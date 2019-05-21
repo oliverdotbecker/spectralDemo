@@ -104,6 +104,7 @@ app.on('ready', () => {
         width: 800,
         height: 600,
         frame: true,
+        icon: "cie.ico",
         title: "Spectral Demo"
     });
 

@@ -31,6 +31,7 @@
       "!.vscode"
     ],
     "win": {
+      "icon": "cie.ico",
       "publisherName": "BSS - Oliver Becker"
     },
     "nsis": {
@@ -39,7 +40,8 @@
       "allowElevation": false,
       "allowToChangeInstallationDirectory": true,
       "menuCategory": true,
-      "uninstallDisplayName": "Spectral Demo"
+      "uninstallDisplayName": "Spectral Demo",
+      "installerIcon": "cie.ico"
     }
   }
 }
