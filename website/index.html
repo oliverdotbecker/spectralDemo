@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Spectral Demo</title>
+        <script ></script>
+        <link rel="stylesheet" href="default.css">
+        <script type="text/javascript" src="index.js"></script>
+    </head>
+    <body onload="init();">
+        <h1>Sensor Data</h1>
+        <br>
+        <div id="controls">
+            <div>
+                <label>COM Port: </label>
+                <input type="text" id="comInput" placeholder="COM Port"/>
+            </div>
+            <div>
+                <label>Max: </label>
+                <label id="currentMax">0</label>
+            </div>
+            <div>
+                <label>Command: </label>
+                <input type="text" id="commandInput" placeholder="Command"/>
+            </div>
+            <div>
+                <label>LED: </label>
+                <input type="checkbox" id="ckLED"/>
+            </div>
+        </div>
+        <div id="bars"></div>
+        <div id="values"></div>
+        <div id="names"></div>
+    </body>
+</html>
