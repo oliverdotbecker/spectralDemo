@@ -7,6 +7,8 @@ var serialPath = "COM3";
 var activeSerialPort = null;
 var lastCommand = "";
 var measures = [0,0,0,0,0,0];
+var temp = 0;
+var receivedData = "";
 
 function initSerialCommunication(startup)
 {
@@ -40,17 +42,24 @@ function attachSerialListeners()
         activeSerialPort.on('data', function (data) {
             //console.log('Data:', data);
             console.log(data+"");
-            if(lastCommand.search("ATDATA") != -1)
+            receivedData += (data+"");
+            if(receivedData.search("OK") != -1 || receivedData.search("ERROR") != -1)
             {
-                data = data+"";
-                measures = data.split(",");
-                if(measures.length == 6)
+                if(lastCommand.search("ATDATA") != -1 || lastCommand.search("ATCDATA") != -1)
                 {
-                    measures[5] = measures[5].split(" ")[1];
-                    console.log(measures);
+                    measures = receivedData.split(",");
+                    if(measures.length == 6)
+                    {
+                        measures[5] = measures[5].split(" ")[1];
+                        console.log(measures);
+                    }
                 }
+                if(lastCommand.search("ATTEMP") != -1 && receivedData.search(",") == -1)
+                {
+                    temp = receivedData.split(" ")[0];
+                }
+                receivedData = "";
             }
-            //handleReceivedData(data);
         });
         activeSerialPort.on('error', function (data) {
             console.log('Error:', data);
@@ -65,7 +74,7 @@ function sendSerialData(data)
     {
         activeSerialPort.write(data, function(err) {
             if (err) {
-            return console.log('Error on write: ', err.message)
+                return console.log('Error on write: ', err.message)
             }
             lastCommand = data;
             //console.log('message written');
@@ -82,8 +91,11 @@ setTimeout(() => {
     sendSerialData("ATLED1=0\n");
 },250);
 var dataInterval = setInterval(() => {
-    sendSerialData("ATDATA\n");
+    sendSerialData("ATCDATA\n");
 },500);
+var tempInterval = setInterval(() => {
+    sendSerialData("ATTEMP\n");
+},5020);
 
 app.on('ready', () => {
     win = new BrowserWindow({
@@ -118,6 +130,11 @@ exports.getMeasures = function()
     }
 }
 
+exports.getTemp = function()
+{
+    return JSON.stringify(temp);
+}
+
 exports.sendCommand = function(command)
 {
     sendSerialData(command+"\n");
@@ -129,10 +146,14 @@ exports.setSerialPath = function(path)
     measures = [];
     serialPath = path;
     clearInterval(dataInterval);
+    clearInterval(tempInterval);
     initSerialCommunication();
     dataInterval = setInterval(() => {
-        sendSerialData("ATDATA\n");
+        sendSerialData("ATCDATA\n");
     },500);
+    tempInterval = setInterval(() => {
+        sendSerialData("ATTEMP\n");
+    },5020);
 }
 
 exports.getSerialPath = function()

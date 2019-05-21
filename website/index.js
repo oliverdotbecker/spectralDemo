@@ -1,8 +1,7 @@
 const electronDaemon = require('electron').remote.require('./index.js');
-const sensorMax = 1000;
 const channelCount = 6;
 const channelNames = ["Violett","Blau","Gr&uuml;n","Gelb","Orange","Red"];
-const channelColors = ["purple","blue","green","yellow","orange","red"];
+const channelColors = ["#310080","blue","green","yellow","orange","red"];
 
 var height = 0;
 
@@ -10,6 +9,7 @@ var barsContainer = null;
 var currMaxDisplay = null;
 var valueContainer = null;
 var comInput = null;
+var currTempDisplay = null;
 
 function init()
 {
@@ -49,9 +49,15 @@ function init()
         }
     },500);
 
+    setInterval(() => {
+        var currentTemp = electronDaemon.getTemp();
+        currTempDisplay.innerHTML = JSON.parse(currentTemp)+" &deg;C";
+    },5100);
+
     barsContainer = document.getElementById('bars');
     valueContainer = document.getElementById('values');
     currMaxDisplay = document.getElementById('currentMax');
+    currTempDisplay = document.getElementById('currentTemp');
     var namesContainer = document.getElementById('names');
 
     for(var i = 0; i < channelCount; i++)

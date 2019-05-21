@@ -33,7 +33,8 @@ input[type="checkbox"] {
     width: 1.5em;
 }
 
-#controls {
+#controls,
+#infos {
     width: 99%;
     display: flex;
     color: white;
