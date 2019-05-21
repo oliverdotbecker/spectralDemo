@@ -8,23 +8,23 @@
             "name": "Electron Main Process",
             "type": "node",
             "request": "launch",
-            "cwd": "${workspaceRoot}/node",
-            "runtimeExecutable": "${workspaceRoot}/node/node_modules/.bin/electron",
+            "cwd": "${workspaceRoot}",
+            "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
             "windows": {
-                "runtimeExecutable": "${workspaceRoot}/node/node_modules/.bin/electron"
+                "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron"
             },
             "runtimeArgs": [
-                "${workspaceRoot}/node/index.js",
+                "${workspaceRoot}/index.js",
                 "dev"
             ],
-            "program": "${workspaceRoot}/node/index.js",
+            "program": "${workspaceRoot}/index.js",
             "protocol": "inspector"
         },
         {
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}\\node\\index.js",
+            "program": "${workspaceFolder}\\index.js",
             "protocol": "inspector"
         }
     ]
