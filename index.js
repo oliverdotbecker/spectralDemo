@@ -112,10 +112,10 @@ var tempInterval = setInterval(() => {
 
 app.on('ready', () => {
     win = new BrowserWindow({
-        x: 0,
-        y: 0,
-        width: 800,
-        height: 600,
+        x: 5,
+        y: 5,
+        width: 1000,
+        height: 700,
         frame: true,
         icon: "cie.ico",
         title: "Spectral Demo"

@@ -1,7 +1,10 @@
 const electronDaemon = require('electron').remote.require('./index.js');
+
+//AS7262 settings
 const channelCount = 6;
 const channelNames = ["Violett","Blau","Gr&uuml;n","Gelb","Orange","Red"];
 const channelColors = ["#310080","blue","green","yellow","orange","red"];
+const channelWavelengths = [450,500,550,570,600,650]; //nm
 
 var height = 0;
 
@@ -43,6 +46,8 @@ function init()
                     barsContainer.childNodes[i].style.height = (parseInt(measures[i])/currMax)*height+"px";
                     valueContainer.innerHTML += "<label>"+measures[i]+"</label>";
                 }
+
+                //var xyz = convertSpectrumToXYZ(measures);
 
                 comInput.style.color = "";
             }
@@ -121,4 +126,12 @@ function init()
 function portFail()
 {
     comInput.style.color = "red";
+}
+
+function convertSpectrumToXYZ(spectralData)
+{
+    for(var wI = 0; wI < channelWavelengths.length; wI++)
+    {
+
+    }
 }
