@@ -1,0 +1,46 @@
+{
+  "name": "spectraldemo",
+  "version": "1.0.0",
+  "description": "a processing application for a ams AS726x sensor",
+  "main": "index.js",
+  "author": "Oliver Becker",
+  "license": "ISC",
+  "dependencies": {
+    "serialport": "^7.1.5"
+  },
+  "scripts": {
+    "start": "electron index.js",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "4.0.4",
+    "electron-builder": "19.49.2",
+    "electron-packager": "8.7.2",
+    "electron-prebuilt": "1.4.13",
+    "electron-rebuild": "1.6.1"
+  },
+  "build": {
+    "appId": "bss.spectraldemo",
+    "productName": "Spectral Demo",
+    "asar": true,
+    "copyright": "Copyright © 2019 ${author}",
+    "directories": {
+      "output": "build"
+    },
+    "files": [
+      "**/*",
+      "!.vscode"
+    ],
+    "win": {
+      "publisherName": "BSS - Oliver Becker"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": false,
+      "allowToChangeInstallationDirectory": true,
+      "menuCategory": true,
+      "uninstallDisplayName": "Spectral Demo"
+    }
+  }
+}
