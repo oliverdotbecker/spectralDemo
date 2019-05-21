@@ -3,10 +3,23 @@ const electron = require('electron');
 const {app, BrowserWindow} = electron;
 const globalShortcut = electron.globalShortcut;
 
+var devFlag = false;
+
+process.argv.forEach(function (val, index, array) {
+    if(val == "dev")
+    {
+        devFlag = true;
+    }
+});
+
 var serialPath = "COM3";
 var activeSerialPort = null;
 var lastCommand = "";
-var measures = [0,0,0,0,0,0];
+var measures = null;
+if(devFlag)
+{
+    measures = [2000,5,3,4,3,10];
+}
 var temp = 0;
 var receivedData = "";
 
@@ -40,8 +53,7 @@ function attachSerialListeners()
     if(activeSerialPort)
     {
         activeSerialPort.on('data', function (data) {
-            //console.log('Data:', data);
-            console.log(data+"");
+            //console.log(data+"");
             receivedData += (data+"");
             if(receivedData.search("OK") != -1 || receivedData.search("ERROR") != -1)
             {
@@ -51,7 +63,7 @@ function attachSerialListeners()
                     if(measures.length == 6)
                     {
                         measures[5] = measures[5].split(" ")[1];
-                        console.log(measures);
+                        //console.log(measures);
                     }
                 }
                 if(lastCommand.search("ATTEMP") != -1 && receivedData.search(",") == -1)
@@ -73,11 +85,12 @@ function sendSerialData(data)
     if(activeSerialPort)
     {
         activeSerialPort.write(data, function(err) {
-            if (err) {
-                return console.log('Error on write: ', err.message)
+            if (err)
+            {
+                win.webContents.executeJavaScript('portFail();');
+                return console.log('Error on write: ', err.message);
             }
             lastCommand = data;
-            //console.log('message written');
         });
     }
 }
