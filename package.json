@@ -13,7 +13,6 @@
     "dist": "electron-builder"
   },
   "devDependencies": {
-    "electron": "4.0.4",
     "electron-builder": "19.49.2",
     "electron-packager": "8.7.2",
     "electron-prebuilt": "1.4.13",

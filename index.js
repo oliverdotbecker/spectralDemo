@@ -1,7 +1,7 @@
 const serialPort = require('serialport');
-/*const electron = require('electron');
+const electron = require('electron');
 const {app, BrowserWindow} = electron;
-const globalShortcut = electron.globalShortcut;*/
+const globalShortcut = electron.globalShortcut;
 
 var serialPath = "COM3";
 var activeSerialPort = null;
@@ -85,7 +85,7 @@ var dataInterval = setInterval(() => {
     sendSerialData("ATDATA\n");
 },500);
 
-/*app.on('ready', () => {
+app.on('ready', () => {
     win = new BrowserWindow({
         x: 0,
         y: 0,
@@ -108,7 +108,7 @@ var dataInterval = setInterval(() => {
     var ret = globalShortcut.register('ctrl+alt+s', function() {
         win.webContents.toggleDevTools();
     });
-})*/
+})
 
 exports.getMeasures = function()
 {
