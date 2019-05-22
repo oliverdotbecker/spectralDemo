@@ -18,7 +18,7 @@ var lastCommand = "";
 var measures = null;
 if(devFlag)
 {
-    measures = [2000,5,3,4,3,10];
+    measures = [2000,6000,3,200,3,10];
 }
 var temp = 0;
 var receivedData = "";

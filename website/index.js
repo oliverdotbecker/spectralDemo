@@ -5,6 +5,14 @@ const channelCount = 6;
 const channelNames = ["Violett","Blau","Gr&uuml;n","Gelb","Orange","Red"];
 const channelColors = ["#310080","blue","green","yellow","orange","red"];
 const channelWavelengths = [450,500,550,570,600,650]; //nm
+//CIE 1931 tristimulus values from:
+//https://wisotop.de/Anhang-Tristimulus-Werte.php
+
+const tristimulusX = [0.3362,0.0049,0.4334,0.7621,1.0622,0.2835];
+const tristimulusY = [0.0380,0.3230,0.9950,0.9520,0.6310,0.1070];
+const tristimulusZ = [1.7721,0.2720,0.0087,0.0021,0.0008,0.0000];
+
+const maxSpectrumVal = 65536;
 
 var height = 0;
 
@@ -13,6 +21,7 @@ var currMaxDisplay = null;
 var valueContainer = null;
 var comInput = null;
 var currTempDisplay = null;
+var currXYZDisplay = null;
 
 function init()
 {
@@ -47,7 +56,7 @@ function init()
                     valueContainer.innerHTML += "<label>"+measures[i]+"</label>";
                 }
 
-                //var xyz = convertSpectrumToXYZ(measures);
+                convertSpectrumToXYZ(measures);
 
                 comInput.style.color = "";
             }
@@ -63,6 +72,7 @@ function init()
     valueContainer = document.getElementById('values');
     currMaxDisplay = document.getElementById('currentMax');
     currTempDisplay = document.getElementById('currentTemp');
+    currXYZDisplay = document.getElementById('currentXYZ');
     var namesContainer = document.getElementById('names');
 
     for(var i = 0; i < channelCount; i++)
@@ -130,8 +140,27 @@ function portFail()
 
 function convertSpectrumToXYZ(spectralData)
 {
+    var X = 0;
+    var Y = 0;
+    var Z = 0;
     for(var wI = 0; wI < channelWavelengths.length; wI++)
     {
-
+        X += tristimulusX[wI]*(spectralData[wI]/maxSpectrumVal);
+        Y += tristimulusY[wI]*(spectralData[wI]/maxSpectrumVal);
+        Z += tristimulusZ[wI]*(spectralData[wI]/maxSpectrumVal);
     }
+    console.log(X+" "+Y+" "+Z);
+    if(currXYZDisplay)
+    {
+        currXYZDisplay.innerHTML = round(X,4)+" "+round(Y,4)+" "+round(Z,4);
+    }
+    //return [X,Y,Z];
+}
+
+function round(number,digits)
+{
+    number = number*Math.pow(10,digits);
+    number = Math.round(number);
+    number = number/Math.pow(10,digits);
+    return number;
 }
