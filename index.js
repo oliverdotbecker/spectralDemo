@@ -99,13 +99,13 @@ initSerialCommunication();
 sendSerialData("ATLED0=0\n");
 setTimeout(() => {
     sendSerialData("ATLED0=100\n");
-},500);
+},510);
 setTimeout(() => {
     sendSerialData("ATLED1=0\n");
-},250);
+},200);
 var dataInterval = setInterval(() => {
     sendSerialData("ATCDATA\n");
-},500);
+},250);
 var tempInterval = setInterval(() => {
     sendSerialData("ATTEMP\n");
 },5020);
@@ -164,7 +164,7 @@ exports.setSerialPath = function(path)
     initSerialCommunication();
     dataInterval = setInterval(() => {
         sendSerialData("ATCDATA\n");
-    },500);
+    },250);
     tempInterval = setInterval(() => {
         sendSerialData("ATTEMP\n");
     },5020);
