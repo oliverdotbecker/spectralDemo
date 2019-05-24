@@ -243,10 +243,12 @@ function XYZtoRGB(tX,tY,tZ)
 
         var diff = 255-max;
         var fact = diff/max;
-
-        r = Math.round(r*fact);
-        g = Math.round(g*fact);
-        b = Math.round(b*fact);
+        if(fact > 1)
+        {
+            r = Math.round(r*fact);
+            g = Math.round(g*fact);
+            b = Math.round(b*fact);
+        }
 
         currColorDisplay.style.backgroundColor = "rgb("+r+","+g+","+b+")";
     }
