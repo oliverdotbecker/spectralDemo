@@ -2,8 +2,8 @@ const electronDaemon = require('electron').remote.require('./index.js');
 
 //AS7262 settings
 const channelCount = 6;
-const channelNames = ["Violett","Blau","Gr&uuml;n","Gelb","Orange","Red"];
-const channelColors = ["#310080","blue","green","yellow","orange","red"];
+const channelNames = ["Blau","Gr&uuml;n","Gelbgr&uuml;n","Gelb","Orange","Red"];
+const channelColors = ["blue","green","#c0ff00","yellow","orange","red"];
 const channelWavelengths = [450,500,550,570,600,650]; //nm
 //CIE 1931 tristimulus values from:
 //https://wisotop.de/Anhang-Tristimulus-Werte.php
@@ -22,6 +22,8 @@ var valueContainer = null;
 var comInput = null;
 var currTempDisplay = null;
 var currXYZDisplay = null;
+var currRGBDisplay = null;
+var currColorDisplay = null;
 
 function init()
 {
@@ -45,6 +47,10 @@ function init()
                 if(parseInt(currMax) < 10)
                 {
                     currMax = 10;
+                }
+                else
+                {
+                    currMax = parseInt(currMax)+1;
                 }
                 currMaxDisplay.innerHTML = currMax;
 
@@ -73,6 +79,8 @@ function init()
     currMaxDisplay = document.getElementById('currentMax');
     currTempDisplay = document.getElementById('currentTemp');
     currXYZDisplay = document.getElementById('currentXYZ');
+    currRGBDisplay = document.getElementById('currentRGB');
+    currColorDisplay = document.getElementById('currentColor');
     var namesContainer = document.getElementById('names');
 
     for(var i = 0; i < channelCount; i++)
@@ -154,7 +162,46 @@ function convertSpectrumToXYZ(spectralData)
     {
         currXYZDisplay.innerHTML = round(X,4)+" "+round(Y,4)+" "+round(Z,4);
     }
+    XYZtoRGB(X,Y,Z);
     //return [X,Y,Z];
+}
+
+function XYZtoRGB(tX,tY,tZ)
+{
+    var gamma = 1/2.2;
+    var r = Math.max((2.3706743*tX)+(-0.9000405*tY)+(-0.4706338*tZ),0);
+    var g = Math.max((-0.5138850*tX)+(1.4253036*tY)+(0.0885814*tZ),0);
+    var b = Math.max((0.0052982*tX)+(-0.0146949*tY)+(1.0093968*tZ),0);
+
+    r = normalize(Math.pow(r,gamma));
+    g = normalize(Math.pow(g,gamma));
+    b = normalize(Math.pow(b,gamma));
+
+    r = Math.round(r*255);
+    g = Math.round(g*255);
+    b = Math.round(b*255);
+
+    if(currRGBDisplay)
+    {
+        currRGBDisplay.innerHTML = r+" "+g+" "+b;
+        currRGBDisplay.style.backgroundColor = "rgb("+r+","+g+","+b+")";
+    }
+    if(currColorDisplay)
+    {
+        currColorDisplay.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;";
+
+        var max = Math.max(r,g);
+        max = Math.max(max,b);
+
+        var diff = 255-max;
+        var fact = diff/max;
+
+        r = Math.round(r*fact);
+        g = Math.round(g*fact);
+        b = Math.round(b*fact);
+
+        currColorDisplay.style.backgroundColor = "rgb("+r+","+g+","+b+")";
+    }
 }
 
 function round(number,digits)
@@ -163,4 +210,8 @@ function round(number,digits)
     number = Math.round(number);
     number = number/Math.pow(10,digits);
     return number;
+}
+
+function normalize (n) {
+    return Math.max(0,Math.min(n,1));
 }

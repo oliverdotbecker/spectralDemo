@@ -42,11 +42,25 @@ input[type="checkbox"] {
     justify-content: space-around;
     align-items: center;
     margin-left: .25em;
+    height: 2em;
+}
+#infos {
+    margin-top: .5em;
+    margin-bottom: .5em;
 }
 
-#controls>div {
+#controls>div,
+#infos>div {
     display: flex;
     align-items: center;
+}
+
+#currentRGB,
+#currentColor {
+    height: 1.5em;
+    line-height: 1.5em;
+    padding: .5em 1em;
+    margin-left: .5em;
 }
 
 #bars {
