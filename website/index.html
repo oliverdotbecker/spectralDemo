@@ -24,6 +24,10 @@
                 <label>LED: </label>
                 <input type="checkbox" id="ckLED"/>
             </div>
+            <div>
+                <label>Grid: </label>
+                <input type="checkbox" id="ckGrid" checked/>
+            </div>
         </div>
         <div id="infos">
             <div>
@@ -35,10 +39,6 @@
                 <label id="currentTemp">Unknown</label>
             </div>
             <div>
-                <label>XYZ: </label>
-                <label id="currentXYZ">Unknown</label>
-            </div>
-            <div>
                 <label>RGB: </label>
                 <label id="currentRGB">Unknown</label>
             </div>
@@ -46,9 +46,46 @@
                 <label>Color: </label>
                 <label id="currentColor">Unknown</label>
             </div>
+            <div>
+                <label>XYZ: </label>
+                <label id="currentXYZ">Unknown</label>
+            </div>
+            <div>
+                <label>xyY: </label>
+                <label id="currentxyY">Unknown</label>
+            </div>
         </div>
-        <div id="bars"></div>
-        <div id="values"></div>
-        <div id="names"></div>
+        <div id="graphics">
+            <div id="spectrum">
+                <div id="bars"></div>
+                <div id="values"></div>
+                <div id="names"></div>
+            </div>
+            <div id="cie">
+                <div id="ciePos"></div>
+                <div id="grid">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div id="grid2">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

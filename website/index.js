@@ -15,6 +15,8 @@ const tristimulusZ = [1.7721,0.2720,0.0087,0.0021,0.0008,0.0000];
 const maxSpectrumVal = 65536;
 
 var height = 0;
+var cieXdiv = 0;
+var cieYdiv = 0;
 
 var barsContainer = null;
 var currMaxDisplay = null;
@@ -22,8 +24,11 @@ var valueContainer = null;
 var comInput = null;
 var currTempDisplay = null;
 var currXYZDisplay = null;
+var currxyYDisplay = null;
 var currRGBDisplay = null;
 var currColorDisplay = null;
+var cieDisp = null;
+var ciePos = null;
 
 function init()
 {
@@ -62,6 +67,13 @@ function init()
                     valueContainer.innerHTML += "<label>"+measures[i]+"</label>";
                 }
 
+                if(cieDisp)
+                {
+                    var box = cieDisp.getBoundingClientRect();
+                    cieXdiv = box.width/9;
+                    cieYdiv = box.height/9;
+                }
+
                 convertSpectrumToXYZ(measures);
 
                 comInput.style.color = "";
@@ -79,8 +91,11 @@ function init()
     currMaxDisplay = document.getElementById('currentMax');
     currTempDisplay = document.getElementById('currentTemp');
     currXYZDisplay = document.getElementById('currentXYZ');
+    currxyYDisplay = document.getElementById('currentxyY');
     currRGBDisplay = document.getElementById('currentRGB');
     currColorDisplay = document.getElementById('currentColor');
+    cieDisp = document.getElementById('cie');
+    ciePos = document.getElementById('ciePos');
     var namesContainer = document.getElementById('names');
 
     for(var i = 0; i < channelCount; i++)
@@ -139,6 +154,27 @@ function init()
             }
         }
     }
+
+    var ckGrid = document.getElementById('ckGrid');
+    ckGrid.onchange = function(event)
+    {
+        var input = event.currentTarget;
+        if(input)
+        {
+            var grid = document.getElementById("grid");
+            var grid2 = document.getElementById("grid2");
+            if(input.checked)
+            {
+                grid.style.display = "";
+                grid2.style.display = "";
+            }
+            else
+            {
+                grid.style.display = "none";
+                grid2.style.display = "none";
+            }
+        }
+    }
 }
 
 function portFail()
@@ -161,6 +197,18 @@ function convertSpectrumToXYZ(spectralData)
     if(currXYZDisplay)
     {
         currXYZDisplay.innerHTML = round(X,4)+" "+round(Y,4)+" "+round(Z,4);
+    }
+    if(currxyYDisplay)
+    {
+        var x = X/(X+Y+Z);
+        var y = Y/(X+Y+Z);
+        currxyYDisplay.innerHTML = round(x,4)+" "+round(y,4)+" "+round(Y,4);
+        
+        if(cieDisp && ciePos)
+        {
+            ciePos.style.bottom = (y*10*cieYdiv)+"px";
+            ciePos.style.left = (x*10*cieXdiv)+"px";
+        }
     }
     XYZtoRGB(X,Y,Z);
     //return [X,Y,Z];
@@ -214,4 +262,13 @@ function round(number,digits)
 
 function normalize (n) {
     return Math.max(0,Math.min(n,1));
+}
+
+function setxy(x,y)
+{
+    if(cieDisp && ciePos)
+    {
+        ciePos.style.bottom = (y*10*cieYdiv)+"px";
+        ciePos.style.left = (x*10*cieXdiv)+"px";
+    }
 }
