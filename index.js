@@ -12,6 +12,35 @@ process.argv.forEach(function (val, index, array) {
     }
 });
 
+//electron
+app.on('ready', () => {
+    win = new BrowserWindow({
+        x: 5,
+        y: 5,
+        width: 1000,
+        height: 700,
+        frame: true,
+        icon: "cie.ico",
+        title: "Spectral Demo"
+    });
+
+    var pagePath = 'file://' + __dirname + '/website/index.html';
+    //win.webContents.openDevTools();
+    win.loadURL(pagePath);
+
+    var ret = globalShortcut.register('ctrl+shift+c', function() {
+        win.webContents.openDevTools();
+        setTimeout(() => {
+            win.devToolsWebContents.executeJavaScript('DevToolsAPI.enterInspectElementMode()');
+        },1000);
+    });
+    var ret = globalShortcut.register('ctrl+alt+s', function() {
+        win.webContents.toggleDevTools();
+    });
+})
+
+//Sensor and serial stuff
+var activeSensor = "7262";
 var serialPath = "COM3";
 var activeSerialPort = null;
 var lastCommand = "";
@@ -22,6 +51,8 @@ if(devFlag)
 }
 var temp = 0;
 var receivedData = "";
+var tempInterval = null;
+var dataInterval = null;
 
 function initSerialCommunication(startup)
 {
@@ -55,7 +86,7 @@ function attachSerialListeners()
         activeSerialPort.on('data', function (data) {
             //console.log(data+"");
             receivedData += (data+"");
-            if(receivedData.search("OK") != -1 || receivedData.search("ERROR") != -1)
+            if(receivedData.search("OK") != -1)
             {
                 if(lastCommand.search("ATDATA") != -1 || lastCommand.search("ATCDATA") != -1)
                 {
@@ -66,10 +97,24 @@ function attachSerialListeners()
                         //console.log(measures);
                     }
                 }
+                if(lastCommand.search("ATXYZC") != -1)
+                {
+                    measures = receivedData.split(",");
+                    if(measures.length == 3)
+                    {
+                        measures[2] = measures[2].split(" ")[1];
+                        //console.log(measures);
+                    }
+                }
                 if(lastCommand.search("ATTEMP") != -1 && receivedData.search(",") == -1)
                 {
                     temp = receivedData.split(" ")[0];
                 }
+                receivedData = "";
+            }
+            else if(receivedData.search("ERROR") != -1)
+            {
+                console.error("Command: "+lastCommand.substr(0,lastCommand.length-1)+" failed.");
                 receivedData = "";
             }
         });
@@ -95,47 +140,6 @@ function sendSerialData(data)
     }
 }
 
-initSerialCommunication();
-sendSerialData("ATLED0=0\n");
-setTimeout(() => {
-    sendSerialData("ATLED0=100\n");
-},510);
-setTimeout(() => {
-    sendSerialData("ATLED1=0\n");
-},200);
-var dataInterval = setInterval(() => {
-    sendSerialData("ATCDATA\n");
-},250);
-var tempInterval = setInterval(() => {
-    sendSerialData("ATTEMP\n");
-},5020);
-
-app.on('ready', () => {
-    win = new BrowserWindow({
-        x: 5,
-        y: 5,
-        width: 1000,
-        height: 700,
-        frame: true,
-        icon: "cie.ico",
-        title: "Spectral Demo"
-    });
-
-    var pagePath = 'file://' + __dirname + '/website/index.html';
-    //win.webContents.openDevTools();
-    win.loadURL(pagePath);
-
-    var ret = globalShortcut.register('ctrl+shift+c', function() {
-        win.webContents.openDevTools();
-        setTimeout(() => {
-            win.devToolsWebContents.executeJavaScript('DevToolsAPI.enterInspectElementMode()');
-        },1000);
-    });
-    var ret = globalShortcut.register('ctrl+alt+s', function() {
-        win.webContents.toggleDevTools();
-    });
-})
-
 exports.getMeasures = function()
 {
     if(measures.length == 6)
@@ -156,18 +160,82 @@ exports.sendCommand = function(command)
 
 exports.setSerialPath = function(path)
 {
-    activeSerialPort.close();
     measures = [];
     serialPath = path;
     clearInterval(dataInterval);
     clearInterval(tempInterval);
-    initSerialCommunication();
-    dataInterval = setInterval(() => {
-        sendSerialData("ATCDATA\n");
-    },250);
-    tempInterval = setInterval(() => {
-        sendSerialData("ATTEMP\n");
-    },5020);
+    if(!activeSerialPort)
+    {
+        initSerialCommunication();
+    }
+    sendSerialData("ATLED0=100\n");
+    setTimeout(() => {
+        sendSerialData("ATLED1=0\n");
+    },100);
+    if(activeSensor == "7261")
+    {
+        setTimeout(() => {
+            sendSerialData("ATTCSMD=2\n");
+        },250);
+        dataInterval = setInterval(() => {
+            sendSerialData("ATDATA\n");
+        },500);
+        tempInterval = setInterval(() => {
+            sendSerialData("ATTEMP\n");
+        },5020);
+    }
+    else
+    {
+        dataInterval = setInterval(() => {
+            sendSerialData("ATCDATA\n");
+        },250);
+        tempInterval = setInterval(() => {
+            sendSerialData("ATTEMP\n");
+        },5020);
+    }
+}
+
+exports.setSensor = function(sensor)
+{
+    measures = [];
+    activeSensor = sensor;
+    if(dataInterval)
+    {
+        clearInterval(dataInterval);
+    }
+    if(tempInterval)
+    {
+        clearInterval(tempInterval);
+    }
+    if(!activeSerialPort)
+    {
+        initSerialCommunication();
+    }
+    sendSerialData("ATLED0=100\n");
+    setTimeout(() => {
+        sendSerialData("ATLED1=0\n");
+    },100);
+    if(activeSensor == "7261")
+    {
+        setTimeout(() => {
+            sendSerialData("ATTCSMD=2\n");
+        },250);
+        dataInterval = setInterval(() => {
+            sendSerialData("ATDATA\n");
+        },500);
+        tempInterval = setInterval(() => {
+            sendSerialData("ATTEMP\n");
+        },5020);
+    }
+    else
+    {
+        dataInterval = setInterval(() => {
+            sendSerialData("ATCDATA\n");
+        },250);
+        tempInterval = setInterval(() => {
+            sendSerialData("ATTEMP\n");
+        },5020);
+    }
 }
 
 exports.getSerialPath = function()
