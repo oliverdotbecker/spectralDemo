@@ -268,12 +268,8 @@ function XYZtoXY(X,Y,Z)
         var x = X/(X+Y+Z);
         var y = Y/(X+Y+Z);
         currxyYDisplay.innerHTML = round(x,4)+" "+round(y,4)+" "+round(Y,4);
-        
-        if(cieDisp && ciePos)
-        {
-            ciePos.style.bottom = (y*10*cieYdiv)+"px";
-            ciePos.style.left = (x*10*cieXdiv)+"px";
-        }
+
+        setxy(x,y);
     }
 }
 
@@ -331,7 +327,14 @@ function normalize (n) {
 
 function setxy(x,y)
 {
-    if(cieDisp && ciePos)
+    //Boundaries
+    x = Math.min(x,0.9);
+    y = Math.min(y,0.9);
+    x = Math.max(x,0);
+    y = Math.max(y,0);
+
+    //Set position
+    if(ciePos)
     {
         ciePos.style.bottom = (y*10*cieYdiv)+"px";
         ciePos.style.left = (x*10*cieXdiv)+"px";
