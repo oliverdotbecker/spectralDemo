@@ -2,25 +2,36 @@ const electronDaemon = require('electron').remote.require('./index.js');
 
 var serialPorts = [];
 
+//AS7261 settings
+const AS7261 = {
+    channelCount:6,
+    channelNames:["X","Y","Z","Dark","C","NIR"],
+    channelColors:["lightgray","gray","darkgray","#222222","white","red"]
+}
 //AS7262 settings
-const channelCount = 6;
-const channelNames = ["Blau","Gr&uuml;n","Gelbgr&uuml;n","Gelb","Orange","Red"];
-const channelColors = ["blue","green","#c0ff00","yellow","orange","red"];
-const channelWavelengths = [450,500,550,570,600,650]; //nm
+const AS7262 = {
+    channelCount:6,
+    channelNames:["Blau","Gr&uuml;n","Gelbgr&uuml;n","Gelb","Orange","Red"],
+    channelColors:["blue","green","#c0ff00","yellow","orange","red"],
+    channelWavelengths:[450,500,550,570,600,650], //nm
+    maxSpectrumVal:65536
+}
+var activeSettings = AS7262;
+var activeSensor = "7262";
+electronDaemon.setSensor(activeSensor);
+
 //CIE 1931 tristimulus values from:
 //https://wisotop.de/Anhang-Tristimulus-Werte.php
-
 const tristimulusX = [0.3362,0.0049,0.4334,0.7621,1.0622,0.2835];
 const tristimulusY = [0.0380,0.3230,0.9950,0.9520,0.6310,0.1070];
 const tristimulusZ = [1.7721,0.2720,0.0087,0.0021,0.0008,0.0000];
-
-const maxSpectrumVal = 65536;
 
 var height = 0;
 var cieXdiv = 0;
 var cieYdiv = 0;
 
 var barsContainer = null;
+var namesContainer = null;
 var currMaxDisplay = null;
 var valueContainer = null;
 var comInput = null;
@@ -63,7 +74,7 @@ function init()
 
                 valueContainer.innerHTML = "";
 
-                for(var i = 0; i < channelCount; i++)
+                for(var i = 0; i < activeSettings.channelCount; i++)
                 {
                     barsContainer.childNodes[i].style.height = (parseInt(measures[i])/currMax)*height+"px";
                     valueContainer.innerHTML += "<label>"+measures[i]+"</label>";
@@ -76,12 +87,29 @@ function init()
                     cieYdiv = box.height/9;
                 }
 
-                convertSpectrumToXYZ(measures);
+                if(activeSensor == "7262")
+                {
+                    for(i in measures)
+                    {
+                        measures[i] = parseFloat(measures[i]);
+                    }
+                    convertSpectrumToXYZ(measures);
+                }
+                else
+                {
+                    for(i in measures)
+                    {
+                        measures[i] = parseFloat(measures[i])/65536;
+                    }
+                    currXYZDisplay.innerHTML = round(measures[0],4)+" "+round(measures[1],4)+" "+round(measures[2],4);
+                    XYZtoXY(measures[0],measures[1],measures[2]);
+                    XYZtoRGB(measures[0],measures[1],measures[2]);
+                }
 
                 comInput.style.color = "";
             }
         }
-    },500);
+    },250);
 
     setInterval(() => {
         var currentTemp = electronDaemon.getTemp();
@@ -98,20 +126,7 @@ function init()
     currColorDisplay = document.getElementById('currentColor');
     cieDisp = document.getElementById('cie');
     ciePos = document.getElementById('ciePos');
-    var namesContainer = document.getElementById('names');
-
-    for(var i = 0; i < channelCount; i++)
-    {
-        var newBar = document.createElement('div');
-        newBar.className = "bar"
-        newBar.title = channelNames[i];
-        newBar.style.backgroundColor = channelColors[i];
-        barsContainer.appendChild(newBar);
-
-        var newLabel = document.createElement('label');
-        newLabel.innerHTML = channelNames[i];
-        namesContainer.appendChild(newLabel);
-    }
+    namesContainer = document.getElementById('names');
     
     var commandInput = document.getElementById('commandInput');
     commandInput.onkeydown = function(event)
@@ -165,15 +180,49 @@ function init()
     }
     updateSerialPorts(true);
     
-    comInput = document.getElementById('comInput');
-    comInput.value = electronDaemon.getSerialPath();
-    comInput.onchange = function(event)
+    var sensorSelect = document.getElementById('sensorSelect');
+    sensorSelect.value = activeSensor;
+    sensorSelect.onchange = function(event)
     {
         var input = event.currentTarget;
         if(input)
         {
             electronDaemon.setSerialPath(input.value);
+            
+            if(input.value == "7261")
+            {
+                activeSettings = AS7261;
+                activeSensor = "7261";
+                electronDaemon.setSensor(activeSensor);
+            }
+            else
+            {
+                activeSettings = AS7262;
+                activeSensor = "7262";
+                electronDaemon.setSensor(activeSensor);
+            }
+            createSurface();
         }
+    }
+    
+    createSurface();
+}
+
+function createSurface()
+{
+    barsContainer.innerHTML = "";
+    namesContainer.innerHTML = "";
+    for(var i = 0; i < activeSettings.channelCount; i++)
+    {
+        var newBar = document.createElement('div');
+        newBar.className = "bar"
+        newBar.title = activeSettings.channelNames[i];
+        newBar.style.backgroundColor = activeSettings.channelColors[i];
+        barsContainer.appendChild(newBar);
+
+        var newLabel = document.createElement('label');
+        newLabel.innerHTML = activeSettings.channelNames[i];
+        namesContainer.appendChild(newLabel);
     }
 }
 
@@ -187,31 +236,32 @@ function convertSpectrumToXYZ(spectralData)
     var X = 0;
     var Y = 0;
     var Z = 0;
-    for(var wI = 0; wI < channelWavelengths.length; wI++)
+    for(var wI = 0; wI < activeSettings.channelWavelengths.length; wI++)
     {
-        X += tristimulusX[wI]*(spectralData[wI]/maxSpectrumVal);
-        Y += tristimulusY[wI]*(spectralData[wI]/maxSpectrumVal);
-        Z += tristimulusZ[wI]*(spectralData[wI]/maxSpectrumVal);
+        X += tristimulusX[wI]*(spectralData[wI]/activeSettings.maxSpectrumVal);
+        Y += tristimulusY[wI]*(spectralData[wI]/activeSettings.maxSpectrumVal);
+        Z += tristimulusZ[wI]*(spectralData[wI]/activeSettings.maxSpectrumVal);
     }
     console.log(X+" "+Y+" "+Z);
     if(currXYZDisplay)
     {
         currXYZDisplay.innerHTML = round(X,4)+" "+round(Y,4)+" "+round(Z,4);
     }
+    XYZtoXY(X,Y,Z);
+    XYZtoRGB(X,Y,Z);
+    //return [X,Y,Z];
+}
+
+function XYZtoXY(X,Y,Z)
+{
     if(currxyYDisplay)
     {
         var x = X/(X+Y+Z);
         var y = Y/(X+Y+Z);
         currxyYDisplay.innerHTML = round(x,4)+" "+round(y,4)+" "+round(Y,4);
-        
-        if(cieDisp && ciePos)
-        {
-            ciePos.style.bottom = (y*10*cieYdiv)+"px";
-            ciePos.style.left = (x*10*cieXdiv)+"px";
-        }
+
+        setxy(x,y);
     }
-    XYZtoRGB(X,Y,Z);
-    //return [X,Y,Z];
 }
 
 function XYZtoRGB(tX,tY,tZ)
@@ -268,7 +318,14 @@ function normalize (n) {
 
 function setxy(x,y)
 {
-    if(cieDisp && ciePos)
+    //Boundaries
+    x = Math.min(x,0.9);
+    y = Math.min(y,0.9);
+    x = Math.max(x,0);
+    y = Math.max(y,0);
+
+    //Set position
+    if(ciePos)
     {
         ciePos.style.bottom = (y*10*cieYdiv)+"px";
         ciePos.style.left = (x*10*cieXdiv)+"px";
