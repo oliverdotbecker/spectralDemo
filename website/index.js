@@ -1,5 +1,7 @@
 const electronDaemon = require('electron').remote.require('./index.js');
 
+var serialPorts = [];
+
 //AS7262 settings
 const channelCount = 6;
 const channelNames = ["Blau","Gr&uuml;n","Gelbgr&uuml;n","Gelb","Orange","Red"];
@@ -123,20 +125,6 @@ function init()
             }
         }
     }
-    
-    comInput = document.getElementById('comInput');
-    comInput.value = electronDaemon.getSerialPath();
-    comInput.onkeydown = function(event)
-    {
-        if(event.keyCode == 13)
-        {
-            var input = event.currentTarget;
-            if(input)
-            {
-                electronDaemon.setSerialPath(input.value);
-            }
-        }
-    }
 
     var ckLED = document.getElementById('ckLED');
     ckLED.onchange = function(event)
@@ -173,6 +161,18 @@ function init()
                 grid.style.display = "none";
                 grid2.style.display = "none";
             }
+        }
+    }
+    updateSerialPorts(true);
+    
+    comInput = document.getElementById('comInput');
+    comInput.value = electronDaemon.getSerialPath();
+    comInput.onchange = function(event)
+    {
+        var input = event.currentTarget;
+        if(input)
+        {
+            electronDaemon.setSerialPath(input.value);
         }
     }
 }
@@ -272,5 +272,34 @@ function setxy(x,y)
     {
         ciePos.style.bottom = (y*10*cieYdiv)+"px";
         ciePos.style.left = (x*10*cieXdiv)+"px";
+    }
+}
+
+function updateSerialPorts(getPorts)
+{
+    if(getPorts)
+    {
+        electronDaemon.getAvailableSerialPorts(true).then(()=>{
+            serialPorts = JSON.parse(electronDaemon.getAvailableSerialPorts());
+            updateSerialPorts();
+        });
+    }
+    else
+    {
+        var comInput = document.getElementById("comInput");
+        if(comInput)
+        {
+            while(comInput.childElementCount > 0)
+            {
+                comInput.childNodes[0].remove();
+            }
+            for(idx in serialPorts)
+            {
+                var newOption = document.createElement('option');
+                newOption.value = serialPorts[idx].comName;
+                newOption.innerHTML = serialPorts[idx].comName;
+                comInput.appendChild(newOption);
+            }
+        }
     }
 }

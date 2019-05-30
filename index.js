@@ -95,6 +95,18 @@ function sendSerialData(data)
     }
 }
 
+var serialPorts = "[]";
+exports.getAvailableSerialPorts = function(query)
+{
+    if(query)
+    {
+        return serialPort.list().then(ports => {
+            serialPorts = JSON.stringify(ports);
+        });
+    }
+    return serialPorts;
+}
+
 initSerialCommunication();
 sendSerialData("ATLED0=0\n");
 setTimeout(() => {

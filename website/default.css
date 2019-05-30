@@ -39,6 +39,10 @@ input[type="checkbox"] {
     margin-left: .25em;
 }
 
+datalist {
+    display: block;
+}
+
 #controls,
 #infos {
     width: 99%;
