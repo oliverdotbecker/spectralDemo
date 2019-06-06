@@ -116,6 +116,7 @@ function init()
         currTempDisplay.innerHTML = JSON.parse(currentTemp)+" &deg;C";
     },5100);
 
+    comInput = document.getElementById("comInput");
     barsContainer = document.getElementById('bars');
     valueContainer = document.getElementById('values');
     currMaxDisplay = document.getElementById('currentMax');
@@ -343,7 +344,7 @@ function updateSerialPorts(getPorts)
     }
     else
     {
-        var comInput = document.getElementById("comInput");
+        //comInput = document.getElementById("comInput");
         if(comInput)
         {
             while(comInput.childElementCount > 0)
