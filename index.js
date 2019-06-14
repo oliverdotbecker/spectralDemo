@@ -37,7 +37,7 @@ app.on('ready', () => {
     var ret = globalShortcut.register('ctrl+alt+s', function() {
         win.webContents.toggleDevTools();
     });
-})
+});
 
 //Sensor and serial stuff
 var activeSensor = "7262";
@@ -166,32 +166,6 @@ var dataInterval = setInterval(() => {
 var tempInterval = setInterval(() => {
     sendSerialData("ATTEMP\n");
 },5020);
-
-app.on('ready', () => {
-    win = new BrowserWindow({
-        x: 5,
-        y: 5,
-        width: 1000,
-        height: 700,
-        frame: true,
-        icon: "cie.ico",
-        title: "Spectral Demo"
-    });
-
-    var pagePath = 'file://' + __dirname + '/website/index.html';
-    //win.webContents.openDevTools();
-    win.loadURL(pagePath);
-
-    var ret = globalShortcut.register('ctrl+shift+c', function() {
-        win.webContents.openDevTools();
-        setTimeout(() => {
-            win.devToolsWebContents.executeJavaScript('DevToolsAPI.enterInspectElementMode()');
-        },1000);
-    });
-    var ret = globalShortcut.register('ctrl+alt+s', function() {
-        win.webContents.toggleDevTools();
-    });
-})
 
 exports.getMeasures = function()
 {
