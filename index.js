@@ -1,7 +1,8 @@
 const serialPort = require('serialport');
 const electron = require('electron');
-const {app, BrowserWindow} = electron;
+const {app, BrowserWindow, Menu} = electron;
 const globalShortcut = electron.globalShortcut;
+const fs = require('fs');
 
 var devFlag = false;
 
@@ -37,6 +38,46 @@ app.on('ready', () => {
     var ret = globalShortcut.register('ctrl+alt+s', function() {
         win.webContents.toggleDevTools();
     });
+    
+    const menuTemplate = [
+        {
+            label: 'App',
+            submenu: [
+                {role: 'reload', label: 'Reset App'},
+                {type: 'separator'},
+                {role: 'resetzoom'},
+                {role: 'zoomin'},
+                {role: 'zoomout'},
+                {type: 'separator'},
+                {role: 'togglefullscreen'},
+                {type: 'separator'},
+                {role: 'close'}
+            ]
+        },
+        {
+            label:'Data',
+            submenu: [
+                {
+                    label: 'Export',
+                    click: (menuItem, browserWindow, event) => {
+                        win.webContents.executeJavaScript('doExport();');
+                    }
+                }
+            ]
+        }
+    ]
+
+    if(devFlag == true)
+    {
+        menuTemplate.push({
+            label: "Developer",
+            submenu: [
+                {role: 'toggledevtools'}
+            ]
+        })
+    }
+
+    Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate))
 });
 
 //Sensor and serial stuff
@@ -268,4 +309,10 @@ exports.setSensor = function(sensor)
 exports.getSerialPath = function()
 {
     return serialPath;
+}
+
+exports.exportSavedData = function(data)
+{
+    var date = new Date().toJSON();
+    fs.writeFileSync(__dirname+'/export'+date.replace(/:/g,"-").replace("T","_").replace("Z","")+'.json',data,'utf8');
 }

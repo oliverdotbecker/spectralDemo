@@ -43,6 +43,8 @@ var currColorDisplay = null;
 var cieDisp = null;
 var ciePos = null;
 
+var savedValues = [];
+
 function init()
 {
     console.log("Init");
@@ -360,4 +362,19 @@ function updateSerialPorts(getPorts)
             }
         }
     }
+}
+
+function save()
+{
+    var currXY = currxyYDisplay.innerHTML;
+    savedValues.push({
+        x:currXY.split(" ")[0],
+        y:currXY.split(" ")[1]
+    });
+}
+
+function doExport()
+{
+    electronDaemon.exportSavedData(JSON.stringify(savedValues));
+    savedValues = [];
 }
