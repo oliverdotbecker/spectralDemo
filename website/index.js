@@ -29,6 +29,7 @@ const tristimulusZ = [1.7721,0.2720,0.0087,0.0021,0.0008,0.0000];
 var height = 0;
 var cieXdiv = 0;
 var cieYdiv = 0;
+var currMax = 0;
 
 var barsContainer = null;
 var namesContainer = null;
@@ -59,7 +60,7 @@ function init()
             {
                 var box = barsContainer.getBoundingClientRect();
                 height = box.height;
-                var currMax = 0;
+                currMax = 0;
                 for(var i = 0; i < measures.length; i++)
                 {
                     currMax = Math.max(parseInt(measures[i]),currMax);
@@ -162,22 +163,25 @@ function init()
     }
 
     var ckGrid = document.getElementById('ckGrid');
-    ckGrid.onchange = function(event)
+    if(ckGrid)
     {
-        var input = event.currentTarget;
-        if(input)
+        ckGrid.onchange = function(event)
         {
-            var grid = document.getElementById("grid");
-            var grid2 = document.getElementById("grid2");
-            if(input.checked)
+            var input = event.currentTarget;
+            if(input)
             {
-                grid.style.display = "";
-                grid2.style.display = "";
-            }
-            else
-            {
-                grid.style.display = "none";
-                grid2.style.display = "none";
+                var grid = document.getElementById("grid");
+                var grid2 = document.getElementById("grid2");
+                if(input.checked)
+                {
+                    grid.style.display = "";
+                    grid2.style.display = "";
+                }
+                else
+                {
+                    grid.style.display = "none";
+                    grid2.style.display = "none";
+                }
             }
         }
     }
@@ -231,7 +235,7 @@ function createSurface()
 
 function portFail()
 {
-    comInput.style.color = "red";
+    comInput.style.backgroundColor = "red";
 }
 
 function convertSpectrumToXYZ(spectralData)
@@ -241,9 +245,9 @@ function convertSpectrumToXYZ(spectralData)
     var Z = 0;
     for(var wI = 0; wI < activeSettings.channelWavelengths.length; wI++)
     {
-        X += tristimulusX[wI]*(spectralData[wI]/activeSettings.maxSpectrumVal);
-        Y += tristimulusY[wI]*(spectralData[wI]/activeSettings.maxSpectrumVal);
-        Z += tristimulusZ[wI]*(spectralData[wI]/activeSettings.maxSpectrumVal);
+        X += tristimulusX[wI]*(spectralData[wI]/currMax);
+        Y += tristimulusY[wI]*(spectralData[wI]/currMax);
+        Z += tristimulusZ[wI]*(spectralData[wI]/currMax);
     }
     console.log(X+" "+Y+" "+Z);
     if(currXYZDisplay)
@@ -261,7 +265,8 @@ function XYZtoXY(X,Y,Z)
     {
         var x = X/(X+Y+Z);
         var y = Y/(X+Y+Z);
-        currxyYDisplay.innerHTML = round(x,4)+" "+round(y,4)+" "+round(Y,4);
+        var z = Z/(X+Y+Z);
+        currxyYDisplay.innerHTML = round(x,4)+" "+round(y,4)+" "+round(z,4);
 
         setxy(x,y);
     }
