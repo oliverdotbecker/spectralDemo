@@ -389,6 +389,7 @@ function saveContinuous(event)
     else
     {
         clearInterval(saveHandle);
+        saveHandle = null;
         event.currentTarget.classList.remove("rec");
     }
 }
