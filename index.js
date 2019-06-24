@@ -314,5 +314,7 @@ exports.getSerialPath = function()
 exports.exportSavedData = function(data)
 {
     var date = new Date().toJSON();
-    fs.writeFileSync(__dirname+'/export'+date.replace(/:/g,"-").replace("T","_").replace("Z","")+'.json',data,'utf8');
+    var filename = __dirname+'/export'+date.replace(/:/g,"-").replace("T","_").replace("Z","")+'.json';
+    fs.writeFileSync(filename,data,'utf8');
+    return filename;
 }

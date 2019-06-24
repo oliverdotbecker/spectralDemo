@@ -29,6 +29,18 @@ select {
     margin-left: .25em;
 }
 
+input[type="button"] {
+    width: 5em;
+    height: 2em;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="button"]:hover {
+    background-color: lightgray;
+}
+
 select {
     width: 10em;
 }
@@ -70,6 +82,28 @@ datalist {
     line-height: 1.5em;
     padding: .5em 1em;
     margin-left: .5em;
+}
+
+.rec {
+    animation: record 1s infinite;
+}
+
+@keyframes record {
+    0% {
+        background-color: lightgray;
+    }
+
+    20% {
+        background-color: lightcoral;
+    }
+
+    60% {
+        background-color: lightcoral;
+    }
+
+    80% {
+        background-color: lightgray;
+    }
 }
 
 #graphics {

@@ -11,7 +11,7 @@ const AS7261 = {
 //AS7262 settings
 const AS7262 = {
     channelCount:6,
-    channelNames:["Blau","Gr&uuml;n","Gelbgr&uuml;n","Gelb","Orange","Red"],
+    channelNames:["Blau","Gr&uuml;n","Gelbgr&uuml;n","Gelb","Orange","Rot"],
     channelColors:["blue","green","#c0ff00","yellow","orange","red"],
     channelWavelengths:[450,500,550,570,600,650], //nm
     maxSpectrumVal:65536
@@ -45,6 +45,7 @@ var cieDisp = null;
 var ciePos = null;
 
 var savedValues = [];
+var saveHandle = null;
 
 function init()
 {
@@ -378,8 +379,23 @@ function save()
     });
 }
 
+function saveContinuous(event)
+{
+    if(!saveHandle)
+    {
+        saveHandle = setInterval(save,1000);
+        event.currentTarget.classList.add("rec");
+    }
+    else
+    {
+        clearInterval(saveHandle);
+        event.currentTarget.classList.remove("rec");
+    }
+}
+
 function doExport()
 {
-    electronDaemon.exportSavedData(JSON.stringify(savedValues));
+    var filePath = electronDaemon.exportSavedData(JSON.stringify(savedValues));
+    console.log("Saved to: "+filePath);
     savedValues = [];
 }
