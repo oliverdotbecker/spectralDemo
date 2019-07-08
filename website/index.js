@@ -216,6 +216,7 @@ function init()
     }
     
     createSurface();
+    doImport("emitters",true);
 }
 
 function createSurface()
@@ -411,11 +412,11 @@ function doExport(arg)
     }
 }
 
-function doImport(arg)
+function doImport(arg,force)
 {
     if(arg == "emitters")
     {
-        if(confirm("Do you want to overwrite the current emitters?"))
+        if(force || confirm("Do you want to overwrite the current emitters?"))
         {
             var emitterData = electronDaemon.importEmitters("emitters.json");
             if(emitterData)
@@ -425,6 +426,7 @@ function doImport(arg)
                 for(var eNI = 0; eNI < emitterList.childElementCount-1; eNI++)
                 {
                     emitterList.childNodes[eNI].remove();
+                    eNI--;
                 }
 
                 for(var eI = 0; eI < emitters.length; eI++)
@@ -471,7 +473,8 @@ function addEmitter()
 
     emitters.push({
         name:"Emitter "+(emitters.length+1),
-        color:"#FFFFFF"
+        color:"#FFFFFF",
+        measures: {}
     })
 }
 
@@ -488,6 +491,22 @@ function editEmitter(event)
 
     var editEmitterColor = document.getElementById("editEmitterColor");
     editEmitterColor.value = emitters[idx].color;
+
+    var measurementBtns = document.getElementById("measures").children;
+    for(var mI = 0; mI < measurementBtns.length; mI++)
+    {
+        var currMeasurementBtn = measurementBtns[mI];
+        if(emitters[idx].measures && emitters[idx].measures[currMeasurementBtn.innerText])
+        {
+            currMeasurementBtn.style.color = emitters[idx].measures[currMeasurementBtn.innerText].color;
+            currMeasurementBtn.style.borderColor = emitters[idx].measures[currMeasurementBtn.innerText].color;
+        }
+        else
+        {
+            currMeasurementBtn.style.color = "white";
+            currMeasurementBtn.style.borderColor = "white";
+        }
+    }
 }
 
 function toggleEmitterEdit()
@@ -501,6 +520,11 @@ function toggleEmitterEdit()
     {
         emitterList.style.display = "none";
         emitterEdit.style.display = "";
+        var editEmitterName = document.getElementById("editEmitterName");
+        editEmitterName.focus();
+        setTimeout(() => {
+            editEmitterName.select();
+        },100);
     }
 }
 
@@ -536,9 +560,22 @@ function deleteEmitter()
     }
 }
 
-function getMeasurement()
+function getMeasurement(event)
 {
-
+    var elem = event.currentTarget;
+    var idx = emitterEdit.idx;
+    var measurement = emitters[idx].measures[elem.innerText];
+    if(!measurement)
+    {
+        measurement = {};
+    }
+    measurement.xyY = currxyYDisplay.innerText.split(" ");
+    measurement.XYZ = currXYZDisplay.innerText.split(" ");
+    measurement.RGB = currRGBDisplay.innerText.split(" ");
+    measurement.color = currRGBDisplay.style.backgroundColor;
+    emitters[idx].measures[elem.innerText] = measurement;
+    elem.style.color = measurement.color;
+    elem.style.borderColor = measurement.color;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////

@@ -22,11 +22,17 @@ h1 {
 }
 
 input[type="text"],
+input[type="color"],
 select {
     height: 1.5em;
     text-indent: .25em;
     border-radius: .25em;
     margin-left: .25em;
+}
+
+input[type="color"] {
+    height: 2.5em;
+    width: 97%;
 }
 
 input[type="button"] {
@@ -280,6 +286,17 @@ datalist {
 #emitterEdit #measures {
     display: flex;
     flex-wrap: wrap;
+    flex: 4;
+}
+
+#emitterEdit input[type="button"] {
+    height: 85%;
+    flex: 1;
+    margin: .5em;
+}
+
+#emitterEdit input[type="text"] {
+    width: 97%;
 }
 
 #emitterEdit #measures>div {

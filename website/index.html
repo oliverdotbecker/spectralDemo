@@ -99,6 +99,7 @@
                 </div>
             </div>
         </div>
+        <div id="colorMixer"></div>
         <div id="emitters">
             <div id="emitterList">
                 <div class="emitterEntry" id="addEmitter" onclick="addEmitter();">
@@ -107,23 +108,24 @@
                 </div>
             </div>
             <div id="emitterEdit" style="display: none;">
-                <input type="text" id="editEmitterName" placeholder="Emitter name" />
-                <input type="color" id="editEmitterColor" />
+                <div style="flex:2; display: flex; flex-direction: column; justify-content: space-around; height: 100%; align-items: center">
+                    <input type="text" id="editEmitterName" placeholder="Emitter name" />
+                    <input type="color" id="editEmitterColor" />
+                </div>
                 <div id="measures">
-                    <div>5%</div>
-                    <div>10%</div>
-                    <div>20%</div>
-                    <div>35%</div>
-                    <div>50%</div>
-                    <div>65%</div>
-                    <div>85%</div>
-                    <div>100%</div>
+                    <div onclick="getMeasurement(event);">5%</div>
+                    <div onclick="getMeasurement(event);">10%</div>
+                    <div onclick="getMeasurement(event);">20%</div>
+                    <div onclick="getMeasurement(event);">35%</div>
+                    <div onclick="getMeasurement(event);">50%</div>
+                    <div onclick="getMeasurement(event);">65%</div>
+                    <div onclick="getMeasurement(event);">85%</div>
+                    <div onclick="getMeasurement(event);">100%</div>
                 </div>
                 <input type="button" id="editEmitterDelete" value="Delete" onclick="deleteEmitter();" />
                 <input type="button" id="editEmitterSave" value="Save" onclick="saveEmitter();"/>
                 <input type="button" id="editEmitterBack" value="Back" onclick="toggleEmitterEdit();"/>
             </div>
         </div>
-        <div id="colorMixer"></div>
     </body>
 </html>

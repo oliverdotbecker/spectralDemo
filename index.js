@@ -94,7 +94,7 @@ app.on('ready', () => {
 
 //Sensor and serial stuff
 var activeSensor = "7262";
-var serialPath = "COM3";
+var serialPath = "COM8";
 var activeSerialPort = null;
 var lastCommand = "";
 var measures = null;
