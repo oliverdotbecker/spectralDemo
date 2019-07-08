@@ -94,7 +94,7 @@ app.on('ready', () => {
 
 //Sensor and serial stuff
 var activeSensor = "7262";
-var serialPath = "COM8";
+var serialPath = "COM3";
 var activeSerialPort = null;
 var lastCommand = "";
 var measures = null;
@@ -205,20 +205,26 @@ exports.getAvailableSerialPorts = function(query)
     return serialPorts;
 }
 
-initSerialCommunication();
-sendSerialData("ATLED0=0\n");
-setTimeout(() => {
-    sendSerialData("ATLED0=100\n");
-},510);
-setTimeout(() => {
-    sendSerialData("ATLED1=0\n");
-},200);
-var dataInterval = setInterval(() => {
-    sendSerialData("ATCDATA\n");
-},250);
-var tempInterval = setInterval(() => {
-    sendSerialData("ATTEMP\n");
-},5020);
+serialPort.list().then(ports => {
+    if(ports.length > 0)
+    {
+        serialPath = ports[0].comName;
+    }
+    initSerialCommunication();
+    sendSerialData("ATLED0=0\n");
+    setTimeout(() => {
+        sendSerialData("ATLED0=100\n");
+    },510);
+    setTimeout(() => {
+        sendSerialData("ATLED1=0\n");
+    },200);
+    var dataInterval = setInterval(() => {
+        sendSerialData("ATCDATA\n");
+    },250);
+    var tempInterval = setInterval(() => {
+        sendSerialData("ATTEMP\n");
+    },5020);
+});
 
 exports.getMeasures = function()
 {
@@ -244,34 +250,49 @@ exports.setSerialPath = function(path)
     serialPath = path;
     clearInterval(dataInterval);
     clearInterval(tempInterval);
-    if(!activeSerialPort)
+    try
     {
-        initSerialCommunication();
+        activeSerialPort.close();
     }
-    sendSerialData("ATLED0=100\n");
-    setTimeout(() => {
-        sendSerialData("ATLED1=0\n");
-    },100);
-    if(activeSensor == "7261")
+    catch(e)
     {
+
+    }
+    finally
+    {
+        activeSerialPort = null;
+    }
+    if(path != "No Port")
+    {
+        if(!activeSerialPort)
+        {
+            initSerialCommunication();
+        }
+        sendSerialData("ATLED0=100\n");
         setTimeout(() => {
-            sendSerialData("ATTCSMD=2\n");
-        },250);
-        dataInterval = setInterval(() => {
-            sendSerialData("ATDATA\n");
-        },500);
-        tempInterval = setInterval(() => {
-            sendSerialData("ATTEMP\n");
-        },5020);
-    }
-    else
-    {
-        dataInterval = setInterval(() => {
-            sendSerialData("ATCDATA\n");
-        },250);
-        tempInterval = setInterval(() => {
-            sendSerialData("ATTEMP\n");
-        },5020);
+            sendSerialData("ATLED1=0\n");
+        },100);
+        if(activeSensor == "7261")
+        {
+            setTimeout(() => {
+                sendSerialData("ATTCSMD=2\n");
+            },250);
+            dataInterval = setInterval(() => {
+                sendSerialData("ATDATA\n");
+            },500);
+            tempInterval = setInterval(() => {
+                sendSerialData("ATTEMP\n");
+            },5020);
+        }
+        else
+        {
+            dataInterval = setInterval(() => {
+                sendSerialData("ATCDATA\n");
+            },250);
+            tempInterval = setInterval(() => {
+                sendSerialData("ATTEMP\n");
+            },5020);
+        }
     }
 }
 

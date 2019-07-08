@@ -43,6 +43,7 @@ var currRGBDisplay = null;
 var currColorDisplay = null;
 var cieDisp = null;
 var ciePos = null;
+var mixPos = null;
 
 var savedValues = [];
 var saveHandle = null;
@@ -110,7 +111,7 @@ function init()
                     XYZtoRGB(measures[0],measures[1],measures[2]);
                 }
 
-                comInput.style.color = "";
+                comInput.style.backgroundColor = "";
             }
         }
     },250);
@@ -134,6 +135,21 @@ function init()
     namesContainer = document.getElementById('names');
     emitterList = document.getElementById("emitterList");
     emitterEdit = document.getElementById("emitterEdit");
+    sliderContainer = document.getElementById("sliderContainer");
+    mixPos = document.getElementById("mixPos");
+
+    comInput.onchange = function(event)
+    {
+        var input = event.currentTarget;
+        if(input)
+        {
+            electronDaemon.setSerialPath(input.value);
+            if(input.value == "No Port")
+            {
+                portFail();
+            }
+        }
+    }
 
     var commandInput = document.getElementById('commandInput');
     commandInput.onkeydown = function(event)
@@ -369,6 +385,10 @@ function updateSerialPorts(getPorts)
                 newOption.innerHTML = serialPorts[idx].comName;
                 comInput.appendChild(newOption);
             }
+            var newOption = document.createElement('option');
+            newOption.value = "No Port";
+            newOption.innerHTML = "No Port";
+            comInput.appendChild(newOption);
         }
     }
 }
@@ -441,6 +461,29 @@ function doImport(arg,force)
                     newEmitter.appendChild(emitterLabel);
                     emitterList.insertBefore(newEmitter,emitterList.lastElementChild);
                     newEmitter.onclick = editEmitter;
+
+                    var newSliderContainer = document.createElement('div');
+                    newSliderContainer.className = "sliderContainer";
+                    var newSpaceLabel = document.createElement('div');
+                    newSpaceLabel.innerHTML = emitters[eI].name;
+                    newSpaceLabel.className = "spaceLabel";
+                    newSliderContainer.appendChild(newSpaceLabel);
+                    var newSlider = document.createElement('input');
+                    newSlider.className = "vertical";
+                    newSlider.id = "slider"+eI;
+                    newSlider.type = "range";
+                    newSlider.min = 0;
+                    newSlider.max = 100;
+                    newSlider.step = 5;
+                    newSlider.value = 0;
+                    newSlider.oninput = calcColorMix;
+                    newSliderContainer.appendChild(newSlider);
+                    var newSliderDisp = document.createElement('output');
+                    newSliderDisp.id = "sliderDisp"+eI;
+                    newSliderDisp.for = "slider"+eI;
+                    newSliderDisp.value = "0";
+                    newSliderContainer.appendChild(newSliderDisp);
+                    sliderContainer.appendChild(newSliderContainer);
                 }
             }
             else
@@ -459,6 +502,8 @@ var emitters = [];
 var emitterList = null;
 var emitterEdit = null;
 
+var sliderContainer = null;
+
 function addEmitter()
 {
     var newEmitter = document.createElement('div');
@@ -475,7 +520,30 @@ function addEmitter()
         name:"Emitter "+(emitters.length+1),
         color:"#FFFFFF",
         measures: {}
-    })
+    });
+
+    var newSliderContainer = document.createElement('div');
+    newSliderContainer.className = "sliderContainer";
+    var newSpaceLabel = document.createElement('div');
+    newSpaceLabel.innerHTML = "Emitter "+(emitters.length+1);
+    newSpaceLabel.className = "spaceLabel";
+    newSliderContainer.appendChild(newSpaceLabel);
+    var newSlider = document.createElement('input');
+    newSlider.className = "vertical";
+    newSlider.id = "slider"+emitters.length-1;
+    newSlider.type = "range";
+    newSlider.min = 0;
+    newSlider.max = 100;
+    newSlider.step = 5;
+    newSlider.value = 0;
+    newSlider.oninput = calcColorMix;
+    newSliderContainer.appendChild(newSlider);
+    var newSliderDisp = document.createElement('output');
+    newSliderDisp.id = "sliderDisp"+emitters.length-1;
+    newSliderDisp.for = "slider"+emitters.length-1;
+    newSliderDisp.value = "0";
+    newSliderContainer.appendChild(newSliderDisp);
+    sliderContainer.appendChild(newSliderContainer);
 }
 
 function editEmitter(event)
@@ -581,3 +649,13 @@ function getMeasurement(event)
 ////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// Color calc /////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
+
+function calcColorMix(event)
+{
+    var currSlider = event.currentTarget;
+    var slidersOut = currSlider.nextElementSibling;
+    slidersOut.value=currSlider.value;
+
+    mixPos.style.bottom = (0.3*10*cieYdiv)+"px";
+    mixPos.style.left = (0.3*10*cieXdiv)+"px";
+}
