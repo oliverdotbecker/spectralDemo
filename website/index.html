@@ -4,7 +4,7 @@
         <title>Spectral Demo</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link rel="shortcut icon" href="cie_small.png">
+        <link rel="shortcut icon" href="images/cie_small.png">
         <link rel="stylesheet" type="text/css" href="default.css">
         <script type="text/javascript" src="index.js"></script>
     </head>
@@ -99,5 +99,31 @@
                 </div>
             </div>
         </div>
+        <div id="emitters">
+            <div id="emitterList">
+                <div class="emitterEntry" id="addEmitter" onclick="addEmitter();">
+                    <div class="plus"></div>
+                    <label>Add Emitter</label>
+                </div>
+            </div>
+            <div id="emitterEdit" style="display: none;">
+                <input type="text" id="editEmitterName" placeholder="Emitter name" />
+                <input type="color" id="editEmitterColor" />
+                <div id="measures">
+                    <div>5%</div>
+                    <div>10%</div>
+                    <div>20%</div>
+                    <div>35%</div>
+                    <div>50%</div>
+                    <div>65%</div>
+                    <div>85%</div>
+                    <div>100%</div>
+                </div>
+                <input type="button" id="editEmitterDelete" value="Delete" onclick="deleteEmitter();" />
+                <input type="button" id="editEmitterSave" value="Save" onclick="saveEmitter();"/>
+                <input type="button" id="editEmitterBack" value="Back" onclick="toggleEmitterEdit();"/>
+            </div>
+        </div>
+        <div id="colorMixer"></div>
     </body>
 </html>

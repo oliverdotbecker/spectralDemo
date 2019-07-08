@@ -132,7 +132,9 @@ function init()
     cieDisp = document.getElementById('cie');
     ciePos = document.getElementById('ciePos');
     namesContainer = document.getElementById('names');
-    
+    emitterList = document.getElementById("emitterList");
+    emitterEdit = document.getElementById("emitterEdit");
+
     var commandInput = document.getElementById('commandInput');
     commandInput.onkeydown = function(event)
     {
@@ -394,9 +396,151 @@ function saveContinuous(event)
     }
 }
 
-function doExport()
+function doExport(arg)
 {
-    var filePath = electronDaemon.exportSavedData(JSON.stringify(savedValues));
-    console.log("Saved to: "+filePath);
-    savedValues = [];
+    if(arg == "data")
+    {
+        var filePath = electronDaemon.exportSavedData(JSON.stringify(savedValues));
+        console.log("Saved to: "+filePath);
+        savedValues = [];
+    }
+    else if(arg == "emitters")
+    {
+        var filePath = electronDaemon.exportEmitters(JSON.stringify(emitters),"emitters.json");
+        console.log("Emitters saved to: "+filePath);
+    }
 }
+
+function doImport(arg)
+{
+    if(arg == "emitters")
+    {
+        if(confirm("Do you want to overwrite the current emitters?"))
+        {
+            var emitterData = electronDaemon.importEmitters("emitters.json");
+            if(emitterData)
+            {
+                emitters = JSON.parse(emitterData);
+
+                for(var eNI = 0; eNI < emitterList.childElementCount-1; eNI++)
+                {
+                    emitterList.childNodes[eNI].remove();
+                }
+
+                for(var eI = 0; eI < emitters.length; eI++)
+                {
+                    var newEmitter = document.createElement('div');
+                    newEmitter.className = "emitterEntry";
+                    newEmitter.id = "emitter"+eI;
+                    newEmitter.name = eI;
+                    newEmitter.style.borderColor = emitters[eI].color;
+                    var emitterLabel = document.createElement('label');
+                    emitterLabel.innerHTML = emitters[eI].name;
+                    newEmitter.appendChild(emitterLabel);
+                    emitterList.insertBefore(newEmitter,emitterList.lastElementChild);
+                    newEmitter.onclick = editEmitter;
+                }
+            }
+            else
+            {
+                console.error("Failed to import emitter data");
+            }
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// Emitters ///////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+
+var emitters = [];
+var emitterList = null;
+var emitterEdit = null;
+
+function addEmitter()
+{
+    var newEmitter = document.createElement('div');
+    newEmitter.className = "emitterEntry";
+    newEmitter.id = "emitter"+emitters.length;
+    newEmitter.name = emitters.length;
+    var emitterLabel = document.createElement('label');
+    emitterLabel.innerHTML = "Emitter "+(emitters.length+1);
+    newEmitter.appendChild(emitterLabel);
+    emitterList.insertBefore(newEmitter,emitterList.lastElementChild);
+    newEmitter.onclick = editEmitter;
+
+    emitters.push({
+        name:"Emitter "+(emitters.length+1),
+        color:"#FFFFFF"
+    })
+}
+
+function editEmitter(event)
+{
+    var elem = event.currentTarget;
+    var idx = elem.name;
+    toggleEmitterEdit();
+
+    emitterEdit.idx = idx;
+
+    var editEmitterName = document.getElementById("editEmitterName");
+    editEmitterName.value = emitters[idx].name;
+
+    var editEmitterColor = document.getElementById("editEmitterColor");
+    editEmitterColor.value = emitters[idx].color;
+}
+
+function toggleEmitterEdit()
+{
+    if(emitterList.style.display == "none")
+    {
+        emitterList.style.display = "";
+        emitterEdit.style.display = "none";
+    }
+    else
+    {
+        emitterList.style.display = "none";
+        emitterEdit.style.display = "";
+    }
+}
+
+function saveEmitter()
+{
+    var idx = emitterEdit.idx;
+    var editEmitterName = document.getElementById("editEmitterName");
+    var editEmitterColor = document.getElementById("editEmitterColor");
+    emitters[idx].name = editEmitterName.value;
+    emitters[idx].color = editEmitterColor.value;
+
+    var emitterNode = document.getElementById("emitter"+idx);
+    if(emitterNode)
+    {
+        emitterNode.style.borderColor = emitters[idx].color;
+        emitterNode.childNodes[0].innerHTML = emitters[idx].name;
+    }
+    toggleEmitterEdit();
+}
+
+function deleteEmitter()
+{
+    var idx = emitterEdit.idx;
+    if(confirm("Are you sure, that you want to delete the emitter '"+emitters[idx].name+"'?"))
+    {
+        var emitterNode = document.getElementById("emitter"+idx);
+        if(emitterNode)
+        {
+            emitters.splice(idx,1);
+            emitterNode.remove();
+        }
+        toggleEmitterEdit();
+    }
+}
+
+function getMeasurement()
+{
+
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// Color calc /////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////

@@ -18,8 +18,8 @@ app.on('ready', () => {
     win = new BrowserWindow({
         x: 5,
         y: 5,
-        width: 1000,
-        height: 700,
+        width: 1200,
+        height: 900,
         frame: true,
         icon: "cie.ico",
         title: "Spectral Demo"
@@ -60,7 +60,19 @@ app.on('ready', () => {
                 {
                     label: 'Export',
                     click: (menuItem, browserWindow, event) => {
-                        win.webContents.executeJavaScript('doExport();');
+                        win.webContents.executeJavaScript('doExport("data");');
+                    }
+                },
+                {
+                    label: 'Export Emitters',
+                    click: (menuItem, browserWindow, event) => {
+                        win.webContents.executeJavaScript('doExport("emitters");');
+                    }
+                },
+                {
+                    label: 'Import Emitters',
+                    click: (menuItem, browserWindow, event) => {
+                        win.webContents.executeJavaScript('doImport("emitters");');
                     }
                 }
             ]
@@ -311,10 +323,32 @@ exports.getSerialPath = function()
     return serialPath;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// Data Im-/Export ////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+
 exports.exportSavedData = function(data)
 {
     var date = new Date().toJSON();
     var filename = __dirname+'/export'+date.replace(/:/g,"-").replace("T","_").replace("Z","")+'.json';
     fs.writeFileSync(filename,data,'utf8');
     return filename;
+}
+
+exports.exportEmitters = function(data,filename)
+{
+    var filename = __dirname+'/'+filename;
+    fs.writeFileSync(filename,data,'utf8');
+    return filename;
+}
+
+exports.importEmitters = function(filename)
+{
+    var retData = null;
+    var filename = __dirname+'/'+filename;
+    if(fs.existsSync(filename))
+    {
+        retData = fs.readFileSync(filename,'utf8');
+    }
+    return retData;
 }

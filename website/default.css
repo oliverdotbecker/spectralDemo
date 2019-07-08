@@ -108,30 +108,26 @@ datalist {
 
 #graphics {
     display: flex;
-    flex: 1;
+    flex: 10;
 }
 
 #spectrum {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    flex: 12;
 }
 
 #cie {
-    flex: 1;
-    background-image: url(cie2.png);
-    background-position: -5% 125%;
-    background-size: auto 95%;
+    flex: 8;
+    background-image: url(images/cie3.png);
+    background-position: 0px 100%;
+    background-size: 112% 112%;
     background-repeat: no-repeat;
     position: relative;
     overflow: hidden;
 }
 
 #ciePos {
-    /*width: 3px;
-    height: 3px;
-    border:1px solid white;
-    background-color: black;*/
     position: absolute;
     transition: .25s;
     z-index: 5;
@@ -212,4 +208,94 @@ datalist {
     display: flex;
     color: white;
     justify-content: space-around;
+}
+
+#emitters {
+    flex: 2;
+    color: white;
+}
+
+#emitterList,
+#emitterEdit {
+    display: flex;
+    flex-direction: row;
+}
+
+.emitterEntry {
+    display: flex;
+    padding: 1em;
+    margin: 2em 1em;
+    justify-content: center;
+    align-items: center;
+    border-radius: .5em;
+    border: 2px solid white;
+}
+
+.emitterEntry:hover {
+    background-color: rgba(255,255,255,0.3);
+}
+
+.emitterEntry,
+.emitterEntry * {
+    cursor: pointer;
+}
+
+#addEmitter {
+    border: 2px solid blue;
+}
+
+#addEmitter:hover {
+    background-color: rgba(0,0,255,0.3);
+}
+
+#addEmitter>.plus {
+    width: 1.5em;
+    height: 1.5em;
+    position: relative;
+}
+
+.plus:before, .plus:after {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    content: ' ';
+    height: 1.5em;
+    width: .5em;
+    background-color: #0400ff;
+    border-radius: 2px;
+}
+.plus:before {
+    transform: rotate(0deg);
+}
+.plus:after {
+    transform: rotate(-90deg);
+}
+
+#emitterEdit {
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+
+#emitterEdit #measures {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#emitterEdit #measures>div {
+    flex: 1;
+    flex-basis: calc(25% - 3em);
+    padding: .5em;
+    margin: .5em;
+    border: 1px solid white;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+#colorMixer {
+    flex: 2;
+    color: white;
+    display: flex;
+    flex-direction: row;
 }
