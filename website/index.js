@@ -637,6 +637,19 @@ function getMeasurement(event)
     {
         measurement = {};
     }
+    if(activeSensor == "7262")
+    {
+        measurement.spectrum = {};
+        measurement.spectrum.sensor = activeSensor;
+        measurement.spectrum.max = currMax;
+        measurement.spectrum.values = [];
+
+        for(var i = 0; i < valueContainer.childElementCount; i++)
+        {
+            var valueNode = valueContainer.childNodes[i];
+            measurement.spectrum.values.push(valueNode.innerHTML);
+        }
+    }
     measurement.xyY = currxyYDisplay.innerText.split(" ");
     measurement.XYZ = currXYZDisplay.innerText.split(" ");
     measurement.RGB = currRGBDisplay.innerText.split(" ");
