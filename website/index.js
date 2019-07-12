@@ -98,7 +98,7 @@ function init()
                     {
                         measures[i] = parseFloat(measures[i]);
                     }
-                    convertSpectrumToXYZ(measures);
+                    convertSpectrumToXYZ(measures,currMax);
                 }
                 else
                 {
@@ -258,38 +258,42 @@ function portFail()
     comInput.style.backgroundColor = "red";
 }
 
-function convertSpectrumToXYZ(spectralData)
+function convertSpectrumToXYZ(spectralData,max,noDisp)
 {
     var X = 0;
     var Y = 0;
     var Z = 0;
     for(var wI = 0; wI < activeSettings.channelWavelengths.length; wI++)
     {
-        X += tristimulusX[wI]*(spectralData[wI]/currMax);
-        Y += tristimulusY[wI]*(spectralData[wI]/currMax);
-        Z += tristimulusZ[wI]*(spectralData[wI]/currMax);
+        X += tristimulusX[wI]*(spectralData[wI]/max);
+        Y += tristimulusY[wI]*(spectralData[wI]/max);
+        Z += tristimulusZ[wI]*(spectralData[wI]/max);
     }
     console.log(X+" "+Y+" "+Z);
-    if(currXYZDisplay)
+    if(currXYZDisplay && !noDisp)
     {
         currXYZDisplay.innerHTML = round(X,4)+" "+round(Y,4)+" "+round(Z,4);
+        XYZtoXY(X,Y,Z);
+        XYZtoRGB(X,Y,Z);
     }
-    XYZtoXY(X,Y,Z);
-    XYZtoRGB(X,Y,Z);
-    //return [X,Y,Z];
+    return [X,Y,Z];
 }
 
-function XYZtoXY(X,Y,Z)
+function XYZtoXY(X,Y,Z,noDisp)
 {
     if(currxyYDisplay)
     {
         var x = X/(X+Y+Z);
         var y = Y/(X+Y+Z);
         var z = Z/(X+Y+Z);
-        currxyYDisplay.innerHTML = round(x,4)+" "+round(y,4)+" "+round(z,4);
 
-        setxy(x,y);
+        if(currXYZDisplay && !noDisp)
+        {
+            currxyYDisplay.innerHTML = round(x,4)+" "+round(y,4)+" "+round(z,4);
+            setxy(x,y);
+        }
     }
+    return [x,y,z]
 }
 
 function XYZtoRGB(tX,tY,tZ)
@@ -358,6 +362,7 @@ function setxy(x,y)
         ciePos.style.bottom = (y*10*cieYdiv)+"px";
         ciePos.style.left = (x*10*cieXdiv)+"px";
     }
+    console.log("Set x="+x+" y="+y+" bottom="+(y*10*cieYdiv)+"px left="+(x*10*cieXdiv)+"px");
 }
 
 function updateSerialPorts(getPorts)
@@ -673,8 +678,90 @@ function calcColorMix(event)
 {
     var currSlider = event.currentTarget;
     var slidersOut = currSlider.nextElementSibling;
-    slidersOut.value=currSlider.value;
+    slidersOut.value = currSlider.value;
 
-    mixPos.style.bottom = (0.3*10*cieYdiv)+"px";
-    mixPos.style.left = (0.3*10*cieXdiv)+"px";
+    var sliderValues = [];
+    var sliders = document.getElementsByClassName("vertical");
+    for(var sI = 0; sI < sliders.length; sI++)
+    {
+        sliderValues.push(sliders[sI].value);
+    }
+    
+    var calcX = 0.3;
+    var calcY = 0.3;
+    var calcSpectrum = [0,0,0,0,0,0];
+    var calcMax = 0;
+    var wroteSpectrum = false;
+
+    for(var sI = 0; sI < sliderValues.length; sI++)
+    {
+        if(sliderValues[sI] != 0)
+        {
+            var currEmitter = emitters[sI];
+            if(currEmitter.measures != {})
+            {
+                var minMeasure = 0;
+                var maxMeasure = 0;
+                for(measurePercent in currEmitter.measures)
+                {
+                    if(parseInt(measurePercent) <= sliderValues[sI])
+                    {
+                        minMeasure = measurePercent;
+                    }
+                    if(parseInt(measurePercent) >= sliderValues[sI])
+                    {
+                        maxMeasure = measurePercent;
+                        break;
+                    }
+                }
+                
+                if(minMeasure == maxMeasure)
+                {
+                    wroteSpectrum = true;
+                    if(currEmitter.measures[minMeasure].spectrum.max > calcMax)
+                    {
+                        calcMax = currEmitter.measures[minMeasure].spectrum.max;
+                    }
+                    for(var spI = 0; spI < calcSpectrum.length; spI++)
+                    {
+                        calcSpectrum[spI] += parseFloat(currEmitter.measures[minMeasure].spectrum.values[spI]);
+                    }
+                }
+                else
+                {
+                    wroteSpectrum = true;
+                    var relation = parseInt(minMeasure)/parseInt(maxMeasure);
+                    if((currEmitter.measures[minMeasure].spectrum.max*relation) > calcMax)
+                    {
+                        calcMax = (currEmitter.measures[minMeasure].spectrum.max*relation);
+                    }
+                    //Interpolation
+                    for(var spI = 0; spI < calcSpectrum.length; spI++)
+                    {
+                        var minVal = parseFloat(currEmitter.measures[minMeasure].spectrum.values[spI]);
+                        var maxVal = parseFloat(currEmitter.measures[maxMeasure].spectrum.values[spI]);
+                        var diff1 = (sliderValues[sI]-parseInt(minMeasure))/(parseInt(maxMeasure)-parseInt(minMeasure));
+                        var temp2 = diff1*(maxVal-minVal);
+                        calcSpectrum[spI] += (temp2+minVal);
+                    }
+                }
+            }
+        }
+    }
+
+    if(wroteSpectrum)
+    {
+        var calcXYZ = convertSpectrumToXYZ(calcSpectrum,calcMax,true);
+        var calcxyY = XYZtoXY(calcXYZ[0],calcXYZ[1],calcXYZ[2],true);
+
+        calcX = Math.min(calcxyY[0],0.9);
+        calcY = Math.min(calcxyY[1],0.9);
+        calcX = Math.max(calcX,0);
+        calcY = Math.max(calcY,0);
+    }
+
+    var calcBottom = round((calcY*10*cieYdiv),3);
+    var calcLeft = round((calcX*10*cieXdiv),3);
+    mixPos.style.bottom = calcBottom+"px";
+    mixPos.style.left = calcLeft+"px";
 }
