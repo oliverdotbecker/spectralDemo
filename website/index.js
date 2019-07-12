@@ -448,6 +448,7 @@ function doImport(arg,force)
                     emitterList.childNodes[eNI].remove();
                     eNI--;
                 }
+                sliderContainer.innerHTML = "";
 
                 for(var eI = 0; eI < emitters.length; eI++)
                 {
@@ -530,7 +531,7 @@ function addEmitter()
     newSliderContainer.appendChild(newSpaceLabel);
     var newSlider = document.createElement('input');
     newSlider.className = "vertical";
-    newSlider.id = "slider"+emitters.length-1;
+    newSlider.id = "slider"+(emitters.length-1);
     newSlider.type = "range";
     newSlider.min = 0;
     newSlider.max = 100;
@@ -539,8 +540,8 @@ function addEmitter()
     newSlider.oninput = calcColorMix;
     newSliderContainer.appendChild(newSlider);
     var newSliderDisp = document.createElement('output');
-    newSliderDisp.id = "sliderDisp"+emitters.length-1;
-    newSliderDisp.for = "slider"+emitters.length-1;
+    newSliderDisp.id = "sliderDisp"+(emitters.length-1);
+    newSliderDisp.for = "slider"+(emitters.length-1);
     newSliderDisp.value = "0";
     newSliderContainer.appendChild(newSliderDisp);
     sliderContainer.appendChild(newSliderContainer);
@@ -623,6 +624,11 @@ function deleteEmitter()
         {
             emitters.splice(idx,1);
             emitterNode.remove();
+        }
+        var sliderNode = document.getElementById("slider"+idx);
+        if(sliderNode)
+        {
+            sliderNode.parentElement.remove();
         }
         toggleEmitterEdit();
     }
