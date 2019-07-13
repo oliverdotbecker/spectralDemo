@@ -760,6 +760,13 @@ function calcColorMix(event)
         calcY = Math.max(calcY,0);
     }
 
+    if(cieDisp && cieXdiv == 0)
+    {
+        var box = cieDisp.getBoundingClientRect();
+        cieXdiv = box.width/9;
+        cieYdiv = box.height/9;
+    }
+
     var calcBottom = round((calcY*10*cieYdiv),3);
     var calcLeft = round((calcX*10*cieXdiv),3);
     mixPos.style.bottom = calcBottom+"px";
