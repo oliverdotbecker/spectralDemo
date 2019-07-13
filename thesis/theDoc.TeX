@@ -1,7 +1,7 @@
 %% Erläuterungen zu den Befehlen erfolgen unter
 %% diesem Beispiel.
 
-\documentclass{scrartcl}
+\documentclass[11pt]{scrartcl}
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -9,6 +9,7 @@
 \usepackage[ngerman]{babel}
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{wrapfig}
 \usepackage[
     colorlinks=true,
     urlcolor=blue,
@@ -22,20 +23,20 @@
 
 \begin{center}
     \center\includegraphics[width=0.4\linewidth]{logo.png}
-
-    MASTER THESIS
+    \paragraph{}
+    \huge MASTER THESIS
 \end{center}
-
-Title:  Abgleich von LED Lichtquellen auf Basis einer komplexen Lichtsteuerung\\
-\\
+\vspace{2cm}\noindent
+{\large Title:  Abgleich von LED Lichtquellen auf Basis einer komplexen Lichtsteuerung}
+\par\vspace{4cm}\noindent
 Submitted by:   Oliver Becker\\
-\\
+\par\vspace{2cm}\noindent
 1st Academic Supervisor:    Dr. Prof. Herbert Krauß\\
 \\
 2nd Academic Supervisor:    Dr. Prof. Shun-Ping Chen\\
 \\
 Industrial Supervisor:      Dipl.-Ing. (TU) Hartmut Cordes\\
-\\
+\par\vspace{2cm}\noindent
 Completion Date:    31.10.2019
 \clearpage
 
@@ -43,13 +44,29 @@ Completion Date:    31.10.2019
 \clearpage
 
 \section{Vorwort}
-Weltweit finden große Veranstaltungen statt. Bei allen Inszenierungen spielt das Licht eine große Rolle. Egal, ob einfach nur hell oder szenisch ausgeleuchtet, bedarf es einer Steuerung für diese Lichttechnik. Bühnen und Ansprüche der Veranstalter werden immer größer und komplexer. So geht es über das einfache An- und Ausschalten eines Scheinwerfers schon sehr weit hinaus. Heutzutage werden Lichtanlagen mit leistungsfähigen Computersystemen gesteuert, welche von geschultem Personal bedient werden müssen.\\
-In der Filmindustrie spielt Licht eine große Rolle. Die Ausleuchtung eines Film-Sets entscheidet auch wie die Handlung vom Betrachter wahrgenommen wird. Dies gilt sowohl für statische Szenen, als auch für die zumeist hoch Aufwändigen dynamischen Installationen.
-Eine der zurzeit größten Herausforderungen stellt die korrekte Farbwiedergabe der mannigfaltigen Lichtquellen an einem Film-Set dar.
-Dies wird vor allem durch die unterschiedenen chromatischen Eigenschaften von den Licht emittie-renden Quellen erschwert. Diese Quellen sind heute zu xx\% LEDs.\\
-Als Beispiel wird hier ein Film-Set für eine Motorrad Verfolgungs-Szene genommen. Hier wird im Hintergrund mit großen LED Kacheln der Computergenerierte Hintergrund abgespielt. Mit kleinen LED Streifen links und rechts neben dem im Studio aufgebauten Motorrad wird dynamisch Licht auf den Schauspieler emittiert, um eine größere Dynamik zu simulieren.
-Zusätzlich wird mit kleinen Bildschirmen weiterer Computergenerierter Hintergrund von vorne auf das Motorrad und den Schauspieler projiziert, um realistische Spiegelungen in der Windschutz-scheibe und der Brille des Schauspielers zu erhalten.\\
-Alle diese aufgezählten Emitter haben zumeist alle unterschiedlichste chromatische Kennwerte sofern diese überhaupt bekannt sind. Ein Abgleich dieser Quellen ist wünschenswert für ein ho-mogeneres Farbbild. 
+Weltweit finden große Veranstaltungen statt. Bei allen Inszenierungen spielt das Licht eine 
+große Rolle. Egal, ob einfach nur hell oder szenisch ausgeleuchtet, bedarf es einer Steuerung 
+für diese Lichttechnik. Bühnen und Ansprüche der Veranstalter werden immer größer und komplexer. 
+So geht es über das einfache An- und Ausschalten eines Scheinwerfers schon sehr weit hinaus. 
+Heutzutage werden Lichtanlagen mit leistungsfähigen Computersystemen gesteuert, welche von 
+geschultem Personal bedient werden müssen.\\
+In der Filmindustrie spielt Licht eine große Rolle. Die Ausleuchtung eines Film-Sets entscheidet 
+auch wie die Handlung vom Betrachter wahrgenommen wird. Dies gilt sowohl für statische Szenen, 
+als auch für die zumeist hoch Aufwändigen dynamischen Installationen.
+Eine der zurzeit größten Herausforderungen stellt die korrekte Farbwiedergabe der mannigfaltigen 
+Lichtquellen an einem Film-Set dar.
+Dies wird vor allem durch die unterschiedenen chromatischen Eigenschaften von den Licht 
+emittierenden Quellen erschwert. Diese Quellen sind heute zu xx\% LEDs.\\
+Als Beispiel wird hier ein Film-Set für eine Motorrad Verfolgungsszene genommen. Hier wird im 
+Hintergrund mit großen LED Kacheln der Computergenerierte Hintergrund abgespielt. Mit kleinen 
+LED Streifen links und rechts neben dem im Studio aufgebauten Motorrad wird dynamisch Licht auf 
+den Schauspieler emittiert, um eine größere Dynamik zu simulieren.
+Zusätzlich wird mit kleinen Bildschirmen weiterer Computergenerierter Hintergrund von vorne auf 
+das Motorrad und den Schauspieler projiziert, um realistische Spiegelungen in der 
+Windschutzscheibe und der Brille des Schauspielers zu erhalten.\\
+Alle diese aufgezählten Emitter haben zumeist alle unterschiedlichste chromatische Kennwerte 
+sofern diese überhaupt bekannt sind. Ein Abgleich dieser Quellen ist wünschenswert für ein 
+homogeneres Farbbild. 
 \clearpage
 
 \section{Abstrakt}
@@ -213,6 +230,9 @@ micro - $\mu$\\
 \\
 Lines
 \url{https://www.namsu.de/latex/kapitel6.html}\\
+\\
+Embed figures
+\url{https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions}
 \clearpage
 
 \end{document}
