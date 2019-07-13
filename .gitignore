@@ -2,3 +2,12 @@ node_modules
 package-lock.json
 export*.json
 emitters.json
+
+thesis/theDoc.synctex.gz
+thesis/theDoc.aux
+thesis/theDoc.fdb_latexmk
+thesis/theDoc.fls
+thesis/theDoc.log
+thesis/theDoc.out
+thesis/theDoc.pdf
+thesis/theDoc.toc
