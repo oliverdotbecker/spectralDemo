@@ -9,12 +9,15 @@
 \usepackage[ngerman]{babel}
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{subcaption}
 \usepackage{wrapfig}
+\usepackage{float}
 \usepackage[
     colorlinks=true,
     urlcolor=blue,
     linkcolor=black
 ]{hyperref}
+\usepackage[font={scriptsize},figurename=Bild]{caption}
 
 \title{MASTER THESIS}
 \author{Oliver Becker}
@@ -30,6 +33,8 @@
 {\large Title:  Abgleich von LED Lichtquellen auf Basis einer komplexen Lichtsteuerung}
 \par\vspace{4cm}\noindent
 Submitted by:   Oliver Becker\\
+\\
+Matrikelnumber: 725810\\
 \par\vspace{2cm}\noindent
 1st Academic Supervisor:    Dr. Prof. Herbert Krauß\\
 \\
@@ -43,7 +48,9 @@ Completion Date:    31.10.2019
 \tableofcontents
 \clearpage
 
-\section{Vorwort}
+%%%%%%%%%%%%%%%%%%%%%%%%%% Vorwort %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Vorwort}
+\addcontentsline{toc}{section}{Vorwort}
 Weltweit finden große Veranstaltungen statt. Bei allen Inszenierungen spielt das Licht eine 
 große Rolle. Egal, ob einfach nur hell oder szenisch ausgeleuchtet, bedarf es einer Steuerung 
 für diese Lichttechnik. Bühnen und Ansprüche der Veranstalter werden immer größer und komplexer. 
@@ -66,13 +73,33 @@ das Motorrad und den Schauspieler projiziert, um realistische Spiegelungen in de
 Windschutzscheibe und der Brille des Schauspielers zu erhalten.\\
 Alle diese aufgezählten Emitter haben zumeist alle unterschiedlichste chromatische Kennwerte 
 sofern diese überhaupt bekannt sind. Ein Abgleich dieser Quellen ist wünschenswert für ein 
-homogeneres Farbbild. 
+homogeneres Farbbild.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Erklärung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Erklärung}
+\addcontentsline{toc}{section}{Erklärung}
+Ich versichere hiermit, dass ich die vorliegende Arbeit selbständig verfasst und keine anderen als die
+im Literaturverzeichnis angegebenen Quellen benutzt habe.\\
+Alle Stellen, die wörtlich oder sinngemäß aus veröffentlichten oder noch nicht veröffentlichten
+Quellen entnommen sind, sind als solche kenntlich gemacht.\\
+Die Zeichnungen oder Abbildungen in dieser Arbeit sind von mir selbst erstellt worden oder mit
+einem entsprechenden Quellennachweis versehen.\\
+Diese Arbeit ist in gleicher oder ähnlicher Form noch bei keiner anderen Prüfungsbehörde
+eingereicht worden.\\
+\par\vspace{2cm}\noindent
+Darmstadt, den 30.10.2019 \hspace*{0pt}\hfill Oliver Becker
 \clearpage
 
-\section{Abstrakt}
-\section{Abstract}
+%%%%%%%%%%%%%%%%%%%%%%%%%% Abstrakt %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Abstrakt}
+\addcontentsline{toc}{section}{Abstrakt}
+
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
 \clearpage
-\section{Einführung}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% MA Lighting Technology %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{MA Lighting Technology}
 MA Lighting Technology GmbH (im Folgenden MA) wurde 1983 von Michael Adenau zusammen mit
 den drei Mitgesellschaftern Ernst Ebrecht, Thomas Stanger und Werner Hauptvogel gegründet. MA
 entwickelt und produziert Lichtsteuerungen für die Bereiche Fernsehen, Veranstaltungen, Theater
@@ -83,38 +110,46 @@ einem der international führenden Unternehmen für computergesteuerte Lichtstel
 Netzwerkkomponenten und digitale Dimmer Systeme.\\
 In der Referenzliste von MA findet man viele große internationale Theater und Opernhäuser, Bands
 von AC/DC über Sting bis U2, die Eröffnungsfeier der Olympischen Spiele, der Eurovision Song
-Contest 2013 oder die Lichtinstallation zum 25. Jahrestag des Falls der Berliner Mauer 2014.\\
+Contest 2019 oder die Lichtinstallation zum 25. Jahrestag des Falls der Berliner Mauer 2014.\\
 \begin{wrapfigure}{r}{0.5\textwidth}
-    \vspace{-20pt}
+    \vspace{-25pt}
     \begin{center}
         \includegraphics[width=0.48\textwidth]{images/csm_MA_building_WBB.jpg}
     \end{center}
     \vspace{-20pt}
-    \caption{Firmensitz Waldbüttelbrunn [14]}
-    \vspace{-10pt}
+    \caption{Firmensitz Waldbüttelbrunn}
+    \vspace{-15pt}
 \end{wrapfigure}
-Der Hauptsitz von MA Lighting Technology GmbH
-befindet sich in Waldbüttelbrunn in der Nähe von
-Würzburg. Dort beschäftigt MA circa 100 Mitarbeiter. In
-den fünf Gebäuden sitzen Soft- und Hardwareentwicklung,
-Testabteilung, Produktion, Lager und
-Management. Alle Produkte werden größtenteils von
-Hand von den Mitarbeitern vor Ort zusammengebaut.
-Platinen und Gehäuse werden von externen Firmen
-geliefert. Die einzelnen Bauteile werden von den
-Mitarbeitern auf den Platinen aufgesteckt und verlötet.
-Anschließend werden die bestückten Platinen in den Gehäusen montiert und verkabelt. Nach einem
-mehrtägigen BurnIn-Test und einer Werkskonfiguration werden die Geräte verpackt und sind
-versandfertig.\\
-Kundensupport und Vertrieb werden von der externen Firma "Lightpower" durchgeführt. Diese hat
-ihren Sitz in Paderborn. Die Konsultation der Mitarbeiter in Waldbüttelbrunn erfolgt lediglich bei
-größeren technischen Fragen und Problemen.\\
+Der Hauptsitz von MA Lighting Technology GmbH befindet sich in Waldbüttelbrunn in der Nähe von
+Würzburg. Dort beschäftigt MA circa 100 Mitarbeiter. In den fünf Gebäuden sitzen Soft- und
+Hardwareentwicklung, Testabteilung, Produktion, Lager und Management. Alle Produkte werden
+größtenteils von Hand von den Mitarbeitern vor Ort zusammengebaut. Platinen und Gehäuse werden
+von externen Firmen geliefert. Die einzelnen Bauteile werden von den Mitarbeitern auf den
+Platinen aufgesteckt und verlötet. Anschließend werden die bestückten Platinen in den Gehäusen
+montiert und verkabelt. Nach einem mehrtägigen BurnIn-Test und einer Werkskonfiguration werden
+die Geräte verpackt und sind versandfertig.\\
+\\
+Kundensupport und Vertrieb werden von der externen Firma Lightpower in Deutschland durchgeführt.
+Diese hat ihren Sitz in Paderborn. Die Konsultation der Mitarbeiter in Waldbüttelbrunn erfolgt
+lediglich bei größeren technischen Fragen und Problemen.\\
 Eines der ersten Produkte von MA war der Lightcommander24, eine analoge Lichtsteuerkonsole auf
 Basis des DMX (Digital Multiplex) Protokolls von 1990. Nach kurzer Zeit folgten Dimmer für
 Scheinwerfer und DMX-Demultiplexer, um analoge Geräte ansteuern zu können.\\
-\\
-Bild 2 - grandMA Series 1 Full Size 2port Node
-\\
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{images/grandMA_1.png}
+        \caption{gMA1 Full Size}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{0.25\textwidth}
+        \includegraphics[width=\textwidth]{images/MA_2Port_Node_onPC_13019x.png}
+        \caption{2port Node}
+    \end{subfigure}
+    \caption{grandMA1 Serie Produkte}\label{fig:gma1}
+\end{figure}
+\noindent
 Ebenso entwickelte MA die Steuerpulte Scan-Commander und die grandMA Series 1 sowohl als
 Konsole, als auch als Computerapplikation. Das Besondere an dieser Technologie ist, dass DMX-Daten
 nicht nur über XLR\footnote{XLR - drei oder fünf polige Steckverbindung}, sondern auch über ein eigenes Ethernet-Netzwerkprotokoll namens "MA-Net"
@@ -123,35 +158,55 @@ DMX-Nodes. Diese fungieren als Protokollwandler zwischen MA-Net und DMX.\\
 Die Firma setzte immer wieder Standards in der Branche. Im Zuge des technischen Fortschritts –
 Einsatz von LEDas als Lichtquelle, moderne Netzwerktechnologie und Videodatenverarbeitung –
 wurde die Produktpalette wesentlich erweitert. Hinzu kam die grandMA2 Series.\\
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{images/MA-VPU-plus_d.png}
+        \caption{VPU}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{0.45\textwidth}
+        \includegraphics[width=\textwidth]{images/MA_grandMA2_full-size.png}
+        \caption{gMA2 Full Size}
+    \end{subfigure}
+    \caption{grandMA2 Serie Produkte}\label{fig:gma2}
+\end{figure}
+\noindent
 Die grandMA2 Series ist die moderne Fortführung der grandMA Series 1. Außerdem stellt sie
 folgende Produkte bereit: Die Network Processing Unit (NPU), eine Prozessoreinheit, welche die
 Konsole in ihren Berechnungen unterstützt, indem die Konsole Aufträge auf die NPU dezentral
 auslagert. Die Video Processing Unit (VPU) verarbeitet Video-Content und gibt diesen nativ über
 Graphikkarten oder Pixelmapping mit Hilfe von DMX aus. Die Replay-Unit (RPU) ist eine vollwertige
 Konsole ohne die typischen Steuerelemente, sie dient beispielsweise als Havariegerät. Zuletzt noch
-verschiedene Variationen der Nodes, welche weiterhin als Protokollwandler dienen [1].\\
+verschiedene Variationen der Nodes, welche weiterhin als Protokollwandler dienen.\\
 Alle diese Produkte adressieren vor allem den Highend-Profibereich für Theaterproduktionen,
-Liveshows und Festinstallationen. Um auch Kunden im mittleren Marktsegment ansprechen zu
-können, ist im April 2015 auf der international wichtigsten Messe der Branche, der Prolight\&Sound,
-eine weitere Konsolenfamilie vorgestellt worden, die dot2. Zum weiteren Ausbau des
-Systemgedankens beschäftigt sich MA momentan verstärkt mit Netzwerktechnologien und steht kurz
-vor der Veröffentlichung eines eigenen MA-Ethernet-Switches.\\
-Die Arbeiten im Zeitraum der Bachelorarbeit greifen die vorherigen Ergebnisse auf, daher sind diese
-hier ebenfalls beschrieben. Die Funktionen des DMX-Recorders wurden um die Features Spulen,
-Playlists, Schleifen und eine Agenda erweitert. Des Weiteren wurde ein umfangreiches Webinterface
-mit verschiedenen Zugriffsrechten entwickelt, mit welchem sowohl das eigentliche Basisgerät als
-auch die Recorderfunktionen ferngesteuert werden können.\\
-Zunächst werde ich auf den Begriff DMX eingehen. Anschließend sind die Fähigkeiten des
-Basisgerätes, sowie die Erweiterungen und Entwicklungen für den DMX-Recorder unterteilt in
-Hardware und Software erläutert. Die Kapitel 2 bis 2.3 und 3 bis 3.3.3 waren im Bericht der
-Berufspraktischen Phase 2 bereits enthalten und wurden teilweise ergänzt, um die Vollständigkeit
-dieser Arbeit zu gewährleisten.\\
+Liveshows und Festinstallationen.\\
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{images/grandMA3-full-size.png}
+    \caption{grandMA3 Serie Full Size}\label{fig:gma3}
+\end{figure}
+\noindent
+Seit Mitte 2017 entwickelt MA eine neue Produkt Serie. Die grandMA3 Serie. Diese Serie greift die
+in den letzten 34 Jahren gesammelte Erfahrung auf, jedoch wurde jede Zeile Code neu geschrieben,
+um die technischen Möglichkeiten der neuen Hardware vollumfänglich nutzen zu können.\\
+Neben vielen Veränderungen gegenüber der Vorserien arbeitet die Farblogik der grandMA3 Software
+mit den Spezifikationen des CIE\footnote{CIE - Commission internationale de l’éclairage} 1931 Standards.
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% DMX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Grundlagen}
 \subsection{DMX}
-Diese Abkürzung steht für Digital Multiplex [2]. Dahinter verbirgt sich ein digitales Steuerprotokoll,
+Diese Abkürzung steht für Digital Multiplex. Dahinter verbirgt sich ein digitales Steuerprotokoll,
 welches vornehmlich in der Veranstaltungstechnik eingesetzt wird. Es wurde zuerst als DMX-
 512/1990 standardisiert. Im November 2004 wurde dieser Standard aktualisiert, bekannt als
 DMX512-A (ANSI E1.11-2008). DMX basiert elektrisch auf dem RS-485 (EIA-485)
 Schnittstellenstandard.\\
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{images/dmx.png}
+    \caption{Physikalische Übertragung DMX-512/1990 (RS-485)}
+\end{figure}
+\noindent
 Das eigentliche Signal wird dabei seriell auf einem Leitungspaar symmetrisch übertragen auf der
 einen Leitung mit invertierten und auf der anderen mit nichtinvertiertem Pegel. Das Signal ist so
 weniger störungsempfindlich, da sich externe Einstreuungen auf beide Datenleitungen gleichmäßig
@@ -162,21 +217,29 @@ Datenübertragungsrate bis zu 12 Mbps. Ein Netzwerk aus mehreren Geräten wird a
 Die Datenübertragung erfolgt mittels einer Universal Asynchronous Receiver Transmitter (UART)
 gesteuerten asynchronen seriellen Schnittstelle. Ein Datenframe besteht aus acht Datenbits und zwei
 Stoppbits. Die Symbolrate beträgt 250 kBaud (Baud = Bits pro sec).
-Bild 5 - Physikalische Übertragung DMX-512/1990 (RS-485)\\
-\\
-Legende zu Bild 6 (S.17 [2]):\\
-Nr. Signalabschnitt Min Soll Max Einheit\\
-1 "BREAK" 88 176 - $\mu$s\\
-2 "MARK after "BREAK 8 $\mu$s - < 1 s\\
-3 Slot Time 43,12 44,0 44,88 $\mu$s\\
-4 Startbit 3,92 4,0 4,08 $\mu$s\\
-5 LSB (niederwertigstes Datenbit) 3,92 4,0 4,08 $\mu$s\\
-6 MSB (höchstwertigstes Datenbit) 3,92 4,0 4,08 $\mu$s\\
-7 Stoppbit 3,92 4,0 4,08 $\mu$s\\
-8 "MARK" Inter-Slot Time 0 - < 1 s\\
-9 "MARK" before "BREAK"h 0 - < 1 s\\
-10 "BREAK" – "BREAK" (Übertragungsausfall) 1,2 ms - 1,25 s\\
-\\
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{images/DMX_zeitlich.png}
+    \caption{Zeitliche Darstellung DMX-Signal}
+\end{figure}
+\noindent
+\begin{table}[H]
+    \small
+    Legende zu Bild 6:\\
+    \begin{tabular}{llllll}
+        Nr. & Signalabschnitt & Min & Soll & Max & Einheit\\
+        1 & BREAK & 88 & 176 & - & $\mu$s\\
+        2 & MARK after BREAK & 8 $\mu$s & - & < 1 s\\
+        3 & Slot Time & 43,12 & 44,0 & 44,88 & $\mu$s\\
+        4 & Startbit & 3,92 & 4,0 & 4,08 & $\mu$s\\
+        5 & LSB (niederwertigstes Datenbit) & 3,92 & 4,0 & 4,08 & $\mu$s\\
+        6 & MSB (höchstwertigstes Datenbit) & 3,92 & 4,0 & 4,08 & $\mu$s\\
+        7 & Stoppbit & 3,92 & 4,0 & 4,08 & $\mu$s\\
+        8 & MARK Inter-Slot Time & 0 & - & < 1 & s\\
+        9 & MARK before BREAK & 0 & - & < 1 & s\\
+        10 & BREAK – BREAK (Übertragungsausfall) & 1,2 ms & - & 1,25 s & s\\
+    \end{tabular}
+\end{table}
+\noindent
 Ein DMX-Paket beginnt mit mindestens 88 $\mu$s (22 Bitlängen) niedrigem Pegel (logisch 0) – dieser
 Abschnitt wird "BREAK" genannt. Durch ihn wird eine einfache Erkennung des Paketanfangs
 ermöglicht, da quasi jeder handelsübliche UART den Break als ungültiges Datenbyte mit fehlenden
@@ -190,10 +253,7 @@ Kanal, der dritte Slot für den zweiten Kanal etc.. Sollte die Übertragung zu e
 Zeitpunkt unterbrochen werden, kann sie durch das Senden eines neuen DMX-Paketes wieder
 aufgenommen werden. Die "BREAK"-Sequenz führt automatisch zu einem Zurücksetzen aller noch
 offenen Übertragungen.\\
-\\
-Bild 6 - Zeitliche Darstellung DMX-Signal
-Bild 7 - Netzwerktopologien [13]\\
-\\
+\noindent
 In der Spezifikation DMX512-A wurden erstmals Maximalzeiten für die Slot Time (3) und den
 zeitlichen Abstand zwischen zwei BREAKs (10) definiert. Wenn die Zeit zwischen zwei BREAKs größer
 als eine Sekunde ist, wertet ein Empfänger dies als Übertragungsausfall. Ein Übertragungsausfall ist
@@ -203,6 +263,13 @@ darauffolgendem NULL-Startcode erkennen kann." [2] Weiter wurde eine empfohlene 
 BREAKs definiert. Dies soll den Empfängern die Dekodierung erleichtern.
 \clearpage
 
+\subsection{HTML,Javascript,CSS}
+\clearpage
+
+\subsection{Electron}
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Lichtquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lichtquellen}
 \clearpage
 
@@ -219,6 +286,9 @@ TODO Add something about color spaces
 \section{Automatisierung}
 \clearpage
 
+\section{Abbildungsverzeichnis}
+\listoffigures
+\clearpage
 
 \section{\LaTeX Beispiele}
 \begin{align}
@@ -229,16 +299,16 @@ m &= \frac{m_0}{\sqrt{1-\frac{v^2}{c^2}}}
 Sonderzeichen
 \url{https://de.wikibooks.org/wiki/LaTeX-Kompendium:_Sonderzeichen}\\
 micro - $\mu$\\
-\\
+
 Lines
 \url{https://www.namsu.de/latex/kapitel6.html}\\
-\\
+
 Embed figures
 \url{https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions}\\
-\\
+
 Sub and Top Text
 \textsuperscript{top} and \textsubscript{sub}\\
-\\
+
 Fußnoten\\
 \footnote{Text der Fußnote}
 \clearpage
