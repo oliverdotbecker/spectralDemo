@@ -12,6 +12,7 @@
 \usepackage{subcaption}
 \usepackage{wrapfig}
 \usepackage{float}
+\usepackage[printonlyused, footnote]{acronym}
 \usepackage[
     colorlinks=true,
     urlcolor=blue,
@@ -152,7 +153,7 @@ Scheinwerfer und DMX-Demultiplexer, um analoge Geräte ansteuern zu können.\\
 \noindent
 Ebenso entwickelte MA die Steuerpulte Scan-Commander und die grandMA Series 1 sowohl als
 Konsole, als auch als Computerapplikation. Das Besondere an dieser Technologie ist, dass DMX-Daten
-nicht nur über XLR\footnote{XLR - drei oder fünf polige Steckverbindung}, sondern auch über ein eigenes Ethernet-Netzwerkprotokoll namens "MA-Net"
+nicht nur über \ac{xlr}, sondern auch über ein eigenes Ethernet-Netzwerkprotokoll namens "MA-Net"
 ausgegeben werden. Als Gegenstück am anderen Ende des Netzwerkkabels existieren sogenannte
 DMX-Nodes. Diese fungieren als Protokollwandler zwischen MA-Net und DMX.\\
 Die Firma setzte immer wieder Standards in der Branche. Im Zuge des technischen Fortschritts –
@@ -160,14 +161,14 @@ Einsatz von LEDas als Lichtquelle, moderne Netzwerktechnologie und Videodatenver
 wurde die Produktpalette wesentlich erweitert. Hinzu kam die grandMA2 Series.\\
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{0.4\textwidth}
-        \includegraphics[width=\textwidth]{images/MA-VPU-plus_d.png}
-        \caption{VPU}
-    \end{subfigure}
-    \hfill 
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{images/MA_grandMA2_full-size.png}
         \caption{gMA2 Full Size}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{images/MA-VPU-plus_d.png}
+        \caption{VPU}
     \end{subfigure}
     \caption{grandMA2 Serie Produkte}\label{fig:gma2}
 \end{figure}
@@ -190,7 +191,7 @@ Seit Mitte 2017 entwickelt MA eine neue Produkt Serie. Die grandMA3 Serie. Diese
 in den letzten 34 Jahren gesammelte Erfahrung auf, jedoch wurde jede Zeile Code neu geschrieben,
 um die technischen Möglichkeiten der neuen Hardware vollumfänglich nutzen zu können.\\
 Neben vielen Veränderungen gegenüber der Vorserien arbeitet die Farblogik der grandMA3 Software
-mit den Spezifikationen des CIE\footnote{CIE - Commission internationale de l’éclairage} 1931 Standards.
+mit den Spezifikationen des \ac{cie} 1931 Standards.
 
 \clearpage
 
@@ -288,6 +289,13 @@ TODO Add something about color spaces
 
 \section{Abbildungsverzeichnis}
 \listoffigures
+\clearpage
+
+\section{Abkürzungsverzeichnis}
+\begin{acronym}
+    \acro{cie}[CIE]{Commission internationale de l’éclairage}
+    \acro{xlr}[XLR]{drei oder fünf polige Steckverbindung}
+\end{acronym}
 \clearpage
 
 \section{\LaTeX Beispiele}
