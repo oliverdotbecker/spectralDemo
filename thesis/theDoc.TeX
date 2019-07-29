@@ -197,6 +197,13 @@ mit den Spezifikationen des \ac{cie} 1931 Standards.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% DMX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Grundlagen}
+
+In dieser Arbeit werden externe Lichtquellen mit der grandMA3 Applikation von MA Lighting über ein Protokoll
+mit der Bezeichnung DMX angesteuert.\\
+Für eine erste Überprüfung geeigneter Hardware wurde mit einer kleinen Demo Applikation gearbeitet. Diese wurde
+in Javascript und \ac{html} mit Hilfe des Electron Frameworks erstellt.\\
+Im folgenden werden die hier verwendeten Protokolle, Programme, und Frameworks dargelegt.
+
 \subsection{DMX}
 Diese Abkürzung steht für Digital Multiplex. Dahinter verbirgt sich ein digitales Steuerprotokoll,
 welches vornehmlich in der Veranstaltungstechnik eingesetzt wird. Es wurde zuerst als DMX-
@@ -264,6 +271,18 @@ BREAKs definiert. Dies soll den Empfängern die Dekodierung erleichtern.
 \clearpage
 
 \subsection{HTML,Javascript,CSS}
+\ac{html} ist eine Struktur-Beschreibungs Sprache. Sie ist an den \ac{xml} Standard angelehnt. \ac{html}
+wird hauptsächlich in der Webentwicklung verwendet. Doch kann \ac{html} auch für Webgestützte Desktop
+Applikationen genutzt werden.\\
+\\
+\ac{css} ist eine in der \ac{json} Notation geschrieben. Hier kann auf Elemente in einem \ac{html} Baum
+verwiesen werden, und mit verschiedenen Attributen das Erscheinungsbild im Webbrowser, oder in der Applikation,
+geändert werden.\\
+Einfache Dinge wie Hintergrund- oder Textfarben, bis hin zu komplexen Animationen kann mit \ac{css} beschrieben
+werden.\\
+\\
+Javascript ist eine Skript Sprache die wie \ac{css} meist in der Webentwicklung verwendet wird. Jedoch kann
+mit einem entsprechenden Interpreter Javascript auch ohne Browser auf Computern ausgeführt werden.
 \clearpage
 
 \subsection{Electron}
@@ -294,6 +313,10 @@ TODO Add something about color spaces
 \begin{acronym}
     \acro{cie}[CIE]{Commission internationale de l’éclairage}
     \acro{xlr}[XLR]{drei oder fünf polige Steckverbindung}
+    \acro{html}[HTML]{Hypertext Markup Language}
+    \acro{css}[CSS]{Cascading Style Sheets}
+    \acro{xml}[XML]{Extensible Markup Language}
+    \acro{json}[JSON]{JavaScript Object Notation}
 \end{acronym}
 \clearpage
 
