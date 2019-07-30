@@ -30,12 +30,12 @@
     \paragraph{}
     \huge MASTER THESIS
 \end{center}
-\vspace{2cm}\noindent
+\vspace{3cm}\noindent
 {\large Title:  Abgleich von LED Lichtquellen auf Basis einer komplexen Lichtsteuerung}
-\par\vspace{4cm}\noindent
-Submitted by:   Oliver Becker\\
+\par\vspace{3cm}\noindent
+Submitted by:               Oliver Becker\\
 \\
-Matrikelnumber: 725810\\
+Matriculation number:       725810\\
 \par\vspace{2cm}\noindent
 1st Academic Supervisor:    Prof. Dr. Herbert Krauß\\
 \\
@@ -43,7 +43,7 @@ Matrikelnumber: 725810\\
 \\
 Industrial Supervisor:      Dipl.-Ing. Hartmut Cordes\\
 \par\vspace{2cm}\noindent
-Completion Date:    31.10.2019
+Completion Date:            31.10.2019
 \clearpage
 
 \tableofcontents
@@ -130,9 +130,9 @@ Platinen aufgesteckt und verlötet. Anschließend werden die bestückten Platine
 montiert und verkabelt. Nach einem mehrtägigen BurnIn-Test und einer Werkskonfiguration werden
 die Geräte verpackt und sind versandfertig.\\
 \\
-Kundensupport und Vertrieb werden in Deutschland von der externen Firma Lightpower durchgeführt.
-Diese hat ihren Sitz in Paderborn. Die Konsultation der Mitarbeiter in Waldbüttelbrunn erfolgt
-lediglich bei größeren technischen Fragen und Problemen.\\
+Kundensupport und Vertrieb werden in Deutschland von der externen Firma MA Lighting International
+durchgeführt. Diese hat ihren Sitz in Paderborn. Die Konsultation der Mitarbeiter in
+Waldbüttelbrunn erfolgt lediglich bei größeren technischen Fragen und Problemen.\\
 Eines der ersten Produkte von MA war der Lightcommander24, eine analoge Lichtsteuerkonsole auf
 Basis des \ac{dmx} Protokolls von 1990. Nach kurzer Zeit folgten Dimmer für
 Scheinwerfer und DMX-Demultiplexer, um analoge Geräte ansteuern zu können.\\
@@ -141,19 +141,19 @@ Scheinwerfer und DMX-Demultiplexer, um analoge Geräte ansteuern zu können.\\
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{images/grandMA_1.png}
-        \caption{gMA1 Full Size}
+        \caption{grandMA 1 Full Size}
     \end{subfigure}
     \hfill 
     \begin{subfigure}[b]{0.25\textwidth}
         \includegraphics[width=\textwidth]{images/MA_2Port_Node_onPC_13019x.png}
         \caption{2port Node}
     \end{subfigure}
-    \caption{grandMA1 Serie Produkte}\label{fig:gma1}
+    \caption{grandMA 1 Serie Produkte}\label{fig:gma1}
 \end{figure}
 \noindent
 Ebenso entwickelte MA die Steuerpulte Scan-Commander und die grandMA Series 1 sowohl als
 Konsole, als auch als Computerapplikation. Das Besondere an dieser Technologie ist, dass DMX-Daten
-nicht nur über \ac{xlr}, sondern auch über ein eigenes Ethernet-Netzwerkprotokoll namens "MA-Net"
+nicht nur über \ac{xlr}, sondern auch über ein eigenes Ethernet-Netzwerkprotokoll namens 'MA-Net'
 ausgegeben werden. Als Gegenstück am anderen Ende des Netzwerkkabels existieren sogenannte
 DMX-Nodes. Diese fungieren als Protokollwandler zwischen MA-Net und DMX.\\
 Die Firma setzte immer wieder Standards in der Branche. Im Zuge des technischen Fortschritts –
@@ -163,19 +163,19 @@ wurde die Produktpalette wesentlich erweitert. Hinzu kam die grandMA2 Series.\\
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{images/MA_grandMA2_full-size.png}
-        \caption{gMA2 Full Size}
+        \caption{grandMA 2 Full Size}
     \end{subfigure}
     \hfill 
     \begin{subfigure}[b]{0.4\textwidth}
         \includegraphics[width=\textwidth]{images/MA-VPU-plus_d.png}
         \caption{VPU}
     \end{subfigure}
-    \caption{grandMA2 Serie Produkte}\label{fig:gma2}
+    \caption{grandMA 2 Serie Produkte}\label{fig:gma2}
 \end{figure}
 \noindent
 Die grandMA2 Series ist die moderne Fortführung der grandMA Series 1. Außerdem stellt sie
 folgende Produkte bereit: Die Network Processing Unit (NPU), eine Prozessoreinheit, welche die
-Konsole in ihren Berechnungen unterstützt, indem die Konsole Aufträge auf die NPU dezentral
+Konsole in ihren Berechnungen unterstützt, indem die Konsole Rechenaufträge auf die NPU dezentral
 auslagert. Die Video Processing Unit (VPU) verarbeitet Video-Content und gibt diesen nativ über
 Graphikkarten oder Pixelmapping mit Hilfe von DMX aus. Die Replay-Unit (RPU) ist eine vollwertige
 Konsole ohne die typischen Steuerelemente, sie dient beispielsweise als Havariegerät. Zuletzt noch
@@ -184,7 +184,7 @@ Alle diese Produkte adressieren vor allem den Highend-Profibereich für Theaterp
 Liveshows und Festinstallationen.\\
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{images/grandMA3-full-size.png}
-    \caption{grandMA3 Serie Full Size}\label{fig:gma3}
+    \caption{grandMA3 Full Size}\label{fig:gma3}
 \end{figure}
 \noindent
 Seit Mitte 2017 entwickelt MA eine neue Produkt Serie. Die grandMA3 Serie. Diese Serie greift die
@@ -208,7 +208,7 @@ Im folgenden werden die hier verwendeten Protokolle, Programme, und Frameworks d
 Diese Abkürzung steht für Digital Multiplex. Dahinter verbirgt sich ein digitales Steuerprotokoll,
 welches vornehmlich in der Veranstaltungstechnik eingesetzt wird. Es wurde zuerst als DMX-
 512/1990 standardisiert. Im November 2004 wurde dieser Standard aktualisiert, bekannt als
-DMX512-A (ANSI E1.11-2008). DMX basiert elektrisch auf dem RS-485 (EIA-485)
+DMX512-A (ANSI E1.11-2008). DMX basiert elektrisch auf dem seriellen RS-485 (EIA-485)
 Schnittstellenstandard.\\
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{images/dmx.png}
@@ -220,7 +220,7 @@ einen Leitung mit invertierten und auf der anderen mit nichtinvertiertem Pegel. 
 weniger störungsempfindlich, da sich externe Einstreuungen auf beide Datenleitungen gleichmäßig
 auswirken und am Empfänger nicht das Pegelniveau, sondern die Pegeldifferenz ausgewertet wird.
 Das ermöglicht laut Standard [2] bis zu 1200m lange Übertragungsstrecken und eine
-Datenübertragungsrate bis zu 12 Mbps. Ein Netzwerk aus mehreren Geräten wird als Bus aufgebaut.\\
+Datenübertragungsrate bis zu 12 \ac{MBps}. Ein Netzwerk aus mehreren Geräten wird als Bus aufgebaut.\\
 Die Datenübertragung erfolgt mittels einer Universal Asynchronous Receiver Transmitter (UART)
 gesteuerten asynchronen seriellen Schnittstelle. Ein Datenframe besteht aus acht Datenbits und zwei
 Stoppbits. Die Symbolrate beträgt 250 kBaud (Baud = Bits pro sec).
@@ -239,7 +239,7 @@ Stoppbits. Die Symbolrate beträgt 250 kBaud (Baud = Bits pro sec).
         3 & Slot Time & 43,12 & 44,0 & 44,88 & $\mu$s\\
         4 & Startbit & 3,92 & 4,0 & 4,08 & $\mu$s\\
         5 & LSB (niederwertigstes Datenbit) & 3,92 & 4,0 & 4,08 & $\mu$s\\
-        6 & MSB (höchstwertigstes Datenbit) & 3,92 & 4,0 & 4,08 & $\mu$s\\
+        6 & MSB (höchstwertiges Datenbit) & 3,92 & 4,0 & 4,08 & $\mu$s\\
         7 & Stoppbit & 3,92 & 4,0 & 4,08 & $\mu$s\\
         8 & MARK Inter-Slot Time & 0 & - & < 1 & s\\
         9 & MARK before BREAK & 0 & - & < 1 & s\\
@@ -248,25 +248,25 @@ Stoppbits. Die Symbolrate beträgt 250 kBaud (Baud = Bits pro sec).
 \end{table}
 \noindent
 Ein DMX-Paket beginnt mit mindestens 88 $\mu$s (22 Bitlängen) niedrigem Pegel (logisch 0) – dieser
-Abschnitt wird "BREAK" genannt. Durch ihn wird eine einfache Erkennung des Paketanfangs
+Abschnitt wird 'BREAK' genannt. Durch ihn wird eine einfache Erkennung des Paketanfangs
 ermöglicht, da quasi jeder handelsübliche UART den Break als ungültiges Datenbyte mit fehlenden
-Stoppbits meldet. Darauf folgt "MARK after BREAK" mit mindestens 8 $\mu$s (2 Bitlängen) hohem Pegel /
-Ruhezustand des Daten-Busses (logisch 1). In dieser "MARK"-Zeit können sich langsamer getaktete
+Stoppbits meldet. Darauf folgt 'MARK after BREAK' mit mindestens 8 $\mu$s (2 Bitlängen) hohem Pegel /
+Ruhezustand des Daten-Busses (logisch 1). In dieser 'MARK'-Zeit können sich langsamer getaktete
 Controller auf ein neues DMX-Paket einstellen. Dann wird das Startbyte mit dem Wert 0 für DMX
 übertragen. Das Startbyte ist der Slot 0. Anschließend werden die anderen 512 Slots mit den
 relevanten DMX-Daten gesendet. Es können, müssen aber nicht alle 513 Slots übertragen werden.
 Eine Adressierung der Slots ist jedoch nicht möglich – der zweite gesendete Slot ist für den ersten
 Kanal, der dritte Slot für den zweiten Kanal etc.. Sollte die Übertragung zu einem beliebigen
 Zeitpunkt unterbrochen werden, kann sie durch das Senden eines neuen DMX-Paketes wieder
-aufgenommen werden. Die "BREAK"-Sequenz führt automatisch zu einem Zurücksetzen aller noch
+aufgenommen werden. Die 'BREAK'-Sequenz führt automatisch zu einem Zurücksetzen aller noch
 offenen Übertragungen.\\
 \noindent
 In der Spezifikation DMX512-A wurden erstmals Maximalzeiten für die Slot Time (3) und den
 zeitlichen Abstand zwischen zwei BREAKs (10) definiert. Wenn die Zeit zwischen zwei BREAKs größer
 als eine Sekunde ist, wertet ein Empfänger dies als Übertragungsausfall. Ein Übertragungsausfall ist
-folgendermaßen definiert: "Ein Übertragungsausfall kann dann angenommen werden, wenn der
+folgendermaßen definiert: 'Ein Übertragungsausfall kann dann angenommen werden, wenn der
 angeschlossene Empfänger nicht innerhalb der angegebenen Zeit einen gültigen BREAK mit
-darauffolgendem NULL-Startcode erkennen kann." [2] Weiter wurde eine empfohlene Länge des
+darauffolgendem NULL-Startcode erkennen kann.' Weiter wurde eine empfohlene Länge des
 BREAKs definiert. Dies soll den Empfängern die Dekodierung erleichtern.
 \clearpage
 
@@ -318,6 +318,7 @@ TODO Add something about color spaces
     \acro{css}[CSS]{Cascading Style Sheets}
     \acro{xml}[XML]{Extensible Markup Language}
     \acro{json}[JSON]{JavaScript Object Notation}
+    \acro{MBps}[MBps]{Megabits pro Sekunde}
 \end{acronym}
 \clearpage
 
