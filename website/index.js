@@ -20,6 +20,39 @@ var activeSettings = AS7262;
 var activeSensor = "7262";
 electronDaemon.setSensor(activeSensor);
 
+const fixtureTypeLibrary = {
+    "Arri Skypannel Mode RGBW":{
+        intensity:1,
+        emitters:{
+            Rot:2,
+            Grün:3,
+            Blau:4,
+            Weiss:5
+        }
+    },
+    "eurolight ml 56":{
+        intensity:false,
+        emitters:{
+            Rot:1,
+            Grün:2,
+            Blau:3,
+            Amber:4,
+            Weiss:5
+        }
+    }
+}
+
+const emitterDafaultColors = {
+    Rot:  "#ff0000",
+    Grün: "#00ff00",
+    Blau: "#0000ff",
+    Amber:"#ffaa00",
+    Weiss:"#ffffff"
+};
+
+var currentFixture = "Arri Skypannel Mode RGBW";
+var currentFixtureHasIntensity = true;
+
 //CIE 1931 tristimulus values from:
 //https://wisotop.de/Anhang-Tristimulus-Werte.php
 const tristimulusX = [0.3362,0.0049,0.4334,0.7621,1.0622,0.2835];
@@ -152,31 +185,37 @@ function init()
     }
 
     var commandInput = document.getElementById('commandInput');
-    commandInput.onkeydown = function(event)
+    if(commandInput)
     {
-        if(event.keyCode == 13)
+        commandInput.onkeydown = function(event)
         {
-            var input = event.currentTarget;
-            if(input)
+            if(event.keyCode == 13)
             {
-                electronDaemon.sendCommand(input.value);
+                var input = event.currentTarget;
+                if(input)
+                {
+                    electronDaemon.sendCommand(input.value);
+                }
             }
         }
     }
 
     var ckLED = document.getElementById('ckLED');
-    ckLED.onchange = function(event)
+    if(ckLED)
     {
-        var input = event.currentTarget;
-        if(input)
+        ckLED.onchange = function(event)
         {
-            if(input.checked)
+            var input = event.currentTarget;
+            if(input)
             {
-                electronDaemon.sendCommand("ATLED1=100");
-            }
-            else
-            {
-                electronDaemon.sendCommand("ATLED1=0");
+                if(input.checked)
+                {
+                    electronDaemon.sendCommand("ATLED1=100");
+                }
+                else
+                {
+                    electronDaemon.sendCommand("ATLED1=0");
+                }
             }
         }
     }
@@ -228,6 +267,33 @@ function init()
                 electronDaemon.setSensor(activeSensor);
             }
             createSurface();
+        }
+    }
+
+    var fixtureSelect = document.getElementById('fixtureSelect');
+    if(fixtureSelect)
+    {
+        for(var fixture in fixtureTypeLibrary)
+        {
+            var option = document.createElement('option');
+            option.innerHTML = fixture;
+            option.value = fixture;
+            fixtureSelect.appendChild(option);
+        }
+
+        fixtureSelect.onchange = function(event)
+        {
+            var elem = event.currentTarget;
+
+            if(confirm("Do you want to save the current emitters?"))
+            {
+                doExport("emitters");
+            }
+
+            currentFixture = elem.value;
+            currentFixtureHasIntensity = fixtureTypeLibrary[currentFixture].intensity == true;
+
+            doImport("emitters",true);
         }
     }
 
@@ -298,6 +364,21 @@ function XYZtoXY(X,Y,Z,noDisp)
 
 function XYZtoRGB(tX,tY,tZ)
 {
+    /*// Convert CIE_xyz to linear RGB (values[0..1])
+    var r = (tX * 3.24071	 + tY * (-1.53726)  + tZ * (-0.498571));
+    var g = (tX * (-0.969258) + tY * 1.87599     + tZ * 0.0415557);
+    var b = (tX * 0.0556352   + tY * (-0.203996) + tZ * 1.05707);
+
+    // Convert linearRGB[0..1] to sRGB [0..255]
+    r *= 255;	g *= 255;	b *= 255;
+
+    // Some values get negative by little rounding errors. Put them to 0.
+    if (r < 0){ r = 0; };  if (g < 0){ g = 0; }; if (b < 0){ b = 0; };
+
+    r = parseInt(r);
+    g = parseInt(g);
+    b = parseInt(b);*/
+
     var gamma = 1/2.2;
     var r = Math.max((2.3706743*tX)+(-0.9000405*tY)+(-0.4706338*tZ),0);
     var g = Math.max((-0.5138850*tX)+(1.4253036*tY)+(0.0885814*tZ),0);
@@ -432,7 +513,7 @@ function doExport(arg)
     }
     else if(arg == "emitters")
     {
-        var filePath = electronDaemon.exportEmitters(JSON.stringify(emitters),"emitters.json");
+        var filePath = electronDaemon.exportEmitters(JSON.stringify(emitters),"emitters_"+currentFixture+".json");
         console.log("Emitters saved to: "+filePath);
     }
 }
@@ -443,17 +524,52 @@ function doImport(arg,force)
     {
         if(force || confirm("Do you want to overwrite the current emitters?"))
         {
-            var emitterData = electronDaemon.importEmitters("emitters.json");
+            for(var eNI = 0; eNI < emitterList.childElementCount-1; eNI++)
+            {
+                emitterList.childNodes[eNI].remove();
+                eNI--;
+            }
+            sliderContainer.innerHTML = "";
+
+            var emitterData = electronDaemon.importEmitters("emitters_"+currentFixture+".json");
             if(emitterData)
             {
                 emitters = JSON.parse(emitterData);
 
-                for(var eNI = 0; eNI < emitterList.childElementCount-1; eNI++)
+                if(currentFixtureHasIntensity)
                 {
-                    emitterList.childNodes[eNI].remove();
-                    eNI--;
+                    var newEmitter = document.createElement('div');
+                    newEmitter.className = "emitterEntry";
+                    newEmitter.id = "intensity";
+                    newEmitter.name = "intensity";
+                    newEmitter.style.borderColor = "none";
+                    var emitterLabel = document.createElement('label');
+                    emitterLabel.innerHTML = "Intensity";
+                    newEmitter.appendChild(emitterLabel);
+                    emitterList.insertBefore(newEmitter,emitterList.lastElementChild);
+
+                    var newSliderContainer = document.createElement('div');
+                    newSliderContainer.className = "sliderContainer";
+                    var newSpaceLabel = document.createElement('div');
+                    newSpaceLabel.innerHTML = "Intensity";
+                    newSpaceLabel.className = "spaceLabel";
+                    newSliderContainer.appendChild(newSpaceLabel);
+                    var newSlider = document.createElement('input');
+                    newSlider.className = "vertical";
+                    newSlider.id = "sliderIntensity";
+                    newSlider.type = "range";
+                    newSlider.min = 0;
+                    newSlider.max = 100;
+                    newSlider.value = 100;
+                    newSlider.oninput = sendDMX;
+                    newSliderContainer.appendChild(newSlider);
+                    var newSliderDisp = document.createElement('output');
+                    newSliderDisp.id = "sliderIntensityDisp";
+                    newSliderDisp.for = "sliderIntensity";
+                    newSliderDisp.value = "100";
+                    newSliderContainer.appendChild(newSliderDisp);
+                    sliderContainer.appendChild(newSliderContainer);
                 }
-                sliderContainer.innerHTML = "";
 
                 for(var eI = 0; eI < emitters.length; eI++)
                 {
@@ -495,6 +611,90 @@ function doImport(arg,force)
             else
             {
                 console.error("Failed to import emitter data");
+
+                if(currentFixtureHasIntensity)
+                {
+                    var newEmitter = document.createElement('div');
+                    newEmitter.className = "emitterEntry";
+                    newEmitter.id = "intensity";
+                    newEmitter.name = "intensity";
+                    newEmitter.style.borderColor = "none";
+                    var emitterLabel = document.createElement('label');
+                    emitterLabel.innerHTML = "Intensity";
+                    newEmitter.appendChild(emitterLabel);
+                    emitterList.insertBefore(newEmitter,emitterList.lastElementChild);
+
+                    var newSliderContainer = document.createElement('div');
+                    newSliderContainer.className = "sliderContainer";
+                    var newSpaceLabel = document.createElement('div');
+                    newSpaceLabel.innerHTML = "Intensity";
+                    newSpaceLabel.className = "spaceLabel";
+                    newSliderContainer.appendChild(newSpaceLabel);
+                    var newSlider = document.createElement('input');
+                    newSlider.className = "vertical";
+                    newSlider.id = "sliderIntensity";
+                    newSlider.type = "range";
+                    newSlider.min = 0;
+                    newSlider.max = 100;
+                    newSlider.value = 100;
+                    newSlider.oninput = sendDMX;
+                    newSliderContainer.appendChild(newSlider);
+                    var newSliderDisp = document.createElement('output');
+                    newSliderDisp.id = "sliderIntensityDisp";
+                    newSliderDisp.for = "sliderIntensity";
+                    newSliderDisp.value = "100";
+                    newSliderContainer.appendChild(newSliderDisp);
+                    sliderContainer.appendChild(newSliderContainer);
+                }
+
+                //auto create emitters from fixturetype
+                var fTEmitters = fixtureTypeLibrary[currentFixture].emitters;
+                var eI = 0;
+                for(var fTE in fTEmitters)
+                {
+                    var defaultColor = emitterDafaultColors[fTE] || "#ffffff";
+                    emitters.push({
+                        name:"Emitter "+(emitters.length+1),
+                        color:defaultColor,
+                        measures: {}
+                    });
+
+
+                    var newEmitter = document.createElement('div');
+                    newEmitter.className = "emitterEntry";
+                    newEmitter.id = "emitter"+eI;
+                    newEmitter.name = eI;
+                    newEmitter.style.borderColor = defaultColor;
+                    var emitterLabel = document.createElement('label');
+                    emitterLabel.innerHTML = fTE;
+                    newEmitter.appendChild(emitterLabel);
+                    emitterList.insertBefore(newEmitter,emitterList.lastElementChild);
+                    newEmitter.onclick = editEmitter;
+
+                    var newSliderContainer = document.createElement('div');
+                    newSliderContainer.className = "sliderContainer";
+                    var newSpaceLabel = document.createElement('div');
+                    newSpaceLabel.innerHTML = fTE;
+                    newSpaceLabel.className = "spaceLabel";
+                    newSliderContainer.appendChild(newSpaceLabel);
+                    var newSlider = document.createElement('input');
+                    newSlider.className = "vertical";
+                    newSlider.id = "slider"+eI;
+                    newSlider.type = "range";
+                    newSlider.min = 0;
+                    newSlider.max = 100;
+                    newSlider.step = 5;
+                    newSlider.value = 0;
+                    newSlider.oninput = calcColorMix;
+                    newSliderContainer.appendChild(newSlider);
+                    var newSliderDisp = document.createElement('output');
+                    newSliderDisp.id = "sliderDisp"+eI;
+                    newSliderDisp.for = "slider"+eI;
+                    newSliderDisp.value = "0";
+                    newSliderContainer.appendChild(newSliderDisp);
+                    sliderContainer.appendChild(newSliderContainer);
+                    eI++;
+                }
             }
         }
     }
@@ -639,6 +839,13 @@ function deleteEmitter()
     }
 }
 
+function updateSliderDisp(event)
+{
+    var currSlider = event.currentTarget;
+    var slidersOut = currSlider.nextElementSibling;
+    slidersOut.value = currSlider.value;
+}
+
 function getMeasurement(event)
 {
     var elem = event.currentTarget;
@@ -674,20 +881,45 @@ function getMeasurement(event)
 /////////////////////////////////// Color calc /////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
-function calcColorMix(event)
+function sendDMX(event)
 {
-    var currSlider = event.currentTarget;
-    var slidersOut = currSlider.nextElementSibling;
-    slidersOut.value = currSlider.value;
-
+    updateSliderDisp(event);
     var sliderValues = [];
+    var dmxValues = [];
     var sliders = document.getElementsByClassName("vertical");
     for(var sI = 0; sI < sliders.length; sI++)
     {
+        if(sliders[sI].id == "sliderIntensity")
+        {
+            continue;
+        }
         sliderValues.push(sliders[sI].value);
+        var emitterName = sliders[sI].previousElementSibling.textContent;
+        if(fixtureTypeLibrary[currentFixture].emitters[emitterName])
+        {
+            dmxValues[fixtureTypeLibrary[currentFixture].emitters[emitterName]-1] = sliders[sI].value;
+        }
+        else
+        {
+            console.error("Failed to find emitter "+emitterName+" in fixture "+currentFixture);
+        }
     }
-    electronDaemon.sendArtnet(sliderValues);
 
+    if(currentFixtureHasIntensity)
+    {
+        var intensitySlider = document.getElementById("sliderIntensity");
+        if(intensitySlider)
+        {
+            dmxValues[fixtureTypeLibrary[currentFixture].intensity-1] = intensitySlider.value;
+        }
+    }
+    electronDaemon.sendArtnet(dmxValues);
+    return sliderValues;
+}
+
+function calcColorMix(event)
+{
+    var sliderValues = sendDMX(event);
     var calcX = 0.3;
     var calcY = 0.3;
     var calcSpectrum = [0,0,0,0,0,0];
@@ -699,7 +931,7 @@ function calcColorMix(event)
         if(sliderValues[sI] != 0)
         {
             var currEmitter = emitters[sI];
-            if(currEmitter.measures != {})
+            if(JSON.stringify(currEmitter.measures) != JSON.stringify({}))
             {
                 var minMeasure = 0;
                 var maxMeasure = 0;
