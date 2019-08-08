@@ -6,6 +6,7 @@
   "author": "Oliver Becker",
   "license": "ISC",
   "dependencies": {
+    "artnet": "^1.4.0",
     "serialport": "^7.1.5"
   },
   "scripts": {

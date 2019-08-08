@@ -373,3 +373,24 @@ exports.importEmitters = function(filename)
     }
     return retData;
 }
+
+////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// Artnet /////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+
+var value = 0;
+var artnetOptions = {
+    host: '2.3.4.7',
+    refresh: 900
+}
+var artnet = require('artnet')(artnetOptions);
+
+exports.sendArtnet = function(channels)
+{
+    for(var i = 0; i < channels.length; i++)
+    {
+        channels[i] = parseInt(channels[i]);
+        channels[i] = channels[i]*2.55;
+    }
+    artnet.set(1, channels);
+}

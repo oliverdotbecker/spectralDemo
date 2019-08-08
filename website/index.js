@@ -57,7 +57,7 @@ function init()
         {
             console.log(measures);
             measures = JSON.parse(measures);
-    
+
             if(barsContainer)
             {
                 var box = barsContainer.getBoundingClientRect();
@@ -205,7 +205,7 @@ function init()
         }
     }
     updateSerialPorts(true);
-    
+
     var sensorSelect = document.getElementById('sensorSelect');
     sensorSelect.value = activeSensor;
     sensorSelect.onchange = function(event)
@@ -214,7 +214,7 @@ function init()
         if(input)
         {
             electronDaemon.setSerialPath(input.value);
-            
+
             if(input.value == "7261")
             {
                 activeSettings = AS7261;
@@ -230,7 +230,7 @@ function init()
             createSurface();
         }
     }
-    
+
     createSurface();
     doImport("emitters",true);
 }
@@ -686,7 +686,8 @@ function calcColorMix(event)
     {
         sliderValues.push(sliders[sI].value);
     }
-    
+    electronDaemon.sendArtnet(sliderValues);
+
     var calcX = 0.3;
     var calcY = 0.3;
     var calcSpectrum = [0,0,0,0,0,0];
@@ -714,7 +715,7 @@ function calcColorMix(event)
                         break;
                     }
                 }
-                
+
                 if(minMeasure == maxMeasure)
                 {
                     wroteSpectrum = true;
