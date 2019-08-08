@@ -201,7 +201,7 @@ mit den Spezifikationen des \ac{cie} 1931 Standards.
 In dieser Arbeit werden Lichtquellen mit der grandMA3 Applikation von MA Lighting über ein Protokoll
 mit der Bezeichnung DMX angesteuert.\\
 Für eine erste Überprüfung geeigneter Hardware wurde mit einer kleinen Demo Applikation gearbeitet. Diese wurde
-in Javascript und \ac{html} mit Hilfe des Electron Frameworks erstellt.\\
+in JavaScript und \ac{html} mit Hilfe des Electron Frameworks erstellt.\\
 Weiter wird diese Applikation für die Ausgabe von \ac{dmx} genutzt.\\
 Im folgenden werden die hier verwendeten Protokolle, Programme, und Frameworks dargelegt.
 
@@ -275,10 +275,10 @@ BREAKs definiert. Dies soll den Empfängern die Dekodierung erleichtern.
 Art-Net ist ein Netzwerkprotokoll zur Verteilung von DMX und RDM Daten. Es ist in OSI Layer 4 auf
 UDP aufgebaut. Das Protokoll ist von der Firma Artistic Licence Holdings Ltd. lizenziert.\\
 Hier wird Art-Net in der dritten Version verwendet. Diese Version wurde 2011 publiziert.\\
-Über das Art-Net 3 Protokoll können bis zu 32.768 DMX Universen verwaltet werden.\cite{artnet}
+Über das Art-Net 3 Protokoll können bis zu 32.768 DMX Universen verwaltet werden.\\\cite{artnet}
 \clearpage
 
-\subsection{HTML,Javascript,CSS}
+\subsection{HTML,JavaScript,CSS}
 \ac{html} ist eine Struktur-Beschreibungs Sprache. Sie ist an den \ac{xml} Standard angelehnt. \ac{html}
 wird hauptsächlich in der Webentwicklung verwendet. Doch kann \ac{html} auch für Webgestützte Desktop
 Applikationen genutzt werden.\\
@@ -289,11 +289,27 @@ geändert werden.\\
 Einfache Dinge wie Hintergrund- oder Textfarben, bis hin zu komplexen Animationen kann mit \ac{css} beschrieben
 werden.\\
 \\
-Javascript ist eine Skript Sprache die wie \ac{css} meist in der Webentwicklung verwendet wird. Jedoch kann
-mit einem entsprechenden Interpreter Javascript auch ohne Browser auf Computern ausgeführt werden.
+JavaScript ist eine Skript Sprache die wie \ac{css} meist in der Webentwicklung verwendet wird. Jedoch kann
+mit einem entsprechenden Interpreter JavaScript auch ohne Browser auf Computern ausgeführt werden.
 \clearpage
 
 \subsection{Electron}
+Electron ist ein Framework welches zum erstellen von Desktop Anwendungen genutzt werden kann. Electron funktioniert
+wie ein Webbrowser. Die Applikation zeigt \ac{html} Inhalte und andere Textinhalte an.\cite{electron} Der Programmierer kann diese
+Browserumgebung nach belieben modifizieren und erweitern. Electron wurde aus dem Projekt Atom Editor von Github entwickelt.\\
+Das Framework basiert auf dem Chromium Projekt von Google. Auf dem Chromium Projekt basiert auch der Chrome Webbrowser von
+Google.\\
+Electron bietet eine Betriebssystem übergreifende Applikation als Resultat. Electron Applikationen können unter Windows, Linux und
+MacOS ausgeführt werden.\\
+Electron ist Open Source und wird von einer breiten Community weltweit permanent weiterentwickelt.\cite{electron}\\
+Das Projekt wird in der Programmiersprachen C++ und JavaScript geschrieben.\\
+\\
+Der JavaScript anteil wird mit NodeJS auf den Zielcomputern ausgeführt. NodeJS ist eine JavaScript Laufzeitumgebung. Laufzeitumgebungen
+sind zum ausführen eines Programms in einer Sprache zwingend erforderlich.
+\clearpage
+
+\subsection{Github}
+Github ist eine webplattform. Dort wurde auch das Git Repository dieses Projektes gehostet.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Lichtquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -339,6 +355,7 @@ TODO Add something about color spaces
     %                            Schulen in Deutschland"', http://www.schulen-ans-netz.de/   
     %                            neuemedien/fakten/dokus/it-ausstattung-2003.pdf, 10.03.2005
     \bibitem[Art-Net Homepage, 2019]{artnet}"'Home - Art-Net"', https://art-net.org.uk/, 07.08.2019
+    \bibitem[Electron Homepage, 2019]{electron}"'Electron | Plattformübergreifende Desktop-Anwendungen mit JavaScript, HTML und CSS entwickeln."', https://electronjs.org/, 08.08.2019
  \end{thebibliography}
 \clearpage
 
