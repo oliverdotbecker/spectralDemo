@@ -381,7 +381,8 @@ exports.importEmitters = function(filename)
 var value = 0;
 var artnetOptions = {
     host: '2.3.4.7',
-    refresh: 900
+    refresh: 900,
+    sendAll:true
 }
 var artnet = require('artnet')(artnetOptions);
 
