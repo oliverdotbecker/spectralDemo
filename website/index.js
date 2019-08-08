@@ -50,6 +50,8 @@ const emitterDafaultColors = {
     Weiss:"#ffffff"
 };
 
+const measureSilderValues = [5,10,20,35,50,65,85,100];
+
 var currentFixture = "Arri Skypannel Mode RGBW";
 var currentFixtureHasIntensity = true;
 
@@ -875,6 +877,39 @@ function getMeasurement(event)
     emitters[idx].measures[elem.innerText] = measurement;
     elem.style.color = measurement.color;
     elem.style.borderColor = measurement.color;
+}
+
+function measureAllEmitters()
+{
+    if(confirm("Are you sure? All past data will be lost."))
+    {
+        var sliders = document.getElementsByClassName("vertical");
+        for(var sI = 0; sI < sliders.length; sI++)
+        {
+            if(sliders[sI].id == "sliderIntensity")
+            {
+                sliders[sI].value = 100;
+            }
+            else
+            {
+                sliders[sI].value = 0;
+            }
+        }
+        for(var sI = 0; sI < sliders.length; sI++)
+        {
+            if(sliders[sI].id != "sliderIntensity")
+            {
+                var emitterName = sliders[sI].previousElementSibling.textContent;
+                measureSilderValues;
+                setTimeout(measureNextValue, 400);
+            }
+        }
+    }
+}
+
+function measureNextValue()
+{
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
