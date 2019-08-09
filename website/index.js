@@ -50,8 +50,8 @@ const emitterDafaultColors = {
     Weiss:"#ffffff"
 };
 
-const valueChangeTimeout = 1500;
-const emitterChangeTimeout = 5000;
+const valueChangeTimeout = 3000;
+const emitterChangeTimeout = 6000;
 const measureSilderValues = [5,10,20,35,50,65,85,100];
 
 var currentFixture = "Arri Skypannel Mode RGBW";
