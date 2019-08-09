@@ -25,28 +25,28 @@
                     <option value="7262">AS 7262</option>
                 </select>
             </div>
+            <!--div>
+                <label>Command: </label>
+                <input type="text" id="commandInput" placeholder="Command"/>
+            </div-->
+            <div>
+                <label>LED: </label>
+                <input type="checkbox" id="ckLED"/>
+            </div>
+            <!--div>
+                <label>Grid: </label>
+                <input type="checkbox" id="ckGrid" checked/>
+            </div-->
             <div>
                 <label>Fixture: </label>
                 <select id="fixtureSelect">
                 </select>
             </div>
-            <!--div>
-                <label>Command: </label>
-                <input type="text" id="commandInput" placeholder="Command"/>
-            </div>
-            <div>
-                <label>LED: </label>
-                <input type="checkbox" id="ckLED"/>
-            </div>
-            <div>
-                <label>Grid: </label>
-                <input type="checkbox" id="ckGrid" checked/>
-            </div-->
             <div>
                 <input type="button" id="saveBtn" value="Measure all" onclick="measureAllEmitters();"/>
             </div>
             <div>
-                <input type="button" id="saveBtn" value="Save" onclick="save();" oncontextmenu="saveContinuous(event);"/>
+                <input type="button" id="saveBtn" value="Save Spectrum" onclick="save();" oncontextmenu="saveContinuous(event);"/>
             </div>
         </div>
         <div id="infos">

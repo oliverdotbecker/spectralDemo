@@ -50,6 +50,8 @@ const emitterDafaultColors = {
     Weiss:"#ffffff"
 };
 
+const valueChangeTimeout = 1500;
+const emitterChangeTimeout = 5000;
 const measureSilderValues = [5,10,20,35,50,65,85,100];
 
 var currentFixture = "Arri Skypannel Mode RGBW";
@@ -656,7 +658,7 @@ function doImport(arg,force)
                 {
                     var defaultColor = emitterDafaultColors[fTE] || "#ffffff";
                     emitters.push({
-                        name:"Emitter "+(emitters.length+1),
+                        name:fTE,
                         color:defaultColor,
                         measures: {}
                     });
@@ -848,11 +850,20 @@ function updateSliderDisp(event)
     slidersOut.value = currSlider.value;
 }
 
-function getMeasurement(event)
+function getMeasurement(event,level,emitterIdx)
 {
-    var elem = event.currentTarget;
-    var idx = emitterEdit.idx;
-    var measurement = emitters[idx].measures[elem.innerText];
+    var elem = null;
+    var idx = emitterIdx;
+    if(level == undefined)
+    {
+        elem = event.currentTarget;
+        level = elem.innerText;
+    }
+    if(emitterIdx == undefined)
+    {
+        idx = emitterEdit.idx;
+    }
+    var measurement = emitters[idx].measures[level];
     if(!measurement)
     {
         measurement = {};
@@ -874,11 +885,17 @@ function getMeasurement(event)
     measurement.XYZ = currXYZDisplay.innerText.split(" ");
     measurement.RGB = currRGBDisplay.innerText.split(" ");
     measurement.color = currRGBDisplay.style.backgroundColor;
-    emitters[idx].measures[elem.innerText] = measurement;
-    elem.style.color = measurement.color;
-    elem.style.borderColor = measurement.color;
+    emitters[idx].measures[level] = measurement;
+    if(elem)
+    {
+        elem.style.color = measurement.color;
+        elem.style.borderColor = measurement.color;
+    }
 }
 
+var currEmitter = 0;
+var currSliderValueIndex = 0;
+var currEmitterCount = -1;
 function measureAllEmitters()
 {
     if(confirm("Are you sure? All past data will be lost."))
@@ -895,21 +912,71 @@ function measureAllEmitters()
                 sliders[sI].value = 0;
             }
         }
-        for(var sI = 0; sI < sliders.length; sI++)
-        {
-            if(sliders[sI].id != "sliderIntensity")
-            {
-                var emitterName = sliders[sI].previousElementSibling.textContent;
-                measureSilderValues;
-                setTimeout(measureNextValue, 400);
-            }
-        }
+
+        currEmitter = -1;
+        currSliderValueIndex = -1;
+        currEmitterCount = Object.keys(fixtureTypeLibrary[currentFixture].emitters).length;
+        measureNextValue();
     }
 }
 
 function measureNextValue()
 {
+    var nextTimeoutVal = valueChangeTimeout;
+    //Measure
+    if(currEmitter != -1)
+    {
+        getMeasurement(null,measureSilderValues[currSliderValueIndex]+"%",currEmitter);
+    }
 
+    //Get next measument job or end loop
+    if(currEmitter < currEmitterCount && currSliderValueIndex <= measureSilderValues.length)
+    {
+        currSliderValueIndex++;
+        if(currSliderValueIndex == measureSilderValues.length)
+        {
+            currSliderValueIndex = 0;
+            if(currEmitter < currEmitterCount-1)
+            {
+                var currentSlider = document.getElementById("slider"+currEmitter);
+                if(currentSlider)
+                {
+                    currentSlider.value = 0;
+                }
+                calcColorMix({currentTarget:currentSlider});
+                nextTimeoutVal = emitterChangeTimeout;
+                currEmitter++;
+            }
+            else
+            {
+                var currentSlider = document.getElementById("slider"+currEmitter);
+                if(currentSlider)
+                {
+                    currentSlider.value = 0;
+                }
+                calcColorMix({currentTarget:currentSlider});
+                console.info("Finished automatic measurement");
+                return;
+            }
+        }
+    }
+    if(currEmitter == -1)
+    {
+        currEmitter = 0;
+        currSliderValueIndex = 0;
+        nextTimeoutVal = emitterChangeTimeout;
+    }
+
+    //Prepare next output
+    var currentSlider = document.getElementById("slider"+currEmitter);
+    if(currentSlider)
+    {
+        currentSlider.value = measureSilderValues[currSliderValueIndex];
+    }
+    calcColorMix({currentTarget:currentSlider});
+
+    //Continue
+    setTimeout(measureNextValue, nextTimeoutVal);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -995,7 +1062,7 @@ function calcColorMix(event)
                         calcSpectrum[spI] += parseFloat(currEmitter.measures[minMeasure].spectrum.values[spI]);
                     }
                 }
-                else
+                else if(maxMeasure != 0)
                 {
                     wroteSpectrum = true;
                     var relation = parseInt(minMeasure)/parseInt(maxMeasure);
@@ -1012,6 +1079,10 @@ function calcColorMix(event)
                         var temp2 = diff1*(maxVal-minVal);
                         calcSpectrum[spI] += (temp2+minVal);
                     }
+                }
+                else
+                {
+                    console.warn("Failed to interpolate values, due to missing measurement values");
                 }
             }
         }
