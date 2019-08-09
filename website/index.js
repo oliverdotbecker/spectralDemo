@@ -149,6 +149,7 @@ function init()
                 }
 
                 comInput.style.backgroundColor = "";
+                drawColorSpace();
             }
         }
     },250);
@@ -700,6 +701,7 @@ function doImport(arg,force)
                     eI++;
                 }
             }
+            drawColorSpace();
         }
     }
 }
@@ -1110,4 +1112,57 @@ function calcColorMix(event)
     var calcLeft = round((calcX*10*cieXdiv),3);
     mixPos.style.bottom = calcBottom+"px";
     mixPos.style.left = calcLeft+"px";
+}
+
+function drawColorSpace()
+{
+    var pathDOM = document.getElementById("realColorSpace");
+    if(pathDOM)
+    {
+        pathDOM.setAttribute("d","");
+
+        //Get Emitter Max
+
+        var coordiantes = [];
+        for(eIdx in emitters)
+        {
+            var currEmitter = emitters[eIdx];
+            var currMeasures = currEmitter.measures;
+            if(JSON.stringify(currMeasures) != JSON.stringify({}) && currMeasures["100%"])
+            {
+                var xy = currMeasures["100%"].xyY;
+                coordiantes.push(xy);
+            }
+            else
+            {
+                console.warn("Emitter "+currEmitter.name+" has no 100% measures. Failed to et coordinates.");
+            }
+        }
+
+        var scaleX = cieXdiv*10;
+        var scaleY = cieYdiv*10;
+
+        pathDOM.parentElement.setAttribute("viewBox","0 0 "+scaleX+" "+scaleY)
+
+        var newPath = "";
+        for(var i = 0; i < 3; i++)
+        {
+            if(i == 0)
+            {
+                newPath += "M ";
+            }
+            else
+            {
+                newPath += "L ";
+            }
+
+            newPath += parseInt(coordiantes[i][0]*scaleX);
+            newPath += ",";
+            newPath += parseInt((1-coordiantes[i][1])*scaleY);
+            newPath += " ";
+        }
+        newPath += "L "+ parseInt(coordiantes[0][0]*scaleX) + "," + parseInt((1-coordiantes[0][1])*scaleY);
+        //newPath += "M 3,3 L "+(scaleX-3)+",3 L "+(scaleX-3)+","+(scaleY-3)+" L 3,"+(scaleY-3)+" L 3,3";
+        pathDOM.setAttribute("d",newPath);
+    }
 }
