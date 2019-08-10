@@ -329,22 +329,30 @@ Einfache Dinge wie Hintergrund- oder Textfarben, bis hin zu komplexen Animatione
 werden.\\
 \\
 JavaScript ist eine Skript Sprache die wie \ac{css} meist in der Webentwicklung verwendet wird. Jedoch kann
-mit einer entsprechenden JavaScript Laufzeitumgebung auch ohne Browser auf Endgeräten ausgeführt werden.
+mit einer entsprechenden JavaScript Laufzeitumgebung auch ohne Browser auf Endgeräten ausgeführt werden.\\
+Bei dieser Arbeit muss zwischen zwei Arten der Nutzung der Sprache JavaScript unterschieden werden:\\
+\begin{addmargin}[2em]{0em}
+ - Webcode, welcher innerhalb des Webbrowsers augeführt wird.\\
+ - Appcode, welcher mit der NodeJS Laufzeitumgebung auf dem Endgerät ausgeführt wird.\\
+\end{addmargin}
+NodeJS ist eine JavaScript Laufzeitumgebung. Laufzeitumgebungen sind zum ausführen eines Programms in einer Sprache zwingend
+erforderlich.\\
+Appcode hat gegenüber Webcode weitreichendere Befugnisse auf dem Endgerät wie Dateisystemzugriff und externe Schnittstellen, wie
+USB oder herkömmliche serielle Schnittstellen (COM).
 \clearpage
 
 \subsection{Electron}
 Electron ist ein Framework welches zum erstellen von Desktop Anwendungen genutzt werden kann. Electron funktioniert
-wie ein Webbrowser. Die Applikation zeigt \ac{html} Inhalte und andere Textinhalte an.\cite{electron} Der Programmierer kann diese
+wie ein Webbrowser. Die Applikation zeigt \ac{html} und andere Textinhalte an.\cite{electron} Der Programmierer kann diese
 Browserumgebung nach belieben modifizieren und erweitern. Electron wurde aus dem Projekt Atom Editor von Github entwickelt.\\
 Das Framework basiert auf dem Chromium Projekt von Google. Auf dem Chromium Projekt basiert auch der Chrome Webbrowser von
 Google.\\
-Electron bietet eine Betriebssystem übergreifende Applikation als Resultat. Electron Applikationen können unter Windows, Linux und
-MacOS ausgeführt werden.\\
+Das Electron Framework bietet eine Betriebssystem übergreifende Applikation als Resultat. Electron Applikationen können unter
+Windows, Linux und MacOS ausgeführt werden.\\
 Electron ist Open Source und wird von einer breiten Community weltweit permanent weiterentwickelt.\cite{electron}\\
-Das Projekt wird in der Programmiersprachen C++ und JavaScript geschrieben.\\
+Das Projekt wird in den Programmiersprachen C++ und JavaScript geschrieben.\\
 \\
-Der JavaScript anteil wird mit NodeJS auf den Zielcomputern ausgeführt. NodeJS ist eine JavaScript Laufzeitumgebung. Laufzeitumgebungen
-sind zum ausführen eines Programms in einer Sprache zwingend erforderlich.
+Der JavaScript-Anteil wird mit NodeJS auf den Zielcomputern ausgeführt.
 
 \subsection{Git und Github}
 Git ist eine Datei Versionierungs- und Management Software. Git wird häufig in der Software Entwicklung mit mehreren Stationen eingesetzt.\\
@@ -356,7 +364,9 @@ Diese Eingestellten Änderungen werden dann mit dem Server synchronisiert und mi
 \\
 Dieses System macht das Entwickeln einer Software mit mehreren Entwicklern deutlich einfacher.\\
 \\
-Github ist eine Webplattform. Dort wurde auch das Git Repository der Testapplikation dieses Projektes gehostet.
+Github ist eine Webplattform, welche kostenlos öffentliche Repositories hosted. Dort wurde auch das Git Repository der Testapplikation
+dieses Projektes gehostet.\\
+Zusätzlich bietet Github ein Projektverwaltungssystem.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Lichtquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -367,6 +377,10 @@ TODO Add something about light sources
 %%%%%%%%%%%%%%%%%%%%%%%%%% Farbräume %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Farbräume}
 TODO Add something about color spaces
+\subsection{Farbspektrum}
+\subsection{sRGB}
+\subsection{CIE}
+\subsubsection{CIE 1931}
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Findung eines Ansatzes %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -391,9 +405,15 @@ Sensoren dieser Firma untersucht.\\
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Anhang %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Anhang}
+\renewcommand{\thesubsection}{\Alph{subsection}}
+\section*{Anhang}
+\addcontentsline{toc}{section}{Anhang}
+
 \subsection{Abbildungsverzeichnis}
+\begingroup
+\renewcommand{\section}[2]{}
 \listoffigures
+\endgroup
 \clearpage
 
 \subsection{Abkürzungsverzeichnis}
@@ -411,11 +431,14 @@ Sensoren dieser Firma untersucht.\\
 \clearpage
 
 \subsection{Literaturverzeichnis}
+\begingroup
+\renewcommand{\section}[2]{}
 \begin{thebibliography}{xxxxxxxxxxxxxxxxxxx}
     \bibitem[Art-Net Homepage, 2019]{artnet}"'Home - Art-Net"', https://art-net.org.uk/, 07.08.2019
     \bibitem[Art-Net Documatation, 2019]{artdmx}"'ArtDmx – Packet Definition - Art-Net"', https://art-net.org.uk/structure/streaming-packets/artdmx-packet-definition/, 10.08.2019
     \bibitem[Electron Homepage, 2019]{electron}"'Electron | Plattformübergreifende Desktop-Anwendungen mit JavaScript, HTML und CSS entwickeln."', https://electronjs.org/, 08.08.2019
  \end{thebibliography}
+ \endgroup
 \clearpage
 
 \section{\LaTeX Beispiele}
