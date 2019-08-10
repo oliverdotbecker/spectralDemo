@@ -295,12 +295,32 @@ Art-Net IP Adressen sind nach folgendem Muster aufgebaut:
 \noindent
 In der Regel werden IP Adressen für Art-net mit dem Netz 2.X.X.X oder 10.X.X.X verwendet. Art-Net wird über den
 Netzwerkport 6454 gesendet und empfangen.
+
+Ein Art-Net Paket kann verschiedene Informationen haben, neben \ac{dmx} Daten. Hier sendet die Applikation jedoch
+lediglich ArtDmx Pakete. Diese Pakete transportieren DMX Daten. Hier ist der Aufbau des ArtDMX Paketes dargelegt.\\
+\begin{table}[H]
+    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} lll}
+        Byte Offset & Name & Größe & Beschreibung\\
+        0 & ID & 8 & Art-Net\\
+        8 & OpCodeLo & 1 & Pakettyp (ArtDmx) LSB\\
+        9 & OpCodeHi & 1 & Pakettyp (ArtDmx) MSB\\
+        10 & ProtVer & 2 & Protokollversion (14)\\
+        12 & Sequenz & 1 & Paketsequenznummer\\
+        13 & Physical & 1 & Physikalischer Port\\
+        14 & Universe & 2 & Art-Net Universum\\
+        16 & Length & 2 & Länge der DMX Daten\\
+        18 & Data[] & 2-512 & DMX Daten\\
+    \end{tabular*}
+\end{table}
+\cite{artdmx}
 \clearpage
 
 \subsection{HTML,JavaScript,CSS}
 \ac{html} ist eine Struktur-Beschreibungs Sprache. Sie ist an den \ac{xml} Standard angelehnt. \ac{html}
 wird hauptsächlich in der Webentwicklung verwendet. Doch kann \ac{html} auch für Webgestützte Desktop
 Applikationen genutzt werden.\\
+Die Sprache enthält Grundlegende Elemente zur Beschreibung von Tabellen, einbinden von Medieninhalten sowie
+das einbinden von weiteren HTML Dateien.\\
 \\
 \ac{css} ist eine in der \ac{json} Notation geschrieben. Hier kann auf Elemente in einem \ac{html} Baum
 verwiesen werden, und mit verschiedenen Attributen das Erscheinungsbild im Webbrowser, oder in der Applikation,
@@ -393,6 +413,7 @@ Sensoren dieser Firma untersucht.\\
 \subsection{Literaturverzeichnis}
 \begin{thebibliography}{xxxxxxxxxxxxxxxxxxx}
     \bibitem[Art-Net Homepage, 2019]{artnet}"'Home - Art-Net"', https://art-net.org.uk/, 07.08.2019
+    \bibitem[Art-Net Documatation, 2019]{artdmx}"'ArtDmx – Packet Definition - Art-Net"', https://art-net.org.uk/structure/streaming-packets/artdmx-packet-definition/, 10.08.2019
     \bibitem[Electron Homepage, 2019]{electron}"'Electron | Plattformübergreifende Desktop-Anwendungen mit JavaScript, HTML und CSS entwickeln."', https://electronjs.org/, 08.08.2019
  \end{thebibliography}
 \clearpage
