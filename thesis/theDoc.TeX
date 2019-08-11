@@ -351,7 +351,6 @@ Das Electron Framework bietet eine Betriebssystem übergreifende Applikation als
 Windows, Linux und MacOS ausgeführt werden.\\
 Electron ist Open Source und wird von einer breiten Community weltweit permanent weiterentwickelt.\cite{electron}\\
 Das Projekt wird in den Programmiersprachen C++ und JavaScript geschrieben.\\
-\\
 Der JavaScript-Anteil wird mit NodeJS auf den Zielcomputern ausgeführt.
 
 \subsection{Git und Github}
@@ -371,7 +370,33 @@ Zusätzlich bietet Github ein Projektverwaltungssystem.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Lichtquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lichtquellen}
-TODO Add something about light sources
+\subsection{Licht und Licht messen}
+Der Begriff Licht bezeichnet den Teil des elektromagnetischen Spektrums, welcher mit dem menschlichen Auge zu erfassen ist.\\
+\\
+Licht besteht aus rein physischer Betrachtungsweise aus Wellen im elektromagnetischen Spektrum und Teilchen. Dieses Phänomen, dass sich
+Licht sowohl in der Ausbreitung wie eine Welle, aber gleichzeitig auch ein Teichenverhalten bei Licht zu beobachten ist nennt sich
+Welle-Teilchen-Dualismus. Dieser Begriff wurde durch Albert Einstein und Max Planck begründet. In dieser Theorie wird Licht als Quantenobjekt
+beschrieben. \cite{wikiLicht}\\
+\begin{wrapfigure}{r}{0.5\textwidth}
+    \vspace{-25pt}
+    \begin{center}
+        \includegraphics[width=0.48\textwidth]{images/Elektromagnetisches-Spektrum.png}
+    \end{center}
+    \vspace{-20pt}
+    \caption{Licht im elektromagnetischen Spektrum}
+    \vspace{-15pt}
+\end{wrapfigure}
+\noindent
+Licht ist elektromagnetischen Spektrum messbar. Somit ist ein Farbton eine Frequenz und eine Helligkeit eine Amplitude.
+Wo eine Farbe im elektromagnetischen Spektrum einzuordnen ist wird mit der Wellenlänge in Nanometern (nm) angegeben. Diese Zahl fällt von
+dem Infraroten Bereich des Spektrums ab 760nm bis in den Ultravioletten Bereich bei 380nm.
+\begin{align}
+    \lambda = \frac{c}{f}
+\end{align}
+Die zugehörigen Frequenzen liegen mit (1) bei etwa 394,5 \ac{thz} für Infrarot und circa 789 \ac{thz} für Ultraviolett. Das entspricht einer Bandbreite
+von 394,5 \ac{thz} die das menschliche Auge erfassen kann.\\
+\\
+Dieser Teil des elektromagnetischen Spektrums lässt sich zum Beispiel mit Photodioden messen.\\
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Farbräume %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -383,21 +408,22 @@ TODO Add something about color spaces
 \subsubsection{CIE 1931}
 \clearpage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%% Findung eines Ansatzes %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Findung eines Ansatzes}
-Licht ist elektromagnetischen Spektrum messbar. Somit ist ein Farbton eine Frequenz und eine Helligkeit eine Amplitude. Dieser Teil des
-elektromagnetischen Spektrums lässt dich zum Beispiel mit Photodioden messen.\\
-\\
+%%%%%%%%%%%%%%%%%%%%%%%%%% Testapplikation und Sensorik %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Testapplikation und Sensorik}
 Es gibt einige Hersteller von entsprechenden Spektralsensoren für sichtbares Licht. Einer davon ist AMS. In dieser Arbeit wurden mehrere
 Sensoren dieser Firma untersucht.\\
 \clearpage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%% Testapplikation und Sensorik %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Testapplikation und Sensorik}
-\clearpage
-
 %%%%%%%%%%%%%%%%%%%%%%%%%% Messungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Messungen}
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Ansteuerung externer Lichtquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ansteuerung externer Lichtquellen}
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Messungen 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Messungen 2}
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Automatisierung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -425,6 +451,7 @@ Sensoren dieser Firma untersucht.\\
     \acro{json}[JSON]{JavaScript Object Notation}
     \acro{MBps}[MBps]{Megabits pro Sekunde}
     \acro{rdm}[RDM]{Remote Device Management}
+    \acro{thz}[THz]{Teraherz}
     \acro{xlr}[XLR]{drei oder fünf polige Steckverbindung}
     \acro{xml}[XML]{Extensible Markup Language}
 \end{acronym}
@@ -437,31 +464,32 @@ Sensoren dieser Firma untersucht.\\
     \bibitem[Art-Net Homepage, 2019]{artnet}"'Home - Art-Net"', https://art-net.org.uk/, 07.08.2019
     \bibitem[Art-Net Documatation, 2019]{artdmx}"'ArtDmx – Packet Definition - Art-Net"', https://art-net.org.uk/structure/streaming-packets/artdmx-packet-definition/, 10.08.2019
     \bibitem[Electron Homepage, 2019]{electron}"'Electron | Plattformübergreifende Desktop-Anwendungen mit JavaScript, HTML und CSS entwickeln."', https://electronjs.org/, 08.08.2019
+    \bibitem[Licht Wikipedia, 2019]{wikiLicht}"'Licht - Wikipedia"', https://de.wikipedia.org/wiki/Licht, 11.08.2019
  \end{thebibliography}
  \endgroup
 \clearpage
 
-\section{\LaTeX Beispiele}
-\begin{align}
-E &= mc^2                 \\
-m &= \frac{m_0}{\sqrt{1-\frac{v^2}{c^2}}}
-\end{align}
-\\
-Sonderzeichen
-\url{https://de.wikibooks.org/wiki/LaTeX-Kompendium:_Sonderzeichen}\\
-micro - $\mu$\\
-\\
-Lines
-\url{https://www.namsu.de/latex/kapitel6.html}\\
-\\
-Embed figures
-\url{https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions}\\
-\\
-Sub and Top Text
-\textsuperscript{top} and \textsubscript{sub}\\
-\\
-Fußnoten
-\footnote{Text der Fußnote}
-\clearpage
+%\section{\LaTeX Beispiele}
+%\begin{align}
+%E &= mc^2\\
+%m &= \frac{m_0}{\sqrt{1-\frac{v^2}{c^2}}}
+%\end{align}
+%\\
+%Sonderzeichen
+%\url{https://de.wikibooks.org/wiki/LaTeX-Kompendium:_Sonderzeichen}\\
+%micro - $\mu$\\
+%\\
+%Lines
+%\url{https://www.namsu.de/latex/kapitel6.html}\\
+%\\
+%Embed figures
+%\url{https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions}\\
+%\\
+%Sub and Top Text
+%\textsuperscript{top} and \textsubscript{sub}\\
+%\\
+%Fußnoten
+%\footnote{Text der Fußnote}
+%\clearpage
 
 \end{document}
