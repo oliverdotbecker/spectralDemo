@@ -61,11 +61,11 @@ Heutzutage werden Lichtanlagen mit leistungsfähigen Computersystemen gesteuert,
 geschultem Personal bedient werden müssen.\\
 In der Filmindustrie spielt Licht eine große Rolle. Die Ausleuchtung eines Film-Sets entscheidet 
 auch wie die Handlung vom Betrachter wahrgenommen wird. Dies gilt sowohl für statische Szenen, 
-als auch für die zumeist hoch Aufwändigen dynamischen Installationen.
+als auch für die zumeist hoch aufwändigen dynamischen Installationen.
 Eine der zurzeit größten Herausforderungen stellt die korrekte Farbwiedergabe der mannigfaltigen 
 Lichtquellen an einem Film-Set dar.
 Dies wird vor allem durch die unterschiedenen chromatischen Eigenschaften von den Licht 
-emittierenden Quellen erschwert. Diese Quellen sind heute zu xx\% LEDs.\\
+emittierenden Quellen erschwert. Diese Quellen sind heute zu {\color{red} xx}\% LEDs.\\
 Als Beispiel wird hier ein Film-Set für eine Motorrad Verfolgungsszene genommen. Hier wird im 
 Hintergrund mit großen LED Kacheln der computergenerierte Hintergrund abgespielt. Mit kleinen 
 LED Streifen links und rechts neben dem im Studio aufgebauten Motorrad wird dynamisch Licht auf 
@@ -158,7 +158,7 @@ nicht nur über \ac{xlr}, sondern auch über ein eigenes Ethernet-Netzwerkprotok
 ausgegeben werden. Als Gegenstück am anderen Ende des Netzwerkkabels existieren sogenannte
 \ac{dmx}-Nodes. Diese fungieren als Protokollwandler zwischen MA-Net und \ac{dmx}.\\
 Die Firma setzte immer wieder Standards in der Branche. Im Zuge des technischen Fortschritts –
-Einsatz von LEDas als Lichtquelle, moderne Netzwerktechnologie und Videodatenverarbeitung –
+Einsatz von \ac{led}s als Lichtquelle, moderne Netzwerktechnologie und Videodatenverarbeitung –
 wurde die Produktpalette wesentlich erweitert. Hinzu kam die grandMA2 Series.\\
 \begin{figure}[H]
     \centering
@@ -178,7 +178,7 @@ Die grandMA2 Series ist die moderne Fortführung der grandMA Series 1. Außerdem
 folgende Produkte bereit: Die Network Processing Unit (NPU), eine Prozessoreinheit, welche die
 Konsole in ihren Berechnungen unterstützt, indem die Konsole Rechenaufträge auf die NPU dezentral
 auslagert. Die Video Processing Unit (VPU) verarbeitet Video-Content und gibt diesen nativ über
-Graphikkarten oder Pixelmapping mit Hilfe von \ac{dmx} aus. Die Replay-Unit (RPU) ist eine vollwertige
+Grafikkarten oder Pixelmapping mit Hilfe von \ac{dmx} aus. Die Replay-Unit (RPU) ist eine vollwertige
 Konsole ohne die typischen Steuerelemente, sie dient beispielsweise als Havariegerät. Zuletzt noch
 verschiedene Variationen der Nodes, welche weiterhin als Protokollwandler dienen.\\
 Alle diese Produkte adressieren vor allem den Highend-Profibereich für Theaterproduktionen,
@@ -223,9 +223,8 @@ weniger störungsempfindlich, da sich externe Einstreuungen auf beide Datenleitu
 auswirken und am Empfänger nicht das Pegelniveau, sondern die Pegeldifferenz ausgewertet wird.
 Das ermöglicht laut Standard [2] bis zu 1200m lange Übertragungsstrecken und eine
 Datenübertragungsrate bis zu 12 \ac{MBps}. Ein Netzwerk aus mehreren Geräten wird als Bus aufgebaut.\\
-Die Datenübertragung erfolgt mittels einer Universal Asynchronous Receiver Transmitter (UART)
-gesteuerten asynchronen seriellen Schnittstelle. Ein Datenframe besteht aus acht Datenbits und zwei
-Stoppbits. Die Symbolrate beträgt 250 kBaud (Baud = Bits pro sec).
+Die Datenübertragung erfolgt mittels einer \ac{uart} gesteuerten asynchronen seriellen Schnittstelle. Ein
+Datenframe besteht aus acht Datenbits und zwei Stoppbits. Die Symbolrate beträgt 250 kBaud (Baud = Bits pro sec).
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{images/DMX_zeitlich.png}
     \caption{Zeitliche Darstellung \ac{dmx}-Signal}
@@ -278,7 +277,7 @@ Es ist in OSI Layer 4 auf UDP aufgebaut. Das Protokoll ist von der Firma Artisti
 Hier wird Art-Net in der dritten Version verwendet. Diese Version wurde 2011 publiziert.\\
 Über das Art-Net 3 Protokoll können bis zu 32.768 \ac{dmx} Universen verwaltet werden.\\
 \cite{artnet}\\
-Das Protokoll kann sowohl Unicast, Multicast oder Brodcast eingesetzt werden. Somit können auch komplexe Netzwerke
+Das Protokoll kann sowohl Unicast, Multicast oder Broadcast eingesetzt werden. Somit können auch komplexe Netzwerke
 in einer physikalischen Struktur aufgebaut werden.\\
 \\
 Mit Hilfe von Protokollwandlern wie dem MA xPort Node kann Art-Net in \ac{dmx} umgewandelt werden. Auch von anderen
@@ -293,11 +292,11 @@ Art-Net IP Adressen sind nach folgendem Muster aufgebaut:
     \end{tabular*}
 \end{table}
 \noindent
-In der Regel werden IP Adressen für Art-net mit dem Netz 2.X.X.X oder 10.X.X.X verwendet. Art-Net wird über den
+In der Regel werden IP Adressen für Art-Net mit dem Netz 2.X.X.X oder 10.X.X.X verwendet. Art-Net wird über den
 Netzwerkport 6454 gesendet und empfangen.
 
-Ein Art-Net Paket kann verschiedene Informationen haben, neben \ac{dmx} Daten. Hier sendet die Applikation jedoch
-lediglich ArtDmx Pakete. Diese Pakete transportieren DMX Daten. Hier ist der Aufbau des ArtDMX Paketes dargelegt.\\
+Ein Art-Net Paket kann verschiedene Informationen enthalten. Hier sendet die Applikation jedoch
+lediglich ArtDmx Pakete. Diese Pakete transportieren DMX Daten. Hier ist der Aufbau des ArtDmx Paketes dargelegt.\\
 \begin{table}[H]
     \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} lll}
         Byte Offset & Name & Größe & Beschreibung\\
@@ -316,38 +315,38 @@ lediglich ArtDmx Pakete. Diese Pakete transportieren DMX Daten. Hier ist der Auf
 \clearpage
 
 \subsection{HTML,JavaScript,CSS}
-\ac{html} ist eine Struktur-Beschreibungs Sprache. Sie ist an den \ac{xml} Standard angelehnt. \ac{html}
-wird hauptsächlich in der Webentwicklung verwendet. Doch kann \ac{html} auch für Webgestützte Desktop
+\ac{html} ist eine Strukturbeschreibungssprache. Sie ist an den \ac{xml} Standard angelehnt. \ac{html}
+wird hauptsächlich in der Webentwicklung verwendet. Doch kann \ac{html} auch für webgestützte Desktop
 Applikationen genutzt werden.\\
-Die Sprache enthält Grundlegende Elemente zur Beschreibung von Tabellen, einbinden von Medieninhalten sowie
-das einbinden von weiteren HTML Dateien.\\
+Die Sprache enthält grundlegende Elemente zur Beschreibung von Tabellen, Einbindung von Medieninhalten sowie
+von weiteren HTML Dateien.\\
 \\
-\ac{css} ist eine in der \ac{json} Notation geschrieben. Hier kann auf Elemente in einem \ac{html} Baum
-verwiesen werden, und mit verschiedenen Attributen das Erscheinungsbild im Webbrowser, oder in der Applikation,
+\ac{css} ist eine in der \ac{json} Notation geschriebene Sprache. Hier kann auf Elemente in einem \ac{html} Baum
+verwiesen werden, und mit verschiedenen Attributen das Erscheinungsbild im Webbrowser oder in der Applikation
 geändert werden.\\
-Einfache Dinge wie Hintergrund- oder Textfarben, bis hin zu komplexen Animationen kann mit \ac{css} beschrieben
+Einfache Dinge wie Hintergrund- oder Textfarben bis hin zu komplexen Animationen können mit \ac{css} beschrieben
 werden.\\
 \\
-JavaScript ist eine Skript Sprache die wie \ac{css} meist in der Webentwicklung verwendet wird. Jedoch kann
+JavaScript ist eine Skript Sprache, die wie \ac{css} meist in der Webentwicklung verwendet wird, kann jedoch
 mit einer entsprechenden JavaScript Laufzeitumgebung auch ohne Browser auf Endgeräten ausgeführt werden.\\
 Bei dieser Arbeit muss zwischen zwei Arten der Nutzung der Sprache JavaScript unterschieden werden:\\
 \begin{addmargin}[2em]{0em}
  - Webcode, welcher innerhalb des Webbrowsers augeführt wird.\\
  - Appcode, welcher mit der NodeJS Laufzeitumgebung auf dem Endgerät ausgeführt wird.\\
 \end{addmargin}
-NodeJS ist eine JavaScript Laufzeitumgebung. Laufzeitumgebungen sind zum ausführen eines Programms in einer Sprache zwingend
+NodeJS ist eine JavaScript Laufzeitumgebung. Laufzeitumgebungen sind zum Ausführen eines Programmes in einer Sprache zwingend
 erforderlich.\\
 Appcode hat gegenüber Webcode weitreichendere Befugnisse auf dem Endgerät wie Dateisystemzugriff und externe Schnittstellen, wie
 USB oder herkömmliche serielle Schnittstellen (COM).
 \clearpage
 
 \subsection{Electron}
-Electron ist ein Framework welches zum erstellen von Desktop Anwendungen genutzt werden kann. Electron funktioniert
+Electron ist ein Framework, welches zum Erstellen von Desktop Anwendungen genutzt werden kann. Electron funktioniert
 wie ein Webbrowser. Die Applikation zeigt \ac{html} und andere Textinhalte an.\cite{electron} Der Programmierer kann diese
-Browserumgebung nach belieben modifizieren und erweitern. Electron wurde aus dem Projekt Atom Editor von Github entwickelt.\\
+Browserumgebung nach Belieben modifizieren und erweitern. Electron wurde aus dem Projekt Atom Editor von Github entwickelt.\\
 Das Framework basiert auf dem Chromium Projekt von Google. Auf dem Chromium Projekt basiert auch der Chrome Webbrowser von
 Google.\\
-Das Electron Framework bietet eine Betriebssystem übergreifende Applikation als Resultat. Electron Applikationen können unter
+Das Electron Framework bietet eine betriebssystemübergreifende Applikation als Resultat. Electron Applikationen können unter
 Windows, Linux und MacOS ausgeführt werden.\\
 Electron ist Open Source und wird von einer breiten Community weltweit permanent weiterentwickelt.\cite{electron}\\
 Das Projekt wird in den Programmiersprachen C++ und JavaScript geschrieben.\\
@@ -356,10 +355,10 @@ Der JavaScript-Anteil wird mit NodeJS auf den Zielcomputern ausgeführt.
 \subsection{Git und Github}
 Git ist eine Datei Versionierungs- und Management Software. Git wird häufig in der Software Entwicklung mit mehreren Stationen eingesetzt.\\
 Eine Instanz von einem mit Git verwalteten Dateisystem wird Repository bezeichnet. Diese Instanz wird meist auf einem Server bereitgestellt.
-Ein Nutzer kann den Ihnalt des Repositories auf sein Endgerät abrufen.
+Ein Nutzer kann den Inhalt des Repositories auf sein Endgerät abrufen.
 Abgerufene Dateien, vornehmlich nicht binäre Textdateien, können anschließend lokal auf einem Endgerät editiert werden. Wenn eine neue Version
 der Datei in das Repository eingestellt werden soll, werden die Änderungen an den Dateien mit einem Kommentar eingestellt (committed).
-Diese Eingestellten Änderungen werden dann mit dem Server synchronisiert und mit den Änderungen von anderen Stationen automatisch zusammengeführt.\\
+Diese eingestellten Änderungen werden dann mit dem Server synchronisiert und mit den Änderungen von anderen Stationen automatisch zusammengeführt.\\
 \\
 Dieses System macht das Entwickeln einer Software mit mehreren Entwicklern deutlich einfacher.\\
 \\
@@ -374,8 +373,8 @@ Zusätzlich bietet Github ein Projektverwaltungssystem.
 Der Begriff Licht bezeichnet den Teil des elektromagnetischen Spektrums, welcher mit dem menschlichen Auge zu erfassen ist.\\
 \\
 Licht besteht aus rein physischer Betrachtungsweise aus Wellen im elektromagnetischen Spektrum und Teilchen. Dieses Phänomen, dass sich
-Licht sowohl in der Ausbreitung wie eine Welle, aber gleichzeitig auch ein Teichenverhalten bei Licht zu beobachten ist nennt sich
-Welle-Teilchen-Dualismus. Dieser Begriff wurde durch Albert Einstein und Max Planck begründet. In dieser Theorie wird Licht als Quantenobjekt
+Licht sowohl in der Ausbreitung wie eine Welle, aber gleichzeitig auch ein Teichen verhält nennt sich Welle-Teilchen-Dualismus.
+Dieser Begriff wurde durch Albert Einstein und Max Planck begründet. In dieser Theorie wird Licht als Quantenobjekt
 beschrieben. \cite{wikiLicht}\\
 \begin{wrapfigure}{r}{0.5\textwidth}
     \vspace{-25pt}
@@ -387,9 +386,9 @@ beschrieben. \cite{wikiLicht}\\
     \vspace{-15pt}
 \end{wrapfigure}
 \noindent
-Licht ist elektromagnetischen Spektrum messbar. Somit ist ein Farbton eine Frequenz und eine Helligkeit eine Amplitude.
-Wo eine Farbe im elektromagnetischen Spektrum einzuordnen ist wird mit der Wellenlänge in Nanometern (nm) angegeben. Diese Zahl fällt von
-dem Infraroten Bereich des Spektrums ab 760nm bis in den Ultravioletten Bereich bei 380nm.
+Licht ist im elektromagnetischen Spektrum messbar. Somit ist ein Farbton eine Frequenz und eine Helligkeit eine Amplitude.
+Wo eine Farbe im elektromagnetischen Spektrum einzuordnen ist, wird mit der Wellenlänge in Nanometern (nm) angegeben. Diese Zahl fällt von
+dem Infrarotbereich des Spektrums ab 760nm bis in den Ultraviolettbereich bei 380nm.
 \begin{align}\label{Equ:1}
     \lambda = \frac{c}{f}
 \end{align}
@@ -401,7 +400,6 @@ werden allgemein als Spektralsensoren bezeichnet.
 \clearpage
 
 \subsection{LED}
-\ac{led}
 \subsection{Lichtquellen in der Veranstaltungstechnik}
 \clearpage
 
@@ -426,23 +424,57 @@ Ein Hersteller, dessen Sensoren in dieser Arbeit vornehmlich genutzt wurden, ist
 Zu Beginn wurde nach einer einfachen Evaluierungslösung für das Erfassen von spektralen Daten gesucht. Hier wurde das
 Sensorboard von der Firma Adafruit AS7262 genutzt.\cite{adafruit}\\
 Dieses Board nutzt einen AMS AS7262 Visible Spectral Light Sensor. Weiter stellt es Pin outs für \ac{i2c} und \ac{uart} bereit,
-sowie eine Status-\ac{led} und eine Referenz weißlicht \ac{led} Lichtquelle, zur Beleuchtung von nicht selbst emittierenden
+sowie eine Status-\ac{led} und eine Referenz \ac{led} Weißlichtquelle, zur Beleuchtung von nicht selbst emittierenden
 Gegenständen.
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.5\textwidth]{images/AS7262_front.png}
+        \includegraphics[width=.48\textwidth]{images/AS7262_front.png}
     \end{center}
     \caption{Adafruit AS7262 Sensorboard\cite{adafruit}}
 \end{figure}
 \noindent
 Für eine erste Evaluierung und auch für das weitere Vorgehen wurde die UART Schnittstelle genutzt, da diese in der Kommunikation
-transparenter Aufgebaut ist.\\
+transparenter aufgebaut ist.\\
 Hier ist zu beachten, dass auf dem Adafruit Sensorboard die Lötbrücke für "'\ac{uart} SELECT"' geschlossen werden muss. Ohne diese
 Anpassung verbleibt der Chip im \ac{i2c} Modus.\\
 Das Sensorboard wurde mit einem "'FTDI Friend"', einem weiteren Produkt von Adafruit, mit dem Endgerät, einem Windows Computer, verbunden.
-Dies ist ein USB-Seriell-Transceiver. Dieser Chip von der Firma FTDI wandelt \ac{usb} zu RS232 analog Signalen.\\
+Dies ist ein USB-Seriell-Transceiver. Dieser Chip von der Firma FTDI wandelt \ac{usb} zu RS232 Analogsignalen.\\
 \\
-Die Kommunikation mit dem AMS Sensor funktioniert mit AT-Kommandos. Einer \ac{ascii} basierten Kommando Sprache.
+Die Kommunikation über \ac{uart} mit allen AMS Sensoren funktioniert mit AT-Kommandos, einer \ac{ascii} basierten Kommando Sprache,
+welche für Modems in den 1980er Jahren entwickelt wurde.
+
+\subsection{AS7261}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{images/AS7261_functional_blockdiagram.png}
+        \caption{Funktionelles Blockdiagramm}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{images/AS7261_spectrum.png}
+        \caption{Spektrale Abdeckung}
+    \end{subfigure}
+    \caption{AMS AS7261 \cite{datasheet61}}\label{fig:AS7261}
+\end{figure}
+\noindent
+\clearpage
+
+\subsection{AS7262}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{images/AS7262_functional_blockdiagram.png}
+        \caption{Funktionelles Blockdiagramm}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{images/AS7262_spectrum.png}
+        \caption{Spektrale Abdeckung}
+    \end{subfigure}
+    \caption{AMS AS7262 \cite{datasheet62}}\label{fig:AS7262}
+\end{figure}
+\noindent
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Messungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -510,6 +542,8 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
     \bibitem[Wikipedia, 2019]{spectrumLight}"'Electromagnetic spectrum - Wikipedia"', \url{https://en.wikipedia.org/wiki/Electromagnetic_spectrum}, 11.08.2019
     \bibitem[Farbwahrnehmung FHT Esslingen, 2019]{fhtEsslignen}"'Farbwahrnehmung"', \url{http://www.it.fht-esslingen.de/~asbeck/gdial/farbe/sehen2.html}, 11.08.2019
     \bibitem[Adafruit Learn, 2019]{adafruit}"'Overview | Adafruit AS7262 6-channel Visible Light Sensor | Adafruit Learning System"', \url{https://learn.adafruit.com/adafruit-as7262-6-channel-visible-light-sensor}, 11.08.2019
+    \bibitem[AS7261 Datenblatt, 2019]{datasheet61}"'AS7261 XYZ Chromatic White Color Sensor + NIR with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7261_DS000493_1-00.pdf/0e7d1f12-702e-d061-b07a-67b0b6316800}, 11.08.2019
+    \bibitem[AS7262 Datenblatt, 2019]{datasheet62}"'AS7262 6-Channel Visible Spectral ID Device with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7262_DS000486_2-00.pdf/0031f605-5629-e030-73b2-f365fd36a43b}, 11.08.2019
  \end{thebibliography}
  \endgroup
 \clearpage
