@@ -380,7 +380,7 @@ exports.importEmitters = function(filename)
 
 var value = 0;
 var artnetOptions = {
-    host: '2.3.4.7',
+    host: '2.255.255.255',
     refresh: 900,
     sendAll:true
 }
