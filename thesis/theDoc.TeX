@@ -80,8 +80,8 @@ homogeneres Farbbild.
 %%%%%%%%%%%%%%%%%%%%%%%%%% Erklärung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Erklärung}
 \addcontentsline{toc}{section}{Erklärung}
-Ich versichere hiermit, dass ich die vorliegende Arbeit selbständig verfasst und keine anderen als die
-im Literaturverzeichnis angegebenen Quellen benutzt habe.\\
+Ich versichere hiermit, dass ich die vorliegende Arbeit selbständig verfasst und keine anderen
+als die im Literaturverzeichnis angegebenen Quellen benutzt habe.\\
 Alle Stellen, die wörtlich oder sinngemäß aus veröffentlichten oder noch nicht veröffentlichten
 Quellen entnommen sind, sind als solche kenntlich gemacht.\\
 Die Zeichnungen oder Abbildungen in dieser Arbeit sind von mir selbst erstellt worden oder mit
@@ -193,7 +193,6 @@ in den letzten 34 Jahren gesammelte Erfahrung auf, jedoch wurde jede Zeile Code 
 um die technischen Möglichkeiten der neuen Hardware vollumfänglich nutzen zu können.\\
 Neben vielen Veränderungen gegenüber der Vorserien arbeitet die Farblogik der grandMA3 Software
 mit den Spezifikationen des \ac{cie} 1931 Standards.
-
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Grundlagen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -320,6 +319,9 @@ wird hauptsächlich in der Webentwicklung verwendet. Doch kann \ac{html} auch f�
 Applikationen genutzt werden.\\
 Die Sprache enthält grundlegende Elemente zur Beschreibung von Tabellen, Einbindung von Medieninhalten sowie
 von weiteren HTML Dateien.\\
+Allerdings ist das erzeugte Ergebnis (zum Beispiel von einem Webbrowser) meist statisch. Als Beispiel ändert sich
+der Inhalt nicht mit dem Vergrößern oder Verkleinern des Webbrowsers für eine bessere Lesbarkeit. Um solche heute
+gewohnten Effekte zu erzeugen, benötigt man \ac{css} oder JavaScript.\\
 \\
 \ac{css} ist eine in der \ac{json} Notation geschriebene Sprache. Hier kann auf Elemente in einem \ac{html} Baum
 verwiesen werden, und mit verschiedenen Attributen das Erscheinungsbild im Webbrowser oder in der Applikation
@@ -334,10 +336,15 @@ Bei dieser Arbeit muss zwischen zwei Arten der Nutzung der Sprache JavaScript un
  - Webcode, welcher innerhalb des Webbrowsers augeführt wird.\\
  - Appcode, welcher mit der NodeJS Laufzeitumgebung auf dem Endgerät ausgeführt wird.\\
 \end{addmargin}
-NodeJS ist eine JavaScript Laufzeitumgebung. Laufzeitumgebungen sind zum Ausführen eines Programmes in einer Sprache zwingend
-erforderlich.\\
-Appcode hat gegenüber Webcode weitreichendere Befugnisse auf dem Endgerät wie Dateisystemzugriff und externe Schnittstellen, wie
-USB oder herkömmliche serielle Schnittstellen (COM).
+NodeJS ist eine JavaScript Laufzeitumgebung. Laufzeitumgebungen sind zum Ausführen eines Programmes in einer
+Sprache zwingend erforderlich.\\
+Webcode kann dynamisch auf einer Website durch anklicken eines \ac{html} Elements weitere HTML Elemente erzeugen,
+oder existierende manipulieren oder löschen. Somit kann eine Benutzereingabe das gesamte Erscheinungsbild ändern,
+ohne eine andere \ac{html} Seite aufzurufen.
+Zusätzlich bieten Webbrowser sogenannte "'Storages"' oder Speicher. Dort kann mit JavaScript Daten gespeichert werden,
+um diese zum Beispiel beim nächsten Aufruf dieser Seite weiterzunutzen.\\
+Appcode hat gegenüber Webcode weitreichendere Befugnisse auf dem Endgerät wie Dateisystemzugriff und Zugriff auf
+externe Schnittstellen, wie USB oder herkömmliche serielle Schnittstellen (COM).
 \clearpage
 
 \subsection{Electron}
@@ -400,6 +407,20 @@ werden allgemein als Spektralsensoren bezeichnet.
 \clearpage
 
 \subsection{LED}
+\ac{led} ist das Acronym für Light Emitting Diode, also lichtemittierende Diode. Dies ist eine spezielle Art von Halbleitern,
+welche bei einem Stromfluss Licht emittiert. Die chemische Zusammensetzung (Dotierung) der Diode entscheidet, welche Farbe
+beziehungsweise, welche Frequenz sie emittiert.\\
+Im folgenden ein Auszug der Element-Farbzuordnung \cite{wikiLed}:
+\begin{table}[H]
+    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} ll}
+        Element & Farbe & Wellenlänge (nm)\\
+        Aluminiumgalliumarsenid (AIGaAs) & Rot, Infrarot & 665 - 1000\\
+        Galliumarsenidphosphid (GaAsP) & Rot, Orange und Gelb & 570 - 760\\
+        Galliumphosphid (GaP) & (Gelb-)Grün & 500 - 580\\
+        Indiumgalliumnitrid (InGaN) &  Grün, Blau, Violett und Ultraviolett & 520 - 230\\
+    \end{tabular*}
+\end{table}
+
 \subsection{Lichtquellen in der Veranstaltungstechnik}
 \clearpage
 
@@ -541,6 +562,7 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
     \bibitem[Licht Wikipedia, 2019]{wikiLicht}"'Licht - Wikipedia"', \url{https://de.wikipedia.org/wiki/Licht}, 11.08.2019
     \bibitem[Wikipedia, 2019]{spectrumLight}"'Electromagnetic spectrum - Wikipedia"', \url{https://en.wikipedia.org/wiki/Electromagnetic_spectrum}, 11.08.2019
     \bibitem[Farbwahrnehmung FHT Esslingen, 2019]{fhtEsslignen}"'Farbwahrnehmung"', \url{http://www.it.fht-esslingen.de/~asbeck/gdial/farbe/sehen2.html}, 11.08.2019
+    \bibitem[Leuchtdiode Wikipedia, 2019]{wikiLed}"'Leuchtdiode - Wikipedia"', \url{https://de.wikipedia.org/wiki/Leuchtdiode}, 21.08.2019
     \bibitem[Adafruit Learn, 2019]{adafruit}"'Overview | Adafruit AS7262 6-channel Visible Light Sensor | Adafruit Learning System"', \url{https://learn.adafruit.com/adafruit-as7262-6-channel-visible-light-sensor}, 11.08.2019
     \bibitem[AS7261 Datenblatt, 2019]{datasheet61}"'AS7261 XYZ Chromatic White Color Sensor + NIR with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7261_DS000493_1-00.pdf/0e7d1f12-702e-d061-b07a-67b0b6316800}, 11.08.2019
     \bibitem[AS7262 Datenblatt, 2019]{datasheet62}"'AS7262 6-Channel Visible Spectral ID Device with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7262_DS000486_2-00.pdf/0031f605-5629-e030-73b2-f365fd36a43b}, 11.08.2019
