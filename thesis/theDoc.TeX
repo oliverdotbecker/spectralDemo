@@ -380,7 +380,7 @@ Zusätzlich bietet Github ein Projektverwaltungssystem.
 Der Begriff Licht bezeichnet den Teil des elektromagnetischen Spektrums, welcher mit dem menschlichen Auge zu erfassen ist.\\
 \\
 Licht besteht aus rein physischer Betrachtungsweise aus Wellen im elektromagnetischen Spektrum und Teilchen. Dieses Phänomen, dass sich
-Licht sowohl in der Ausbreitung wie eine Welle, aber gleichzeitig auch ein Teichen verhält nennt sich Welle-Teilchen-Dualismus.
+Licht sowohl in der Ausbreitung wie eine Welle, aber gleichzeitig auch ein Teilchen verhält nennt sich Welle-Teilchen-Dualismus.
 Dieser Begriff wurde durch Albert Einstein und Max Planck begründet. In dieser Theorie wird Licht als Quantenobjekt
 beschrieben. \cite{wikiLicht}\\
 \begin{wrapfigure}{r}{0.5\textwidth}
@@ -407,9 +407,10 @@ werden allgemein als Spektralsensoren bezeichnet.
 \clearpage
 
 \subsection{LED}
+\subsubsection{Allgemein}
 \ac{led} ist das Acronym für Light Emitting Diode, also lichtemittierende Diode. Dies ist eine spezielle Art von Halbleitern,
 welche bei einem Stromfluss Licht emittiert. Die chemische Zusammensetzung (Dotierung) der Diode entscheidet, welche Farbe
-beziehungsweise, welche Frequenz sie emittiert.\\
+beziehungsweise welche Frequenz sie emittiert.\\
 Im folgenden ein Auszug der Element-Farbzuordnung \cite{wikiLed}:
 \begin{table}[H]
     \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} ll}
@@ -420,8 +421,32 @@ Im folgenden ein Auszug der Element-Farbzuordnung \cite{wikiLed}:
         Indiumgalliumnitrid (InGaN) &  Grün, Blau, Violett und Ultraviolett & 520 - 230\\
     \end{tabular*}
 \end{table}
+Zunächst wurden \ac{led}s seit ihres bekannt werdens in den frühen 1960er Jahren als Leuchtindikatoren benutzt. Also zum Beispiel auf
+Platinen als Statusanzeige oder wie wir es heute von vielen Ethernetanschlussbuchsen kennen, blinkend als Anzeige, dass Daten empfangen
+werden. Durch die voranschreitende technische Entwicklung der \ac{led}, wie bessere Effizienz und bessere Lichtausbeute, sowie besserer
+Langlebigkeit des Bauteils, fand anfang der 1990er die \ac{led} auch ihre Anwendung im Heimbereich.\\
+Es ergaben sich verschiedene Typen von \ac{led}s:\\
+ - Niederstrom\\
+ - HLED\\
+ - COB LED\\
+\subsubsection{Mischen von Farben}
+\subsubsection{Weiße LEDs}
 
 \subsection{Lichtquellen in der Veranstaltungstechnik}
+
+\subsection{Menschliches Farbsehen}
+Das menschliche Auge besitzt zwei Arten von '"Sensoren'", Rezeptoren. Stäbchen zur Helligkeitswahrnehmung bei Nacht.
+Zapfen zur Helligkeits- und Farbwahrnehmung bei Tag. Das Verhältnis von Zapfen zu Stäbchen beträgt im Schnitt 20:1.\\
+Somit ist das Sehen bei Tag ca. sieben Mal so hoch aufgelöst als bei Nacht.\\
+Ähnlich wie verschiedene Photodioden, welche einzelne Spektralbereiche abdecken, decken auch die Zapfen nur einen
+bestimmten Bereich im Farbspektrum ab. Es gibt drei verschiedene Arten von Zapfen. S-, M-, und L-Zapfen. Also '"Short'",
+'" Middle'" und '"Long'" Zapfen. Die Längenangaben beziehen sich auf den Wellenlängenbereich, auf welchen die Zapfen
+resistiv sind.\\
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{images/eye_spectrum.png}
+    \caption{Darstellung des sichtbaren Farbspektrums der Zapfen des Auges}
+\end{figure}
+Die Verteilung der verschiedenen Zapfen Arten liegt circa bei S:M:L 1:16:32.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Farbräume %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -479,6 +504,7 @@ welche für Modems in den 1980er Jahren entwickelt wurde.
     \caption{AMS AS7261 \cite{datasheet61}}\label{fig:AS7261}
 \end{figure}
 \noindent
+Das Sensorspektrum des 7261 ähnelt sehr der Zapfenverteilung im menschlichen Auge.
 \clearpage
 
 \subsection{AS7262}
