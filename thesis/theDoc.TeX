@@ -423,16 +423,13 @@ Im folgenden ein Auszug der Element-Farbzuordnung \cite{wikiLed}:
     \end{tabular*}
 \end{table}
 \noindent
-Zunächst wurden \ac{led}s seit ihres bekannt werdens in den frühen 1960er Jahren als Leuchtindikatoren benutzt. Also zum Beispiel auf
+Zunächst wurden \ac{led}s in den frühen 1960er Jahren als Leuchtindikatoren benutzt. Also zum Beispiel auf
 Platinen als Statusanzeige oder wie wir es heute von vielen Ethernetanschlussbuchsen kennen, blinkend als Anzeige, dass Daten empfangen
 werden. Durch die voranschreitende technische Entwicklung der \ac{led}, wie bessere Effizienz und bessere Lichtausbeute, sowie besserer
 Langlebigkeit des Bauteils, fand anfang der 1990er die \ac{led} auch ihre Anwendung im Heimbereich.\\
-Es ergaben sich verschiedene Typen von \ac{led}s:
-\begin{addmargin}[2em]{0em}
- - Niederstrom\\
- - HLED\\
- - COB LED
-\end{addmargin}
+\ac{led}s emittieren Licht in einem begrenzten Spektralbereich, das Licht ist nahezu monochromatisch. Deshalb sind sie beim Einsatz als
+Signallicht besonders effizient im Vergleich zu anderen Lichtquellen, bei denen zur Erzielung einer monochromen Farbcharakteristik
+Farbfilter den größten Teil des Spektrums absorbieren müssen.\cite{wikiLed}
 
 \subsubsection{Mischen von Farben}
 Emittierende Körper unterliegen der additiven Farbmischung. Das bedeutet, dass sich in das elektromagnetische Spektrum abgegebene
@@ -442,7 +439,21 @@ So kann mit beispielsweise einer roten und einer grünen \ac{led} ein orangener 
 
 \subsubsection{Weiße LEDs}
 Eine tatsächlich weiße \ac{led} existiert bisher auf dem Markt nicht, da \ac{led}s generell schmalbandig abstrahlen. Die Heutzutage
-verwendeten "'weißen"' \ac{led}s sind eigentlich blaue \ac{led}s, mit einem zusätzlichen Phosphor Filter als breitbandigem Lumineszenzfarbstoff.\\
+verwendeten "'weißen"' \ac{led}s sind eigentlich blaue \ac{led}s, mit einem zusätzlichen Phosphor Filter als breitbandigem Lumineszenzfarbstoff.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{images/LED_weiss_P_blau.png}
+        \caption{Funktionelles Blockdiagramm}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{images/LED_weiss_phosphor.png}
+        \caption{Spektrale Abdeckung}
+    \end{subfigure}
+    \caption{Weiss LED Aufbau und Spektrum \cite{wikiLed}}\label{fig:White LED}
+\end{figure}
+\noindent
 Dies verschiebt das abgestrahlte Licht in den gelben Bereich. Somit mit einem Teil des blauen und des farbverschobenen Spektrums, entsteht
 ein breitbandiges Abstrahlverhalten.
 
