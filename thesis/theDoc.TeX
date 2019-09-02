@@ -65,7 +65,7 @@ als auch für die zumeist hoch aufwändigen dynamischen Installationen.
 Eine der zurzeit größten Herausforderungen stellt die korrekte Farbwiedergabe der mannigfaltigen 
 Lichtquellen an einem Film-Set dar.
 Dies wird vor allem durch die unterschiedenen chromatischen Eigenschaften von den Licht 
-emittierenden Quellen erschwert. Diese Quellen sind heute zu {\color{red} xx}\% LEDs.\\
+emittierenden Quellen erschwert. Diese Quellen sind heute zu überwiegenden Teilen LEDs.\\
 Als Beispiel wird hier ein Film-Set für eine Motorrad Verfolgungsszene genommen. Hier wird im 
 Hintergrund mit großen LED Kacheln der computergenerierte Hintergrund abgespielt. Mit kleinen 
 LED Streifen links und rechts neben dem im Studio aufgebauten Motorrad wird dynamisch Licht auf 
@@ -429,9 +429,10 @@ werden. Durch die voranschreitende technische Entwicklung der \ac{led}, wie bess
 Langlebigkeit des Bauteils, fand anfang der 1990er die \ac{led} auch ihre Anwendung im Heimbereich.\\
 \ac{led}s emittieren Licht in einem begrenzten Spektralbereich, das Licht ist nahezu monochromatisch. Deshalb sind sie beim Einsatz als
 Signallicht besonders effizient im Vergleich zu anderen Lichtquellen, bei denen zur Erzielung einer monochromen Farbcharakteristik
-Farbfilter den größten Teil des Spektrums absorbieren müssen.\cite{wikiLed}
+Farbfilter den größten Teil des Spektrums absorbieren müssen.\\
+\cite{showlicht}
 
-\subsubsection{Mischen von Farben}
+\subsubsection{Mischen von Farben}\label{colormixing}
 Emittierende Körper unterliegen der additiven Farbmischung. Das bedeutet, dass sich in das elektromagnetische Spektrum abgegebene
 Wellen auf Ihren jeweiligen Wellenlängen auf addieren. Somit kann mit verschiedenen LED Lichtquellen eine neue Farbe gemischt
 werden.\\
@@ -456,8 +457,55 @@ verwendeten "'weißen"' \ac{led}s sind eigentlich blaue \ac{led}s, mit einem zus
 \noindent
 Dies verschiebt das abgestrahlte Licht in den gelben Bereich. Somit mit einem Teil des blauen und des farbverschobenen Spektrums, entsteht
 ein breitbandiges Abstrahlverhalten.
+\clearpage
 
 \subsection{Lichtquellen in der Veranstaltungstechnik}
+Für die Veranstaltungstechnik ist künstliches Licht nahezu unverzichtbar. Von der Grundausleuchtung in einem Theater, bis zu dem Effektlicht
+auf Kleinveranstaltungen. In den frühen Jahren der großen Konzerte wurden hauptsächlich Scheinwerfer mit Glühfaden Leuchtmitteln beleuchtet.
+Diese Form der Beleuchtung wurde in der Veranstaltungstechnik als Kunstlicht bezeichnet.\\
+Weiter werden vornehmlich in Theatern, sowie Film- und Fernseherproduktion Tageslichtscheinwerfer benutzt. Tageslichtleuchtmittel
+unterscheiden sich von der Art der Lichterzeugung gegenüber Glühlicht. Hier kommen anstatt eines Glühfadens, zwei Elektroden in einer
+gasgefüllten Röhre zum Einsatz. Mit dem dem Anlegen einer Spannung, an den beiden Elektroden baut ein elektrisches Feld auf, welches zu
+einer Gasentladung und somit zu einer Lichtemittierung führt. Solche Gasentladungslampen oder auch \ac{hmi} (Halogen-Metalldampflampe)
+werden für diese Anwendungen in der Regel mit Xenon befüllt. Das emittierte Licht ist ähnlich dem Spektrum des Sonnenlichtes auf der
+Erde. Daher der Name Tageslichtscheinwerfer.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{images/conventional_spectrum.png}
+        \caption{Glühlichtlampe}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{images/HMI_Spectrum.png}
+        \caption{Gasentladungslampe}
+    \end{subfigure}
+    \caption{Typische Spektren der verschiedenen Leuchtmittel \cite{showlicht}}\label{fig:lightEmiiterSpects}
+\end{figure}
+\noindent
+In den 2000er Jahren hielt dann die LED Einzug in die Welt der Veranstaltungstechnik. Dies begann einen Wandel, was besonders die Lebensdauer
+der Leuchtmittel betrifft, sowie der Lichtausbeute im Vergleich zum Stromverbrauch. Mit der Fortschreitenden Entwicklung der \ac{led} und der
+Scheinwerfer, welche diese nutzen hat die \ac{led} heute an vielen Stellen die konventionelle Glühlampe oder \ac{hmi} verdrängt.\\
+Die Lebensdauer einer \ac{led}-Technik basierenden Lampe liegt im Bereich von 15.000 bis 45.000 Betriebsstunden. Eine Glühlampe hingegen
+hat nur eine Lebensdauer von etwa 300 Betriebstunden. Eine Gasentladungslampe hält einer Betriebsbelastung von etwa 300 bis 2000 Stunde aus.
+Eine weitere Stärke der LED ist der niedrige Stromverbrauch bei einer vergleichbaren Lichtausbeute gegenüber einer Glühlampe oder \ac{hmi}.
+Ein PAR64 Medium Flood CP62 hat eine Lichtausbeute von etwa 320 Lumen mit einer Leistung von 1000W \cite{convpar}. Ein vergleichbarer moderner
+\ac{led} \ac{par} mit einer LED Leistung von 180W hat eine Lichtausbeute von etwa 5100 Lumen \cite{ledpar}. So können heute Umfangreichere
+Lichtinstallationen umgesetzt werden. Da die Verfügbare Leistung an Veranstaltungsorten begrenzt ist konnte mit Konventionellen \ac{par}
+Scheinwerfern nur, im Vergleich zu Heute, geringe Zahlen eingesetzt werden, da schon mit 100 \ac{par}s mit 1000W Anschlussleistung bereits
+100.000W zur Verfügung stehen müssten, um alle zur gleichen Zeit zu betreiben. Dies war in der Regel nicht der Fall. Dennoch wurden in der
+Vergangenheit dennoch bei Großveranstaltungen solche Stückzahlen in Bühnen verbaut und dies nicht als einziger Scheinwerfertyp.
+Denn hier hat die LED einen weiteren Vorteil zu damals.\\
+Früher wurden um eine Bühne in verschiedenen Farben auszuleuchten mehrere \ac{par}s benötigt. Um nur Rot, Grün, Blau und Weiß leuchenten zu
+können benötigte man 4 \ac{par}s. Drei davon mit einer jeweiligen Farbfolie vor dem Lichtaustritt. Farbfolien nutzen das Konzept der
+subtraktiven Farbmischung. Es werden vor eine in der Regel weiße Lichtquelle hitzebeständige Folien gespannt, welche nur bestimmte Teile des 
+Lichtspektrums durchlassen.\\
+Dadurch war die Gesamtleistung aller eingesetzten Scheinwerfer früher deutlich größer als dem Licht für die Veranstaltung zugedacht war. Doch
+da die Lampen für die verschieden Farben nie alle zur gleichen Zeit an waren war dies nur ein Problem im Haushalten mit der zur verfügungstehenden
+Leistung.\\
+Mit \ac{led} Scheinwerfern gibt es dieses Problem heute kaum mehr. Die Scheinwerfer können durch das verbauen von mehrfarbigen \ac{led}s (siehe
+\ref{colormixing}) in einem \ac{led} \ac{par} mit additiver Farbmischung ein großes Repertoire an Farben bereitstellen.
+Dennoch sind die Traversen auf den Großveranstaltungen voller geworden gegenüber früher.
 \clearpage
 
 \section{Menschliches Farbsehen}
@@ -584,11 +632,13 @@ Das Sensorspektrum des 7261 ähnelt sehr der Zapfenverteilung im menschlichen Au
     \acro{cie}[CIE]{Commission internationale de l’éclairage}
     \acro{css}[CSS]{Cascading Style Sheets}
     \acro{dmx}[DMX]{Digital Multiplex}
+    \acro{hmi}[HMI]{Hydrargyrum mediumarc iodite}
     \acro{html}[HTML]{Hypertext Markup Language}
     \acro{i2c}[I2C]{Inter-Integrated Circuit}
     \acro{json}[JSON]{JavaScript Object Notation}
     \acro{led}[LED]{Light Emitting Diode}
     \acro{MBps}[MBps]{Megabits pro Sekunde}
+    \acro{par}[PAR]{Parabolic Aluminized Refelector}
     \acro{rdm}[RDM]{Remote Device Management}
     \acro{thz}[THz]{Teraherz}
     \acro{uart}[UART]{Universal Asynchronous Receiver Transmitter}
@@ -615,6 +665,9 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
     \bibitem[Wikipedia, 2019]{spectrumLight}"'Electromagnetic spectrum - Wikipedia"', \url{https://en.wikipedia.org/wiki/Electromagnetic_spectrum}, 11.08.2019
     \bibitem[Farbwahrnehmung FHT Esslingen, 2019]{fhtEsslignen}"'Farbwahrnehmung"', \url{http://www.it.fht-esslingen.de/~asbeck/gdial/farbe/sehen2.html}, 11.08.2019
     \bibitem[Leuchtdiode Wikipedia, 2019]{wikiLed}"'Leuchtdiode - Wikipedia"', \url{https://de.wikipedia.org/wiki/Leuchtdiode}, 21.08.2019
+    \bibitem[Showlicht von Scribble zum fertigen Desgin, 2014]{showlicht}"'Showlicht von Scribble zum fertigen Desgin"', 01.09.2019
+    \bibitem[Philips PAR64 Leuchtmittel 1000W | Thomann, 2019]{convpar}"'Philips PAR64 Leuchtmittel 1000W | Thomann"', \url{https://www.thomann.de/de/philips_par64_1000_watt_mfl_cp62_exe.htm}, 02.09.2019
+    \bibitem[P FLAT PRO 18 IP65 | Cameo, 2019]{ledpar}"'P FLAT PRO 18 IP65 | Cameo"', \url{https://www.cameolight.com/de/loesungen/installation/outdoor-lichttechnik/outdoor-scheinwerfer/2297/p-flat-pro-18-ip65?c=1826}, 02.09.2019
     \bibitem[Adafruit Learn, 2019]{adafruit}"'Overview | Adafruit AS7262 6-channel Visible Light Sensor | Adafruit Learning System"', \url{https://learn.adafruit.com/adafruit-as7262-6-channel-visible-light-sensor}, 11.08.2019
     \bibitem[AS7261 Datenblatt, 2019]{datasheet61}"'AS7261 XYZ Chromatic White Color Sensor + NIR with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7261_DS000493_1-00.pdf/0e7d1f12-702e-d061-b07a-67b0b6316800}, 11.08.2019
     \bibitem[AS7262 Datenblatt, 2019]{datasheet62}"'AS7262 6-Channel Visible Spectral ID Device with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7262_DS000486_2-00.pdf/0031f605-5629-e030-73b2-f365fd36a43b}, 11.08.2019
