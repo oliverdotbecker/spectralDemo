@@ -555,7 +555,7 @@ Gegenständen.
     \begin{center}
         \includegraphics[width=.48\textwidth]{images/AS7262_front.png}
     \end{center}
-    \caption{Adafruit AS7262 Sensorboard\cite{adafruit}}
+    \caption{Adafruit AS7262 Sensorboard \cite{adafruit}}
 \end{figure}
 \noindent
 Für eine erste Evaluierung und auch für das weitere Vorgehen wurde die UART Schnittstelle genutzt, da diese in der Kommunikation
@@ -620,8 +620,61 @@ Bereich.
     \caption{AMS AS7262 \cite{datasheet62}}\label{fig:AS7262}
 \end{figure}
 \noindent
-Hier wird aus der \ac{uart} (AT) Schnittstelle mit dem Befehl ATCDATA die Sensorwerte der einzelnen Dioden als 32-Bit floating point (Gleitkomma 
-Zahlen) ausgegeben. Die weiteren nicht Sensor bezogenen Befehle sind identisch mit dem Befehlssatz des AS7261 Sensors.
+Hier wird aus der \ac{uart} (AT) Schnittstelle mit dem Befehl "'ATCDATA"' die Sensorwerte der einzelnen Dioden als 32-Bit floating point
+(Gleitkomma Zahlen) ausgegeben. Die weiteren nicht Sensor bezogenen Befehle sind identisch mit dem Befehlssatz des AS7261 Sensors.
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Verwendete Lichtquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Verwendete Lichtquellen}
+Im folgenden werden die Lichtquellen beziehungsweise die Lampen beschrieben, die für die Messungen verwendet wurden.
+Auch in der Veranstaltungstechnik als (engl.) "'Fixtures"' bezeichnet. Diese Lampen haben alle \ac{led}s als Lichtquelle. Diese \ac{led}s
+sind alle unterschiedlich aufgebaut.
+\subsection{Ape Labs Light Can}
+~\par\vspace{-\baselineskip}
+\begin{wrapfigure}{r}{0.4\textwidth}
+    \vspace{-45pt}
+    \begin{center}
+        \includegraphics[width=.23\textwidth]{images/light_can_front.png}
+    \end{center}
+    \vspace{-20pt}
+    \caption{Light Can}
+    \vspace{-15pt}
+\end{wrapfigure}
+\noindent
+Diese Lampe ist ein sehr kompakt gebaute RGBW\ac{led} Lichtquelle auf Akku Basis. Diese wurde von der Firma Ape Labs aus Eisigen in Deutschald
+entwickelt. Diese Lampe ist sowohl per Fernbedienung, als auch per W-\ac{dmx} steuerbar.
+Die "'Kanne"' hat einen Abstrahlwinkel von 65 Grad. Zur gezielten Steuerung, ohne vorprogrammierte Effekte wird ein \ac{dmx} zu W-DMX Wander der
+Firma benötigt (W-APP). Dieser ermöglicht dann die Ansterung der Lampe von der Applikation.
+\subsection{Robe LEDWash 300}
+Dieses Wash Movinglight ist ein handelsübliches Gerät und wird Weltweit bei vielen Veranstaltungen universell eingesetzt. Hier sind 19 einzelne
+RGBW \ac{led}s hinter einzelnen Linsen in zwei Kreisen und einer Mittelpunkt \ac{led} positioniert.
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.3\textwidth]{images/Robe_300_ledwash.png}
+    \end{center}
+    \caption{Robe LEDWash 300 \cite{robe}}
+\end{figure}
+\noindent
+Das Movinglight hat einen einstellbaren Abstrahlwinkel von 8 bis 63 Grad. Dieser wurde allerdings bei den Messungen auf 63 Gard fest eingestellt,
+um ein möglichst homogenes Abstrahlverhalten zu erhalten. Laut Hersteller hat die Lampe bei einer Distanz von fünf Metern zur Lampe eine
+Lichtausbeute von 3.370 Lumen. Die Lampe ist per \ac{xlr} mit DMX, oder via Ethernet RJ45-Buchse per Art-Net steuerbar. An einem Display
+am Fuß (der "'Base"') kann der Scheinwerfer konfiguriert werden.
+\subsection{ARRI SkyPanel}
+Das Skypanel S60-C von der Firma Arri, ein Tochterunternehmen der Firma Osram, wird oft als Fluter, Grundlicht in Film und Fernsehen eingesetzt.
+Es wird beworben, dass es mit xyY Kanälen per DMX angesteuert werden kann, diese CIE Werte von der Lampe exakt wiedergegeben werden. Somit
+ist diese Lampe eine perfekte Referenz für diese Arbeit.
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.48\textwidth]{images/skypanel_s60_c.png}
+    \end{center}
+    \caption{ARRI Skypannel S60-C \cite{arri}}
+\end{figure}
+\noindent
+Das SkyPanel hat einen Abstrahlwinkel von 115 Grad. Die RGBW \ac{led}s Befinden sich hinter einem lampengroßem Diffusor. Die Lampe ist per
+\ac{xlr} mit DMX, W-DMX oder via Ethernet RJ45-Buchse per Art-Net steuerbar. An einem Display auf der Rückseite kann der Scheinwerfer konfiguriert
+werden. Außerdem kann manuell am Gerät auch eine xyY CIE Farbe ohne externe Ansteuerung eingestellt werden.\\
+Bei einer Ansteuerung per DMX oder Art-Net kann am Gerät auch abergelesen werden, welche xyY Werte das Gerät aus der Ansteuerung ermittelt,
+und versucht zu emittieren.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Messungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -699,6 +752,9 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
     \bibitem[Adafruit Learn, 2019]{adafruit}"'Overview | Adafruit AS7262 6-channel Visible Light Sensor | Adafruit Learning System"', \url{https://learn.adafruit.com/adafruit-as7262-6-channel-visible-light-sensor}, 11.08.2019
     \bibitem[AS7261 Datenblatt, 2019]{datasheet61}"'AS7261 XYZ Chromatic White Color Sensor + NIR with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7261_DS000493_1-00.pdf/0e7d1f12-702e-d061-b07a-67b0b6316800}, 11.08.2019
     \bibitem[AS7262 Datenblatt, 2019]{datasheet62}"'AS7262 6-Channel Visible Spectral ID Device with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7262_DS000486_2-00.pdf/0031f605-5629-e030-73b2-f365fd36a43b}, 11.08.2019
+    \bibitem[Ape Labs Homepage,2019]{lightCan} \url{https://apelabs.com/products/leuchtdose}, 02.09.2019
+    \bibitem[Robe Homepage,2019]{robe} \url{https://www.robe.cz/ledwash-300plus/}, 02.09.2019
+    \bibitem[Arri Homepage,2019]{arri} \url{https://www.arri.com/en/lighting/led/skypanel/s60-c}, 02.09.2019
  \end{thebibliography}
  \endgroup
 \clearpage
