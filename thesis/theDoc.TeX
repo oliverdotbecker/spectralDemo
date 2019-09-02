@@ -506,10 +506,15 @@ Leistung.\\
 Mit \ac{led} Scheinwerfern gibt es dieses Problem heute kaum mehr. Die Scheinwerfer können durch das verbauen von mehrfarbigen \ac{led}s (siehe
 \ref{colormixing}) in einem \ac{led} \ac{par} mit additiver Farbmischung ein großes Repertoire an Farben bereitstellen.
 Dennoch sind die Traversen auf den Großveranstaltungen voller geworden gegenüber früher.
+Die ersten \ac{led} \ac{par}s hatten viele einzelne 5mm rote, grüne und blaue \ac{led}s. Hier war jedoch das Problem, dass bei der Farbmischung
+mit beispielsweise Rot und Grün kein homogenes Gelb entstanden ist, da die \ac{led}s alle einzeln ihr eigenes Streuverhalten hatten. So konnte
+bei einer auftreffenden Fläche wie dem Boden immer einzelne nur rote oder nur grüne Farbflächen entstehen. Dieses ungewünschte Verhalten wurde
+später gelöst, indem mehere \ac{led}s in einen Chip integriert wurden, und vor jeden dieser \ac{led}-Chips eine Streulinse gesetzt wurde.
+Somit konnte ein deutlich homogeneres Abstrahlverhalten erreichtwerden.
 \clearpage
 
 \section{Menschliches Farbsehen}
-Das menschliche Auge besitzt zwei Arten von "'Sensoren"', Rezeptoren. Stäbchen zur Helligkeitswahrnehmung bei Nacht.
+Das menschliche Auge besitzt zwei Arten von "'Sensoren"', oder auch genannt Rezeptoren. Stäbchen zur Helligkeitswahrnehmung bei Nacht.
 Zapfen zur Helligkeits- und Farbwahrnehmung bei Tag. Das Verhältnis von Zapfen zu Stäbchen beträgt im Schnitt 20:1.\\
 Somit ist das Sehen bei Tag ca. sieben Mal so hoch aufgelöst als bei Nacht.\\
 Ähnlich wie verschiedene Photodioden, welche einzelne Spektralbereiche abdecken, decken auch die Zapfen nur einen
@@ -518,9 +523,9 @@ bestimmten Bereich im Farbspektrum ab. Es gibt drei verschiedene Arten von Zapfe
 resistiv sind.\\
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{images/eye_spectrum.png}
-    \caption{Darstellung des sichtbaren Farbspektrums der Zapfen des Auges}
+    \caption{Darstellung des sichtbaren Farbspektrums der Zapfen des Auges}\label{fig:eye_spectrum}
 \end{figure}
-Die Verteilung der verschiedenen Zapfen Arten liegt circa bei S:M:L 1:16:32.
+Die Mengenverteilung der verschiedenen Zapfen Arten liegt circa bei S:M:L 1:16:32.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Farbräume %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -558,12 +563,15 @@ transparenter aufgebaut ist.\\
 Hier ist zu beachten, dass auf dem Adafruit Sensorboard die Lötbrücke für "'\ac{uart} SELECT"' geschlossen werden muss. Ohne diese
 Anpassung verbleibt der Chip im \ac{i2c} Modus.\\
 Das Sensorboard wurde mit einem "'FTDI Friend"', einem weiteren Produkt von Adafruit, mit dem Endgerät, einem Windows Computer, verbunden.
-Dies ist ein USB-Seriell-Transceiver. Dieser Chip von der Firma FTDI wandelt \ac{usb} zu RS232 Analogsignalen.\\
+Dies ist ein USB-Seriell-Transceiver. Dieser Chip von der Firma FTDI wandelt \ac{usb} zu RS232 Analogsignalen. Die Verbindung mit dem \ac{ic}
+\ac{uart} via RS232 hergestellt, mit einer Baud Rate von 115200.\\
 \\
 Die Kommunikation über \ac{uart} mit allen AMS Sensoren funktioniert mit AT-Kommandos, einer \ac{ascii} basierten Kommando Sprache,
 welche für Modems in den 1980er Jahren entwickelt wurde.
 
 \subsection{AS7261}
+Das Sensorspektrum des 7261 ähnelt sehr der Zapfenverteilung im menschlichen Auge. Die in Bild \ref{fig:AS7261_spectrum} gezeigte
+Gewichtung der Sensoren ist angelehnt an die CIE 1931 Gewichtungskurven für das menschliche Auge. 
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
@@ -573,15 +581,31 @@ welche für Modems in den 1980er Jahren entwickelt wurde.
     \hfill 
     \begin{subfigure}[b]{0.49\textwidth}
         \includegraphics[width=\textwidth]{images/AS7261_spectrum.png}
-        \caption{Spektrale Abdeckung}
+        \caption{Spektrale Abdeckung}\label{fig:AS7261_spectrum}
     \end{subfigure}
     \caption{AMS AS7261 \cite{datasheet61}}\label{fig:AS7261}
 \end{figure}
 \noindent
-Das Sensorspektrum des 7261 ähnelt sehr der Zapfenverteilung im menschlichen Auge.
+Neben den CIE X, Y und Z Sensoren, verfügt der Sensor noch über einen \ac{nir}, einen Dark und einen Clear Sensor. Diese finden hier
+allerdings keine Verwendung.\\
+Die AT Schnittstelle stellt verschiedenste Informationen zur Verfügung. Zunächst kann mit dem Befehl "'ATDATA"' die Sensorwerte als
+16-Bit Integer (Ganzzahl) Werte von 0 bis 65535 ausgegeben.\\
+\\
+Weiter gibt es nicht (spektral) Sensor bezogene Eintellungen die über die \ac{uart} Schnittstelle abgefragt und gesetzt werden können.
+Als ein Beispiel kann die Temperatur in Celsius des \ac{ic}s mit "'ATTEMP"' abgefragt werden.\\
+Mit "'ATLED0=100"' kann eine kleine grüne Status \ac{led} angeschaltet werden, um zu Signalisieren, dass das Programm eine Verbindung mit 
+dem Chip herstellen konnte und die Kommunikation funktioniert.\\
+Zusätzlich kann mit den Befehlen "'ATLED1=0"' und "'ATLED1=100"' eine auf dem Evaluationsboard angebrachte weiße Referenz \ac{led} aus und
+an geschaltet werden, um nicht selbst emmitierende Objekte zu vermessen.\\
+Die Schnittstelle stellt noch einige weiter Inforamtionen zur Verfügung wie die Chip Software-Version, einen Sensor Gain, Sensor Bank Modus
+und Integrationszeit.
 \clearpage
 
 \subsection{AS7262}
+Auch das Sensorspektrum des 7262 ähnelt sehr der Zapfenverteilung im menschlichen Auge. Dieser \ac{ic} hat insgesamt 6 einzelne Photodioden.
+Davon sind 4 im Rot bis Gelbgrünen Teil des Spektrums angesiedelt. Eine weitere Photodiode im grünen Spektralbereich und die letzte im blauen
+Bereich. So sind auch in Bild \ref{fig:eye_spectrum} zwei der drei Zapfen Arten im Rot bis Grünen Bereich. Die dritte Zapfen Art ist im blauen
+Bereich.
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
@@ -596,6 +620,8 @@ Das Sensorspektrum des 7261 ähnelt sehr der Zapfenverteilung im menschlichen Au
     \caption{AMS AS7262 \cite{datasheet62}}\label{fig:AS7262}
 \end{figure}
 \noindent
+Hier wird aus der \ac{uart} (AT) Schnittstelle mit dem Befehl ATCDATA die Sensorwerte der einzelnen Dioden als 32-Bit floating point (Gleitkomma 
+Zahlen) ausgegeben. Die weiteren nicht Sensor bezogenen Befehle sind identisch mit dem Befehlssatz des AS7261 Sensors.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Messungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -635,9 +661,11 @@ Das Sensorspektrum des 7261 ähnelt sehr der Zapfenverteilung im menschlichen Au
     \acro{hmi}[HMI]{Hydrargyrum mediumarc iodite}
     \acro{html}[HTML]{Hypertext Markup Language}
     \acro{i2c}[I2C]{Inter-Integrated Circuit}
+    \acro{ic}[IC]{Integrated Circuit}
     \acro{json}[JSON]{JavaScript Object Notation}
     \acro{led}[LED]{Light Emitting Diode}
     \acro{MBps}[MBps]{Megabits pro Sekunde}
+    \acro{nir}[NIR]{Near Infrared}
     \acro{par}[PAR]{Parabolic Aluminized Refelector}
     \acro{rdm}[RDM]{Remote Device Management}
     \acro{thz}[THz]{Teraherz}
