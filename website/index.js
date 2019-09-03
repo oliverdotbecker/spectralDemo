@@ -30,7 +30,7 @@ const fixtureTypeLibrary = {
             Weiss:5
         }
     },
-    "eurolight ml 56":{
+    "Eurolight ML 56":{
         intensity:false,
         emitters:{
             Rot:1,
@@ -38,6 +38,15 @@ const fixtureTypeLibrary = {
             Blau:3,
             Amber:4,
             Weiss:5
+        }
+    },
+    "Ape Labs Light Can":{
+        intensity:false,
+        emitters:{
+            Rot:1,
+            Grün:2,
+            Blau:3,
+            Weiss:4
         }
     }
 }
@@ -55,7 +64,9 @@ const emitterChangeTimeout = 6000;
 const measureSilderValues = [5,10,20,35,50,65,85,100];
 
 var currentFixture = "Arri Skypannel Mode RGBW";
+currentFixture = "Ape Labs Light Can";
 var currentFixtureHasIntensity = true;
+currentFixtureHasIntensity = false;
 
 //CIE 1931 tristimulus values from:
 //https://wisotop.de/Anhang-Tristimulus-Werte.php
@@ -72,6 +83,7 @@ var barsContainer = null;
 var namesContainer = null;
 var currMaxDisplay = null;
 var valueContainer = null;
+var wavelenghtsContainer = null;
 var comInput = null;
 var currTempDisplay = null;
 var currXYZDisplay = null;
@@ -119,7 +131,7 @@ function init()
                 for(var i = 0; i < activeSettings.channelCount; i++)
                 {
                     barsContainer.childNodes[i].style.height = (parseInt(measures[i])/currMax)*height+"px";
-                    valueContainer.innerHTML += "<label>"+measures[i]+"</label>";
+                    valueContainer.innerHTML += "<label>"+round(measures[i]/currMax,3)+"</label>";
                 }
 
                 if(cieDisp)
@@ -162,6 +174,14 @@ function init()
     comInput = document.getElementById("comInput");
     barsContainer = document.getElementById('bars');
     valueContainer = document.getElementById('values');
+    wavelenghtsContainer = document.getElementById('wavelenghts');
+    if(activeSettings.channelWavelengths)
+    {
+        for(var i = 0; i < activeSettings.channelCount; i++)
+        {
+            wavelenghtsContainer.innerHTML += "<label>"+activeSettings.channelWavelengths[i]+"</label>";
+        }
+    }
     currMaxDisplay = document.getElementById('currentMax');
     currTempDisplay = document.getElementById('currentTemp');
     currXYZDisplay = document.getElementById('currentXYZ');

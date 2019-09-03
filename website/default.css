@@ -222,7 +222,8 @@ svg {
     justify-content: space-around;
 }
 
-#names {
+#names,
+#wavelenghts {
     width: 100%;
     display: flex;
     color: white;
