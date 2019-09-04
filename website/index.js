@@ -103,7 +103,7 @@ function init()
         var measures = electronDaemon.getMeasures();
         if(measures)
         {
-            console.log(measures);
+            //console.log(measures);
             measures = JSON.parse(measures);
 
             if(barsContainer)
@@ -353,7 +353,7 @@ function convertSpectrumToXYZ(spectralData,max,noDisp)
         Y += tristimulusY[wI]*(spectralData[wI]/max);
         Z += tristimulusZ[wI]*(spectralData[wI]/max);
     }
-    console.log(X+" "+Y+" "+Z);
+    //console.log(X+" "+Y+" "+Z);
     if(currXYZDisplay && !noDisp)
     {
         currXYZDisplay.innerHTML = round(X,4)+" "+round(Y,4)+" "+round(Z,4);
