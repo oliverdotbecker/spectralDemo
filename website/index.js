@@ -78,6 +78,7 @@ var height = 0;
 var cieXdiv = 0;
 var cieYdiv = 0;
 var currMax = 0;
+var plusSize = 8;
 
 var barsContainer = null;
 var namesContainer = null;
@@ -189,12 +190,12 @@ function init()
     currRGBDisplay = document.getElementById('currentRGB');
     currColorDisplay = document.getElementById('currentColor');
     cieDisp = document.getElementById('cie');
-    ciePos = document.getElementById('ciePos');
+    ciePos = document.getElementById('livePos');
     namesContainer = document.getElementById('names');
     emitterList = document.getElementById("emitterList");
     emitterEdit = document.getElementById("emitterEdit");
     sliderContainer = document.getElementById("sliderContainer");
-    mixPos = document.getElementById("mixPos");
+    mixPos = document.getElementById("calcPos");
 
     comInput.onchange = function(event)
     {
@@ -305,6 +306,7 @@ function init()
             option.value = fixture;
             fixtureSelect.appendChild(option);
         }
+        fixtureSelect.value = currentFixture;
 
         fixtureSelect.onchange = function(event)
         {
@@ -465,8 +467,16 @@ function setxy(x,y)
     //Set position
     if(ciePos)
     {
-        ciePos.style.bottom = (y*10*cieYdiv)+"px";
-        ciePos.style.left = (x*10*cieXdiv)+"px";
+        var box = ciePos.parentElement.getBoundingClientRect();
+        var sizeX = box.width;
+        var sizeY = box.height;
+        ciePos.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
+
+        var newPath = "M "+ ((x*sizeX)-plusSize) + "," + parseInt(y*sizeY);
+        newPath += " L "+ ((x*sizeX)+plusSize) + "," + parseInt(y*sizeY);
+        newPath += " M "+ (x*sizeX) + "," + (parseInt(y*sizeY)-plusSize);
+        newPath += " L "+ (x*sizeX) + "," + (parseInt(y*sizeY)+plusSize);
+        ciePos.setAttribute("d",newPath);
     }
     console.log("Set x="+x+" y="+y+" bottom="+(y*10*cieYdiv)+"px left="+(x*10*cieXdiv)+"px");
 }
@@ -1044,8 +1054,8 @@ function sendDMX(event)
 function calcColorMix(event)
 {
     var sliderValues = sendDMX(event);
-    var calcX = 0.3;
-    var calcY = 0.3;
+    var calcX = 0.33;
+    var calcY = 0.33;
     var calcSpectrum = [0,0,0,0,0,0];
     var calcMax = 0;
     var wroteSpectrum = false;
@@ -1128,10 +1138,24 @@ function calcColorMix(event)
         cieYdiv = box.height/9;
     }
 
-    var calcBottom = round((calcY*10*cieYdiv),3);
+    /*var calcBottom = round((calcY*10*cieYdiv),3);
     var calcLeft = round((calcX*10*cieXdiv),3);
     mixPos.style.bottom = calcBottom+"px";
-    mixPos.style.left = calcLeft+"px";
+    mixPos.style.left = calcLeft+"px";*/
+    //Set position
+    if(mixPos)
+    {
+        var box = mixPos.parentElement.getBoundingClientRect();
+        var sizeX = box.width;
+        var sizeY = box.height;
+        mixPos.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
+
+        var newPath = "M "+ ((calcX*sizeX)-plusSize) + "," + parseInt(calcY*sizeY);
+        newPath += " L "+ ((calcX*sizeX)+plusSize) + "," + parseInt(calcY*sizeY);
+        newPath += " M "+ (calcX*sizeX) + "," + (parseInt(calcY*sizeY)-plusSize);
+        newPath += " L "+ (calcX*sizeX) + "," + (parseInt(calcY*sizeY)+plusSize);
+        mixPos.setAttribute("d",newPath);
+    }
 }
 
 function drawColorSpace()
@@ -1155,14 +1179,14 @@ function drawColorSpace()
             }
             else
             {
-                console.warn("Emitter "+currEmitter.name+" has no 100% measures. Failed to et coordinates.");
+                console.warn("Emitter "+currEmitter.name+" has no 100% measures. Failed to get coordinates.");
             }
         }
 
-        var scaleX = cieXdiv*10;
-        var scaleY = cieYdiv*10;
-
-        pathDOM.parentElement.setAttribute("viewBox","0 0 "+scaleX+" "+scaleY)
+        var box = pathDOM.parentElement.getBoundingClientRect();
+        var sizeX = box.width;
+        var sizeY = box.height;
+        pathDOM.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
 
         var newPath = "";
         for(var i = 0; i < 3; i++)
@@ -1176,13 +1200,12 @@ function drawColorSpace()
                 newPath += "L ";
             }
 
-            newPath += parseInt(coordiantes[i][0]*scaleX);
+            newPath += parseInt(coordiantes[i][0]*sizeX);
             newPath += ",";
-            newPath += parseInt((1-coordiantes[i][1])*scaleY);
+            newPath += parseInt((coordiantes[i][1])*sizeY);
             newPath += " ";
         }
-        newPath += "L "+ parseInt(coordiantes[0][0]*scaleX) + "," + parseInt((1-coordiantes[0][1])*scaleY);
-        //newPath += "M 3,3 L "+(scaleX-3)+",3 L "+(scaleX-3)+","+(scaleY-3)+" L 3,"+(scaleY-3)+" L 3,3";
+        newPath += "L "+ parseInt(coordiantes[0][0]*sizeX) + "," + parseInt((coordiantes[0][1])*sizeY);
         pathDOM.setAttribute("d",newPath);
     }
 }

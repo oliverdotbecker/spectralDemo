@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="shortcut icon" href="images/cie_small.png">
         <link rel="stylesheet" type="text/css" href="default.css">
+        <script type="text/javascript" src="gui.js"></script>
         <script type="text/javascript" src="index.js"></script>
     </head>
     <body onload="init();">
@@ -83,8 +84,6 @@
                 <div id="wavelenghts"></div>
             </div>
             <div id="cie">
-                <div id="ciePos"></div>
-                <div id="mixPos"></div>
                 <div id="grid">
                     <div></div>
                     <div></div>
@@ -109,6 +108,12 @@
                 </div>
                 <svg viewBox="0 0 100 100">
                     <path id="realColorSpace" stroke="white" stroke-width="3" fill="transparent"></path>
+                </svg>
+                <svg viewBox="0 0 100 100">
+                    <path id="calcPos" stroke="red" stroke-width="3" fill="transparent"></path>
+                </svg>
+                <svg viewBox="0 0 100 100">
+                    <path id="livePos" stroke="black" stroke-width="3" fill="transparent"></path>
                 </svg>
             </div>
         </div>
