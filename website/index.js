@@ -63,8 +63,8 @@ const valueChangeTimeout = 3000;
 const emitterChangeTimeout = 6000;
 const measureSilderValues = [5,10,20,35,50,65,85,100];
 
-var currentFixture = "Arri Skypannel Mode RGBW";
-currentFixture = "Ape Labs Light Can";
+var currentFixture = patch[0].fixtureType;
+var patchOffset = 0;
 var currentFixtureHasIntensity = true;
 currentFixtureHasIntensity = false;
 
@@ -250,34 +250,6 @@ function init()
         }
     }
     updateSerialPorts(true);
-
-    var fixtureSelect = document.getElementById('fixtureSelect');
-    if(fixtureSelect)
-    {
-        for(var fixture in fixtureTypeLibrary)
-        {
-            var option = document.createElement('option');
-            option.innerHTML = fixture;
-            option.value = fixture;
-            fixtureSelect.appendChild(option);
-        }
-        fixtureSelect.value = currentFixture;
-
-        fixtureSelect.onchange = function(event)
-        {
-            var elem = event.currentTarget;
-
-            if(confirm("Do you want to save the current emitters?"))
-            {
-                doExport("emitters");
-            }
-
-            currentFixture = elem.value;
-            currentFixtureHasIntensity = fixtureTypeLibrary[currentFixture].intensity == true;
-
-            doImport("emitters",true);
-        }
-    }
 
     createSurface();
     doImport("emitters",true);
@@ -980,7 +952,7 @@ function sendDMX(event)
         var emitterName = sliders[sI].previousElementSibling.textContent;
         if(fixtureTypeLibrary[currentFixture].emitters[emitterName])
         {
-            dmxValues[fixtureTypeLibrary[currentFixture].emitters[emitterName]-1] = sliders[sI].value;
+            dmxValues[fixtureTypeLibrary[currentFixture].emitters[emitterName]-1+patchOffset] = sliders[sI].value;
         }
         else
         {
@@ -993,7 +965,7 @@ function sendDMX(event)
         var intensitySlider = document.getElementById("sliderIntensity");
         if(intensitySlider)
         {
-            dmxValues[fixtureTypeLibrary[currentFixture].intensity-1] = intensitySlider.value;
+            dmxValues[fixtureTypeLibrary[currentFixture].intensity-1+patchOffset] = intensitySlider.value;
         }
     }
     electronDaemon.sendArtnet(dmxValues);

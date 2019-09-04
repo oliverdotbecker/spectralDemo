@@ -1,6 +1,6 @@
 var settings = localStorage.getItem("spectral.settings") || "{}";
 settings = JSON.parse(settings);
-var patch = localStorage.getItem("spectral.patch") || "{}";
+var patch = localStorage.getItem("spectral.patch") || "[]";
 patch = JSON.parse(patch);
 
 activeSensor = settings.sensor;
@@ -120,13 +120,97 @@ function portFail()
 
 function openPatch()
 {
-    throwPopup("Patch","test");
-}/*
+    var newTable = document.createElement('table');
+    newTable.id = "patchTable";
+    for(var pI = 0; pI < patch.length; pI++)
+    {
+        newTable.appendChild(addPatchLine(patch[pI]));
+    }
+
+    var newTr = document.createElement('tr');
+    var newTd = document.createElement('td');
+    newTd.colSpan = 2;
+    var newLabel = document.createElement('label');
+    newLabel.innerText = "Add a fixture";
+    newTd.appendChild(newLabel);
+    newTr.appendChild(newTd);
+    newTr.onclick = function(event)
+    {
+        var table = event.currentTarget.parentElement;
+        table.insertBefore(addPatchLine(),event.currentTarget);
+    }
+    newTable.appendChild(newTr);
+
+    throwPopup("Patch",newTable,true,[
+        ["Close",closePopup],
+        ["Apply",(event) => {
+            var patchTable = document.getElementById("patchTable");
+            if(patchTable)
+            {
+                patch = [];
+                for(var tI = 0; tI < patchTable.childElementCount-1; tI++)
+                {
+                    var currRow = patchTable.childNodes[tI];
+                    patch.push({
+                        fixtureType:currRow.childNodes[0].childNodes[0].value,
+                        address:currRow.childNodes[1].childNodes[0].value
+                    });
+                }
+                localStorage.setItem("spectral.patch",JSON.stringify(patch));
+                currentFixture = patch[0].fixtureType;
+                currentFixtureHasIntensity = fixtureTypeLibrary[currentFixture].intensity == true;
+                patchOffset = patch[0].address-1;
+                doImport("emitters",true);
+            }
+            closePopup();
+        }]
+    ]);
+}
+
+function addPatchLine(patchData)
+{
+    var newTr = document.createElement('tr');
+    var newTd = document.createElement('td');
+
+    //Fixturetype
+    var newFixtureSelect = document.createElement('select');
+    newFixtureSelect.id = "fixtureSelect";
+    for(var fixture in fixtureTypeLibrary)
+    {
+        var option = document.createElement('option');
+        option.innerHTML = fixture;
+        option.value = fixture;
+        newFixtureSelect.appendChild(option);
+    }
+    if(patchData)
+    {
+        newFixtureSelect.value = patchData.fixtureType;
+    }
+    newTd.appendChild(newFixtureSelect);
+    newTr.appendChild(newTd);
+    newTd = document.createElement('td');
+    var numberInput = document.createElement('input');
+    numberInput.type = "number";
+    numberInput.min = 1;
+    numberInput.max = 512;
+    if(patchData)
+    {
+        numberInput.value = patchData.address;
+    }
+    else
+    {
+        numberInput.value = 1;
+    }
+    newTd.appendChild(numberInput);
+    newTr.appendChild(newTd);
+    return newTr;
+}
+
+/*
 buttons: [
     [value,callback,{attribute:value}]
 ]
 */
-
 function throwPopup(title,content,modal,buttons,autoClose)
 {
     if(modal)
