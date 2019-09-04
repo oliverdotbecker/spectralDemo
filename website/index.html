@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="shortcut icon" href="images/cie_small.png">
         <link rel="stylesheet" type="text/css" href="default.css">
+        <link rel="stylesheet" type="text/css" href="gui.css">
         <script type="text/javascript" src="gui.js"></script>
         <script type="text/javascript" src="index.js"></script>
     </head>
@@ -14,17 +15,7 @@
         <br>
         <div id="controls">
             <div>
-                <label>COM Port: </label>
-                <div>
-                    <select id="comInput" list="portList"></select>
-                </div>
-            </div>
-            <div>
-                <label>Sensor: </label>
-                <select id="sensorSelect">
-                    <option value="7261">AS 7261</option>
-                    <option value="7262">AS 7262</option>
-                </select>
+                <input type="button" id="settingsBtn" value="Sensor Settings" onclick="openSensorSettings();"/>
             </div>
             <!--div>
                 <label>Command: </label>
@@ -147,5 +138,7 @@
                 <input type="button" id="editEmitterBack" value="Back" onclick="toggleEmitterEdit();"/>
             </div>
         </div>
+        <div id="modalOverlay"></div>
+        <div id="popupDiv"></div>
     </body>
 </html>

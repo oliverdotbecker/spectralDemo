@@ -152,7 +152,10 @@ function init()
                     XYZtoRGB(measures[0],measures[1],measures[2]);
                 }
 
-                comInput.style.backgroundColor = "";
+                if(comInput)
+                {
+                    comInput.style.backgroundColor = "";
+                }
             }
         }
         drawColorSpace();
@@ -163,7 +166,6 @@ function init()
         currTempDisplay.innerHTML = JSON.parse(currentTemp)+" &deg;C";
     },5100);
 
-    comInput = document.getElementById("comInput");
     barsContainer = document.getElementById('bars');
     valueContainer = document.getElementById('values');
     wavelenghtsContainer = document.getElementById('wavelenghts');
@@ -187,19 +189,6 @@ function init()
     emitterEdit = document.getElementById("emitterEdit");
     sliderContainer = document.getElementById("sliderContainer");
     calcPos = document.getElementById("calcPos");
-
-    comInput.onchange = function(event)
-    {
-        var input = event.currentTarget;
-        if(input)
-        {
-            electronDaemon.setSerialPath(input.value);
-            if(input.value == "No Port")
-            {
-                portFail();
-            }
-        }
-    }
 
     var commandInput = document.getElementById('commandInput');
     if(commandInput)
@@ -262,31 +251,6 @@ function init()
     }
     updateSerialPorts(true);
 
-    var sensorSelect = document.getElementById('sensorSelect');
-    sensorSelect.value = activeSensor;
-    sensorSelect.onchange = function(event)
-    {
-        var input = event.currentTarget;
-        if(input)
-        {
-            electronDaemon.setSerialPath(input.value);
-
-            if(input.value == "7261")
-            {
-                activeSettings = AS7261;
-                activeSensor = "7261";
-                electronDaemon.setSensor(activeSensor);
-            }
-            else
-            {
-                activeSettings = AS7262;
-                activeSensor = "7262";
-                electronDaemon.setSensor(activeSensor);
-            }
-            createSurface();
-        }
-    }
-
     var fixtureSelect = document.getElementById('fixtureSelect');
     if(fixtureSelect)
     {
@@ -335,11 +299,6 @@ function createSurface()
         newLabel.innerHTML = activeSettings.channelNames[i];
         namesContainer.appendChild(newLabel);
     }
-}
-
-function portFail()
-{
-    comInput.style.backgroundColor = "red";
 }
 
 function convertSpectrumToXYZ(spectralData,max,noDisp)
@@ -482,7 +441,7 @@ function updateSerialPorts(getPorts)
     }
     else
     {
-        //comInput = document.getElementById("comInput");
+        comInput = document.getElementById("comInput");
         if(comInput)
         {
             while(comInput.childElementCount > 0)
