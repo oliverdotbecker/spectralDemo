@@ -75,8 +75,6 @@ const tristimulusY = [0.0380,0.3230,0.9950,0.9520,0.6310,0.1070];
 const tristimulusZ = [1.7721,0.2720,0.0087,0.0021,0.0008,0.0000];
 
 var height = 0;
-var cieXdiv = 0;
-var cieYdiv = 0;
 var currMax = 0;
 var plusSize = 8;
 
@@ -92,8 +90,8 @@ var currxyYDisplay = null;
 var currRGBDisplay = null;
 var currColorDisplay = null;
 var cieDisp = null;
-var ciePos = null;
-var mixPos = null;
+var livePos = null;
+var calcPos = null;
 
 var savedValues = [];
 var saveHandle = null;
@@ -135,13 +133,6 @@ function init()
                     valueContainer.innerHTML += "<label>"+round(measures[i]/currMax,3)+"</label>";
                 }
 
-                if(cieDisp)
-                {
-                    var box = cieDisp.getBoundingClientRect();
-                    cieXdiv = box.width/9;
-                    cieYdiv = box.height/9;
-                }
-
                 if(activeSensor == "7262")
                 {
                     for(i in measures)
@@ -162,9 +153,9 @@ function init()
                 }
 
                 comInput.style.backgroundColor = "";
-                drawColorSpace();
             }
         }
+        drawColorSpace();
     },250);
 
     setInterval(() => {
@@ -190,12 +181,12 @@ function init()
     currRGBDisplay = document.getElementById('currentRGB');
     currColorDisplay = document.getElementById('currentColor');
     cieDisp = document.getElementById('cie');
-    ciePos = document.getElementById('livePos');
+    livePos = document.getElementById('livePos');
     namesContainer = document.getElementById('names');
     emitterList = document.getElementById("emitterList");
     emitterEdit = document.getElementById("emitterEdit");
     sliderContainer = document.getElementById("sliderContainer");
-    mixPos = document.getElementById("calcPos");
+    calcPos = document.getElementById("calcPos");
 
     comInput.onchange = function(event)
     {
@@ -465,20 +456,19 @@ function setxy(x,y)
     y = Math.max(y,0);
 
     //Set position
-    if(ciePos)
+    if(livePos)
     {
-        var box = ciePos.parentElement.getBoundingClientRect();
+        var box = livePos.parentElement.getBoundingClientRect();
         var sizeX = box.width;
         var sizeY = box.height;
-        ciePos.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
+        livePos.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
 
         var newPath = "M "+ ((x*sizeX)-plusSize) + "," + parseInt(y*sizeY);
         newPath += " L "+ ((x*sizeX)+plusSize) + "," + parseInt(y*sizeY);
         newPath += " M "+ (x*sizeX) + "," + (parseInt(y*sizeY)-plusSize);
         newPath += " L "+ (x*sizeX) + "," + (parseInt(y*sizeY)+plusSize);
-        ciePos.setAttribute("d",newPath);
+        livePos.setAttribute("d",newPath);
     }
-    console.log("Set x="+x+" y="+y+" bottom="+(y*10*cieYdiv)+"px left="+(x*10*cieXdiv)+"px");
 }
 
 function updateSerialPorts(getPorts)
@@ -1130,31 +1120,19 @@ function calcColorMix(event)
         calcX = Math.max(calcX,0);
         calcY = Math.max(calcY,0);
     }
-
-    if(cieDisp && cieXdiv == 0)
-    {
-        var box = cieDisp.getBoundingClientRect();
-        cieXdiv = box.width/9;
-        cieYdiv = box.height/9;
-    }
-
-    /*var calcBottom = round((calcY*10*cieYdiv),3);
-    var calcLeft = round((calcX*10*cieXdiv),3);
-    mixPos.style.bottom = calcBottom+"px";
-    mixPos.style.left = calcLeft+"px";*/
     //Set position
-    if(mixPos)
+    if(calcPos)
     {
-        var box = mixPos.parentElement.getBoundingClientRect();
+        var box = calcPos.parentElement.getBoundingClientRect();
         var sizeX = box.width;
         var sizeY = box.height;
-        mixPos.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
+        calcPos.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
 
         var newPath = "M "+ ((calcX*sizeX)-plusSize) + "," + parseInt(calcY*sizeY);
         newPath += " L "+ ((calcX*sizeX)+plusSize) + "," + parseInt(calcY*sizeY);
         newPath += " M "+ (calcX*sizeX) + "," + (parseInt(calcY*sizeY)-plusSize);
         newPath += " L "+ (calcX*sizeX) + "," + (parseInt(calcY*sizeY)+plusSize);
-        mixPos.setAttribute("d",newPath);
+        calcPos.setAttribute("d",newPath);
     }
 }
 
