@@ -795,7 +795,7 @@ function updateSliderDisp(event)
         if(selectedFixtures[sFI])
         {
             var emitter = currSlider.previousElementSibling.textContent;
-            patch[sFI].channels.emitter = currSlider.value;
+            patch[sFI].channels[emitter] = currSlider.value;
             var sheetCell = document.getElementById(sFI+"_"+emitter);
             if(sheetCell)
             {
@@ -941,8 +941,27 @@ function measureNextValue()
 function sendDMX(event)
 {
     updateSliderDisp(event);
+    var dmxValues = new Array(512);
+    dmxValues.fill(0);
+    for(var pI = 0; pI < patch.length; pI++)
+    {
+        var currFixture = patch[pI];
+        var currFixtureType = fixtureTypeLibrary[currFixture.fixtureType];
+        for(var channel in currFixture.channels)
+        {
+            var address = currFixtureType.emitters[channel]+parseInt(currFixture.address)-2;
+            dmxValues[address] = parseInt(currFixture.channels[channel]);
+        }
+    }
+    console.log(dmxValues);
+    electronDaemon.sendArtnet(dmxValues);
+}
+
+function calcColorMix(event)
+{
+    sendDMX(event);
+
     var sliderValues = [];
-    var dmxValues = [];
     var sliders = document.getElementsByClassName("vertical");
     for(var sI = 0; sI < sliders.length; sI++)
     {
@@ -951,32 +970,8 @@ function sendDMX(event)
             continue;
         }
         sliderValues.push(sliders[sI].value);
-        var emitterName = sliders[sI].previousElementSibling.textContent;
-        if(fixtureTypeLibrary[currentFixture].emitters[emitterName])
-        {
-            dmxValues[fixtureTypeLibrary[currentFixture].emitters[emitterName]-1+patchOffset] = sliders[sI].value;
-        }
-        else
-        {
-            console.error("Failed to find emitter "+emitterName+" in fixture "+currentFixture);
-        }
     }
 
-    if(currentFixtureHasIntensity)
-    {
-        var intensitySlider = document.getElementById("sliderIntensity");
-        if(intensitySlider)
-        {
-            dmxValues[fixtureTypeLibrary[currentFixture].intensity-1+patchOffset] = intensitySlider.value;
-        }
-    }
-    electronDaemon.sendArtnet(dmxValues);
-    return sliderValues;
-}
-
-function calcColorMix(event)
-{
-    var sliderValues = sendDMX(event);
     var calcX = 0.33;
     var calcY = 0.33;
     var calcSpectrum = [0,0,0,0,0,0];

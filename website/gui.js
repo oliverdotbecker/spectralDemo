@@ -171,6 +171,8 @@ function openPatch()
                     });
                 }
                 localStorage.setItem("spectral.patch",JSON.stringify(patch));
+                selectedFixtures = [];
+                
                 currentFixture = patch[0].fixtureType;
                 currentFixtureHasIntensity = fixtureTypeLibrary[currentFixture].intensity == true;
                 patchOffset = patch[0].address-1;
