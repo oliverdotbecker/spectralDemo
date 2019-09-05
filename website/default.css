@@ -211,6 +211,17 @@ svg {
     text-align: center;
 }
 
+#fixtureSection {
+    flex: 5;
+    display: flex;
+    flex-direction: row;
+}
+
+#controlSection,
+#fixtureSheet {
+    flex: 1;
+}
+
 #emitters {
     flex: 2;
     color: white;

@@ -48,6 +48,24 @@ const fixtureTypeLibrary = {
             Blau:3,
             Weiss:4
         }
+    },
+    "Ape Labs Mini":{
+        intensity:false,
+        emitters:{
+            Rot:1,
+            Grün:2,
+            Blau:3,
+            Weiss:4
+        }
+    },
+    "Ape Labs Maxi":{
+        intensity:false,
+        emitters:{
+            Rot:1,
+            Grün:2,
+            Blau:3,
+            Weiss:4
+        }
     }
 }
 
@@ -63,10 +81,12 @@ const valueChangeTimeout = 3000;
 const emitterChangeTimeout = 6000;
 const measureSilderValues = [5,10,20,35,50,65,85,100];
 
+var selectedFixtures = [];
+var fixtureSelectionHasIntentsity = false;
+
 var currentFixture = patch[0].fixtureType;
-var patchOffset = 0;
-var currentFixtureHasIntensity = true;
-currentFixtureHasIntensity = false;
+var patchOffset = patch[0].address-1;
+var currentFixtureHasIntensity = fixtureTypeLibrary[currentFixture].intensity == true;
 
 //CIE 1931 tristimulus values from:
 //https://wisotop.de/Anhang-Tristimulus-Werte.php
@@ -271,7 +291,12 @@ function createSurface()
         newLabel.innerHTML = activeSettings.channelNames[i];
         namesContainer.appendChild(newLabel);
     }
+    createFixtureSheet();
 }
+
+////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// Color conversions //////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
 
 function convertSpectrumToXYZ(spectralData,max,noDisp)
 {
@@ -374,7 +399,8 @@ function round(number,digits)
     return number;
 }
 
-function normalize (n) {
+function normalize(n)
+{
     return Math.max(0,Math.min(n,1));
 }
 
@@ -434,6 +460,10 @@ function updateSerialPorts(getPorts)
         }
     }
 }
+
+////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// Im / Export ////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
 
 function save()
 {
@@ -1116,5 +1146,24 @@ function drawColorSpace()
         }
         newPath += "L "+ parseInt(coordiantes[0][0]*sizeX) + "," + parseInt((coordiantes[0][1])*sizeY);
         pathDOM.setAttribute("d",newPath);
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// Fixture Selection //////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+
+function updateSelection(row)
+{
+    var fixtureID = row.id.split("_")[1];
+    if(!selectedFixtures[fixtureID])
+    {
+        row.classList.add("selected");
+        selectedFixtures[fixtureID] = true;
+    }
+    else
+    {
+        row.classList.remove("selected");
+        selectedFixtures[fixtureID] = false;
     }
 }

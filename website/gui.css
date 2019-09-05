@@ -1,3 +1,40 @@
+#fixtureSheet {
+    color: white;
+    border-left: 2px solid white;
+}
+
+#fixtureSheet * {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#fixtureSheet table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#fixtureSheet td {
+    padding: 2px;
+    padding-left: 5px;
+    border: 2px solid black;
+}
+
+#fixtureSheet tr {
+    background-color: #3a3a3f;
+}
+
+#fixtureSheet tr.selected {
+    color: yellow;
+}
+
+#fixtureSheet tr.titleLine {
+    cursor: default;
+}
+
+#fixtureSheet tr:not(.titleLine) {
+    cursor: pointer;
+}
+
 #popupDiv {
     display: none;
     position: fixed;

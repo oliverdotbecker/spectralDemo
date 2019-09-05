@@ -155,7 +155,9 @@ function openPatch()
                     var currRow = patchTable.childNodes[tI];
                     patch.push({
                         fixtureType:currRow.childNodes[0].childNodes[0].value,
-                        address:currRow.childNodes[1].childNodes[0].value
+                        address:currRow.childNodes[1].childNodes[0].value,
+                        channels:{},
+                        emitterData:null
                     });
                 }
                 localStorage.setItem("spectral.patch",JSON.stringify(patch));
@@ -163,6 +165,7 @@ function openPatch()
                 currentFixtureHasIntensity = fixtureTypeLibrary[currentFixture].intensity == true;
                 patchOffset = patch[0].address-1;
                 doImport("emitters",true);
+                createFixtureSheet();
             }
             closePopup();
         }]
@@ -207,6 +210,147 @@ function addPatchLine(patchData)
     newTr.appendChild(newTd);
     return newTr;
 }
+
+////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// Fixture Sheet //////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+
+function createFixtureSheet()
+{
+    var fixtureSheet = document.getElementById("fixtureSheet");
+    if(fixtureSheet)
+    {
+        fixtureSheet.innerHTML = "";
+        var table = document.createElement('table');
+
+        var usedChannels = {
+            intensity:false,
+            Rot:false,
+            Grün:false,
+            Blau:false,
+            Amber:false,
+            Weiss:false
+        };
+
+        for(var pI = 0; pI < patch.length; pI++)
+        {
+            var fTLibEntry = fixtureTypeLibrary[patch[pI].fixtureType];
+            if(fTLibEntry.intensity)
+            {
+                usedChannels.intensity = true;
+            }
+            for(var eIdx in fTLibEntry.emitters)
+            {
+                usedChannels[eIdx] = true;
+            }
+        }
+
+        //Title line
+        var tr = document.createElement('tr');
+        tr.className = "titleLine";
+        var td = document.createElement('td');
+        td.innerHTML = "No";
+        tr.appendChild(td);
+        td = document.createElement('td');
+        td.innerHTML = "Type";
+        tr.appendChild(td);
+        for(var uCIdx in usedChannels)
+        {
+            if(usedChannels[uCIdx])
+            {
+                td = document.createElement('td');
+                switch(uCIdx)
+                {
+                    case "intensity":
+                        td.innerHTML = "Dim";
+                        break;
+                    case "Rot":
+                        td.innerHTML = "Red";
+                        break;
+                    case "Grün":
+                        td.innerHTML = "Green";
+                        break;
+                    case "Blau":
+                        td.innerHTML = "Blue";
+                        break;
+                    case "Weiss":
+                        td.innerHTML = "White";
+                        break;
+                    default:
+                        td.innerHTML = uCIdx;
+                        break;
+                }
+                tr.appendChild(td);
+            }
+        }
+        td = document.createElement('td');
+        td.innerHTML = "M"; //Measure
+        td.title = "Measure";
+        tr.appendChild(td);
+        td = document.createElement('td');
+        td.innerHTML = "S"; //Settings
+        td.title = "Settings";
+        tr.appendChild(td);
+        table.appendChild(tr);
+
+        //Data
+        for(var pI = 0; pI < patch.length; pI++)
+        {
+            tr = document.createElement('tr');
+            tr.id = "fixtureRow_"+pI;
+            tr.onclick = function(event)
+            {
+                updateSelection(event.currentTarget);
+            }
+            td = document.createElement('td');
+            td.innerHTML = pI+1;
+            tr.appendChild(td);
+            td = document.createElement('td');
+            td.innerHTML = patch[pI].fixtureType;
+            tr.appendChild(td);
+            //Channels
+            var fTLibEntry = fixtureTypeLibrary[patch[pI].fixtureType];
+            for(var uCIdx in usedChannels)
+            {
+                if(usedChannels[uCIdx])
+                {
+                    td = document.createElement('td');
+                    if(uCIdx == "intensity")
+                    {
+                        if(fTLibEntry.intensity)
+                        {
+                            td.id = pI+"_intensity";
+                            td.innerText = 0;
+                        }
+                    }
+                    else
+                    {
+                        for(var eIdx in fTLibEntry.emitters)
+                        {
+                            if(eIdx == uCIdx)
+                            {
+                                td.id = pI+"_"+eIdx;
+                                td.innerText = 0;
+                                continue;
+                            }
+                        }
+                    }
+                    tr.appendChild(td);
+                }
+            }
+
+            //Measure Button
+
+            //Emitter Data view
+            table.appendChild(tr);
+        }
+        fixtureSheet.appendChild(table);
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// Popup //////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
 
 /*
 buttons: [
