@@ -697,48 +697,6 @@ var emitterEdit = null;
 
 var sliderContainer = null;
 
-function addEmitter()
-{
-    var newEmitter = document.createElement('div');
-    newEmitter.className = "emitterEntry";
-    newEmitter.id = "emitter"+emitters.length;
-    newEmitter.name = emitters.length;
-    var emitterLabel = document.createElement('label');
-    emitterLabel.innerHTML = "Emitter "+(emitters.length+1);
-    newEmitter.appendChild(emitterLabel);
-    emitterList.appendChild(newEmitter);
-    newEmitter.onclick = editEmitter;
-
-    emitters.push({
-        name:"Emitter "+(emitters.length+1),
-        color:"#FFFFFF",
-        measures: {}
-    });
-
-    var newSliderContainer = document.createElement('div');
-    newSliderContainer.className = "sliderContainer";
-    var newSpaceLabel = document.createElement('div');
-    newSpaceLabel.innerHTML = "Emitter "+(emitters.length+1);
-    newSpaceLabel.className = "spaceLabel";
-    newSliderContainer.appendChild(newSpaceLabel);
-    var newSlider = document.createElement('input');
-    newSlider.className = "vertical";
-    newSlider.id = "slider"+(emitters.length-1);
-    newSlider.type = "range";
-    newSlider.min = 0;
-    newSlider.max = 100;
-    newSlider.step = 5;
-    newSlider.value = 0;
-    newSlider.oninput = calcColorMix;
-    newSliderContainer.appendChild(newSlider);
-    var newSliderDisp = document.createElement('output');
-    newSliderDisp.id = "sliderDisp"+(emitters.length-1);
-    newSliderDisp.for = "slider"+(emitters.length-1);
-    newSliderDisp.value = "0";
-    newSliderContainer.appendChild(newSliderDisp);
-    sliderContainer.appendChild(newSliderContainer);
-}
-
 function editEmitter(event)
 {
     var elem = event.currentTarget;
@@ -831,6 +789,20 @@ function updateSliderDisp(event)
     var currSlider = event.currentTarget;
     var slidersOut = currSlider.nextElementSibling;
     slidersOut.value = currSlider.value;
+
+    for(var sFI in selectedFixtures)
+    {
+        if(selectedFixtures[sFI])
+        {
+            var emitter = currSlider.previousElementSibling.textContent;
+            patch[sFI].channels.emitter = currSlider.value;
+            var sheetCell = document.getElementById(sFI+"_"+emitter);
+            if(sheetCell)
+            {
+                sheetCell.innerHTML = currSlider.value;
+            }
+        }
+    }
 }
 
 function getMeasurement(event,level,emitterIdx)

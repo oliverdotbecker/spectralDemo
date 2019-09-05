@@ -153,10 +153,20 @@ function openPatch()
                 for(var tI = 0; tI < patchTable.childElementCount-1; tI++)
                 {
                     var currRow = patchTable.childNodes[tI];
+                    var fixtureChannels = {};
+                    var fTLibEntry = fixtureTypeLibrary[currRow.childNodes[0].childNodes[0].value];
+                    if(fTLibEntry.intensity)
+                    {
+                        fixtureChannels.intensity = 0;
+                    }
+                    for(var eIdx in fTLibEntry.emitters)
+                    {
+                        fixtureChannels[eIdx] = 0;
+                    }
                     patch.push({
                         fixtureType:currRow.childNodes[0].childNodes[0].value,
                         address:currRow.childNodes[1].childNodes[0].value,
-                        channels:{},
+                        channels:fixtureChannels,
                         emitterData:null
                     });
                 }

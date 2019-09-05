@@ -252,37 +252,6 @@ svg {
     cursor: pointer;
 }
 
-#addEmitter {
-    border: 2px solid blue;
-}
-
-#addEmitter:hover {
-    background-color: rgba(0,0,255,0.3);
-}
-
-#addEmitter>.plus {
-    width: 1.5em;
-    height: 1.5em;
-    position: relative;
-}
-
-.plus:before, .plus:after {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    content: ' ';
-    height: 1.5em;
-    width: .5em;
-    background-color: #0400ff;
-    border-radius: 2px;
-}
-.plus:before {
-    transform: rotate(0deg);
-}
-.plus:after {
-    transform: rotate(-90deg);
-}
-
 #emitterEdit {
     justify-content: space-around;
     align-items: center;
