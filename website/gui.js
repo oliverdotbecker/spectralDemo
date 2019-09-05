@@ -91,6 +91,8 @@ function openSensorSettings()
     newTr.appendChild(newTd);
     newTable.appendChild(newTr);
 
+    updateSerialPorts(true);
+
     throwPopup("Sensor Settings",newTable,true,[
         ["Close",closePopup],
         ["Apply",(event) => {

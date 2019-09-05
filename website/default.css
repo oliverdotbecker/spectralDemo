@@ -115,6 +115,8 @@ datalist {
 #graphics {
     display: flex;
     flex: 10;
+    margin-bottom: 8px;
+    border-bottom: 2px solid white;
 }
 
 #spectrum {
@@ -202,6 +204,13 @@ svg {
     justify-content: space-around;
 }
 
+#values>label,
+#names>label,
+#wavelenghts>label {
+    flex: 1;
+    text-align: center;
+}
+
 #emitters {
     flex: 2;
     color: white;
@@ -216,7 +225,7 @@ svg {
 .emitterEntry {
     display: flex;
     padding: 1em;
-    margin: 2em 1em;
+    margin: 1em 1em;
     justify-content: center;
     align-items: center;
     border-radius: .5em;

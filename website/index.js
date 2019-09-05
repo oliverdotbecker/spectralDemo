@@ -263,7 +263,7 @@ function createSurface()
     {
         var newBar = document.createElement('div');
         newBar.className = "bar"
-        newBar.title = activeSettings.channelNames[i];
+        newBar.title = activeSettings.channelNames[i].replace(/&uuml;/g,"ü");
         newBar.style.backgroundColor = activeSettings.channelColors[i];
         barsContainer.appendChild(newBar);
 
@@ -502,7 +502,7 @@ function doImport(arg,force)
                     var emitterLabel = document.createElement('label');
                     emitterLabel.innerHTML = "Intensity";
                     newEmitter.appendChild(emitterLabel);
-                    emitterList.insertBefore(newEmitter,emitterList.lastElementChild);
+                    emitterList.appendChild(newEmitter);
 
                     var newSliderContainer = document.createElement('div');
                     newSliderContainer.className = "sliderContainer";
@@ -537,7 +537,7 @@ function doImport(arg,force)
                     var emitterLabel = document.createElement('label');
                     emitterLabel.innerHTML = emitters[eI].name;
                     newEmitter.appendChild(emitterLabel);
-                    emitterList.insertBefore(newEmitter,emitterList.lastElementChild);
+                    emitterList.appendChild(newEmitter);
                     newEmitter.onclick = editEmitter;
 
                     var newSliderContainer = document.createElement('div');
@@ -676,7 +676,7 @@ function addEmitter()
     var emitterLabel = document.createElement('label');
     emitterLabel.innerHTML = "Emitter "+(emitters.length+1);
     newEmitter.appendChild(emitterLabel);
-    emitterList.insertBefore(newEmitter,emitterList.lastElementChild);
+    emitterList.appendChild(newEmitter);
     newEmitter.onclick = editEmitter;
 
     emitters.push({
