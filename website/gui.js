@@ -5,6 +5,140 @@ patch = JSON.parse(patch);
 
 activeSensor = settings.sensor;
 
+function createSurface()
+{
+    barsContainer.innerHTML = "";
+    namesContainer.innerHTML = "";
+    for(var i = 0; i < activeSettings.channelCount; i++)
+    {
+        var newBar = document.createElement('div');
+        newBar.className = "bar"
+        newBar.title = activeSettings.channelNames[i].replace(/&uuml;/g,"ü");
+        newBar.style.backgroundColor = activeSettings.channelColors[i];
+        barsContainer.appendChild(newBar);
+
+        var newLabel = document.createElement('label');
+        newLabel.innerHTML = activeSettings.channelNames[i];
+        namesContainer.appendChild(newLabel);
+    }
+    createFixtureSheet();
+    createSliders();
+}
+
+function createSliders()
+{
+    emitterList.innerHTML = "";
+
+    var usedChannels = {
+        intensity:false,
+        Rot:false,
+        Grün:false,
+        Blau:false,
+        Amber:false,
+        Weiss:false
+    };
+
+    for(var pI = 0; pI < patch.length; pI++)
+    {
+        var fTLibEntry = fixtureTypeLibrary[patch[pI].fixtureType];
+        if(fTLibEntry.intensity)
+        {
+            usedChannels.intensity = true;
+        }
+        for(var eIdx in fTLibEntry.emitters)
+        {
+            usedChannels[eIdx] = true;
+        }
+    }
+
+    if(usedChannels.intensity)
+    {
+        var newEmitter = document.createElement('div');
+        newEmitter.className = "emitterEntry";
+        newEmitter.id = "intensity";
+        newEmitter.name = "intensity";
+        newEmitter.style.borderColor = "none";
+        var emitterLabel = document.createElement('label');
+        emitterLabel.innerHTML = "Intensity";
+        newEmitter.appendChild(emitterLabel);
+        emitterList.insertBefore(newEmitter,emitterList.lastElementChild);
+
+        var newSliderContainer = document.createElement('div');
+        newSliderContainer.className = "sliderContainer";
+        var newSpaceLabel = document.createElement('div');
+        newSpaceLabel.innerHTML = "Intensity";
+        newSpaceLabel.className = "spaceLabel";
+        newSliderContainer.appendChild(newSpaceLabel);
+        var newSlider = document.createElement('input');
+        newSlider.className = "vertical";
+        newSlider.id = "sliderIntensity";
+        newSlider.type = "range";
+        newSlider.min = 0;
+        newSlider.max = 100;
+        newSlider.value = 100;
+        newSlider.oninput = sendDMX;
+        newSliderContainer.appendChild(newSlider);
+        var newSliderDisp = document.createElement('output');
+        newSliderDisp.id = "sliderIntensityDisp";
+        newSliderDisp.for = "sliderIntensity";
+        newSliderDisp.value = "100";
+        newSliderContainer.appendChild(newSliderDisp);
+        sliderContainer.appendChild(newSliderContainer);
+    }
+
+    var eI = 0;
+    for(var fTE in usedChannels)
+    {
+        if(fTE == "intensity")
+        {
+            continue;
+        }
+        if(usedChannels[fTE])
+        {
+            var defaultColor = emitterDafaultColors[fTE] || "#ffffff";
+            emitters.push({
+                name:fTE,
+                color:defaultColor,
+                measures: {}
+            });
+    
+            var newEmitter = document.createElement('div');
+            newEmitter.className = "emitterEntry";
+            newEmitter.id = "emitter"+eI;
+            newEmitter.name = eI;
+            newEmitter.style.borderColor = defaultColor;
+            var emitterLabel = document.createElement('label');
+            emitterLabel.innerHTML = fTE;
+            newEmitter.appendChild(emitterLabel);
+            emitterList.appendChild(newEmitter);
+    
+            var newSliderContainer = document.createElement('div');
+            newSliderContainer.className = "sliderContainer";
+            var newSpaceLabel = document.createElement('div');
+            newSpaceLabel.innerHTML = fTE;
+            newSpaceLabel.className = "spaceLabel";
+            newSliderContainer.appendChild(newSpaceLabel);
+            var newSlider = document.createElement('input');
+            newSlider.className = "vertical";
+            newSlider.id = "slider"+eI;
+            newSlider.type = "range";
+            newSlider.min = 0;
+            newSlider.max = 100;
+            newSlider.step = 5;
+            newSlider.value = 0;
+            newSlider.oninput = calcColorMix;
+            newSliderContainer.appendChild(newSlider);
+            var newSliderDisp = document.createElement('output');
+            newSliderDisp.id = "sliderDisp"+eI;
+            newSliderDisp.for = "slider"+eI;
+            newSliderDisp.value = "0";
+            newSliderContainer.appendChild(newSliderDisp);
+            sliderContainer.appendChild(newSliderContainer);
+            eI++;
+        }
+    }
+}
+
 function openSensorSettings()
 {
     var newTable = document.createElement('table');
@@ -172,12 +306,13 @@ function openPatch()
                 }
                 localStorage.setItem("spectral.patch",JSON.stringify(patch));
                 selectedFixtures = [];
-                
+
                 currentFixture = patch[0].fixtureType;
                 currentFixtureHasIntensity = fixtureTypeLibrary[currentFixture].intensity == true;
                 patchOffset = patch[0].address-1;
                 doImport("emitters",true);
                 createFixtureSheet();
+                createSliders();
             }
             closePopup();
         }]

@@ -272,26 +272,8 @@ function init()
     updateSerialPorts(true);
 
     createSurface();
-    doImport("emitters",true);
-}
-
-function createSurface()
-{
-    barsContainer.innerHTML = "";
-    namesContainer.innerHTML = "";
-    for(var i = 0; i < activeSettings.channelCount; i++)
-    {
-        var newBar = document.createElement('div');
-        newBar.className = "bar"
-        newBar.title = activeSettings.channelNames[i].replace(/&uuml;/g,"ü");
-        newBar.style.backgroundColor = activeSettings.channelColors[i];
-        barsContainer.appendChild(newBar);
-
-        var newLabel = document.createElement('label');
-        newLabel.innerHTML = activeSettings.channelNames[i];
-        namesContainer.appendChild(newLabel);
-    }
-    createFixtureSheet();
+    sendDMX();
+    //doImport("emitters",true);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -521,166 +503,10 @@ function doImport(arg,force)
             if(emitterData)
             {
                 emitters = JSON.parse(emitterData);
-
-                if(currentFixtureHasIntensity)
-                {
-                    var newEmitter = document.createElement('div');
-                    newEmitter.className = "emitterEntry";
-                    newEmitter.id = "intensity";
-                    newEmitter.name = "intensity";
-                    newEmitter.style.borderColor = "none";
-                    var emitterLabel = document.createElement('label');
-                    emitterLabel.innerHTML = "Intensity";
-                    newEmitter.appendChild(emitterLabel);
-                    emitterList.appendChild(newEmitter);
-
-                    var newSliderContainer = document.createElement('div');
-                    newSliderContainer.className = "sliderContainer";
-                    var newSpaceLabel = document.createElement('div');
-                    newSpaceLabel.innerHTML = "Intensity";
-                    newSpaceLabel.className = "spaceLabel";
-                    newSliderContainer.appendChild(newSpaceLabel);
-                    var newSlider = document.createElement('input');
-                    newSlider.className = "vertical";
-                    newSlider.id = "sliderIntensity";
-                    newSlider.type = "range";
-                    newSlider.min = 0;
-                    newSlider.max = 100;
-                    newSlider.value = 100;
-                    newSlider.oninput = sendDMX;
-                    newSliderContainer.appendChild(newSlider);
-                    var newSliderDisp = document.createElement('output');
-                    newSliderDisp.id = "sliderIntensityDisp";
-                    newSliderDisp.for = "sliderIntensity";
-                    newSliderDisp.value = "100";
-                    newSliderContainer.appendChild(newSliderDisp);
-                    sliderContainer.appendChild(newSliderContainer);
-                }
-
-                for(var eI = 0; eI < emitters.length; eI++)
-                {
-                    var newEmitter = document.createElement('div');
-                    newEmitter.className = "emitterEntry";
-                    newEmitter.id = "emitter"+eI;
-                    newEmitter.name = eI;
-                    newEmitter.style.borderColor = emitters[eI].color;
-                    var emitterLabel = document.createElement('label');
-                    emitterLabel.innerHTML = emitters[eI].name;
-                    newEmitter.appendChild(emitterLabel);
-                    emitterList.appendChild(newEmitter);
-                    newEmitter.onclick = editEmitter;
-
-                    var newSliderContainer = document.createElement('div');
-                    newSliderContainer.className = "sliderContainer";
-                    var newSpaceLabel = document.createElement('div');
-                    newSpaceLabel.innerHTML = emitters[eI].name;
-                    newSpaceLabel.className = "spaceLabel";
-                    newSliderContainer.appendChild(newSpaceLabel);
-                    var newSlider = document.createElement('input');
-                    newSlider.className = "vertical";
-                    newSlider.id = "slider"+eI;
-                    newSlider.type = "range";
-                    newSlider.min = 0;
-                    newSlider.max = 100;
-                    newSlider.step = 5;
-                    newSlider.value = 0;
-                    newSlider.oninput = calcColorMix;
-                    newSliderContainer.appendChild(newSlider);
-                    var newSliderDisp = document.createElement('output');
-                    newSliderDisp.id = "sliderDisp"+eI;
-                    newSliderDisp.for = "slider"+eI;
-                    newSliderDisp.value = "0";
-                    newSliderContainer.appendChild(newSliderDisp);
-                    sliderContainer.appendChild(newSliderContainer);
-                }
             }
             else
             {
                 console.error("Failed to import emitter data");
-
-                if(currentFixtureHasIntensity)
-                {
-                    var newEmitter = document.createElement('div');
-                    newEmitter.className = "emitterEntry";
-                    newEmitter.id = "intensity";
-                    newEmitter.name = "intensity";
-                    newEmitter.style.borderColor = "none";
-                    var emitterLabel = document.createElement('label');
-                    emitterLabel.innerHTML = "Intensity";
-                    newEmitter.appendChild(emitterLabel);
-                    emitterList.insertBefore(newEmitter,emitterList.lastElementChild);
-
-                    var newSliderContainer = document.createElement('div');
-                    newSliderContainer.className = "sliderContainer";
-                    var newSpaceLabel = document.createElement('div');
-                    newSpaceLabel.innerHTML = "Intensity";
-                    newSpaceLabel.className = "spaceLabel";
-                    newSliderContainer.appendChild(newSpaceLabel);
-                    var newSlider = document.createElement('input');
-                    newSlider.className = "vertical";
-                    newSlider.id = "sliderIntensity";
-                    newSlider.type = "range";
-                    newSlider.min = 0;
-                    newSlider.max = 100;
-                    newSlider.value = 100;
-                    newSlider.oninput = sendDMX;
-                    newSliderContainer.appendChild(newSlider);
-                    var newSliderDisp = document.createElement('output');
-                    newSliderDisp.id = "sliderIntensityDisp";
-                    newSliderDisp.for = "sliderIntensity";
-                    newSliderDisp.value = "100";
-                    newSliderContainer.appendChild(newSliderDisp);
-                    sliderContainer.appendChild(newSliderContainer);
-                }
-
-                //auto create emitters from fixturetype
-                var fTEmitters = fixtureTypeLibrary[currentFixture].emitters;
-                var eI = 0;
-                for(var fTE in fTEmitters)
-                {
-                    var defaultColor = emitterDafaultColors[fTE] || "#ffffff";
-                    emitters.push({
-                        name:fTE,
-                        color:defaultColor,
-                        measures: {}
-                    });
-
-
-                    var newEmitter = document.createElement('div');
-                    newEmitter.className = "emitterEntry";
-                    newEmitter.id = "emitter"+eI;
-                    newEmitter.name = eI;
-                    newEmitter.style.borderColor = defaultColor;
-                    var emitterLabel = document.createElement('label');
-                    emitterLabel.innerHTML = fTE;
-                    newEmitter.appendChild(emitterLabel);
-                    emitterList.insertBefore(newEmitter,emitterList.lastElementChild);
-                    newEmitter.onclick = editEmitter;
-
-                    var newSliderContainer = document.createElement('div');
-                    newSliderContainer.className = "sliderContainer";
-                    var newSpaceLabel = document.createElement('div');
-                    newSpaceLabel.innerHTML = fTE;
-                    newSpaceLabel.className = "spaceLabel";
-                    newSliderContainer.appendChild(newSpaceLabel);
-                    var newSlider = document.createElement('input');
-                    newSlider.className = "vertical";
-                    newSlider.id = "slider"+eI;
-                    newSlider.type = "range";
-                    newSlider.min = 0;
-                    newSlider.max = 100;
-                    newSlider.step = 5;
-                    newSlider.value = 0;
-                    newSlider.oninput = calcColorMix;
-                    newSliderContainer.appendChild(newSlider);
-                    var newSliderDisp = document.createElement('output');
-                    newSliderDisp.id = "sliderDisp"+eI;
-                    newSliderDisp.for = "slider"+eI;
-                    newSliderDisp.value = "0";
-                    newSliderContainer.appendChild(newSliderDisp);
-                    sliderContainer.appendChild(newSliderContainer);
-                    eI++;
-                }
             }
             drawColorSpace();
         }
@@ -697,7 +523,7 @@ var emitterEdit = null;
 
 var sliderContainer = null;
 
-function editEmitter(event)
+/*function editEmitter(event)
 {
     var elem = event.currentTarget;
     var idx = elem.name;
@@ -782,7 +608,7 @@ function deleteEmitter()
         }
         toggleEmitterEdit();
     }
-}
+}*/
 
 function updateSliderDisp(event)
 {
@@ -940,7 +766,10 @@ function measureNextValue()
 
 function sendDMX(event)
 {
-    updateSliderDisp(event);
+    if(event)
+    {
+        updateSliderDisp(event);
+    }
     var dmxValues = new Array(512);
     dmxValues.fill(0);
     for(var pI = 0; pI < patch.length; pI++)
