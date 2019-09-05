@@ -265,7 +265,7 @@ function openPatch()
 
     var newTr = document.createElement('tr');
     var newTd = document.createElement('td');
-    newTd.colSpan = 2;
+    newTd.colSpan = 3;
     var newLabel = document.createElement('label');
     newLabel.innerText = "Add a fixture";
     newTd.appendChild(newLabel);
@@ -354,6 +354,16 @@ function addPatchLine(patchData)
         numberInput.value = 1;
     }
     newTd.appendChild(numberInput);
+    newTr.appendChild(newTd);
+    newTd = document.createElement('td');
+    var deleteFixture = document.createElement('div');
+    deleteFixture.className = "deleteFixture";
+    deleteFixture.onclick = function(event)
+    {
+        var elem = event.currentTarget;
+        elem.parentElement.parentElement.remove();
+    }
+    newTd.appendChild(deleteFixture);
     newTr.appendChild(newTd);
     return newTr;
 }

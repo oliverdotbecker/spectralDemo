@@ -1,3 +1,41 @@
+#patchTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#patchTable tr {
+    background-color: #3a3a3f
+}
+
+#patchTable tr:hover {
+    background-color: #4e4d5d
+}
+
+#patchTable td {
+    text-align: center;
+    padding: 3px 0px;
+}
+
+#patchTable select {
+    width: initial;
+}
+
+#patchTable label {
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.deleteFixture {
+    width: 20px;
+    height: 20px;
+    background-image: url(images/close.png);
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    cursor: pointer;
+}
+
 #fixtureSheet {
     color: white;
     border-left: 2px solid white;
