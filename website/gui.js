@@ -309,6 +309,15 @@ function openPatch()
                     else
                     {
                         console.error("Failed to import emitter data");
+                        emitterData = [];
+                        for(var eI in fTLibEntry.emitters)
+                        {
+                            emitterData.push({
+                                name:eI,
+                                color:emitterDafaultColors[eI],
+                                measures:{}
+                            })
+                        }
                     }
                     patch.push({
                         fixtureType:currRow.childNodes[0].childNodes[0].value,
@@ -507,12 +516,16 @@ function createFixtureSheet()
 
             //Measure Button
             td = document.createElement('td');
-            td.className = "measureFixture"
+            td.className = "measureFixture";
+            td.onclick = function(event)
+            {
+                measureAllEmitters(event.currentTarget.parentElement);
+            }
             tr.appendChild(td);
 
             //Emitter Data view
             td = document.createElement('td');
-            td.className = "fixtureData"
+            td.className = "fixtureData";
             tr.appendChild(td);
             table.appendChild(tr);
         }
@@ -545,7 +558,7 @@ function throwPopup(title,content,modal,buttons,autoClose)
     if(popupDiv)
     {
         popupDiv.innerHTML = "";
-        popupDiv.isReminder = false;
+        popupDiv.className = "";
         popupDiv.style.display = "flex";
         popupDiv.style.flexDirection = "column";
         popupDiv.style.left = "";
@@ -627,6 +640,33 @@ function throwPopup(title,content,modal,buttons,autoClose)
             };
             buttonsDiv.appendChild(newBtn);
             popupDiv.appendChild(buttonsDiv);
+        }
+    }
+}
+
+function throwWaitPopup()
+{
+    var modalOverlay = document.getElementById("modalOverlay");
+    if(modalOverlay)
+    {
+        modalOverlay.style.display = "block";
+    }
+
+    var popupDiv = document.getElementById("popupDiv");
+    if(popupDiv)
+    {
+        popupDiv.innerHTML = "";
+        popupDiv.style.display = "flex";
+        popupDiv.className = "circle";
+
+        var colors = ["blue","green","#c0ff00","yellow","orange","red"];
+        for(var cLI = 0; cLI < 6; cLI++)
+        {
+            var colorLine = document.createElement('div');
+            colorLine.className = "colorLine";
+            colorLine.style.backgroundColor = colors[cLI];
+            colorLine.style.animationDelay = (2/6*cLI)+"s";
+            popupDiv.appendChild(colorLine);
         }
     }
 }

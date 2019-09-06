@@ -74,6 +74,7 @@ const emitterChangeTimeout = 6000;
 const measureSilderValues = [5,10,20,35,50,65,85,100];
 
 var selectedFixtures = [];
+var currMeasuredFixtureId = null;
 
 //CIE 1931 tristimulus values from:
 //https://wisotop.de/Anhang-Tristimulus-Werte.php
@@ -466,8 +467,15 @@ function doExport(arg)
     }
     else if(arg == "emitters")
     {
-        /*var filePath = electronDaemon.exportEmitters(JSON.stringify(emitters),"emitters_"+currentFixture+".json");
-        console.log("Emitters saved to: "+filePath);*/
+        for(var sI in selectedFixtures)
+        {
+            if(selectedFixtures[sI])
+            {
+                var emitterData = patch[sI].emitterData;
+                var filePath = electronDaemon.exportEmitters(JSON.stringify(emitterData),"emitters_"+patch[sI].fixtureType+".json");
+                console.log("Emitters saved to: "+filePath);
+            }
+        }
     }
 }
 
@@ -499,10 +507,10 @@ var sliderContainer = null;
     for(var mI = 0; mI < measurementBtns.length; mI++)
     {
         var currMeasurementBtn = measurementBtns[mI];
-        if(emitters[idx].measures && emitters[idx].measures[currMeasurementBtn.innerText])
+        if(patch[currMeasuredFixtureId].emitterData && patch[currMeasuredFixtureId].emitterData[idx].measures[currMeasurementBtn.innerText])
         {
-            currMeasurementBtn.style.color = emitters[idx].measures[currMeasurementBtn.innerText].color;
-            currMeasurementBtn.style.borderColor = emitters[idx].measures[currMeasurementBtn.innerText].color;
+            currMeasurementBtn.style.color = patch[currMeasuredFixtureId].emitterData[idx].measures[currMeasurementBtn.innerText].color;
+            currMeasurementBtn.style.borderColor = patch[currMeasuredFixtureId].emitterData[idx].measures[currMeasurementBtn.innerText].color;
         }
         else
         {
@@ -602,7 +610,8 @@ function getMeasurement(event,level,emitterIdx)
     {
         idx = emitterEdit.idx;
     }
-    var measurement = emitters[idx].measures[level];
+    ;
+    var measurement = patch[currMeasuredFixtureId].emitterData[idx].measures[level];
     if(!measurement)
     {
         measurement = {};
@@ -624,7 +633,7 @@ function getMeasurement(event,level,emitterIdx)
     measurement.XYZ = currXYZDisplay.innerText.split(" ");
     measurement.RGB = currRGBDisplay.innerText.split(" ");
     measurement.color = currRGBDisplay.style.backgroundColor;
-    emitters[idx].measures[level] = measurement;
+    patch[currMeasuredFixtureId].emitterData[idx].measures[level] = measurement;
     if(elem)
     {
         elem.style.color = measurement.color;
@@ -635,8 +644,9 @@ function getMeasurement(event,level,emitterIdx)
 var currEmitter = 0;
 var currSliderValueIndex = 0;
 var currEmitterCount = -1;
-function measureAllEmitters()
+function measureAllEmitters(row)
 {
+    currMeasuredFixtureId = row.id.split("_")[1];
     if(confirm("Are you sure? All past data will be lost."))
     {
         var sliders = document.getElementsByClassName("vertical");
@@ -654,6 +664,27 @@ function measureAllEmitters()
 
         currEmitter = -1;
         currSliderValueIndex = -1;
+        currEmitterCount = Object.keys(fixtureTypeLibrary[patch[currMeasuredFixtureId].fixtureType].emitters).length;
+
+        for(var sI in selectedFixtures)
+        {
+            selectedFixtures[sI] = false;
+            var row = document.getElementById("fixtureRow_"+sI);
+            if(row)
+            {
+                row.classList.remove("selected");
+            }
+        }
+
+        selectedFixtures[currMeasuredFixtureId] = false;
+        var row = document.getElementById("fixtureRow_"+currMeasuredFixtureId);
+        if(row)
+        {
+            row.classList.remove("selected");
+        }
+
+        throwWaitPopup();
+
         measureNextValue();
     }
 }
@@ -693,6 +724,8 @@ function measureNextValue()
                     currentSlider.value = 0;
                 }
                 calcColorMix({currentTarget:currentSlider});
+                localStorage.setItem("spectral.patch",JSON.stringify(patch));
+                closePopup();
                 console.info("Finished automatic measurement");
                 return;
             }
@@ -856,7 +889,7 @@ function drawColorSpace()
     if(pathDOM)
     {
         pathDOM.setAttribute("d","");
-
+        emitters = null;
         for(var sFI in selectedFixtures)
         {
             if(selectedFixtures[sFI])
@@ -874,7 +907,7 @@ function drawColorSpace()
             {
                 var currEmitter = emitters[eIdx];
                 var currMeasures = currEmitter.measures;
-                if(JSON.stringify(currMeasures) != JSON.stringify({}) && currMeasures["100%"])
+                if(currMeasures && JSON.stringify(currMeasures) != JSON.stringify({}) && currMeasures["100%"])
                 {
                     var xy = currMeasures["100%"].xyY;
                     coordiantes.push(xy);
@@ -891,7 +924,7 @@ function drawColorSpace()
             pathDOM.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
     
             var newPath = "";
-            for(var i = 0; i < 3; i++)
+            for(var i = 0; i < Math.min(coordiantes.length,3); i++)
             {
                 if(i == 0)
                 {
@@ -907,7 +940,10 @@ function drawColorSpace()
                 newPath += parseInt((coordiantes[i][1])*sizeY);
                 newPath += " ";
             }
-            newPath += "L "+ parseInt(coordiantes[0][0]*sizeX) + "," + parseInt((coordiantes[0][1])*sizeY);
+            if(coordiantes[0])
+            {
+                newPath += "L "+ parseInt(coordiantes[0][0]*sizeX) + "," + parseInt((coordiantes[0][1])*sizeY);
+            }
             pathDOM.setAttribute("d",newPath);
         }
     }

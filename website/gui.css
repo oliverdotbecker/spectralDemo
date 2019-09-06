@@ -98,6 +98,35 @@
     background-color: #4e4d5d;
 }
 
+.circle {
+    width: 10em !important;
+    height: 10em !important;
+    border-radius: 5em !important;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.colorLine {
+    width: 5px;
+    height: 10px;
+    border-radius: 2.5px;
+    animation: height 2s infinite;
+}
+
+@keyframes height {
+    0% {
+        height: 10px;
+    }
+    50% {
+        height: 30px;
+    }
+    100% {
+        height: 10px;
+    }
+}
+
 #popupDiv {
     display: none;
     position: fixed;
