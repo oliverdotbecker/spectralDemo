@@ -726,6 +726,7 @@ function measureNextValue()
                 calcColorMix({currentTarget:currentSlider});
                 localStorage.setItem("spectral.patch",JSON.stringify(patch));
                 closePopup();
+                drawColorSpace();
                 console.info("Finished automatic measurement");
                 return;
             }

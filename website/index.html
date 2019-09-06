@@ -17,6 +17,9 @@
             <div>
                 <input type="button" id="settingsBtn" value="Sensor Settings" onclick="openSensorSettings();"/>
             </div>
+            <div>
+                <input type="button" id="patchBtn" value="Patch" onclick="openPatch();"/>
+            </div>
             <!--div>
                 <label>Command: </label>
                 <input type="text" id="commandInput" placeholder="Command"/>
@@ -29,12 +32,6 @@
                 <label>Grid: </label>
                 <input type="checkbox" id="ckGrid" checked/>
             </div-->
-            <div>
-                <input type="button" id="patchBtn" value="Patch" onclick="openPatch();"/>
-            </div>
-            <div>
-                <input type="button" id="saveBtn" value="Measure all" onclick="measureAllEmitters();"/>
-            </div>
             <div>
                 <input type="button" id="saveBtn" value="Save Spectrum" onclick="save();" oncontextmenu="saveContinuous(event);"/>
             </div>
