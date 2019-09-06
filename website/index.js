@@ -69,24 +69,11 @@ const fixtureTypeLibrary = {
     }
 }
 
-const emitterDafaultColors = {
-    Rot:  "#ff0000",
-    Grün: "#00ff00",
-    Blau: "#0000ff",
-    Amber:"#ffaa00",
-    Weiss:"#ffffff"
-};
-
 const valueChangeTimeout = 3000;
 const emitterChangeTimeout = 6000;
 const measureSilderValues = [5,10,20,35,50,65,85,100];
 
 var selectedFixtures = [];
-var fixtureSelectionHasIntentsity = false;
-
-var currentFixture = patch[0].fixtureType;
-var patchOffset = patch[0].address-1;
-var currentFixtureHasIntensity = fixtureTypeLibrary[currentFixture].intensity == true;
 
 //CIE 1931 tristimulus values from:
 //https://wisotop.de/Anhang-Tristimulus-Werte.php
@@ -178,7 +165,6 @@ function init()
                 }
             }
         }
-        drawColorSpace();
     },250);
 
     setInterval(() => {
@@ -273,7 +259,6 @@ function init()
 
     createSurface();
     sendDMX();
-    //doImport("emitters",true);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -481,35 +466,8 @@ function doExport(arg)
     }
     else if(arg == "emitters")
     {
-        var filePath = electronDaemon.exportEmitters(JSON.stringify(emitters),"emitters_"+currentFixture+".json");
-        console.log("Emitters saved to: "+filePath);
-    }
-}
-
-function doImport(arg,force)
-{
-    if(arg == "emitters")
-    {
-        if(force || confirm("Do you want to overwrite the current emitters?"))
-        {
-            for(var eNI = 0; eNI < emitterList.childElementCount-1; eNI++)
-            {
-                emitterList.childNodes[eNI].remove();
-                eNI--;
-            }
-            sliderContainer.innerHTML = "";
-
-            var emitterData = electronDaemon.importEmitters("emitters_"+currentFixture+".json");
-            if(emitterData)
-            {
-                emitters = JSON.parse(emitterData);
-            }
-            else
-            {
-                console.error("Failed to import emitter data");
-            }
-            drawColorSpace();
-        }
+        /*var filePath = electronDaemon.exportEmitters(JSON.stringify(emitters),"emitters_"+currentFixture+".json");
+        console.log("Emitters saved to: "+filePath);*/
     }
 }
 
@@ -517,7 +475,7 @@ function doImport(arg,force)
 /////////////////////////////////// Emitters ///////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
-var emitters = [];
+var emitters = null;
 var emitterList = null;
 var emitterEdit = null;
 
@@ -696,7 +654,6 @@ function measureAllEmitters()
 
         currEmitter = -1;
         currSliderValueIndex = -1;
-        currEmitterCount = Object.keys(fixtureTypeLibrary[currentFixture].emitters).length;
         measureNextValue();
     }
 }
@@ -782,7 +739,7 @@ function sendDMX(event)
             dmxValues[address] = parseInt(currFixture.channels[channel]);
         }
     }
-    console.log(dmxValues);
+    //console.log(dmxValues);
     electronDaemon.sendArtnet(dmxValues);
 }
 
@@ -900,48 +857,59 @@ function drawColorSpace()
     {
         pathDOM.setAttribute("d","");
 
-        //Get Emitter Max
-
-        var coordiantes = [];
-        for(eIdx in emitters)
+        for(var sFI in selectedFixtures)
         {
-            var currEmitter = emitters[eIdx];
-            var currMeasures = currEmitter.measures;
-            if(JSON.stringify(currMeasures) != JSON.stringify({}) && currMeasures["100%"])
+            if(selectedFixtures[sFI])
             {
-                var xy = currMeasures["100%"].xyY;
-                coordiantes.push(xy);
-            }
-            else
-            {
-                console.warn("Emitter "+currEmitter.name+" has no 100% measures. Failed to get coordinates.");
+                emitters = patch[sFI].emitterData;
+                break;
             }
         }
 
-        var box = pathDOM.parentElement.getBoundingClientRect();
-        var sizeX = box.width;
-        var sizeY = box.height;
-        pathDOM.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
-
-        var newPath = "";
-        for(var i = 0; i < 3; i++)
+        if(emitters)
         {
-            if(i == 0)
+            //Get Emitter Max
+            var coordiantes = [];
+            for(eIdx in emitters)
             {
-                newPath += "M ";
+                var currEmitter = emitters[eIdx];
+                var currMeasures = currEmitter.measures;
+                if(JSON.stringify(currMeasures) != JSON.stringify({}) && currMeasures["100%"])
+                {
+                    var xy = currMeasures["100%"].xyY;
+                    coordiantes.push(xy);
+                }
+                else
+                {
+                    console.warn("Emitter "+currEmitter.name+" has no 100% measures. Failed to get coordinates.");
+                }
             }
-            else
+    
+            var box = pathDOM.parentElement.getBoundingClientRect();
+            var sizeX = box.width;
+            var sizeY = box.height;
+            pathDOM.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
+    
+            var newPath = "";
+            for(var i = 0; i < 3; i++)
             {
-                newPath += "L ";
+                if(i == 0)
+                {
+                    newPath += "M ";
+                }
+                else
+                {
+                    newPath += "L ";
+                }
+    
+                newPath += parseInt(coordiantes[i][0]*sizeX);
+                newPath += ",";
+                newPath += parseInt((coordiantes[i][1])*sizeY);
+                newPath += " ";
             }
-
-            newPath += parseInt(coordiantes[i][0]*sizeX);
-            newPath += ",";
-            newPath += parseInt((coordiantes[i][1])*sizeY);
-            newPath += " ";
+            newPath += "L "+ parseInt(coordiantes[0][0]*sizeX) + "," + parseInt((coordiantes[0][1])*sizeY);
+            pathDOM.setAttribute("d",newPath);
         }
-        newPath += "L "+ parseInt(coordiantes[0][0]*sizeX) + "," + parseInt((coordiantes[0][1])*sizeY);
-        pathDOM.setAttribute("d",newPath);
     }
 }
 
@@ -962,4 +930,5 @@ function updateSelection(row)
         row.classList.remove("selected");
         selectedFixtures[fixtureID] = false;
     }
+    drawColorSpace();
 }

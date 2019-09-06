@@ -73,6 +73,31 @@
     cursor: pointer;
 }
 
+#fixtureSheet .measureFixture {
+    width: 20px;
+    height: 20px;
+    background-image: url(images/measure.png);
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    cursor: pointer;
+}
+
+#fixtureSheet .fixtureData {
+    width: 20px;
+    height: 20px;
+    background-image: url(images/measureSignal.png);
+    background-size: 90%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    cursor: pointer;
+}
+
+#fixtureSheet .measureFixture:hover,
+#fixtureSheet .fixtureData:hover {
+    background-color: #4e4d5d;
+}
+
 #popupDiv {
     display: none;
     position: fixed;

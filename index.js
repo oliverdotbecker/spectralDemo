@@ -68,12 +68,6 @@ app.on('ready', () => {
                     click: (menuItem, browserWindow, event) => {
                         win.webContents.executeJavaScript('doExport("emitters");');
                     }
-                },
-                {
-                    label: 'Import Emitters',
-                    click: (menuItem, browserWindow, event) => {
-                        win.webContents.executeJavaScript('doImport("emitters");');
-                    }
                 }
             ]
         }

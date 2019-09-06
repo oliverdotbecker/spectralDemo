@@ -3,6 +3,14 @@ settings = JSON.parse(settings);
 var patch = localStorage.getItem("spectral.patch") || "[]";
 patch = JSON.parse(patch);
 
+const emitterDafaultColors = {
+    Rot:  "#ff0000",
+    Grün: "#00ff00",
+    Blau: "#0000ff",
+    Amber:"#ffaa00",
+    Weiss:"#ffffff"
+};
+
 activeSensor = settings.sensor;
 
 function createSurface()
@@ -28,6 +36,7 @@ function createSurface()
 function createSliders()
 {
     emitterList.innerHTML = "";
+    sliderContainer.innerHTML = "";
 
     var usedChannels = {
         intensity:false,
@@ -96,11 +105,6 @@ function createSliders()
         if(usedChannels[fTE])
         {
             var defaultColor = emitterDafaultColors[fTE] || "#ffffff";
-            emitters.push({
-                name:fTE,
-                color:defaultColor,
-                measures: {}
-            });
     
             var newEmitter = document.createElement('div');
             newEmitter.className = "emitterEntry";
@@ -297,20 +301,25 @@ function openPatch()
                     {
                         fixtureChannels[eIdx] = 0;
                     }
+                    var emitterData = electronDaemon.importEmitters("emitters_"+currRow.childNodes[0].childNodes[0].value+".json");
+                    if(emitterData)
+                    {
+                        emitterData = JSON.parse(emitterData);
+                    }
+                    else
+                    {
+                        console.error("Failed to import emitter data");
+                    }
                     patch.push({
                         fixtureType:currRow.childNodes[0].childNodes[0].value,
                         address:currRow.childNodes[1].childNodes[0].value,
                         channels:fixtureChannels,
-                        emitterData:null
+                        emitterData:emitterData
                     });
                 }
                 localStorage.setItem("spectral.patch",JSON.stringify(patch));
                 selectedFixtures = [];
 
-                currentFixture = patch[0].fixtureType;
-                currentFixtureHasIntensity = fixtureTypeLibrary[currentFixture].intensity == true;
-                patchOffset = patch[0].address-1;
-                doImport("emitters",true);
                 createFixtureSheet();
                 createSliders();
             }
@@ -497,12 +506,19 @@ function createFixtureSheet()
             }
 
             //Measure Button
+            td = document.createElement('td');
+            td.className = "measureFixture"
+            tr.appendChild(td);
 
             //Emitter Data view
+            td = document.createElement('td');
+            td.className = "fixtureData"
+            tr.appendChild(td);
             table.appendChild(tr);
         }
         fixtureSheet.appendChild(table);
     }
+    updateSelection(fixtureSheet.childNodes[0].childNodes[1]);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -611,68 +627,6 @@ function throwPopup(title,content,modal,buttons,autoClose)
             };
             buttonsDiv.appendChild(newBtn);
             popupDiv.appendChild(buttonsDiv);
-        }
-    }
-}
-
-function throwReminderPopup(content)
-{
-    var modalOverlay = document.getElementById("modalOverlay");
-    if(modalOverlay)
-    {
-        modalOverlay.style.display = "block";
-    }
-
-    var popupDiv = document.getElementById("popupDiv");
-    if(popupDiv)
-    {
-        if(!popupDiv.isReminder || popupDiv.style.display != "flex")
-        {
-            popupDiv.innerHTML = "";
-            popupDiv.style.display = "flex";
-            popupDiv.style.flexDirection = "column";
-            popupDiv.style.left = "";
-            popupDiv.style.top = "";
-            popupDiv.style.right = "";
-    
-            var titleDiv = document.createElement('div');
-            titleDiv.id = "popupTitle";
-            titleDiv.innerHTML = "Erinnerung";
-            popupDiv.appendChild(titleDiv);
-
-            popupDiv.isReminder = true;
-            popupDiv.reminderCount = "1";
-
-            var contentDiv = document.createElement('div');
-            contentDiv.id = "popupContent";
-            contentDiv.innerHTML = "<p>"+content+"</p>";
-            popupDiv.appendChild(contentDiv);
-            
-            popupDiv.classList.add("buttons");
-            var buttonsDiv = document.createElement('div');
-            buttonsDiv.id = "buttonsDiv";
-            var newBtn = document.createElement('input');
-            newBtn.type = "button";
-            newBtn.value = "Schließen";
-            newBtn.onclick = function() {
-                closePopup();
-            };
-            buttonsDiv.appendChild(newBtn);
-            popupDiv.appendChild(buttonsDiv);
-        }
-        else
-        {
-            popupDiv.reminderCount = parseInt(popupDiv.reminderCount)+1;
-            var popupTitle = document.getElementById("popupTitle");
-            if(popupTitle)
-            {
-                popupTitle.innerHTML = popupDiv.reminderCount+" Erinnerungen";
-            }
-            var popupContent = document.getElementById("popupContent");
-            if(popupContent)
-            {
-                popupContent.innerHTML += "<p>"+content+"</p>";
-            }
         }
     }
 }
