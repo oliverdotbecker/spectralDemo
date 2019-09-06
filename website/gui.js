@@ -475,7 +475,10 @@ function createFixtureSheet()
             tr.id = "fixtureRow_"+pI;
             tr.onclick = function(event)
             {
-                updateSelection(event.currentTarget);
+                if(event.srcElement == event.currentTarget || (event.srcElement != event.currentTarget && (event.srcElement.className == "" || event.srcElement.className == "selected")))
+                {
+                    updateSelection(event.currentTarget);
+                }
             }
             td = document.createElement('td');
             td.innerHTML = pI+1;
