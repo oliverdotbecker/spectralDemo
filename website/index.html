@@ -14,11 +14,13 @@
         <h1>Sensor Data</h1>
         <br>
         <div id="controls">
-            <div>
-                <input type="button" id="settingsBtn" value="Sensor Settings" onclick="openSensorSettings();"/>
+            <div class="menuItem" onclick="openSensorSettings();">
+                <div class="icon" id="settingsIcon"></div>
+                <label>Sensor Settings</label>
             </div>
-            <div>
-                <input type="button" id="patchBtn" value="Patch" onclick="openPatch();"/>
+            <div class="menuItem" onclick="openPatch();">
+                <div class="icon" id="patchIcon"></div>
+                <label>Patch</label>
             </div>
             <!--div>
                 <label>Command: </label>
@@ -32,8 +34,9 @@
                 <label>Grid: </label>
                 <input type="checkbox" id="ckGrid" checked/>
             </div-->
-            <div>
-                <input type="button" id="saveBtn" value="Save Spectrum" onclick="save();" oncontextmenu="saveContinuous(event);"/>
+            <div class="menuItem" onclick="save();" oncontextmenu="saveContinuous(event);" id="saveBtn">
+                <div class="icon" id="saveIcon"></div>
+                <label>Save Spectrum</label>
             </div>
         </div>
         <div id="infos">

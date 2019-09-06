@@ -1,3 +1,39 @@
+.menuItem {
+    border: 2px solid gray;
+    padding: .1em 1em .1em .25em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.menuItem * {
+    cursor: pointer;
+}
+
+.menuItem .icon {
+    width: 25px;
+    height: 25px;
+    background-position: 50% 50%;
+    background-size: 90%;
+    margin-right: .25em;
+    background-repeat: no-repeat;
+}
+
+#settingsIcon {
+    background-image: url(images/settings.png);
+}
+
+#patchIcon {
+    background-image: url(images/lamp.png);
+}
+
+#saveIcon {
+    background-image: url(images/save.png);
+}
+
+.menuItem:hover {
+    background-color: rgba(97, 97, 97, 0.7);
+}
+
 #patchTable {
     width: 100%;
     border-collapse: collapse;
