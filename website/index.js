@@ -97,7 +97,6 @@ var currXYZDisplay = null;
 var currxyYDisplay = null;
 var currRGBDisplay = null;
 var currColorDisplay = null;
-var cieDisp = null;
 var livePos = null;
 var calcPos = null;
 
@@ -189,13 +188,12 @@ function init()
     currxyYDisplay = document.getElementById('currentxyY');
     currRGBDisplay = document.getElementById('currentRGB');
     currColorDisplay = document.getElementById('currentColor');
-    cieDisp = document.getElementById('cie');
-    livePos = document.getElementById('livePos');
     namesContainer = document.getElementById('names');
     emitterList = document.getElementById("emitterList");
     emitterEdit = document.getElementById("emitterEdit");
     sliderContainer = document.getElementById("sliderContainer");
     calcPos = document.getElementById("calcPos");
+    livePos = document.getElementById('livePos');
 
     var commandInput = document.getElementById('commandInput');
     if(commandInput)
@@ -676,11 +674,11 @@ function measureAllEmitters(row)
             }
         }
 
-        selectedFixtures[currMeasuredFixtureId] = false;
+        selectedFixtures[currMeasuredFixtureId] = true;
         var row = document.getElementById("fixtureRow_"+currMeasuredFixtureId);
         if(row)
         {
-            row.classList.remove("selected");
+            row.classList.add("selected");
         }
 
         throwWaitPopup();
@@ -798,61 +796,73 @@ function calcColorMix(event)
     var calcMax = 0;
     var wroteSpectrum = false;
 
-    for(var sI = 0; sI < sliderValues.length; sI++)
+    emitters = null;
+    for(var sFI in selectedFixtures)
     {
-        if(sliderValues[sI] != 0)
+        if(selectedFixtures[sFI])
         {
-            var currEmitter = emitters[sI];
-            if(JSON.stringify(currEmitter.measures) != JSON.stringify({}))
+            emitters = patch[sFI].emitterData;
+            break;
+        }
+    }
+    if(emitters)
+    {
+        for(var sI = 0; sI < sliderValues.length; sI++)
+        {
+            if(sliderValues[sI] != 0)
             {
-                var minMeasure = 0;
-                var maxMeasure = 0;
-                for(measurePercent in currEmitter.measures)
+                var currEmitter = emitters[sI];
+                if(JSON.stringify(currEmitter.measures) != JSON.stringify({}))
                 {
-                    if(parseInt(measurePercent) <= sliderValues[sI])
+                    var minMeasure = 0;
+                    var maxMeasure = 0;
+                    for(measurePercent in currEmitter.measures)
                     {
-                        minMeasure = measurePercent;
+                        if(parseInt(measurePercent) <= sliderValues[sI])
+                        {
+                            minMeasure = measurePercent;
+                        }
+                        if(parseInt(measurePercent) >= sliderValues[sI])
+                        {
+                            maxMeasure = measurePercent;
+                            break;
+                        }
                     }
-                    if(parseInt(measurePercent) >= sliderValues[sI])
+    
+                    if(minMeasure == maxMeasure)
                     {
-                        maxMeasure = measurePercent;
-                        break;
+                        wroteSpectrum = true;
+                        if(currEmitter.measures[minMeasure].spectrum.max > calcMax)
+                        {
+                            calcMax = currEmitter.measures[minMeasure].spectrum.max;
+                        }
+                        for(var spI = 0; spI < calcSpectrum.length; spI++)
+                        {
+                            calcSpectrum[spI] += parseFloat(currEmitter.measures[minMeasure].spectrum.values[spI]);
+                        }
                     }
-                }
-
-                if(minMeasure == maxMeasure)
-                {
-                    wroteSpectrum = true;
-                    if(currEmitter.measures[minMeasure].spectrum.max > calcMax)
+                    else if(maxMeasure != 0)
                     {
-                        calcMax = currEmitter.measures[minMeasure].spectrum.max;
+                        wroteSpectrum = true;
+                        var relation = parseInt(minMeasure)/parseInt(maxMeasure);
+                        if((currEmitter.measures[minMeasure].spectrum.max*relation) > calcMax)
+                        {
+                            calcMax = (currEmitter.measures[minMeasure].spectrum.max*relation);
+                        }
+                        //Interpolation
+                        for(var spI = 0; spI < calcSpectrum.length; spI++)
+                        {
+                            var minVal = parseFloat(currEmitter.measures[minMeasure].spectrum.values[spI]);
+                            var maxVal = parseFloat(currEmitter.measures[maxMeasure].spectrum.values[spI]);
+                            var diff1 = (sliderValues[sI]-parseInt(minMeasure))/(parseInt(maxMeasure)-parseInt(minMeasure));
+                            var temp2 = diff1*(maxVal-minVal);
+                            calcSpectrum[spI] += (temp2+minVal);
+                        }
                     }
-                    for(var spI = 0; spI < calcSpectrum.length; spI++)
+                    else
                     {
-                        calcSpectrum[spI] += parseFloat(currEmitter.measures[minMeasure].spectrum.values[spI]);
+                        console.warn("Failed to interpolate values, due to missing measurement values");
                     }
-                }
-                else if(maxMeasure != 0)
-                {
-                    wroteSpectrum = true;
-                    var relation = parseInt(minMeasure)/parseInt(maxMeasure);
-                    if((currEmitter.measures[minMeasure].spectrum.max*relation) > calcMax)
-                    {
-                        calcMax = (currEmitter.measures[minMeasure].spectrum.max*relation);
-                    }
-                    //Interpolation
-                    for(var spI = 0; spI < calcSpectrum.length; spI++)
-                    {
-                        var minVal = parseFloat(currEmitter.measures[minMeasure].spectrum.values[spI]);
-                        var maxVal = parseFloat(currEmitter.measures[maxMeasure].spectrum.values[spI]);
-                        var diff1 = (sliderValues[sI]-parseInt(minMeasure))/(parseInt(maxMeasure)-parseInt(minMeasure));
-                        var temp2 = diff1*(maxVal-minVal);
-                        calcSpectrum[spI] += (temp2+minVal);
-                    }
-                }
-                else
-                {
-                    console.warn("Failed to interpolate values, due to missing measurement values");
                 }
             }
         }
