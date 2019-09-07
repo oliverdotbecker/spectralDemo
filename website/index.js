@@ -828,7 +828,7 @@ function calcColorMix(event)
                             break;
                         }
                     }
-    
+
                     if(minMeasure == maxMeasure)
                     {
                         wroteSpectrum = true;
@@ -912,8 +912,7 @@ function drawColorSpace()
 
         if(emitters)
         {
-            //Get Emitter Max
-            var coordiantes = [];
+            var coordinates = [];
             for(eIdx in emitters)
             {
                 var currEmitter = emitters[eIdx];
@@ -921,21 +920,21 @@ function drawColorSpace()
                 if(currMeasures && JSON.stringify(currMeasures) != JSON.stringify({}) && currMeasures["100%"])
                 {
                     var xy = currMeasures["100%"].xyY;
-                    coordiantes.push(xy);
+                    coordinates.push(xy);
                 }
                 else
                 {
                     console.warn("Emitter "+currEmitter.name+" has no 100% measures. Failed to get coordinates.");
                 }
             }
-    
+
             var box = pathDOM.parentElement.getBoundingClientRect();
             var sizeX = box.width;
             var sizeY = box.height;
             pathDOM.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
-    
+
             var newPath = "";
-            for(var i = 0; i < Math.min(coordiantes.length,3); i++)
+            for(var i = 0; i < Math.min(coordinates.length,3); i++)
             {
                 if(i == 0)
                 {
@@ -945,15 +944,15 @@ function drawColorSpace()
                 {
                     newPath += "L ";
                 }
-    
-                newPath += parseInt(coordiantes[i][0]*sizeX);
+
+                newPath += parseInt(coordinates[i][0]*sizeX);
                 newPath += ",";
-                newPath += parseInt((coordiantes[i][1])*sizeY);
+                newPath += parseInt((coordinates[i][1])*sizeY);
                 newPath += " ";
             }
-            if(coordiantes[0])
+            if(coordinates[0])
             {
-                newPath += "L "+ parseInt(coordiantes[0][0]*sizeX) + "," + parseInt((coordiantes[0][1])*sizeY);
+                newPath += "L "+ parseInt(coordinates[0][0]*sizeX) + "," + parseInt((coordinates[0][1])*sizeY);
             }
             pathDOM.setAttribute("d",newPath);
         }
