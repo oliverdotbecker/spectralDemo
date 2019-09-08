@@ -369,7 +369,7 @@ Diese eingestellten Änderungen werden dann mit dem Server synchronisiert und mi
 \\
 Dieses System macht das Entwickeln einer Software mit mehreren Entwicklern deutlich einfacher.\\
 \\
-Github ist eine Webplattform, welche kostenlos öffentliche Repositories hosted. Dort wurde auch das Git Repository der Testapplikation
+Github ist eine Webplattform, welche kostenlos öffentliche Repositories hosted. Dort wurde auch das Git Repository der Applikation
 dieses Projektes gehostet.\\
 Zusätzlich bietet Github ein Projektverwaltungssystem.
 \clearpage
@@ -542,8 +542,8 @@ Auges im elektromagnetischen Spektrum.
 \subsubsection{CIE 1931}
 \clearpage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%% Testapplikation und Sensorik %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Sensorik und Testapplikation}
+%%%%%%%%%%%%%%%%%%%%%%%%%% Sensorik %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Sensorik}
 Es gibt einige Hersteller von entsprechenden Spektralsensoren für Licht und spektral benachbarte Bereiche wie Infrarot.
 Ein Hersteller, dessen Sensoren in dieser Arbeit vornehmlich genutzt wurden, ist die Firma AMS.\\
 Zu Beginn wurde nach einer einfachen Evaluierungslösung für das Erfassen von spektralen Daten gesucht. Hier wurde das
@@ -624,12 +624,13 @@ Hier werden aus der \ac{uart} (AT) Schnittstelle mit dem Befehl "'ATCDATA"' die 
 (Gleitkomma Zahlen) ausgegeben. Die weiteren nicht Sensor bezogenen Befehle sind identisch mit dem Befehlssatz des AS7261 Sensors.
 \clearpage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%% Verwendete Lampen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Verwendete Lampen}
+%%%%%%%%%%%%%%%%%%%%%%%%%% Verwendete Gerätschaften %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Verwendete Gerätschaften}
+\subsection{Lampen}
 Im folgenden werden die Lichtquellen beziehungsweise die Lampen beschrieben, die für die Messungen verwendet wurden.
 Auch in der Veranstaltungstechnik als (engl.) "'Fixtures"' bezeichnet. Diese Lampen haben alle \ac{led}s als Lichtquelle. Diese \ac{led}s
 sind alle unterschiedlich aufgebaut.
-\subsection{Ape Labs Light Can}
+\subsubsection{Ape Labs Light Can}
 ~\par\vspace{-\baselineskip}
 \begin{wrapfigure}{r}{0.4\textwidth}
     \vspace{-45pt}
@@ -641,11 +642,11 @@ sind alle unterschiedlich aufgebaut.
     \vspace{-15pt}
 \end{wrapfigure}
 \noindent
-Diese Lampe ist ein sehr kompakt gebaute RGBW\ac{led} Lichtquelle auf Akku Basis. Diese wurde von der Firma Ape Labs aus Eisigen in Deutschland
+Diese Lampe ist eine sehr kompakt gebaute RGBW \ac{led} Lichtquelle auf Akku Basis. Diese wurde von der Firma Ape Labs aus Eisigen in Deutschland
 entwickelt. Diese Lampe ist sowohl per Fernbedienung, als auch per W-\ac{dmx} steuerbar.
 Die "'Kanne"' hat einen Abstrahlwinkel von 65 Grad. Zur gezielten Steuerung, ohne vorprogrammierte Effekte wird ein \ac{dmx} zu W-DMX Wandler der
 Firma benötigt (W-APP). Dieser ermöglicht dann die Ansteurung der Lampe durch die Applikation.
-\subsection{Robe LEDWash 300}
+\subsubsection{Robe LEDWash 300}
 Dieses Wash Movinglight ist ein handelsübliches Gerät und wird weltweit bei vielen Veranstaltungen universell eingesetzt. Hier sind 19 einzelne
 RGBW \ac{led}s hinter einzelnen Linsen in zwei Kreisen und einer Mittelpunkt \ac{led} positioniert.
 \begin{figure}[H]
@@ -659,7 +660,7 @@ Das Movinglight hat einen einstellbaren Abstrahlwinkel von 8 bis 63 Grad. Dieser
 um ein möglichst homogenes Abstrahlverhalten zu erhalten. Laut Hersteller hat die Lampe bei einer Distanz von fünf Metern zur Lampe eine
 Lichtausbeute von 3.370 Lumen. Die Lampe ist per \ac{xlr} mit DMX, oder via Ethernet RJ45-Buchse per Art-Net steuerbar. An einem Display
 am Fuß (der "'Base"') kann der Scheinwerfer konfiguriert werden.
-\subsection{ARRI SkyPanel}
+\subsubsection{ARRI SkyPanel}
 Das Skypanel S60-C von der Firma Arri, ein Tochterunternehmen der Firma Osram, wird oft als Fluter, das Grundlicht in Film und Fernsehen, eingesetzt.
 Es wird beworben, dass es mit xyY Kanälen per DMX angesteuert werden kann und diese CIE Werte von der Lampe exakt wiedergegeben werden. Somit
 ist diese Lampe eine perfekte Referenz für diese Arbeit.
@@ -667,7 +668,7 @@ ist diese Lampe eine perfekte Referenz für diese Arbeit.
     \begin{center}
         \includegraphics[width=.48\textwidth]{images/skypanel_s60_c.png}
     \end{center}
-    \caption{ARRI Skypannel S60-C \cite{arri}}
+    \caption{ARRI Skypanel S60-C \cite{arri}}
 \end{figure}
 \noindent
 Das SkyPanel hat einen Abstrahlwinkel von 115 Grad. Die RGBW \ac{led}s befinden sich hinter einem lampengroßem Diffusor. Die Lampe ist per
@@ -675,18 +676,32 @@ Das SkyPanel hat einen Abstrahlwinkel von 115 Grad. Die RGBW \ac{led}s befinden 
 werden. Außerdem kann manuell am Gerät auch eine xyY CIE Farbe ohne externe Ansteuerung eingestellt werden.\\
 Bei einer Ansteuerung per DMX oder Art-Net kann am Gerät auch abgelesen werden, welche xyY Werte das Gerät aus der Ansteuerung ermittelt,
 und versucht zu emittieren.
+\subsection{Messgerät MK350 LED}
+Als Referenz Messgerät zu dem vergleichsweisen niedrigpreisigen Sensoren wurde das bei MA Lighting bereits vorhandene Spektralmessgerät
+"'MK350 LED"' der Firma UPRtek genutzt.\\
+%% Geräte Bilder
+Dieses Messgerät kann Spektraldaten im Bereich von {\color{red} xx} bis {\color{red} xx} nanometern messen. Hier wird ein Messwert pro
+einem Nanometer erfasst. Daraus Berechnet das Messgerät weiter CIE1931 x  Koordinaten, sowie CIE 1973 uv Koordinaten.
+Messwerte können einzeln oder auch in Serie erfasst werden und im CSV Format für die weitere Auswertung auf eine SD Karte gesichert werden.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Messungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Messungen}
+\section{Messungen und Testapplikation}
 Zu Beginn wurde der Sensor AS7262 in Betrieb genommen, da dieser auf einem Evaluierungsboard verfügbar war.
 Zunächst wurde mit der Applikation "'Putty"' über die COM Schnittstelle einige Kommandos gesendet um die
 \ac{uart} Schnittstelle zu testen. Dies ist erfolgreich gelungen. Es wurden erste spektrale Werte des
-Umgebungslichtes empfangen.\\
+Umgebungslichtes und einer Light Can empfangen.\\
 Anschließend wurde begonnen eine erste NodeJS Applikation zu programmieren, um intervallweise spektrale Daten
 von der \ac{uart} Schnittstelle abzufragen und anzuzeigen. So konnten erste Messwerte mit dem AS7262 Sensor erhoben werden.
-Als Referenz zu dem vergleichsweisen niederpreisigen Sensor wurde das bei MA Lighting bereits vorhandene Messgerät
-"'MK350 LED"' der Firma UPRtek genutzt. Hier wurde beobachtet, dass ...
+Diese Messwerte wurden mit dem MK350 verglichen. Hier wurde beobachtet, dass die gemessenen Daten des MK350 auf den jeweiligen
+Wellenlängen mit den Werten übereinstimmt. Hier ist anzumerken, dass wie in Bild {\color{red} xx} zu sehen, die pro Wellenlänge
+gemessene Amplitude nach 1 normiert wird. Zur Vergleichbarkeit werden auch in der Applikation die Sensor Werte des AS7262 nach
+1 normiert. Die Messwerte der sechs Wellenlängen des AS7262 sind mit geringer Abweichung identisch zum MK350.\\
+%% Spektrum MK350; Spektrum AS7262
+Doch war hier ein großes Defizit des AS7262 zu beobachten. wie in Bild {\color{red} xx} zu erkennen liegt für das Maximum
+des grünen Emitters bei ca. 480 nanometern. Doch liegen die beiden nächsten Messflanken des AS7262 bei 450 und 500 nanometern.
+Somit wird der Wellenlängenbereich mit der höchsten Energiedichte nicht erfasst. Dies erzeugt eine große Fehlerquelle für weitere
+Berechnungen.\\
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Ansteuerung externer Lichtquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
