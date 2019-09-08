@@ -896,45 +896,93 @@ function calcColorMix(event)
 
 function drawColorSpace()
 {
-    var pathDOM = document.getElementById("realColorSpace");
-    if(pathDOM)
+    var combinedPathDOM = document.getElementById("realColorSpace");
+    if(combinedPathDOM)
     {
-        pathDOM.setAttribute("d","");
-        emitters = null;
+        var singleColorSpaces = document.getElementsByClassName("singleColorSpace");
+        while(singleColorSpaces.length > 0)
+        {
+            singleColorSpaces[0].remove();
+        }
+
+        combinedPathDOM.setAttribute("d","");
+        var selectedEmitters = [];
         for(var sFI in selectedFixtures)
         {
             if(selectedFixtures[sFI])
             {
-                emitters = patch[sFI].emitterData;
-                break;
+                selectedEmitters.push(patch[sFI].emitterData);
             }
         }
 
-        if(emitters)
+        if(selectedEmitters.length > 0)
         {
             var coordinates = [];
-            for(eIdx in emitters)
+            for(var fI = 0; fI < selectedEmitters.length; fI++)
             {
-                var currEmitter = emitters[eIdx];
-                var currMeasures = currEmitter.measures;
-                if(currMeasures && JSON.stringify(currMeasures) != JSON.stringify({}) && currMeasures["100%"])
+                coordinates[fI] = [];
+                var currEmitters = selectedEmitters[fI];
+                for(eIdx in currEmitters)
                 {
-                    var xy = currMeasures["100%"].xyY;
-                    coordinates.push(xy);
+                    var currMeasures = currEmitters[eIdx].measures;
+                    if(currMeasures && JSON.stringify(currMeasures) != JSON.stringify({}) && currMeasures["100%"])
+                    {
+                        var xy = currMeasures["100%"].xyY;
+                        coordinates[fI].push(xy);
+                    }
+                    else
+                    {
+                        console.warn("Selected Fixture "+fI+" Emitter "+currEmitters[eIdx].name+" has no 100% measures. Failed to get coordinates.");
+                    }
                 }
-                else
+
+                //Draw single color space
+                var box = combinedPathDOM.parentElement.getBoundingClientRect();
+                var sizeX = box.width;
+                var sizeY = box.height;
+
+                var currSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                combinedPathDOM.parentElement.parentElement.appendChild(currSvg);
+                currSvg.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97));
+                currSvg.setAttribute("class","singleColorSpace")
+                var currPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                currSvg.appendChild(currPath);
+                currPath.setAttribute("stroke","black");
+                currPath.setAttribute("stroke-width",".5");
+                currPath.setAttribute("fill","transparent");
+        
+                var newPath = "";
+                for(var i = 0; i < Math.min(coordinates[fI].length,3); i++)
                 {
-                    console.warn("Emitter "+currEmitter.name+" has no 100% measures. Failed to get coordinates.");
+                    if(i == 0)
+                    {
+                        newPath += "M ";
+                    }
+                    else
+                    {
+                        newPath += "L ";
+                    }
+    
+                    newPath += parseInt(coordinates[fI][i][0]*sizeX);
+                    newPath += ",";
+                    newPath += parseInt((coordinates[fI][i][1])*sizeY);
+                    newPath += " ";
                 }
+                if(coordinates[fI][0])
+                {
+                    newPath += "L "+ parseInt(coordinates[fI][0][0]*sizeX) + "," + parseInt((coordinates[fI][0][1])*sizeY);
+                }
+                currPath.setAttribute("d",newPath);
             }
 
-            var box = pathDOM.parentElement.getBoundingClientRect();
+            //Draw combined color space
+            var box = combinedPathDOM.parentElement.getBoundingClientRect();
             var sizeX = box.width;
             var sizeY = box.height;
-            pathDOM.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
+            combinedPathDOM.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
     
             var newPath = "";
-            for(var i = 0; i < Math.min(coordinates.length,3); i++)
+            for(var i = 0; i < Math.min(coordinates[0].length,3); i++)
             {
                 if(i == 0)
                 {
@@ -945,16 +993,16 @@ function drawColorSpace()
                     newPath += "L ";
                 }
 
-                newPath += parseInt(coordinates[i][0]*sizeX);
+                newPath += parseInt(coordinates[0][i][0]*sizeX);
                 newPath += ",";
-                newPath += parseInt((coordinates[i][1])*sizeY);
+                newPath += parseInt((coordinates[0][i][1])*sizeY);
                 newPath += " ";
             }
             if(coordinates[0])
             {
-                newPath += "L "+ parseInt(coordinates[0][0]*sizeX) + "," + parseInt((coordinates[0][1])*sizeY);
+                newPath += "L "+ parseInt(coordinates[0][0][0]*sizeX) + "," + parseInt((coordinates[0][0][1])*sizeY);
             }
-            pathDOM.setAttribute("d",newPath);
+            combinedPathDOM.setAttribute("d",newPath);
         }
     }
 }
