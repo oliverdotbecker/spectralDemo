@@ -828,7 +828,7 @@ function calcColorMix(event)
                             break;
                         }
                     }
-
+    
                     if(minMeasure == maxMeasure)
                     {
                         wroteSpectrum = true;
@@ -932,7 +932,7 @@ function drawColorSpace()
             var sizeX = box.width;
             var sizeY = box.height;
             pathDOM.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
-
+    
             var newPath = "";
             for(var i = 0; i < Math.min(coordinates.length,3); i++)
             {
