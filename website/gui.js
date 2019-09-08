@@ -3,7 +3,7 @@ settings = JSON.parse(settings);
 var patch = localStorage.getItem("spectral.patch") || "[]";
 patch = JSON.parse(patch);
 
-const emitterDafaultColors = {
+const emitterDefaultColors = {
     Rot:  "#ff0000",
     Grün: "#00ff00",
     Blau: "#0000ff",
@@ -104,7 +104,7 @@ function createSliders()
         }
         if(usedChannels[fTE])
         {
-            var defaultColor = emitterDafaultColors[fTE] || "#ffffff";
+            var defaultColor = emitterDefaultColors[fTE] || "#ffffff";
     
             var newEmitter = document.createElement('div');
             newEmitter.className = "emitterEntry";
@@ -314,7 +314,7 @@ function openPatch()
                         {
                             emitterData.push({
                                 name:eI,
-                                color:emitterDafaultColors[eI],
+                                color:emitterDefaultColors[eI],
                                 measures:{}
                             })
                         }

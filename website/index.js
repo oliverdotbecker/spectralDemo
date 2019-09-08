@@ -90,7 +90,7 @@ var barsContainer = null;
 var namesContainer = null;
 var currMaxDisplay = null;
 var valueContainer = null;
-var wavelenghtsContainer = null;
+var wavelengthsContainer = null;
 var comInput = null;
 var currTempDisplay = null;
 var currXYZDisplay = null;
@@ -174,12 +174,12 @@ function init()
 
     barsContainer = document.getElementById('bars');
     valueContainer = document.getElementById('values');
-    wavelenghtsContainer = document.getElementById('wavelenghts');
+    wavelengthsContainer = document.getElementById('wavelengths');
     if(activeSettings.channelWavelengths)
     {
         for(var i = 0; i < activeSettings.channelCount; i++)
         {
-            wavelenghtsContainer.innerHTML += "<label>"+activeSettings.channelWavelengths[i]+"</label>";
+            wavelengthsContainer.innerHTML += "<label>"+activeSettings.channelWavelengths[i]+"</label>";
         }
     }
     currMaxDisplay = document.getElementById('currentMax');
@@ -696,7 +696,7 @@ function measureNextValue()
         getMeasurement(null,measureSilderValues[currSliderValueIndex]+"%",currEmitter);
     }
 
-    //Get next measument job or end loop
+    //Get next measurement job or end loop
     if(currEmitter < currEmitterCount && currSliderValueIndex <= measureSilderValues.length)
     {
         currSliderValueIndex++;
