@@ -828,7 +828,7 @@ function calcColorMix(event)
                             break;
                         }
                     }
-    
+
                     if(minMeasure == maxMeasure)
                     {
                         wroteSpectrum = true;
@@ -942,7 +942,7 @@ function drawColorSpace()
                 var sizeY = box.height;
 
                 var currSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-                combinedPathDOM.parentElement.parentElement.appendChild(currSvg);
+                combinedPathDOM.parentElement.parentElement.insertBefore(currSvg,combinedPathDOM.parentElement);
                 currSvg.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97));
                 currSvg.setAttribute("class","singleColorSpace")
                 var currPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -950,7 +950,7 @@ function drawColorSpace()
                 currPath.setAttribute("stroke","black");
                 currPath.setAttribute("stroke-width",".5");
                 currPath.setAttribute("fill","transparent");
-        
+
                 var newPath = "";
                 for(var i = 0; i < Math.min(coordinates[fI].length,3); i++)
                 {
@@ -962,7 +962,7 @@ function drawColorSpace()
                     {
                         newPath += "L ";
                     }
-    
+
                     newPath += parseInt(coordinates[fI][i][0]*sizeX);
                     newPath += ",";
                     newPath += parseInt((coordinates[fI][i][1])*sizeY);
@@ -975,14 +975,37 @@ function drawColorSpace()
                 currPath.setAttribute("d",newPath);
             }
 
+            //Analyse the coordinates
+            var combinedCoordinates = [];
+            for(var fI = 0; fI < selectedEmitters.length-1; fI++)
+            {
+                var currCoordinatesA = coordinates[fI];
+                var currCoordinatesB = coordinates[fI+1];
+                for(var vI = 0; vI < 3; vI++)
+                {
+                    for(var vI2 = 0; vI2 < 3; vI2++)
+                    {
+                        var secIdx = (vI+1)%3;
+                        var secIdx2 = (vI2+1)%3;
+                        var intersection = intersect(parseFloat(currCoordinatesA[vI][0]),parseFloat(currCoordinatesA[vI][1]),parseFloat(currCoordinatesA[secIdx][0]),parseFloat(currCoordinatesA[secIdx][1]),parseFloat(currCoordinatesB[vI2][0]),parseFloat(currCoordinatesB[vI2][1]),parseFloat(currCoordinatesB[secIdx2][0]),parseFloat(currCoordinatesB[secIdx2][1]));
+                        if(intersection)
+                        {
+                            combinedCoordinates.push(intersection);
+                        }
+                    }
+                }
+            }
+            var centerPoint = getCenterpoint(combinedCoordinates);
+            combinedCoordinates = sortCombinedPointsCounterClockwise(combinedCoordinates,centerPoint);
+
             //Draw combined color space
             var box = combinedPathDOM.parentElement.getBoundingClientRect();
             var sizeX = box.width;
             var sizeY = box.height;
             combinedPathDOM.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
-    
+
             var newPath = "";
-            for(var i = 0; i < Math.min(coordinates[0].length,3); i++)
+            for(var i = 0; i < combinedCoordinates.length; i++)
             {
                 if(i == 0)
                 {
@@ -993,18 +1016,73 @@ function drawColorSpace()
                     newPath += "L ";
                 }
 
-                newPath += parseInt(coordinates[0][i][0]*sizeX);
+                newPath += parseInt(combinedCoordinates[i].x*sizeX);
                 newPath += ",";
-                newPath += parseInt((coordinates[0][i][1])*sizeY);
+                newPath += parseInt((combinedCoordinates[i].y)*sizeY);
                 newPath += " ";
             }
-            if(coordinates[0])
+            if(combinedCoordinates.length > 0)
             {
-                newPath += "L "+ parseInt(coordinates[0][0][0]*sizeX) + "," + parseInt((coordinates[0][0][1])*sizeY);
+                newPath += "L "+ parseInt(combinedCoordinates[0].x*sizeX) + "," + parseInt((combinedCoordinates[0].y)*sizeY);
             }
             combinedPathDOM.setAttribute("d",newPath);
         }
     }
+}
+
+function intersect(x1, y1, x2, y2, x3, y3, x4, y4) {
+
+    // Check if none of the lines are of length 0
+    if ((x1 === x2 && y1 === y2) || (x3 === x4 && y3 === y4))
+    {
+        return false;
+    }
+
+    denominator = ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1))
+
+    // Lines are parallel
+    if (denominator === 0)
+    {
+        return false;
+    }
+
+    let ua = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / denominator
+    let ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / denominator
+
+    // is the intersection along the segments
+    if (ua < 0 || ua > 1 || ub < 0 || ub > 1)
+    {
+        return false;
+    }
+
+    // Return a object with the x and y coordinates of the intersection
+    let x = x1 + ua * (x2 - x1);
+    let y = y1 + ua * (y2 - y1);
+
+    return {x, y};
+}
+
+function getCenterpoint(coordinates)
+{
+    var x = 0;
+    var y = 0;
+    for(var idx in coordinates)
+    {
+        x += coordinates[idx].x;
+        y += coordinates[idx].y;
+    }
+    console.log("Found center at x="+(x/coordinates.length)+" y="+(y/coordinates.length));
+    return {x:(x/coordinates.length), y:(y/coordinates.length)};
+}
+
+function sortCombinedPointsCounterClockwise(coordinates,center)
+{
+    coordinates.sort((a,b) => {
+        var angle1 = (Math.atan2(a.x - center.x,a.y - center.y)*(180/Math.PI))+360;
+        var angle2 = (Math.atan2(b.x - center.x,b.y - center.y)*(180/Math.PI))+360;
+        return (angle1 - angle2);
+    });
+    return coordinates;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
