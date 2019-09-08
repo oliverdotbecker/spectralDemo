@@ -71,7 +71,7 @@ const fixtureTypeLibrary = {
 
 const valueChangeTimeout = 3000;
 const emitterChangeTimeout = 6000;
-const measureSilderValues = [5,10,20,35,50,65,85,100];
+const measureSliderValues = [5,10,20,35,50,65,85,100];
 
 var selectedFixtures = [];
 var currMeasuredFixtureId = null;
@@ -693,14 +693,14 @@ function measureNextValue()
     //Measure
     if(currEmitter != -1)
     {
-        getMeasurement(null,measureSilderValues[currSliderValueIndex]+"%",currEmitter);
+        getMeasurement(null,measureSliderValues[currSliderValueIndex]+"%",currEmitter);
     }
 
     //Get next measurement job or end loop
-    if(currEmitter < currEmitterCount && currSliderValueIndex <= measureSilderValues.length)
+    if(currEmitter < currEmitterCount && currSliderValueIndex <= measureSliderValues.length)
     {
         currSliderValueIndex++;
-        if(currSliderValueIndex == measureSilderValues.length)
+        if(currSliderValueIndex == measureSliderValues.length)
         {
             currSliderValueIndex = 0;
             if(currEmitter < currEmitterCount-1)
@@ -741,7 +741,7 @@ function measureNextValue()
     var currentSlider = document.getElementById("slider"+currEmitter);
     if(currentSlider)
     {
-        currentSlider.value = measureSilderValues[currSliderValueIndex];
+        currentSlider.value = measureSliderValues[currSliderValueIndex];
     }
     calcColorMix({currentTarget:currentSlider});
 
