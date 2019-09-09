@@ -94,7 +94,7 @@ var lastCommand = "";
 var measures = null;
 if(devFlag)
 {
-    measures = [2000,6000,3,200,3,10];
+    measures = [1500,3000,300,250,700,500];
 }
 var temp = 0;
 var receivedData = "";
@@ -292,44 +292,47 @@ exports.setSerialPath = function(path)
 
 exports.setSensor = function(sensor)
 {
-    measures = [];
-    activeSensor = sensor;
-    if(dataInterval)
+    if(activeSensor != sensor)
     {
-        clearInterval(dataInterval);
-    }
-    if(tempInterval)
-    {
-        clearInterval(tempInterval);
-    }
-    if(!activeSerialPort)
-    {
-        initSerialCommunication();
-    }
-    sendSerialData("ATLED0=100\n");
-    setTimeout(() => {
-        sendSerialData("ATLED1=0\n");
-    },100);
-    if(activeSensor == "7261")
-    {
+        measures = [];
+        activeSensor = sensor;
+        if(dataInterval)
+        {
+            clearInterval(dataInterval);
+        }
+        if(tempInterval)
+        {
+            clearInterval(tempInterval);
+        }
+        if(!activeSerialPort)
+        {
+            initSerialCommunication();
+        }
+        sendSerialData("ATLED0=100\n");
         setTimeout(() => {
-            sendSerialData("ATTCSMD=2\n");
-        },250);
-        dataInterval = setInterval(() => {
-            sendSerialData("ATDATA\n");
-        },500);
-        tempInterval = setInterval(() => {
-            sendSerialData("ATTEMP\n");
-        },5020);
-    }
-    else
-    {
-        dataInterval = setInterval(() => {
-            sendSerialData("ATCDATA\n");
-        },250);
-        tempInterval = setInterval(() => {
-            sendSerialData("ATTEMP\n");
-        },5020);
+            sendSerialData("ATLED1=0\n");
+        },100);
+        if(activeSensor == "7261")
+        {
+            setTimeout(() => {
+                sendSerialData("ATTCSMD=2\n");
+            },250);
+            dataInterval = setInterval(() => {
+                sendSerialData("ATDATA\n");
+            },500);
+            tempInterval = setInterval(() => {
+                sendSerialData("ATTEMP\n");
+            },5020);
+        }
+        else
+        {
+            dataInterval = setInterval(() => {
+                sendSerialData("ATCDATA\n");
+            },250);
+            tempInterval = setInterval(() => {
+                sendSerialData("ATTEMP\n");
+            },5020);
+        }
     }
 }
 
