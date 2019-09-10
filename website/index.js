@@ -96,7 +96,6 @@ var currTempDisplay = null;
 var currXYZDisplay = null;
 var currxyYDisplay = null;
 var currRGBDisplay = null;
-var currColorDisplay = null;
 var livePos = null;
 var calcPos = null;
 
@@ -167,10 +166,10 @@ function init()
         }
     },250);
 
-    setInterval(() => {
+    /*setInterval(() => {
         var currentTemp = electronDaemon.getTemp();
         currTempDisplay.innerHTML = JSON.parse(currentTemp)+" &deg;C";
-    },5100);
+    },5100);*/
 
     barsContainer = document.getElementById('bars');
     valueContainer = document.getElementById('values');
@@ -187,7 +186,6 @@ function init()
     currXYZDisplay = document.getElementById('currentXYZ');
     currxyYDisplay = document.getElementById('currentxyY');
     currRGBDisplay = document.getElementById('currentRGB');
-    currColorDisplay = document.getElementById('currentColor');
     namesContainer = document.getElementById('names');
     emitterList = document.getElementById("emitterList");
     emitterEdit = document.getElementById("emitterEdit");
@@ -304,13 +302,13 @@ function XYZtoXY(X,Y,Z,noDisp)
 
 function XYZtoRGB(tX,tY,tZ)
 {
-    /*// Convert CIE_xyz to linear RGB (values[0..1])
-    var r = (tX * 3.24071	 + tY * (-1.53726)  + tZ * (-0.498571));
-    var g = (tX * (-0.969258) + tY * 1.87599     + tZ * 0.0415557);
-    var b = (tX * 0.0556352   + tY * (-0.203996) + tZ * 1.05707);
+    // Convert CIE_xyz to linear RGB (values[0..1])
+    var r = Math.max(tX * 3.24071     + tY * (-1.53726)  + tZ * (-0.498571),0);
+    var g = Math.max(tX * (-0.969258) + tY * 1.87599     + tZ * 0.0415557  ,0);
+    var b = Math.max(tX * 0.0556352   + tY * (-0.203996) + tZ * 1.05707    ,0);
 
     // Convert linearRGB[0..1] to sRGB [0..255]
-    r *= 255;	g *= 255;	b *= 255;
+    /*r *= 255;	g *= 255;	b *= 255;
 
     // Some values get negative by little rounding errors. Put them to 0.
     if (r < 0){ r = 0; };  if (g < 0){ g = 0; }; if (b < 0){ b = 0; };
@@ -320,9 +318,9 @@ function XYZtoRGB(tX,tY,tZ)
     b = parseInt(b);*/
 
     var gamma = 1/2.2;
-    var r = Math.max((2.3706743*tX)+(-0.9000405*tY)+(-0.4706338*tZ),0);
+    /*var r = Math.max((2.3706743*tX)+(-0.9000405*tY)+(-0.4706338*tZ),0);
     var g = Math.max((-0.5138850*tX)+(1.4253036*tY)+(0.0885814*tZ),0);
-    var b = Math.max((0.0052982*tX)+(-0.0146949*tY)+(1.0093968*tZ),0);
+    var b = Math.max((0.0052982*tX)+(-0.0146949*tY)+(1.0093968*tZ),0);*/
 
     r = normalize(Math.pow(r,gamma));
     g = normalize(Math.pow(g,gamma));
@@ -336,24 +334,6 @@ function XYZtoRGB(tX,tY,tZ)
     {
         currRGBDisplay.innerHTML = r+" "+g+" "+b;
         currRGBDisplay.style.backgroundColor = "rgb("+r+","+g+","+b+")";
-    }
-    if(currColorDisplay)
-    {
-        currColorDisplay.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;";
-
-        var max = Math.max(r,g);
-        max = Math.max(max,b);
-
-        var diff = 255-max;
-        var fact = diff/max;
-        if(fact > 1)
-        {
-            r = Math.round(r*fact);
-            g = Math.round(g*fact);
-            b = Math.round(b*fact);
-        }
-
-        currColorDisplay.style.backgroundColor = "rgb("+r+","+g+","+b+")";
     }
 }
 
@@ -1103,4 +1083,17 @@ function updateSelection(row)
         selectedFixtures[fixtureID] = false;
     }
     drawColorSpace();
+
+    //Set faders to the values of the last selected fixture
+    var currFixture = patch[fixtureID];
+    for(var channel in currFixture.channels)
+    {
+        var currSlider = document.getElementById("silder_"+channel);
+        if(currSlider)
+        {
+            currSlider = currSlider.nextElementSibling;
+            currSlider.value = currFixture.channels[channel];
+            currSlider.nextElementSibling.innerHTML = currFixture.channels[channel];
+        }
+    }
 }

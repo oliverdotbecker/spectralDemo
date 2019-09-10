@@ -121,6 +121,7 @@ function createSliders()
             var newSpaceLabel = document.createElement('div');
             newSpaceLabel.innerHTML = fTE;
             newSpaceLabel.className = "spaceLabel";
+            newSpaceLabel.id = "silder_"+fTE;
             newSliderContainer.appendChild(newSpaceLabel);
             var newSlider = document.createElement('input');
             newSlider.className = "vertical";
