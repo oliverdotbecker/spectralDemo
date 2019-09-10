@@ -74,6 +74,7 @@ const emitterChangeTimeout = 6000;
 const measureSliderValues = [5,10,20,35,50,65,85,100];
 
 var selectedFixtures = [];
+var selectedFixturesHavehangedValues = false;
 var currMeasuredFixtureId = null;
 
 //CIE 1931 tristimulus values from:
@@ -559,6 +560,8 @@ function updateSliderDisp(event)
     var currSlider = event.currentTarget;
     var slidersOut = currSlider.nextElementSibling;
     slidersOut.value = currSlider.value;
+
+    selectedFixturesHavehangedValues = true;
 
     for(var sFI in selectedFixtures)
     {
@@ -1071,6 +1074,19 @@ function sortCombinedPointsCounterClockwise(coordinates,center)
 
 function updateSelection(row)
 {
+    if(selectedFixturesHavehangedValues)
+    {
+        for(var sI in selectedFixtures)
+        {
+            selectedFixtures[sI] = false;
+            var unselectRow = document.getElementById("fixtureRow_"+sI);
+            if(unselectRow)
+            {
+                unselectRow.classList.remove("selected");
+            }
+        }
+    }
+
     var fixtureID = row.id.split("_")[1];
     if(!selectedFixtures[fixtureID])
     {
@@ -1096,4 +1112,5 @@ function updateSelection(row)
             currSlider.nextElementSibling.innerHTML = currFixture.channels[channel];
         }
     }
+    selectedFixturesHavehangedValues = false;
 }
