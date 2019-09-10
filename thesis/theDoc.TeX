@@ -682,15 +682,22 @@ und versucht zu emittieren.
 Als Referenz Messgerät zu dem vergleichsweisen niedrigpreisigen Sensoren wurde das bei MA Lighting bereits vorhandene Spektralmessgerät
 "'MK350 LED"' der Firma UPRtek genutzt.\\
 \begin{figure}[H]
-    \begin{center}
-        \includegraphics[width=.48\textwidth]{images/MK350N_Basic_Handheld_Spectrometer.png}
-    \end{center}
-    \caption{UPRtek MK350 LED \cite{uprtek}}
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{images/MK350N_Basic_Handheld_Spectrometer.png}
+        \caption{Produkt \cite{uprtek}}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{images/mk350_lightcan_green.JPG}
+        \caption{Grafisches Benutzer Interface}
+    \end{subfigure}
+    \caption{UPRtek MK350 LED}
 \end{figure}
 \noindent
-Dieses Messgerät kann Spektraldaten im Bereich von {\color{red} 360} bis {\color{red} 760} nanometern messen. Hier wird ein Messwert pro
-einem Nanometer erfasst. Daraus Berechnet das Messgerät weiter \ac{cie} 1931 xy Koordinaten, sowie \ac{cie} 1973 uv Koordinaten.
-Messwerte können einzeln oder auch in Serie erfasst werden und im CSV Format für die weitere Auswertung auf eine SD Karte gesichert werden.
+Dieses Messgerät kann Spektraldaten im Bereich von 360 bis 760 nanometern messen. Hier wird ein Messwert pro einem Nanometer erfasst. Daraus Berechnet
+das Messgerät weiter \ac{cie} 1931 xy Koordinaten, sowie \ac{cie} 1973 uv Koordinaten. Messwerte können einzeln oder auch in Serie erfasst werden und
+im CSV Format für die weitere Auswertung auf eine SD Karte gesichert werden.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Messungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -709,19 +716,19 @@ gemessene Amplitude nach 1 normiert wird. Zur Vergleichbarkeit werden auch in de
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
-        \includegraphics[width=\textwidth]{images/AS7262_functional_blockdiagram.png}
-        \caption{Spektrum MK350}\label{fig:green_spec_MK350} %// TODO Exchange picture
+        \includegraphics[width=\textwidth]{images/mk350_lightcan_green_spectrum.png}
+        \caption{Spektrum MK350}\label{fig:green_spec_MK350}
     \end{subfigure}
     \hfill 
     \begin{subfigure}[b]{0.49\textwidth}
-        \includegraphics[width=\textwidth]{images/AS7262_spectrum.png}
-        \caption{Spektrum AS7262}\label{fig:green_spec_7262} %// TODO Exchange picture
+        \includegraphics[width=\textwidth]{images/app_lightcan_green_spectrum.png}
+        \caption{Spektrum AS7262}\label{fig:green_spec_7262}
     \end{subfigure}
     \caption{Spektrum des grünen Emitters einer LightCan}
 \end{figure}
 \noindent
 Doch war hier ein großes Defizit des AS7262 zu beobachten. wie in Bild  \ref{fig:green_spec_MK350} zu erkennen liegt für das Maximum
-des grünen Emitters bei ca. 480 nanometern. Doch liegen die beiden nächsten Messflanken des AS7262 bei 450 und 500 nanometern (Bild \ref{fig:spec_7262}).
+des grünen Emitters bei ca. 515 nanometern. Doch liegen die beiden nächsten Messflanken des AS7262 bei 500 und 550 nanometern (Bild \ref{fig:spec_7262}).
 Somit wird der Wellenlängenbereich mit der höchsten Energiedichte nicht erfasst. Dies erzeugt eine relevante Fehlerquelle für weitere
 Berechnungen.\\
 Nach der Implementierung der ersten Auswertung der Messdaten eines mit der Applikation verbundenen Sensors wurde begonnen, die Messwerte in der
