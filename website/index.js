@@ -1001,7 +1001,8 @@ function drawColorSpace()
                         { 
                             // both points are inside, ass second point
                             vertices2.push(point2);
-                        } else if (d1 >= 0.0 && d2 < 0.0)
+                        }
+                        else if (d1 >= 0.0 && d2 < 0.0)
                         {
                             // only first point is outside, add intersecion and second point
                             var intersection = intersect(point1[0], point1[1], point2[0], point2[1], clip_point1[0], clip_point1[1], clip_point2[0], clip_point2[1]);
@@ -1010,7 +1011,8 @@ function drawColorSpace()
                                 vertices2.push([ intersection.x, intersection.y ]);
                             }
                             vertices2.push(point2);
-                        } else if (d1 < 0.0 && d2 >= 0.0)
+                        }
+                        else if (d1 < 0.0 && d2 >= 0.0)
                         {
                             // only second point is outside, add intersecion point
                             var intersection = intersect(point1[0], point1[1], point2[0], point2[1], clip_point1[0], clip_point1[1], clip_point2[0], clip_point2[1]);
@@ -1067,8 +1069,8 @@ function drawColorSpace()
     }
 }
 
-function intersect(x1, y1, x2, y2, x3, y3, x4, y4) {
-
+function intersect(x1, y1, x2, y2, x3, y3, x4, y4)
+{
     // Check if none of the lines are of length 0
     if ((x1 === x2 && y1 === y2) || (x3 === x4 && y3 === y4))
     {
