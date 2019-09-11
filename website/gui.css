@@ -1,6 +1,9 @@
 /********************************************/
 /************* Menu *************************/
 /********************************************/
+#controls {
+    -webkit-user-select: none;
+}
 
 .menuItem {
     border: 2px solid gray;
@@ -87,6 +90,7 @@
 #fixtureSheet {
     color: white;
     border-left: 2px solid white;
+    position: relative;
 }
 
 #fixtureSheet * {
@@ -144,6 +148,12 @@
 #fixtureSheet .measureFixture:hover,
 #fixtureSheet .fixtureData:hover {
     background-color: #4e4d5d;
+}
+
+#lasso {
+    border: 2px solid blue;
+    position: absolute;
+    display: none;
 }
 
 /********************************************/

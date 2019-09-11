@@ -395,13 +395,149 @@ function addPatchLine(patchData)
 /////////////////////////////////// Fixture Sheet //////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
+var lassoStartPoint = null;
+
 function createFixtureSheet()
 {
     var fixtureSheet = document.getElementById("fixtureSheet");
     if(fixtureSheet)
     {
         fixtureSheet.innerHTML = "";
+        var lasso = document.createElement('div');
+        lasso.id = "lasso";
+        fixtureSheet.appendChild(lasso);
+        fixtureSheet.onmousemove = function(event)
+        {
+            if(event.buttons != 0)
+            {
+                var lasso = document.getElementById("lasso");
+                if(lasso)
+                {
+                    if(!lassoStartPoint)
+                    {
+                        lasso.style.display = "block";
+                        lasso.style.width = "0px";
+                        lasso.style.height = "0px";
+                        lasso.style.left = event.layerX+"px";
+                        lasso.style.top = event.layerY+"px";
+                        lassoStartPoint = {
+                            x:event.clientX,
+                            y:event.clientY
+                        }
+                    }
+                    else
+                    {
+                        var lassoWidth = lassoStartPoint.x-event.clientX;
+                        var lassoHeight = lassoStartPoint.y-event.clientY;
+                        if(lassoWidth > 0)
+                        {
+                            if(event.layerX != 0)
+                            {
+                                lasso.style.left = event.layerX+"px";
+                            }
+                            lasso.style.width = lassoWidth+"px";
+                            lasso.style.height = lassoHeight+"px";
+                        }
+                        else
+                        {
+                            lassoWidth = lassoWidth*(-1);
+                            lasso.style.width = lassoWidth+"px";
+                            lasso.style.height = lassoHeight+"px";
+                        }
+                        if(lassoHeight < 0)
+                        {
+                            lassoHeight = lassoHeight*(-1);
+                            lasso.style.width = lassoWidth+"px";
+                            lasso.style.height = lassoHeight+"px";
+                        }
+                        else
+                        {
+                            if(event.layerY != 0)
+                            {
+                                lasso.style.top = event.layerY+"px";
+                            }
+                            lasso.style.width = lassoWidth+"px";
+                            lasso.style.height = lassoHeight+"px";
+                        }
+                        //console.log("W="+lassoWidth+" H="+lassoHeight);
+                    }
+                }
+            }
+        }
+        fixtureSheet.onmouseup = function(event)
+        {
+            if(lassoStartPoint != null)
+            {
+                var lassoHeight = lassoStartPoint.y-event.clientY;
+                if(lassoHeight != 0)
+                {
+                    var startHeight = 0;
+                    var stopHeight = 0;
+                    if(lassoHeight > 0)
+                    {
+                        startHeight = lassoStartPoint.y-lassoHeight;
+                        stopHeight = lassoStartPoint.y;
+                    }
+                    else
+                    {
+                        stopHeight = lassoStartPoint.y-lassoHeight;
+                        startHeight = lassoStartPoint.y;
+                    }
+                    var fixtureSheet = document.getElementById("fixtureSheet");
+                    if(fixtureSheet)
+                    {
+                        //var sheetBox = fixtureSheet.getBoundingClientRect();
+                        var sheetRows = fixtureSheet.childNodes[1].childNodes;
+                        for(var i = 1; i < sheetRows.length; i++)
+                        {
+                            var box = sheetRows[i].getBoundingClientRect();
+                            if(box.bottom > startHeight && box.top < stopHeight)
+                            {
+                                if(event.shiftKey)
+                                {
+                                    updateSelection(sheetRows[i]);
+                                }
+                                else
+                                {
+                                    if(sheetRows[i].className.search("selected") == -1)
+                                    {
+                                        updateSelection(sheetRows[i]);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if(!event.ctrlKey)
+                                {
+                                    if(sheetRows[i].className.search("selected") != -1)
+                                    {
+                                        updateSelection(sheetRows[i]);
+                                    }
+                                }
+                                console.log("Row "+i+" does not match "+box.bottom+" > "+startHeight+" && "+box.top+" < "+stopHeight);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        console.warn("Lasso: There is no fixture sheet");
+                    }
+                }
+                else
+                {
+                    console.warn("Lasso is too small");
+                }
+
+                lassoStartPoint = null;
+                var lasso = document.getElementById("lasso");
+                if(lasso)
+                {
+                    lasso.style.display = "";
+                }
+            }
+        }
         var table = document.createElement('table');
+        table.draggable = false;
 
         var usedChannels = {
             intensity:false,
@@ -427,6 +563,7 @@ function createFixtureSheet()
 
         //Title line
         var tr = document.createElement('tr');
+        tr.draggable = false;
         tr.className = "titleLine";
         var td = document.createElement('td');
         td.innerHTML = "No";
@@ -477,6 +614,7 @@ function createFixtureSheet()
         for(var pI = 0; pI < patch.length; pI++)
         {
             tr = document.createElement('tr');
+            tr.draggable = false;
             tr.id = "fixtureRow_"+pI;
             tr.onclick = function(event)
             {
@@ -486,9 +624,11 @@ function createFixtureSheet()
                 }
             }
             td = document.createElement('td');
+            td.draggable = false;
             td.innerHTML = pI+1;
             tr.appendChild(td);
             td = document.createElement('td');
+            td.draggable = false;
             td.innerHTML = patch[pI].fixtureType;
             tr.appendChild(td);
             //Channels
@@ -498,6 +638,7 @@ function createFixtureSheet()
                 if(usedChannels[uCIdx])
                 {
                     td = document.createElement('td');
+                    td.draggable = false;
                     if(uCIdx == "intensity")
                     {
                         if(fTLibEntry.intensity)
@@ -524,6 +665,7 @@ function createFixtureSheet()
 
             //Measure Button
             td = document.createElement('td');
+            td.draggable = false;
             td.className = "measureFixture";
             td.onclick = function(event)
             {
@@ -533,6 +675,7 @@ function createFixtureSheet()
 
             //Emitter Data view
             td = document.createElement('td');
+            td.draggable = false;
             td.className = "fixtureData";
             td.onclick = function(event)
             {
@@ -543,7 +686,7 @@ function createFixtureSheet()
         }
         fixtureSheet.appendChild(table);
     }
-    updateSelection(fixtureSheet.childNodes[0].childNodes[1]);
+    updateSelection(fixtureSheet.childNodes[1].childNodes[1]);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////

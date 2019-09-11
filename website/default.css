@@ -216,6 +216,7 @@ svg {
 #controlSection,
 #fixtureSheet {
     flex: 1;
+    -webkit-user-select: none;
 }
 
 #emitters {
