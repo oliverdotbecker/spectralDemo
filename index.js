@@ -1,4 +1,4 @@
-const serialPort = require('serialport');
+//const serialPort = require('serialport');
 const electron = require('electron');
 const {app, BrowserWindow, Menu} = electron;
 const globalShortcut = electron.globalShortcut;
@@ -103,6 +103,7 @@ var dataInterval = null;
 
 function initSerialCommunication(startup)
 {
+    return null;
     if(serialPath)
     {
         activeSerialPort = new serialPort(serialPath, {
@@ -190,16 +191,16 @@ function sendSerialData(data)
 var serialPorts = "[]";
 exports.getAvailableSerialPorts = function(query)
 {
-    if(query)
+    /*if(query)
     {
         return serialPort.list().then(ports => {
             serialPorts = JSON.stringify(ports);
         });
-    }
+    }*/
     return serialPorts;
 }
 
-serialPort.list().then(ports => {
+/*serialPort.list().then(ports => {
     if(ports.length > 0)
     {
         serialPath = ports[0].comName;
@@ -218,7 +219,7 @@ serialPort.list().then(ports => {
     var tempInterval = setInterval(() => {
         sendSerialData("ATTEMP\n");
     },5020);
-});
+});*/
 
 exports.getMeasures = function()
 {

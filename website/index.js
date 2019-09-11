@@ -252,7 +252,7 @@ function init()
             }
         }
     }
-    updateSerialPorts(true);
+    //updateSerialPorts(true);
 
     createSurface();
     sendDMX();
@@ -957,23 +957,76 @@ function drawColorSpace()
 
             //Analyse the coordinates
             var combinedCoordinates = [];
-            for(var fI = 0; fI < selectedEmitters.length-1; fI++)
+
+            // temporary vertex storage
+            var vertices1 = [], vertices2 = [];
+
+            // start from first gamut
+            vertices2.push([ parseFloat(coordinates[0][0][0]), parseFloat(coordinates[0][0][1]) ]);
+            vertices2.push([ parseFloat(coordinates[0][1][0]), parseFloat(coordinates[0][1][1]) ]);
+            vertices2.push([ parseFloat(coordinates[0][2][0]), parseFloat(coordinates[0][2][1]) ]);
+
+            // clip using all other gamuts
+            for(var fI = 1; fI < selectedEmitters.length; fI++)
             {
                 var currCoordinatesA = coordinates[fI];
-                var currCoordinatesB = coordinates[fI+1];
-                for(var vI = 0; vI < 3; vI++)
+
+                var clip_points = [];
+                for (var vI = 0; vI < currCoordinatesA.length; vI++)
                 {
-                    for(var vI2 = 0; vI2 < 3; vI2++)
+                    clip_points.push([ parseFloat(currCoordinatesA[vI][0]), parseFloat(currCoordinatesA[vI][1]) ]);
+                }
+
+                // TODO: sort clip_points (expected to be in CCW order)
+
+                // loop through clipping edges
+                for (var vI = 0; vI < 3; vI++)
+                {
+                    var clip_point1 = clip_points[vI],
+                        clip_point2 = clip_points[(vI + 1) % 3];
+
+                    // swap lists
+                    vertices1 = vertices2;
+                    vertices2 = [];
+
+                    for (var i = 0; i < vertices1.length; i++)
                     {
-                        var secIdx = (vI+1)%3;
-                        var secIdx2 = (vI2+1)%3;
-                        var intersection = intersect(parseFloat(currCoordinatesA[vI][0]),parseFloat(currCoordinatesA[vI][1]),parseFloat(currCoordinatesA[secIdx][0]),parseFloat(currCoordinatesA[secIdx][1]),parseFloat(currCoordinatesB[vI2][0]),parseFloat(currCoordinatesB[vI2][1]),parseFloat(currCoordinatesB[secIdx2][0]),parseFloat(currCoordinatesB[secIdx2][1]));
-                        if(intersection)
+                        var point1 = vertices1[i],
+                            point2 = vertices1[(i + 1) % vertices1.length];
+                        
+                        var d1 = (point1[0] - clip_point1[0]) * (clip_point2[1] - clip_point1[1]) - (point1[1] - clip_point1[1]) * (clip_point2[0] - clip_point1[0]),
+                            d2 = (point2[0] - clip_point1[0]) * (clip_point2[1] - clip_point1[1]) - (point2[1] - clip_point1[1]) * (clip_point2[0] - clip_point1[0]);
+
+                        if (d1 < 0.0 && d2 < 0.0)
+                        { 
+                            // both points are inside, ass second point
+                            vertices2.push(point2);
+                        } else if (d1 >= 0.0 && d2 < 0.0)
                         {
-                            combinedCoordinates.push(intersection);
+                            // only first point is outside, add intersecion and second point
+                            var intersection = intersect(point1[0], point1[1], point2[0], point2[1], clip_point1[0], clip_point1[1], clip_point2[0], clip_point2[1]);
+                            if (intersection)
+                            {
+                                vertices2.push([ intersection.x, intersection.y ]);
+                            }
+                            vertices2.push(point2);
+                        } else if (d1 < 0.0 && d2 >= 0.0)
+                        {
+                            // only second point is outside, add intersecion point
+                            var intersection = intersect(point1[0], point1[1], point2[0], point2[1], clip_point1[0], clip_point1[1], clip_point2[0], clip_point2[1]);
+                            if (intersection)
+                            {
+                                vertices2.push([ intersection.x, intersection.y ]);
+                            }
                         }
                     }
                 }
+            }
+
+            // copy values to output container
+            for (var i = 0; i < vertices2.length; i++)
+            {
+                combinedCoordinates.push({ x : vertices2[i][0], y : vertices2[i][1] });
             }
 
             if(combinedCoordinates.length > 0)
@@ -1036,7 +1089,7 @@ function intersect(x1, y1, x2, y2, x3, y3, x4, y4) {
     // is the intersection along the segments
     if (ua < 0 || ua > 1 || ub < 0 || ub > 1)
     {
-        return false;
+        //return false;
     }
 
     // Return a object with the x and y coordinates of the intersection

@@ -6,8 +6,8 @@
   "author": "Oliver Becker",
   "license": "ISC",
   "dependencies": {
-    "artnet": "^1.4.0",
-    "serialport": "^7.1.5"
+    "artnet": "1.4.0",
+    "electron": "6.0.8"
   },
   "scripts": {
     "start": "electron index.js",
