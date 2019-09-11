@@ -252,7 +252,7 @@ function init()
             }
         }
     }
-    //updateSerialPorts(true);
+    updateSerialPorts(true);
 
     createSurface();
     sendDMX();
