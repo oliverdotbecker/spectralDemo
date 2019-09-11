@@ -74,7 +74,7 @@ const emitterChangeTimeout = 6000;
 const measureSliderValues = [5,10,20,35,50,65,85,100];
 
 var selectedFixtures = [];
-var selectedFixturesHavehangedValues = false;
+var selectedFixturesHaveChangedValues = false;
 var currMeasuredFixtureId = null;
 
 //CIE 1931 tristimulus values from:
@@ -88,7 +88,6 @@ var currMax = 0;
 var plusSize = 8;
 
 var barsContainer = null;
-var namesContainer = null;
 var currMaxDisplay = null;
 var valueContainer = null;
 var wavelengthsContainer = null;
@@ -188,7 +187,7 @@ function init()
     currxyYDisplay = document.getElementById('currentxyY');
     currRGBDisplay = document.getElementById('currentRGB');
     namesContainer = document.getElementById('names');
-    emitterList = document.getElementById("emitterList");
+    channelSliders = document.getElementById("channelSliders");
     emitterEdit = document.getElementById("emitterEdit");
     sliderContainer = document.getElementById("sliderContainer");
     calcPos = document.getElementById("calcPos");
@@ -463,62 +462,60 @@ function doExport(arg)
 ////////////////////////////////////////////////////////////////////////////////////////
 
 var emitters = null;
-var emitterList = null;
-var emitterEdit = null;
 
-var sliderContainer = null;
-
-/*function editEmitter(event)
+function editEmitter(row)
 {
-    var elem = event.currentTarget;
-    var idx = elem.name;
-    toggleEmitterEdit();
+    var fixtureID = row.id.split("_")[1];
 
-    emitterEdit.idx = idx;
+    var mainDiv = document.createElement('div');
+    mainDiv.id = "emitterMainDiv";
 
-    var editEmitterName = document.getElementById("editEmitterName");
-    editEmitterName.value = emitters[idx].name;
-
-    var editEmitterColor = document.getElementById("editEmitterColor");
-    editEmitterColor.value = emitters[idx].color;
-
-    var measurementBtns = document.getElementById("measures").children;
-    for(var mI = 0; mI < measurementBtns.length; mI++)
+    for(var eI in patch[fixtureID].emitterData)
     {
-        var currMeasurementBtn = measurementBtns[mI];
-        if(patch[currMeasuredFixtureId].emitterData && patch[currMeasuredFixtureId].emitterData[idx].measures[currMeasurementBtn.innerText])
+        var currDataEntry = patch[fixtureID].emitterData[eI];
+
+        var emitterDiv = document.createElement('div');
+        emitterDiv.className = "emitterDiv";
+
+        var emitterTitle = document.createElement('div');
+        emitterTitle.className = "emitterTitle";
+        if(currDataEntry.name == "Weiss")
         {
-            currMeasurementBtn.style.color = patch[currMeasuredFixtureId].emitterData[idx].measures[currMeasurementBtn.innerText].color;
-            currMeasurementBtn.style.borderColor = patch[currMeasuredFixtureId].emitterData[idx].measures[currMeasurementBtn.innerText].color;
+            emitterTitle.className += " white"
         }
-        else
+        emitterTitle.innerHTML = "<label>"+currDataEntry.name+"</label>";
+        emitterTitle.style.backgroundColor = currDataEntry.color;
+        emitterTitle.title = "Click to toggle the measurment values";
+        emitterTitle.onclick = function(event)
         {
-            currMeasurementBtn.style.color = "white";
-            currMeasurementBtn.style.borderColor = "white";
+            var elem = event.currentTarget;
+            elem.parentElement.classList.toggle("collapsed");
         }
+        emitterDiv.appendChild(emitterTitle);
+
+        var emitterContent = document.createElement('div');
+        emitterContent.className = "emitterContent";
+        for(var mI in currDataEntry.measures)
+        {
+            var currMeasure = currDataEntry.measures[mI];
+            var currMeasurementBtn = document.createElement('div');
+            currMeasurementBtn.className = "measurementBtn";
+            currMeasurementBtn.innerText = mI;
+            currMeasurementBtn.style.color = currMeasure.color;
+            currMeasurementBtn.style.borderColor = currMeasure.color;
+            currMeasurementBtn.title = "Spectral: "+currMeasure.spectrum.values.join(" ")+"\n";
+            currMeasurementBtn.title += "XYZ: "+currMeasure.XYZ.join(" ")+"\n";
+            currMeasurementBtn.title += "xyY: "+currMeasure.xyY.join(" ")+"\n";
+            currMeasurementBtn.title += "RGB: "+currMeasure.RGB.join(" ")+"\n";
+            emitterContent.appendChild(currMeasurementBtn);
+        }
+        emitterDiv.appendChild(emitterContent);
+        mainDiv.appendChild(emitterDiv);
     }
+    throwPopup("Fixture Info",mainDiv,true);
 }
 
-function toggleEmitterEdit()
-{
-    if(emitterList.style.display == "none")
-    {
-        emitterList.style.display = "";
-        emitterEdit.style.display = "none";
-    }
-    else
-    {
-        emitterList.style.display = "none";
-        emitterEdit.style.display = "";
-        var editEmitterName = document.getElementById("editEmitterName");
-        editEmitterName.focus();
-        setTimeout(() => {
-            editEmitterName.select();
-        },100);
-    }
-}
-
-function saveEmitter()
+/*function saveEmitter()
 {
     var idx = emitterEdit.idx;
     var editEmitterName = document.getElementById("editEmitterName");
@@ -561,7 +558,7 @@ function updateSliderDisp(event)
     var slidersOut = currSlider.nextElementSibling;
     slidersOut.value = currSlider.value;
 
-    selectedFixturesHavehangedValues = true;
+    selectedFixturesHaveChangedValues = true;
 
     for(var sFI in selectedFixtures)
     {
@@ -978,37 +975,41 @@ function drawColorSpace()
                     }
                 }
             }
-            var centerPoint = getCenterpoint(combinedCoordinates);
-            combinedCoordinates = sortCombinedPointsCounterClockwise(combinedCoordinates,centerPoint);
 
-            //Draw combined color space
-            var box = combinedPathDOM.parentElement.getBoundingClientRect();
-            var sizeX = box.width;
-            var sizeY = box.height;
-            combinedPathDOM.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
-
-            var newPath = "";
-            for(var i = 0; i < combinedCoordinates.length; i++)
-            {
-                if(i == 0)
-                {
-                    newPath += "M ";
-                }
-                else
-                {
-                    newPath += "L ";
-                }
-
-                newPath += parseInt(combinedCoordinates[i].x*sizeX);
-                newPath += ",";
-                newPath += parseInt((combinedCoordinates[i].y)*sizeY);
-                newPath += " ";
-            }
             if(combinedCoordinates.length > 0)
             {
-                newPath += "L "+ parseInt(combinedCoordinates[0].x*sizeX) + "," + parseInt((combinedCoordinates[0].y)*sizeY);
+                var centerPoint = getCenterpoint(combinedCoordinates);
+                combinedCoordinates = sortCombinedPointsCounterClockwise(combinedCoordinates,centerPoint);
+    
+                //Draw combined color space
+                var box = combinedPathDOM.parentElement.getBoundingClientRect();
+                var sizeX = box.width;
+                var sizeY = box.height;
+                combinedPathDOM.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
+    
+                var newPath = "";
+                for(var i = 0; i < combinedCoordinates.length; i++)
+                {
+                    if(i == 0)
+                    {
+                        newPath += "M ";
+                    }
+                    else
+                    {
+                        newPath += "L ";
+                    }
+    
+                    newPath += parseInt(combinedCoordinates[i].x*sizeX);
+                    newPath += ",";
+                    newPath += parseInt((combinedCoordinates[i].y)*sizeY);
+                    newPath += " ";
+                }
+                if(combinedCoordinates.length > 0)
+                {
+                    newPath += "L "+ parseInt(combinedCoordinates[0].x*sizeX) + "," + parseInt((combinedCoordinates[0].y)*sizeY);
+                }
+                combinedPathDOM.setAttribute("d",newPath);
             }
-            combinedPathDOM.setAttribute("d",newPath);
         }
     }
 }
@@ -1074,7 +1075,7 @@ function sortCombinedPointsCounterClockwise(coordinates,center)
 
 function updateSelection(row)
 {
-    if(selectedFixturesHavehangedValues)
+    if(selectedFixturesHaveChangedValues)
     {
         for(var sI in selectedFixtures)
         {
@@ -1112,5 +1113,5 @@ function updateSelection(row)
             currSlider.nextElementSibling.innerHTML = currFixture.channels[channel];
         }
     }
-    selectedFixturesHavehangedValues = false;
+    selectedFixturesHaveChangedValues = false;
 }

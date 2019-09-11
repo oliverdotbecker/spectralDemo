@@ -57,10 +57,6 @@ input[type="checkbox"] {
     margin-left: .25em;
 }
 
-datalist {
-    display: block;
-}
-
 #controls,
 #infos {
     width: 99%;
@@ -227,8 +223,7 @@ svg {
     color: white;
 }
 
-#emitterList,
-#emitterEdit {
+#channelSliders {
     display: flex;
     flex-direction: row;
 }
@@ -250,39 +245,6 @@ svg {
 .emitterEntry,
 .emitterEntry * {
     cursor: pointer;
-}
-
-#emitterEdit {
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
-}
-
-#emitterEdit #measures {
-    display: flex;
-    flex-wrap: wrap;
-    flex: 4;
-}
-
-#emitterEdit input[type="button"] {
-    height: 85%;
-    flex: 1;
-    margin: .5em;
-}
-
-#emitterEdit input[type="text"] {
-    width: 97%;
-}
-
-#emitterEdit #measures>div {
-    flex: 1;
-    flex-basis: calc(25% - 3em);
-    padding: .5em;
-    margin: .5em;
-    border: 1px solid white;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 2px;
 }
 
 #sliderContainer {

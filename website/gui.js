@@ -11,6 +11,10 @@ const emitterDefaultColors = {
     Weiss:"#ffffff"
 };
 
+var namesContainer = null;
+var channelSliders = null;
+var sliderContainer = null;
+
 activeSensor = settings.sensor;
 
 function createSurface()
@@ -35,7 +39,7 @@ function createSurface()
 
 function createSliders()
 {
-    emitterList.innerHTML = "";
+    channelSliders.innerHTML = "";
     sliderContainer.innerHTML = "";
 
     var usedChannels = {
@@ -70,7 +74,7 @@ function createSliders()
         var emitterLabel = document.createElement('label');
         emitterLabel.innerHTML = "Intensity";
         newEmitter.appendChild(emitterLabel);
-        emitterList.insertBefore(newEmitter,emitterList.lastElementChild);
+        channelSliders.insertBefore(newEmitter,channelSliders.lastElementChild);
 
         var newSliderContainer = document.createElement('div');
         newSliderContainer.className = "sliderContainer";
@@ -114,7 +118,7 @@ function createSliders()
             var emitterLabel = document.createElement('label');
             emitterLabel.innerHTML = fTE;
             newEmitter.appendChild(emitterLabel);
-            emitterList.appendChild(newEmitter);
+            channelSliders.appendChild(newEmitter);
     
             var newSliderContainer = document.createElement('div');
             newSliderContainer.className = "sliderContainer";
@@ -530,6 +534,10 @@ function createFixtureSheet()
             //Emitter Data view
             td = document.createElement('td');
             td.className = "fixtureData";
+            td.onclick = function(event)
+            {
+                editEmitter(event.currentTarget.parentElement);
+            }
             tr.appendChild(td);
             table.appendChild(tr);
         }
