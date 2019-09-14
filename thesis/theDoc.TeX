@@ -33,7 +33,7 @@
 \end{center}
 \vspace{1cm}\noindent
 \begin{center}
-    \huge \color{red} Vorabversion 0.8
+    \huge \color{red} Vorabversion 0.9
 \end{center}
 \vspace{1cm}\noindent
 {\large Title:  Abgleich von LED Lichtquellen auf Basis einer komplexen Lichtsteuerung}
@@ -841,7 +841,7 @@ umgewandelt. Dies ist möglich mit folgenden Gleichungen von Lindbloom's Webauft
 \end{align}
 mit CIE RGB
 \begin{align}\label{Equ:5}
-    M = \left[ \begin{array}{rrr}
+    M^{-1} = \left[ \begin{array}{rrr}
         2.3706743 & -0.9000405 & -0.4706338 \\
         -0.5138850 & 1.4253036 & 0.0885814 \\
         0.0052982 & -0.0146949 & 1.0093968 \\
@@ -856,9 +856,22 @@ die Weißlicht Bezugsquelle.
     \caption{Errechnete Werte aus dem Spektrum}
 \end{figure}
 \noindent
-Mit diesen Umrechnungen sind nun alle relevanten Farbräume abgedeckt. Diese Werte werden in der Applikation angezeigt. Die RGB Werte werden mit
-den entsprechenden Werten als Hintergrundfarbe hinterlegt.
+Mit diesen Umrechnungen sind nun alle relevanten Farbräume abgedeckt. Diese Werte werden in der Applikation angezeigt. Die Anzeige der RGB Werte
+wird mit den entsprechenden Werten als Hintergrundfarbe hinterlegt.
 \subsection{Aufnehmen von Messwerten}
+Mit den nun verfügbaren Farbraumdaten aus einer Messung, kann mit der weiteren Verarbeitung der Daten begonnen werden. Nun können die einzelnen
+Emitter vermessen und die Messdaten gesichert werden. Für eine erste Vermessung einer Light Can wurde diese mit dem WAPP per DMX angesteuert.
+Für die Vermessung einer Light Can wurde folgendes Szenario definiert:
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=\textwidth]{images/light_can_holder_3d.png}
+    \end{center}
+    \caption{3D Modell des Messaufbaus für eine Light Can}\label{fig:3DCanHolder}
+\end{figure}
+\noindent
+Diese in Bild \ref{fig:3DCanHolder} gezeigte Vorrichtung wurde 3D Modelliert und anschließend mit einem 3D Drucker hergestellt. In die linke
+Halterung kann eines der Sensorboards eingeschoben werden. Mit einem definierten Abstand von zwölf Zentimetern kann in den rechen runden Halterungen
+eine Light Can arretiert werden. Dieser Abstand wurde anhand der Empfindlichkeiten der Sensoren in den ersten Probemessungen festgelegt.\\
 \subsection{Vorberechnen anhand von Messwerten}
 \clearpage
 
