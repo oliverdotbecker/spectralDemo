@@ -391,7 +391,7 @@ beschrieben. \cite{wikiLicht}\\
     \vspace{-15pt}
 \end{wrapfigure}
 \noindent
-Licht ist im elektromagnetischen Spektrum messbar. Somit ist ein Farbton eine Frequenz und eine Helligkeit eine Amplitude.
+Licht ist im elektromagnetischen Spektrum messbar. Somit kann man einen Farbton als eine Frequenz und eine Helligkeit als eine Amplitude beschreiben.
 Wo eine Farbe im elektromagnetischen Spektrum einzuordnen ist, wird mit der Wellenlänge in Nanometern (nm) angegeben. Diese Zahl fällt von
 dem Infrarotbereich des Spektrums ab 760nm bis in den Ultraviolettbereich bei 380nm.
 \begin{align}\label{Equ:1}
@@ -422,13 +422,13 @@ Im folgenden ein Auszug der Element-Farbzuordnung \cite{wikiLed}:
 \end{table}
 \noindent
 Zunächst wurden \ac{led}s in den frühen 1960er Jahren als Leuchtindikatoren benutzt. Also zum Beispiel auf
-Platinen als Statusanzeige oder wie wir es heute von vielen Ethernetanschlussbuchsen kennen als blinkend als Anzeige, die den Datenempfang
+Platinen als Statusanzeige oder wie wir es heute von vielen Ethernetanschlussbuchsen kennen als blinkende Anzeige, die den Datenempfang
 signalisiert. Durch die voranschreitende technische Entwicklung der \ac{led}, wie bessere Effizienz und bessere Lichtausbeute, sowie besserer
 Langlebigkeit des Bauteils, fand anfang der 1990er die \ac{led} auch ihre Anwendung im Heimbereich.\\
 \ac{led}s emittieren Licht in einem begrenzten Spektralbereich. Das Licht ist nahezu monochromatisch. Deshalb sind sie beim Einsatz als
 Signallicht besonders effizient im Vergleich zu anderen Lichtquellen, bei denen zur Erzielung einer monochromen Farbcharakteristik
 Farbfilter den größten Teil des Spektrums absorbieren müssen.\\
-\cite{showlicht}
+\cite{showlicht} %// TODO: Quotes
 
 \subsubsection{Mischen von Farben}\label{colormixing}
 Emittierende Körper unterliegen der additiven Farbmischung. Das bedeutet, dass sich in das elektromagnetische Spektrum abgegebene
@@ -511,6 +511,24 @@ später gelöst, indem mehrere \ac{led}s in einen Chip integriert wurden, und vo
 Somit konnte ein deutlich homogeneres Abstrahlverhalten erreicht werden.
 \clearpage
 
+%%%%%%%%%%%%%%%%%%%%%%%%%% Farbe %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Farbe}
+Der Begriff Farbe, als Sinneseindruck, beschreibt die verschiedenen Zustände, welche die Amplituden im elektromagnetischen Spektrum annehmen können. Hier ist es
+unerheblich, ob nur eine einzelne Spekrallinie oder eine breite spektrale Verteilung betrachtet wird.\\
+Der Farbeindruck wird vorallem durch den Farbton geprägt. Ein Farbton entsteht natürlich oder künstich von einem emittierenden oder reflektieren Körper.
+Weiter ist die Sättigung ein entscheidendes Merkmal einer Farbe. Umso intensiver ein Farbton ist, desto höher ist die Sättigung der Farbe. Ein blasser
+Farbton beinhaltet in seinem Spektrum einen Weiss-Anteil. Je blasser der Farbton, so mehr Weiss-Anteile enthält er. Zuletzt ist noch die Helligkeit zu
+nennen. Sie drückt die Intensität der Lichtempfindung einer Farbe aus und ist mit der Farbempfindung fest verknüpft.
+\subsection{Farbtemperatur}
+Der Begriff der Farbtemperatur ist durch den plankschen Strahler begründet. Es wurde beobachtet, dass bei dem starken Erhitzen von einem Metall
+sich die Farbe des Metalls verändert.
+\subsection{Farbmischung}
+\subsubsection{Additiv}
+\subsubsection{Subtraktiv}
+%\cite[62 - 63]{lichtquellen}
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Menschliches Farbsehen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Menschliches Farbsehen}
 Das menschliche Auge besitzt zwei Arten von "'Sensoren"', oder auch Rezeptoren. Stäbchen zur Helligkeitswahrnehmung bei Nacht und
 Zapfen zur Helligkeits- und Farbwahrnehmung bei Tag. Das Verhältnis von Zapfen zu Stäbchen beträgt im Schnitt 20:1.\\
@@ -546,7 +564,7 @@ Auges im elektromagnetischen Spektrum.
 Es gibt einige Hersteller von entsprechenden Spektralsensoren für Licht und spektral benachbarte Bereiche wie Infrarot.
 Ein Hersteller, dessen Sensoren in dieser Arbeit vornehmlich genutzt wurden, ist die Firma AMS.\\
 Zu Beginn wurde nach einer einfachen Evaluierungslösung für das Erfassen von spektralen Daten gesucht. Hier wurde das
-Sensorboard von der Firma Adafruit AS7262 genutzt.\cite{adafruit}\\
+Sensorboard von der Firma Adafruit AS7262 genutzt. \cite{adafruit}\\
 Dieses Board nutzt einen AMS AS7262 Visible Spectral Light Sensor. Weiter stellt es Pin outs für \ac{i2c} und \ac{uart} bereit,
 sowie eine Status-\ac{led} und eine Referenz \ac{led} Weißlichtquelle zur Beleuchtung von nicht selbst emittierenden
 Gegenständen.
@@ -880,25 +898,26 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
 \begingroup
 \renewcommand{\section}[2]{}
 \begin{thebibliography}{xxxxxxxxxxxxxxxxxxx}
-    \bibitem[Art-Net Homepage, 2019]{artnet}"'Home - Art-Net"', \url{https://art-net.org.uk/}, 07.08.2019
-    \bibitem[Art-Net Documatation, 2019]{artdmx}"'ArtDmx – Packet Definition - Art-Net"', \url{https://art-net.org.uk/structure/streaming-packets/artdmx-packet-definition/}, 10.08.2019
-    \bibitem[Electron Homepage, 2019]{electron}"'Electron | Plattformübergreifende Desktop-Anwendungen mit JavaScript, HTML und CSS entwickeln."', \url{https://electronjs.org/}, 08.08.2019
-    \bibitem[Licht Wikipedia, 2019]{wikiLicht}"'Licht - Wikipedia"', \url{https://de.wikipedia.org/wiki/Licht}, 11.08.2019
-    \bibitem[Wikipedia, 2019]{spectrumLight}"'Electromagnetic spectrum - Wikipedia"', \url{https://en.wikipedia.org/wiki/Electromagnetic_spectrum}, 11.08.2019
-    \bibitem[Farbwahrnehmung FHT Esslingen, 2019]{fhtEsslignen}"'Farbwahrnehmung"', \url{http://www.it.fht-esslingen.de/~asbeck/gdial/farbe/sehen2.html}, 11.08.2019
-    \bibitem[Leuchtdiode Wikipedia, 2019]{wikiLed}"'Leuchtdiode - Wikipedia"', \url{https://de.wikipedia.org/wiki/Leuchtdiode}, 21.08.2019
+    \bibitem[Art-Net Homepage, 2019]{artnet}"'Home - Art-Net"', \url{https://art-net.org.uk/}. Visited on: 07.08.2019
+    \bibitem[Art-Net Documatation, 2019]{artdmx}"'ArtDmx – Packet Definition - Art-Net"', \url{https://art-net.org.uk/structure/streaming-packets/artdmx-packet-definition/}. Visited on: 10.08.2019
+    \bibitem[Electron Homepage, 2019]{electron}"'Electron | Plattformübergreifende Desktop-Anwendungen mit JavaScript, HTML und CSS entwickeln."', \url{https://electronjs.org/}. Visited on: 08.08.2019
+    \bibitem[Licht Wikipedia, 2019]{wikiLicht}"'Licht - Wikipedia"', \url{https://de.wikipedia.org/wiki/Licht}. Visited on: 11.08.2019
+    \bibitem[Wikipedia, 2019]{spectrumLight}"'Electromagnetic spectrum - Wikipedia"', \url{https://en.wikipedia.org/wiki/Electromagnetic_spectrum}. Visited on: 11.08.2019
+    \bibitem[Lichtquellen, 2015]{lichtquellen} Dohlus, Rainer: "'Lichtquellen"' De Gruyter, Berlin, 2015, 
+    \bibitem[Farbwahrnehmung FHT Esslingen, 2019]{fhtEsslignen}"'Farbwahrnehmung"', \url{http://www.it.fht-esslingen.de/~asbeck/gdial/farbe/sehen2.html}. Visited on: 11.08.2019
+    \bibitem[Leuchtdiode Wikipedia, 2019]{wikiLed}"'Leuchtdiode - Wikipedia"', \url{https://de.wikipedia.org/wiki/Leuchtdiode}. Visited on: 21.08.2019
     \bibitem[Showlicht von Scribble zum fertigen Desgin, 2014]{showlicht}"'Showlicht von Scribble zum fertigen Desgin"', 01.09.2019
-    \bibitem[Philips PAR64 Leuchtmittel 1000W | Thomann, 2019]{convpar}"'Philips PAR64 Leuchtmittel 1000W | Thomann"', \url{https://www.thomann.de/de/philips_par64_1000_watt_mfl_cp62_exe.htm}, 02.09.2019
-    \bibitem[P FLAT PRO 18 IP65 | Cameo, 2019]{ledpar}"'P FLAT PRO 18 IP65 | Cameo"', \url{https://www.cameolight.com/de/loesungen/installation/outdoor-lichttechnik/outdoor-scheinwerfer/2297/p-flat-pro-18-ip65?c=1826}, 02.09.2019
-    \bibitem[Adafruit Learn, 2019]{adafruit}"'Overview | Adafruit AS7262 6-channel Visible Light Sensor | Adafruit Learning System"', \url{https://learn.adafruit.com/adafruit-as7262-6-channel-visible-light-sensor}, 11.08.2019
-    \bibitem[AS7261 Datenblatt, 2019]{datasheet61}"'AS7261 XYZ Chromatic White Color Sensor + NIR with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7261_DS000493_1-00.pdf/0e7d1f12-702e-d061-b07a-67b0b6316800}, 11.08.2019
-    \bibitem[AS7262 Datenblatt, 2019]{datasheet62}"'AS7262 6-Channel Visible Spectral ID Device with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7262_DS000486_2-00.pdf/0031f605-5629-e030-73b2-f365fd36a43b}, 11.08.2019
-    \bibitem[Ape Labs Homepage,2019]{lightCan} \url{https://apelabs.com/products/leuchtdose}, 02.09.2019
-    \bibitem[Robe Homepage,2019]{robe} \url{https://www.robe.cz/ledwash-300plus/}, 02.09.2019
-    \bibitem[Arri Homepage,2019]{arri} \url{https://www.arri.com/en/lighting/led/skypanel/s60-c}, 02.09.2019
-    \bibitem[UPRtek Homepage,2019]{uprtek} \url{https://www.uprtek.com/de/product/LED-Test-Measurement-Handspektrometer/MK350N-Basic-Handheld-Spectrometer.html}, 09.09.2019
-    \bibitem[Lindbloom Homepage,2019]{lindbloom} \url{http://brucelindbloom.com/index.html}, 09.09.2019
-    \bibitem[Wisotop Homepage,2019]{wisotop} \url{https://wisotop.de/Anhang-Tristimulus-Werte.php}, 09.09.2019
+    \bibitem[Philips PAR64 Leuchtmittel 1000W | Thomann, 2019]{convpar}"'Philips PAR64 Leuchtmittel 1000W | Thomann"', \url{https://www.thomann.de/de/philips_par64_1000_watt_mfl_cp62_exe.htm}. Visited on: 02.09.2019
+    \bibitem[P FLAT PRO 18 IP65 | Cameo, 2019]{ledpar}"'P FLAT PRO 18 IP65 | Cameo"', \url{https://www.cameolight.com/de/loesungen/installation/outdoor-lichttechnik/outdoor-scheinwerfer/2297/p-flat-pro-18-ip65?c=1826}. Visited on: 02.09.2019
+    \bibitem[Adafruit Learn, 2019]{adafruit}"'Overview | Adafruit AS7262 6-channel Visible Light Sensor | Adafruit Learning System"', \url{https://learn.adafruit.com/adafruit-as7262-6-channel-visible-light-sensor}. Visited on: 11.08.2019
+    \bibitem[AS7261 Datenblatt, 2019]{datasheet61}"'AS7261 XYZ Chromatic White Color Sensor + NIR with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7261_DS000493_1-00.pdf/0e7d1f12-702e-d061-b07a-67b0b6316800}. Visited on: 11.08.2019
+    \bibitem[AS7262 Datenblatt, 2019]{datasheet62}"'AS7262 6-Channel Visible Spectral ID Device with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7262_DS000486_2-00.pdf/0031f605-5629-e030-73b2-f365fd36a43b}. Visited on: 11.08.2019
+    \bibitem[Ape Labs Homepage,2019]{lightCan} \url{https://apelabs.com/products/leuchtdose}. Visited on: 02.09.2019
+    \bibitem[Robe Homepage,2019]{robe} \url{https://www.robe.cz/ledwash-300plus/}. Visited on: 02.09.2019
+    \bibitem[Arri Homepage,2019]{arri} \url{https://www.arri.com/en/lighting/led/skypanel/s60-c}. Visited on: 02.09.2019
+    \bibitem[UPRtek Homepage,2019]{uprtek} \url{https://www.uprtek.com/de/product/LED-Test-Measurement-Handspektrometer/MK350N-Basic-Handheld-Spectrometer.html}. Visited on: 09.09.2019
+    \bibitem[Lindbloom Homepage,2019]{lindbloom} \url{http://brucelindbloom.com/index.html}. Visited on: 09.09.2019
+    \bibitem[Wisotop Homepage,2019]{wisotop} \url{https://wisotop.de/Anhang-Tristimulus-Werte.php}. Visited on: 09.09.2019
  \end{thebibliography}
  \endgroup
 \clearpage
