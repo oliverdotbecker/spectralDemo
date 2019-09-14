@@ -31,7 +31,11 @@
     \paragraph{}
     \huge MASTER THESIS
 \end{center}
-\vspace{3cm}\noindent
+\vspace{1cm}\noindent
+\begin{center}
+    \huge \color{red} Vorabversion 0.8
+\end{center}
+\vspace{1cm}\noindent
 {\large Title:  Abgleich von LED Lichtquellen auf Basis einer komplexen Lichtsteuerung}
 \par\vspace{3cm}\noindent
 Submitted by:               Oliver Becker\\
@@ -404,8 +408,70 @@ Dieser Teil des elektromagnetischen Spektrums lässt sich zum Beispiel mit Photo
 werden allgemein als Spektralsensoren bezeichnet.
 \clearpage
 
-\subsection{LED}
-\subsubsection{Allgemein}
+%%%%%%%%%%%%%%%%%%%%%%%%%% Farbe %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Farbe}
+Der Begriff Farbe, als Sinneseindruck, beschreibt die verschiedenen Zustände, welche die Amplituden im elektromagnetischen Spektrum annehmen können. Hier ist es
+unerheblich, ob nur eine einzelne Spekrallinie oder eine breite spektrale Verteilung betrachtet wird.\\
+Der Farbeindruck wird vorallem durch den Farbton geprägt. Ein Farbton entsteht natürlich oder künstich von einem emittierenden oder reflektieren Körper.
+Weiter ist die Sättigung ein entscheidendes Merkmal einer Farbe. Umso intensiver ein Farbton ist, desto höher ist die Sättigung der Farbe. Ein blasser
+Farbton beinhaltet in seinem Spektrum einen Weiss-Anteil. Je blasser der Farbton, so mehr Weiss-Anteile enthält er. Zuletzt ist noch die Helligkeit zu
+nennen. Sie drückt die Intensität der Lichtempfindung einer Farbe aus und ist mit der Farbempfindung fest verknüpft.
+\subsection{Farbtemperatur}
+Der Begriff der Farbtemperatur ist durch den planckscher Strahler begründet. Es wurde beobachtet, dass bei dem starken Erhitzen von einem Metall
+sich die Farbe des Metalls verändert. Ab einer Temperatur von etwa 923 Kelvin (K), also 650 Celsius, fängt das Metall an rot zu glühen. Bei
+weiterem erhöhen der Temperatur wechselt der Farbton des Metalls über gelb zur sogenannten Weißglut ab rund 1300 Celsius (1573 K).
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/thermal_radiation_figure.png}
+    \end{center}
+    \caption{Farbtemperatur Darstellung \cite{wikiFarbtemperatur}}
+\end{figure}
+\noindent
+Dieses Prinzip der Lichtemittierung wird auch Temperaturstrahlung genannt.\\
+Somit wird auch heute bei \ac{led}s noch die Farbtemperatur bestimmt und in Kelvin angegeben, auch wenn die Lichtemittierung nicht auf der
+Temperaturstrahlung basiert.
+\subsection{Farbmischung}
+
+\subsubsection{Additiv}
+\subsubsection{Subtraktiv}
+%\cite[62 - 63]{lichtquellen}
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Menschliches Farbsehen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Menschliches Farbsehen}
+Das menschliche Auge besitzt zwei Arten von "'Sensoren"', oder auch Rezeptoren. Stäbchen zur Helligkeitswahrnehmung bei Nacht und
+Zapfen zur Helligkeits- und Farbwahrnehmung bei Tag. Das Verhältnis von Zapfen zu Stäbchen beträgt im Schnitt 20:1.\\
+Somit ist das Sehen bei Tag ca. sieben Mal so hoch aufgelöst wie bei Nacht.\\
+Ähnlich wie verschiedene Photodioden, welche einzelne Spektralbereiche abdecken, decken auch die Zapfen nur einen
+bestimmten Bereich im Farbspektrum ab. Es gibt drei verschiedene Arten von Zapfen. S-, M-, und L-Zapfen. Also "'Short"',
+"'Middle"' und "'Long"' Zapfen. Die Längenangaben beziehen sich auf den Wellenlängenbereich, auf welchen die Zapfen
+resistiv sind.\\
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{images/eye_spectrum.png}
+    \caption{Darstellung des sichtbaren Farbspektrums der Zapfen des Auges}\label{fig:eye_spectrum}
+\end{figure}
+\noindent
+Die Mengenverteilung der verschiedenen Zapfenarten liegt circa bei S:M:L 1:16:32.
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Farbräume %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Farbräume}
+\subsection{Farbspektrum}
+Wie bereits in \ref{light and measurement} beschrieben ist das Farbspektrum die Entsprechung des Wahrnehmungsbereiches des menschlichen
+Auges im elektromagnetischen Spektrum.
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{images/farbspektrum.png}
+    \caption{Darstellung des sichtbaren Farbspektrums \cite{fhtEsslignen}}
+\end{figure}
+\subsection{sRGB}
+\subsection{CIE} \label{section_CIE}
+\subsubsection{CIE 1931}
+\subsubsection{CIE 1976}
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% LED %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{LED}
+\subsection{Allgemein}
 \ac{led} ist das Acronym für Light Emitting Diode, also lichtemittierende Diode. Dies ist eine spezielle Art von Halbleitern,
 welche bei einem Stromfluss Licht emittieren. Die chemische Zusammensetzung (Dotierung) der Diode entscheidet, welche Farbe
 beziehungsweise welche Frequenz sie emittiert.\\
@@ -430,13 +496,13 @@ Signallicht besonders effizient im Vergleich zu anderen Lichtquellen, bei denen 
 Farbfilter den größten Teil des Spektrums absorbieren müssen.\\
 \cite{showlicht} %// TODO: Quotes
 
-\subsubsection{Mischen von Farben}\label{colormixing}
+\subsection{Mischen von Farben}\label{colormixing}
 Emittierende Körper unterliegen der additiven Farbmischung. Das bedeutet, dass sich in das elektromagnetische Spektrum abgegebene
 Wellen auf Ihren jeweiligen Wellenlängen aufaddieren. Somit kann mit verschiedenen LED Lichtquellen eine neue Farbe gemischt
 werden.\\
 So kann beispielsweise mit einer roten und einer grünen \ac{led} ein orangener bis gelber Farbton gemischt werden.
 
-\subsubsection{Weiße LEDs}
+\subsection{Weiße LEDs}
 Eine tatsächlich weiße \ac{led} existiert bisher auf dem Markt nicht, da \ac{led}s generell schmalbandig abstrahlen. Die Heutzutage
 verwendeten "'weißen"' \ac{led}s sind eigentlich blaue \ac{led}s, mit einem zusätzlichen Phosphor Filter als breitbandigem Lumineszenzfarbstoff.
 \begin{figure}[H]
@@ -457,7 +523,8 @@ Dies verschiebt das abgestrahlte Licht in den gelben Bereich. Somit mit einem Te
 ein breitbandiges Abstrahlverhalten.
 \clearpage
 
-\subsection{Lichtquellen in der Veranstaltungstechnik}
+%%%%%%%%%%%%%%%%%%%%%%%%%% Lichtquellen in der Veranstaltungstechnik %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Lichtquellen in der Veranstaltungstechnik}
 Für die Veranstaltungstechnik ist künstliches Licht nahezu unverzichtbar. Von der Grundausleuchtung in einem Theater bis zu dem Effektlicht
 auf Kleinveranstaltungen. In den frühen Jahren der großen Konzerte wurden hauptsächlich mit Scheinwerfern mit Glühfaden Leuchtmitteln beleuchtet.
 Diese Form der Beleuchtung wurde in der Veranstaltungstechnik als Kunstlicht bezeichnet.\\
@@ -511,52 +578,78 @@ später gelöst, indem mehrere \ac{led}s in einen Chip integriert wurden, und vo
 Somit konnte ein deutlich homogeneres Abstrahlverhalten erreicht werden.
 \clearpage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%% Farbe %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Farbe}
-Der Begriff Farbe, als Sinneseindruck, beschreibt die verschiedenen Zustände, welche die Amplituden im elektromagnetischen Spektrum annehmen können. Hier ist es
-unerheblich, ob nur eine einzelne Spekrallinie oder eine breite spektrale Verteilung betrachtet wird.\\
-Der Farbeindruck wird vorallem durch den Farbton geprägt. Ein Farbton entsteht natürlich oder künstich von einem emittierenden oder reflektieren Körper.
-Weiter ist die Sättigung ein entscheidendes Merkmal einer Farbe. Umso intensiver ein Farbton ist, desto höher ist die Sättigung der Farbe. Ein blasser
-Farbton beinhaltet in seinem Spektrum einen Weiss-Anteil. Je blasser der Farbton, so mehr Weiss-Anteile enthält er. Zuletzt ist noch die Helligkeit zu
-nennen. Sie drückt die Intensität der Lichtempfindung einer Farbe aus und ist mit der Farbempfindung fest verknüpft.
-\subsection{Farbtemperatur}
-Der Begriff der Farbtemperatur ist durch den plankschen Strahler begründet. Es wurde beobachtet, dass bei dem starken Erhitzen von einem Metall
-sich die Farbe des Metalls verändert.
-\subsection{Farbmischung}
-\subsubsection{Additiv}
-\subsubsection{Subtraktiv}
-%\cite[62 - 63]{lichtquellen}
-\clearpage
-
-%%%%%%%%%%%%%%%%%%%%%%%%%% Menschliches Farbsehen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Menschliches Farbsehen}
-Das menschliche Auge besitzt zwei Arten von "'Sensoren"', oder auch Rezeptoren. Stäbchen zur Helligkeitswahrnehmung bei Nacht und
-Zapfen zur Helligkeits- und Farbwahrnehmung bei Tag. Das Verhältnis von Zapfen zu Stäbchen beträgt im Schnitt 20:1.\\
-Somit ist das Sehen bei Tag ca. sieben Mal so hoch aufgelöst wie bei Nacht.\\
-Ähnlich wie verschiedene Photodioden, welche einzelne Spektralbereiche abdecken, decken auch die Zapfen nur einen
-bestimmten Bereich im Farbspektrum ab. Es gibt drei verschiedene Arten von Zapfen. S-, M-, und L-Zapfen. Also "'Short"',
-"'Middle"' und "'Long"' Zapfen. Die Längenangaben beziehen sich auf den Wellenlängenbereich, auf welchen die Zapfen
-resistiv sind.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%% Verwendete Gerätschaften %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Verwendete Gerätschaften}
+\subsection{Lampen}
+Im folgenden werden die Lichtquellen beziehungsweise die Lampen beschrieben, die für die Messungen verwendet wurden.
+Auch in der Veranstaltungstechnik als (engl.) "'Fixtures"' bezeichnet. Diese Lampen haben alle \ac{led}s als Lichtquelle. Diese \ac{led}s
+sind alle unterschiedlich aufgebaut.
+\subsubsection{Ape Labs Light Can}
+~\par\vspace{-\baselineskip}
+\begin{wrapfigure}{r}{0.4\textwidth}
+    \vspace{-45pt}
+    \begin{center}
+        \includegraphics[width=.23\textwidth]{images/light_can_front.png}
+    \end{center}
+    \vspace{-20pt}
+    \caption{Light Can}
+    \vspace{-15pt}
+\end{wrapfigure}
+\noindent
+Diese Lampe ist eine sehr kompakt gebaute RGBW \ac{led} Lichtquelle auf Akku Basis. Diese wurde von der Firma Ape Labs aus Eisigen in Deutschland
+entwickelt. Diese Lampe ist sowohl per Fernbedienung, als auch per W-\ac{dmx} steuerbar.
+Die "'Kanne"' hat einen Abstrahlwinkel von 65 Grad. Zur gezielten Steuerung, ohne vorprogrammierte Effekte wird ein \ac{dmx} zu W-DMX Wandler der
+Firma benötigt (W-APP). Dieser ermöglicht dann die Ansteuerung der Lampe durch die Applikation.
+\subsubsection{Robe LEDWash 300}
+Dieses Wash Movinglight ist ein handelsübliches Gerät und wird weltweit bei vielen Veranstaltungen universell eingesetzt. Hier sind 19 einzelne
+RGBW \ac{led}s hinter einzelnen Linsen in zwei Kreisen und einer Mittelpunkt \ac{led} positioniert.
 \begin{figure}[H]
-    \includegraphics[width=\textwidth]{images/eye_spectrum.png}
-    \caption{Darstellung des sichtbaren Farbspektrums der Zapfen des Auges}\label{fig:eye_spectrum}
+    \begin{center}
+        \includegraphics[width=.3\textwidth]{images/Robe_300_ledwash.png}
+    \end{center}
+    \caption{Robe LEDWash 300 \cite{robe}}
 \end{figure}
-Die Mengenverteilung der verschiedenen Zapfenarten liegt circa bei S:M:L 1:16:32.
-\clearpage
-
-%%%%%%%%%%%%%%%%%%%%%%%%%% Farbräume %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Farbräume}
-\subsection{Farbspektrum}
-Wie bereits in \ref{light and measurement} beschrieben ist das Farbspektrum die Entsprechung des Wahrnehmungsbereiches des menschlichen
-Auges im elektromagnetischen Spektrum.
+\noindent
+Das Movinglight hat einen einstellbaren Abstrahlwinkel von 8 bis 63 Grad. Dieser wurde allerdings bei den Messungen auf 63 Grad fest eingestellt,
+um ein möglichst homogenes Abstrahlverhalten zu erhalten. Laut Hersteller hat die Lampe bei einer Distanz von fünf Metern zur Lampe eine
+Lichtausbeute von 3.370 Lumen. Die Lampe ist per \ac{xlr} mit DMX, oder via Ethernet RJ45-Buchse per Art-Net steuerbar. An einem Display
+am Fuß (der "'Base"') kann der Scheinwerfer konfiguriert werden.
+\subsubsection{ARRI SkyPanel}
+Das Skypanel S60-C von der Firma Arri, ein Tochterunternehmen der Firma Osram, wird oft als Fluter, das Grundlicht in Film und Fernsehen, eingesetzt.
+Es wird beworben, dass es mit xyY Kanälen per DMX angesteuert werden kann und diese \ac{cie} Werte von der Lampe exakt wiedergegeben werden. Somit
+ist diese Lampe eine perfekte Referenz für diese Arbeit.
 \begin{figure}[H]
-    \includegraphics[width=\textwidth]{images/farbspektrum.png}
-    \caption{Darstellung des sichtbaren Farbspektrums \cite{fhtEsslignen}}
+    \begin{center}
+        \includegraphics[width=.48\textwidth]{images/skypanel_s60_c.png}
+    \end{center}
+    \caption{ARRI Skypanel S60-C \cite{arri}}
 \end{figure}
-\subsection{sRGB}
-\subsection{CIE} \label{section_CIE}
-\subsubsection{CIE 1931}
-\subsubsection{CIE 1976}
+\noindent
+Das SkyPanel hat einen Abstrahlwinkel von 115 Grad. Die RGBW \ac{led}s befinden sich hinter einem lampengroßem Diffusor. Die Lampe ist per
+\ac{xlr} mit DMX, W-DMX oder via Ethernet RJ45-Buchse per Art-Net steuerbar. An einem Display auf der Rückseite kann der Scheinwerfer konfiguriert
+werden. Außerdem kann manuell am Gerät auch eine xyY \ac{cie} Farbe ohne externe Ansteuerung eingestellt werden.\\
+Bei einer Ansteuerung per DMX oder Art-Net kann am Gerät auch abgelesen werden, welche xyY Werte das Gerät aus der Ansteuerung ermittelt,
+und versucht zu emittieren.
+\subsection{Messgerät MK350 LED}
+Als Referenz Messgerät zu dem vergleichsweisen niedrigpreisigen Sensoren wurde das bei MA Lighting bereits vorhandene Spektralmessgerät
+"'MK350 LED"' der Firma UPRtek genutzt.\\
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{images/MK350N_Basic_Handheld_Spectrometer.png}
+        \caption{Produkt \cite{uprtek}}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{images/mk350_lightcan_green.JPG}
+        \caption{Grafisches Benutzer Interface}
+    \end{subfigure}
+    \caption{UPRtek MK350 LED}
+\end{figure}
+\noindent
+Dieses Messgerät kann Spektraldaten im Bereich von 360 bis 760 nanometern messen. Hier wird ein Messwert pro einem Nanometer erfasst. Daraus Berechnet
+das Messgerät weiter \ac{cie} 1931 xy Koordinaten, sowie \ac{cie} 1976 uv Koordinaten. Messwerte können einzeln oder auch in Serie erfasst werden und
+im CSV Format für die weitere Auswertung auf eine SD Karte gesichert werden.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Sensorik %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -639,80 +732,6 @@ Bereich.
 \noindent
 Hier werden aus der \ac{uart} (AT) Schnittstelle mit dem Befehl "'ATCDATA"' die Sensorwerte der einzelnen Dioden als 32-Bit floating point
 (Gleitkomma Zahlen) ausgegeben. Die weiteren nicht Sensor bezogenen Befehle sind identisch mit dem Befehlssatz des AS7261 Sensors.
-\clearpage
-
-%%%%%%%%%%%%%%%%%%%%%%%%%% Verwendete Gerätschaften %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Verwendete Gerätschaften}
-\subsection{Lampen}
-Im folgenden werden die Lichtquellen beziehungsweise die Lampen beschrieben, die für die Messungen verwendet wurden.
-Auch in der Veranstaltungstechnik als (engl.) "'Fixtures"' bezeichnet. Diese Lampen haben alle \ac{led}s als Lichtquelle. Diese \ac{led}s
-sind alle unterschiedlich aufgebaut.
-\subsubsection{Ape Labs Light Can}
-~\par\vspace{-\baselineskip}
-\begin{wrapfigure}{r}{0.4\textwidth}
-    \vspace{-45pt}
-    \begin{center}
-        \includegraphics[width=.23\textwidth]{images/light_can_front.png}
-    \end{center}
-    \vspace{-20pt}
-    \caption{Light Can}
-    \vspace{-15pt}
-\end{wrapfigure}
-\noindent
-Diese Lampe ist eine sehr kompakt gebaute RGBW \ac{led} Lichtquelle auf Akku Basis. Diese wurde von der Firma Ape Labs aus Eisigen in Deutschland
-entwickelt. Diese Lampe ist sowohl per Fernbedienung, als auch per W-\ac{dmx} steuerbar.
-Die "'Kanne"' hat einen Abstrahlwinkel von 65 Grad. Zur gezielten Steuerung, ohne vorprogrammierte Effekte wird ein \ac{dmx} zu W-DMX Wandler der
-Firma benötigt (W-APP). Dieser ermöglicht dann die Ansteuerung der Lampe durch die Applikation.
-\subsubsection{Robe LEDWash 300}
-Dieses Wash Movinglight ist ein handelsübliches Gerät und wird weltweit bei vielen Veranstaltungen universell eingesetzt. Hier sind 19 einzelne
-RGBW \ac{led}s hinter einzelnen Linsen in zwei Kreisen und einer Mittelpunkt \ac{led} positioniert.
-\begin{figure}[H]
-    \begin{center}
-        \includegraphics[width=.3\textwidth]{images/Robe_300_ledwash.png}
-    \end{center}
-    \caption{Robe LEDWash 300 \cite{robe}}
-\end{figure}
-\noindent
-Das Movinglight hat einen einstellbaren Abstrahlwinkel von 8 bis 63 Grad. Dieser wurde allerdings bei den Messungen auf 63 Grad fest eingestellt,
-um ein möglichst homogenes Abstrahlverhalten zu erhalten. Laut Hersteller hat die Lampe bei einer Distanz von fünf Metern zur Lampe eine
-Lichtausbeute von 3.370 Lumen. Die Lampe ist per \ac{xlr} mit DMX, oder via Ethernet RJ45-Buchse per Art-Net steuerbar. An einem Display
-am Fuß (der "'Base"') kann der Scheinwerfer konfiguriert werden.
-\subsubsection{ARRI SkyPanel}
-Das Skypanel S60-C von der Firma Arri, ein Tochterunternehmen der Firma Osram, wird oft als Fluter, das Grundlicht in Film und Fernsehen, eingesetzt.
-Es wird beworben, dass es mit xyY Kanälen per DMX angesteuert werden kann und diese \ac{cie} Werte von der Lampe exakt wiedergegeben werden. Somit
-ist diese Lampe eine perfekte Referenz für diese Arbeit.
-\begin{figure}[H]
-    \begin{center}
-        \includegraphics[width=.48\textwidth]{images/skypanel_s60_c.png}
-    \end{center}
-    \caption{ARRI Skypanel S60-C \cite{arri}}
-\end{figure}
-\noindent
-Das SkyPanel hat einen Abstrahlwinkel von 115 Grad. Die RGBW \ac{led}s befinden sich hinter einem lampengroßem Diffusor. Die Lampe ist per
-\ac{xlr} mit DMX, W-DMX oder via Ethernet RJ45-Buchse per Art-Net steuerbar. An einem Display auf der Rückseite kann der Scheinwerfer konfiguriert
-werden. Außerdem kann manuell am Gerät auch eine xyY \ac{cie} Farbe ohne externe Ansteuerung eingestellt werden.\\
-Bei einer Ansteuerung per DMX oder Art-Net kann am Gerät auch abgelesen werden, welche xyY Werte das Gerät aus der Ansteuerung ermittelt,
-und versucht zu emittieren.
-\subsection{Messgerät MK350 LED}
-Als Referenz Messgerät zu dem vergleichsweisen niedrigpreisigen Sensoren wurde das bei MA Lighting bereits vorhandene Spektralmessgerät
-"'MK350 LED"' der Firma UPRtek genutzt.\\
-\begin{figure}[H]
-    \centering
-    \begin{subfigure}[b]{0.49\textwidth}
-        \includegraphics[width=\textwidth]{images/MK350N_Basic_Handheld_Spectrometer.png}
-        \caption{Produkt \cite{uprtek}}
-    \end{subfigure}
-    \hfill 
-    \begin{subfigure}[b]{0.49\textwidth}
-        \includegraphics[width=\textwidth]{images/mk350_lightcan_green.JPG}
-        \caption{Grafisches Benutzer Interface}
-    \end{subfigure}
-    \caption{UPRtek MK350 LED}
-\end{figure}
-\noindent
-Dieses Messgerät kann Spektraldaten im Bereich von 360 bis 760 nanometern messen. Hier wird ein Messwert pro einem Nanometer erfasst. Daraus Berechnet
-das Messgerät weiter \ac{cie} 1931 xy Koordinaten, sowie \ac{cie} 1976 uv Koordinaten. Messwerte können einzeln oder auch in Serie erfasst werden und
-im CSV Format für die weitere Auswertung auf eine SD Karte gesichert werden.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Messungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -902,6 +921,7 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
     \bibitem[Art-Net Documatation, 2019]{artdmx}"'ArtDmx – Packet Definition - Art-Net"', \url{https://art-net.org.uk/structure/streaming-packets/artdmx-packet-definition/}. Visited on: 10.08.2019
     \bibitem[Electron Homepage, 2019]{electron}"'Electron | Plattformübergreifende Desktop-Anwendungen mit JavaScript, HTML und CSS entwickeln."', \url{https://electronjs.org/}. Visited on: 08.08.2019
     \bibitem[Licht Wikipedia, 2019]{wikiLicht}"'Licht - Wikipedia"', \url{https://de.wikipedia.org/wiki/Licht}. Visited on: 11.08.2019
+    \bibitem[Farbtemperatur Wikipedia, 2019]{wikiFarbtemperatur}"'Farbtemperatur - Wikipedia"', \url{https://de.wikipedia.org/wiki/Farbtemperatur}. Visited on: 14.09.2019
     \bibitem[Wikipedia, 2019]{spectrumLight}"'Electromagnetic spectrum - Wikipedia"', \url{https://en.wikipedia.org/wiki/Electromagnetic_spectrum}. Visited on: 11.08.2019
     \bibitem[Lichtquellen, 2015]{lichtquellen} Dohlus, Rainer: "'Lichtquellen"' De Gruyter, Berlin, 2015, 
     \bibitem[Farbwahrnehmung FHT Esslingen, 2019]{fhtEsslignen}"'Farbwahrnehmung"', \url{http://www.it.fht-esslingen.de/~asbeck/gdial/farbe/sehen2.html}. Visited on: 11.08.2019
