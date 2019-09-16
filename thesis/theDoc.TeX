@@ -1006,9 +1006,18 @@ Die gleiche Startadresse pro Lampe muss dann mit dem entsprechenden Fixturetypen
 In der Applikation werden beim hinzufügen von Lampen im Hintergrund noch weitere Dinge erledigt. Durch das Nutzen von mehreren Lampen musste die Art
 und Weise wie Emitter und die mehreren angelegten Lampen verwaltet werden umgestellt werden.\\
 Die Emitter Sektion wird nun automatisch erzeugt. Anhand der genutzten Fixturetypen wird zusammengetragen welche Art von Emittern benötigt werden.
-Für alle verwendeten Emitter wird eine entsprechende Representation mit einem Schieberegler erzeugt.
-\subsection{Art-Net Implementierung}
+Für alle verwendeten Emitter wird eine entsprechende Representation mit einem Schieberegler erzeugt. Der "'Add Emitter"' Knopf zum manuellen
+hinzufügen von Emittern entfällt.\\
+Falls für den Fixturetypen bereits eine vergangene Messung auf der Festplatte verfügbar ist, wird diese dem Fixture als Emitter Daten zugewiesen.
+Wenn keine Daten vorhanden sind wird das Fixture als nicht vermessen markiert.\\
+Zuletzt wird der Patch gesichert und auch beim nächsten öffnen der Applikation auch wieder geladen.
 \subsection{Fixture Sheet}
+Ein sogenanntes "'Fixture Sheet"' ist eine Auflistung der gepatchten Fixtures und deren aktueller Zustand.
+\subsection{Art-Net Implementierung}
+Zur Ansteuerung der Lampen mit \ac{dmx} wurde eine einfache Art-Net Implementierung aus dem NPM Modul "'artnet"' von dem Alias "'hobbyquaker"' genutzt
+\cite{artnetPackage}. Zur Art-Net - DMX Umsetzung wurde ein grandMA3 "'xPort Node"' genutzt. Dieser wurde als Protokoll Wandler eingesetzt.\\
+%//TODO: Schematischer Aufbau Applikation -> Node (-> WAPP) -> Lampe als Skizze
+In der Applikation wurde 
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Automatisierung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1017,7 +1026,7 @@ Für alle verwendeten Emitter wird eine entsprechende Representation mit einem S
 Hier folgen Notizen:\\
 Anpassung der Fader Werte anhand von Kalibrierungsdaten und Anpassen der auszugebenden DMX Werte\\
  - Vorgehensweise\\
- - Mathemathik\\
+ - Mathematik\\
  - Verwendeter Algorithmus\\
  - Analyse (stärken und Schwächen)
 \begin{addmargin}[2em]{0em}
@@ -1096,6 +1105,7 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
     \bibitem[Wisotop Homepage,2019]{wisotop} \url{https://wisotop.de/Anhang-Tristimulus-Werte.php}. Visited on: 09.09.2019
     \bibitem[Light Can Manual,2019]{lightCanDMX} \url{http://download.apelabs.com/manuals/Ape_Labs_-_LightCan_-_Manual_-_web.pdf} Page 33. Visited on: 16.09.2019
     \bibitem[SkyPanel Manual,2019]{skypanelDMX} \url{https://www.arri.com/resource/blob/65958/560471fec7f8f2e186ef8ca9e6cdd489/arri-skypanel-dmx-protocol-specification-v4-4-en-okt2018-data.pdf} Page 12. Visited on: 16.09.2019
+    \bibitem[artnet NPMJS,2019]{artnetPackage} \url{https://www.npmjs.com/package/artnet}. Visited on: 16.09.2019
  \end{thebibliography}
  \endgroup
 \clearpage
