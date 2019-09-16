@@ -1013,6 +1013,23 @@ Wenn keine Daten vorhanden sind wird das Fixture als nicht vermessen markiert.\\
 Zuletzt wird der Patch gesichert und auch beim nächsten öffnen der Applikation auch wieder geladen.
 \subsection{Fixture Sheet}
 Ein sogenanntes "'Fixture Sheet"' ist eine Auflistung der gepatchten Fixtures und deren aktueller Zustand.
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.9\textwidth]{images/app_fixture_sheet_dummy.png}
+    \end{center}
+    \caption{Fixture Sheet in der Applikation mit Selektion}\label{fig:fixtureSheet}
+\end{figure}
+\noindent
+Weiter wird hier eine Selektion eingeführt. Nur selektierte Fixtures werden über die Schieberegler in ihren Werten manipuliert. Alle anderen Werte bleiben
+unangetastet. Alle selektierten Fixtures werden mit gelber Schrift gekennzeichnet.\\
+Jede Reihe des Fixture Sheets außer der obersten repräsentiert den Zustand eines gepatchten Fixtures. In der ersten Spalte in Bild \ref{fig:fixtureSheet}
+wird eine inkrementierte Nummer angezeigt, um mehrere Fixtures des gleichen Typs auseinader halten zu können. In der zweiten Spalte wird der Name des
+Fixturetyps angezeigt um diesen zu identifizieren.\\
+Die folgenden Spalten bis "'M"' werden dynamisch je nach genutzten Attributen generiert. Nutzt ein Fixture ein Attribut nicht, wird die Spalte leer gelassen.
+Wird das Attribut genutzt wird der aktuelle Wert, der mit den Schiebereglern eingestellt wurde von 0 bis 100 angezeigt. Dieser Wert soll später via \ac{dmx}
+ausgegeben werden.\\
+Die Spalte "'M"' steht für "'Measure"'. Mit dem anklicken der Zelle wird später automatisierte das Vermessen des Fixtures angestoßen. Mit klicken auf die
+Zelle in der Spalte "'S"' für "'Settings"' also Einstellungen, können nun hier in einem Popup die gemessenen Emitter Werte eingesehen werden.
 \subsection{Art-Net Implementierung}
 Zur Ansteuerung der Lampen mit \ac{dmx} wurde eine einfache Art-Net Implementierung aus dem NPM Modul "'artnet"' von dem Alias "'hobbyquaker"' genutzt
 \cite{artnetPackage}. Zur Art-Net - DMX Umsetzung wurde ein grandMA3 "'xPort Node"' genutzt. Dieser wurde als Protokoll Wandler eingesetzt.\\
