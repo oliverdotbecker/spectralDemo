@@ -906,9 +906,9 @@ RGB Farbe hinterlegt.\\
 Nach dem manuellen erfassen aller Helligkeitsstufen konnten die erfassten Daten mit der Schaltfläche "'Save"' permanent auf der Festplatte zur
 Weiterverwendung gespeichert werden. Dieser Vorgang musste für alle Emitter wiederholt werden.
 \subsection{Vorberechnen anhand von Messwerten}
-Mit den nun verfügbaren Messwerten einer Lichtquelle wurde zur Überprüfung der bisher eingesetzten Berechnugnen eine Möglichkeit programmiert,
-um virtuell in der Applikation die Emitter additiv zu mischen. Durch Interpolation zwischen den erfassten Heliggkeitsstufen und additiver
-Farbmsichung den Farbton einer aktiven Emitterkombination vorauszuberechnen.
+Mit den nun verfügbaren Messwerten einer Lichtquelle wurde zur Überprüfung der bisher eingesetzten Berechnungen eine Möglichkeit programmiert,
+um virtuell in der Applikation die Emitter additiv zu mischen. Durch Interpolation zwischen den erfassten Helligkeitsstufen und additiver
+Farbmischung den Farbton einer aktiven Emitterkombination vorauszuberechnen.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.9\textwidth]{images/app_emitters_with_sliders_v1.png}
@@ -930,34 +930,34 @@ Spektrum wurde in eine \ac{cie} xy Koordinate umgerechnet und zusätzlich zu der
         \includegraphics[width=\textwidth]{images/app_dummy_spectrum_with_xy_and_calc_and_emitters_green_blue.png}
         \caption{Messung des grünen und blauen Emitters}\label{fig:calcLightCanMix}
     \end{subfigure}
-    \caption{Zwischenstand der Benutzeroberfläche mit Messungen und Vorberechung einer Light Can}
+    \caption{Zwischenstand der Benutzeroberfläche mit Messungen und Vorberechnung einer Light Can}
 \end{figure}
 \noindent
 Die vorberechnete Koordinate wird als rotes Kreuz in der CIE 1931 Normtafel angezeigt, neben der aktuellen Messung, welche als schwarzes Kreuz
 angezeigt wird.\\
-Hier ist zu beobachten, dass bei einem Mischfarbton in Bild \ref{fig:calcLightCanMix} die Messung der Lichquelle mit der Vorberechnung nicht
-übereinstimmt. Bei Messungen mit den anderen Lichtquellen ist diese Abweichung nicht aufgetreten. die zwei Kreuze waren zumeist in jeder beliebeigen
+Hier ist zu beobachten, dass bei einem Mischfarbton in Bild \ref{fig:calcLightCanMix} die Messung der Lichtquelle mit der Vorberechnung nicht
+übereinstimmt. Bei Messungen mit den anderen Lichtquellen ist diese Abweichung nicht aufgetreten. die zwei Kreuze waren zumeist in jeder beliebigen
 Kombination nahezu deckungsgleich.\\
-Diese Abweichung entsteht durch eine spezielle Funktion des Light Can Scheinwerfers. Die Light Can nutzt einen interen Algorithmus, um sowohl bei
-maximaler Austeuerung eines einzelnen Emitters als auch bei der Aussteuerung von mehereren Emittern immer die gleiche Gesamthelligkeit zu
-emmitieren.\\
+Diese Abweichung entsteht durch eine spezielle Funktion des Light Can Scheinwerfers. Die Light Can nutzt einen internen Algorithmus, um sowohl bei
+maximaler Austeuerung eines einzelnen Emitters als auch bei der Aussteuerung von mehreren Emittern immer die gleiche Gesamthelligkeit zu
+emittieren.\\
 So wird bei einem 100 Prozent Ansteuerung des grünen Emitters eine Helligkeit von circa 4400 Lux von dem einen Emitter abgegeben. Bei der
-Kombination mehrere Emitter wird die maximale zu erriechende Helligkeit der einzlenen Emitter reduziert.\\
+Kombination mehrere Emitter wird die maximale zu erreichende Helligkeit der einzelnen Emitter reduziert.\\
 \\
-Dieser Test zeigt, dass für lineare und annähernd linare Farbmischsysteme eine einzel Emittervermessung ausreichend ist um den Gammut, den möglichen
-Farbraum und die Farbmischung vorauszuberechnen. Für nicht linare Farbmischsysteme sind weitere Messungen der tatsächilchen Mischfarben nötig oder der
+Dieser Test zeigt, dass für lineare und annähernd lineare Farbmischsysteme eine einzel Emittervermessung ausreichend ist um den Gamut, den möglichen
+Farbraum und die Farbmischung vorauszuberechnen. Für nicht lineare Farbmischsysteme sind weitere Messungen der tatsächlichen Mischfarben nötig oder der
 modifizierende Algorithmus in der Lampe muss bekannt sein.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Ansteuerung externer Lichtquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Ansteuerung externer Lichtquellen}
-Zur automatisierung der Vermssung der Lichtquellen ist es nötig, dass die messende Applikation auch die Lichtquellen ansteuern kann. Somit wurde
-in der Applikation eine \ac{dmx} Steuerung mit Art-Net implemementiert. Weiter wurde ermöglicht, mehere Lampen zu verwalten und zu steuern, um später meherere
+Zur automatisierung der Vermessung der Lichtquellen ist es nötig, dass die messende Applikation auch die Lichtquellen ansteuern kann. Somit wurde
+in der Applikation eine \ac{dmx} Steuerung mit Art-Net implementiert. Weiter wurde ermöglicht, mehrere Lampen zu verwalten und zu steuern, um später mehrere
 vermessene Lampen ansteuern zu können.
 \subsection{Fixturetypen}
 Lichtquellen verschiedener Hersteller haben viele unterschiedliche Funktionen. Von einer Helligkeitsregelung, dem Dimmer, über mehrere Emitter, wie
-die hier venrwendeten Lichtquellen, bis zu Bewegungssteurungen meherer Achsen, wie des Robe LEDWash 300.\\
-Die Zuordung dieser Funktionen zu den DMX Steuerkanälen der Lampe ist somit je nach Funktionalitätsumfang von Lampe zu Lampe und auch bei einem gleichen
+die hier venrwendeten Lichtquellen, bis zu Bewegungssteuerungen mehrerer Achsen, wie des Robe LEDWash 300.\\
+Die Zuordnung dieser Funktionen zu den DMX Steuerkanälen der Lampe ist somit je nach Funktionalitätsumfang von Lampe zu Lampe und auch bei einem gleichen
 Lampentyp von Hersteller zu Hersteller unterschiedlich. So findet sich beispielsweise bei der Light Can kein Dimmer Steuerkanal für die Gesamtintensität
 der Lampe. Hier werden nur Steuerkanäle der einzelnen Emitter bereitgestellt.
 \begin{figure}[H]
@@ -978,7 +978,7 @@ Das SkyPanel hingegen bietet 31 sogenannte DMX Modi, die Light Can 3 Modi. Je na
 die Lampe reagiert. Hier wird nach Anwendungsfall ein DMX Mode gewählt. Das SkyPanel bietet auch in einem DMX Modus eine Ansteuerung von CIE 1931 x und
 y Kanälen auf zwei \ac{dmx} Kanälen. Dies ermöglicht die Lampe durch internes Umsetzen der empfangenen \ac{dmx} Werte auf diesen Kanälen in Helligkeitswerte
 für die einzelnen Emitter.\\
-Eine abstrahierte, oder auch vereinheitliche Steuerung für equivalente Lampenfunktionen ist durch diese Unterschiede in der Belegung nur durch
+Eine abstrahierte, oder auch vereinheitliche Steuerung für äquivalente Lampenfunktionen ist durch diese Unterschiede in der Belegung nur durch
 Zuordnungstabellen in der Software möglich. Hier wird die gewählte Belegung der Lampe hinterlegt, um mit einem Schieberegler für den roten Emitter
 wie in Bild \ref{fig:emitterFaders} den entsprechenden Steuerkanal mit dem eingestellten Wert zu beschicken.\\
 \\
@@ -998,8 +998,15 @@ In der Applikation ist dies eine statische \ac{json} Liste von Fixturetypen (Bil
 Emitter die Lampe hat und auf welchem \ac{dmx} Kanal des Modus sich der Emitter bezogen auf 1 befindet. Weiter ob die Lampe einen Dimmer Kanal hat und
 wenn ja ebenfalls auf welchem Kanal dieser zu finden ist.
 \subsection{Patch}
-Im sogenannten "'Patch"' oder auch "'Addressierung"' legt man fest welche Lampen man steuern möchte. Ein Patch Eintrag besteht aus den Inforamtionen,
-des verwendeten Fixturetypen und der DMX Startaddresse.
+Im sogenannten "'Patch"' oder auch "'Adressierung"' legt man fest welche Lampen man steuern möchte. Ein Patch Eintrag besteht aus den Informationen,
+des verwendeten Fixturetypen und der DMX Startadresse. Die DMX Startadresse ist die Nummer zwischen 1 und 512, welche man an der Lampe einstellt.
+Alle weiteren Steuerkanäle des DMX Modus der Lampe folgen dann auf diese Startadresse. Hier muss bei mehreren Lampen auf einer DMX Linie geachtet
+werden, dass keine Lampen sich in ihren Steuerkanälen ungewollt überlappen.\\
+Die gleiche Startadresse pro Lampe muss dann mit dem entsprechenden Fixturetypen und dem korrekten Modus der Steuerungssoftware eingegeben werden.\\
+In der Applikation werden beim hinzufügen von Lampen im Hintergrund noch weitere Dinge erledigt. Durch das Nutzen von mehreren Lampen musste die Art
+und Weise wie Emitter und die mehreren angelegten Lampen verwaltet werden umgestellt werden.\\
+Die Emitter Sektion wird nun automatisch erzeugt. Anhand der genutzten Fixturetypen wird zusammengetragen welche Art von Emittern benötigt werden.
+Für alle verwendeten Emitter wird eine entsprechende Representation mit einem Schieberegler erzeugt.
 \subsection{Art-Net Implementierung}
 \subsection{Fixture Sheet}
 \clearpage
