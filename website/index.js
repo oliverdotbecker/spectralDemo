@@ -485,7 +485,7 @@ function editEmitter(row)
         }
         emitterTitle.innerHTML = "<label>"+currDataEntry.name+"</label>";
         emitterTitle.style.backgroundColor = currDataEntry.color;
-        emitterTitle.title = "Click to toggle the measurment values";
+        emitterTitle.title = "Click to toggle the measurement values";
         emitterTitle.onclick = function(event)
         {
             var elem = event.currentTarget;
@@ -1004,7 +1004,7 @@ function drawColorSpace()
                         }
                         else if (d1 >= 0.0 && d2 < 0.0)
                         {
-                            // only first point is outside, add intersecion and second point
+                            // only first point is outside, add intersection and second point
                             var intersection = intersect(point1[0], point1[1], point2[0], point2[1], clip_point1[0], clip_point1[1], clip_point2[0], clip_point2[1]);
                             if (intersection)
                             {
@@ -1014,7 +1014,7 @@ function drawColorSpace()
                         }
                         else if (d1 < 0.0 && d2 >= 0.0)
                         {
-                            // only second point is outside, add intersecion point
+                            // only second point is outside, add intersection point
                             var intersection = intersect(point1[0], point1[1], point2[0], point2[1], clip_point1[0], clip_point1[1], clip_point2[0], clip_point2[1]);
                             if (intersection)
                             {
@@ -1160,7 +1160,7 @@ function updateSelection(row)
     var currFixture = patch[fixtureID];
     for(var channel in currFixture.channels)
     {
-        var currSlider = document.getElementById("silder_"+channel);
+        var currSlider = document.getElementById("slider_"+channel);
         if(currSlider)
         {
             currSlider = currSlider.nextElementSibling;
