@@ -592,7 +592,9 @@ sind alle unterschiedlich aufgebaut.
         \includegraphics[width=.23\textwidth]{images/light_can_front.png}
     \end{center}
     \vspace{-20pt}
-    \caption{Light Can}
+    \begin{center}
+        \caption{Light Can\\\cite{lightCan}}
+    \end{center}
     \vspace{-15pt}
 \end{wrapfigure}
 \noindent
@@ -839,12 +841,12 @@ umgewandelt. Dies ist möglich mit folgenden Gleichungen von Lindbloom's Webauft
         Z \\
     \end{array}\right]
 \end{align}
-mit CIE RGB
+mit sRGB Umrechnungsmatrix mit Weiss-Referenzpunk D65 %// TODO: D65 irgendwo erklären
 \begin{align}\label{Equ:5}
     M^{-1} = \left[ \begin{array}{rrr}
-        2.3706743 & -0.9000405 & -0.4706338 \\
-        -0.5138850 & 1.4253036 & 0.0885814 \\
-        0.0052982 & -0.0146949 & 1.0093968 \\
+        3.2404542  & -1.5371385 & -0.4985314 \\
+        -0.9692660 & 1.8760108  & 0.0415560  \\
+        0.0556434  & -0.2040259 & 1.0572252  \\
     \end{array}\right]
 \end{align}
 Für $M$ sind einige Definitionen gegeben. Diese gewählte Definition ist abhängig von dem RGB Farbraum, in den umgerechnet werden soll, sowie
@@ -872,19 +874,95 @@ Für die Vermessung einer Light Can wurde folgendes Szenario definiert:
 Diese in Bild \ref{fig:3DCanHolder} gezeigte Vorrichtung wurde 3D Modelliert und anschließend mit einem 3D Drucker hergestellt. In die linke
 Halterung kann eines der Sensorboards eingeschoben werden. Mit einem definierten Abstand von zwölf Zentimetern kann in den rechen runden Halterungen
 eine Light Can arretiert werden. Dieser Abstand wurde anhand der Empfindlichkeiten der Sensoren in den ersten Probemessungen festgelegt.\\
+In der Applikation wurden die Emitter der Light Can aufgelistet. Diese sind Rot, Grün, Blau und Weiss. Pro Emitter werden acht Helligkeitsstufen
+gemessen, da bei den Probemessungen beobachtet wurde, dass vor allem bei niedrigen Helligkeiten der gemessene Farbton sich deutlich von dem
+gemessenen Farbton bei hohen Helligkeiten unterscheidet.\\
+Die gewählten Helligkeitsstufen sind:\\
+5\%, 10\%, 20\%, 35\%, 50\%, 65\%, 85\% und 100\% der Helligkeit des jeweiligen Emitters.\\
+Um die gemessenen Werte in der Applikation zu erfassen, wurde eine Emitter Sektion in der grafischen Benutzeroberfläche vorgesehen.
+Der Benutzer konnte mit der Schaltfläche "'Add Emitter"' manuell Emitter zu der aktuellen Messung hinzufügen. Durch anklicken eines angelegten
+Emitters, konnte das Menü des einzelnen Emitters geöffnet werden.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{\textwidth}
+        \includegraphics[width=\textwidth]{images/app_emitters_v1.png}
+        \caption{Emitter Übersicht der aktuellen Messung}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{\textwidth}
+        \includegraphics[width=\textwidth]{images/app_edit_emitters_v1.png}
+        \caption{Menü des einzelnen Emitters}
+    \end{subfigure}
+    \caption{Erste version der Benutzeroberfläche zur manuellen Erfassung von Emitterwerten}
+\end{figure}
+\noindent
+Das Emitter Menü bot einige Einstellungsmöglichkeiten wie den Namen und die Farbe zur bessern Zuordnung für den Benutzer, sowie pro zu messende
+Helligkeitsstufe eine Schaltfläche. Während einer Messung musste der Benutzer nun mit einer externen (DMX) Ansteuerung, Beispielsweise den roten
+Emitter einer Light Can in den gewünschen Helligkeitszustand bringen. Anschließend konnte mit einem Klick auf die zugehörige Schaltfläche die
+aktuell gemessenen Werte im Hintergrund abgespeichert werden. Die betätigte Schaltfläche wurde zur Bestätigung für den Benutzer in der errechneten
+RGB Farbe hinterlegt.\\
+Nach dem manuellen erfassen aller Helligkeitsstufen konnten die erfassten Daten mit der Schaltfläche "'Save"' permanent auf der Festplatte zur
+Weiterverwendung gespeichert werden. Dieser Vorgang musste für alle Emitter wiederholt werden.
 \subsection{Vorberechnen anhand von Messwerten}
+Mit den nun verfügbaren Messwerten einer Lichtquelle wurde zur Überprüfung der bisher eingesetzten Berechnugnen eine Möglichkeit programmiert,
+um virtuell in der Applikation die Emitter additiv zu mischen. Durch Interpolation zwischen den erfassten Heliggkeitsstufen und additiver
+Farbmsichung den Farbton einer aktiven Emitterkombination vorauszuberechnen.
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.9\textwidth]{images/app_emitters_with_sliders_v1.png}
+    \end{center}
+    \caption{Emitter Übersicht mit Schiebereglern}
+\end{figure}
+\noindent
+In der Benutzeroberfläche wurde dies mit Schiebereglern pro Emitter gelöst, welche von 0 bis 100 in fünf Prozent Schritten einstellbar sind.
+Sobald der Benutzer einen Schieberegler betätigt, wurde das gemessene oder interpolierte Spektrum der Emitter aufaddiert. Dieses kombinierte
+Spektrum wurde in eine \ac{cie} xy Koordinate umgerechnet und zusätzlich zu der aktuellen Messung in der CIE 1931 Normtafel angezeigt.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/app_dummy_spectrum_with_xy_and_calc_and_emitters.png}
+        \caption{Messung des grünen Emitters}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/app_dummy_spectrum_with_xy_and_calc_and_emitters_green_blue.png}
+        \caption{Messung des grünen und blauen Emitters}\label{fig:calcLightCanMix}
+    \end{subfigure}
+    \caption{Zwischenstand der Benutzeroberfläche mit Messungen und Vorberechung einer Light Can}
+\end{figure}
+\noindent
+Die vorberechnete Koordinate wird als rotes Kreuz in der CIE 1931 Normtafel angezeigt, neben der aktuellen Messung, welche als schwarzes Kreuz
+angezeigt wird.\\
+Hier ist zu beobachten, dass bei einem Mischfarbton in Bild \ref{fig:calcLightCanMix} die Messung der Lichquelle mit der Vorberechnung nicht
+übereinstimmt. Bei Messungen mit den anderen Lichtquellen ist diese Abweichung nicht aufgetreten. die zwei Kreuze waren zumeist in jeder beliebeigen
+Kombination nahezu deckungsgleich.\\
+Diese Abweichung entsteht durch eine spezielle Funktion des Light Can Scheinwerfers. Die Light Can nutzt einen interen Algorithmus, um sowohl bei
+maximaler asusteuerung eines einzelnen Emitters als auch bei der aussteuerung von mehereren Emittern immer die gleiche Gesamthelligkeit zu
+emmitieren.\\
+So wird bei einem 100 Prozent Ansteuerung des grünen Emitters eine Helligkeit von circa 4400 Lux von dem einen Emitter abgegeben. Bei der
+Kombination mehrere Emitter wird die maximale zu erriechende Helligkeit der einzlenen Emitter reduziert.\\
+\\
+Dieser Test zeigt, dass für lineare und annähernd linare Farbmischsysteme eine einzel Emittervermessung ausreichend ist um den möglichen Farbraum
+und die Farbmischung vorauszuberechnen. Für nicht linare Farbmischsysteme sind weitere Messungen der tatsächilchen Mischfarben nötig oder der
+modifizierende Algorithmus in der Lampe muss bekannt sein.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Ansteuerung externer Lichtquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Ansteuerung externer Lichtquellen}
+Zur automatisierung der Vermssung der Lichtquellen ist es nötig, dass die messende Applikation auch die Lichtquellen ansteuern kann. Somit wurde
+in der Applikation eine \ac{dmx} Steuerung mit Art-Net implemementiert. Weiter wurde ermöglicht, mehere Lampen zu verwalten und zu steuern, um später meherere
+vermessene Lampen ansteuern zu können.
+\subsection{Fixturetypen}
+Lichtquellen verschiedener Hersteller haben viele unterschiedliche Funktionen. Von einer Helligkeitsregelung, dem Dimmer, über mehrere Emitter, wie
+die hier venrwendeten Lichtquellen bis zu Bewegungssteurungen meherer Achsen, wie des Robe LEDWash 300.
 \subsection{Patch}
-\subsection{Art-Net}
+\subsection{Art-Net Implementierung}
 \subsection{Fixture Sheet}
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Automatisierung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Automatisierung}
-\color{red}
+{\color{red}
 Hier folgen Notizen:\\
 Anpassung der Fader Werte anhand von Kalibrierungsdaten und Anpassen der auszugebenden DMX Werte\\
  - Vorgehensweise\\
@@ -894,7 +972,7 @@ Anpassung der Fader Werte anhand von Kalibrierungsdaten und Anpassen der auszuge
 \begin{addmargin}[2em]{0em}
     - Light Can innere Algorithmen\\
     - Exemplarische Ergebnisse
-\end{addmargin}
+\end{addmargin}}
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Anhang %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -956,13 +1034,13 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
     \bibitem[Showlicht von Scribble zum fertigen Desgin, 2014]{showlicht}"'Showlicht von Scribble zum fertigen Desgin"', 01.09.2019
     \bibitem[Philips PAR64 Leuchtmittel 1000W | Thomann, 2019]{convpar}"'Philips PAR64 Leuchtmittel 1000W | Thomann"', \url{https://www.thomann.de/de/philips_par64_1000_watt_mfl_cp62_exe.htm}. Visited on: 02.09.2019
     \bibitem[P FLAT PRO 18 IP65 | Cameo, 2019]{ledpar}"'P FLAT PRO 18 IP65 | Cameo"', \url{https://www.cameolight.com/de/loesungen/installation/outdoor-lichttechnik/outdoor-scheinwerfer/2297/p-flat-pro-18-ip65?c=1826}. Visited on: 02.09.2019
-    \bibitem[Adafruit Learn, 2019]{adafruit}"'Overview | Adafruit AS7262 6-channel Visible Light Sensor | Adafruit Learning System"', \url{https://learn.adafruit.com/adafruit-as7262-6-channel-visible-light-sensor}. Visited on: 11.08.2019
-    \bibitem[AS7261 Datenblatt, 2019]{datasheet61}"'AS7261 XYZ Chromatic White Color Sensor + NIR with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7261_DS000493_1-00.pdf/0e7d1f12-702e-d061-b07a-67b0b6316800}. Visited on: 11.08.2019
-    \bibitem[AS7262 Datenblatt, 2019]{datasheet62}"'AS7262 6-Channel Visible Spectral ID Device with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7262_DS000486_2-00.pdf/0031f605-5629-e030-73b2-f365fd36a43b}. Visited on: 11.08.2019
     \bibitem[Ape Labs Homepage,2019]{lightCan} \url{https://apelabs.com/products/leuchtdose}. Visited on: 02.09.2019
     \bibitem[Robe Homepage,2019]{robe} \url{https://www.robe.cz/ledwash-300plus/}. Visited on: 02.09.2019
     \bibitem[Arri Homepage,2019]{arri} \url{https://www.arri.com/en/lighting/led/skypanel/s60-c}. Visited on: 02.09.2019
     \bibitem[UPRtek Homepage,2019]{uprtek} \url{https://www.uprtek.com/de/product/LED-Test-Measurement-Handspektrometer/MK350N-Basic-Handheld-Spectrometer.html}. Visited on: 09.09.2019
+    \bibitem[Adafruit Learn, 2019]{adafruit}"'Overview | Adafruit AS7262 6-channel Visible Light Sensor | Adafruit Learning System"', \url{https://learn.adafruit.com/adafruit-as7262-6-channel-visible-light-sensor}. Visited on: 11.08.2019
+    \bibitem[AS7261 Datenblatt, 2019]{datasheet61}"'AS7261 XYZ Chromatic White Color Sensor + NIR with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7261_DS000493_1-00.pdf/0e7d1f12-702e-d061-b07a-67b0b6316800}. Visited on: 11.08.2019
+    \bibitem[AS7262 Datenblatt, 2019]{datasheet62}"'AS7262 6-Channel Visible Spectral ID Device with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7262_DS000486_2-00.pdf/0031f605-5629-e030-73b2-f365fd36a43b}. Visited on: 11.08.2019
     \bibitem[Lindbloom Homepage,2019]{lindbloom} \url{http://brucelindbloom.com/index.html}. Visited on: 09.09.2019
     \bibitem[Wisotop Homepage,2019]{wisotop} \url{https://wisotop.de/Anhang-Tristimulus-Werte.php}. Visited on: 09.09.2019
  \end{thebibliography}
