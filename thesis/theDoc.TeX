@@ -911,7 +911,7 @@ Farbmsichung den Farbton einer aktiven Emitterkombination vorauszuberechnen.
     \begin{center}
         \includegraphics[width=.9\textwidth]{images/app_emitters_with_sliders_v1.png}
     \end{center}
-    \caption{Emitter Übersicht mit Schiebereglern}
+    \caption{Emitter Übersicht mit Schiebereglern}\label{fig:emitterFaders}
 \end{figure}
 \noindent
 In der Benutzeroberfläche wurde dies mit Schiebereglern pro Emitter gelöst, welche von 0 bis 100 in fünf Prozent Schritten einstellbar sind.
@@ -937,13 +937,13 @@ Hier ist zu beobachten, dass bei einem Mischfarbton in Bild \ref{fig:calcLightCa
 übereinstimmt. Bei Messungen mit den anderen Lichtquellen ist diese Abweichung nicht aufgetreten. die zwei Kreuze waren zumeist in jeder beliebeigen
 Kombination nahezu deckungsgleich.\\
 Diese Abweichung entsteht durch eine spezielle Funktion des Light Can Scheinwerfers. Die Light Can nutzt einen interen Algorithmus, um sowohl bei
-maximaler asusteuerung eines einzelnen Emitters als auch bei der aussteuerung von mehereren Emittern immer die gleiche Gesamthelligkeit zu
+maximaler Austeuerung eines einzelnen Emitters als auch bei der Aussteuerung von mehereren Emittern immer die gleiche Gesamthelligkeit zu
 emmitieren.\\
 So wird bei einem 100 Prozent Ansteuerung des grünen Emitters eine Helligkeit von circa 4400 Lux von dem einen Emitter abgegeben. Bei der
 Kombination mehrere Emitter wird die maximale zu erriechende Helligkeit der einzlenen Emitter reduziert.\\
 \\
-Dieser Test zeigt, dass für lineare und annähernd linare Farbmischsysteme eine einzel Emittervermessung ausreichend ist um den möglichen Farbraum
-und die Farbmischung vorauszuberechnen. Für nicht linare Farbmischsysteme sind weitere Messungen der tatsächilchen Mischfarben nötig oder der
+Dieser Test zeigt, dass für lineare und annähernd linare Farbmischsysteme eine einzel Emittervermessung ausreichend ist um den Gammut, den möglichen
+Farbraum und die Farbmischung vorauszuberechnen. Für nicht linare Farbmischsysteme sind weitere Messungen der tatsächilchen Mischfarben nötig oder der
 modifizierende Algorithmus in der Lampe muss bekannt sein.
 \clearpage
 
@@ -954,8 +954,22 @@ in der Applikation eine \ac{dmx} Steuerung mit Art-Net implemementiert. Weiter w
 vermessene Lampen ansteuern zu können.
 \subsection{Fixturetypen}
 Lichtquellen verschiedener Hersteller haben viele unterschiedliche Funktionen. Von einer Helligkeitsregelung, dem Dimmer, über mehrere Emitter, wie
-die hier venrwendeten Lichtquellen bis zu Bewegungssteurungen meherer Achsen, wie des Robe LEDWash 300.
+die hier venrwendeten Lichtquellen, bis zu Bewegungssteurungen meherer Achsen, wie des Robe LEDWash 300.\\
+Die Zuordung dieser Funktionen zu den DMX Steuerkanälen der Lampe ist somit je nach Funktionalitätsumfang von Lampe zu Lampe und auch bei einem gleichen
+Lampentyp von Hersteller zu Hersteller unterschiedlich. So findet sich beispielsweise bei der Light Can kein Dimmer Steuerkanal für die Gesamtintensität
+der Lampe. Hier werden nur Steuerkanäle der einzelnen Emitter bereitgestellt.\\
+% Bild DMX Chart Light Can und SkyPanel
+Das SkyPanel hingegen bietet {\color{red} xx} sogenannte DMX Modi. Je nach Wahl des DMX Modus wechselt die Belegung der \ac{dmx} Steuerkanäle, auf die
+die Lampe reagiert. Hier wird nach Anwendungsfall ein DMX Mode gewählt. Das SkyPanel bietet auch in einem DMX Modus eine Ansteuerung von CIE 1931 x und
+y Kanälen auf zwei \ac{dmx} Kanälen. Dies ermöglicht die Lampe durch internes Umsetzen der empfangenen \ac{dmx} Werte auf diesen Kanälen in Helligkeitswerte
+für die einzelnen Emitter.\\
+Eine abstrahierte, oder auch vereinheitliche Steuerung für equivalente Lampenfunktionen ist durch diese Unterschiede in der Belegung nur durch
+Zuordnungstabellen in der Software möglich. Hier wird die gewählte Belegung der Lampe hinterlegt, um mit einem Schieberegler für den roten Emitter
+wie in Bild \ref{fig:emitterFaders} den entsprechenden Steuerkanal mit dem eingestellten Wert zu beschicken.\\
+Diese Zuordnungstabellen nennt man in der Brache (engl.) "'Fixturetypen"'.
 \subsection{Patch}
+Im sogenannten "'Patch"' oder auch "'Addressierung"' legt man fest welche Lampen man steuern möchte. Ein Patch Eintrag besteht aus den Inforamtionen,
+des verwendeten Fixturetypen und der DMX Startaddresse.
 \subsection{Art-Net Implementierung}
 \subsection{Fixture Sheet}
 \clearpage
