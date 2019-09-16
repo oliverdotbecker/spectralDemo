@@ -311,6 +311,7 @@ lediglich ArtDmx Pakete. Diese Pakete transportieren DMX Daten. Hier ist der Auf
         18 & Data[] & 2-512 & DMX Daten\\
     \end{tabular*}
 \end{table}
+\noindent
 \cite{artdmx}
 \clearpage
 
@@ -958,16 +959,44 @@ Lichtquellen verschiedener Hersteller haben viele unterschiedliche Funktionen. V
 die hier venrwendeten Lichtquellen, bis zu Bewegungssteurungen meherer Achsen, wie des Robe LEDWash 300.\\
 Die Zuordung dieser Funktionen zu den DMX Steuerkanälen der Lampe ist somit je nach Funktionalitätsumfang von Lampe zu Lampe und auch bei einem gleichen
 Lampentyp von Hersteller zu Hersteller unterschiedlich. So findet sich beispielsweise bei der Light Can kein Dimmer Steuerkanal für die Gesamtintensität
-der Lampe. Hier werden nur Steuerkanäle der einzelnen Emitter bereitgestellt.\\
-% Bild DMX Chart Light Can und SkyPanel
-Das SkyPanel hingegen bietet {\color{red} xx} sogenannte DMX Modi. Je nach Wahl des DMX Modus wechselt die Belegung der \ac{dmx} Steuerkanäle, auf die
+der Lampe. Hier werden nur Steuerkanäle der einzelnen Emitter bereitgestellt.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/dmx_chart_light_can_4_channel_mode.png}
+        \caption{Light Can 4 Channel Mode \cite{lightCanDMX}}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/dmx_chart_skypanel_mode_4.png}
+        \caption{Auszug SkyPanel Mode 4 \cite{skypanelDMX}}
+    \end{subfigure}
+    \caption{DMX Charts der Hersteller Ape Labs und Arri}
+\end{figure}
+\noindent
+Das SkyPanel hingegen bietet 31 sogenannte DMX Modi, die Light Can 3 Modi. Je nach Wahl des DMX Modus wechselt die Belegung der \ac{dmx} Steuerkanäle, auf die
 die Lampe reagiert. Hier wird nach Anwendungsfall ein DMX Mode gewählt. Das SkyPanel bietet auch in einem DMX Modus eine Ansteuerung von CIE 1931 x und
 y Kanälen auf zwei \ac{dmx} Kanälen. Dies ermöglicht die Lampe durch internes Umsetzen der empfangenen \ac{dmx} Werte auf diesen Kanälen in Helligkeitswerte
 für die einzelnen Emitter.\\
 Eine abstrahierte, oder auch vereinheitliche Steuerung für equivalente Lampenfunktionen ist durch diese Unterschiede in der Belegung nur durch
 Zuordnungstabellen in der Software möglich. Hier wird die gewählte Belegung der Lampe hinterlegt, um mit einem Schieberegler für den roten Emitter
 wie in Bild \ref{fig:emitterFaders} den entsprechenden Steuerkanal mit dem eingestellten Wert zu beschicken.\\
+\\
 Diese Zuordnungstabellen nennt man in der Brache (engl.) "'Fixturetypen"'.
+\clearpage
+\begin{wrapfigure}{r}{0.3\textwidth}
+    \vspace{-25pt}
+    \begin{center}
+        \includegraphics[width=0.3\textwidth]{images/code_fixturetype_skypanel.png}
+    \end{center}
+    \vspace{-20pt}
+    \caption{Fixturetyp Definition im Applikationscode} \label{fig:code_fixturetype}
+    \vspace{-15pt}
+\end{wrapfigure}
+\noindent
+In der Applikation ist dies eine statische \ac{json} Liste von Fixturetypen (Bild \ref{fig:code_fixturetype}). Hier wird lediglich festgehalten, welche
+Emitter die Lampe hat und auf welchem \ac{dmx} Kanal des Modus sich der Emitter bezogen auf 1 befindet. Weiter ob die Lampe einen Dimmer Kanal hat und
+wenn ja ebenfalls auf welchem Kanal dieser zu finden ist.
 \subsection{Patch}
 Im sogenannten "'Patch"' oder auch "'Addressierung"' legt man fest welche Lampen man steuern möchte. Ein Patch Eintrag besteht aus den Inforamtionen,
 des verwendeten Fixturetypen und der DMX Startaddresse.
@@ -1058,6 +1087,8 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
     \bibitem[AS7262 Datenblatt, 2019]{datasheet62}"'AS7262 6-Channel Visible Spectral ID Device with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7262_DS000486_2-00.pdf/0031f605-5629-e030-73b2-f365fd36a43b}. Visited on: 11.08.2019
     \bibitem[Lindbloom Homepage,2019]{lindbloom} \url{http://brucelindbloom.com/index.html}. Visited on: 09.09.2019
     \bibitem[Wisotop Homepage,2019]{wisotop} \url{https://wisotop.de/Anhang-Tristimulus-Werte.php}. Visited on: 09.09.2019
+    \bibitem[Light Can Manual,2019]{lightCanDMX} \url{http://download.apelabs.com/manuals/Ape_Labs_-_LightCan_-_Manual_-_web.pdf} Page 33. Visited on: 16.09.2019
+    \bibitem[SkyPanel Manual,2019]{skypanelDMX} \url{https://www.arri.com/resource/blob/65958/560471fec7f8f2e186ef8ca9e6cdd489/arri-skypanel-dmx-protocol-specification-v4-4-en-okt2018-data.pdf} Page 12. Visited on: 16.09.2019
  \end{thebibliography}
  \endgroup
 \clearpage
