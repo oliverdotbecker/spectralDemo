@@ -31,7 +31,12 @@
     \paragraph{}
     \huge MASTER THESIS
 \end{center}
-\vspace{3cm}\noindent
+\vspace{1cm}\noindent
+\begin{center}
+    \huge \color{red} Vorabversion 0.9\\
+    \large Stand: \today
+\end{center}
+\vspace{1cm}\noindent
 {\large Title:  Abgleich von LED Lichtquellen auf Basis einer komplexen Lichtsteuerung}
 \par\vspace{3cm}\noindent
 Submitted by:               Oliver Becker\\
@@ -306,6 +311,7 @@ lediglich ArtDmx Pakete. Diese Pakete transportieren DMX Daten. Hier ist der Auf
         18 & Data[] & 2-512 & DMX Daten\\
     \end{tabular*}
 \end{table}
+\noindent
 \cite{artdmx}
 \clearpage
 
@@ -391,7 +397,7 @@ beschrieben. \cite{wikiLicht}\\
     \vspace{-15pt}
 \end{wrapfigure}
 \noindent
-Licht ist im elektromagnetischen Spektrum messbar. Somit ist ein Farbton eine Frequenz und eine Helligkeit eine Amplitude.
+Licht ist im elektromagnetischen Spektrum messbar. Somit kann man einen Farbton als eine Frequenz und eine Helligkeit als eine Amplitude beschreiben.
 Wo eine Farbe im elektromagnetischen Spektrum einzuordnen ist, wird mit der Wellenlänge in Nanometern (nm) angegeben. Diese Zahl fällt von
 dem Infrarotbereich des Spektrums ab 760nm bis in den Ultraviolettbereich bei 380nm.
 \begin{align}\label{Equ:1}
@@ -404,8 +410,70 @@ Dieser Teil des elektromagnetischen Spektrums lässt sich zum Beispiel mit Photo
 werden allgemein als Spektralsensoren bezeichnet.
 \clearpage
 
-\subsection{LED}
-\subsubsection{Allgemein}
+%%%%%%%%%%%%%%%%%%%%%%%%%% Farbe %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Farbe}
+Der Begriff Farbe, als Sinneseindruck, beschreibt die verschiedenen Zustände, welche die Amplituden im elektromagnetischen Spektrum annehmen können. Hier ist es
+unerheblich, ob nur eine einzelne Spekrallinie oder eine breite spektrale Verteilung betrachtet wird.\\
+Der Farbeindruck wird vorallem durch den Farbton geprägt. Ein Farbton entsteht natürlich oder künstich von einem emittierenden oder reflektieren Körper.
+Weiter ist die Sättigung ein entscheidendes Merkmal einer Farbe. Umso intensiver ein Farbton ist, desto höher ist die Sättigung der Farbe. Ein blasser
+Farbton beinhaltet in seinem Spektrum einen Weiss-Anteil. Je blasser der Farbton, so mehr Weiss-Anteile enthält er. Zuletzt ist noch die Helligkeit zu
+nennen. Sie drückt die Intensität der Lichtempfindung einer Farbe aus und ist mit der Farbempfindung fest verknüpft.
+\subsection{Farbtemperatur}
+Der Begriff der Farbtemperatur ist durch den planckscher Strahler begründet. Es wurde beobachtet, dass bei dem starken Erhitzen von einem Metall
+sich die Farbe des Metalls verändert. Ab einer Temperatur von etwa 923 Kelvin (K), also 650 Celsius, fängt das Metall an rot zu glühen. Bei
+weiterem erhöhen der Temperatur wechselt der Farbton des Metalls über gelb zur sogenannten Weißglut ab rund 1300 Celsius (1573 K).
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/thermal_radiation_figure.png}
+    \end{center}
+    \caption{Farbtemperatur Darstellung \cite{wikiFarbtemperatur}}
+\end{figure}
+\noindent
+Dieses Prinzip der Lichtemittierung wird auch Temperaturstrahlung genannt.\\
+Somit wird auch heute bei \ac{led}s noch die Farbtemperatur bestimmt und in Kelvin angegeben, auch wenn die Lichtemittierung nicht auf der
+Temperaturstrahlung basiert.
+\subsection{Farbmischung}
+
+\subsubsection{Additiv}
+\subsubsection{Subtraktiv}
+%\cite[62 - 63]{lichtquellen}
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Menschliches Farbsehen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Menschliches Farbsehen}
+Das menschliche Auge besitzt zwei Arten von "'Sensoren"', oder auch Rezeptoren. Stäbchen zur Helligkeitswahrnehmung bei Nacht und
+Zapfen zur Helligkeits- und Farbwahrnehmung bei Tag. Das Verhältnis von Zapfen zu Stäbchen beträgt im Schnitt 20:1.\\
+Somit ist das Sehen bei Tag ca. sieben Mal so hoch aufgelöst wie bei Nacht.\\
+Ähnlich wie verschiedene Photodioden, welche einzelne Spektralbereiche abdecken, decken auch die Zapfen nur einen
+bestimmten Bereich im Farbspektrum ab. Es gibt drei verschiedene Arten von Zapfen. S-, M-, und L-Zapfen. Also "'Short"',
+"'Middle"' und "'Long"' Zapfen. Die Längenangaben beziehen sich auf den Wellenlängenbereich, auf welchen die Zapfen
+resistiv sind.\\
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{images/eye_spectrum.png}
+    \caption{Darstellung des sichtbaren Farbspektrums der Zapfen des Auges}\label{fig:eye_spectrum}
+\end{figure}
+\noindent
+Die Mengenverteilung der verschiedenen Zapfenarten liegt circa bei S:M:L 1:16:32.
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Farbräume %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Farbräume}
+\subsection{Farbspektrum}
+Wie bereits in \ref{light and measurement} beschrieben ist das Farbspektrum die Entsprechung des Wahrnehmungsbereiches des menschlichen
+Auges im elektromagnetischen Spektrum.
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{images/farbspektrum.png}
+    \caption{Darstellung des sichtbaren Farbspektrums \cite{fhtEsslignen}}
+\end{figure}
+\subsection{sRGB}
+\subsection{CIE} \label{section_CIE}
+\subsubsection{CIE 1931}
+\subsubsection{CIE 1976}
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% LED %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{LED}
+\subsection{Allgemein}
 \ac{led} ist das Acronym für Light Emitting Diode, also lichtemittierende Diode. Dies ist eine spezielle Art von Halbleitern,
 welche bei einem Stromfluss Licht emittieren. Die chemische Zusammensetzung (Dotierung) der Diode entscheidet, welche Farbe
 beziehungsweise welche Frequenz sie emittiert.\\
@@ -422,21 +490,21 @@ Im folgenden ein Auszug der Element-Farbzuordnung \cite{wikiLed}:
 \end{table}
 \noindent
 Zunächst wurden \ac{led}s in den frühen 1960er Jahren als Leuchtindikatoren benutzt. Also zum Beispiel auf
-Platinen als Statusanzeige oder wie wir es heute von vielen Ethernetanschlussbuchsen kennen als blinkend als Anzeige, die den Datenempfang
+Platinen als Statusanzeige oder wie wir es heute von vielen Ethernetanschlussbuchsen kennen als blinkende Anzeige, die den Datenempfang
 signalisiert. Durch die voranschreitende technische Entwicklung der \ac{led}, wie bessere Effizienz und bessere Lichtausbeute, sowie besserer
 Langlebigkeit des Bauteils, fand anfang der 1990er die \ac{led} auch ihre Anwendung im Heimbereich.\\
 \ac{led}s emittieren Licht in einem begrenzten Spektralbereich. Das Licht ist nahezu monochromatisch. Deshalb sind sie beim Einsatz als
 Signallicht besonders effizient im Vergleich zu anderen Lichtquellen, bei denen zur Erzielung einer monochromen Farbcharakteristik
 Farbfilter den größten Teil des Spektrums absorbieren müssen.\\
-\cite{showlicht}
+\cite{showlicht} %// TODO: Quotes
 
-\subsubsection{Mischen von Farben}\label{colormixing}
+\subsection{Mischen von Farben}\label{colormixing}
 Emittierende Körper unterliegen der additiven Farbmischung. Das bedeutet, dass sich in das elektromagnetische Spektrum abgegebene
 Wellen auf Ihren jeweiligen Wellenlängen aufaddieren. Somit kann mit verschiedenen LED Lichtquellen eine neue Farbe gemischt
 werden.\\
 So kann beispielsweise mit einer roten und einer grünen \ac{led} ein orangener bis gelber Farbton gemischt werden.
 
-\subsubsection{Weiße LEDs}
+\subsection{Weiße LEDs}
 Eine tatsächlich weiße \ac{led} existiert bisher auf dem Markt nicht, da \ac{led}s generell schmalbandig abstrahlen. Die Heutzutage
 verwendeten "'weißen"' \ac{led}s sind eigentlich blaue \ac{led}s, mit einem zusätzlichen Phosphor Filter als breitbandigem Lumineszenzfarbstoff.
 \begin{figure}[H]
@@ -457,7 +525,8 @@ Dies verschiebt das abgestrahlte Licht in den gelben Bereich. Somit mit einem Te
 ein breitbandiges Abstrahlverhalten.
 \clearpage
 
-\subsection{Lichtquellen in der Veranstaltungstechnik}
+%%%%%%%%%%%%%%%%%%%%%%%%%% Lichtquellen in der Veranstaltungstechnik %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Lichtquellen in der Veranstaltungstechnik}
 Für die Veranstaltungstechnik ist künstliches Licht nahezu unverzichtbar. Von der Grundausleuchtung in einem Theater bis zu dem Effektlicht
 auf Kleinveranstaltungen. In den frühen Jahren der großen Konzerte wurden hauptsächlich mit Scheinwerfern mit Glühfaden Leuchtmitteln beleuchtet.
 Diese Form der Beleuchtung wurde in der Veranstaltungstechnik als Kunstlicht bezeichnet.\\
@@ -511,34 +580,80 @@ später gelöst, indem mehrere \ac{led}s in einen Chip integriert wurden, und vo
 Somit konnte ein deutlich homogeneres Abstrahlverhalten erreicht werden.
 \clearpage
 
-\section{Menschliches Farbsehen}
-Das menschliche Auge besitzt zwei Arten von "'Sensoren"', oder auch Rezeptoren. Stäbchen zur Helligkeitswahrnehmung bei Nacht und
-Zapfen zur Helligkeits- und Farbwahrnehmung bei Tag. Das Verhältnis von Zapfen zu Stäbchen beträgt im Schnitt 20:1.\\
-Somit ist das Sehen bei Tag ca. sieben Mal so hoch aufgelöst wie bei Nacht.\\
-Ähnlich wie verschiedene Photodioden, welche einzelne Spektralbereiche abdecken, decken auch die Zapfen nur einen
-bestimmten Bereich im Farbspektrum ab. Es gibt drei verschiedene Arten von Zapfen. S-, M-, und L-Zapfen. Also "'Short"',
-"'Middle"' und "'Long"' Zapfen. Die Längenangaben beziehen sich auf den Wellenlängenbereich, auf welchen die Zapfen
-resistiv sind.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%% Verwendete Gerätschaften %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Verwendete Gerätschaften}
+\subsection{Lampen}
+Im folgenden werden die Lichtquellen beziehungsweise die Lampen beschrieben, die für die Messungen verwendet wurden.
+Auch in der Veranstaltungstechnik als (engl.) "'Fixtures"' bezeichnet. Diese Lampen haben alle \ac{led}s als Lichtquelle. Diese \ac{led}s
+sind alle unterschiedlich aufgebaut.
+\subsubsection{Ape Labs Light Can}
+~\par\vspace{-\baselineskip}
+\begin{wrapfigure}{r}{0.4\textwidth}
+    \vspace{-45pt}
+    \begin{center}
+        \includegraphics[width=.23\textwidth]{images/light_can_front.png}
+    \end{center}
+    \vspace{-20pt}
+    \begin{center}
+        \caption{Light Can\\\cite{lightCan}}
+    \end{center}
+    \vspace{-15pt}
+\end{wrapfigure}
+\noindent
+Diese Lampe ist eine sehr kompakt gebaute RGBW \ac{led} Lichtquelle auf Akku Basis. Diese wurde von der Firma Ape Labs aus Eisigen in Deutschland
+entwickelt. Diese Lampe ist sowohl per Fernbedienung, als auch per W-\ac{dmx} steuerbar.
+Die "'Kanne"' hat einen Abstrahlwinkel von 65 Grad. Zur gezielten Steuerung, ohne vorprogrammierte Effekte wird ein \ac{dmx} zu W-DMX Wandler der
+Firma benötigt (W-APP). Dieser ermöglicht dann die Ansteuerung der Lampe durch die Applikation.
+\subsubsection{Robe LEDWash 300}
+Dieses Wash Movinglight ist ein handelsübliches Gerät und wird weltweit bei vielen Veranstaltungen universell eingesetzt. Hier sind 19 einzelne
+RGBW \ac{led}s hinter einzelnen Linsen in zwei Kreisen und einer Mittelpunkt \ac{led} positioniert.
 \begin{figure}[H]
-    \includegraphics[width=\textwidth]{images/eye_spectrum.png}
-    \caption{Darstellung des sichtbaren Farbspektrums der Zapfen des Auges}\label{fig:eye_spectrum}
+    \begin{center}
+        \includegraphics[width=.3\textwidth]{images/Robe_300_ledwash.png}
+    \end{center}
+    \caption{Robe LEDWash 300 \cite{robe}}
 \end{figure}
-Die Mengenverteilung der verschiedenen Zapfenarten liegt circa bei S:M:L 1:16:32.
-\clearpage
-
-%%%%%%%%%%%%%%%%%%%%%%%%%% Farbräume %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Farbräume}
-\subsection{Farbspektrum}
-Wie bereits in \ref{light and measurement} beschrieben ist das Farbspektrum die Entsprechung des Wahrnehmungsbereiches des menschlichen
-Auges im elektromagnetischen Spektrum.
+\noindent
+Das Movinglight hat einen einstellbaren Abstrahlwinkel von 8 bis 63 Grad. Dieser wurde allerdings bei den Messungen auf 63 Grad fest eingestellt,
+um ein möglichst homogenes Abstrahlverhalten zu erhalten. Laut Hersteller hat die Lampe bei einer Distanz von fünf Metern zur Lampe eine
+Lichtausbeute von 3.370 Lumen. Die Lampe ist per \ac{xlr} mit DMX, oder via Ethernet RJ45-Buchse per Art-Net steuerbar. An einem Display
+am Fuß (der "'Base"') kann der Scheinwerfer konfiguriert werden.
+\subsubsection{ARRI SkyPanel}
+Das Skypanel S60-C von der Firma Arri, ein Tochterunternehmen der Firma Osram, wird oft als Fluter, das Grundlicht in Film und Fernsehen, eingesetzt.
+Es wird beworben, dass es mit xyY Kanälen per DMX angesteuert werden kann und diese \ac{cie} Werte von der Lampe exakt wiedergegeben werden. Somit
+ist diese Lampe eine perfekte Referenz für diese Arbeit.
 \begin{figure}[H]
-    \includegraphics[width=\textwidth]{images/farbspektrum.png}
-    \caption{Darstellung des sichtbaren Farbspektrums \cite{fhtEsslignen}}
+    \begin{center}
+        \includegraphics[width=.48\textwidth]{images/skypanel_s60_c.png}
+    \end{center}
+    \caption{ARRI Skypanel S60-C \cite{arri}}
 \end{figure}
-\subsection{sRGB}
-\subsection{CIE} \label{section_CIE}
-\subsubsection{CIE 1931}
-\subsubsection{CIE 1976}
+\noindent
+Das SkyPanel hat einen Abstrahlwinkel von 115 Grad. Die RGBW \ac{led}s befinden sich hinter einem lampengroßem Diffusor. Die Lampe ist per
+\ac{xlr} mit DMX, W-DMX oder via Ethernet RJ45-Buchse per Art-Net steuerbar. An einem Display auf der Rückseite kann der Scheinwerfer konfiguriert
+werden. Außerdem kann manuell am Gerät auch eine xyY \ac{cie} Farbe ohne externe Ansteuerung eingestellt werden.\\
+Bei einer Ansteuerung per DMX oder Art-Net kann am Gerät auch abgelesen werden, welche xyY Werte das Gerät aus der Ansteuerung ermittelt,
+und versucht zu emittieren.
+\subsection{Messgerät MK350 LED}
+Als Referenz Messgerät zu dem vergleichsweisen niedrigpreisigen Sensoren wurde das bei MA Lighting bereits vorhandene Spektralmessgerät
+"'MK350 LED"' der Firma UPRtek genutzt.\\
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{images/MK350N_Basic_Handheld_Spectrometer.png}
+        \caption{Produkt \cite{uprtek}}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{0.49\textwidth}
+        \includegraphics[width=\textwidth]{images/mk350_lightcan_green.JPG}
+        \caption{Grafisches Benutzer Interface}
+    \end{subfigure}
+    \caption{UPRtek MK350 LED}
+\end{figure}
+\noindent
+Dieses Messgerät kann Spektraldaten im Bereich von 360 bis 760 nanometern messen. Hier wird ein Messwert pro einem Nanometer erfasst. Daraus Berechnet
+das Messgerät weiter \ac{cie} 1931 xy Koordinaten, sowie \ac{cie} 1976 uv Koordinaten. Messwerte können einzeln oder auch in Serie erfasst werden und
+im CSV Format für die weitere Auswertung auf eine SD Karte gesichert werden.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Sensorik %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -546,7 +661,7 @@ Auges im elektromagnetischen Spektrum.
 Es gibt einige Hersteller von entsprechenden Spektralsensoren für Licht und spektral benachbarte Bereiche wie Infrarot.
 Ein Hersteller, dessen Sensoren in dieser Arbeit vornehmlich genutzt wurden, ist die Firma AMS.\\
 Zu Beginn wurde nach einer einfachen Evaluierungslösung für das Erfassen von spektralen Daten gesucht. Hier wurde das
-Sensorboard von der Firma Adafruit AS7262 genutzt.\cite{adafruit}\\
+Sensorboard von der Firma Adafruit AS7262 genutzt. \cite{adafruit}\\
 Dieses Board nutzt einen AMS AS7262 Visible Spectral Light Sensor. Weiter stellt es Pin outs für \ac{i2c} und \ac{uart} bereit,
 sowie eine Status-\ac{led} und eine Referenz \ac{led} Weißlichtquelle zur Beleuchtung von nicht selbst emittierenden
 Gegenständen.
@@ -623,80 +738,6 @@ Hier werden aus der \ac{uart} (AT) Schnittstelle mit dem Befehl "'ATCDATA"' die 
 (Gleitkomma Zahlen) ausgegeben. Die weiteren nicht Sensor bezogenen Befehle sind identisch mit dem Befehlssatz des AS7261 Sensors.
 \clearpage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%% Verwendete Gerätschaften %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Verwendete Gerätschaften}
-\subsection{Lampen}
-Im folgenden werden die Lichtquellen beziehungsweise die Lampen beschrieben, die für die Messungen verwendet wurden.
-Auch in der Veranstaltungstechnik als (engl.) "'Fixtures"' bezeichnet. Diese Lampen haben alle \ac{led}s als Lichtquelle. Diese \ac{led}s
-sind alle unterschiedlich aufgebaut.
-\subsubsection{Ape Labs Light Can}
-~\par\vspace{-\baselineskip}
-\begin{wrapfigure}{r}{0.4\textwidth}
-    \vspace{-45pt}
-    \begin{center}
-        \includegraphics[width=.23\textwidth]{images/light_can_front.png}
-    \end{center}
-    \vspace{-20pt}
-    \caption{Light Can}
-    \vspace{-15pt}
-\end{wrapfigure}
-\noindent
-Diese Lampe ist eine sehr kompakt gebaute RGBW \ac{led} Lichtquelle auf Akku Basis. Diese wurde von der Firma Ape Labs aus Eisigen in Deutschland
-entwickelt. Diese Lampe ist sowohl per Fernbedienung, als auch per W-\ac{dmx} steuerbar.
-Die "'Kanne"' hat einen Abstrahlwinkel von 65 Grad. Zur gezielten Steuerung, ohne vorprogrammierte Effekte wird ein \ac{dmx} zu W-DMX Wandler der
-Firma benötigt (W-APP). Dieser ermöglicht dann die Ansteuerung der Lampe durch die Applikation.
-\subsubsection{Robe LEDWash 300}
-Dieses Wash Movinglight ist ein handelsübliches Gerät und wird weltweit bei vielen Veranstaltungen universell eingesetzt. Hier sind 19 einzelne
-RGBW \ac{led}s hinter einzelnen Linsen in zwei Kreisen und einer Mittelpunkt \ac{led} positioniert.
-\begin{figure}[H]
-    \begin{center}
-        \includegraphics[width=.3\textwidth]{images/Robe_300_ledwash.png}
-    \end{center}
-    \caption{Robe LEDWash 300 \cite{robe}}
-\end{figure}
-\noindent
-Das Movinglight hat einen einstellbaren Abstrahlwinkel von 8 bis 63 Grad. Dieser wurde allerdings bei den Messungen auf 63 Grad fest eingestellt,
-um ein möglichst homogenes Abstrahlverhalten zu erhalten. Laut Hersteller hat die Lampe bei einer Distanz von fünf Metern zur Lampe eine
-Lichtausbeute von 3.370 Lumen. Die Lampe ist per \ac{xlr} mit DMX, oder via Ethernet RJ45-Buchse per Art-Net steuerbar. An einem Display
-am Fuß (der "'Base"') kann der Scheinwerfer konfiguriert werden.
-\subsubsection{ARRI SkyPanel}
-Das Skypanel S60-C von der Firma Arri, ein Tochterunternehmen der Firma Osram, wird oft als Fluter, das Grundlicht in Film und Fernsehen, eingesetzt.
-Es wird beworben, dass es mit xyY Kanälen per DMX angesteuert werden kann und diese \ac{cie} Werte von der Lampe exakt wiedergegeben werden. Somit
-ist diese Lampe eine perfekte Referenz für diese Arbeit.
-\begin{figure}[H]
-    \begin{center}
-        \includegraphics[width=.48\textwidth]{images/skypanel_s60_c.png}
-    \end{center}
-    \caption{ARRI Skypanel S60-C \cite{arri}}
-\end{figure}
-\noindent
-Das SkyPanel hat einen Abstrahlwinkel von 115 Grad. Die RGBW \ac{led}s befinden sich hinter einem lampengroßem Diffusor. Die Lampe ist per
-\ac{xlr} mit DMX, W-DMX oder via Ethernet RJ45-Buchse per Art-Net steuerbar. An einem Display auf der Rückseite kann der Scheinwerfer konfiguriert
-werden. Außerdem kann manuell am Gerät auch eine xyY \ac{cie} Farbe ohne externe Ansteuerung eingestellt werden.\\
-Bei einer Ansteuerung per DMX oder Art-Net kann am Gerät auch abgelesen werden, welche xyY Werte das Gerät aus der Ansteuerung ermittelt,
-und versucht zu emittieren.
-\subsection{Messgerät MK350 LED}
-Als Referenz Messgerät zu dem vergleichsweisen niedrigpreisigen Sensoren wurde das bei MA Lighting bereits vorhandene Spektralmessgerät
-"'MK350 LED"' der Firma UPRtek genutzt.\\
-\begin{figure}[H]
-    \centering
-    \begin{subfigure}[b]{0.49\textwidth}
-        \includegraphics[width=\textwidth]{images/MK350N_Basic_Handheld_Spectrometer.png}
-        \caption{Produkt \cite{uprtek}}
-    \end{subfigure}
-    \hfill 
-    \begin{subfigure}[b]{0.49\textwidth}
-        \includegraphics[width=\textwidth]{images/mk350_lightcan_green.JPG}
-        \caption{Grafisches Benutzer Interface}
-    \end{subfigure}
-    \caption{UPRtek MK350 LED}
-\end{figure}
-\noindent
-Dieses Messgerät kann Spektraldaten im Bereich von 360 bis 760 nanometern messen. Hier wird ein Messwert pro einem Nanometer erfasst. Daraus Berechnet
-das Messgerät weiter \ac{cie} 1931 xy Koordinaten, sowie \ac{cie} 1976 uv Koordinaten. Messwerte können einzeln oder auch in Serie erfasst werden und
-im CSV Format für die weitere Auswertung auf eine SD Karte gesichert werden.
-\clearpage
-
 %%%%%%%%%%%%%%%%%%%%%%%%%% Messungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Messungen und Testapplikation}
 \subsection{Empfangen und aufbereiten der Sensorwerte}
@@ -707,7 +748,7 @@ Umgebungslichtes und einer Light Can empfangen. Es wurde der Befehl "'ATDATA"' g
 Anschließend wurde begonnen eine erste NodeJS Applikation zu programmieren, um intervallweise spektrale Daten
 von der \ac{uart} Schnittstelle abzufragen und anzuzeigen. So konnten erste Messwerte mit dem AS7262 Sensor erhoben werden.
 Diese Messwerte wurden mit dem MK350 verglichen. Hier wurde beobachtet, dass die gemessenen Daten des MK350 auf den jeweiligen
-Wellenlängen mit den Werten übereinstimmt. Hier ist anzumerken, dass wie in Bild \ref{fig:green_spec_MK350} zu sehen, die pro Wellenlänge
+Wellenlängen mit den Werten übereinstimmen. Hier ist anzumerken, dass wie in Bild \ref{fig:green_spec_MK350} zu sehen, die pro Wellenlänge
 gemessene Amplitude nach 1 normiert wird. Zur Vergleichbarkeit werden auch in der Applikation die Sensor Werte des AS7262 nach
 1 normiert. Die Messwerte der sechs Wellenlängen des AS7262 sind mit geringer Abweichung identisch zum MK350.\\
 \begin{figure}[H]
@@ -721,17 +762,17 @@ gemessene Amplitude nach 1 normiert wird. Zur Vergleichbarkeit werden auch in de
         \includegraphics[width=\textwidth]{images/app_lightcan_green_spectrum.png}
         \caption{Spektrum AS7262}\label{fig:green_spec_7262}
     \end{subfigure}
-    \caption{Spektrum des grünen Emitters einer LightCan}
+    \caption{Spektrum des grünen Emitters einer LightCan. Gemessen am 10.09.2019}
 \end{figure}
 \noindent
-Doch war hier ein großes Defizit des AS7262 zu beobachten. wie in Bild  \ref{fig:green_spec_MK350} zu erkennen liegt für das Maximum
-des grünen Emitters bei ca. 515 nanometern. Doch liegen die beiden nächsten Messflanken des AS7262 bei 500 und 550 nanometern (Bild \ref{fig:spec_7262}).
+Doch war hier ein großes Defizit des AS7262 zu beobachten. Wie in Bild  \ref{fig:green_spec_MK350} zu erkennen liegt das Maximum
+des grünen Emitters bei ca. 515 Nanometern. Doch liegen die beiden nächsten Messflanken des AS7262 bei 500 und 550 Nanometern (Bild \ref{fig:spec_7262}).
 Somit wird der Wellenlängenbereich mit der höchsten Energiedichte nicht erfasst. Dies erzeugt eine relevante Fehlerquelle für weitere
 Berechnungen.\\
 Nach der Implementierung der ersten Auswertung der Messdaten eines mit der Applikation verbundenen Sensors wurde begonnen, die Messwerte in der
 Applikation grafisch aufzubereiten. Zunächst wurde die NodeJS mit dem \ac{npm} Paket Electron erweitert. Auf der Appcode Seite ist ein Befehlssatz
-zur Generierung eines Electron Fensters, sowie eine Abfrage des Sensors mit dem Befehl "'ATCDATA"', welcher intervallweise alle 250 millisekunden
-abgerufen wird. Die Empfangenen Sensordaten werden dann per Schnittstelle an den Webcode weitergegeben.\\
+zur Generierung eines Electron Fensters, sowie eine Abfrage des Sensors mit dem Befehl "'ATCDATA"', welcher intervallweise alle 250 Millisekunden
+abgerufen wird. Die empfangenen Sensordaten werden dann per Schnittstelle an den Webcode weitergegeben.\\
 Mit den im Webcode verfügbaren Sensordaten wurden in Anlehnung zu der Darstellung im MK350 die Werte mit proportional hohen Balken pro Wellenlänge
 mit HTML Elementen dargestellt. Diese Balken wurden zur besseren Zuordnung in eine, die Wellenlänge repräsentierende, Farbe eingefärbt.
 \begin{figure}[H]
@@ -741,7 +782,7 @@ mit HTML Elementen dargestellt. Diese Balken wurden zur besseren Zuordnung in ei
     \caption{Erste Darstellung der Sensorwerte}
 \end{figure}
 \noindent
-Die 1 normierten Werte bezogen auf den Maximal gemessenen einheitlosen Wert sind unter den Balken angezeigt. Der maximale gemessene Wert ist in der
+Die 1 normierten Werte bezogen auf den maximal gemessenen einheitlosen Wert sind unter den Balken angezeigt. Der maximale gemessene Wert ist in der
 oberen linken Ecke angezeigt. Unter den normierten Messwerten ist zusätzlich ein beschreibender Name der Farbe, sowie die Wellenlänge aufgeführt.\\
 \\
 Mit dieses Werten wurde begonnen eine XYZ \ac{cie} Koordinate zu errechnen. Hier wurden die Formeln von Bruce Lindbloom genutzt. Lindbloom's Webauftritt
@@ -766,14 +807,14 @@ Die hier genutzten Tristimuluswerte \cite{wisotop}:
     \end{tabular*}
 \end{table}
 \noindent
-Aus diesen WErten und den mit dem Sensor erfassten Spektralwerte konnten nun die \ac{cie} XYZ Werte errechnet werden. Um nun den graphischen Punkt auf
-einem \ac{cie} 1931 Diagramm zu erhalten müssen die XYZ in xyz Koordinaten umgerechnet werden. Dies ist mit den folgenden Formeln möglich \cite{lindbloom}:
+Aus diesen Werten und den mit dem Sensor erfassten Spektralwerten konnten nun die \ac{cie} XYZ Werte errechnet werden. Um nun den graphischen Punkt auf
+einem \ac{cie} 1931 Diagramm zu erhalten, müssen die XYZ in xyz Koordinaten umgerechnet werden. Dies ist mit den folgenden Formeln möglich \cite{lindbloom}:
 \begin{align}\label{Equ:3}
     x = \frac{X}{X+Y+Z}\\
     y = \frac{Y}{X+Y+Z}\\
     z = Y
 \end{align}
-Mit diesen Werten konnte nun der Punkt in das \ac{cie} 1931 Diagramm in der Applikation nach jeder Messung, also immer nach 250ms eingezeichnet werden.
+Mit diesen Werten konnte nun der Punkt in das \ac{cie} 1931 Diagramm in der Applikation nach jeder Messung, also immer nach 250 Millisekunden eingezeichnet werden.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=\textwidth]{images/app_dummy_spectrum_with_xy.png}
@@ -785,8 +826,8 @@ Mit diesen Werten konnte nun der Punkt in das \ac{cie} 1931 Diagramm in der Appl
 Hier folgen Notizen:\\
 - AS7261\\
 - Mit dem Sensor AS7261 konnten die bisherigen Ausführungen bis zur XYZ zu xyz Konvertierung übersprungen werden\\
-- Der Applikation wurde ein Sensor auswahl Dialog hinzugefügt\\
-- Hier wurde festgestellt, dass der AS7261 folgende Vor-/Nachteile bei der ermittlung der XYZ Werte hat\\}
+- Der Applikation wurde ein Sensorauswahldialog hinzugefügt\\
+- Hier wurde festgestellt, dass der AS7261 folgende Vor-/Nachteile bei der Ermittlung der XYZ Werte hat\\}
 \\
 Zusätzlich zur Darstellung im \ac{cie} 1931 Farbraum wurde zur besseren Einordnung und zur Anzeige in der Applikation die XYZ Werte in RGB Werte
 umgewandelt. Dies ist möglich mit folgenden Gleichungen von Lindbloom's Webauftritt \cite{lindbloom}:
@@ -802,16 +843,16 @@ umgewandelt. Dies ist möglich mit folgenden Gleichungen von Lindbloom's Webauft
         Z \\
     \end{array}\right]
 \end{align}
-mit CIE RGB
+mit sRGB Umrechnungsmatrix mit Weiss-Referenzpunk D65 %// TODO: D65 irgendwo erklären
 \begin{align}\label{Equ:5}
-    M = \left[ \begin{array}{rrr}
-        2.3706743 & -0.9000405 & -0.4706338 \\
-        -0.5138850 & 1.4253036 & 0.0885814 \\
-        0.0052982 & -0.0146949 & 1.0093968 \\
+    M^{-1} = \left[ \begin{array}{rrr}
+        3.2404542  & -1.5371385 & -0.4985314 \\
+        -0.9692660 & 1.8760108  & 0.0415560  \\
+        0.0556434  & -0.2040259 & 1.0572252  \\
     \end{array}\right]
 \end{align}
 Für $M$ sind einige Definitionen gegeben. Diese gewählte Definition ist abhängig von dem RGB Farbraum, in den umgerechnet werden soll, sowie
-die Weißlicht Bezugsquelle.
+die Weißlicht-Bezugsquelle.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=\textwidth]{images/app_dummy_info_with_rgb.png}
@@ -819,18 +860,196 @@ die Weißlicht Bezugsquelle.
     \caption{Errechnete Werte aus dem Spektrum}
 \end{figure}
 \noindent
-Mit diesen Umrechnungen sind nun alle relevanten Farbräume abgedeckt. Diese Werte werden in der Applikation angezeigt. Die RGB Werte werden mit
-den entsprechenden Werten als Hintergrundfarbe hinterlegt.
+Mit diesen Umrechnungen sind nun alle relevanten Farbräume abgedeckt. Diese Werte werden in der Applikation angezeigt. Die Anzeige der RGB Werte
+wird mit den entsprechenden Werten als Hintergrundfarbe hinterlegt.
 \subsection{Aufnehmen von Messwerten}
+Mit den nun verfügbaren Farbraumdaten aus einer Messung, kann mit der weiteren Verarbeitung der Daten begonnen werden. Nun können die einzelnen
+Emitter vermessen und die Messdaten gesichert werden. Für eine erste Vermessung einer Light Can wurde diese mit dem WAPP per DMX angesteuert.
+Für die Vermessung einer Light Can wurde folgendes Szenario definiert:
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=\textwidth]{images/light_can_holder_3d.png}
+    \end{center}
+    \caption{3D Modell des Messaufbaus für eine Light Can}\label{fig:3DCanHolder}
+\end{figure}
+\noindent
+Diese in Bild \ref{fig:3DCanHolder} gezeigte Vorrichtung wurde 3D modelliert und anschließend mit einem 3D Drucker hergestellt. In die linke
+Halterung kann eines der Sensorboards eingeschoben werden. Mit einem definierten Abstand von zwölf Zentimetern kann in den rechten runden Halterungen
+eine Light Can arretiert werden. Dieser Abstand wurde anhand der Empfindlichkeiten der Sensoren in den ersten Probemessungen festgelegt.\\
+In der Applikation wurden die Emitter der Light Can aufgelistet. Diese sind Rot, Grün, Blau und Weiss. Pro Emitter werden acht Helligkeitsstufen
+gemessen, da bei den Probemessungen beobachtet wurde, dass vor allem bei niedrigen Helligkeiten der gemessene Farbton sich deutlich von dem
+gemessenen Farbton bei hohen Helligkeiten unterscheidet.\\
+Die gewählten Helligkeitsstufen sind:\\
+5\%, 10\%, 20\%, 35\%, 50\%, 65\%, 85\% und 100\% der Helligkeit des jeweiligen Emitters.\\
+Um die gemessenen Werte in der Applikation zu erfassen, wurde eine Emittersektion in der grafischen Benutzeroberfläche vorgesehen.
+Der Benutzer konnte mit der Schaltfläche "'Add Emitter"' manuell Emitter zu der aktuellen Messung hinzufügen. Durch Anklicken eines angelegten
+Emitters, konnte das Menü des einzelnen Emitters geöffnet werden.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{\textwidth}
+        \includegraphics[width=\textwidth]{images/app_emitters_v1.png}
+        \caption{Emitter Übersicht der aktuellen Messung}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{\textwidth}
+        \includegraphics[width=\textwidth]{images/app_edit_emitters_v1.png}
+        \caption{Menü des einzelnen Emitters}
+    \end{subfigure}
+    \caption{Erste version der Benutzeroberfläche zur manuellen Erfassung von Emitterwerten}
+\end{figure}
+\noindent
+Das Emittermenü bot einige Einstellungsmöglichkeiten wie den Namen und die Farbe zur bessern Zuordnung für den Benutzer, sowie eine Schaltfläche pro zu messende
+Helligkeitsstufe. Während einer Messung musste der Benutzer nun mit einer externen (DMX) Ansteuerung, beispielsweise den roten
+Emitter einer Light Can in den gewünschen Helligkeitszustand bringen. Anschließend konnte mit einem Klick auf die zugehörige Schaltfläche die
+aktuell gemessenen Werte im Hintergrund abgespeichert werden. Die betätigte Schaltfläche wurde zur Bestätigung für den Benutzer in der errechneten
+RGB Farbe hinterlegt.\\
+Nach dem manuellen erfassen aller Helligkeitsstufen konnten die erfassten Daten mit der Schaltfläche "'Save"' permanent auf der Festplatte zur
+Weiterverwendung gespeichert werden. Dieser Vorgang musste für alle Emitter wiederholt werden.
 \subsection{Vorberechnen anhand von Messwerten}
+Mit den nun verfügbaren Messwerten einer Lichtquelle wurde zur Überprüfung der bisher eingesetzten Berechnungen eine Möglichkeit programmiert,
+um virtuell in der Applikation die Emitter additiv zu mischen. Durch Interpolation zwischen den erfassten Helligkeitsstufen und additiver
+Farbmischung den Farbton einer aktiven Emitterkombination vorauszuberechnen.
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.9\textwidth]{images/app_emitters_with_sliders_v1.png}
+    \end{center}
+    \caption{Emitter Übersicht mit Schiebereglern}\label{fig:emitterFaders}
+\end{figure}
+\noindent
+In der Benutzeroberfläche wurde dies mit Schiebereglern pro Emitter gelöst, welche von 0 bis 100 in fünf Prozent Schritten einstellbar sind.
+Sobald der Benutzer einen Schieberegler betätigt, wurde das gemessene oder interpolierte Spektrum der Emitter aufaddiert. Dieses kombinierte
+Spektrum wurde in eine \ac{cie} xy Koordinate umgerechnet und zusätzlich zu der aktuellen Messung in der CIE 1931 Normtafel angezeigt.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/app_dummy_spectrum_with_xy_and_calc_and_emitters.png}
+        \caption{Messung des grünen Emitters}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/app_dummy_spectrum_with_xy_and_calc_and_emitters_green_blue.png}
+        \caption{Messung des grünen und blauen Emitters}\label{fig:calcLightCanMix}
+    \end{subfigure}
+    \caption{Zwischenstand der Benutzeroberfläche mit Messungen und Vorberechnung einer Light Can}
+\end{figure}
+\noindent
+Die vorberechnete Koordinate wird als rotes Kreuz in der CIE 1931 Normtafel angezeigt, neben der aktuellen Messung, welche als schwarzes Kreuz
+angezeigt wird.\\
+Hier ist zu beobachten, dass bei einem Mischfarbton in Bild \ref{fig:calcLightCanMix} die Messung der Lichtquelle mit der Vorberechnung nicht
+übereinstimmt. Bei Messungen mit den anderen Lichtquellen ist diese Abweichung nicht aufgetreten. die zwei Kreuze waren zumeist in jeder beliebigen
+Kombination nahezu deckungsgleich.\\
+Diese Abweichung entsteht durch eine spezielle Funktion des Light Can Scheinwerfers. Die Light Can nutzt einen internen Algorithmus, um sowohl bei
+maximaler Austeuerung eines einzelnen Emitters als auch bei der Aussteuerung von mehreren Emittern immer die gleiche Gesamthelligkeit zu
+emittieren.\\
+So wird bei einem 100 Prozent Ansteuerung des grünen Emitters eine Helligkeit von circa 4400 Lux von dem einen Emitter abgegeben. Bei der
+Kombination mehrere Emitter wird die maximale zu erreichende Helligkeit der einzelnen Emitter reduziert.\\
+\\
+Dieser Test zeigt, dass für lineare und annähernd lineare Farbmischsysteme eine Einzelvermessung der Emitter ausreichend ist, um den Gamut, den möglichen
+Farbraum und die Farbmischung vorauszuberechnen. Für nicht lineare Farbmischsysteme sind weitere Messungen der tatsächlichen Mischfarben nötig oder der
+modifizierende Algorithmus in der Lampe muss bekannt sein.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Ansteuerung externer Lichtquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Ansteuerung externer Lichtquellen}
+Zur automatisierung der Vermessung der Lichtquellen ist es nötig, dass die messende Applikation auch die Lichtquellen ansteuern kann. Somit wurde
+in der Applikation eine \ac{dmx} Steuerung mit Art-Net implementiert. Weiter wurde ermöglicht mehrere Lampen zu verwalten und zu steuern, um später mehrere
+vermessene Lampen ansteuern zu können.
+\subsection{Fixturetypen}
+Lichtquellen verschiedener Hersteller haben viele unterschiedliche Funktionen. Von einer Helligkeitsregelung, dem Dimmer, über mehrere Emitter, wie
+die hier venrwendeten Lichtquellen, bis zu Bewegungssteuerungen mehrerer Achsen, wie des Robe LEDWash 300.\\
+Die Zuordnung dieser Funktionen zu den DMX Steuerkanälen der Lampe ist somit je nach Funktionalitätsumfang von Lampe zu Lampe und auch bei einem gleichen
+Lampentyp von Hersteller zu Hersteller unterschiedlich. So findet sich beispielsweise bei der Light Can kein Dimmer Steuerkanal für die Gesamtintensität
+der Lampe. Hier werden nur Steuerkanäle der einzelnen Emitter bereitgestellt.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/dmx_chart_light_can_4_channel_mode.png}
+        \caption{Light Can 4 Channel Mode \cite{lightCanDMX}}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/dmx_chart_skypanel_mode_4.png}
+        \caption{Auszug SkyPanel Mode 4 \cite{skypanelDMX}}
+    \end{subfigure}
+    \caption{DMX Charts der Hersteller Ape Labs und Arri}
+\end{figure}
+\noindent
+Das SkyPanel hingegen bietet 31 sogenannte DMX Modi, die Light Can 3 Modi. Je nach Wahl des DMX Modus wechselt die Belegung der \ac{dmx} Steuerkanäle, auf die
+die Lampe reagiert. Hier wird nach Anwendungsfall ein DMX Mode gewählt. Das SkyPanel bietet auch in einem DMX Modus eine Ansteuerung von CIE 1931 x und
+y Kanälen auf zwei \ac{dmx} Kanälen. Dies ermöglicht die Lampe durch internes Umsetzen der empfangenen \ac{dmx} Werte auf diesen Kanälen in Helligkeitswerte %%%%%%%%%%%%%%%%%
+für die einzelnen Emitter.\\
+Eine abstrahierte, oder auch vereinheitliche Steuerung für äquivalente Lampenfunktionen ist durch diese Unterschiede in der Belegung nur durch
+Zuordnungstabellen in der Software möglich. Hier wird die gewählte Belegung der Lampe hinterlegt, um mit einem Schieberegler für den roten Emitter
+wie in Bild \ref{fig:emitterFaders} den entsprechenden Steuerkanal mit dem eingestellten Wert zu beschicken.\\
+\\
+Diese Zuordnungstabellen nennt man in der Brache (engl.) "'Fixturetypen"'.
+\clearpage
+\begin{wrapfigure}{r}{0.3\textwidth}
+    \vspace{-25pt}
+    \begin{center}
+        \includegraphics[width=0.3\textwidth]{images/code_fixturetype_skypanel.png}
+    \end{center}
+    \vspace{-20pt}
+    \caption{Fixturetyp Definition im Applikationscode} \label{fig:code_fixturetype}
+    \vspace{-15pt}
+\end{wrapfigure}
+\noindent
+In der Applikation ist dies eine statische \ac{json} Liste von Fixturetypen (Bild \ref{fig:code_fixturetype}). Hier wird lediglich festgehalten, welche
+Emitter die Lampe hat und auf welchem \ac{dmx} Kanal des Modus sich der Emitter bezogen auf 1 befindet. Weiter ob die Lampe einen Dimmer Kanal hat und
+wenn ja ebenfalls auf welchem Kanal dieser zu finden ist.
+\subsection{Patch}
+Im sogenannten "'Patch"' oder auch "'Adressierung"' legt man fest, welche Lampen man steuern möchte. Ein Patcheintrag besteht aus den Informationen,
+des verwendeten Fixturetypen und der DMX Startadresse. Die DMX Startadresse ist die Nummer zwischen 1 und 512, welche man an der Lampe einstellt.
+Alle weiteren Steuerkanäle des DMX Modus der Lampe folgen dann auf diese Startadresse. Hier muss bei mehreren Lampen auf einer DMX Linie darauf geachtet
+werden, dass keine Lampen sich in ihren Steuerkanälen ungewollt überlappen.\\
+Die gleiche Startadresse pro Lampe muss dann mit dem entsprechenden Fixturetypen und dem korrekten Modus der Steuerungssoftware eingegeben werden.\\
+In der Applikation werden beim Hinzufügen von Lampen im Hintergrund noch weitere Dinge erledigt. Durch das Nutzen von mehreren Lampen musste die Art
+und Weise wie Emitter und die mehreren angelegten Lampen verwaltet werden umgestellt werden.\\
+Die Emitter Sektion wird nun automatisch erzeugt. Anhand der genutzten Fixturetypen wird zusammengetragen, welche Arten von Emittern benötigt werden.
+Für alle verwendeten Emitter wird eine entsprechende Representation mit einem Schieberegler erzeugt. Der "'Add Emitter"' Knopf zum manuellen
+Hinzufügen von Emittern entfällt.\\
+Falls für den Fixturetypen bereits eine vergangene Messung auf der Festplatte verfügbar ist, wird diese dem Fixture als Emitter Daten zugewiesen.
+Wenn keine Daten vorhanden sind, wird das Fixture als nicht vermessen markiert.\\
+Zuletzt wird der Patch gesichert und auch beim nächsten Öffnen der Applikation auch wieder geladen.
+\subsection{Fixture Sheet}
+Ein sogenanntes "'Fixture Sheet"' ist eine Auflistung der gepatchten Fixtures und deren aktueller Zustand.
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.9\textwidth]{images/app_fixture_sheet_dummy.png}
+    \end{center}
+    \caption{Fixture Sheet in der Applikation mit Selektion}\label{fig:fixtureSheet}
+\end{figure}
+\noindent
+Weiter wird hier eine Selektion eingeführt. Nur selektierte Fixtures werden über die Schieberegler in ihren Werten manipuliert. Alle anderen Werte bleiben
+unangetastet. Alle selektierten Fixtures werden mit gelber Schrift gekennzeichnet.\\
+Jede Reihe des Fixture Sheets außer der obersten repräsentiert den Zustand eines gepatchten Fixtures. In der ersten Spalte in Bild \ref{fig:fixtureSheet}
+wird eine inkrementierte Nummer angezeigt, um mehrere Fixtures des gleichen Typs auseinaderhalten zu können. In der zweiten Spalte wird der Name des
+Fixturetyps angezeigt, um diesen zu identifizieren.\\
+Die folgenden Spalten bis "'M"' werden dynamisch je nach genutzten Attributen generiert. Nutzt ein Fixture ein Attribut nicht, wird die Spalte leer gelassen.
+Wird das Attribut genutzt, wird der aktuelle Wert, der mit den Schiebereglern eingestellt wurde, von 0 bis 100 angezeigt. Dieser Wert soll später via \ac{dmx}
+ausgegeben werden.\\
+Die Spalte "'M"' steht für "'Measure"'. Mit dem Anklicken der Zelle wird später automatisiert das Vermessen des Fixtures angestoßen. Mit Klicken auf die
+Zelle in der Spalte "'S"' für "'Settings"' also Einstellungen, können nun hier in einem Popup die gemessenen Emitter Werte eingesehen werden.
+\subsection{Art-Net Implementierung}
+Zur Ansteuerung der Lampen mit \ac{dmx} wurde eine einfache Art-Net Implementierung aus dem NPM Modul "'artnet"' von dem Alias "'hobbyquaker"' genutzt
+\cite{artnetPackage}. Zur Art-Net - DMX Umsetzung wurde ein grandMA3 "'xPort Node"' genutzt. Dieser wurde als Protokoll Wandler eingesetzt.\\
+%//TODO: Schematischer Aufbau Applikation -> Node (-> WAPP) -> Lampe als Skizze
+In der Applikation wird mit jeder Einstellung an einem beliebigen Schieberegler das Zusammenstellen neuer DMX Informationen angestoßen.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Automatisierung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Automatisierung}
+{\color{red}
+Hier folgen Notizen:\\
+Anpassung der Fader Werte anhand von Kalibrierungsdaten und Anpassen der auszugebenden DMX Werte\\
+ - Vorgehensweise\\
+ - Mathematik\\
+ - Verwendeter Algorithmus\\
+ - Analyse (stärken und Schwächen)
+\begin{addmargin}[2em]{0em}
+    - Light Can innere Algorithmen\\
+    - Exemplarische Ergebnisse
+\end{addmargin}}
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Anhang %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -880,25 +1099,30 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
 \begingroup
 \renewcommand{\section}[2]{}
 \begin{thebibliography}{xxxxxxxxxxxxxxxxxxx}
-    \bibitem[Art-Net Homepage, 2019]{artnet}"'Home - Art-Net"', \url{https://art-net.org.uk/}, 07.08.2019
-    \bibitem[Art-Net Documatation, 2019]{artdmx}"'ArtDmx – Packet Definition - Art-Net"', \url{https://art-net.org.uk/structure/streaming-packets/artdmx-packet-definition/}, 10.08.2019
-    \bibitem[Electron Homepage, 2019]{electron}"'Electron | Plattformübergreifende Desktop-Anwendungen mit JavaScript, HTML und CSS entwickeln."', \url{https://electronjs.org/}, 08.08.2019
-    \bibitem[Licht Wikipedia, 2019]{wikiLicht}"'Licht - Wikipedia"', \url{https://de.wikipedia.org/wiki/Licht}, 11.08.2019
-    \bibitem[Wikipedia, 2019]{spectrumLight}"'Electromagnetic spectrum - Wikipedia"', \url{https://en.wikipedia.org/wiki/Electromagnetic_spectrum}, 11.08.2019
-    \bibitem[Farbwahrnehmung FHT Esslingen, 2019]{fhtEsslignen}"'Farbwahrnehmung"', \url{http://www.it.fht-esslingen.de/~asbeck/gdial/farbe/sehen2.html}, 11.08.2019
-    \bibitem[Leuchtdiode Wikipedia, 2019]{wikiLed}"'Leuchtdiode - Wikipedia"', \url{https://de.wikipedia.org/wiki/Leuchtdiode}, 21.08.2019
+    \bibitem[Art-Net Homepage, 2019]{artnet}"'Home - Art-Net"', \url{https://art-net.org.uk/}. Visited on: 07.08.2019
+    \bibitem[Art-Net Documatation, 2019]{artdmx}"'ArtDmx – Packet Definition - Art-Net"', \url{https://art-net.org.uk/structure/streaming-packets/artdmx-packet-definition/}. Visited on: 10.08.2019
+    \bibitem[Electron Homepage, 2019]{electron}"'Electron | Plattformübergreifende Desktop-Anwendungen mit JavaScript, HTML und CSS entwickeln."', \url{https://electronjs.org/}. Visited on: 08.08.2019
+    \bibitem[Licht Wikipedia, 2019]{wikiLicht}"'Licht - Wikipedia"', \url{https://de.wikipedia.org/wiki/Licht}. Visited on: 11.08.2019
+    \bibitem[Farbtemperatur Wikipedia, 2019]{wikiFarbtemperatur}"'Farbtemperatur - Wikipedia"', \url{https://de.wikipedia.org/wiki/Farbtemperatur}. Visited on: 14.09.2019
+    \bibitem[Wikipedia, 2019]{spectrumLight}"'Electromagnetic spectrum - Wikipedia"', \url{https://en.wikipedia.org/wiki/Electromagnetic_spectrum}. Visited on: 11.08.2019
+    \bibitem[Lichtquellen, 2015]{lichtquellen} Dohlus, Rainer: "'Lichtquellen"' De Gruyter, Berlin, 2015, 
+    \bibitem[Farbwahrnehmung FHT Esslingen, 2019]{fhtEsslignen}"'Farbwahrnehmung"', \url{http://www.it.fht-esslingen.de/~asbeck/gdial/farbe/sehen2.html}. Visited on: 11.08.2019
+    \bibitem[Leuchtdiode Wikipedia, 2019]{wikiLed}"'Leuchtdiode - Wikipedia"', \url{https://de.wikipedia.org/wiki/Leuchtdiode}. Visited on: 21.08.2019
     \bibitem[Showlicht von Scribble zum fertigen Desgin, 2014]{showlicht}"'Showlicht von Scribble zum fertigen Desgin"', 01.09.2019
-    \bibitem[Philips PAR64 Leuchtmittel 1000W | Thomann, 2019]{convpar}"'Philips PAR64 Leuchtmittel 1000W | Thomann"', \url{https://www.thomann.de/de/philips_par64_1000_watt_mfl_cp62_exe.htm}, 02.09.2019
-    \bibitem[P FLAT PRO 18 IP65 | Cameo, 2019]{ledpar}"'P FLAT PRO 18 IP65 | Cameo"', \url{https://www.cameolight.com/de/loesungen/installation/outdoor-lichttechnik/outdoor-scheinwerfer/2297/p-flat-pro-18-ip65?c=1826}, 02.09.2019
-    \bibitem[Adafruit Learn, 2019]{adafruit}"'Overview | Adafruit AS7262 6-channel Visible Light Sensor | Adafruit Learning System"', \url{https://learn.adafruit.com/adafruit-as7262-6-channel-visible-light-sensor}, 11.08.2019
-    \bibitem[AS7261 Datenblatt, 2019]{datasheet61}"'AS7261 XYZ Chromatic White Color Sensor + NIR with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7261_DS000493_1-00.pdf/0e7d1f12-702e-d061-b07a-67b0b6316800}, 11.08.2019
-    \bibitem[AS7262 Datenblatt, 2019]{datasheet62}"'AS7262 6-Channel Visible Spectral ID Device with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7262_DS000486_2-00.pdf/0031f605-5629-e030-73b2-f365fd36a43b}, 11.08.2019
-    \bibitem[Ape Labs Homepage,2019]{lightCan} \url{https://apelabs.com/products/leuchtdose}, 02.09.2019
-    \bibitem[Robe Homepage,2019]{robe} \url{https://www.robe.cz/ledwash-300plus/}, 02.09.2019
-    \bibitem[Arri Homepage,2019]{arri} \url{https://www.arri.com/en/lighting/led/skypanel/s60-c}, 02.09.2019
-    \bibitem[UPRtek Homepage,2019]{uprtek} \url{https://www.uprtek.com/de/product/LED-Test-Measurement-Handspektrometer/MK350N-Basic-Handheld-Spectrometer.html}, 09.09.2019
-    \bibitem[Lindbloom Homepage,2019]{lindbloom} \url{http://brucelindbloom.com/index.html}, 09.09.2019
-    \bibitem[Wisotop Homepage,2019]{wisotop} \url{https://wisotop.de/Anhang-Tristimulus-Werte.php}, 09.09.2019
+    \bibitem[Philips PAR64 Leuchtmittel 1000W | Thomann, 2019]{convpar}"'Philips PAR64 Leuchtmittel 1000W | Thomann"', \url{https://www.thomann.de/de/philips_par64_1000_watt_mfl_cp62_exe.htm}. Visited on: 02.09.2019
+    \bibitem[P FLAT PRO 18 IP65 | Cameo, 2019]{ledpar}"'P FLAT PRO 18 IP65 | Cameo"', \url{https://www.cameolight.com/de/loesungen/installation/outdoor-lichttechnik/outdoor-scheinwerfer/2297/p-flat-pro-18-ip65?c=1826}. Visited on: 02.09.2019
+    \bibitem[Ape Labs Homepage,2019]{lightCan} \url{https://apelabs.com/products/leuchtdose}. Visited on: 02.09.2019
+    \bibitem[Robe Homepage,2019]{robe} \url{https://www.robe.cz/ledwash-300plus/}. Visited on: 02.09.2019
+    \bibitem[Arri Homepage,2019]{arri} \url{https://www.arri.com/en/lighting/led/skypanel/s60-c}. Visited on: 02.09.2019
+    \bibitem[UPRtek Homepage,2019]{uprtek} \url{https://www.uprtek.com/de/product/LED-Test-Measurement-Handspektrometer/MK350N-Basic-Handheld-Spectrometer.html}. Visited on: 09.09.2019
+    \bibitem[Adafruit Learn, 2019]{adafruit}"'Overview | Adafruit AS7262 6-channel Visible Light Sensor | Adafruit Learning System"', \url{https://learn.adafruit.com/adafruit-as7262-6-channel-visible-light-sensor}. Visited on: 11.08.2019
+    \bibitem[AS7261 Datenblatt, 2019]{datasheet61}"'AS7261 XYZ Chromatic White Color Sensor + NIR with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7261_DS000493_1-00.pdf/0e7d1f12-702e-d061-b07a-67b0b6316800}. Visited on: 11.08.2019
+    \bibitem[AS7262 Datenblatt, 2019]{datasheet62}"'AS7262 6-Channel Visible Spectral ID Device with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7262_DS000486_2-00.pdf/0031f605-5629-e030-73b2-f365fd36a43b}. Visited on: 11.08.2019
+    \bibitem[Lindbloom Homepage,2019]{lindbloom} \url{http://brucelindbloom.com/index.html}. Visited on: 09.09.2019
+    \bibitem[Wisotop Homepage,2019]{wisotop} \url{https://wisotop.de/Anhang-Tristimulus-Werte.php}. Visited on: 09.09.2019
+    \bibitem[Light Can Manual,2019]{lightCanDMX} \url{http://download.apelabs.com/manuals/Ape_Labs_-_LightCan_-_Manual_-_web.pdf} Page 33. Visited on: 16.09.2019
+    \bibitem[SkyPanel Manual,2019]{skypanelDMX} \url{https://www.arri.com/resource/blob/65958/560471fec7f8f2e186ef8ca9e6cdd489/arri-skypanel-dmx-protocol-specification-v4-4-en-okt2018-data.pdf} Page 12. Visited on: 16.09.2019
+    \bibitem[artnet NPMJS,2019]{artnetPackage} \url{https://www.npmjs.com/package/artnet}. Visited on: 16.09.2019
  \end{thebibliography}
  \endgroup
 \clearpage
