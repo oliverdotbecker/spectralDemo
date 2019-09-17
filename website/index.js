@@ -748,7 +748,7 @@ function sendDMX(event)
         for(var channel in currFixture.channels)
         {
             var address = currFixtureType.emitters[channel]+parseInt(currFixture.address)-2;
-            dmxValues[address] = parseInt(currFixture.channels[channel]);
+            dmxValues[address] = parseInt(parseInt(currFixture.channels[channel])/100*255); //avoiding 2.55 due to floating point js errors
         }
     }
     //console.log(dmxValues);

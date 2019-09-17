@@ -385,10 +385,5 @@ var artnet = require('artnet')(artnetOptions);
 
 exports.sendArtnet = function(channels)
 {
-    for(var i = 0; i < channels.length; i++)
-    {
-        channels[i] = parseInt(channels[i]);
-        channels[i] = channels[i]*2.55;
-    }
     artnet.set(1, channels);
 }
