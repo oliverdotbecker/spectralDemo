@@ -212,12 +212,27 @@ serialPort.list().then(ports => {
     setTimeout(() => {
         sendSerialData("ATLED1=0\n");
     },200);
-    var dataInterval = setInterval(() => {
-        sendSerialData("ATCDATA\n");
-    },250);
-    var tempInterval = setInterval(() => {
-        sendSerialData("ATTEMP\n");
-    },5020);
+    if(activeSensor == "7261")
+    {
+        setTimeout(() => {
+            sendSerialData("ATTCSMD=2\n");
+        },250);
+        dataInterval = setInterval(() => {
+            sendSerialData("ATDATA\n");
+        },500);
+        tempInterval = setInterval(() => {
+            sendSerialData("ATTEMP\n");
+        },5020);
+    }
+    else
+    {
+        dataInterval = setInterval(() => {
+            sendSerialData("ATCDATA\n");
+        },250);
+        tempInterval = setInterval(() => {
+            sendSerialData("ATTEMP\n");
+        },5020);
+    }
 });
 
 exports.getMeasures = function()
