@@ -219,12 +219,24 @@ function openSensorSettings()
             {
                 activeSettings = AS7261;
                 activeSensor = "7261";
+                currMaxDisplay.parentElement.style.display = "none";
+                var waveLengthContainer = document.getElementById("wavelengths");
+                if(waveLengthContainer)
+                {
+                    waveLengthContainer.style.display = "none";
+                }
                 electronDaemon.setSensor(activeSensor);
             }
             else
             {
                 activeSettings = AS7262;
                 activeSensor = "7262";
+                currMaxDisplay.parentElement.style.display = "";
+                var waveLengthContainer = document.getElementById("wavelengths");
+                if(waveLengthContainer)
+                {
+                    waveLengthContainer.style.display = "";
+                }
                 electronDaemon.setSensor(activeSensor);
             }
             createSurface();

@@ -4,8 +4,8 @@ var serialPorts = [];
 
 //AS7261 settings
 const AS7261 = {
-    channelCount:6,
-    channelNames:["X","Y","Z","Dark","C","NIR"],
+    channelCount:3,
+    channelNames:["X","Y","Z"],
     channelColors:["lightgray","gray","darkgray","#222222","white","red"]
 }
 //AS7262 settings
@@ -117,7 +117,7 @@ function init()
                 var box = barsContainer.getBoundingClientRect();
                 height = box.height;
                 currMax = 0;
-                for(var i = 0; i < measures.length; i++)
+                for(var i = 0; i < Math.min(activeSettings.channelCount,measures.length); i++)
                 {
                     currMax = Math.max(parseInt(measures[i]),currMax);
                 }
@@ -135,8 +135,16 @@ function init()
 
                 for(var i = 0; i < activeSettings.channelCount; i++)
                 {
-                    barsContainer.childNodes[i].style.height = (parseInt(measures[i])/currMax)*height+"px";
-                    valueContainer.innerHTML += "<label>"+round(measures[i]/currMax,3)+"</label>";
+                    if(activeSensor == "7262")
+                    {
+                        barsContainer.childNodes[i].style.height = (parseInt(measures[i])/currMax)*height+"px";
+                        valueContainer.innerHTML += "<label>"+round(measures[i]/currMax,3)+"</label>";
+                    }
+                    else
+                    {
+                        barsContainer.childNodes[i].style.height = (parseInt(measures[i])/currMax)*height+"px";
+                        valueContainer.innerHTML += "<label>"+round(measures[i],3)+"</label>";
+                    }
                 }
 
                 if(activeSensor == "7262")
@@ -267,7 +275,7 @@ function convertSpectrumToXYZ(spectralData,max,noDisp)
     var X = 0;
     var Y = 0;
     var Z = 0;
-    for(var wI = 0; wI < activeSettings.channelWavelengths.length; wI++)
+    for(var wI = 0; wI < AS7262.channelWavelengths.length; wI++)
     {
         X += tristimulusX[wI]*(spectralData[wI]/max);
         Y += tristimulusY[wI]*(spectralData[wI]/max);
