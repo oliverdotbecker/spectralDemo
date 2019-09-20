@@ -824,6 +824,7 @@ function throwWaitPopup()
     {
         popupDiv.innerHTML = "";
         popupDiv.style.display = "flex";
+        popupDiv.style.flexDirection = "row";
         popupDiv.className = "circle";
 
         var colors = ["blue","green","#c0ff00","yellow","orange","red"];
