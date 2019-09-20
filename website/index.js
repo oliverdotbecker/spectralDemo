@@ -66,6 +66,15 @@ const fixtureTypeLibrary = {
             Blau:3,
             Weiss:4
         }
+    },
+    "Ape Stick4":{
+        intensity:false,
+        emitters:{
+            Rot:1,
+            Grün:2,
+            Blau:3,
+            Weiss:4
+        }
     }
 }
 
