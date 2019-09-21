@@ -1,7 +1,5 @@
 const electronDaemon = require('electron').remote.require('./index.js');
 
-var serialPorts = [];
-
 //AS7261 settings
 const AS7261 = {
     channelCount:3,
@@ -16,6 +14,7 @@ const AS7262 = {
     channelWavelengths:[450,500,550,570,600,650], //nm
     maxSpectrumVal:65536
 }
+var serialPorts = [];
 var activeSettings = AS7262;
 var activeSensor = "7262";
 electronDaemon.setSensor(activeSensor);
@@ -532,43 +531,6 @@ function editEmitter(row)
     throwPopup("Fixture Info",mainDiv,true);
 }
 
-/*function saveEmitter()
-{
-    var idx = emitterEdit.idx;
-    var editEmitterName = document.getElementById("editEmitterName");
-    var editEmitterColor = document.getElementById("editEmitterColor");
-    emitters[idx].name = editEmitterName.value;
-    emitters[idx].color = editEmitterColor.value;
-
-    var emitterNode = document.getElementById("emitter"+idx);
-    if(emitterNode)
-    {
-        emitterNode.style.borderColor = emitters[idx].color;
-        emitterNode.childNodes[0].innerHTML = emitters[idx].name;
-    }
-    toggleEmitterEdit();
-}
-
-function deleteEmitter()
-{
-    var idx = emitterEdit.idx;
-    if(confirm("Are you sure, that you want to delete the emitter '"+emitters[idx].name+"'?"))
-    {
-        var emitterNode = document.getElementById("emitter"+idx);
-        if(emitterNode)
-        {
-            emitters.splice(idx,1);
-            emitterNode.remove();
-        }
-        var sliderNode = document.getElementById("slider"+idx);
-        if(sliderNode)
-        {
-            sliderNode.parentElement.remove();
-        }
-        toggleEmitterEdit();
-    }
-}*/
-
 function updateSliderDisp(event)
 {
     var currSlider = event.currentTarget;
@@ -793,6 +755,26 @@ function calcColorMix(event)
     var calcMax = 0;
     var wroteSpectrum = false;
 
+    //Set maximums per fixture per channel calculated by the combined color space
+    //And collecting the minimal values for the combined control
+
+    //Either create a hash table for all combinations (5% steps) (1600 Entries per lamp) define if this is color mix is inside
+    // this color space!
+
+    //Or calculate this live on dragging the slider
+
+    /*for(var fI = 0; fI < selectedEmitters.length; fI++)
+    {
+        coordinates[fI] = [];
+        var currEmitters = selectedEmitters[fI];
+        for(eIdx in currEmitters)
+        {
+            var currMeasures = currEmitters[eIdx].measures;
+
+            debugger;
+        }
+    }*/
+
     emitters = null;
     for(var sFI in selectedFixtures)
     {
@@ -891,6 +873,8 @@ function calcColorMix(event)
     }
 }
 
+var selectedEmitters = [];
+var currColorSpaceCoordinates = [];
 function drawColorSpace()
 {
     var combinedPathDOM = document.getElementById("realColorSpace");
@@ -903,7 +887,7 @@ function drawColorSpace()
         }
 
         combinedPathDOM.setAttribute("d","");
-        var selectedEmitters = [];
+        selectedEmitters = [];
         for(var sFI in selectedFixtures)
         {
             if(selectedFixtures[sFI])
@@ -934,131 +918,136 @@ function drawColorSpace()
                 }
 
                 //Draw single color space
-                var box = combinedPathDOM.parentElement.getBoundingClientRect();
-                var sizeX = box.width;
-                var sizeY = box.height;
-
-                var currSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-                combinedPathDOM.parentElement.parentElement.insertBefore(currSvg,combinedPathDOM.parentElement);
-                currSvg.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97));
-                currSvg.setAttribute("class","singleColorSpace")
-                var currPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-                currSvg.appendChild(currPath);
-                currPath.setAttribute("stroke","black");
-                currPath.setAttribute("stroke-width",".5");
-                currPath.setAttribute("fill","transparent");
-
-                var newPath = "";
-                for(var i = 0; i < Math.min(coordinates[fI].length,3); i++)
                 {
-                    if(i == 0)
+                    var box = combinedPathDOM.parentElement.getBoundingClientRect();
+                    var sizeX = box.width;
+                    var sizeY = box.height;
+    
+                    var currSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                    combinedPathDOM.parentElement.parentElement.insertBefore(currSvg,combinedPathDOM.parentElement);
+                    currSvg.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97));
+                    currSvg.setAttribute("class","singleColorSpace")
+                    var currPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                    currSvg.appendChild(currPath);
+                    currPath.setAttribute("stroke","black");
+                    currPath.setAttribute("stroke-width",".5");
+                    currPath.setAttribute("fill","transparent");
+    
+                    var newPath = "";
+                    for(var i = 0; i < Math.min(coordinates[fI].length,3); i++)
                     {
-                        newPath += "M ";
+                        if(i == 0)
+                        {
+                            newPath += "M ";
+                        }
+                        else
+                        {
+                            newPath += "L ";
+                        }
+    
+                        newPath += parseInt(coordinates[fI][i][0]*sizeX);
+                        newPath += ",";
+                        newPath += parseInt((coordinates[fI][i][1])*sizeY);
+                        newPath += " ";
                     }
-                    else
+                    if(coordinates[fI][0])
                     {
-                        newPath += "L ";
+                        newPath += "L "+ parseInt(coordinates[fI][0][0]*sizeX) + "," + parseInt((coordinates[fI][0][1])*sizeY);
                     }
-
-                    newPath += parseInt(coordinates[fI][i][0]*sizeX);
-                    newPath += ",";
-                    newPath += parseInt((coordinates[fI][i][1])*sizeY);
-                    newPath += " ";
+                    currPath.setAttribute("d",newPath);
                 }
-                if(coordinates[fI][0])
-                {
-                    newPath += "L "+ parseInt(coordinates[fI][0][0]*sizeX) + "," + parseInt((coordinates[fI][0][1])*sizeY);
-                }
-                currPath.setAttribute("d",newPath);
             }
 
             //Analyse the coordinates
             var combinedCoordinates = [];
-
-            // temporary vertex storage
-            var vertices1 = [], vertices2 = [];
-
-            // start from first gamut
-            vertices2.push([ parseFloat(coordinates[0][0][0]), parseFloat(coordinates[0][0][1]) ]);
-            vertices2.push([ parseFloat(coordinates[0][1][0]), parseFloat(coordinates[0][1][1]) ]);
-            vertices2.push([ parseFloat(coordinates[0][2][0]), parseFloat(coordinates[0][2][1]) ]);
-
-            // clip using all other gamuts
-            for(var fI = 1; fI < selectedEmitters.length; fI++)
             {
-                var currCoordinatesA = coordinates[fI];
+                // temporary vertex storage
+                var vertices1 = [], vertices2 = [];
 
-                var clip_points = [];
-                for (var vI = 0; vI < currCoordinatesA.length; vI++)
+                // start from first gamut
+                vertices2.push([ parseFloat(coordinates[0][0][0]), parseFloat(coordinates[0][0][1]) ]);
+                vertices2.push([ parseFloat(coordinates[0][1][0]), parseFloat(coordinates[0][1][1]) ]);
+                vertices2.push([ parseFloat(coordinates[0][2][0]), parseFloat(coordinates[0][2][1]) ]);
+
+                // clip using all other gamuts
+                for(var fI = 1; fI < selectedEmitters.length; fI++)
                 {
-                    clip_points.push([ parseFloat(currCoordinatesA[vI][0]), parseFloat(currCoordinatesA[vI][1]) ]);
-                }
+                    var currCoordinatesA = coordinates[fI];
 
-                // TODO: sort clip_points (expected to be in CCW order)
-
-                // loop through clipping edges
-                for (var vI = 0; vI < 3; vI++)
-                {
-                    var clip_point1 = clip_points[vI],
-                        clip_point2 = clip_points[(vI + 1) % 3];
-
-                    // swap lists
-                    vertices1 = vertices2;
-                    vertices2 = [];
-
-                    for (var i = 0; i < vertices1.length; i++)
+                    var clip_points = [];
+                    for (var vI = 0; vI < currCoordinatesA.length; vI++)
                     {
-                        var point1 = vertices1[i],
-                            point2 = vertices1[(i + 1) % vertices1.length];
-                        
-                        var d1 = (point1[0] - clip_point1[0]) * (clip_point2[1] - clip_point1[1]) - (point1[1] - clip_point1[1]) * (clip_point2[0] - clip_point1[0]),
-                            d2 = (point2[0] - clip_point1[0]) * (clip_point2[1] - clip_point1[1]) - (point2[1] - clip_point1[1]) * (clip_point2[0] - clip_point1[0]);
+                        clip_points.push([ parseFloat(currCoordinatesA[vI][0]), parseFloat(currCoordinatesA[vI][1]) ]);
+                    }
 
-                        if (d1 < 0.0 && d2 < 0.0)
-                        { 
-                            // both points are inside, ass second point
-                            vertices2.push(point2);
-                        }
-                        else if (d1 >= 0.0 && d2 < 0.0)
+                    // TODO: sort clip_points (expected to be in CCW order)
+
+                    // loop through clipping edges
+                    for (var vI = 0; vI < 3; vI++)
+                    {
+                        var clip_point1 = clip_points[vI],
+                            clip_point2 = clip_points[(vI + 1) % 3];
+
+                        // swap lists
+                        vertices1 = vertices2;
+                        vertices2 = [];
+
+                        for (var i = 0; i < vertices1.length; i++)
                         {
-                            // only first point is outside, add intersection and second point
-                            var intersection = intersect(point1[0], point1[1], point2[0], point2[1], clip_point1[0], clip_point1[1], clip_point2[0], clip_point2[1]);
-                            if (intersection)
+                            var point1 = vertices1[i],
+                                point2 = vertices1[(i + 1) % vertices1.length];
+
+                            var d1 = (point1[0] - clip_point1[0]) * (clip_point2[1] - clip_point1[1]) - (point1[1] - clip_point1[1]) * (clip_point2[0] - clip_point1[0]),
+                                d2 = (point2[0] - clip_point1[0]) * (clip_point2[1] - clip_point1[1]) - (point2[1] - clip_point1[1]) * (clip_point2[0] - clip_point1[0]);
+
+                            if (d1 < 0.0 && d2 < 0.0)
                             {
-                                vertices2.push([ intersection.x, intersection.y ]);
+                                // both points are inside, ass second point
+                                vertices2.push(point2);
                             }
-                            vertices2.push(point2);
-                        }
-                        else if (d1 < 0.0 && d2 >= 0.0)
-                        {
-                            // only second point is outside, add intersection point
-                            var intersection = intersect(point1[0], point1[1], point2[0], point2[1], clip_point1[0], clip_point1[1], clip_point2[0], clip_point2[1]);
-                            if (intersection)
+                            else if (d1 >= 0.0 && d2 < 0.0)
                             {
-                                vertices2.push([ intersection.x, intersection.y ]);
+                                // only first point is outside, add intersection and second point
+                                var intersection = intersect(point1[0], point1[1], point2[0], point2[1], clip_point1[0], clip_point1[1], clip_point2[0], clip_point2[1]);
+                                if (intersection)
+                                {
+                                    vertices2.push([ intersection.x, intersection.y ]);
+                                }
+                                vertices2.push(point2);
+                            }
+                            else if (d1 < 0.0 && d2 >= 0.0)
+                            {
+                                // only second point is outside, add intersection point
+                                var intersection = intersect(point1[0], point1[1], point2[0], point2[1], clip_point1[0], clip_point1[1], clip_point2[0], clip_point2[1]);
+                                if (intersection)
+                                {
+                                    vertices2.push([ intersection.x, intersection.y ]);
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            // copy values to output container
-            for (var i = 0; i < vertices2.length; i++)
-            {
-                combinedCoordinates.push({ x : vertices2[i][0], y : vertices2[i][1] });
+                // copy values to output container
+                for (var i = 0; i < vertices2.length; i++)
+                {
+                    combinedCoordinates.push({ x : vertices2[i][0], y : vertices2[i][1] });
+                }
             }
 
             if(combinedCoordinates.length > 0)
             {
+                currColorSpaceCoordinates = [];
                 var centerPoint = getCenterpoint(combinedCoordinates);
                 combinedCoordinates = sortCombinedPointsCounterClockwise(combinedCoordinates,centerPoint);
-    
+                currColorSpaceCoordinates = JSON.parse(JSON.stringify(combinedCoordinates));
+
                 //Draw combined color space
                 var box = combinedPathDOM.parentElement.getBoundingClientRect();
                 var sizeX = box.width;
                 var sizeY = box.height;
                 combinedPathDOM.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
-    
+
                 var newPath = "";
                 for(var i = 0; i < combinedCoordinates.length; i++)
                 {
@@ -1070,7 +1059,7 @@ function drawColorSpace()
                     {
                         newPath += "L ";
                     }
-    
+
                     newPath += parseInt(combinedCoordinates[i].x*sizeX);
                     newPath += ",";
                     newPath += parseInt((combinedCoordinates[i].y)*sizeY);
