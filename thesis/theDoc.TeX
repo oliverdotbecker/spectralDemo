@@ -1033,7 +1033,13 @@ Zelle in der Spalte "'S"' für "'Settings"' also Einstellungen, können nun hier
 \subsection{Art-Net Implementierung}
 Zur Ansteuerung der Lampen mit \ac{dmx} wurde eine einfache Art-Net Implementierung aus dem NPM Modul "'artnet"' von dem Alias "'hobbyquaker"' genutzt
 \cite{artnetPackage}. Zur Art-Net - DMX Umsetzung wurde ein grandMA3 "'4Port Node"' genutzt. Dieser wurde als Protokoll Wandler eingesetzt.\\
-%//TODO: Schematischer Aufbau Applikation -> Node (-> WAPP) -> Lampe als Skizze
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.9\textwidth]{images/Data_transmission_scheme.png}
+    \end{center}
+    \caption{Fixture Sheet in der Applikation mit Selektion}\label{fig:fixtureSheet}
+\end{figure}
+\noindent
 In der Applikation wird mit jeder Einstellung an einem beliebigen Schieberegler das Zusammenstellen neuer DMX Informationen angestoßen.
 \clearpage
 
