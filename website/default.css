@@ -230,7 +230,7 @@ svg {
 }
 
 #emitters {
-    flex: 2;
+    flex: 1;
     color: white;
 }
 
@@ -249,13 +249,9 @@ svg {
     border: 2px solid white;
 }
 
-.emitterEntry:hover {
-    background-color: rgba(255,255,255,0.3);
-}
-
 .emitterEntry,
 .emitterEntry * {
-    cursor: pointer;
+    cursor: default;
 }
 
 #sliderContainer {
@@ -273,6 +269,7 @@ input[type="range"].vertical {
     -webkit-appearance: slider-vertical;
     width: 40px;
     height: 100%;
+    cursor: ns-resize;
 }
 
 output {
