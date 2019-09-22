@@ -769,6 +769,12 @@ function calcColorMix(event)
         }
     }*/
 
+    var posMarkers = document.getElementsByClassName("posMarker");
+    while(posMarkers.length)
+    {
+        posMarkers[0].remove();
+    }
+
     emitters = null;
     var newPath = "";
     for(var sFI in selectedFixtures)
@@ -884,6 +890,14 @@ function calcColorMix(event)
                 newPath += " M "+ (calcX*sizeX) + "," + (parseInt(calcY*sizeY)-plusSize);
                 newPath += " L "+ (calcX*sizeX) + "," + (parseInt(calcY*sizeY)+plusSize);
                 calcPos.setAttribute("d",newPath);
+
+                var newPosMarker = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                newPosMarker.setAttribute("class","posMarker");
+                newPosMarker.setAttribute("x",(calcX*sizeX)+plusSize);
+                newPosMarker.setAttribute("y",parseInt(calcY*sizeY)+plusSize);
+                newPosMarker.setAttribute("style","fill:red;");
+                newPosMarker.innerHTML = (parseInt(sFI)+1);
+                calcPos.parentElement.appendChild(newPosMarker);
             }
         }
     }
