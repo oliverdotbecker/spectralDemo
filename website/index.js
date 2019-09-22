@@ -749,12 +749,6 @@ function calcColorMix(event)
         sliderValues.push(sliders[sI].value);
     }
 
-    var calcX = 0.33;
-    var calcY = 0.33;
-    var calcSpectrum = [0,0,0,0,0,0];
-    var calcMax = 0;
-    var wroteSpectrum = false;
-
     //Set maximums per fixture per channel calculated by the combined color space
     //And collecting the minimal values for the combined control
 
@@ -776,100 +770,122 @@ function calcColorMix(event)
     }*/
 
     emitters = null;
+    var newPath = "";
     for(var sFI in selectedFixtures)
     {
         if(selectedFixtures[sFI])
         {
             emitters = patch[sFI].emitterData;
-            break;
-        }
-    }
-    if(emitters)
-    {
-        for(var sI = 0; sI < sliderValues.length; sI++)
-        {
-            if(sliderValues[sI] != 0)
-            {
-                var currEmitter = emitters[sI];
-                if(JSON.stringify(currEmitter.measures) != JSON.stringify({}))
-                {
-                    var minMeasure = 0;
-                    var maxMeasure = 0;
-                    for(measurePercent in currEmitter.measures)
-                    {
-                        if(parseInt(measurePercent) <= sliderValues[sI])
-                        {
-                            minMeasure = measurePercent;
-                        }
-                        if(parseInt(measurePercent) >= sliderValues[sI])
-                        {
-                            maxMeasure = measurePercent;
-                            break;
-                        }
-                    }
 
-                    if(minMeasure == maxMeasure)
+            var calcX = 0.33;
+            var calcY = 0.33;
+            var calcSpectrum = [0,0,0,0,0,0];
+            var calcMax = 0;
+            var wroteSpectrum = false;
+
+            for(var sI = 0; sI < sliderValues.length; sI++)
+            {
+                if(sliderValues[sI] != 0)
+                {
+                    var currEmitter = emitters[sI];
+                    if(JSON.stringify(currEmitter.measures) != JSON.stringify({}))
                     {
-                        wroteSpectrum = true;
-                        if(currEmitter.measures[minMeasure].spectrum.max > calcMax)
+                        var minMeasure = 0;
+                        var maxMeasure = 0;
+                        for(measurePercent in currEmitter.measures)
                         {
-                            calcMax = currEmitter.measures[minMeasure].spectrum.max;
+                            if(parseInt(measurePercent) <= sliderValues[sI])
+                            {
+                                minMeasure = measurePercent;
+                            }
+                            if(parseInt(measurePercent) >= sliderValues[sI])
+                            {
+                                maxMeasure = measurePercent;
+                                break;
+                            }
                         }
-                        for(var spI = 0; spI < calcSpectrum.length; spI++)
+
+                        if(minMeasure == maxMeasure)
                         {
-                            calcSpectrum[spI] += parseFloat(currEmitter.measures[minMeasure].spectrum.values[spI]);
+                            wroteSpectrum = true;
+                            if(currEmitter.measures[minMeasure].spectrum.max > calcMax)
+                            {
+                                calcMax = currEmitter.measures[minMeasure].spectrum.max;
+                            }
+                            for(var spI = 0; spI < calcSpectrum.length; spI++)
+                            {
+                                calcSpectrum[spI] += parseFloat(currEmitter.measures[minMeasure].spectrum.values[spI]);
+                            }
                         }
-                    }
-                    else if(maxMeasure != 0)
-                    {
-                        wroteSpectrum = true;
-                        var relation = parseInt(minMeasure)/parseInt(maxMeasure);
-                        if((currEmitter.measures[minMeasure].spectrum.max*relation) > calcMax)
+                        else if(maxMeasure != 0)
                         {
-                            calcMax = (currEmitter.measures[minMeasure].spectrum.max*relation);
+                            wroteSpectrum = true;
+                            var relation = parseInt(minMeasure)/parseInt(maxMeasure);
+                            if((currEmitter.measures[minMeasure].spectrum.max*relation) > calcMax)
+                            {
+                                calcMax = (currEmitter.measures[minMeasure].spectrum.max*relation);
+                            }
+                            //Interpolation
+                            for(var spI = 0; spI < calcSpectrum.length; spI++)
+                            {
+                                var minVal = parseFloat(currEmitter.measures[minMeasure].spectrum.values[spI]);
+                                var maxVal = parseFloat(currEmitter.measures[maxMeasure].spectrum.values[spI]);
+                                var diff1 = (sliderValues[sI]-parseInt(minMeasure))/(parseInt(maxMeasure)-parseInt(minMeasure));
+                                var temp2 = diff1*(maxVal-minVal);
+                                calcSpectrum[spI] += (temp2+minVal);
+                            }
                         }
-                        //Interpolation
-                        for(var spI = 0; spI < calcSpectrum.length; spI++)
+                        else
                         {
-                            var minVal = parseFloat(currEmitter.measures[minMeasure].spectrum.values[spI]);
-                            var maxVal = parseFloat(currEmitter.measures[maxMeasure].spectrum.values[spI]);
-                            var diff1 = (sliderValues[sI]-parseInt(minMeasure))/(parseInt(maxMeasure)-parseInt(minMeasure));
-                            var temp2 = diff1*(maxVal-minVal);
-                            calcSpectrum[spI] += (temp2+minVal);
+                            console.warn("Failed to interpolate values, due to missing measurement values");
                         }
-                    }
-                    else
-                    {
-                        console.warn("Failed to interpolate values, due to missing measurement values");
                     }
                 }
             }
+
+            if(wroteSpectrum)
+            {
+                var calcXYZ = convertSpectrumToXYZ(calcSpectrum,calcMax,true);
+                var calcxyY = XYZtoXY(calcXYZ[0],calcXYZ[1],calcXYZ[2],true);
+
+                if(pointIsInside(calcxyY,currColorSpaceCoordinates))
+                {
+                    console.log("inside")
+                }
+                else if(pointOnPolygon(calcxyY,currColorSpaceCoordinates))
+                {
+                    console.log("on line")
+                }
+                else
+                {
+                    console.log("outside")
+                    //Do the value adjustment
+                }
+                calcX = Math.min(calcxyY[0],0.9);
+                calcY = Math.min(calcxyY[1],0.9);
+                calcX = Math.max(calcX,0);
+                calcY = Math.max(calcY,0);
+            }
+            //Set position
+            if(calcPos)
+            {
+                var box = calcPos.parentElement.getBoundingClientRect();
+                var sizeX = box.width;
+                var sizeY = box.height;
+                calcPos.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97));
+
+                if(newPath != "")
+                {
+                    newPath += " ";
+                }
+
+                newPath += "M "+ ((calcX*sizeX)-plusSize) + "," + parseInt(calcY*sizeY);
+                newPath += " L "+ ((calcX*sizeX)+plusSize) + "," + parseInt(calcY*sizeY);
+                newPath += " M "+ (calcX*sizeX) + "," + (parseInt(calcY*sizeY)-plusSize);
+                newPath += " L "+ (calcX*sizeX) + "," + (parseInt(calcY*sizeY)+plusSize);
+                calcPos.setAttribute("d",newPath);
+            }
         }
-    }
-
-    if(wroteSpectrum)
-    {
-        var calcXYZ = convertSpectrumToXYZ(calcSpectrum,calcMax,true);
-        var calcxyY = XYZtoXY(calcXYZ[0],calcXYZ[1],calcXYZ[2],true);
-
-        calcX = Math.min(calcxyY[0],0.9);
-        calcY = Math.min(calcxyY[1],0.9);
-        calcX = Math.max(calcX,0);
-        calcY = Math.max(calcY,0);
-    }
-    //Set position
-    if(calcPos)
-    {
-        var box = calcPos.parentElement.getBoundingClientRect();
-        var sizeX = box.width;
-        var sizeY = box.height;
-        calcPos.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
-
-        var newPath = "M "+ ((calcX*sizeX)-plusSize) + "," + parseInt(calcY*sizeY);
-        newPath += " L "+ ((calcX*sizeX)+plusSize) + "," + parseInt(calcY*sizeY);
-        newPath += " M "+ (calcX*sizeX) + "," + (parseInt(calcY*sizeY)-plusSize);
-        newPath += " L "+ (calcX*sizeX) + "," + (parseInt(calcY*sizeY)+plusSize);
-        calcPos.setAttribute("d",newPath);
     }
 }
 
@@ -1075,7 +1091,13 @@ function drawColorSpace()
     }
 }
 
-function intersect(x1, y1, x2, y2, x3, y3, x4, y4)
+window.onresize = function()
+{
+    drawColorSpace();
+    calcColorMix();
+}
+
+function intersect(x1, y1, x2, y2, x3, y3, x4, y4,force)
 {
     // Check if none of the lines are of length 0
     if ((x1 === x2 && y1 === y2) || (x3 === x4 && y3 === y4))
@@ -1095,9 +1117,9 @@ function intersect(x1, y1, x2, y2, x3, y3, x4, y4)
     let ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / denominator
 
     // is the intersection along the segments
-    if (ua < 0 || ua > 1 || ub < 0 || ub > 1)
+    if (force && (ua < 0 || ua > 1 || ub < 0 || ub > 1))
     {
-        //return false;
+        return false;
     }
 
     // Return a object with the x and y coordinates of the intersection
@@ -1105,6 +1127,49 @@ function intersect(x1, y1, x2, y2, x3, y3, x4, y4)
     let y = y1 + ua * (y2 - y1);
 
     return {x, y};
+}
+
+function pointIsInside(point, vs)
+{
+    // ray-casting algorithm based on
+    // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
+
+    var x = point[0], y = point[1];
+
+    var inside = false;
+    for (var i = 0, j = vs.length - 1; i < vs.length; j = i++)
+    {
+        var xi = vs[i].x, yi = vs[i].y;
+        var xj = vs[j].x, yj = vs[j].y;
+
+        var intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+        if (intersect)
+        {
+            inside = !inside;
+        }
+    }
+
+    return inside;
+}
+
+function pointOnPolygon(point, vertices)
+{
+    for(var idx = 0; idx < vertices.length; idx++)
+    {
+        for(var idx2 = 0; idx2 < vertices.length; idx2++)
+        {
+            if(idx != idx2)
+            {
+                p1 = vertices[idx]
+                p2 = vertices[idx2]
+                if(intersect(point[0]-0.001,point[1]-0.001,point[0]+0.001,point[1]+0.001, p1.x, p1.y, p2.x, p2.y,true))
+                {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 }
 
 function getCenterpoint(coordinates)
