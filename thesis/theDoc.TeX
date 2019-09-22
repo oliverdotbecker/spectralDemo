@@ -948,6 +948,40 @@ Kombination mehrere Emitter wird die maximale zu erreichende Helligkeit der einz
 Dieser Test zeigt, dass für lineare und annähernd lineare Farbmischsysteme eine Einzelvermessung der Emitter ausreichend ist, um den Gamut, den möglichen
 Farbraum und die Farbmischung vorauszuberechnen. Für nicht lineare Farbmischsysteme sind weitere Messungen der tatsächlichen Mischfarben nötig oder der
 modifizierende Algorithmus in der Lampe muss bekannt sein.
+\subsection{Gamut Zeichnung}
+Als Gamut bezeichnet man das Farbvermögen einer Lichtquelle. Mit den verarbeiteten Messdaten ist es möglich diesen in den CIE 1931 Farbraum für die einzelnen
+Lampen einzuzeichnen.\\
+Für eine beliebige Anzahl N von Emittern kann ein Polygon mit N oder weniger Ecken entstehen. Beispielsweise spannen die Emitter Rot, Grün und Blau spannen ein
+dreieckiges Polygon als Gamut. Ein vierte weißer Emitter liegt innerhalb dieses Polygons, dies erweitert den Gamut nicht. Läge ein weiterer Emitter außerhalb des
+bereits aufgespannten Polygons wird dies entsprechend erweitert.\\
+Um einen Gamut einer Lampe in ein CIE Diagramm einzuzeichnen müssen die xy Koordinaten gegen den Uhrzeigersinn sortiert werden. Dies wird bewerkstelligt, indem
+der Mittelpunkt des Polygons gesucht wird.
+\begin{align}\label{Equ:6}
+    Center_x = \frac{\sum_{i}Vertex_{ix}}{i}\\
+    Center_y = \frac{\sum_{i}Vertex_{iy}}{i}
+\end{align}
+Anschließend werden die Winkel der einzelnen Koordinaten zu dem gefundenen Mittelpunkt errechnet werden.
+\begin{align}\label{Equ:7}
+    \phi = arctan2(Vertex_x - Center_x, Vertex_y - Center_y)*\frac{180}{\pi}+360 %https://de.wikipedia.org/wiki/Arctan2
+\end{align}
+Die Koordianten werden nach aufsteigendem Winkel sortiert. Somit sind die Koordinaten gegen den Uhrzeigersinn angeordnet. Final wird in der Applikation dynamisch
+ein \ac{svg} Grafik mit den Strecken zwischen den Koordinaten über dem CIE 1931 Diagramm erzeugt.\\
+%% // TODO: Bild
+\subsection{Zeichnung eines kombinierten Gamut}
+Hier bestand die Aufgabe zu bestimmten, ob Koordinaten (oder auch als Vertex bezeichnet) eines Gamut A innerhalb eines Gamut B einer anderen Lampe liegen. Wenn diese
+Bedingung erfüllt ist, muss zur ermittung des gemeinsamen Gamut muss ermittelt werden, ob ein Punkt innerhalb des bestehenden Polygons liegt. Dies wurde mit dem
+Sutherland–Hodgman Algorithmus \cite{sutherlandHodgman} bewerkstelligt. Für diesen Algorithmus werden die Vertex Daten des zu analysierenden Polygons benötigt. Die
+Vertex Daten sind hier die CIE 1931 xy Koordinaten. Wichtig ist, dass die Vertices gegen den Uhrzeigersinn vorsortiert sind.\\
+Der Algorithmus spannt die Gerade zwischen zwei Vertices auf und prüft auf welcher Seite der Geraden sich die bisherigen Gamut Vertices befinden. Wenn beide Vertices
+sich auf der gegen den Uhrzeigersinn linken Seite, der Gamutflächenseite, befindet, wird der zweite Vertex der Gamutvertex Liste hinzugefügt.\\
+Liegt der erste der beiden Vertices außerhalb der Flächenseite wird der, auf der Fläche liegende Vertex und der Schnittpunkt des Polygons und der Gamutflächenseite der
+Gamutvertex Liste hinzugefügt (siehe Bild).
+%% // TODO: Bild (beispiel Koordinaten system mit zwei geraden zur simulation)
+Liegt der zweite Vertex außerhalb der Gamutflächenseite wird der Schnittpunkt des Polygons und der Gamutflächenseite der Gamutvertex Liste hinzugefügt. Diese Vorgehensweise
+wird in der Applikation für jede selektierte Lampe wiederholt. Gestartet wird mit dem Gamut der ersten selektierten Lampe. Dieser Gamut wird mit dem der nächsten Lampe
+zusammengeführt. Der daraus entstehende kombinierte Gamut wird nun mit dem der nächsten selektierten Lampe ebenfalls zusammengeführt, bis alle Lampen der Selektion durlaufen
+sind. Der hier entstehnde Gamut wird nun in dem CIE 1931 Diagramm weiß eingezeichnet. Zusätzlich wird in schwarz der Gamut der einzelnen Lampen eingezeichnet (siehe Bild).
+%% // TODO: Bild
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Ansteuerung externer Lichtquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1101,6 +1135,7 @@ Anpassung der Fader Werte anhand von Kalibrierungsdaten und Anpassen der auszuge
     \acro{npm}[NPM]{Network Paket Manager for Javascript}
     \acro{par}[PAR]{Parabolic Aluminized Refelector}
     \acro{rdm}[RDM]{Remote Device Management}
+    \acro{svg}[SVG]{Scalable Vector Graphics}
     \acro{thz}[THz]{Teraherz}
     \acro{uart}[UART]{Universal Asynchronous Receiver Transmitter}
     \acro{usb}[USB]{Universal Serial Bus}
@@ -1111,6 +1146,8 @@ Anpassung der Fader Werte anhand von Kalibrierungsdaten und Anpassen der auszuge
 
 \subsection{Formelzeichen und Konstanten}
 $\lambda$ - Lambda - Wellenlänge\\
+\\
+$\phi$ - Phi - Winkel\\
 \\
 c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
 \clearpage
@@ -1143,8 +1180,9 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
     \bibitem[Light Can Manual,2019]{lightCanDMX} \url{http://download.apelabs.com/manuals/Ape_Labs_-_LightCan_-_Manual_-_web.pdf} Page 33. Visited on: 16.09.2019
     \bibitem[SkyPanel Manual,2019]{skypanelDMX} \url{https://www.arri.com/resource/blob/65958/560471fec7f8f2e186ef8ca9e6cdd489/arri-skypanel-dmx-protocol-specification-v4-4-en-okt2018-data.pdf} Page 12. Visited on: 16.09.2019
     \bibitem[artnet NPMJS,2019]{artnetPackage} \url{https://www.npmjs.com/package/artnet}. Visited on: 16.09.2019
- \end{thebibliography}
- \endgroup
+    \bibitem[Sutherland–Hodgman algorithm Wikipedia,2019]{sutherlandHodgman} \url{https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm}. Visited on: 22.09.2019
+\end{thebibliography}
+\endgroup
 \clearpage
 
 %\section{\LaTeX Beispiele}
