@@ -1005,8 +1005,21 @@ Vertex Daten sind hier die CIE 1931 xy Koordinaten. Wichtig ist, dass die Vertic
 Der Algorithmus spannt die Gerade zwischen zwei Vertices auf und prüft auf welcher Seite der Geraden sich die bisherigen Gamut Vertices befinden. Wenn beide Vertices
 sich auf der gegen den Uhrzeigersinn linken Seite, der Gamutflächenseite, befindet, wird der zweite Vertex der Gamutvertex Liste hinzugefügt.\\
 Liegt der erste der beiden Vertices außerhalb der Flächenseite wird der, auf der Fläche liegende Vertex und der Schnittpunkt des Polygons und der Gamutflächenseite der
-Gamutvertex Liste hinzugefügt (siehe Bild).
-%% // TODO: Bild (beispiel Koordinaten system mit zwei geraden zur simulation)
+Gamutvertex Liste hinzugefügt (siehe Bild \ref{fig:sutherland_hodgman}).
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/sutherland_hodgman_example.png}
+        \caption{Ausgangs Situation}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/sutherland_hodgman_example_solution.png}
+        \caption{Errechente Vertices}
+    \end{subfigure}
+    \caption{Grafische Reperesentation des Sutherland–Hodgman Algorithmus} \label{fig:sutherland_hodgman}
+\end{figure}
+\noindent
 Liegt der zweite Vertex außerhalb der Gamutflächenseite wird der Schnittpunkt des Polygons und der Gamutflächenseite der Gamutvertex Liste hinzugefügt. Diese Vorgehensweise
 wird in der Applikation für jede selektierte Lampe wiederholt. Gestartet wird mit dem Gamut der ersten selektierten Lampe. Dieser Gamut wird mit dem der nächsten Lampe
 zusammengeführt. Der daraus entstehende kombinierte Gamut wird nun mit dem der nächsten selektierten Lampe ebenfalls zusammengeführt, bis alle Lampen der Selektion durlaufen
