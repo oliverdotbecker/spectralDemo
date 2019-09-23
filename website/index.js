@@ -84,6 +84,7 @@ const measureSliderValues = [5,10,20,35,50,65,85,100];
 var selectedFixtures = [];
 var selectedFixturesHaveChangedValues = false;
 var currMeasuredFixtureId = null;
+var referenceFixtureId = -1;
 
 //CIE 1931 tristimulus values from:
 //https://wisotop.de/Anhang-Tristimulus-Werte.php
@@ -1030,6 +1031,7 @@ function drawColorSpace()
                             var point1 = vertices1[i];
                             var point2 = vertices1[(i + 1) % vertices1.length];
 
+                            //Kreuzprodukt?
                             var d1 = (point1[0] - clip_point1[0]) * (clip_point2[1] - clip_point1[1]) - (point1[1] - clip_point1[1]) * (clip_point2[0] - clip_point1[0]);
                             var d2 = (point2[0] - clip_point1[0]) * (clip_point2[1] - clip_point1[1]) - (point2[1] - clip_point1[1]) * (clip_point2[0] - clip_point1[0]);
 

@@ -635,6 +635,32 @@ function createFixtureSheet()
                     updateSelection(event.currentTarget);
                 }
             }
+            tr.oncontextmenu = function(event)
+            {
+                var row = event.currentTarget;
+                if(!row.classList.contains("selected"))
+                {
+                    return;
+                }
+                if(referenceFixtureId != -1)
+                {
+                    var lastReferenceRow = document.getElementById("fixtureRow_"+(referenceFixtureId));
+                    if(lastReferenceRow)
+                    {
+                        lastReferenceRow.classList.remove("reference");
+                    }
+                }
+                var fixtureID = row.id.split("_")[1];
+                if(referenceFixtureId != fixtureID)
+                {
+                    referenceFixtureId = fixtureID;
+                    row.classList.add("reference");
+                }
+                else
+                {
+                    referenceFixtureId = -1;
+                }
+            }
             td = document.createElement('td');
             td.draggable = false;
             td.innerHTML = pI+1;
