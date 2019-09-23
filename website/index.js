@@ -778,10 +778,13 @@ function calcColorMix(event)
 
     emitters = null;
     var newPath = "";
+    var selectedFixturesCount = 0;
+    var referencePointCoordinates = null;
     for(var sFI in selectedFixtures)
     {
         if(selectedFixtures[sFI])
         {
+            selectedFixturesCount++;
             emitters = patch[sFI].emitterData;
 
             var calcX = 0.33;
@@ -872,24 +875,11 @@ function calcColorMix(event)
             {
                 var calcXYZ = convertSpectrumToXYZ(calcSpectrum,calcMax,true);
                 var calcxyY = XYZtoXY(calcXYZ[0],calcXYZ[1],calcXYZ[2],true);
-
-                if(pointIsInside(calcxyY,currColorSpaceCoordinates))
-                {
-                    console.log("inside")
-                }
-                else if(pointOnPolygon(calcxyY,currColorSpaceCoordinates))
-                {
-                    console.log("on line")
-                }
-                else
-                {
-                    console.log("outside")
-                    //Do the value adjustment
-                }
                 calcX = Math.min(calcxyY[0],0.9);
                 calcY = Math.min(calcxyY[1],0.9);
                 calcX = Math.max(calcX,0);
                 calcY = Math.max(calcY,0);
+                referencePointCoordinates = {x:calcX,y:calcY};
             }
             //Set position
             if(calcPos)
@@ -919,6 +909,43 @@ function calcColorMix(event)
                 calcPos.parentElement.appendChild(newPosMarker);
             }
         }
+    }
+
+    //Doing the color correlation
+    if(selectedFixturesCount > 1 && referenceFixtureId != -1 && referencePointCoordinates)
+    {
+        //Get next point inside the combined Gamut if the point is outside
+        if(pointIsInside(referencePointCoordinates,currColorSpaceCoordinates))
+        {
+            console.log("inside")
+        }
+        else if(pointOnPolygon(referencePointCoordinates,currColorSpaceCoordinates))
+        {
+            console.log("on line")
+        }
+        else
+        {
+            console.log("outside")
+            //Find vector with the shortest distance to the outside point
+
+            //Get Point on the gamut
+        }
+
+        //go thru each fixture
+
+            //get emitter triangles for this fixture
+
+            //get if triangle is relevant and "relevance index"
+
+            //get best triangle
+
+            //Perform matrix calculation
+
+            //Apply dmx values
+    }
+    else
+    {
+        //Not all conditions for a color correlation fulfilled
     }
 }
 
