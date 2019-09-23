@@ -812,34 +812,52 @@ function calcColorMix(event)
                             }
                         }
 
-                        if(minMeasure == maxMeasure)
+                        var lastCalcMax = calcMax;
+                        if(minMeasure == maxMeasure || sliderValues[sI] < 5)
                         {
                             wroteSpectrum = true;
-                            if(currEmitter.measures[minMeasure].spectrum.max > calcMax)
+                            if(currEmitter.measures[maxMeasure].spectrum.max > calcMax)
                             {
-                                calcMax = currEmitter.measures[minMeasure].spectrum.max;
+                                calcMax = currEmitter.measures[maxMeasure].spectrum.max;
                             }
+                            if(sliderValues[sI] < 5)
+                            {
+                                calcMax = calcMax/(6-sliderValues[sI]);
+                            }
+                            var ratio = lastCalcMax/calcMax;
                             for(var spI = 0; spI < calcSpectrum.length; spI++)
                             {
-                                calcSpectrum[spI] += parseFloat(currEmitter.measures[minMeasure].spectrum.values[spI]);
+                                if(lastCalcMax != 0)
+                                {
+                                    calcSpectrum[spI] = calcSpectrum[spI]*ratio;
+                                }
+                                calcSpectrum[spI] += parseFloat(currEmitter.measures[maxMeasure].spectrum.values[spI]);
                             }
                         }
                         else if(maxMeasure != 0)
                         {
-                            wroteSpectrum = true;
-                            var relation = parseInt(minMeasure)/parseInt(maxMeasure);
-                            if((currEmitter.measures[minMeasure].spectrum.max*relation) > calcMax)
+                            if(minMeasure)
                             {
-                                calcMax = (currEmitter.measures[minMeasure].spectrum.max*relation);
-                            }
-                            //Interpolation
-                            for(var spI = 0; spI < calcSpectrum.length; spI++)
-                            {
-                                var minVal = parseFloat(currEmitter.measures[minMeasure].spectrum.values[spI]);
-                                var maxVal = parseFloat(currEmitter.measures[maxMeasure].spectrum.values[spI]);
-                                var diff1 = (sliderValues[sI]-parseInt(minMeasure))/(parseInt(maxMeasure)-parseInt(minMeasure));
-                                var temp2 = diff1*(maxVal-minVal);
-                                calcSpectrum[spI] += (temp2+minVal);
+                                wroteSpectrum = true;
+                                var relation = parseInt(minMeasure)/parseInt(maxMeasure);
+                                if((currEmitter.measures[minMeasure].spectrum.max*relation) > calcMax)
+                                {
+                                    calcMax = (currEmitter.measures[minMeasure].spectrum.max*relation);
+                                }
+                                var ratio = lastCalcMax/calcMax;
+                                //Interpolation
+                                for(var spI = 0; spI < calcSpectrum.length; spI++)
+                                {
+                                    var minVal = parseFloat(currEmitter.measures[minMeasure].spectrum.values[spI]);
+                                    var maxVal = parseFloat(currEmitter.measures[maxMeasure].spectrum.values[spI]);
+                                    var diff1 = (sliderValues[sI]-parseInt(minMeasure))/(parseInt(maxMeasure)-parseInt(minMeasure));
+                                    var temp2 = diff1*(maxVal-minVal);
+                                    if(lastCalcMax != 0)
+                                    {
+                                        calcSpectrum[spI] = calcSpectrum[spI]*ratio;
+                                    }
+                                    calcSpectrum[spI] += (temp2+minVal);
+                                }
                             }
                         }
                         else
