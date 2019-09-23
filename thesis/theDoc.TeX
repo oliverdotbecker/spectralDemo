@@ -996,7 +996,13 @@ Anschließend werden die Winkel der einzelnen Koordinaten zu dem gefundenen Mitt
 \end{align}
 Die Koordianten werden nach aufsteigendem Winkel sortiert. Somit sind die Koordinaten gegen den Uhrzeigersinn angeordnet. Final wird in der Applikation dynamisch
 ein \ac{svg} Grafik mit den Strecken zwischen den Koordinaten über dem CIE 1931 Diagramm erzeugt.\\
-%% // TODO: Bild
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.7\textwidth]{images/gamut_lightCan.png}
+    \end{center}
+    \caption{Gamut einer LightCan}
+\end{figure}
+\noindent
 \subsection{Zeichnung eines kombinierten Gamut}
 Hier bestand die Aufgabe zu bestimmten, ob Koordinaten (oder auch als Vertex bezeichnet) eines Gamut A innerhalb eines Gamut B einer anderen Lampe liegen. Wenn diese
 Bedingung erfüllt ist, muss zur ermittung des gemeinsamen Gamut muss ermittelt werden, ob ein Punkt innerhalb des bestehenden Polygons liegt. Dies wurde mit dem
@@ -1023,8 +1029,15 @@ Gamutvertex Liste hinzugefügt (siehe Bild \ref{fig:sutherland_hodgman}).
 Liegt der zweite Vertex außerhalb der Gamutflächenseite wird der Schnittpunkt des Polygons und der Gamutflächenseite der Gamutvertex Liste hinzugefügt. Diese Vorgehensweise
 wird in der Applikation für jede selektierte Lampe wiederholt. Gestartet wird mit dem Gamut der ersten selektierten Lampe. Dieser Gamut wird mit dem der nächsten Lampe
 zusammengeführt. Der daraus entstehende kombinierte Gamut wird nun mit dem der nächsten selektierten Lampe ebenfalls zusammengeführt, bis alle Lampen der Selektion durlaufen
-sind. Der hier entstehnde Gamut wird nun in dem CIE 1931 Diagramm weiß eingezeichnet. Zusätzlich wird in schwarz der Gamut der einzelnen Lampen eingezeichnet (siehe Bild).
-%% // TODO: Bild
+sind. Der hier entstehnde Gamut wird nun in dem CIE 1931 Diagramm weiß eingezeichnet. Zusätzlich wird in schwarz der Gamut der einzelnen Lampen eingezeichnet (siehe Bild
+\ref{fig:combinedGamut}).
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.7\textwidth]{images/combined_gamut_lightCan_lightStick.png}
+    \end{center}
+    \caption{Kombinierter Gamut einer LightCan und eines ApeSticks}\label{fig:combinedGamut}
+\end{figure}
+\noindent
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Ansteuerung externer Lichtquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
