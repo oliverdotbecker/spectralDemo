@@ -146,6 +146,20 @@ function createSliders()
             eI++;
         }
     }
+
+    //Adding mix info
+    var mixInfo = document.createElement('div');
+    calcPosData = document.createElement('div');
+    calcPosData.className = "mixInfo";
+    calcPosData.id = "calcPosData";
+    calcPosData.innerHTML = "<div>Calc</div><div>xy: 0.33 0.33</div><div>RGB: 255 255 255</div>";
+    mixInfo.appendChild(calcPosData);
+    mixPosData = document.createElement('div');
+    mixPosData.className = "mixInfo";
+    mixPosData.id = "mixPosData";
+    mixPosData.innerHTML = "<div>Mix</div><div>xy: 0.33 0.33</div><div>RGB: 255 255 255</div>";
+    mixInfo.appendChild(mixPosData);
+    sliderContainer.appendChild(mixInfo);
 }
 
 function openSensorSettings()

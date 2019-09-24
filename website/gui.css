@@ -212,6 +212,16 @@
     cursor: default;
 }
 
+.mixInfo {
+    border:1px solid black;
+    padding: .5em 1em;
+    background-color: white;
+}
+
+.mixInfo * {
+    color: black;
+}
+
 /********************************************/
 /************* Wait Popup *******************/
 /********************************************/

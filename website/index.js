@@ -210,6 +210,11 @@ function init()
     calcPos = document.getElementById("calcPos");
     livePos = document.getElementById('livePos');
 
+    mixPos = document.getElementById('mixPos');
+
+    calcPosData = document.getElementById('calcPosData');
+    mixPosData = document.getElementById('mixPosData');
+
     var commandInput = document.getElementById('commandInput');
     if(commandInput)
     {
@@ -319,6 +324,7 @@ function XYZtoXY(X,Y,Z,noDisp)
 
 function XYZtoRGB(tX,tY,tZ)
 {
+    //sRGB - D65
     // Convert CIE_xyz to linear RGB (values[0..1])
     var r = Math.max(tX * 3.24071     + tY * (-1.53726)  + tZ * (-0.498571),0);
     var g = Math.max(tX * (-0.969258) + tY * 1.87599     + tZ * 0.0415557  ,0);
@@ -334,11 +340,12 @@ function XYZtoRGB(tX,tY,tZ)
     g = parseInt(g);
     b = parseInt(b);*/
 
-    var gamma = 1/2.2;
+    //CIE RGB - E
     /*var r = Math.max((2.3706743*tX)+(-0.9000405*tY)+(-0.4706338*tZ),0);
     var g = Math.max((-0.5138850*tX)+(1.4253036*tY)+(0.0885814*tZ),0);
     var b = Math.max((0.0052982*tX)+(-0.0146949*tY)+(1.0093968*tZ),0);*/
 
+    var gamma = 1/2.2;
     r = normalize(Math.pow(r,gamma));
     g = normalize(Math.pow(g,gamma));
     b = normalize(Math.pow(b,gamma));
@@ -352,6 +359,39 @@ function XYZtoRGB(tX,tY,tZ)
         currRGBDisplay.innerHTML = r+" "+g+" "+b;
         currRGBDisplay.style.backgroundColor = "rgb("+r+","+g+","+b+")";
     }
+}
+
+function xyToRGB(x,y)
+{
+    var X = x/y;
+    var Y = 1;
+    var Z = (1-x-y)/y;
+
+    //sRGB - D65
+    var r = (X*0.4124564 + Y*0.3575761 + Z*0.1804375);
+    var g = (X*0.2126729 + Y*0.7151522 + Z*0.0721750);
+    var b = (X*0.0193339 + Y*0.1191920 + Z*0.9503041);
+
+    //CIE RGB - E
+    var r = (X*0.4887180 + Y*0.3106803 + Z*0.2006017);
+    var g = (X*0.1762044 + Y*0.8129847 + Z*0.0108109);
+    var b = (X*0.0000000 + Y*0.0102048 + Z*0.9897952);
+
+    var max = Math.max(r,Math.max(g,b));
+    r /= max;
+    g /= max;
+    b /= max;
+
+    var gamma = 1;
+    r = normalize(Math.pow(r,gamma));
+    g = normalize(Math.pow(g,gamma));
+    b = normalize(Math.pow(b,gamma));
+
+    r = Math.round(r*255);
+    g = Math.round(g*255);
+    b = Math.round(b*255);
+
+    return r+","+g+","+b;
 }
 
 function round(number,digits)
@@ -388,6 +428,30 @@ function setxy(x,y)
         newPath += " M "+ (x*sizeX) + "," + (parseInt(y*sizeY)-plusSize);
         newPath += " L "+ (x*sizeX) + "," + (parseInt(y*sizeY)+plusSize);
         livePos.setAttribute("d",newPath);
+    }
+}
+
+function drawMixPos(x,y)
+{
+    //Boundaries
+    x = Math.min(x,0.9);
+    y = Math.min(y,0.9);
+    x = Math.max(x,0);
+    y = Math.max(y,0);
+
+    //Set position
+    if(mixPos)
+    {
+        var box = mixPos.parentElement.getBoundingClientRect();
+        var sizeX = box.width;
+        var sizeY = box.height;
+        mixPos.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97))
+
+        var newPath = "M "+ ((x*sizeX)-plusSize) + "," + parseInt(y*sizeY);
+        newPath += " L "+ ((x*sizeX)+plusSize) + "," + parseInt(y*sizeY);
+        newPath += " M "+ (x*sizeX) + "," + (parseInt(y*sizeY)-plusSize);
+        newPath += " L "+ (x*sizeX) + "," + (parseInt(y*sizeY)+plusSize);
+        mixPos.setAttribute("d",newPath);
     }
 }
 
@@ -879,7 +943,10 @@ function calcColorMix(event)
                 calcY = Math.min(calcxyY[1],0.9);
                 calcX = Math.max(calcX,0);
                 calcY = Math.max(calcY,0);
-                referencePointCoordinates = {x:calcX,y:calcY};
+                if(sFI == referenceFixtureId)
+                {
+                    referencePointCoordinates = {x:calcX,y:calcY};
+                }
             }
             //Set position
             if(calcPos)
@@ -914,22 +981,66 @@ function calcColorMix(event)
     //Doing the color correlation
     if(selectedFixturesCount > 1 && referenceFixtureId != -1 && referencePointCoordinates)
     {
+        var mixCoordinates = null;
         //Get next point inside the combined Gamut if the point is outside
         if(pointIsInside(referencePointCoordinates,currColorSpaceCoordinates))
         {
-            console.log("inside")
+            console.log("inside");
+            mixCoordinates = referencePointCoordinates;
         }
         else if(pointOnPolygon(referencePointCoordinates,currColorSpaceCoordinates))
         {
-            console.log("on line")
+            console.log("on line");
+            mixCoordinates = referencePointCoordinates;
         }
         else
         {
-            console.log("outside")
+            console.log("outside");
             //Find vector with the shortest distance to the outside point
 
             //Get Point on the gamut
+
+            var possiblePoints = [];
+            var next = currColorSpaceCoordinates[currColorSpaceCoordinates.length-1];
+            for(var i = 0; i < currColorSpaceCoordinates.length-1; i++)
+            {
+                var intersection = intersect(0.33,0.33,referencePointCoordinates.x,referencePointCoordinates.y,currColorSpaceCoordinates[i].x,currColorSpaceCoordinates[i].y,next.x,next.y);
+                if(intersection)
+                {
+                    possiblePoints.push(intersection);
+                }
+                next = currColorSpaceCoordinates[i+2];
+            }
+
+            //Find the point with the shortest distance
+            var minDistance = 5;
+            var minDistIdx = -1;
+            for(var i = 0; i < possiblePoints.length; i++)
+            {
+                var x = Math.abs(possiblePoints[0]-referencePointCoordinates.x);
+                var y = Math.abs(possiblePoints[1]-referencePointCoordinates.y);
+
+                var distance = Math.sqrt(x^2+y^2);
+                if(distance < minDistance)
+                {
+                    minDistIdx = i;
+                    distance = minDistance;
+                }
+            }
+            mixCoordinates = possiblePoints[minDistIdx];
+
+            var rgbPoint = xyToRGB(mixCoordinates.x,mixCoordinates.y);
+            mixPosData.style.backgroundColor = "rgb("+rgbPoint+")";
+            mixPosData.childNodes[1].innerText = "xy: "+round(mixCoordinates.x,4)+" "+round(mixCoordinates.y,4);
+            mixPosData.childNodes[2].innerText = "RGB: "+rgbPoint;
         }
+        var rgbReference = xyToRGB(referencePointCoordinates.x,referencePointCoordinates.y);
+        calcPosData.style.backgroundColor = "rgb("+rgbReference+")";
+        calcPosData.childNodes[1].innerText = "xy: "+round(referencePointCoordinates.x,4)+" "+round(referencePointCoordinates.y,4);
+        calcPosData.childNodes[2].innerText = "RGB: "+rgbReference;
+
+        //Draw found point
+        drawMixPos(mixCoordinates.x,mixCoordinates.y);
 
         //go thru each fixture
 
@@ -1223,7 +1334,7 @@ function pointOnPolygon(point, vertices)
             {
                 p1 = vertices[idx]
                 p2 = vertices[idx2]
-                if(intersect(point[0]-0.001,point[1]-0.001,point[0]+0.001,point[1]+0.001, p1.x, p1.y, p2.x, p2.y,true))
+                if(intersect(point.x-0.001,point.y-0.001,point.x+0.001,point.y+0.001, p1.x, p1.y, p2.x, p2.y,true))
                 {
                     return true;
                 }
