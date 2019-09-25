@@ -999,14 +999,43 @@ function calcColorMix(event)
             //Find vector with the shortest distance to the outside point
 
             //Get Point on the gamut
-
             var possiblePoints = [];
-            var next = currColorSpaceCoordinates[currColorSpaceCoordinates.length-1];
-            for(var i = 0; i < currColorSpaceCoordinates.length-1; i++)
+            var lastDirChanged = false;
+            for(var i = 0; i < currColorSpaceCoordinates.length; i++)
             {
-                var intersection = intersect(0.33,0.33,referencePointCoordinates.x,referencePointCoordinates.y,currColorSpaceCoordinates[i].x,currColorSpaceCoordinates[i].y,next.x,next.y);
+                var currCoord = currColorSpaceCoordinates[i];
+                var next = currColorSpaceCoordinates[(i+1)%currColorSpaceCoordinates.length];
+
+                var intersection = getSpPoint(currCoord,next,referencePointCoordinates);
+                //var intersection = intersect(0.33,0.33,referencePointCoordinates.x,referencePointCoordinates.y,currCoord.x,currCoord.y,next.x,next.y);
                 if(intersection)
                 {
+                    /*var leftCoord = currCoord;
+                    var rightCoord = next;
+                    if(currCoord.x > next.x)
+                    {
+                        leftCoord = next;
+                        rightCoord = currCoord;
+                        lastDirChanged = true;
+                    }
+                    else if(currCoord.x == next.x)
+                    {
+                        if(currCoord.y > next.y || lastDirChanged)
+                        {
+                            leftCoord = next;
+                            rightCoord = currCoord;
+                        }
+                    }
+
+                    if(leftCoord.x < intersection.x)
+                    {
+                        intersection = leftCoord;
+                    }
+                    else if(rightCoord.x > intersection.x)
+                    {
+                        intersection = rightCoord;
+                    }*/
+
                     possiblePoints.push(intersection);
                 }
                 next = currColorSpaceCoordinates[i+2];
@@ -1017,10 +1046,12 @@ function calcColorMix(event)
             var minDistIdx = -1;
             for(var i = 0; i < possiblePoints.length; i++)
             {
-                var x = Math.abs(possiblePoints[0]-referencePointCoordinates.x);
-                var y = Math.abs(possiblePoints[1]-referencePointCoordinates.y);
+                var x = Math.abs(possiblePoints[i].x-referencePointCoordinates.x);
+                var y = Math.abs(possiblePoints[i].y-referencePointCoordinates.y);
 
-                var distance = Math.sqrt(x^2+y^2);
+                var distance = Math.sqrt(Math.pow(x,2)+Math.pow(y,2));
+                console.log("X="+x+" Y="+y+" Dist="+distance);
+
                 if(distance < minDistance)
                 {
                     minDistIdx = i;
@@ -1058,6 +1089,15 @@ function calcColorMix(event)
     {
         //Not all conditions for a color correlation fulfilled
     }
+}
+
+function getSpPoint(A,B,C)
+{
+    var x1=A.x, y1=A.y, x2=B.x, y2=B.y, x3=C.x, y3=C.y;
+    var px = x2-x1, py = y2-y1, dAB = px*px + py*py;
+    var u = ((x3 - x1) * px + (y3 - y1) * py) / dAB;
+    var x = x1 + u * px, y = y1 + u * py;
+    return {x:x, y:y}; //this is D
 }
 
 var selectedEmitters = [];
