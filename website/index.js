@@ -615,6 +615,23 @@ function updateSliderDisp(event)
             {
                 sheetCell.innerHTML = currSlider.value;
             }
+
+            if(patch[sFI].calibratedChannels)
+            {
+                for(var emitterName in patch[sFI].channels)
+                {
+                    var sheetCell = document.getElementById(sFI+"_"+emitterName);
+                    if(sheetCell)
+                    {
+                        var pos = sheetCell.innerHTML.indexOf("(");
+                        if(pos != -1)
+                        {
+                            sheetCell.innerHTML = sheetCell.innerHTML.substring(0,pos);
+                        }
+                        sheetCell.innerHTML += "("+parseInt(patch[sFI].calibratedChannels[emitterName]*100)+")";
+                    }
+                }
+            }
         }
     }
 }
@@ -792,7 +809,17 @@ function sendDMX(event)
         for(var channel in currFixture.channels)
         {
             var address = currFixtureType.emitters[channel]+parseInt(currFixture.address)-2;
-            dmxValues[address] = parseInt(parseInt(currFixture.channels[channel])/100*255); //avoiding 2.55 due to floating point js errors
+            if(referenceFixtureId != -1 && selectedFixtures[pI])
+            {
+                if(patch[pI].calibratedChannels)
+                {
+                    dmxValues[address] = parseInt(parseInt(currFixture.calibratedChannels[channel])*255);
+                }
+            }
+            else
+            {
+                dmxValues[address] = parseInt(parseInt(currFixture.channels[channel])/100*255); //avoiding 2.55 due to floating point js errors
+            }
         }
     }
     //console.log(dmxValues);
@@ -813,26 +840,6 @@ function calcColorMix(event)
         }
         sliderValues.push(sliders[sI].value);
     }
-
-    //Set maximums per fixture per channel calculated by the combined color space
-    //And collecting the minimal values for the combined control
-
-    //Either create a hash table for all combinations (5% steps) (1600 Entries per lamp) define if this is color mix is inside
-    // this color space!
-
-    //Or calculate this live on dragging the slider
-
-    /*for(var fI = 0; fI < selectedEmitters.length; fI++)
-    {
-        coordinates[fI] = [];
-        var currEmitters = selectedEmitters[fI];
-        for(eIdx in currEmitters)
-        {
-            var currMeasures = currEmitters[eIdx].measures;
-
-            debugger;
-        }
-    }*/
 
     var posMarkers = document.getElementsByClassName("posMarker");
     while(posMarkers.length)
@@ -1066,9 +1073,9 @@ function calcColorMix(event)
                     {
                         console.log("["+sFI+"] Found triangle");
                         var currTestTriangle = [
-                            {x:parseFloat(currentEmitterData[i].measures["100%"].xyY[0]),y:parseFloat(currentEmitterData[i].measures["100%"].xyY[1])},
-                            {x:parseFloat(currentEmitterData[j].measures["100%"].xyY[0]),y:parseFloat(currentEmitterData[j].measures["100%"].xyY[1])},
-                            {x:parseFloat(currentEmitterData[k].measures["100%"].xyY[0]),y:parseFloat(currentEmitterData[k].measures["100%"].xyY[1])}
+                            {x:parseFloat(currentEmitterData[i].measures["100%"].xyY[0]),y:parseFloat(currentEmitterData[i].measures["100%"].xyY[1]),name:currentEmitterData[i].name},
+                            {x:parseFloat(currentEmitterData[j].measures["100%"].xyY[0]),y:parseFloat(currentEmitterData[j].measures["100%"].xyY[1]),name:currentEmitterData[j].name},
+                            {x:parseFloat(currentEmitterData[k].measures["100%"].xyY[0]),y:parseFloat(currentEmitterData[k].measures["100%"].xyY[1]),name:currentEmitterData[k].name}
                         ];
 
                         var currTestTriangle = sortCombinedPointsCounterClockwise(currTestTriangle,getCenterpoint(currTestTriangle));
@@ -1117,6 +1124,24 @@ function calcColorMix(event)
             ];
 
             //Apply dmx values
+            patch[sFI].calibratedChannels = {};
+            for(var eIdx = 0; eIdx < currentEmitterData.length; eIdx++)
+            {
+                var emitterFound = false;
+                for(var iI = 0; iI < mixTriangle.points.length; iI++)
+                {
+                    if(mixTriangle.points[iI].name == currentEmitterData[eIdx].name)
+                    {
+                        patch[sFI].calibratedChannels[currentEmitterData[eIdx].name] = Math.max(0,Math.min(resultIntensities[iI],1));
+                        emitterFound = true;
+                        break;
+                    }
+                }
+                if(!emitterFound)
+                {
+                    patch[sFI].calibratedChannels[currentEmitterData[eIdx].name] = 0;
+                }
+            }
         }
     }
     else
