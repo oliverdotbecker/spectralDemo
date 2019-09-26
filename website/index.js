@@ -1052,16 +1052,56 @@ function calcColorMix(event)
         drawMixPos(mixCoordinates.x,mixCoordinates.y);
 
         //go thru each fixture
+        for(var sFI in selectedFixtures)
+        {
+            var currentEmitterData = patch[sFI].emitterData;
 
             //get emitter triangles for this fixture
+            var mixTriangles = [];
+            for(var i = 0; i < currentEmitterData.length-2; i++)
+            {
+                for(var j = i+1; j < currentEmitterData.length-1; j++)
+                {
+                    for(var k = j+1; k < currentEmitterData.length; k++)
+                    {
+                        console.log("["+sFI+"] Found triangle");
+                        var currTestTriangle = [
+                            {x:parseFloat(currentEmitterData[i].measures["100%"].xyY[0]),y:parseFloat(currentEmitterData[i].measures["100%"].xyY[1])},
+                            {x:parseFloat(currentEmitterData[j].measures["100%"].xyY[0]),y:parseFloat(currentEmitterData[j].measures["100%"].xyY[1])},
+                            {x:parseFloat(currentEmitterData[k].measures["100%"].xyY[0]),y:parseFloat(currentEmitterData[k].measures["100%"].xyY[1])}
+                        ];
 
-            //get if triangle is relevant and "relevance index"
+                        var currTestTriangle = sortCombinedPointsCounterClockwise(currTestTriangle,getCenterpoint(currTestTriangle));
 
-            //get best triangle
+                        //get if triangle is relevant and "relevance index"
+                        if(pointIsInside(mixCoordinates,currTestTriangle))
+                        {
+                            console.log("["+sFI+"] Mix point is inside");
+
+                            var relevanceDistance = 0;
+                            //Add up all vector distances of the triangle points
+                            for(var triIdx = 0; triIdx < currTestTriangle.length; triIdx++)
+                            {
+                                relevanceDistance += Math.sqrt(Math.pow(mixCoordinates.x-currTestTriangle[triIdx].x,2)+Math.pow(mixCoordinates.y-currTestTriangle[triIdx].y,2));
+                            }
+                            mixTriangles.push({
+                                points:currTestTriangle,
+                                relevanceDistance:relevanceDistance
+                            })
+                        }
+                    }
+                }
+            }
+
+            //get best triangle (the one with the shortest distance should win)
+            var mixTriangle = mixTriangles.reduce(function(prev, curr) {
+                return prev.relevanceDistance < curr.relevanceDistance ? prev : curr;
+            });
 
             //Perform matrix calculation
 
             //Apply dmx values
+        }
     }
     else
     {
@@ -1328,7 +1368,7 @@ function pointIsInside(point, vs)
     // ray-casting algorithm based on
     // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
 
-    var x = point[0], y = point[1];
+    var x = point.x, y = point.y;
 
     var inside = false;
     for (var i = 0, j = vs.length - 1; i < vs.length; j = i++)
