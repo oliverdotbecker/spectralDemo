@@ -987,20 +987,25 @@ function calcColorMix(event)
         {
             console.log("inside");
             mixCoordinates = referencePointCoordinates;
+            mixPosData.style.display = "none";
+            mixPos.parentElement.style.display = "none";
         }
         else if(pointOnPolygon(referencePointCoordinates,currColorSpaceCoordinates))
         {
             console.log("on line");
             mixCoordinates = referencePointCoordinates;
+            mixPosData.style.display = "none";
+            mixPos.parentElement.style.display = "none";
         }
         else
         {
             console.log("outside");
+            mixPosData.style.display = "";
+            mixPos.parentElement.style.display = "";
             //Find vector with the shortest distance to the outside point
 
             //Get Point on the gamut
             var possiblePoints = [];
-            var lastDirChanged = false;
             for(var i = 0; i < currColorSpaceCoordinates.length; i++)
             {
                 var currCoord = currColorSpaceCoordinates[i];
