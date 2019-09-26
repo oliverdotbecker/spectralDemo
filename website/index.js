@@ -1006,36 +1006,9 @@ function calcColorMix(event)
                 var currCoord = currColorSpaceCoordinates[i];
                 var next = currColorSpaceCoordinates[(i+1)%currColorSpaceCoordinates.length];
 
-                var intersection = getSpPoint(currCoord,next,referencePointCoordinates);
-                //var intersection = intersect(0.33,0.33,referencePointCoordinates.x,referencePointCoordinates.y,currCoord.x,currCoord.y,next.x,next.y);
+                var intersection = getSpPoint(currCoord,next,referencePointCoordinates,true);
                 if(intersection)
                 {
-                    /*var leftCoord = currCoord;
-                    var rightCoord = next;
-                    if(currCoord.x > next.x)
-                    {
-                        leftCoord = next;
-                        rightCoord = currCoord;
-                        lastDirChanged = true;
-                    }
-                    else if(currCoord.x == next.x)
-                    {
-                        if(currCoord.y > next.y || lastDirChanged)
-                        {
-                            leftCoord = next;
-                            rightCoord = currCoord;
-                        }
-                    }
-
-                    if(leftCoord.x < intersection.x)
-                    {
-                        intersection = leftCoord;
-                    }
-                    else if(rightCoord.x > intersection.x)
-                    {
-                        intersection = rightCoord;
-                    }*/
-
                     possiblePoints.push(intersection);
                 }
                 next = currColorSpaceCoordinates[i+2];
@@ -1055,7 +1028,7 @@ function calcColorMix(event)
                 if(distance < minDistance)
                 {
                     minDistIdx = i;
-                    distance = minDistance;
+                    minDistance = distance;
                 }
             }
             mixCoordinates = possiblePoints[minDistIdx];
@@ -1091,11 +1064,15 @@ function calcColorMix(event)
     }
 }
 
-function getSpPoint(A,B,C)
+function getSpPoint(A,B,C,limit)
 {
     var x1=A.x, y1=A.y, x2=B.x, y2=B.y, x3=C.x, y3=C.y;
     var px = x2-x1, py = y2-y1, dAB = px*px + py*py;
     var u = ((x3 - x1) * px + (y3 - y1) * py) / dAB;
+    if(limit)
+    {
+        u = Math.max(0,Math.min(u,1));
+    }
     var x = x1 + u * px, y = y1 + u * py;
     return {x:x, y:y}; //this is D
 }
