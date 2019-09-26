@@ -368,9 +368,9 @@ function xyToRGB(x,y)
     var Z = (1-x-y)/y;
 
     //sRGB - D65
-    var r = (X*0.4124564 + Y*0.3575761 + Z*0.1804375);
+    /*var r = (X*0.4124564 + Y*0.3575761 + Z*0.1804375);
     var g = (X*0.2126729 + Y*0.7151522 + Z*0.0721750);
-    var b = (X*0.0193339 + Y*0.1191920 + Z*0.9503041);
+    var b = (X*0.0193339 + Y*0.1191920 + Z*0.9503041);*/
 
     //CIE RGB - E
     var r = (X*0.4887180 + Y*0.3106803 + Z*0.2006017);
@@ -391,7 +391,7 @@ function xyToRGB(x,y)
     g = Math.round(g*255);
     b = Math.round(b*255);
 
-    return r+","+g+","+b;
+    return {r:r,g:g,b:b};
 }
 
 function round(number,digits)
@@ -1039,14 +1039,14 @@ function calcColorMix(event)
             mixCoordinates = possiblePoints[minDistIdx];
 
             var rgbPoint = xyToRGB(mixCoordinates.x,mixCoordinates.y);
-            mixPosData.style.backgroundColor = "rgb("+rgbPoint+")";
+            mixPosData.style.backgroundColor = "rgb("+rgbPoint.r+","+rgbPoint.g+","+rgbPoint.b+")";
             mixPosData.childNodes[1].innerText = "xy: "+round(mixCoordinates.x,4)+" "+round(mixCoordinates.y,4);
-            mixPosData.childNodes[2].innerText = "RGB: "+rgbPoint;
+            mixPosData.childNodes[2].innerText = "RGB: "+rgbPoint.r+" "+rgbPoint.g+" "+rgbPoint.b;
         }
         var rgbReference = xyToRGB(referencePointCoordinates.x,referencePointCoordinates.y);
-        calcPosData.style.backgroundColor = "rgb("+rgbReference+")";
+        calcPosData.style.backgroundColor = "rgb("+rgbReference.r+","+rgbReference.g+","+rgbReference.b+")";
         calcPosData.childNodes[1].innerText = "xy: "+round(referencePointCoordinates.x,4)+" "+round(referencePointCoordinates.y,4);
-        calcPosData.childNodes[2].innerText = "RGB: "+rgbReference;
+        calcPosData.childNodes[2].innerText = "RGB: "+rgbReference.r+" "+rgbReference.g+" "+rgbReference.b;
 
         //Draw found point
         drawMixPos(mixCoordinates.x,mixCoordinates.y);
@@ -1074,7 +1074,7 @@ function calcColorMix(event)
                         var currTestTriangle = sortCombinedPointsCounterClockwise(currTestTriangle,getCenterpoint(currTestTriangle));
 
                         //get if triangle is relevant and "relevance index"
-                        if(pointIsInside(mixCoordinates,currTestTriangle))
+                        if(pointIsInside(mixCoordinates,currTestTriangle) || pointOnPolygon(mixCoordinates,currTestTriangle))
                         {
                             console.log("["+sFI+"] Mix point is inside");
 
@@ -1099,6 +1099,22 @@ function calcColorMix(event)
             });
 
             //Perform matrix calculation
+            var e1 = xyToRGB(mixTriangle.points[0].x,mixTriangle.points[0].y);
+            var e2 = xyToRGB(mixTriangle.points[1].x,mixTriangle.points[1].y);
+            var e3 = xyToRGB(mixTriangle.points[2].x,mixTriangle.points[2].y);
+            var emitterMatrix = [
+                [e1.r,e1.g,e1.b],
+                [e2.r,e2.g,e2.b],
+                [e3.r,e3.g,e3.b]
+            ];
+            var invertMatrix = matrix_invert(emitterMatrix);
+            var mixPoint = xyToRGB(mixCoordinates.x,mixCoordinates.y);
+
+            var resultIntensities = [
+                invertMatrix[0][0]*mixPoint.r + invertMatrix[0][1]*mixPoint.r + invertMatrix[0][2]*mixPoint.r,
+                invertMatrix[1][0]*mixPoint.g + invertMatrix[1][1]*mixPoint.g + invertMatrix[1][2]*mixPoint.g,
+                invertMatrix[2][0]*mixPoint.b + invertMatrix[2][1]*mixPoint.b + invertMatrix[2][2]*mixPoint.b
+            ];
 
             //Apply dmx values
         }
@@ -1427,6 +1443,100 @@ function sortCombinedPointsCounterClockwise(coordinates,center)
         return (angle1 - angle2);
     });
     return coordinates;
+}
+
+// Returns the inverse of matrix `M`.
+function matrix_invert(M){
+    // I use Guassian Elimination to calculate the inverse:
+    // (1) 'augment' the matrix (left) by the identity (on the right)
+    // (2) Turn the matrix on the left into the identity by elemetry row ops
+    // (3) The matrix on the right is the inverse (was the identity matrix)
+    // There are 3 elemtary row ops: (I combine b and c in my code)
+    // (a) Swap 2 rows
+    // (b) Multiply a row by a scalar
+    // (c) Add 2 rows
+    
+    //if the matrix isn't square: exit (error)
+    if(M.length !== M[0].length){return;}
+    
+    //create the identity matrix (I), and a copy (C) of the original
+    var i=0, ii=0, j=0, dim=M.length, e=0, t=0;
+    var I = [], C = [];
+    for(i=0; i<dim; i+=1){
+        // Create the row
+        I[I.length]=[];
+        C[C.length]=[];
+        for(j=0; j<dim; j+=1){
+            
+            //if we're on the diagonal, put a 1 (for identity)
+            if(i==j){ I[i][j] = 1; }
+            else{ I[i][j] = 0; }
+            
+            // Also, make the copy of the original
+            C[i][j] = M[i][j];
+        }
+    }
+    
+    // Perform elementary row operations
+    for(i=0; i<dim; i+=1){
+        // get the element e on the diagonal
+        e = C[i][i];
+        
+        // if we have a 0 on the diagonal (we'll need to swap with a lower row)
+        if(e==0){
+            //look through every row below the i'th row
+            for(ii=i+1; ii<dim; ii+=1){
+                //if the ii'th row has a non-0 in the i'th col
+                if(C[ii][i] != 0){
+                    //it would make the diagonal have a non-0 so swap it
+                    for(j=0; j<dim; j++){
+                        e = C[i][j];       //temp store i'th row
+                        C[i][j] = C[ii][j];//replace i'th row by ii'th
+                        C[ii][j] = e;      //repace ii'th by temp
+                        e = I[i][j];       //temp store i'th row
+                        I[i][j] = I[ii][j];//replace i'th row by ii'th
+                        I[ii][j] = e;      //repace ii'th by temp
+                    }
+                    //don't bother checking other rows since we've swapped
+                    break;
+                }
+            }
+            //get the new diagonal
+            e = C[i][i];
+            //if it's still 0, not invertable (error)
+            if(e==0){return}
+        }
+        
+        // Scale this row down by e (so we have a 1 on the diagonal)
+        for(j=0; j<dim; j++){
+            C[i][j] = C[i][j]/e; //apply to original matrix
+            I[i][j] = I[i][j]/e; //apply to identity
+        }
+        
+        // Subtract this row (scaled appropriately for each row) from ALL of
+        // the other rows so that there will be 0's in this column in the
+        // rows above and below this one
+        for(ii=0; ii<dim; ii++){
+            // Only apply to other rows (we want a 1 on the diagonal)
+            if(ii==i){continue;}
+            
+            // We want to change this element to 0
+            e = C[ii][i];
+            
+            // Subtract (the row above(or below) scaled by e) from (the
+            // current row) but start at the i'th column and assume all the
+            // stuff left of diagonal is 0 (which it should be if we made this
+            // algorithm correctly)
+            for(j=0; j<dim; j++){
+                C[ii][j] -= e*C[i][j]; //apply to original matrix
+                I[ii][j] -= e*I[i][j]; //apply to identity
+            }
+        }
+    }
+    
+    //we've done all operations, C should be the identity
+    //matrix I should be the inverse:
+    return I;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
