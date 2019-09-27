@@ -982,8 +982,8 @@ modifizierende Algorithmus in der Lampe muss bekannt sein.
 \subsection{Gamut Zeichnung}
 Als Gamut bezeichnet man das Farbvermögen einer Lichtquelle. Mit den verarbeiteten Messdaten ist es möglich diesen in den CIE 1931 Farbraum für die einzelnen
 Lampen einzuzeichnen.\\
-Für eine beliebige Anzahl N von Emittern kann ein Polygon mit N oder weniger Ecken entstehen. Beispielsweise spannen die Emitter Rot, Grün und Blau spannen ein
-dreieckiges Polygon als Gamut. Ein vierte weißer Emitter liegt innerhalb dieses Polygons, dies erweitert den Gamut nicht. Läge ein weiterer Emitter außerhalb des
+Für eine beliebige Anzahl N von Emittern kann ein Polygon mit N oder weniger Ecken entstehen. Beispielsweise spannen die Emitter Rot, Grün und Blau ein
+dreieckiges Polygon als Gamut auf. Ein vierter weißer Emitter liegt innerhalb dieses Polygons, dies erweitert den Gamut nicht. Läge ein weiterer Emitter außerhalb des
 bereits aufgespannten Polygons wird dies entsprechend erweitert.\\
 Um einen Gamut einer Lampe in ein CIE Diagramm einzuzeichnen müssen die xy Koordinaten gegen den Uhrzeigersinn sortiert werden. Dies wird bewerkstelligt, indem
 der Mittelpunkt des Polygons gesucht wird.
@@ -1006,7 +1006,7 @@ ein \ac{svg} Grafik mit den Strecken zwischen den Koordinaten über dem CIE 1931
 \noindent
 \subsection{Zeichnung eines kombinierten Gamut}
 Hier bestand die Aufgabe zu bestimmten, ob Koordinaten (oder auch als Vertex bezeichnet) eines Gamut A innerhalb eines Gamut B einer anderen Lampe liegen. Wenn diese
-Bedingung erfüllt ist, muss zur ermittung des gemeinsamen Gamut muss ermittelt werden, ob ein Punkt innerhalb des bestehenden Polygons liegt. Dies wurde mit dem
+Bedingung erfüllt ist, muss zur Ermittlung des gemeinsamen Gamut muss ermittelt werden, ob ein Punkt innerhalb des bestehenden Polygons liegt. Dies wurde mit dem
 Sutherland–Hodgman Algorithmus \cite{sutherlandHodgman} bewerkstelligt. Für diesen Algorithmus werden die Vertex Daten des zu analysierenden Polygons benötigt. Die
 Vertex Daten sind hier die CIE 1931 xy Koordinaten. Wichtig ist, dass die Vertices gegen den Uhrzeigersinn vorsortiert sind.\\
 Der Algorithmus spannt die Gerade zwischen zwei Vertices auf und prüft auf welcher Seite der Geraden sich die bisherigen Gamut Vertices befinden. Wenn beide Vertices
@@ -1045,10 +1045,10 @@ sind. Der hier entstehnde Gamut wird nun in dem CIE 1931 Diagramm weiß eingezei
 \section{Ansteuerung externer Lichtquellen}
 Zur automatisierung der Vermessung der Lichtquellen ist es nötig, dass die messende Applikation auch die Lichtquellen ansteuern kann. Somit wurde
 in der Applikation eine \ac{dmx} Steuerung mit Art-Net implementiert. Weiter wurde ermöglicht, mehrere Lampen zu verwalten und zu steuern, um später mehrere
-vermessene Lampen ansteuern zu können.
+vermessener Lampen ansteuern zu können.
 \subsection{Fixturetypen}
 Lichtquellen verschiedener Hersteller haben viele unterschiedliche Funktionen. Von einer Helligkeitsregelung, dem Dimmer, über mehrere Emitter, wie
-die hier venrwendeten Lichtquellen, bis zu Bewegungssteuerungen mehrerer Achsen, wie beim Robe LEDWash 300.\\
+die hier verwendeten Lichtquellen, bis zu Bewegungssteuerungen mehrerer Achsen, wie beim Robe LEDWash 300.\\
 Die Zuordnung dieser Funktionen zu den DMX Steuerkanälen der Lampe ist somit je nach Funktionalitätsumfang von Lampe zu Lampe und auch bei einem gleichen
 Lampentyp von Hersteller zu Hersteller unterschiedlich. So findet sich beispielsweise bei der Light Can kein Dimmer Steuerkanal für die Gesamtintensität
 der Lampe. Hier werden nur Steuerkanäle der einzelnen Emitter bereitgestellt.
