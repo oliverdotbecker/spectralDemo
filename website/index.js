@@ -108,6 +108,9 @@ var currRGBDisplay = null;
 var livePos = null;
 var calcPos = null;
 
+var mixPos = null;
+var mixTriangleSvg = null;
+
 var savedValues = [];
 var saveHandle = null;
 
@@ -211,6 +214,7 @@ function init()
     livePos = document.getElementById('livePos');
 
     mixPos = document.getElementById('mixPos');
+    mixTriangleSvg = document.getElementById('mixTriangle');
 
     calcPosData = document.getElementById('calcPosData');
     mixPosData = document.getElementById('mixPosData');
@@ -1015,10 +1019,10 @@ function calcColorMix(event)
             var possiblePoints = [];
             for(var i = 0; i < currColorSpaceCoordinates.length; i++)
             {
-                var currCoord = currColorSpaceCoordinates[i];
+                var curr = currColorSpaceCoordinates[i];
                 var next = currColorSpaceCoordinates[(i+1)%currColorSpaceCoordinates.length];
 
-                var intersection = getSpPoint(currCoord,next,referencePointCoordinates,true);
+                var intersection = getSpPoint(curr,next,referencePointCoordinates,true);
                 if(intersection)
                 {
                     possiblePoints.push(intersection);
@@ -1073,9 +1077,21 @@ function calcColorMix(event)
                     {
                         console.log("["+sFI+"] Found triangle");
                         var currTestTriangle = [
-                            {x:parseFloat(currentEmitterData[i].measures["100%"].xyY[0]),y:parseFloat(currentEmitterData[i].measures["100%"].xyY[1]),name:currentEmitterData[i].name},
-                            {x:parseFloat(currentEmitterData[j].measures["100%"].xyY[0]),y:parseFloat(currentEmitterData[j].measures["100%"].xyY[1]),name:currentEmitterData[j].name},
-                            {x:parseFloat(currentEmitterData[k].measures["100%"].xyY[0]),y:parseFloat(currentEmitterData[k].measures["100%"].xyY[1]),name:currentEmitterData[k].name}
+                            {
+                                x:parseFloat(currentEmitterData[i].measures["100%"].xyY[0]),
+                                y:parseFloat(currentEmitterData[i].measures["100%"].xyY[1]),
+                                name:currentEmitterData[i].name
+                            },
+                            {
+                                x:parseFloat(currentEmitterData[j].measures["100%"].xyY[0]),
+                                y:parseFloat(currentEmitterData[j].measures["100%"].xyY[1]),
+                                name:currentEmitterData[j].name
+                            },
+                            {
+                                x:parseFloat(currentEmitterData[k].measures["100%"].xyY[0]),
+                                y:parseFloat(currentEmitterData[k].measures["100%"].xyY[1]),
+                                name:currentEmitterData[k].name
+                            }
                         ];
 
                         var currTestTriangle = sortCombinedPointsCounterClockwise(currTestTriangle,getCenterpoint(currTestTriangle));
@@ -1104,6 +1120,33 @@ function calcColorMix(event)
             var mixTriangle = mixTriangles.reduce(function(prev, curr) {
                 return prev.relevanceDistance < curr.relevanceDistance ? prev : curr;
             });
+
+            var box = calcPos.parentElement.getBoundingClientRect();
+            var sizeX = box.width;
+            var sizeY = box.height;
+            mixTriangleSvg.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97));
+            var newPath = "";
+            for(var i = 0; i < mixTriangle.points.length; i++)
+            {
+                if(i == 0)
+                {
+                    newPath += "M ";
+                }
+                else
+                {
+                    newPath += "L ";
+                }
+
+                newPath += parseInt(mixTriangle.points[i].x*sizeX);
+                newPath += ",";
+                newPath += parseInt((mixTriangle.points[i].y)*sizeY);
+                newPath += " ";
+            }
+            if(mixTriangle.points[0])
+            {
+                newPath += "L "+ parseInt(mixTriangle.points[0].x*sizeX) + "," + parseInt((mixTriangle.points[0].y)*sizeY);
+            }
+            mixTriangleSvg.setAttribute("d",newPath);
 
             //Perform matrix calculation
             var e1 = xyToRGB(mixTriangle.points[0].x,mixTriangle.points[0].y);
