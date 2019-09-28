@@ -993,6 +993,7 @@ function calcColorMix(event)
     if(selectedFixturesCount > 1 && referenceFixtureId != -1 && referencePointCoordinates)
     {
         var mixCoordinates = null;
+        mixTriangleSvg.parentElement.style.display = "";
         //Get next point inside the combined Gamut if the point is outside
         if(pointIsInside(referencePointCoordinates,currColorSpaceCoordinates))
         {
@@ -1000,7 +1001,6 @@ function calcColorMix(event)
             mixCoordinates = referencePointCoordinates;
             mixPosData.style.display = "none";
             mixPos.parentElement.style.display = "none";
-            mixTriangleSvg.parentElement.style.display = "none";
         }
         else if(pointOnPolygon(referencePointCoordinates,currColorSpaceCoordinates))
         {
@@ -1008,14 +1008,12 @@ function calcColorMix(event)
             mixCoordinates = referencePointCoordinates;
             mixPosData.style.display = "none";
             mixPos.parentElement.style.display = "none";
-            mixTriangleSvg.parentElement.style.display = "none";
         }
         else
         {
             console.log("outside");
             mixPosData.style.display = "";
             mixPos.parentElement.style.display = "";
-            mixTriangleSvg.parentElement.style.display = "";
             //Find vector with the shortest distance to the outside point
 
             //Get Point on the gamut
@@ -1193,6 +1191,9 @@ function calcColorMix(event)
     else
     {
         //Not all conditions for a color correlation fulfilled
+        mixPosData.style.display = "none";
+        mixPos.parentElement.style.display = "none";
+        mixTriangleSvg.parentElement.style.display = "none";
     }
 }
 
