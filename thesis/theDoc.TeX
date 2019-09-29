@@ -547,7 +547,7 @@ beschreibt drei Grundfarben: Rot, Grün und Blau. Helmholtz beobachtete, dass au
 additiv gemsicht werden kann.\\
 Der RGB Farbraum beschreibt mit einem Zahlentripel eine Farbvalenz. Diese Zahlen beschreiben die Intensität von rotem (R), grünen (G) und
 blauem (B) Licht. Die Werte für R, G und B sind einheitenlos. Oft werden diese von 0 bis 1 definiert, aber weitere übliche Wertebereiche
-von 0 bis 100 Prozent und von 0 bis 255 (8 bit) für digitale Anwendungen werden genutzt.
+von 0 bis 100 Prozent und von 0 bis 255 (8 bit) für digitale Anwendungen werden genutzt. \cite{wikipediaRGB}\\
 Grafisch wird der RGB Farbraum in den meisten Publikationen als Würfel in einem kartesischen Koordinatensystem dargestellt. Dieser Würfel
 mit einer Kantenlänge von eins umschließt die in diesem Farbraum abbildbaren Farbvalenzen.
 \begin{figure}[H]
@@ -556,7 +556,75 @@ mit einer Kantenlänge von eins umschließt die in diesem Farbraum abbildbaren F
 \end{figure}
 \noindent
 Bei den Koordinaten (0,0,0) ist Schwarz definiert. Bei (1,1,1) ist der Weißpunkt definiert. Die grau Linie befindet sich auf der diagonalen
-von Schwarz zum Weißpunkt. Ein Grauton besteht daher immer aus einem Zahlentripel eines Wertes.
+von Schwarz zum Weißpunkt. Ein Grauton besteht daher immer aus einem Zahlentripel eines Wertes. \cite{wisotopRGB}
+\subsubsection{Graßmasche Gesetze}
+"'Hermann Günther Graßmann  war ein deutscher Mathematiker, Physiker und Sprachwissenschaftler. Er gilt als eigentlicher Begründer der
+Vektorrechnung."'\\\cite{wikipediaGrassmann}\\
+"'Die von Graßmann aufgestellten Gesetze bezogen sich weitestgehend auf die additive Farbmischung, gelten aber auch grundlegend bei der
+subtraktiven Farbmischung. ... Ganz allgemein erlaubt diese Lehre von den Maßbezeichnungen der Farben eine Beschreibung der Farbvalenz
+mit grafischen Mitteln, ... auf einem Diagramm der graßmannschen Farbmischungsberechnung mit Hilfe von Vektoren dargestellt ist. Diese
+Art der Berechnung geht ebenfalls fundamental auf die Arbeiten Graßmanns zurück."'\\\cite{wikipediaGrassmannGestze}\\
+\\
+Erstes graßmannsches Gesetz:\\
+"'Jeder Farbeindruck kann mit genau drei Grundgrößen vollständig beschrieben werden.
+\begin{align}\label{Equ:2}
+    \{C\} \equiv R.\{R\} + G.\{G\} + B.\{B\} \textrm{\hspace{1em} bzw. \hspace{1em}} \{C\} \equiv \left[ \begin{array}{r}
+        R \\
+        G \\
+        B \\
+    \end{array}\right]
+\end{align}
+"'\cite{wikipediaGrassmannGestze}\\
+\\
+Zweites graßmannsches Gesetz:\\
+"'Mischt man eine Farbe mit sich veränderndem Farbton mit einer Farbe, bei der der Farbton immer gleich bleibt, so entstehen Farben mit
+sich veränderndem Farbton, wie es durch die Schnittmengen der Farbflächen im Begleitbild illustriert wird.
+\begin{align}\label{Equ:3}
+    \textrm{Zwei Farben, \hspace{.5em}} \{C_1\} \equiv \left[ \begin{array}{r}
+        R_1 \\
+        G_1 \\
+        B_1 \\
+    \end{array}\right]
+    \textrm{\hspace{.5em} und \hspace{.5em}} \{C_2\} \equiv \left[ \begin{array}{r}
+        R_2 \\
+        G_2 \\
+        B_2 \\
+    \end{array}\right]
+\end{align}
+ergeben nach additiver Farbmischung die Farbe
+\begin{align}\label{Equ:4}
+    \{C\} \equiv \{C_1\} +\{C_2\} \equiv \left[ \begin{array}{r}
+        R_1 + R_2 \\
+        G_1 + G_2 \\
+        B_1 + B_2 \\
+    \end{array}\right]
+\end{align}
+Hiermit beschreibt Graßmann im Prinzip die (mathematische) Homogenität des Farbraumes – egal welche Farbtonveränderung man an einer Farbe
+vornimmt, das Mischprodukt folgt analog."'\cite{wikipediaGrassmannGestze}\\
+\\
+Drittes graßmannsches Gesetz:\\
+"'Der Farbton einer durch additive Farbmischung entstandenen Farbe hängt nur vom Farbeindruck der Ausgangsfarben, nicht jedoch von deren
+physikalischen (spektralen) Zusammensetzungen ab. ...
+\begin{align}\label{Equ:5}
+    \{C'\} \equiv k.\{C\} \equiv \left[ \begin{array}{r}
+        k.R \\
+        k.G \\
+        k.B \\
+    \end{array}\right]
+\end{align}
+Dieses Gesetz besagt, dass das Mischverhalten selbst der metameren Farben – also derjenigen Farben mit gleichem Farbeindruck, aber
+zugleich unterschiedlicher spektraler Zusammensetzung – rein aufgrund ihres Farbeindruckes exakt beschrieben werden kann. Umgekehrt können
+also vom Mischverhalten her keine unmittelbaren Rückschlüsse auf die spektrale Zusammensetzung einer Farbe gezogen werden."'\\
+\cite{wikipediaGrassmannGestze}\\
+\\
+Viertes graßmannsches Gesetz:\\
+"'Die Intensität (bzw. Totalintensität) einer additiv gemischten Farbe (T3) entspricht der Summe der Intensitäten der Ausgangsfarben ...
+\begin{align}\label{Equ:6}
+    T(A+B) \equiv T(A) + T(B)
+\end{align}
+Laut David L. MacAdam gilt dieses Gesetz nur für den Spezialfall einer idealisierten, auf einen Punkt reduzierten Quelle, nicht aber für
+ausgedehntere Farbflächen. Graßmann hatte sich nur mit dem oben genannten Spezialfall befasst."'\\
+\cite{wikipediaGrassmannGestze}
 \subsection{CIE} \label{section_CIE}
 \subsubsection{CIE 1931}
 \subsubsection{CIE 1976}
@@ -879,7 +947,7 @@ oberen linken Ecke angezeigt. Unter den normierten Messwerten ist zusätzlich ei
 Mit diesen Werten wurde begonnen, eine XYZ \ac{cie} Koordinate zu errechnen. Hier wurden die Formeln von Bruce Lindbloom genutzt. Lindblooms Webauftritt
 dient bereits in vielen Büchern und anderen Publikationen als Referenz für Themen wie Farbräume oder Umrechnung zwischen Farbräumen.\\
 Zur Umrechnung eines diskreten Farbspektrums zu einer \ac{cie} XYZ Koordinate sind folgende Formeln gegeben \cite{lindbloom}:
-\begin{align}\label{Equ:2}
+\begin{align}\label{Equ:7}
     X = \sum_{i}x_i*P_i\Delta\lambda\\
     Y = \sum_{i}y_i*P_i\Delta\lambda\\
     Z = \sum_{i}z_i*P_i\Delta\lambda
@@ -900,7 +968,7 @@ Die hier genutzten Tristimuluswerte \cite{wisotop}:
 \noindent
 Aus diesen Werten und den mit dem Sensor erfassten Spektralwerten konnten nun die \ac{cie} XYZ Werte errechnet werden. Um nun den grafischen Punkt auf
 einem \ac{cie} 1931 Diagramm zu erhalten, müssen die XYZ in xyz Koordinaten umgerechnet werden. Dies ist mit den folgenden Formeln möglich \cite{lindbloom}:
-\begin{align}\label{Equ:3}
+\begin{align}\label{Equ:8}
     x = \frac{X}{X+Y+Z}\\
     y = \frac{Y}{X+Y+Z}\\
     z = Y
@@ -922,7 +990,7 @@ Hier folgen Notizen:\\
 \\
 Zusätzlich zur Darstellung im \ac{cie} 1931 Farbraum wurde zur besseren Einordnung und zur Anzeige in der Applikation die XYZ Werte in RGB Werte
 umgewandelt. Dies ist möglich mit folgenden Gleichungen von Lindblooms Webauftritt \cite{lindbloom}:
-\begin{align}\label{Equ:4}
+\begin{align}\label{Equ:9}
     \left[ \begin{array}{r}
         r \\
         g \\
@@ -935,7 +1003,7 @@ umgewandelt. Dies ist möglich mit folgenden Gleichungen von Lindblooms Webauftr
     \end{array}\right]
 \end{align}
 mit sRGB Umrechnungsmatrix mit Weiß-Referenzpunkt D65 %// TODO: D65 irgendwo erklären
-\begin{align}\label{Equ:5}
+\begin{align}\label{Equ:10}
     \mathbf M^{-1} = \left[ \begin{array}{rrr}
         3.2404542  & -1.5371385 & -0.4985314 \\
         -0.9692660 & 1.8760108  & 0.0415560  \\
@@ -1046,12 +1114,12 @@ dreieckiges Polygon als Gamut auf. Ein vierter weißer Emitter liegt innerhalb d
 bereits aufgespannten Polygons wird dies entsprechend erweitert.\\
 Um einen Gamut einer Lampe in ein CIE Diagramm einzuzeichnen müssen die xy Koordinaten gegen den Uhrzeigersinn sortiert werden. Dies wird bewerkstelligt, indem
 der Mittelpunkt des Polygons gesucht wird.
-\begin{align}\label{Equ:6}
+\begin{align}\label{Equ:11}
     Center_x = \frac{\sum_{i}Vertex_{ix}}{i}\\
     Center_y = \frac{\sum_{i}Vertex_{iy}}{i}
 \end{align}
 Anschließend werden die Winkel der einzelnen Koordinaten zu dem gefundenen Mittelpunkt errechnet werden.
-\begin{align}\label{Equ:7}
+\begin{align}\label{Equ:12}
     \phi = arctan2(Vertex_x - Center_x, Vertex_y - Center_y)*\frac{180}{\pi}+360 %https://de.wikipedia.org/wiki/Arctan2
 \end{align}
 Die Koordinaten werden nach aufsteigendem Winkel sortiert. Somit sind die Koordinaten gegen den Uhrzeigersinn angeordnet. Final wird in der Applikation dynamisch
@@ -1291,6 +1359,9 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
     \bibitem[Lichtquellen, 2015]{lichtquellen} Dohlus, Rainer: "'Lichtquellen"' De Gruyter, Berlin, 2015, 
     \bibitem[Farbwahrnehmung FHT Esslingen, 2019]{fhtEsslignen}"'Farbwahrnehmung"', \url{http://www.it.fht-esslingen.de/~asbeck/gdial/farbe/sehen2.html}. Visited on: 11.08.2019
     \bibitem[Wisotop Homepage,2019]{wisotopRGB} \url{https://wisotop.de/Farbmodelle-RGB-CMYK-HSS-HSL.php}. Visited on: 27.09.2019
+    \bibitem[RGB-Farbraum - Wikipedia,2019]{wikipediaRGB} \url{https://de.wikipedia.org/wiki/RGB-Farbraum}. Visited on: 29.09.2019
+    \bibitem[Hermann Graßmann - Wikipedia,2019]{wikipediaGrassmann} \url{https://de.wikipedia.org/wiki/Hermann\_Gra%C3%9Fmann}. Visited on: 29.09.2019
+    \bibitem[Graßmannsche Gesetze - Wikipedia,2019]{wikipediaGrassmannGestze} \url{https://de.wikipedia.org/wiki/Gra%C3%9Fmannsche_Gesetze}. Visited on: 29.09.2019
     \bibitem[Leuchtdiode Wikipedia, 2019]{wikiLed}"'Leuchtdiode - Wikipedia"', \url{https://de.wikipedia.org/wiki/Leuchtdiode}. Visited on: 21.08.2019
     \bibitem[Showlicht von Scribble zum fertigen Desgin, 2014]{showlicht}"'Showlicht von Scribble zum fertigen Desgin"', 01.09.2019
     \bibitem[Philips PAR64 Leuchtmittel 1000W | Thomann, 2019]{convpar}"'Philips PAR64 Leuchtmittel 1000W | Thomann"', \url{https://www.thomann.de/de/philips_par64_1000_watt_mfl_cp62_exe.htm}. Visited on: 02.09.2019
