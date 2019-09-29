@@ -26,32 +26,97 @@
 \date{31. Oktober 2019} %%\today
 \begin{document}
 
-\begin{center}
-    \center\includegraphics[width=0.4\linewidth]{images/logo.png}
-    \paragraph{}
-    \huge MASTER THESIS
-\end{center}
+\par\vspace{-1cm}
+\begin{flushright}
+    \includegraphics[width=0.4\linewidth]{images/logo.png}
+\end{flushright}
 \vspace{1cm}\noindent
 \begin{center}
+    \huge MASTER THESIS\\
     \huge \color{red} Vorabversion 0.95\\
     \large Stand: \today
 \end{center}
 \vspace{1cm}\noindent
 {\large Title:  Abgleich von LED Lichtquellen auf Basis einer komplexen Lichtsteuerung}
 \par\vspace{3cm}\noindent
-Submitted by:               Oliver Becker\\
+Submitted by: \hspace{2cm}             Oliver Becker\\
 \\
-Matriculation number:       725810\\
+Matriculation number:  \hspace{.6cm}   725810\\
 \par\vspace{2cm}\noindent
-1st Academic Supervisor:    Prof. Dr. Herbert Krauß\\
+1st Academic Supervisor: \hspace{.2cm} Prof. Dr. Herbert Krauß\\
 \\
-2nd Academic Supervisor:    Prof. Dr. Shun-Ping Chen\\
+2nd Academic Supervisor: \hspace{.05cm} Prof. Dr. Shun-Ping Chen\\
 \\
-Industrial Supervisor:      Dipl.-Ing. Hartmut Cordes\\
+Industrial Supervisor:   \hspace{.75cm} Dipl.-Ing. Hartmut Cordes\\
 \par\vspace{2cm}\noindent
-Completion Date:            31.10.2019
+Completion Date: \hspace{1.5cm}         31.10.2019
 \clearpage
 
+%%%%%%%%%%%%%%%%%%%%%%%%%% Template Content %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent
+Student:\\
+\\
+Oliver \hspace{6cm} Becker\\
+\\
+Date of Birth: 21.07.1992 \hspace{2.8cm} Matr-No.:725810
+\par\noindent\rule{\textwidth}{0.4pt}
+1st Academic Supervisor: Prof. Dr. Herbert Krauß\\
+\\
+2st Academic Supervisor: Prof. Dr. Shun-Ping Chen
+\par\noindent\rule{\textwidth}{0.4pt}
+Title: Abgleich von LED Lichtquellen auf Basis einer komplexen Lichtsteuerung\\
+%%%%%%%%%%%%%%%%%%%%%%%%%% Abstrakt %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\par\vspace{-0.8cm}\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+to be filled\\
+to be filled\\
+to be filled\\
+to be filled\\
+to be filled\\
+to be filled\\
+to be filled\\
+to be filled\\
+to be filled\\
+to be filled\\
+\par\noindent\rule{\textwidth}{0.4pt}
+In partial fulfillment of the requirements of the University of Applied Sciences Hochschule
+Darmstadt (h\_da) for the degree Master of Science in Electrical Engineering carried out in
+collaboration with Industrial Enterprise\\
+\\
+Company:\hspace{0.45cm} MA Lighting Technology GmbH\\
+Address:\hspace{0.7cm} Dachdeckerstraße 13\\
+\hspace*{2.15cm} 97297 Waldbüttelbrunn\\
+\\
+This Master Thesis is subject to a non-disclosure agreement between the University of Applied 
+Sciences Hochschule Darmstadt (h\_da) and the industrial partner.\\
+\par\noindent\rule{\textwidth}{0.4pt}
+(Signature)\\
+
+1st Academic Supervisor:..............................................................................
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Declaration %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent
+Student:\\
+\\
+Oliver \hspace{6cm} Becker\\
+\\
+1st Academic Supervisor: Prof. Dr. Herbert Krauß\\
+\\
+2st Academic Supervisor: Prof. Dr. Shun-Ping Chen
+\section*{Declaration}
+\addcontentsline{toc}{section}{Declaration}
+I hereby declare that this thesis is a presentation of my original research work and that no other sources were used other
+than what is cited.\\
+I furthermore declare that wherever contributions of others are involved, this contribution is indicated, clearly
+acknowledged and due reference is given to the author and source.\\
+I also certify that all content without reference or citation contained in this thesis is original work.\\
+I acknowledge that any misappropriation of the previous declarations can be considered a case of academic fraud.
+\par\vspace{2cm}\noindent
+Darmstadt, den 30.10.2019 \hspace*{0pt}\hfill Oliver Becker
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% tableofcontents %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \tableofcontents
 \clearpage
 
@@ -81,28 +146,6 @@ Windschutzscheibe und der Brille des Schauspielers zu erhalten.\\
 Alle diese aufgezählten Emitter haben zumeist alle unterschiedlichste chromatische Kennwerte 
 sofern diese überhaupt bekannt sind. Ein Abgleich dieser Quellen ist wünschenswert für ein 
 homogeneres Farbbild.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%% Erklärung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Erklärung}
-\addcontentsline{toc}{section}{Erklärung}
-Ich versichere hiermit, dass ich die vorliegende Arbeit selbständig verfasst und keine anderen
-als die im Literaturverzeichnis angegebenen Quellen benutzt habe.\\
-Alle Stellen, die wörtlich oder sinngemäß aus veröffentlichten oder noch nicht veröffentlichten
-Quellen entnommen sind, sind als solche kenntlich gemacht.\\
-Die Zeichnungen oder Abbildungen in dieser Arbeit sind von mir selbst erstellt worden oder mit
-einem entsprechenden Quellennachweis versehen.\\
-Diese Arbeit ist in gleicher oder ähnlicher Form noch bei keiner anderen Prüfungsbehörde
-eingereicht worden.\\
-\par\vspace{2cm}\noindent
-Darmstadt, den 30.10.2019 \hspace*{0pt}\hfill Oliver Becker
-\clearpage
-
-%%%%%%%%%%%%%%%%%%%%%%%%%% Abstrakt %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Abstrakt}
-\addcontentsline{toc}{section}{Abstrakt}
-
-\section*{Abstract}
-\addcontentsline{toc}{section}{Abstract}
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% MA Lighting Technology %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -893,7 +936,7 @@ umgewandelt. Dies ist möglich mit folgenden Gleichungen von Lindblooms Webauftr
 \end{align}
 mit sRGB Umrechnungsmatrix mit Weiß-Referenzpunkt D65 %// TODO: D65 irgendwo erklären
 \begin{align}\label{Equ:5}
-    M^{-1} = \left[ \begin{array}{rrr}
+    \mathbf M^{-1} = \left[ \begin{array}{rrr}
         3.2404542  & -1.5371385 & -0.4985314 \\
         -0.9692660 & 1.8760108  & 0.0415560  \\
         0.0556434  & -0.2040259 & 1.0572252  \\
