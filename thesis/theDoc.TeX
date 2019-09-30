@@ -33,7 +33,7 @@
 \vspace{1cm}\noindent
 \begin{center}
     \huge MASTER THESIS\\
-    \huge \color{red} Vorabversion 0.95\\
+    \huge \color{red} Vorabversion 0.96\\
     \large Stand: \today
 \end{center}
 \vspace{1cm}\noindent
@@ -540,24 +540,8 @@ in dieser Arbeit das Farbspektrum die Referenz für die weiteren Berechnungen in
     \caption{Darstellung des sichtbaren Farbspektrums \cite{fhtEsslignen}}
 \end{figure}
 \noindent
-\subsection{RGB}
-Der RGB baut auf dem Prinzip der trichormatischen Theorie. Diese Theorie wurde maßgeblich von Hermann von Helmholtz um 1890 entwickelt. Sie
-beschreibt drei Grundfarben: Rot, Grün und Blau. Helmholtz beobachtete, dass aus drei Farbvalenzen jede beliebige Valenz innerhalb des Gamut
-additiv gemsicht werden kann.\\
-Der RGB Farbraum beschreibt mit einem Zahlentripel eine Farbvalenz. Diese Zahlen beschreiben die Intensität von rotem (R), grünen (G) und
-blauem (B) Licht. Die Werte für R, G und B sind einheitenlos. Oft werden diese von 0 bis 1 definiert, aber weitere übliche Wertebereiche
-von 0 bis 100 Prozent und von 0 bis 255 (8 bit) für digitale Anwendungen werden genutzt. \cite{wikipediaRGB}\\
-Grafisch wird der RGB Farbraum in den meisten Publikationen als Würfel in einem kartesischen Koordinatensystem dargestellt. Dieser Würfel
-mit einer Kantenlänge von eins umschließt die in diesem Farbraum abbildbaren Farbvalenzen.
-\begin{figure}[H]
-    \includegraphics[width=\textwidth]{images/rgb_color_cube.png}
-    \caption{RGB Farbwürfel \cite{wisotopRGB}}
-\end{figure}
-\noindent
-Bei den Koordinaten (0,0,0) ist Schwarz definiert. Bei (1,1,1) ist der Weißpunkt definiert. Die grau Linie befindet sich auf der diagonalen
-von Schwarz zum Weißpunkt. Ein Grauton besteht daher immer aus einem Zahlentripel eines Wertes. \cite{wisotopRGB}
-\subsubsection{Graßmasche Gesetze}
-"'Hermann Günther Graßmann  war ein deutscher Mathematiker, Physiker und Sprachwissenschaftler. Er gilt als eigentlicher Begründer der
+\subsection{Graßmasche Gesetze}
+"'Hermann Günther Graßmann war ein deutscher Mathematiker, Physiker und Sprachwissenschaftler. Er gilt als eigentlicher Begründer der
 Vektorrechnung."'\\\cite{wikipediaGrassmann}\\
 "'Die von Graßmann aufgestellten Gesetze bezogen sich weitestgehend auf die additive Farbmischung, gelten aber auch grundlegend bei der
 subtraktiven Farbmischung. ... Ganz allgemein erlaubt diese Lehre von den Maßbezeichnungen der Farben eine Beschreibung der Farbvalenz
@@ -622,15 +606,39 @@ Viertes graßmannsches Gesetz:\\
     T(A+B) \equiv T(A) + T(B)
 \end{align}
 Laut David L. MacAdam gilt dieses Gesetz nur für den Spezialfall einer idealisierten, auf einen Punkt reduzierten Quelle, nicht aber für
-ausgedehntere Farbflächen. Graßmann hatte sich nur mit dem oben genannten Spezialfall befasst."'\\
-\cite{wikipediaGrassmannGestze}\\
+ausgedehntere Farbflächen. Graßmann hatte sich nur mit dem oben genannten Spezialfall befasst."' \cite{wikipediaGrassmannGestze}\\
 \\
 Die hier aufgeführen Gesetze von Graßmann bilden die Grundlage für alle Berechnungen von Koordinaten innerhalb eines Farbraumes. Alle folgenden
 Berechnungen dieser Arbeit stützen sich auf diese Gestze. "'Die von Graßmann aufgestellten Gesetze wurden lange Jahre in der wissenschaftlichen
 Welt so gut wie nicht anerkannt – heute jedoch bilden sie eine weitestgehend immer noch gültige Grundlage aller modernen Farblehren und -räume."'\\
 \cite{wikipediaGrassmannGestze}
+\subsection{RGB}
+Der RGB baut auf dem Prinzip der trichormatischen Theorie. Diese Theorie wurde maßgeblich von Hermann von Helmholtz um 1890 entwickelt. Sie
+beschreibt drei Grundfarben: Rot, Grün und Blau. Helmholtz beobachtete, dass aus drei Farbvalenzen jede beliebige Valenz innerhalb des Gamut
+additiv gemsicht werden kann.Diese Theorie wurde von Hermann Graßmann weiterentwickelt.\\
+Der RGB Farbraum beschreibt mit einem Zahlentripel eine Farbvalenz. Diese Zahlen beschreiben die Intensität von rotem (R), grünen (G) und
+blauem (B) Licht. Die Werte für R, G und B sind einheitenlos. Oft werden diese von 0 bis 1 definiert, aber weitere übliche Wertebereiche
+von 0 bis 100 Prozent und von 0 bis 255 (8 bit) für digitale Anwendungen werden genutzt. \cite{wikipediaRGB}\\
+Grafisch wird der RGB Farbraum in den meisten Publikationen als Würfel in einem kartesischen Koordinatensystem dargestellt. Dieser Würfel
+mit einer Kantenlänge von eins umschließt die in diesem Farbraum abbildbaren Farbvalenzen.
+\begin{figure}[H]
+    \includegraphics[width=\textwidth]{images/rgb_color_cube.png}
+    \caption{RGB Farbwürfel \cite{wisotopRGB}}
+\end{figure}
+\noindent
+Bei den Koordinaten (0,0,0) ist Schwarz definiert. Bei (1,1,1) ist der Weißpunkt definiert. Die grau Linie befindet sich auf der diagonalen
+von Schwarz zum Weißpunkt. Ein Grauton besteht daher immer aus einem Zahlentripel eines Wertes. \cite{wisotopRGB}\\
+Der RGB Farbraum wird im Allgemeinen bei selbst emittierenden Körpern, welche der additiven Farbmischung unterliegen, angewendet. Heutzutage
+wird die RGB Definition noch zur Bildwiedergabe in Monitoren oder zur Farbdefinition in HTML Seiten verwendet.\\
+Jedoch bildet der RGB Farbraum nicht alle Farbvalenzen die für das menschliche Auge wahrnehmbar sind. Daher wurde im Jahr 1931 ein erster
+Normierungsversuch beschlossen, um ein "'weltweit einheitliches Darstellungssystem zu finden"'.\\\cite{wikipediaRGB}
 \subsection{CIE} \label{section_CIE}
 \subsubsection{CIE 1931}
+\begin{figure}[H]
+    \includegraphics[width=.5\textwidth]{images/cie1931.png}
+    \caption{CIE 1931 2D Farbraum}
+\end{figure}
+\noindent
 \subsubsection{CIE 1976}
 \clearpage
 
