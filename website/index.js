@@ -315,7 +315,7 @@ function XYZtoXY(X,Y,Z,noDisp)
     {
         var x = X/(X+Y+Z);
         var y = Y/(X+Y+Z);
-        var z = Z/(X+Y+Z);
+        var Y = Y;
 
         if(currXYZDisplay && !noDisp)
         {
@@ -323,7 +323,7 @@ function XYZtoXY(X,Y,Z,noDisp)
             setxy(x,y);
         }
     }
-    return [x,y,z]
+    return [x,y,Y];
 }
 
 function XYZtoRGB(tX,tY,tZ)
