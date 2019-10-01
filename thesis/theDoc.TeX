@@ -691,13 +691,15 @@ definieren. In dem ebenfalls zwei dimensionalen Koordinatensystem wird sich mit 
     \caption{CIE 1976 2D Farbraum \cite{wikipedia1976}}
 \end{figure}
 \noindent
+"'Der CIE LUV-Farbraum ist eine Ableitung des Standard CIE XYZ-Farbraums, in dem der Abstand der Farben dem menschlichen Farbsehen besser entgegenkommt."' \cite{wisotoLuv}
 Mit den folgenden Formeln lassen sich die u' und v' Koordinaten errechnen.
 \begin{align}\label{Equ:9}
     u' = \frac{4X}{X+15Y+3Z}\\
     v' = \frac{9Y}{X+15Y+3Z}
 \end{align}
 \cite{lindbloom}\\
-Um mehrere Farben zu vergleichen muss die u'v' Koordinate auf ein Referenzweiß ($X_r$,$Y_r$,$Z_r$) bezogen werden. So ergeben sich absolute uv Koordinaten.
+Um mehrere Farben zu vergleichen muss die u'v' Koordinate auf ein Referenzweiß ($X_r$,$Y_r$,$Z_r$) bezogen werden. So ergeben sich absolute uv Koordinaten. Die Luminanz
+L ist ein Faktor für die Bestimmung der Sättigung $s_{uv}$ der Farbvalenz. \cite{wikipedia1976}
 \begin{align}\label{Equ:10}
     &y_r = \frac{Y}{Y_r}\\
     &L = \left\{
@@ -719,9 +721,13 @@ Um mehrere Farben zu vergleichen muss die u'v' Koordinate auf ein Referenzweiß 
             {903.3} & \text{Actual CIE standard} \\
             {24389 / 27} & \text{Intent of the CIE standard}
         \end{array}
-        \right.
+        \right.\\
+    &s_{uv} = \frac{C^*_{uv}}{L}\\
+    &C^*_{uv} = \sqrt{(u^2*v^2)}\\
 \end{align}
-\cite{lindbloom}
+\cite{lindbloom}, \cite{wikipedia1976}\\
+\\
+Wenn die uv Koordinaten auf 0 gesetzt werden, also auf dem Referenzweißpunkt liegen variiert L die Grauskala der Valenz. \cite{wisotoLuv}
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% LED %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1454,6 +1460,7 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
     \bibitem[CIExy1931 - Wikipedia,2019]{wikipedia1931Image} \url{https://de.wikipedia.org/wiki/Datei:CIExy1931.svg}. Visited on: 30.09.2019
     \bibitem[CIE - Wikipedia,2019]{wikipediaCIE} \url{https://de.wikipedia.org/wiki/CIE-Normvalenzsystem}. Visited on: 30.09.2019
     \bibitem[CIELUV - Wikipedia,2019]{wikipedia1976} \url{https://de.wikipedia.org/wiki/CIELUV-Farbraumsystem}. Visited on: 30.09.2019
+    \bibitem[CIE Luv - Wisotop,2019]{wisotoLuv} \url{https://wisotop.de/CIE-luv.php}. Visited on: 01.10.2019
     \bibitem[Leuchtdiode Wikipedia, 2019]{wikiLed}"'Leuchtdiode - Wikipedia"', \url{https://de.wikipedia.org/wiki/Leuchtdiode}. Visited on: 21.08.2019
     \bibitem[Showlicht von Scribble zum fertigen Desgin, 2014]{showlicht}"'Showlicht von Scribble zum fertigen Desgin"', 01.09.2019
     \bibitem[Philips PAR64 Leuchtmittel 1000W | Thomann, 2019]{convpar}"'Philips PAR64 Leuchtmittel 1000W | Thomann"', \url{https://www.thomann.de/de/philips_par64_1000_watt_mfl_cp62_exe.htm}. Visited on: 02.09.2019
