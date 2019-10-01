@@ -633,7 +633,36 @@ wird die RGB Definition noch zur Bildwiedergabe in Monitoren oder zur Farbdefini
 Jedoch bildet der RGB Farbraum nicht alle Farbvalenzen die für das menschliche Auge wahrnehmbar sind. Daher wurde im Jahr 1931 ein erster
 Normierungsversuch beschlossen, um ein "'weltweit einheitliches Darstellungssystem zu finden"'.\\\cite{wikipediaRGB}
 \subsection{CIE} \label{section_CIE}
+"'Das CIE-Normvalenzsystem oder \ac{cie}-Normfarbsystem wurde von der Internationalen Beleuchtungskommission (\ac{cie} – Commission internationale de l’éclairage)
+definiert, um eine Relation zwischen der menschlichen Farbwahrnehmung (Farbe) und den physikalischen Ursachen des Farbreizes (Farbvalenz) herzustellen.
+Es erfasst die Gesamtheit wahrnehmbarer Farben. Unter Nutzung der Farbraumkoordinaten ist auch die Bezeichnung Yxy-Farbraum oder CIE-Yxy gebräuchlich"'
+\cite{wikipediaCIE}\\
+Der \ac{cie} Farbraum ersetzt die bekannten drei "'realen"' Grundgrößen Rot, Grün und Blau durch "'imaginäre'" Grundgrößen X, Y und Z. Hier steht aber auch
+X für den rot Anteil der Farbvalenz, sowie Y für die grüne und Z für die blaue Valenz. Doch ist dies nicht wie in RGB linear. Die Grundgrößen werden mit
+sogenannten Empfindlichkeitskurven beschrieben.
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.5\textwidth]{images/cie_tristimul.png}
+    \end{center}
+    \caption{CIE XYZ genormte Empfindlichkeitskurven \cite{wikipediaCIE}}
+\end{figure}
+\noindent
+Hier sind die Kurven, welche auch für das Tristimulus Verfahren benötigt werden grafisch dargestellt. Bei dem Tristimulus Verfahren werden die spektrale Energie
+einer Wellenlänge mit dem korrespondierenden Wert für jeweils X, Y und Z multipliziert um die CIE XYZ Koordinate zu erhalten.\\
+Die Empfindlichkeitskurven ahmen die spektrale Empfindlichkeit des menschlichen Auges nach. X kann auch durch L ersetzt werden für die langwellig sensitiven Zapfen
+des Auges. Gleiches gilt für Y mit M und Z mit S. Somit kann man diese Darstellung als LMS-Farbraum bezeichnen.\\
+\subsubsection{Standardbeleuchtung} \label{whiteRef}
+"'Das CIE-Normvalenzsystem wurde ursprünglich in Hinsicht auf Beleuchtungsfragen entwickelt. Das System erlaubt prinzipiell jede denkbare Kombination an X-, Y-
+und Z-Werten. Um eine normierte Übersicht der Farben zu erreichen wurden neutralweiße Normlichtfarben definiert. Aus Gründen der Farbwahrnehmung befinden sich diese
+auf der Black-Body-Kurve, da dies mit einer Farbtemperatur verbundene Beleuchtungen sind."' \cite{wikipediaCIE}\\
+Das Bedeutet, dass von dem roten Bereich zum der CIE Diagramme eine Kurve zu finden ist, welche die verschiedenen Farbtemperaturen repräsentieren. Für die Umrechnung
+in andere Farbräume, wie zum Beispiel RGB muss ein Referenzweißpunkt definiert werden wo sich die Weißpunkte der beiden Farbräume decken. Je nach Weißpunkt gibt es 
+für die gleiche Umrechnung verschiedene Umrechnungsmatrizen.\\
+In dieser Arbeit wird der Weißpunkt D65 als Referenzpunkt genutzt. "'Das Spektrum hat eine ähnlichste Farbtemperatur von 6504 Kelvin. Genutzt wird dieses Normlicht als Weißpunkt für sRGB"' \cite{wikipediaCIE}
 \subsubsection{CIE 1931}
+Der 1931 definierte \ac{cie} Farbraum, auch Umgangsprachlich als "'Schuhsohle"' bezeichnet wird in der Regel zwei Dimensional dargestellt. In dem Koordinatensystem wird
+sich mit x auf der x-Achse und y auf der y-Achse bewegt. Zusätzlich wird eine CIE 1931 Koordinate noch mit Y (groß Y) für die Helligkeit der Farbvalenz beschrieben.
+Hier wird in der Regel eine Konstante angenommen mit der Definition des Weißpunktes (siehe \ref{whiteRef}).
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.7\textwidth]{images/cie_1931.png}
@@ -641,7 +670,20 @@ Normierungsversuch beschlossen, um ein "'weltweit einheitliches Darstellungssyst
     \caption{CIE 1931 2D Farbraum \cite{wikipedia1931Image}}
 \end{figure}
 \noindent
+Die xy Koordinaten sind 1 normiert. Außerdem gilt:
+\begin{align}
+    x + y <= 1
+\end{align}
+Mit den folgenden Formeln lassen sich die x und y Koordinaten errechnen. Y bleibt als Luminanzfaktor erhalten.
+\begin{align}\label{Equ:7}
+    x = \frac{X}{X+Y+Z}\\
+    y = \frac{Y}{X+Y+Z}\\
+    Y = Y \label{Equ:8}
+\end{align}
+\cite{lindbloom}
 \subsubsection{CIE 1976}
+Auch der 1976 definierte Farbraum basiert auf den X,Y und Z Werten. Der Farbraum wurde eingeführt um einen Farbraum mit gleichmäßigeren verteilteren Farbflächen zu
+definieren. In dem ebenfalls zwei dimensionalen Koordinatensystem wird sich mit u auf der x-Achse und v auf der y-Achse bewegt.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.7\textwidth]{images/cie_1976.png}
@@ -649,6 +691,37 @@ Normierungsversuch beschlossen, um ein "'weltweit einheitliches Darstellungssyst
     \caption{CIE 1976 2D Farbraum \cite{wikipedia1976}}
 \end{figure}
 \noindent
+Mit den folgenden Formeln lassen sich die u' und v' Koordinaten errechnen.
+\begin{align}\label{Equ:9}
+    u' = \frac{4X}{X+15Y+3Z}\\
+    v' = \frac{9Y}{X+15Y+3Z}
+\end{align}
+\cite{lindbloom}\\
+Um mehrere Farben zu vergleichen muss die u'v' Koordinate auf ein Referenzweiß ($X_r$,$Y_r$,$Z_r$) bezogen werden. So ergeben sich absolute uv Koordinaten.
+\begin{align}\label{Equ:10}
+    &y_r = \frac{Y}{Y_r}\\
+    &L = \left\{
+        \begin{array}{ll}
+            116 \sqrt[3]{y_r} - 16 & \text{if } y_r > \epsilon \\
+            \kappa y_r & \text{otherwise}
+        \end{array}
+        \right.\\
+    &u = 13 L (u' - u_r')\\
+    &v = 13 L (v' - v_r')\\
+    &\epsilon = \left\{
+        \begin{array}{ll}
+            {0.008856} & \text{Actual CIE standard} \\
+            {216 / 24389} & \text{Intent of the CIE standard}
+        \end{array}
+        \right.\\
+    &\kappa = \left\{
+        \begin{array}{ll}
+            {903.3} & \text{Actual CIE standard} \\
+            {24389 / 27} & \text{Intent of the CIE standard}
+        \end{array}
+        \right.
+\end{align}
+\cite{lindbloom}
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% LED %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -968,7 +1041,7 @@ oberen linken Ecke angezeigt. Unter den normierten Messwerten ist zusätzlich ei
 Mit diesen Werten wurde begonnen, eine XYZ \ac{cie} Koordinate zu errechnen. Hier wurden die Formeln von Bruce Lindbloom genutzt. Lindblooms Webauftritt
 dient bereits in vielen Büchern und anderen Publikationen als Referenz für Themen wie Farbräume oder Umrechnung zwischen Farbräumen.\\
 Zur Umrechnung eines diskreten Farbspektrums zu einer \ac{cie} XYZ Koordinate sind folgende Formeln gegeben \cite{lindbloom}:
-\begin{align}\label{Equ:7}
+\begin{align}\label{Equ:11}
     X = \sum_{i}x_i*P_i\Delta\lambda\\
     Y = \sum_{i}y_i*P_i\Delta\lambda\\
     Z = \sum_{i}z_i*P_i\Delta\lambda
@@ -988,12 +1061,7 @@ Die hier genutzten Tristimuluswerte \cite{wisotop}:
 \end{table}
 \noindent
 Aus diesen Werten und den mit dem Sensor erfassten Spektralwerten konnten nun die \ac{cie} XYZ Werte errechnet werden. Um nun den grafischen Punkt auf
-einem \ac{cie} 1931 Diagramm zu erhalten, müssen die XYZ in xyz Koordinaten umgerechnet werden. Dies ist mit den folgenden Formeln möglich \cite{lindbloom}:
-\begin{align}\label{Equ:8}
-    x = \frac{X}{X+Y+Z}\\
-    y = \frac{Y}{X+Y+Z}\\
-    z = Y
-\end{align}
+einem \ac{cie} 1931 Diagramm zu erhalten, müssen die XYZ in xyz Koordinaten umgerechnet werden. Dies ist mit den Formeln \ref{Equ:8} bis \ref{Equ:10} möglich.
 Mit diesen Werten konnte nun der Punkt in das \ac{cie} 1931 Diagramm in der Applikation nach jeder Messung, also immer nach 250 Millisekunden eingezeichnet werden.
 \begin{figure}[H]
     \begin{center}
@@ -1011,7 +1079,7 @@ Hier folgen Notizen:\\
 \\
 Zusätzlich zur Darstellung im \ac{cie} 1931 Farbraum wurde zur besseren Einordnung und zur Anzeige in der Applikation die XYZ Werte in RGB Werte
 umgewandelt. Dies ist möglich mit folgenden Gleichungen von Lindblooms Webauftritt \cite{lindbloom}:
-\begin{align}\label{Equ:9}
+\begin{align}\label{Equ:12}
     \left[ \begin{array}{r}
         r \\
         g \\
@@ -1023,8 +1091,8 @@ umgewandelt. Dies ist möglich mit folgenden Gleichungen von Lindblooms Webauftr
         Z \\
     \end{array}\right]
 \end{align}
-mit sRGB Umrechnungsmatrix mit Weiß-Referenzpunkt D65 %// TODO: D65 irgendwo erklären
-\begin{align}\label{Equ:10}
+mit sRGB Umrechnungsmatrix mit Weiß-Referenzpunkt D65 (siehe \ref{whiteRef})
+\begin{align}\label{Equ:13}
     \mathbf M^{-1} = \left[ \begin{array}{rrr}
         3.2404542  & -1.5371385 & -0.4985314 \\
         -0.9692660 & 1.8760108  & 0.0415560  \\
@@ -1135,12 +1203,12 @@ dreieckiges Polygon als Gamut auf. Ein vierter weißer Emitter liegt innerhalb d
 bereits aufgespannten Polygons wird dies entsprechend erweitert.\\
 Um einen Gamut einer Lampe in ein CIE Diagramm einzuzeichnen müssen die xy Koordinaten gegen den Uhrzeigersinn sortiert werden. Dies wird bewerkstelligt, indem
 der Mittelpunkt des Polygons gesucht wird.
-\begin{align}\label{Equ:11}
+\begin{align}\label{Equ:14}
     Center_x = \frac{\sum_{i}Vertex_{ix}}{i}\\
     Center_y = \frac{\sum_{i}Vertex_{iy}}{i}
 \end{align}
 Anschließend werden die Winkel der einzelnen Koordinaten zu dem gefundenen Mittelpunkt errechnet werden.
-\begin{align}\label{Equ:12}
+\begin{align}\label{Equ:15}
     \phi = arctan2(Vertex_x - Center_x, Vertex_y - Center_y)*\frac{180}{\pi}+360 %https://de.wikipedia.org/wiki/Arctan2
 \end{align}
 Die Koordinaten werden nach aufsteigendem Winkel sortiert. Somit sind die Koordinaten gegen den Uhrzeigersinn angeordnet. Final wird in der Applikation dynamisch
@@ -1163,12 +1231,12 @@ Liegt der erste der beiden Vertices außerhalb der Flächenseite wird der, auf d
 Gamutvertex Liste hinzugefügt (siehe Bild \ref{fig:sutherland_hodgman}).
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{.49\textwidth}
+    \begin{subfigure}[b]{.39\textwidth}
         \includegraphics[width=\textwidth]{images/sutherland_hodgman_example.png}
         \caption{Ausgangs Situation}
     \end{subfigure}
     \hfill 
-    \begin{subfigure}[b]{.49\textwidth}
+    \begin{subfigure}[b]{.39\textwidth}
         \includegraphics[width=\textwidth]{images/sutherland_hodgman_example_solution.png}
         \caption{Errechnete Vertices}
     \end{subfigure}
@@ -1182,7 +1250,7 @@ sind. Der hier entstehende Gamut wird nun in dem CIE 1931 Diagramm weiß eingeze
 \ref{fig:combinedGamut}).
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.7\textwidth]{images/combined_gamut_lightCan_lightStick.png}
+        \includegraphics[width=.5\textwidth]{images/combined_gamut_lightCan_lightStick.png}
     \end{center}
     \caption{Kombinierter Gamut einer LightCan und eines ApeSticks}\label{fig:combinedGamut}
 \end{figure}
@@ -1384,6 +1452,7 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
     \bibitem[Hermann Graßmann - Wikipedia,2019]{wikipediaGrassmann} \url{https://de.wikipedia.org/wiki/Hermann\_Gra%C3%9Fmann}. Visited on: 29.09.2019
     \bibitem[Graßmannsche Gesetze - Wikipedia,2019]{wikipediaGrassmannGestze} \url{https://de.wikipedia.org/wiki/Gra%C3%9Fmannsche_Gesetze}. Visited on: 29.09.2019
     \bibitem[CIExy1931 - Wikipedia,2019]{wikipedia1931Image} \url{https://de.wikipedia.org/wiki/Datei:CIExy1931.svg}. Visited on: 30.09.2019
+    \bibitem[CIE - Wikipedia,2019]{wikipediaCIE} \url{https://de.wikipedia.org/wiki/CIE-Normvalenzsystem}. Visited on: 30.09.2019
     \bibitem[CIELUV - Wikipedia,2019]{wikipedia1976} \url{https://de.wikipedia.org/wiki/CIELUV-Farbraumsystem}. Visited on: 30.09.2019
     \bibitem[Leuchtdiode Wikipedia, 2019]{wikiLed}"'Leuchtdiode - Wikipedia"', \url{https://de.wikipedia.org/wiki/Leuchtdiode}. Visited on: 21.08.2019
     \bibitem[Showlicht von Scribble zum fertigen Desgin, 2014]{showlicht}"'Showlicht von Scribble zum fertigen Desgin"', 01.09.2019
