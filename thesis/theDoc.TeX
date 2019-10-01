@@ -1377,7 +1377,17 @@ Hier folgen Notizen:\\
 Anpassung der Fader Werte anhand von Kalibrierungsdaten und Anpassen der auszugebenden DMX Werte\\
  - Vorgehensweise\\
  - Mathematik\\
- - Verwendeter Algorithmus}
+ - Verwendeter Algorithmus}\\
+\\
+Mit den in den realisierten Funktionen aus den vorhergehenden Kapiteln kann nun ein automatisierter Abgleich zweier LED Lichtquellen vorbereitet werden. Hier ergeben aufgrund
+der Ergebnisse der bisherigen Messungen folgende Fragen:\\
+\begin{addmargin}[2em]{0em}
+    1. Wie kann eine Farbton der außerhalb des kombinierten Gamut mit möglichst geringe abweichung der Farbvalenz in den Bereich des kombinierten Gamut verschoben werden?\\
+    2. Wie kann eine Anpassung der Farbvalenz der anderen Lichtquelle auf die erste realisiert werden?\\
+    3. Wie kann dies grafisch in einem Programm für den Benutzer realisiert werden?\\
+\end{addmargin}
+Diese Punkte werden nun nach einander erörtert. Die Ausgangssituation ist, dass ein Benutzer in der Applikation zwei vermessene Lampen selektiert. Die Applikation berechnet
+den kombinierten Gamut der beiden Lampen.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Auswertung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
