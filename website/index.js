@@ -1153,10 +1153,15 @@ function calcColorMix(event)
             var e1 = xyToRGB(mixTriangle.points[0].x,mixTriangle.points[0].y);
             var e2 = xyToRGB(mixTriangle.points[1].x,mixTriangle.points[1].y);
             var e3 = xyToRGB(mixTriangle.points[2].x,mixTriangle.points[2].y);
-            var emitterMatrix = [
+            /*var emitterMatrix = [
                 [e1.r,e1.g,e1.b],
                 [e2.r,e2.g,e2.b],
                 [e3.r,e3.g,e3.b]
+            ];*/
+            var emitterMatrix = [
+                [e1.r,e2.r,e3.r],
+                [e1.g,e2.g,e3.g],
+                [e1.b,e2.b,e3.b]
             ];
             var invertMatrix = matrix_invert(emitterMatrix);
             var mixPoint = xyToRGB(mixCoordinates.x,mixCoordinates.y);
