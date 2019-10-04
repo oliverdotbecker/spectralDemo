@@ -377,11 +377,11 @@ function xyToRGB(x,y)
     var b = (X*0.0193339 + Y*0.1191920 + Z*0.9503041);*/
 
     //CIE RGB - E
-    var r = (X*0.4887180 + Y*0.3106803 + Z*0.2006017);
-    var g = (X*0.1762044 + Y*0.8129847 + Z*0.0108109);
-    var b = (X*0.0000000 + Y*0.0102048 + Z*0.9897952);
+    var r = ( X * 2.3706743 - Y * 0.9000405 - Z * 0.4706338);
+    var g = (-X * 0.5138850 + Y * 1.4253036 + Z * 0.0885814);
+    var b = ( X * 0.0052982 - Y * 0.0146949 + Z * 1.0093968);
 
-    var max = Math.max(r,Math.max(g,b));
+    /*var max = Math.max(r,Math.max(g,b));
     r /= max;
     g /= max;
     b /= max;
@@ -393,7 +393,7 @@ function xyToRGB(x,y)
 
     r = Math.round(r*255);
     g = Math.round(g*255);
-    b = Math.round(b*255);
+    b = Math.round(b*255);*/
 
     return {r:r,g:g,b:b};
 }
@@ -1168,11 +1168,6 @@ function calcColorMix(event)
             var e1 = xyToRGB(mixTriangle.points[0].x,mixTriangle.points[0].y);
             var e2 = xyToRGB(mixTriangle.points[1].x,mixTriangle.points[1].y);
             var e3 = xyToRGB(mixTriangle.points[2].x,mixTriangle.points[2].y);
-            /*var emitterMatrix = [
-                [e1.r,e1.g,e1.b],
-                [e2.r,e2.g,e2.b],
-                [e3.r,e3.g,e3.b]
-            ];*/
             var emitterMatrix = [
                 [e1.r,e2.r,e3.r],
                 [e1.g,e2.g,e3.g],
@@ -1182,9 +1177,9 @@ function calcColorMix(event)
             var mixPoint = xyToRGB(mixCoordinates.x,mixCoordinates.y);
 
             var resultIntensities = [
-                invertMatrix[0][0]*mixPoint.r + invertMatrix[0][1]*mixPoint.r + invertMatrix[0][2]*mixPoint.r,
-                invertMatrix[1][0]*mixPoint.g + invertMatrix[1][1]*mixPoint.g + invertMatrix[1][2]*mixPoint.g,
-                invertMatrix[2][0]*mixPoint.b + invertMatrix[2][1]*mixPoint.b + invertMatrix[2][2]*mixPoint.b
+                invertMatrix[0][0] * mixPoint.r + invertMatrix[0][1] * mixPoint.g + invertMatrix[0][2] * mixPoint.b,
+                invertMatrix[1][0] * mixPoint.r + invertMatrix[1][1] * mixPoint.g + invertMatrix[1][2] * mixPoint.b,
+                invertMatrix[2][0] * mixPoint.r + invertMatrix[2][1] * mixPoint.g + invertMatrix[2][2] * mixPoint.b
             ];
 
             //Apply dmx values
