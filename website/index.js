@@ -319,7 +319,7 @@ function XYZtoXY(X,Y,Z,noDisp)
 
         if(currXYZDisplay && !noDisp)
         {
-            currxyYDisplay.innerHTML = round(x,4)+" "+round(y,4)+" "+round(z,4);
+            currxyYDisplay.innerHTML = round(x,4)+" "+round(y,4)+" "+round(Y,4);
             setxy(x,y);
         }
     }
@@ -499,9 +499,24 @@ function updateSerialPorts(getPorts)
 function save()
 {
     var currXY = currxyYDisplay.innerHTML;
+    var currXYZ = currXYZDisplay.innerHTML;
+    var currRGB = currRGBDisplay.innerHTML;
     savedValues.push({
-        x:currXY.split(" ")[0],
-        y:currXY.split(" ")[1]
+        "xyY":{
+            x:currXY.split(" ")[0],
+            y:currXY.split(" ")[1],
+            Y:currXY.split(" ")[2],
+        },
+        "XYZ":{
+            X:currXYZ.split(" ")[0],
+            Y:currXYZ.split(" ")[1],
+            Z:currXYZ.split(" ")[2],
+        },
+        "RGB":{
+            X:currRGB.split(" ")[0],
+            Y:currRGB.split(" ")[1],
+            Z:currRGB.split(" ")[2],
+        }
     });
 }
 
@@ -815,9 +830,9 @@ function sendDMX(event)
             var address = currFixtureType.emitters[channel]+parseInt(currFixture.address)-2;
             if(referenceFixtureId != -1 && selectedFixtures[pI])
             {
-                if(patch[pI].calibratedChannels)
+                if(currFixture.calibratedChannels)
                 {
-                    dmxValues[address] = parseInt(parseInt(currFixture.calibratedChannels[channel])*255);
+                    dmxValues[address] = parseInt(parseFloat(currFixture.calibratedChannels[channel])*255);
                 }
             }
             else
