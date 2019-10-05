@@ -1098,7 +1098,7 @@ Der Applikation musste lediglich ein Sensor Auswahldialog hinzugefügt werden un
 berücksichtigt werden.\\
 \\
 {\color{red}
-Hier folgen Notizen:\\
+Hier folgen Notizen:\\ %// TODO : Finish 7261 stuff
 - Hier wurde festgestellt, dass der AS7261 folgende Vor-/Nachteile bei der Ermittlung der XYZ Werte hat}
 \subsection{Farbraum Umrechnungen}
 Um nun den grafischen Punkt auf einem \ac{cie} 1931 Diagramm zu erhalten, müssen die XYZ in xyY Koordinaten umgerechnet werden. Dies ist mit den
@@ -1112,7 +1112,7 @@ umgewandelt. Dies ist möglich mit folgenden Gleichungen von Lindblooms Webauftr
         g \\
         b \\
     \end{array}\right]
-    = [M]^{-1} \left[ \begin{array}{r}
+    = {\mathbf[M]^{-1}} \left[ \begin{array}{r}
         X \\
         Y \\
         Z \\
@@ -1126,7 +1126,7 @@ mit sRGB Umrechnungsmatrix mit Weiß-Referenzpunkt D65 (siehe \ref{whiteRef})
         0.0556434  & -0.2040259 & 1.0572252  \\
     \end{array}\right]
 \end{align}
-Für $M$ sind einige Definitionen gegeben. Diese gewählte Definition ist abhängig von dem RGB Farbraum, in den umgerechnet werden soll, sowie
+Für $\mathbf M^{-1}$ sind einige Definitionen gegeben. Diese gewählte Definition ist abhängig von dem RGB Farbraum, in den umgerechnet werden soll, sowie
 die Weißlicht-Bezugsquelle.
 \begin{figure}[H]
     \begin{center}
@@ -1255,15 +1255,15 @@ Vertex Daten sind hier die CIE 1931 xy Koordinaten. Wichtig ist, dass die Vertic
 Der Algorithmus spannt die Gerade zwischen zwei Vertices und prüft, auf welcher Seite der Geraden sich die bisherigen Gamut Vertices befinden. Wenn beide Vertices
 sich auf der gegen den Uhrzeigersinn linken Seite, der Gamutflächenseite, befinden, wird der zweite Vertex der Gamutvertex Liste hinzugefügt.\\
 Liegt der erste der beiden Vertices außerhalb der Flächenseite, wird der auf der Fläche liegende Vertex und der Schnittpunkt des Polygons und der Gamutflächenseite der
-Gamutvertex Liste hinzugefügt (siehe Bild \ref{fig:sutherland_hodgman}).
+Gamutvertex Liste hinzugefügt (siehe Bild \ref{fig:sutherland_hodgman}).\\
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[b]{.39\textwidth}
+    \begin{subfigure}[b]{.49\textwidth}
         \includegraphics[width=\textwidth]{images/sutherland_hodgman_example.png}
         \caption{Ausgangs Situation}
     \end{subfigure}
     \hfill 
-    \begin{subfigure}[b]{.39\textwidth}
+    \begin{subfigure}[b]{.49\textwidth}
         \includegraphics[width=\textwidth]{images/sutherland_hodgman_example_solution.png}
         \caption{Errechnete Vertices}
     \end{subfigure}
@@ -1277,7 +1277,7 @@ durchlaufen sind. Der hier entstehende Gamut wird nun in dem CIE 1931 Diagramm w
 eingezeichnet (siehe Bild \ref{fig:combinedGamut}).
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.5\textwidth]{images/combined_gamut_lightCan_lightStick.png}
+        \includegraphics[width=.75\textwidth]{images/combined_gamut_lightCan_lightStick.png}
     \end{center}
     \caption{Kombinierter Gamut einer LightCan und eines ApeSticks}\label{fig:combinedGamut}
 \end{figure}
