@@ -1475,10 +1475,16 @@ function pointIsInside(point, vs)
 Wenn der Punkt nicht innerhalb des kombinierten Gamuts ist, wird geprüft, ob sich der Referenzpunkt auf den Strecken zwischen den Vertices des kombinierten
 Gamuts liegt. Dies prüft die vorhergehende Routine nicht. Falls dies ebenfalls nicht der Fall ist muss der Punkt außerhalb des Gamuts liegen.\\
 In diesem Fall muss ein neuer Punkt auf dem Rand des Gamuts gefunden werden, welcher die geringste Abweichung zur Farbvalenz des Referenzpunktes hat. Dieser
-Punkt wird im Folgenden "'Mixpunkt"' genannt. %// TODO : Weiter schreiben
+Punkt wird im Folgenden "'Mixpunkt"' genannt.
 Es wird angenommen, dass die minimale Farbverschiebung durch das suchen des orthogonalen Bezugspunktes an dem kombinierten Gamut erreicht wird (siehe
-Bild ).
-\\%// TODO: Bild für Punkt außerhalb mit Mixpunkt
+Bild \ref{fig:refCombined}).
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/combined_gamut_with_mix_point_and_math.png}
+    \end{center}
+    \caption{Kombinierter Gamut mit Referenz- und Mixpunkt}\label{fig:refCombined}
+\end{figure}
+\noindent
 Dieser Bezugspunkt wird berechnet mit Hilfe das Ansatzes des Kreuzprodukts von der Strecke der Beiden Vertices (A und B) und zwischen dem Referenzpunkt (C)
 und dem Mixpunkt (D). Setzt man dieses Kreuzprodukt gleich null müssen diese im rechten Winkel zueinander liegen.
 \begin{align}\label{Equ:16}
@@ -1512,7 +1518,7 @@ function getSpPoint(A,B,C,limit)
 Diese Prozedur wird für alle Seiten des Polygons ausgeführt. Falls mehrere Punkte gefunden werden, wird der Punkt mit der kürzesten Vektor Distanz zum
 Referenzpunkt gewählt.\\
 \\
-Nun kann begonnen werden die \ac{dmx} Ausgabe für diesen Punkt für alle selektierten Lampen zu berechnen.
+Nun kann begonnen werden die \ac{dmx} Ausgabe für diesen Punkt für alle selektierten Lampen zu berechnen. %// TODO : Weiter schreiben
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Auswertung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
