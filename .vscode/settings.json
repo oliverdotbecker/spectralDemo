@@ -53,5 +53,26 @@
         "wapp",
         "weitreichendere",
         "wisotop"
+    ],
+    "cSpell.ignoreWords": [
+        "aboveskip",
+        "basicstyle",
+        "belowskip",
+        "breakatwhitespace",
+        "breaklines",
+        "captionpos",
+        "extendedchars",
+        "keywordstyle",
+        "morecomment",
+        "morestring",
+        "ndkeywords",
+        "ndkeywordstyle",
+        "numbersep",
+        "numberstyle",
+        "showspaces",
+        "showstringspaces",
+        "showtabs",
+        "stringstyle",
+        "tabsize"
     ]
 }
