@@ -932,11 +932,13 @@ im CSV Format für die weitere Auswertung auf eine SD Karte gesichert werden.
 \section{Sensorik}
 Es gibt einige Hersteller von entsprechenden Spektralsensoren für Licht und spektral benachbarte Bereiche wie Infrarot.
 Ein Hersteller, dessen Sensoren in dieser Arbeit vornehmlich genutzt wurden, ist die Firma AMS.\\
+AMS ist ein globales Unternehmen und einer der führenden Hersteller für Sensortechnik. AMS stellt hauptsächlich Sensoren für die Bereiche
+Optik, Bildverarbeitungund Schall her. Sensoren von AMS werden in Smartphones und Smarthome Produkten sowie in industrieller Automatisierung
+und medizinischen Geräten zu finden. \cite{ams}\\
 Zu Beginn wurde nach einer einfachen Evaluierungslösung für das Erfassen von spektralen Daten gesucht. Hier wurde das
 Sensorboard von der Firma Adafruit AS7262 genutzt. \cite{adafruit}\\
 Dieses Board nutzt einen AMS AS7262 Visible Spectral Light Sensor. Weiter stellt es Pin outs für \ac{i2c} und \ac{uart} bereit,
-sowie eine Status-\ac{led} und eine Referenz \ac{led} Weißlichtquelle zur Beleuchtung von nicht selbst emittierenden
-Gegenständen.
+sowie eine Status-\ac{led} und eine Referenz \ac{led} Weißlichtquelle zur Beleuchtung von nicht selbst emittierenden Gegenständen.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.48\textwidth]{images/AS7262_front.png}
@@ -950,14 +952,12 @@ Hier ist zu beachten, dass auf dem Adafruit Sensorboard die Lötbrücke für "'\
 Anpassung verbleibt der Chip im \ac{i2c} Modus.\\
 Das Sensorboard wurde mit einem "'FTDI Friend"', einem weiteren Produkt von Adafruit, mit dem Endgerät, einem Windows Computer, verbunden.
 Dies ist ein USB-Seriell-Transceiver. Dieser Chip von der Firma FTDI wandelt \ac{usb} zu RS232 Analogsignalen. Die Verbindung mit dem \ac{ic}
-\ac{uart} via RS232 hergestellt, mit einer Baud Rate von 115200.\\
-\\
+wird über \ac{uart} via RS232 hergestellt, mit einer Baud Rate von 115200.\\
 Die Kommunikation über \ac{uart} mit allen AMS Sensoren funktioniert mit AT-Kommandos, einer \ac{ascii} basierten Kommandosprache,
 welche für Modems in den 1980er Jahren entwickelt wurde.
-
 \subsection{AS7261}
-Das Sensorspektrum des 7261 ähnelt sehr der Zapfenverteilung im menschlichen Auge. Die in Bild \ref{fig:AS7261_spectrum} gezeigte
-Gewichtung der Sensoren ist angelehnt an die \ac{cie} 1931 Gewichtungskurven für das menschliche Auge. 
+Das Sensorspektrum des 7261 ähnelt sehr der Farbreizverarbeitung im menschlichen Auge. Die in Bild \ref{fig:AS7261_spectrum} gezeigte
+Gewichtung der Sensoren ist angelehnt an die \ac{cie} 1931 Gewichtungskurven für das menschliche Auge.
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
@@ -977,16 +977,14 @@ allerdings keine Verwendung.\\
 Die AT Schnittstelle stellt verschiedenste Informationen zur Verfügung. Zunächst kann mit dem Befehl "'ATDATA"' die Sensorwerte als
 16-Bit Integer (Ganzzahl) Werte von 0 bis 65535 ausgegeben.\\
 \\
-Weiter gibt es nicht (spektral) Sensor bezogene Eintellungen die über die \ac{uart} Schnittstelle abgefragt und gesetzt werden können.
-Als ein Beispiel kann die Temperatur in Celsius des \ac{ic}s mit "'ATTEMP"' abgefragt werden.\\
+Weiter gibt es nicht (spektral) Sensor bezogene Einstellungen die über die \ac{uart} Schnittstelle abgefragt und gesetzt werden können.
+Als ein Beispiel kann die Temperatur des Chips in Celsius des \ac{ic}s mit "'ATTEMP"' abgefragt werden.\\
 Mit "'ATLED0=100"' kann eine kleine grüne Status \ac{led} angeschaltet werden, um zu signalisieren, dass das Programm eine Verbindung mit 
 dem Chip herstellen konnte und die Kommunikation funktioniert.\\
 Zusätzlich kann mit den Befehlen "'ATLED1=0"' und "'ATLED1=100"' eine auf dem Evaluationsboard angebrachte weiße Referenz \ac{led} aus und
 an geschaltet werden, um nicht selbst emittierende Objekte zu vermessen.\\
 Die Schnittstelle stellt noch einige weitere Informationen zur Verfügung, wie die Chip Software-Version, einen Sensor Gain, Sensor Bank Modus
 und Integrationszeit.
-\clearpage
-
 \subsection{AS7262}
 Auch das Sensorspektrum des 7262 ähnelt sehr der Zapfenverteilung im menschlichen Auge. Dieser \ac{ic} hat insgesamt 6 einzelne Photodioden.
 Davon sind 4 im rot bis gelbgrünen Teil des Spektrums angesiedelt. Eine weitere Photodiode im grünen Spektralbereich und die letzte im blauen
@@ -1013,6 +1011,7 @@ Hier werden aus der \ac{uart} (AT) Schnittstelle mit dem Befehl "'ATCDATA"' die 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Messungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Messungen und Testapplikation}
 \subsection{Empfangen und Aufbereiten der Sensorwerte}
+\subsubsection{Erfassen der Messwerte mit dem AS7262}
 Zu Beginn wurde der Sensor AS7262 in Betrieb genommen, da dieser auf einem Evaluierungsboard verfügbar war.
 Zunächst wurden mit der Applikation "'Putty"' über die COM Schnittstelle einige Kommandos gesendet, um die
 \ac{uart} Schnittstelle zu testen. Dies ist erfolgreich gelungen. Es wurden erste spektrale Werte des
@@ -1079,9 +1078,7 @@ Die hier genutzten Tristimuluswerte \cite{wisotop}:
     \end{tabular*}
 \end{table}
 \noindent
-Aus diesen Werten und den mit dem Sensor erfassten Spektralwerten konnten nun die \ac{cie} XYZ Werte errechnet werden. Um nun den grafischen Punkt auf
-einem \ac{cie} 1931 Diagramm zu erhalten, müssen die XYZ in xyz Koordinaten umgerechnet werden. Dies ist mit den Formeln \ref{Equ:8} bis \ref{Equ:10} möglich.
-Mit diesen Werten konnte nun der Punkt in das \ac{cie} 1931 Diagramm in der Applikation nach jeder Messung, also immer nach 250 Millisekunden eingezeichnet werden.
+Aus diesen Werten und den mit dem Sensor erfassten Spektralwerten konnten nun die \ac{cie} XYZ Werte errechnet werden.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=\textwidth]{images/app_dummy_spectrum_with_xy.png}
@@ -1089,13 +1086,24 @@ Mit diesen Werten konnte nun der Punkt in das \ac{cie} 1931 Diagramm in der Appl
     \caption{Darstellung der Sensorwerte und CIE 1931 Diagramm}
 \end{figure}
 \noindent
+\subsubsection{Erfassen der Messwerte mit dem AS7261}
+Da der AS7261 nicht als Evaluierungskit von Adafruit verfügbar war, wurde ein zweites 7262 Sensorboard von Adafruit genutzt. Der 7261 Sensor
+wurde von AMS separat bestellt. Anschießend wurde der Chip auf dem Evaluierungs Board ausgetauscht.\\
+Für den Betrieb benötigt die AS72xx Chip Reihe einen Serial Flash Speicher mit einer Chip-Spezifischen Firmware. Diese wurde bei AMS angefragt
+und anschließend aud den Flash Speicher des Evaluierungsboard aufgespielt. AMS wies darauf hin, dass bei diesem Chip eine Kalibrierung entscheidend
+für den Einsatz im diesem Anwendungsfall ist. Doch sei die vorkonfigurierte Kalibrierung in der Firmaware für das messen von sichtbarem Licht
+optimiert und einsetzbar ist.\\
+Der AS7261 sendet auf des UART Kommando "'ATDATA"' XYZ Daten. Somit können in der Anwendung die bisher erläuterten Schritte übersprungen werden.
+Der Applikation musste lediglich ein Sensor Auswahldialog hinzugefügt werden und diese Einstellung an verschidenen Stellen im Programmablauf
+berücksichtigt werden.\\
+\\
 {\color{red}
 Hier folgen Notizen:\\
-- AS7261\\
-- Mit dem Sensor AS7261 konnten die bisherigen Ausführungen bis zur XYZ zu xyz Konvertierung übersprungen werden\\
-- Der Applikation wurde ein Sensorauswahldialog hinzugefügt\\
-- Hier wurde festgestellt, dass der AS7261 folgende Vor-/Nachteile bei der Ermittlung der XYZ Werte hat\\}
-\\
+- Hier wurde festgestellt, dass der AS7261 folgende Vor-/Nachteile bei der Ermittlung der XYZ Werte hat}
+\subsection{Farbraum Umrechnungen}
+Um nun den grafischen Punkt auf einem \ac{cie} 1931 Diagramm zu erhalten, müssen die XYZ in xyY Koordinaten umgerechnet werden. Dies ist mit den
+Formeln \ref{Equ:8} bis \ref{Equ:10} möglich. Mit diesen Werten konnte nun der Punkt in das \ac{cie} 1931 Diagramm in der Applikation nach jeder Messung,
+also immer nach 250 Millisekunden eingezeichnet werden.\\
 Zusätzlich zur Darstellung im \ac{cie} 1931 Farbraum wurde zur besseren Einordnung und zur Anzeige in der Applikation die XYZ Werte in RGB Werte
 umgewandelt. Dies ist möglich mit folgenden Gleichungen von Lindblooms Webauftritt \cite{lindbloom}:
 \begin{align}\label{Equ:12}
@@ -1493,6 +1501,7 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
     \bibitem[Robe Homepage,2019]{robe} \url{https://www.robe.cz/ledwash-300plus/}. Visited on: 02.09.2019
     \bibitem[Arri Homepage,2019]{arri} \url{https://www.arri.com/en/lighting/led/skypanel/s60-c}. Visited on: 02.09.2019
     \bibitem[UPRtek Homepage,2019]{uprtek} \url{https://www.uprtek.com/de/product/LED-Test-Measurement-Handspektrometer/MK350N-Basic-Handheld-Spectrometer.html}. Visited on: 09.09.2019
+    \bibitem[AMS Homepage,2019]{ams} \url{https://ams.com/about-ams}. Visited on: 04.10.2019
     \bibitem[Adafruit Learn, 2019]{adafruit}"'Overview | Adafruit AS7262 6-channel Visible Light Sensor | Adafruit Learning System"', \url{https://learn.adafruit.com/adafruit-as7262-6-channel-visible-light-sensor}. Visited on: 11.08.2019
     \bibitem[AS7261 Datenblatt, 2019]{datasheet61}"'AS7261 XYZ Chromatic White Color Sensor + NIR with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7261_DS000493_1-00.pdf/0e7d1f12-702e-d061-b07a-67b0b6316800}. Visited on: 11.08.2019
     \bibitem[AS7262 Datenblatt, 2019]{datasheet62}"'AS7262 6-Channel Visible Spectral ID Device with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7262_DS000486_2-00.pdf/0031f605-5629-e030-73b2-f365fd36a43b}. Visited on: 11.08.2019
