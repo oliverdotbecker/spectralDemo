@@ -1,6 +1,3 @@
-%% Erläuterungen zu den Befehlen erfolgen unter
-%% diesem Beispiel.
-
 \documentclass[11pt]{scrartcl}
 
 \usepackage[utf8]{inputenc}
@@ -23,7 +20,7 @@
 \usepackage{listings}
 \usepackage{color}
 
-\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{darkGreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 \definecolor{lightgray}{rgb}{.9,.9,.9}
@@ -32,12 +29,12 @@
     keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, for},
     keywordstyle=\color{blue}\bfseries,
     ndkeywords={class, export, boolean, throw, implements, import, this},
-    ndkeywordstyle=\color{darkgray}\bfseries,
+    ndkeywordstyle=\color{darkGray}\bfseries,
     identifierstyle=\color{black},
     sensitive=false,
     comment=[l]{//},
     morecomment=[s]{/*}{*/},
-    commentstyle=\color{dkgreen}\ttfamily,
+    commentstyle=\color{darkGreen}\ttfamily,
     stringstyle=\color{mauve}\ttfamily,
     morestring=[b]',
     morestring=[b]"
@@ -108,7 +105,7 @@ Date of Birth: 21.07.1992 \hspace{2.8cm} Matr-No.:725810
 2st Academic Supervisor: Prof. Dr. Shun-Ping Chen
 \par\noindent\rule{\textwidth}{0.4pt}
 Title: Abgleich von LED Lichtquellen auf Basis einer komplexen Lichtsteuerung\\
-%%%%%%%%%%%%%%%%%%%%%%%%%% Abstrakt %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%% Abstract %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \par\vspace{-0.8cm}\section*{Abstract}
 \addcontentsline{toc}{section}{Abstract}
 to be filled\\
@@ -1458,27 +1455,64 @@ der Referenzpunkt links von der Geraden zweier aufeinaderfolgender Koordinaten i
 Richtung der Geraden gegen den Uhrzeigersinn ist. Wenn für alle Geraden diese Bedingung erfüllt ist, ist der Referenzpunkt innherhalb des kombinierten
 Gamuts.\\
 \begin{lstlisting}[caption=Punkt in Polygon Check]
-    function pointIsInside(point, vs)
+function pointIsInside(point, vs)
+{
+    var x = point.x, y = point.y;
+    var inside = false;
+    for (var i = 0, j = vs.length - 1; i < vs.length; j = i++)
     {
-        var x = point.x, y = point.y;
-        var inside = false;
-        for (var i = 0, j = vs.length - 1; i < vs.length; j = i++)
+        var xi = vs[i].x, yi = vs[i].y;
+        var xj = vs[j].x, yj = vs[j].y;
+        var intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+        if (intersect)
         {
-            var xi = vs[i].x, yi = vs[i].y;
-            var xj = vs[j].x, yj = vs[j].y;
-            var intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
-            if (intersect)
-            {
-                inside = !inside;
-            }
+            inside = !inside;
         }
-        return inside;
     }
+    return inside;
+}
 \end{lstlisting}
 Wenn der Punkt nicht innerhalb des kombinierten Gamuts ist, wird geprüft, ob sich der Referenzpunkt auf den Strecken zwischen den Vertices des kombinierten
 Gamuts liegt. Dies prüft die vorhergehende Routine nicht. Falls dies ebenfalls nicht der Fall ist muss der Punkt außerhalb des Gamuts liegen.\\
 In diesem Fall muss ein neuer Punkt auf dem Rand des Gamuts gefunden werden, welcher die geringste Abweichung zur Farbvalenz des Referenzpunktes hat. Dieser
 Punkt wird im Folgenden "'Mixpunkt"' genannt. %// TODO : Weiter schreiben
+Es wird angenommen, dass die minimale Farbverschiebung durch das suchen des orthogonalen Bezugspunktes an dem kombinierten Gamut erreicht wird (siehe
+Bild ).
+\\%// TODO: Bild für Punkt außerhalb mit Mixpunkt
+Dieser Bezugspunkt wird berechnet mit Hilfe das Ansatzes des Kreuzprodukts von der Strecke der Beiden Vertices (A und B) und zwischen dem Referenzpunkt (C)
+und dem Mixpunkt (D). Setzt man dieses Kreuzprodukt gleich null müssen diese im rechten Winkel zueinander liegen.
+\begin{align}\label{Equ:16}
+    AB \times CD = 0
+\end{align}
+\begin{align}\label{Equ:17}
+    &D = A + t(A - B)\\
+    &D_x = A_x + t(A_x - B_x)
+    &D_y = A_y + t(A_y - B_y)
+\end{align}
+(\ref{Equ:16}) mit (\ref{Equ:17})
+\begin{align}\label{Equ:18}
+    &(A_x+t(B_x-A_x)-C_x)(B_x-A_x)+(A_y+t(B_y-A_y)-C_y)(B_y-A_y)=0\\
+    &t = \frac{(C_x-A_x)(B_x-A_x)+(C_y-A_y)(B_y-A_y)}{(B_x-A_x)^2+(B_y-A_y)^2}
+\end{align}
+Mit der Limitierung $0 \geq t \leq 1$ kann der errechnete Punkt nur auf der Strecke AB liegen, falls D ebenfalls außerhalb des Polygons liegt.\\
+\begin{lstlisting}[caption=Mixpunktermittlung]
+function getSpPoint(A,B,C,limit)
+{
+    var x1=A.x, y1=A.y, x2=B.x, y2=B.y, x3=C.x, y3=C.y;
+    var px = x2-x1, py = y2-y1, dAB = px*px + py*py;
+    var t = ((x3 - x1) * px + (y3 - y1) * py) / dAB;
+    if(limit)
+    {
+        t = Math.max(0,Math.min(u,1));
+    }
+    var x = x1 + t * px, y = y1 + t * py;
+    return {x:x, y:y};
+}
+\end{lstlisting}
+Diese Prozedur wird für alle Seiten des Polygons ausgeführt. Falls mehrere Punkte gefunden werden, wird der Punkt mit der kürzesten Vektor Distanz zum
+Referenzpunkt gewählt.\\
+\\
+Nun kann begonnen werden die \ac{dmx} Ausgabe für diesen Punkt für alle selektierten Lampen zu berechnen.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Auswertung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
