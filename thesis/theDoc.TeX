@@ -20,6 +20,49 @@
     citecolor=black
 ]{hyperref}
 \usepackage[font={scriptsize},figurename=Bild]{caption}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+
+\lstdefinelanguage{JavaScript}{
+    keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, for},
+    keywordstyle=\color{blue}\bfseries,
+    ndkeywords={class, export, boolean, throw, implements, import, this},
+    ndkeywordstyle=\color{darkgray}\bfseries,
+    identifierstyle=\color{black},
+    sensitive=false,
+    comment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    commentstyle=\color{dkgreen}\ttfamily,
+    stringstyle=\color{mauve}\ttfamily,
+    morestring=[b]',
+    morestring=[b]"
+}
+\renewcommand*{\lstlistingname}{Code}
+
+\lstset{frame=tb,
+    language=JavaScript,
+    backgroundcolor=\color{lightgray},
+    extendedchars=true,
+    basicstyle=\footnotesize\ttfamily,
+    showstringspaces=false,
+    showspaces=false,
+    numbers=left,
+    numberstyle=\footnotesize,
+    numbersep=9pt,
+    showtabs=false,
+    captionpos=b
+    aboveskip=3mm,
+    belowskip=3mm,
+    columns=flexible,
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=3
+}
 
 \title{MASTER THESIS}
 \author{Oliver Becker}
@@ -249,7 +292,7 @@ mit der Bezeichnung \ac{dmx} angesteuert.\\
 Für eine erste Überprüfung geeigneter Hardware wurde mit einer kleinen Demo Applikation gearbeitet. Diese wurde
 in JavaScript und \ac{html} mit Hilfe des Electron Frameworks erstellt.\\
 Weiter wird diese Applikation für die Ausgabe von \ac{dmx} genutzt.\\
-Im folgenden werden die hier verwendeten Protokolle, Programme, und Frameworks dargelegt.
+Im Folgenden werden die hier verwendeten Protokolle, Programme, und Frameworks dargelegt.
 
 \subsection{DMX}
 Diese Abkürzung steht für Digital Multiplex. Dahinter verbirgt sich ein digitales Steuerprotokoll,
@@ -749,7 +792,7 @@ Wenn die uv Koordinaten auf 0 gesetzt werden, also auf dem Referenzweißpunkt li
 \ac{led} ist das Acronym für Light Emitting Diode, also lichtemittierende Diode. Dies ist eine spezielle Art von Halbleitern,
 welche bei einem Stromfluss Licht emittieren. Die chemische Zusammensetzung (Dotierung) der Diode entscheidet, welche Farbe
 beziehungsweise welche Frequenz sie emittiert.\\
-Im folgenden ein Auszug der Element-Farbzuordnung \cite{wikiLed}:
+Im Folgenden ein Auszug der Element-Farbzuordnung \cite{wikiLed}:
 \begin{table}[H]
     \small
     \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} ll}
@@ -855,7 +898,7 @@ Somit konnte ein deutlich homogeneres Abstrahlverhalten erreicht werden.
 %%%%%%%%%%%%%%%%%%%%%%%%%% Verwendete Geräte %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Verwendete Geräte}
 \subsection{Lampen}
-Im folgenden werden die Lichtquellen beziehungsweise die Lampen beschrieben, die für die Messungen verwendet wurden.
+Im Folgenden werden die Lichtquellen beziehungsweise die Lampen beschrieben, die für die Messungen verwendet wurden.
 Auch in der Veranstaltungstechnik als (engl.) "'Fixtures"' bezeichnet. Diese Lampen haben alle \ac{led}s als Lichtquelle. Diese \ac{led}s
 sind alle unterschiedlich aufgebaut.
 \subsubsection{Ape Labs Light Can}
@@ -1180,7 +1223,7 @@ aktuell gemessenen Werte im Hintergrund abgespeichert werden. Die betätigte Sch
 RGB Farbe hinterlegt.\\
 Nach dem manuellen Erfassen aller Helligkeitsstufen konnten die erfassten Daten mit der Schaltfläche "'Save"' permanent auf der Festplatte zur
 Weiterverwendung gespeichert werden. Dieser Vorgang musste für alle Emitter wiederholt werden.
-\subsection{Vorberechnen anhand von Messwerten}
+\subsection{Vorberechnen anhand von Messwerten}\label{calcColor}
 Mit den nun verfügbaren Messwerten einer Lichtquelle wurde zur Überprüfung der bisher eingesetzten Berechnungen eine Möglichkeit programmiert,
 um virtuell in der Applikation die Emitter additiv zu mischen. Durch Interpolation zwischen den erfassten Helligkeitsstufen und additiver
 Farbmischung den Farbton einer aktiven Emitterkombination vorauszuberechnen.
@@ -1391,24 +1434,51 @@ DMX Universum konfigurierten DMX Ausgängen aus. Dieses DMX Signal wird dann kab
 DMX Empfänger sind in dieser Arbeit die Lampen, beziehungsweise im Fall der Ape Labs Produkte der "'WAPP"'.
 \clearpage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%% Automatisierung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Automatisierung}
-{\color{red}
-Hier folgen Notizen:\\
-Anpassung der Fader Werte anhand von Kalibrierungsdaten und Anpassen der auszugebenden DMX Werte\\
- - Vorgehensweise\\
- - Mathematik\\
- - Verwendeter Algorithmus}\\
-\\
-Mit den in den realisierten Funktionen aus den vorhergehenden Kapiteln kann nun ein automatisierter Abgleich zweier LED Lichtquellen vorbereitet werden. Hier ergeben aufgrund
-der Ergebnisse der bisherigen Messungen folgende Fragen:\\
+%%%%%%%%%%%%%%%%%%%%%%%%%% Automatisiertes angleichen zweier LED Lichtquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Automatisiertes angleichen zweier LED Lichtquellen}
+Mit den in den realisierten Funktionen aus den vorhergehenden Kapiteln kann nun ein automatisierter Abgleich zweier LED Lichtquellen vorbereitet werden. Hier
+ergeben aufgrund der Ergebnisse der bisherigen Messungen folgende Fragen:\\
 \begin{addmargin}[2em]{0em}
-    1. Wie kann eine Farbton der außerhalb des kombinierten Gamut mit möglichst geringe abweichung der Farbvalenz in den Bereich des kombinierten Gamut verschoben werden?\\
+    1. Wie kann eine Farbton der außerhalb des kombinierten Gamut mit möglichst geringe abweichung der Farbvalenz in den Bereich des kombinierten Gamut
+    verschoben werden?\\
     2. Wie kann eine Anpassung der Farbvalenz der anderen Lichtquelle auf die erste realisiert werden?\\
     3. Wie kann dies grafisch in einem Programm für den Benutzer realisiert werden?\\
 \end{addmargin}
-Diese Punkte werden nun nach einander erörtert. Die Ausgangssituation ist, dass ein Benutzer in der Applikation zwei vermessene Lampen selektiert. Die Applikation berechnet
-den kombinierten Gamut der beiden Lampen.
+Diese Punkte werden nun nach einander erörtert. Die Ausgangssituation ist, dass ein Benutzer in der Applikation zwei vermessene Lampen selektiert. Die
+Applikation berechnet die xyY Koordinaten des kombinierten Gamuts der beiden Lampen.
+Per Benutzereingabe wird ein Mischungsverhältnis der Emitter vorgegeben. Beispielsweise ein Cyanton mit 100\% Grün- und 65\% Blauanteil. Mit den erfassten
+Messwerten wird mit der vorgehensweise aus Kapitel \ref{calcColor} die erwartete xyY Koordinate errechnet. Diese Koordinate wird im Folgenden als
+Referenzpunkt bezeichnet.\\
+Nun muss ermittelt werden, ob der Referenzpunkt auf dem CIE 1931 Diagramm außerhalb des kombinierten Gamuts liegt oder nicht. Falls der Punkt außerhalb des
+kombinierten Gamuts befindet kann dieser Punkt nicht von allen Lampen gemischt werden. Somit müsste ein Punkt innerhalb, beziehungsweise auf dem Rand
+dieses Polygons gefunden werden sodass alle gewählten Lichtquellen im der lage sind diese Farbvalenz zu erzeugen.\\
+Zunächst wird geprüft, ob sich der Referenzpunkt innerhalb des kombinierten Gamuts befindet. Die Koordinaten des kombinierten Gamut werden gegen den
+Uhrzeigersinn vorsortiert. Siehe (\ref{Equ:14}) - (\ref{Equ:15}). Anschließend kann ähnlich zum Sutherland–Hodgman Algorithmus geprüft werden, ob sich
+der Referenzpunkt links von der Geraden zweier aufeinaderfolgender Koordinaten ist. Auch hier ist zu beachten, dass links von der Stecke aus Sicht der
+Richtung der Geraden gegen den Uhrzeigersinn ist. Wenn für alle Geraden diese Bedingung erfüllt ist, ist der Referenzpunkt innherhalb des kombinierten
+Gamuts.\\
+\begin{lstlisting}[caption=Punkt in Polygon Check]
+    function pointIsInside(point, vs)
+    {
+        var x = point.x, y = point.y;
+        var inside = false;
+        for (var i = 0, j = vs.length - 1; i < vs.length; j = i++)
+        {
+            var xi = vs[i].x, yi = vs[i].y;
+            var xj = vs[j].x, yj = vs[j].y;
+            var intersect = ((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+            if (intersect)
+            {
+                inside = !inside;
+            }
+        }
+        return inside;
+    }
+\end{lstlisting}
+Wenn der Punkt nicht innerhalb des kombinierten Gamuts ist, wird geprüft, ob sich der Referenzpunkt auf den Strecken zwischen den Vertices des kombinierten
+Gamuts liegt. Dies prüft die vorhergehende Routine nicht. Falls dies ebenfalls nicht der Fall ist muss der Punkt außerhalb des Gamuts liegen.\\
+In diesem Fall muss ein neuer Punkt auf dem Rand des Gamuts gefunden werden, welcher die geringste Abweichung zur Farbvalenz des Referenzpunktes hat. Dieser
+Punkt wird im Folgenden "'Mixpunkt"' genannt. %// TODO : Weiter schreiben
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Auswertung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
