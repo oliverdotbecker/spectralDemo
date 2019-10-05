@@ -18,6 +18,7 @@
         "ftdi",
         "funktionalitätsumfang",
         "gehostet",
+        "gepatchte",
         "gepatchten",
         "gewichtungskurven",
         "graßmann",
@@ -35,6 +36,7 @@
         "metameren",
         "movinglight",
         "multicast",
+        "normierungsversuch",
         "pixelmapping",
         "prolight",
         "resistiv",
@@ -61,8 +63,13 @@
         "breakatwhitespace",
         "breaklines",
         "captionpos",
+        "dohlus",
         "extendedchars",
+        "gruyter",
+        "hobbyquaker",
         "keywordstyle",
+        "l’éclairage",
+        "matr",
         "morecomment",
         "morestring",
         "ndkeywords",
@@ -73,6 +80,7 @@
         "showstringspaces",
         "showtabs",
         "stringstyle",
-        "tabsize"
+        "tabsize",
+        "thomann"
     ]
 }
