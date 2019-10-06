@@ -152,7 +152,7 @@ function createSliders()
     calcPosData = document.createElement('div');
     calcPosData.className = "mixInfo";
     calcPosData.id = "calcPosData";
-    calcPosData.innerHTML = "<div>Calc</div><div>xy: 0.33 0.33</div><div>RGB: 255 255 255</div>";
+    calcPosData.innerHTML = "<div>Ref</div><div>xy: 0.33 0.33</div><div>RGB: 255 255 255</div>";
     mixInfo.appendChild(calcPosData);
     mixPosData = document.createElement('div');
     mixPosData.className = "mixInfo";
