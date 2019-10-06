@@ -1557,31 +1557,49 @@ und (\ref{Equ:12}) bis (\ref{Equ:13}).\\
 Ebenfalls werden die Emitterkoordinaten des Mixdreiecks in RGB Koordinaten umgewandelt. Nun wird in Anlehnung an (\ref{Equ:13}) eine Matrix aus den RGB
 Emitterkoordinaten erstellt.
 \begin{align}\label{Equ:20}
-    K = \left[ \begin{array}{rrr}
+    \mathbf K = \left[ \begin{array}{rrr}
         E^1_r  & E^2_r & E^3_r \\
         E^1_g  & E^2_g & E^3_g \\
         E^1_b  & E^2_b & E^3_b \\
     \end{array}\right]
 \end{align}
-Wird $K^{-1}$ mit dem Vektor der RGB Koordinaten des Mixpunktes multipliziert erhält man die Intensitätswerte der Emitter. Diese Werte sind eins normiert.
+Wird $\mathbf K^{-1}$ mit dem Vektor der RGB Koordinaten des Mixpunktes multipliziert erhält man die Intensitätswerte der Emitter. Diese Werte sind eins normiert.
 \begin{align}\label{Equ:21}
     \left[ \begin{array}{r}
         MP_R \\
         MP_G \\
         MP_B \\
     \end{array}\right]
-    = {\mathbf[K]^{-1}} \left[ \begin{array}{r}
+    = {\mathbf [K]^{-1}} \left[ \begin{array}{r}
         I_{E1} \\
         I_{E2} \\
         I_{E3} \\
     \end{array}\right]
 \end{align}
 \subsection{Umsetzen des Benutzerinterfaces}
-%// TODO : Weiter schreiben
+In der Benutzeroberfläche kann bisher eine Selektion von Fixtures vorgenommen werden. Der kombinierte Gamut dieser Selektion wird in das CIE 1931 Diagramm
+eingezeichnet, wenn die Fixtures Messdaten hinterlegt haben. Bei dem mischen einer Farbe wird für das erste Fixture eine vorberechnete Koordinate
+eingezeichnet.\\
+Die Einzeichnung der vorberechnen Koordinate wurde erweitert, sodass diese für jedes selektiertes Fixture eingezeichnet wírd. Jede Koordinate wird mit
+der Fixture Nummer (Fixture Id) markiert.\\
+\\
+Zum Nutzen der Funktionalität der vorhergehenden Kapitel zu nutzen muss ein Referenz-Fixture definiert werden. Im Fixture Sheet kann nun ein Eintrag mit
+einem rechts Klick als Referenz definiert werden kann. Somit wird die vorberechnete Koordinate zum "'Referenzpunkt"'. Die gewählte Reihe wird mit roter
+Schrift gekennzeichnet.\\
+Die errechneten korrigierten Intensitätswerte werden im Fixture Sheet pro Emitter in Klammern hinter dem Nutzer eingestellten Wert angezeigt. Diese Werte
+werden auf 0 bis 100 skaliert. Diese Werte werden mit 2.55 multipliziert als DMX ausgegeben.
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/app_fixture_sheet_with_reference.png}
+    \end{center}
+    \caption{Fixture Sheet mit korrigierten Werten}
+\end{figure}
+\noindent
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Auswertung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Auswertung}
+%// TODO : Weiter schreiben
 {\color{red}
 Hier folgen Notizen:\\
 - Analyse (stärken und Schwächen)
