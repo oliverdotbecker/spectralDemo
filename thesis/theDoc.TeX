@@ -496,8 +496,8 @@ werden allgemein als Spektralsensoren bezeichnet.
 %%%%%%%%%%%%%%%%%%%%%%%%%% Farbe %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Farbe}
 Der Begriff Farbe, als Sinneseindruck, beschreibt die verschiedenen Zustände, welche die Amplituden im elektromagnetischen Spektrum annehmen können. Hier ist es
-unerheblich, ob nur eine einzelne Spekrallinie oder eine breite spektrale Verteilung betrachtet wird.\\
-Der Farbeindruck wird vorallem durch den Farbton geprägt. Ein Farbton entsteht natürlich oder künstich von einem emittierenden oder reflektieren Körper.
+unerheblich, ob nur eine einzelne Spektrallinie oder eine breite spektrale Verteilung betrachtet wird.\\
+Der Farbeindruck wird vorallem durch den Farbton geprägt. Ein Farbton entsteht natürlich oder künstlich von einem emittierenden oder reflektieren Körper.
 Weiter ist die Sättigung ein entscheidendes Merkmal einer Farbe. Umso intensiver ein Farbton ist, desto höher ist die Sättigung der Farbe. Ein blasser
 Farbton beinhaltet in seinem Spektrum einen Weiß-Anteil. Je blasser der Farbton, desto mehr Weiß-Anteile enthält er. Zuletzt ist noch die Helligkeit zu
 nennen. Sie drückt die Intensität der Lichtempfindung einer Farbe aus und ist mit der Farbempfindung fest verknüpft.
@@ -1148,9 +1148,9 @@ Zusätzlich zur Darstellung im \ac{cie} 1931 Farbraum wurde zur besseren Einordn
 umgewandelt. Dies ist möglich mit folgenden Gleichungen von Lindblooms Webauftritt \cite{lindbloom}:
 \begin{align}\label{Equ:12}
     \left[ \begin{array}{r}
-        r \\
-        g \\
-        b \\
+        R \\
+        G \\
+        B \\
     \end{array}\right]
     = {\mathbf[M]^{-1}} \left[ \begin{array}{r}
         X \\
@@ -1158,7 +1158,7 @@ umgewandelt. Dies ist möglich mit folgenden Gleichungen von Lindblooms Webauftr
         Z \\
     \end{array}\right]
 \end{align}
-mit sRGB Umrechnungsmatrix mit Weiß-Referenzpunkt D65 (siehe \ref{whiteRef})
+mit sRGB Umrechnungsmatrix $\mathbf M^{-1}$ mit Weiß-Referenzpunkt D65 (siehe \ref{whiteRef})
 \begin{align}\label{Equ:13}
     \mathbf M^{-1} = \left[ \begin{array}{rrr}
         3.2404542  & -1.5371385 & -0.4985314 \\
@@ -1328,7 +1328,7 @@ eingezeichnet (siehe Bild \ref{fig:combinedGamut}).
 \section{Ansteuerung externer Lichtquellen}
 Zur automatisierung der Vermessung der Lichtquellen ist es nötig, dass die messende Applikation auch die Lichtquellen ansteuern kann. Somit wurde
 in der Applikation eine \ac{dmx} Steuerung mit Art-Net implementiert. Weiter wurde ermöglicht, mehrere Lampen zu verwalten und zu steuern, um später mehrere
-vermessener Lampen ansteuern zu können.
+vermessene Lampen ansteuern zu können.
 \subsection{Fixturetypen}
 Lichtquellen verschiedener Hersteller haben viele unterschiedliche Funktionen. Von einer Helligkeitsregelung, dem Dimmer, über mehrere Emitter, wie
 die hier verwendeten Lichtquellen, bis zu Bewegungssteuerungen mehrerer Achsen, wie beim Robe LEDWash 300.\\
@@ -1445,7 +1445,8 @@ Diese Punkte werden nun nach einander erörtert. Die Ausgangssituation ist, dass
 Applikation berechnet die xyY Koordinaten des kombinierten Gamuts der beiden Lampen.
 Per Benutzereingabe wird ein Mischungsverhältnis der Emitter vorgegeben. Beispielsweise ein Cyanton mit 100\% Grün- und 65\% Blauanteil. Mit den erfassten
 Messwerten wird mit der vorgehensweise aus Kapitel \ref{calcColor} die erwartete xyY Koordinate errechnet. Diese Koordinate wird im Folgenden als
-Referenzpunkt bezeichnet.\\
+Referenzpunkt bezeichnet.
+\subsection{Finden eines Punktes innerhalb des kombinierten Gamuts}
 Nun muss ermittelt werden, ob der Referenzpunkt auf dem CIE 1931 Diagramm außerhalb des kombinierten Gamuts liegt oder nicht. Falls der Punkt außerhalb des
 kombinierten Gamuts befindet kann dieser Punkt nicht von allen Lampen gemischt werden. Somit müsste ein Punkt innerhalb, beziehungsweise auf dem Rand
 dieses Polygons gefunden werden sodass alle gewählten Lichtquellen im der lage sind diese Farbvalenz zu erzeugen.\\
@@ -1480,7 +1481,7 @@ Es wird angenommen, dass die minimale Farbverschiebung durch das suchen des orth
 Bild \ref{fig:refCombined}).
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.8\textwidth]{images/combined_gamut_with_mix_point_and_math.png}
+        \includegraphics[width=.75\textwidth]{images/combined_gamut_with_mix_point_and_math.png}
     \end{center}
     \caption{Kombinierter Gamut mit Referenz- und Mixpunkt}\label{fig:refCombined}
 \end{figure}
@@ -1520,8 +1521,8 @@ Referenzpunkt gewählt.\\
 Falls der Referenzpunkt nicht außerhalb des kombinierten Gamuts ist wird der Referenzpunkt als Mixpunkt übernommen.\\
 \\
 Nun kann begonnen werden die \ac{dmx} Ausgabe für diesen Punkt für alle selektierten Lampen zu berechnen. Der folgende Ablauf wird pro Lampe der Selektion
-angewendet.\\
-\\
+angewendet.
+\subsection{Finden der Emitter und Intensitäten}
 Hier wird begonnen, indem die Emitterkombinationen pro Lampe ermittelt werden, mit welchen der gewünschte Farbton gemischt werden kann. Da die hier
 verwendeten Lampen RGBW Lichtquellen besitzen gibt es mehrere Möglichkeiten eine Farbe zu mischen. Für komplexere Testaufbauten gibt es allerdings auch
 übliche Lampen in der Veranstaltungstechnik mit fünf oder mehr Emittern. Beispielsweise RGBWA (Amber) Geräte.\\
@@ -1539,12 +1540,43 @@ Somit um so kleiner die Summe der Distanzen der Emitter des Dreiecks, desto grö
 \end{figure}
 \noindent
 Auf Bild \ref{fig:triangleCombined} sind zwei mögliche "'Mixdreiecke"' zu sehen. Einmal mit den Emittern RGB und eines mit den Emittern GBW. Es ist leicht
-zu erkennen, dass das kleinere Mixdreieck eine kürzere Gesamtdistanz hat. Somit wird dieses für das weitere Vorgehen genutzt.\\
+zu erkennen, dass das kleinere Mixdreieck eine kürzere Gesamtdistanz hat. Somit wird dieses "'Mixdreieck"' für das weitere Vorgehen genutzt.\\
 Um von dem Referenzpunkt zum Mixpunkt zu gelangen, muss grafisch betrachtet etwas von dem weißen Emitter hinzugegeben werden. Was nicht direkt ersichtlich
 ist, dass der grüne und blaue Emitter in der Intensität gedämpft werden muss, um das korrekte Mischungsverhältnis zu erhalten. Nun muss jedoch für die
 einzelnen Emitter der konkrete Helligkeitswert errechnet werden, um diesen dann auch der Lampe per \ac{dmx} übermitteln zu können.\\
 \\
-Diese Intensitäten der einzelnen Emitter kann nicht im CIE 1931 Farbraum ermittelt werden.
+Diese Intensitäten der einzelnen Emitter kann nicht im CIE 1931 Farbraum ermittelt werden, da dieser in der xyY nicht beschreibt, von welchem Emitter,
+beziehungsweise welchem Grundton, welcher Anteil die Farbmischung erzeugt. Hierzu wird hier der RGB Farbraum gewählt. {\color{red} XYZ wäre auch möglich!?}\\
+Somit müssen die xyY Koordinaten des Mixpunktes in RGB Koordinaten umgerechnet werden mit \cite{lindbloom}:
+\begin{align}\label{Equ:19}
+    X = \frac{x}{y}\\
+    Y = 1\\
+    Z = \frac{1-x-y}{y}
+\end{align}
+und (\ref{Equ:12}) bis (\ref{Equ:13}).\\
+Ebenfalls werden die Emitterkoordinaten des Mixdreiecks in RGB Koordinaten umgewandelt. Nun wird in Anlehnung an (\ref{Equ:13}) eine Matrix aus den RGB
+Emitterkoordinaten erstellt.
+\begin{align}\label{Equ:20}
+    K = \left[ \begin{array}{rrr}
+        E^1_r  & E^2_r & E^3_r \\
+        E^1_g  & E^2_g & E^3_g \\
+        E^1_b  & E^2_b & E^3_b \\
+    \end{array}\right]
+\end{align}
+Wird $K^{-1}$ mit dem Vektor der RGB Koordinaten des Mixpunktes multipliziert erhält man die Intensitätswerte der Emitter. Diese Werte sind eins normiert.
+\begin{align}\label{Equ:21}
+    \left[ \begin{array}{r}
+        MP_R \\
+        MP_G \\
+        MP_B \\
+    \end{array}\right]
+    = {\mathbf[K]^{-1}} \left[ \begin{array}{r}
+        I_{E1} \\
+        I_{E2} \\
+        I_{E3} \\
+    \end{array}\right]
+\end{align}
+\subsection{Umsetzen des Benutzerinterfaces}
 %// TODO : Weiter schreiben
 \clearpage
 
