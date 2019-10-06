@@ -1517,8 +1517,35 @@ function getSpPoint(A,B,C,limit)
 \end{lstlisting}
 Diese Prozedur wird für alle Seiten des Polygons ausgeführt. Falls mehrere Punkte gefunden werden, wird der Punkt mit der kürzesten Vektor Distanz zum
 Referenzpunkt gewählt.\\
+Falls der Referenzpunkt nicht außerhalb des kombinierten Gamuts ist wird der Referenzpunkt als Mixpunkt übernommen.\\
 \\
-Nun kann begonnen werden die \ac{dmx} Ausgabe für diesen Punkt für alle selektierten Lampen zu berechnen. %// TODO : Weiter schreiben
+Nun kann begonnen werden die \ac{dmx} Ausgabe für diesen Punkt für alle selektierten Lampen zu berechnen. Der folgende Ablauf wird pro Lampe der Selektion
+angewendet.\\
+\\
+Hier wird begonnen, indem die Emitterkombinationen pro Lampe ermittelt werden, mit welchen der gewünschte Farbton gemischt werden kann. Da die hier
+verwendeten Lampen RGBW Lichtquellen besitzen gibt es mehrere Möglichkeiten eine Farbe zu mischen. Für komplexere Testaufbauten gibt es allerdings auch
+übliche Lampen in der Veranstaltungstechnik mit fünf oder mehr Emittern. Beispielsweise RGBWA (Amber) Geräte.\\
+Es werden nun aus allen möglichen Emitterkombinationen immer drei Emitter einer Lampe betrachtet. Diese ergeben im CIE 1931 Diagramm ein Dreieck. Die
+Vertices des Dreiecks werden gegen den Uhrzeigersinn sortiert. Anschließend wird geprüft, ob der Mixpunkt innerhalb dieses Emitterdreiecks liegt.
+Falls ja, wird diese Emitterkombination zu einer Sammlung möglicher Mischkombinationen hinzugefügt. Zusätzlich wird ein Relevanzabstand berechnet.\\
+Dieser beschreibt die Gesamthelligkeit der Farbmischung. Dies kann mit der Summe der Distanzen zwischen den Dreieckspunkten und dem Mixpunkt ausgedrückt
+werden, da umso weiter ein Emitter im Farbraum von dem zu mischenden Punkt entfernt ist, desto geringer ist die Intensität des Emitters in der Mischung.
+Somit um so kleiner die Summe der Distanzen der Emitter des Dreiecks, desto größer ist die Gesamthelligkeit gegenüber einer anderen Emitterkombination.
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/combined_gamut_with_mix_triangles_cyan.png}
+    \end{center}
+    \caption{Kombinierter Gamut mit Mixdreiecken}\label{fig:triangleCombined}
+\end{figure}
+\noindent
+Auf Bild \ref{fig:triangleCombined} sind zwei mögliche "'Mixdreiecke"' zu sehen. Einmal mit den Emittern RGB und eines mit den Emittern GBW. Es ist leicht
+zu erkennen, dass das kleinere Mixdreieck eine kürzere Gesamtdistanz hat. Somit wird dieses für das weitere Vorgehen genutzt.\\
+Um von dem Referenzpunkt zum Mixpunkt zu gelangen, muss grafisch betrachtet etwas von dem weißen Emitter hinzugegeben werden. Was nicht direkt ersichtlich
+ist, dass der grüne und blaue Emitter in der Intensität gedämpft werden muss, um das korrekte Mischungsverhältnis zu erhalten. Nun muss jedoch für die
+einzelnen Emitter der konkrete Helligkeitswert errechnet werden, um diesen dann auch der Lampe per \ac{dmx} übermitteln zu können.\\
+\\
+Diese Intensitäten der einzelnen Emitter kann nicht im CIE 1931 Farbraum ermittelt werden.
+%// TODO : Weiter schreiben
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Auswertung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
