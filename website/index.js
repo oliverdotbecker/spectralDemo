@@ -326,7 +326,7 @@ function XYZtoXY(X,Y,Z,noDisp)
     return [x,y,Y];
 }
 
-function XYZtoRGB(tX,tY,tZ)
+function XYZtoRGB(tX,tY,tZ,noDisp)
 {
     //sRGB - D65
     // Convert CIE_xyz to linear RGB (values[0..1])
@@ -358,11 +358,12 @@ function XYZtoRGB(tX,tY,tZ)
     g = Math.round(g*255);
     b = Math.round(b*255);
 
-    if(currRGBDisplay)
+    if(currRGBDisplay && !noDisp)
     {
         currRGBDisplay.innerHTML = r+" "+g+" "+b;
         currRGBDisplay.style.backgroundColor = "rgb("+r+","+g+","+b+")";
     }
+    return {r:r,g:g,b:b};
 }
 
 function xyToRGB(x,y)
@@ -370,32 +371,7 @@ function xyToRGB(x,y)
     var X = x/y;
     var Y = 1;
     var Z = (1-x-y)/y;
-
-    //sRGB - D65
-    /*var r = (X*0.4124564 + Y*0.3575761 + Z*0.1804375);
-    var g = (X*0.2126729 + Y*0.7151522 + Z*0.0721750);
-    var b = (X*0.0193339 + Y*0.1191920 + Z*0.9503041);*/
-
-    //CIE RGB - E
-    var r = ( X * 2.3706743 - Y * 0.9000405 - Z * 0.4706338);
-    var g = (-X * 0.5138850 + Y * 1.4253036 + Z * 0.0885814);
-    var b = ( X * 0.0052982 - Y * 0.0146949 + Z * 1.0093968);
-
-    /*var max = Math.max(r,Math.max(g,b));
-    r /= max;
-    g /= max;
-    b /= max;
-
-    var gamma = 1;
-    r = normalize(Math.pow(r,gamma));
-    g = normalize(Math.pow(g,gamma));
-    b = normalize(Math.pow(b,gamma));
-
-    r = Math.round(r*255);
-    g = Math.round(g*255);
-    b = Math.round(b*255);*/
-
-    return {r:r,g:g,b:b};
+    return XYZtoRGB(X,Y,Z,true);
 }
 
 function round(number,digits)
@@ -1091,7 +1067,7 @@ function calcColorMix(event)
                 {
                     for(var k = j+1; k < currentEmitterData.length; k++)
                     {
-                        console.log("["+sFI+"] Found triangle");
+                        //console.log("["+sFI+"] Found triangle");
                         var currTestTriangle = [
                             {
                                 x:parseFloat(currentEmitterData[i].measures["100%"].xyY[0]),
@@ -1137,32 +1113,39 @@ function calcColorMix(event)
                 return prev.relevanceDistance < curr.relevanceDistance ? prev : curr;
             });
 
-            var box = calcPos.parentElement.getBoundingClientRect();
-            var sizeX = box.width;
-            var sizeY = box.height;
-            mixTriangleSvg.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97));
-            var newPath = "";
-            for(var i = 0; i < mixTriangle.points.length; i++)
+            if(sFI == referenceFixtureId)
             {
-                if(i == 0)
+                var box = calcPos.parentElement.getBoundingClientRect();
+                var sizeX = box.width;
+                var sizeY = box.height;
+                mixTriangleSvg.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97));
+                var newPath = "";
+                for(var mTI = 0; mTI < mixTriangles.length; mTI++)
                 {
-                    newPath += "M ";
+                    var currMixTriangle = mixTriangles[mTI];
+                    for(var i = 0; i < currMixTriangle.points.length; i++)
+                    {
+                        if(i == 0)
+                        {
+                            newPath += " M ";
+                        }
+                        else
+                        {
+                            newPath += "L ";
+                        }
+        
+                        newPath += parseInt(currMixTriangle.points[i].x*sizeX);
+                        newPath += ",";
+                        newPath += parseInt((currMixTriangle.points[i].y)*sizeY);
+                        newPath += " ";
+                    }
+                    if(currMixTriangle.points[0])
+                    {
+                        newPath += "L "+ parseInt(currMixTriangle.points[0].x*sizeX) + "," + parseInt((currMixTriangle.points[0].y)*sizeY);
+                    }
+                    mixTriangleSvg.setAttribute("d",newPath);
                 }
-                else
-                {
-                    newPath += "L ";
-                }
-
-                newPath += parseInt(mixTriangle.points[i].x*sizeX);
-                newPath += ",";
-                newPath += parseInt((mixTriangle.points[i].y)*sizeY);
-                newPath += " ";
             }
-            if(mixTriangle.points[0])
-            {
-                newPath += "L "+ parseInt(mixTriangle.points[0].x*sizeX) + "," + parseInt((mixTriangle.points[0].y)*sizeY);
-            }
-            mixTriangleSvg.setAttribute("d",newPath);
 
             //Perform matrix calculation
             var e1 = xyToRGB(mixTriangle.points[0].x,mixTriangle.points[0].y);
