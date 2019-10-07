@@ -973,7 +973,7 @@ im CSV Format für die weitere Auswertung auf eine SD Karte gesichert werden.
 Es gibt einige Hersteller von entsprechenden Spektralsensoren für Licht und spektral benachbarte Bereiche wie Infrarot.
 Ein Hersteller, dessen Sensoren in dieser Arbeit vornehmlich genutzt wurden, ist die Firma AMS.\\
 AMS ist ein globales Unternehmen und einer der führenden Hersteller für Sensortechnik. AMS stellt hauptsächlich Sensoren für die Bereiche
-Optik, Bildverarbeitungund Schall her. Sensoren von AMS werden in Smartphones und Smarthome Produkten sowie in industrieller Automatisierung
+Optik, Bildverarbeitung und Schall her. Sensoren von AMS werden in Smartphones und Smarthome Produkten sowie in industrieller Automatisierung
 und medizinischen Geräten zu finden. \cite{ams}\\
 Zu Beginn wurde nach einer einfachen Evaluierungslösung für das Erfassen von spektralen Daten gesucht. Hier wurde das
 Sensorboard von der Firma Adafruit AS7262 genutzt. \cite{adafruit}\\
@@ -1449,10 +1449,10 @@ Referenzpunkt bezeichnet.
 \subsection{Finden eines Punktes innerhalb des kombinierten Gamuts}
 Nun muss ermittelt werden, ob der Referenzpunkt auf dem CIE 1931 Diagramm außerhalb des kombinierten Gamuts liegt oder nicht. Falls der Punkt außerhalb des
 kombinierten Gamuts befindet kann dieser Punkt nicht von allen Lampen gemischt werden. Somit müsste ein Punkt innerhalb, beziehungsweise auf dem Rand
-dieses Polygons gefunden werden sodass alle gewählten Lichtquellen im der lage sind diese Farbvalenz zu erzeugen.\\
+dieses Polygons gefunden werden sodass alle gewählten Lichtquellen im der Lage sind diese Farbvalenz zu erzeugen.\\
 Zunächst wird geprüft, ob sich der Referenzpunkt innerhalb des kombinierten Gamuts befindet. Die Koordinaten des kombinierten Gamut werden gegen den
 Uhrzeigersinn vorsortiert. Siehe (\ref{Equ:14}) - (\ref{Equ:15}). Anschließend kann ähnlich zum Sutherland–Hodgman Algorithmus geprüft werden, ob sich
-der Referenzpunkt links von der Geraden zweier aufeinaderfolgender Koordinaten ist. Auch hier ist zu beachten, dass links von der Stecke aus Sicht der
+der Referenzpunkt links von der Geraden zweier aufeinaderfolgender Koordinaten ist. Auch hier ist zu beachten, dass links von der Strecke aus Sicht der
 Richtung der Geraden gegen den Uhrzeigersinn ist. Wenn für alle Geraden diese Bedingung erfüllt ist, ist der Referenzpunkt innherhalb des kombinierten
 Gamuts.\\
 \begin{lstlisting}[caption=Punkt in Polygon Check]
@@ -1481,7 +1481,7 @@ Es wird angenommen, dass die minimale Farbverschiebung durch das suchen des orth
 Bild \ref{fig:refCombined}).
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.75\textwidth]{images/combined_gamut_with_mix_point_and_math.png}
+        \includegraphics[width=.7\textwidth]{images/combined_gamut_with_mix_point_and_math.png}
     \end{center}
     \caption{Kombinierter Gamut mit Referenz- und Mixpunkt}\label{fig:refCombined}
 \end{figure}
@@ -1531,7 +1531,7 @@ Vertices des Dreiecks werden gegen den Uhrzeigersinn sortiert. Anschließend wir
 Falls ja, wird diese Emitterkombination zu einer Sammlung möglicher Mischkombinationen hinzugefügt. Zusätzlich wird ein Relevanzabstand berechnet.\\
 Dieser beschreibt die Gesamthelligkeit der Farbmischung. Dies kann mit der Summe der Distanzen zwischen den Dreieckspunkten und dem Mixpunkt ausgedrückt
 werden, da umso weiter ein Emitter im Farbraum von dem zu mischenden Punkt entfernt ist, desto geringer ist die Intensität des Emitters in der Mischung.
-Somit um so kleiner die Summe der Distanzen der Emitter des Dreiecks, desto größer ist die Gesamthelligkeit gegenüber einer anderen Emitterkombination.
+Somit: Um so kleiner die Summe der Distanzen der Emitter des Dreiecks, desto größer ist die Gesamthelligkeit gegenüber einer anderen Emitterkombination.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.8\textwidth]{images/combined_gamut_with_mix_triangles_cyan.png}
@@ -1546,7 +1546,7 @@ ist, dass der grüne und blaue Emitter in der Intensität gedämpft werden muss,
 einzelnen Emitter der konkrete Helligkeitswert errechnet werden, um diesen dann auch der Lampe per \ac{dmx} übermitteln zu können.\\
 \\
 Diese Intensitäten der einzelnen Emitter kann nicht im CIE 1931 Farbraum ermittelt werden, da dieser in der xyY nicht beschreibt, von welchem Emitter,
-beziehungsweise welchem Grundton, welcher Anteil die Farbmischung erzeugt. Hierzu wird hier der RGB Farbraum gewählt. {\color{red} XYZ wäre auch möglich!?}\\
+beziehungsweise welchem Grundton, welcher Anteil die Farbmischung erzeugt. Hierzu wird hier der RGB Farbraum gewählt.\\
 Somit müssen die xyY Koordinaten des Mixpunktes in RGB Koordinaten umgerechnet werden mit \cite{lindbloom}:
 \begin{align}\label{Equ:19}
     X = \frac{x}{y}\\
@@ -1578,12 +1578,12 @@ Wird $\mathbf K^{-1}$ mit dem Vektor der RGB Koordinaten des Mixpunktes multipli
 \end{align}
 \subsection{Umsetzen des Benutzerinterfaces}
 In der Benutzeroberfläche kann bisher eine Selektion von Fixtures vorgenommen werden. Der kombinierte Gamut dieser Selektion wird in das CIE 1931 Diagramm
-eingezeichnet, wenn die Fixtures Messdaten hinterlegt haben. Bei dem mischen einer Farbe wird für das erste Fixture eine vorberechnete Koordinate
+eingezeichnet, wenn die Fixtures Messdaten hinterlegt haben. Bei dem Mischen einer Farbe wird für das erste Fixture eine vorberechnete Koordinate
 eingezeichnet.\\
 Die Einzeichnung der vorberechnen Koordinate wurde erweitert, sodass diese für jedes selektiertes Fixture eingezeichnet wírd. Jede Koordinate wird mit
 der Fixture Nummer (Fixture Id) markiert.\\
 \\
-Zum Nutzen der Funktionalität der vorhergehenden Kapitel zu nutzen muss ein Referenz-Fixture definiert werden. Im Fixture Sheet kann nun ein Eintrag mit
+Zum Nutzen der Funktionalität der vorhergehenden Kapitel muss ein Referenz-Fixture definiert werden. Im Fixture Sheet kann nun ein Eintrag mit
 einem rechts Klick als Referenz definiert werden kann. Somit wird die vorberechnete Koordinate zum "'Referenzpunkt"'. Die gewählte Reihe wird mit roter
 Schrift gekennzeichnet.\\
 Die errechneten korrigierten Intensitätswerte werden im Fixture Sheet pro Emitter in Klammern hinter dem Nutzer eingestellten Wert angezeigt. Diese Werte
