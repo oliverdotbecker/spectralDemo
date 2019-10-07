@@ -1611,7 +1611,6 @@ function matrix_invert(M)
             {
                 continue;
             }
-
             // We want to change this element to 0
             e = C[ii][i];
 
@@ -1626,7 +1625,6 @@ function matrix_invert(M)
             }
         }
     }
-
     //we've done all operations, C should be the identity
     //matrix I should be the inverse:
     return I;
