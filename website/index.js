@@ -1133,7 +1133,7 @@ function calcColorMix(event)
                         {
                             newPath += "L ";
                         }
-        
+
                         newPath += parseInt(currMixTriangle.points[i].x*sizeX);
                         newPath += ",";
                         newPath += parseInt((currMixTriangle.points[i].y)*sizeY);
@@ -1257,7 +1257,7 @@ function drawColorSpace()
                     var box = combinedPathDOM.parentElement.getBoundingClientRect();
                     var sizeX = box.width;
                     var sizeY = box.height;
-    
+
                     var currSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
                     combinedPathDOM.parentElement.parentElement.insertBefore(currSvg,combinedPathDOM.parentElement);
                     currSvg.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97));
@@ -1267,7 +1267,7 @@ function drawColorSpace()
                     currPath.setAttribute("stroke","black");
                     currPath.setAttribute("stroke-width",".5");
                     currPath.setAttribute("fill","transparent");
-    
+
                     var newPath = "";
                     for(var i = 0; i < Math.min(coordinates[fI].length,3); i++)
                     {
@@ -1279,7 +1279,7 @@ function drawColorSpace()
                         {
                             newPath += "L ";
                         }
-    
+
                         newPath += parseInt(coordinates[fI][i][0]*sizeX);
                         newPath += ",";
                         newPath += parseInt((coordinates[fI][i][1])*sizeY);
@@ -1482,7 +1482,7 @@ function pointOnPolygon(point, vertices)
             {
                 p1 = vertices[idx]
                 p2 = vertices[idx2]
-                if(intersect(point.x-0.001,point.y-0.001,point.x+0.001,point.y+0.001, p1.x, p1.y, p2.x, p2.y,true))
+                if(intersect(point.x-0.01,point.y-0.01,point.x+0.01,point.y+0.01, p1.x, p1.y, p2.x, p2.y,true))
                 {
                     return true;
                 }
@@ -1516,56 +1516,70 @@ function sortCombinedPointsCounterClockwise(coordinates,center)
 }
 
 // Returns the inverse of matrix `M`.
-function matrix_invert(M){
+function matrix_invert(M)
+{
     // I use Guassian Elimination to calculate the inverse:
     // (1) 'augment' the matrix (left) by the identity (on the right)
-    // (2) Turn the matrix on the left into the identity by elemetry row ops
+    // (2) Turn the matrix on the left into the identity by elementary row ops
     // (3) The matrix on the right is the inverse (was the identity matrix)
-    // There are 3 elemtary row ops: (I combine b and c in my code)
+    // There are 3 elementary row ops: (I combine b and c in my code)
     // (a) Swap 2 rows
     // (b) Multiply a row by a scalar
     // (c) Add 2 rows
-    
+
     //if the matrix isn't square: exit (error)
-    if(M.length !== M[0].length){return;}
-    
+    if(M.length !== M[0].length)
+    {
+        return;
+    }
+
     //create the identity matrix (I), and a copy (C) of the original
-    var i=0, ii=0, j=0, dim=M.length, e=0, t=0;
+    var i=0, ii=0, j=0, dim=M.length, e=0;
     var I = [], C = [];
-    for(i=0; i<dim; i+=1){
+    for(i = 0; i < dim; i += 1)
+    {
         // Create the row
         I[I.length]=[];
         C[C.length]=[];
-        for(j=0; j<dim; j+=1){
-            
+        for(j = 0; j < dim; j += 1)
+        {
             //if we're on the diagonal, put a 1 (for identity)
-            if(i==j){ I[i][j] = 1; }
-            else{ I[i][j] = 0; }
-            
+            if(i==j)
+            {
+                I[i][j] = 1;
+            }
+            else
+            {
+                I[i][j] = 0;
+            }
             // Also, make the copy of the original
             C[i][j] = M[i][j];
         }
     }
-    
+
     // Perform elementary row operations
-    for(i=0; i<dim; i+=1){
+    for(i = 0; i < dim; i += 1)
+    {
         // get the element e on the diagonal
         e = C[i][i];
-        
         // if we have a 0 on the diagonal (we'll need to swap with a lower row)
-        if(e==0){
+        if(e == 0)
+        {
             //look through every row below the i'th row
-            for(ii=i+1; ii<dim; ii+=1){
+            for(ii = i+1; ii < dim; ii += 1)
+            {
                 //if the ii'th row has a non-0 in the i'th col
-                if(C[ii][i] != 0){
+                if(C[ii][i] != 0)
+                {
                     //it would make the diagonal have a non-0 so swap it
-                    for(j=0; j<dim; j++){
+                    for(j = 0; j < dim; j++)
+                    {
                         e = C[i][j];       //temp store i'th row
                         C[i][j] = C[ii][j];//replace i'th row by ii'th
-                        C[ii][j] = e;      //repace ii'th by temp
+                        C[ii][j] = e;      //replace ii'th by temp
                         e = I[i][j];       //temp store i'th row
                         I[i][j] = I[ii][j];//replace i'th row by ii'th
-                        I[ii][j] = e;      //repace ii'th by temp
+                        I[ii][j] = e;      //replace ii'th by temp
                     }
                     //don't bother checking other rows since we've swapped
                     break;
@@ -1573,37 +1587,46 @@ function matrix_invert(M){
             }
             //get the new diagonal
             e = C[i][i];
-            //if it's still 0, not invertable (error)
-            if(e==0){return}
+            //if it's still 0, not invertible (error)
+            if(e == 0)
+            {
+                return;
+            }
         }
-        
+
         // Scale this row down by e (so we have a 1 on the diagonal)
-        for(j=0; j<dim; j++){
+        for(j = 0; j < dim; j++)
+        {
             C[i][j] = C[i][j]/e; //apply to original matrix
             I[i][j] = I[i][j]/e; //apply to identity
         }
-        
+
         // Subtract this row (scaled appropriately for each row) from ALL of
         // the other rows so that there will be 0's in this column in the
         // rows above and below this one
-        for(ii=0; ii<dim; ii++){
+        for(ii = 0; ii < dim; ii++)
+        {
             // Only apply to other rows (we want a 1 on the diagonal)
-            if(ii==i){continue;}
-            
+            if(ii == i)
+            {
+                continue;
+            }
+
             // We want to change this element to 0
             e = C[ii][i];
-            
+
             // Subtract (the row above(or below) scaled by e) from (the
             // current row) but start at the i'th column and assume all the
             // stuff left of diagonal is 0 (which it should be if we made this
             // algorithm correctly)
-            for(j=0; j<dim; j++){
+            for(j = 0; j < dim; j++)
+            {
                 C[ii][j] -= e*C[i][j]; //apply to original matrix
                 I[ii][j] -= e*I[i][j]; //apply to identity
             }
         }
     }
-    
+
     //we've done all operations, C should be the identity
     //matrix I should be the inverse:
     return I;
