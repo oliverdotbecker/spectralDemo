@@ -681,6 +681,7 @@ function createFixtureSheet()
                 {
                     realValLabels[0].remove();
                 }
+                sendDMX(event);
             }
             td = document.createElement('td');
             td.draggable = false;
