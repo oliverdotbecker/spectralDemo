@@ -92,6 +92,8 @@ var serialPath = "COM3";
 var activeSerialPort = null;
 var lastCommand = "";
 var measures = null;
+var AS7261BankMode = "2";
+var AS7261Command = "ATXYZC";
 if(devFlag)
 {
     measures = [1500,3000,300,250,700,500];
@@ -215,10 +217,10 @@ serialPort.list().then(ports => {
     if(activeSensor == "7261")
     {
         setTimeout(() => {
-            sendSerialData("ATTCSMD=2\n");
+            sendSerialData("ATTCSMD="+AS7261BankMode+"\n");
         },250);
         dataInterval = setInterval(() => {
-            sendSerialData("ATDATA\n");
+            sendSerialData(AS7261Command+"\n");
         },500);
         tempInterval = setInterval(() => {
             sendSerialData("ATTEMP\n");
@@ -237,7 +239,7 @@ serialPort.list().then(ports => {
 
 exports.getMeasures = function()
 {
-    if(measures.length == 6)
+    if(measures.length == 6 || measures.length == 3)
     {
         return JSON.stringify(measures);
     }
@@ -284,10 +286,10 @@ exports.setSerialPath = function(path)
         if(activeSensor == "7261")
         {
             setTimeout(() => {
-                sendSerialData("ATTCSMD=2\n");
+                sendSerialData("ATTCSMD="+AS7261BankMode+"\n");
             },250);
             dataInterval = setInterval(() => {
-                sendSerialData("ATDATA\n");
+                sendSerialData(AS7261Command+"\n");
             },500);
             tempInterval = setInterval(() => {
                 sendSerialData("ATTEMP\n");
@@ -330,10 +332,10 @@ exports.setSensor = function(sensor)
         if(activeSensor == "7261")
         {
             setTimeout(() => {
-                sendSerialData("ATTCSMD=2\n");
+                sendSerialData("ATTCSMD="+AS7261BankMode+"\n");
             },250);
             dataInterval = setInterval(() => {
-                sendSerialData("ATDATA\n");
+                sendSerialData(AS7261Command+"\n");
             },500);
             tempInterval = setInterval(() => {
                 sendSerialData("ATTEMP\n");
