@@ -647,7 +647,14 @@ function createFixtureSheet()
             {
                 if(event.srcElement == event.currentTarget || (event.srcElement != event.currentTarget && (event.srcElement.className == "" || event.srcElement.className == "selected")))
                 {
-                    updateSelection(event.currentTarget);
+                    if(!event.currentTarget.classList.contains("reference"))
+                    {
+                        updateSelection(event.currentTarget);
+                    }
+                    else
+                    {
+                        console.warn("Can't be unselected if it is a reference");
+                    }
                 }
             }
             tr.oncontextmenu = function(event)
