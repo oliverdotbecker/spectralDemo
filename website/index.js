@@ -311,17 +311,14 @@ function convertSpectrumToXYZ(spectralData,max,noDisp)
 
 function XYZtoXY(X,Y,Z,noDisp)
 {
-    if(xyYDisplay)
-    {
-        var x = X/(X+Y+Z);
-        var y = Y/(X+Y+Z);
-        var Y = Y;
+    var x = X/(X+Y+Z);
+    var y = Y/(X+Y+Z);
+    var Y = Y;
 
-        if(XYZDisplay && !noDisp)
-        {
-            xyYDisplay.innerHTML = round(x,4)+" "+round(y,4)+" "+round(Y,4);
-            setxy(x,y);
-        }
+    if(xyYDisplay && !noDisp)
+    {
+        xyYDisplay.innerHTML = round(x,4)+" "+round(y,4)+" "+round(Y,4);
+        setxy(x,y);
     }
     return [x,y,Y];
 }
@@ -991,6 +988,14 @@ function calcColorMix(event)
                 newPosMarker.setAttribute("style","fill:red;");
                 newPosMarker.innerHTML = (parseInt(sFI)+1);
                 calcPos.parentElement.appendChild(newPosMarker);
+            }
+
+            if(referenceFixtureId == -1)
+            {
+                var rgbReference = xyYToRGB(calcX,calcY);
+                calcPosData.style.backgroundColor = "rgb("+rgbReference.r+","+rgbReference.g+","+rgbReference.b+")";
+                calcPosData.childNodes[1].innerText = "xy: "+round(calcX,4)+" "+round(calcY,4);
+                calcPosData.childNodes[2].innerText = "RGB: "+rgbReference.r+" "+rgbReference.g+" "+rgbReference.b;
             }
         }
     }
