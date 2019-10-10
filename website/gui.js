@@ -3,6 +3,11 @@ settings = JSON.parse(settings);
 var patch = localStorage.getItem("spectral.patch") || "[]";
 patch = JSON.parse(patch);
 
+for(var pI = 0; pI < patch.length; pI++)
+{
+    patch[pI].calibratedChannels = null;
+}
+
 const emitterDefaultColors = {
     Rot:  "#ff0000",
     Grün: "#00ff00",
@@ -695,6 +700,7 @@ function createFixtureSheet()
                     mixTriangle.style.display = "none";
                     mixPosData.style.display = "none";
                     mixPos.style.display = "none";
+                    fixturesHaveStillRefData = true;
                 }
                 else
                 {

@@ -15,8 +15,8 @@ const AS7262 = {
     maxSpectrumVal:65536
 }
 var serialPorts = [];
-var activeSettings = AS7261;
-var activeSensor = "7261";
+var activeSettings = AS7262;
+var activeSensor = "7262";
 electronDaemon.setSensor(activeSensor);
 
 const fixtureTypeLibrary = {
@@ -85,6 +85,7 @@ var selectedFixtures = [];
 var selectedFixturesHaveChangedValues = false;
 var currMeasuredFixtureId = null;
 var referenceFixtureId = -1;
+var fixturesHaveStillRefData = false;
 
 //CIE 1931 tristimulus values from:
 //https://wisotop.de/Anhang-Tristimulus-Werte.php
@@ -323,7 +324,7 @@ function XYZtoXY(X,Y,Z,noDisp)
     return [x,y,Y];
 }
 
-function XYZtoRGB(tX,tY,tZ,noDisp)
+function XYZtoRGB(tX,tY,tZ,noDisp,test)
 {
     //sRGB - D65
     // Convert CIE_xyz to linear RGB (values[0..1])
@@ -346,14 +347,17 @@ function XYZtoRGB(tX,tY,tZ,noDisp)
     var g = Math.max((-0.5138850*tX)+(1.4253036*tY)+(0.0885814*tZ),0);
     var b = Math.max((0.0052982*tX)+(-0.0146949*tY)+(1.0093968*tZ),0);*/
 
-    var gamma = 1/2.2;
-    r = normalize(Math.pow(r,gamma));
-    g = normalize(Math.pow(g,gamma));
-    b = normalize(Math.pow(b,gamma));
-
-    r = Math.round(r*255);
-    g = Math.round(g*255);
-    b = Math.round(b*255);
+    if(!test)
+    {
+        var gamma = 1/2.2;
+        r = normalize(Math.pow(r,gamma));
+        g = normalize(Math.pow(g,gamma));
+        b = normalize(Math.pow(b,gamma));
+    
+        r = Math.round(r*255);
+        g = Math.round(g*255);
+        b = Math.round(b*255);
+    }
 
     if(RGBDisplay && !noDisp)
     {
@@ -601,6 +605,15 @@ function updateSliderDisp(event)
     slidersOut.value = currSlider.value;
 
     selectedFixturesHaveChangedValues = true;
+
+    if(fixturesHaveStillRefData)
+    {
+        fixturesHaveStillRefData = false;
+        for(var pI = 0; pI < patch.length; pI++)
+        {
+            patch[pI].calibratedChannels = null;
+        }
+    }
 
     for(var sFI in selectedFixtures)
     {
@@ -1132,30 +1145,36 @@ function calcColorMix(event)
                                 {
                                     x:parseFloat(currentEmitterData[i].measures["100%"].xyY[0]),
                                     y:parseFloat(currentEmitterData[i].measures["100%"].xyY[1]),
-                                    Y:parseFloat(currentEmitterData[i].measures["100%"].xyY[2]),
+                                    X:parseFloat(currentEmitterData[i].measures["100%"].XYZ[0]),
+                                    Y:parseFloat(currentEmitterData[i].measures["100%"].XYZ[1]),
+                                    Z:parseFloat(currentEmitterData[i].measures["100%"].XYZ[2]),
                                     name:currentEmitterData[i].name
                                 },
                                 {
                                     x:parseFloat(currentEmitterData[j].measures["100%"].xyY[0]),
                                     y:parseFloat(currentEmitterData[j].measures["100%"].xyY[1]),
-                                    Y:parseFloat(currentEmitterData[j].measures["100%"].xyY[2]),
+                                    X:parseFloat(currentEmitterData[j].measures["100%"].XYZ[0]),
+                                    Y:parseFloat(currentEmitterData[j].measures["100%"].XYZ[1]),
+                                    Z:parseFloat(currentEmitterData[j].measures["100%"].XYZ[2]),
                                     name:currentEmitterData[j].name
                                 },
                                 {
                                     x:parseFloat(currentEmitterData[k].measures["100%"].xyY[0]),
                                     y:parseFloat(currentEmitterData[k].measures["100%"].xyY[1]),
-                                    Y:parseFloat(currentEmitterData[k].measures["100%"].xyY[2]),
+                                    X:parseFloat(currentEmitterData[k].measures["100%"].XYZ[0]),
+                                    Y:parseFloat(currentEmitterData[k].measures["100%"].XYZ[1]),
+                                    Z:parseFloat(currentEmitterData[k].measures["100%"].XYZ[2]),
                                     name:currentEmitterData[k].name
                                 }
                             ];
-    
+
                             var currTestTriangle = sortCombinedPointsCounterClockwise(currTestTriangle,getCenterpoint(currTestTriangle));
-    
+
                             //get if triangle is relevant and "relevance index"
                             if(pointIsInside(mixCoordinates,currTestTriangle) || pointOnPolygon(mixCoordinates,currTestTriangle))
                             {
                                 console.log("["+sFI+"] Mix point is inside");
-    
+
                                 var relevanceDistance = 0;
                                 //Add up all vector distances of the triangle points
                                 for(var triIdx = 0; triIdx < currTestTriangle.length; triIdx++)
@@ -1170,12 +1189,12 @@ function calcColorMix(event)
                         }
                     }
                 }
-    
+
                 //get best triangle (the one with the shortest distance should win)
                 var mixTriangle = mixTriangles.reduce(function(prev, curr) {
                     return prev.relevanceDistance < curr.relevanceDistance ? prev : curr;
                 });
-    
+
                 if(sFI == referenceFixtureId)
                 {
                     var box = calcPos.parentElement.getBoundingClientRect();
@@ -1196,7 +1215,7 @@ function calcColorMix(event)
                             {
                                 newPath += "L ";
                             }
-    
+
                             newPath += parseInt(currMixTriangle.points[i].x*sizeX);
                             newPath += ",";
                             newPath += parseInt((currMixTriangle.points[i].y)*sizeY);
@@ -1209,42 +1228,53 @@ function calcColorMix(event)
                         mixTriangleSvg.setAttribute("d",newPath);
                     }
                 }
-    
+
                 //Perform matrix calculation
-                var e1 = xyYToRGB(mixTriangle.points[0].x,mixTriangle.points[0].y/*,mixTriangle.points[0].Y*/);
-                var e2 = xyYToRGB(mixTriangle.points[1].x,mixTriangle.points[1].y/*,mixTriangle.points[1].Y*/);
-                var e3 = xyYToRGB(mixTriangle.points[2].x,mixTriangle.points[2].y/*,mixTriangle.points[2].Y*/);
+                var e1 = XYZtoRGB(mixTriangle.points[0].X,mixTriangle.points[0].Y,mixTriangle.points[0].Z,true,true);
+                var e2 = XYZtoRGB(mixTriangle.points[1].X,mixTriangle.points[1].Y,mixTriangle.points[1].Z,true,true);
+                var e3 = XYZtoRGB(mixTriangle.points[2].X,mixTriangle.points[2].Y,mixTriangle.points[2].Z,true,true);
                 var emitterMatrix = [
                     [e1.r,e2.r,e3.r],
                     [e1.g,e2.g,e3.g],
                     [e1.b,e2.b,e3.b]
                 ];
                 var invertMatrix = matrix_invert(emitterMatrix);
-                var mixPoint = xyYToRGB(mixCoordinates.x,mixCoordinates.y);
-    
-                var resultIntensities = [
-                    invertMatrix[0][0] * mixPoint.r + invertMatrix[0][1] * mixPoint.g + invertMatrix[0][2] * mixPoint.b,
-                    invertMatrix[1][0] * mixPoint.r + invertMatrix[1][1] * mixPoint.g + invertMatrix[1][2] * mixPoint.b,
-                    invertMatrix[2][0] * mixPoint.r + invertMatrix[2][1] * mixPoint.g + invertMatrix[2][2] * mixPoint.b
-                ];
-    
-                //Apply dmx values
-                patch[sFI].calibratedChannels = {};
-                for(var eIdx = 0; eIdx < currentEmitterData.length; eIdx++)
+                if(!invertMatrix)
                 {
-                    var emitterFound = false;
-                    for(var iI = 0; iI < mixTriangle.points.length; iI++)
+                    console.error("Failed to generate inverted emitter matrix");
+                }
+                else
+                {
+                    var mixPoint = xyYToRGB(mixCoordinates.x,mixCoordinates.y);
+
+                    var resultIntensities = [
+                        invertMatrix[0][0] * mixPoint.r + invertMatrix[0][1] * mixPoint.g + invertMatrix[0][2] * mixPoint.b,
+                        invertMatrix[1][0] * mixPoint.r + invertMatrix[1][1] * mixPoint.g + invertMatrix[1][2] * mixPoint.b,
+                        invertMatrix[2][0] * mixPoint.r + invertMatrix[2][1] * mixPoint.g + invertMatrix[2][2] * mixPoint.b
+                    ];
+
+                    //Apply dmx values
+                    patch[sFI].calibratedChannels = {};
+                    for(var eIdx = 0; eIdx < currentEmitterData.length; eIdx++)
                     {
-                        if(mixTriangle.points[iI].name == currentEmitterData[eIdx].name)
+                        var emitterFound = false;
+                        for(var iI = 0; iI < mixTriangle.points.length; iI++)
                         {
-                            patch[sFI].calibratedChannels[currentEmitterData[eIdx].name] = Math.max(0,Math.min(resultIntensities[iI],1));
-                            emitterFound = true;
-                            break;
+                            if(mixTriangle.points[iI].name == currentEmitterData[eIdx].name)
+                            {
+                                patch[sFI].calibratedChannels[currentEmitterData[eIdx].name] = Math.max(0,Math.min(resultIntensities[iI],1));
+                                if(patch[sFI].calibratedChannels[currentEmitterData[eIdx].name] < 0.00001)
+                                {
+                                    patch[sFI].calibratedChannels[currentEmitterData[eIdx].name] = 0;
+                                }
+                                emitterFound = true;
+                                break;
+                            }
                         }
-                    }
-                    if(!emitterFound)
-                    {
-                        patch[sFI].calibratedChannels[currentEmitterData[eIdx].name] = 0;
+                        if(!emitterFound)
+                        {
+                            patch[sFI].calibratedChannels[currentEmitterData[eIdx].name] = 0;
+                        }
                     }
                 }
             }
@@ -1710,6 +1740,15 @@ function updateSelection(row)
             {
                 unselectRow.classList.remove("selected");
             }
+        }
+    }
+
+    if(fixturesHaveStillRefData)
+    {
+        fixturesHaveStillRefData = false;
+        for(var pI = 0; pI < patch.length; pI++)
+        {
+            patch[pI].calibratedChannels = null;
         }
     }
 
