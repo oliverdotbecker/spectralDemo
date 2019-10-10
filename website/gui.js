@@ -79,7 +79,7 @@ function createSliders()
         var newSliderContainer = document.createElement('div');
         newSliderContainer.className = "sliderContainer";
         var newSpaceLabel = document.createElement('div');
-        newSpaceLabel.innerHTML = "Intensity";
+        newSpaceLabel.innerHTML = "intensity";
         newSpaceLabel.className = "spaceLabel";
         newSliderContainer.appendChild(newSpaceLabel);
         var newSlider = document.createElement('input');

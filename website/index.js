@@ -804,6 +804,10 @@ function sendDMX(event)
         for(var channel in currFixture.channels)
         {
             var address = currFixtureType.emitters[channel]+parseInt(currFixture.address)-2;
+            if(isNaN(address) && channel == "intensity")
+            {
+                address = currFixtureType[channel]+parseInt(currFixture.address)-2;
+            }
             if(referenceFixtureId != -1 && selectedFixtures[pI])
             {
                 if(currFixture.calibratedChannels)
