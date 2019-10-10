@@ -101,10 +101,10 @@ var currMaxDisplay = null;
 var valueContainer = null;
 var wavelengthsContainer = null;
 var comInput = null;
-var currTempDisplay = null;
-var currXYZDisplay = null;
-var currxyYDisplay = null;
-var currRGBDisplay = null;
+var tempDisplay = null;
+var XYZDisplay = null;
+var xyYDisplay = null;
+var RGBDisplay = null;
 var livePos = null;
 var calcPos = null;
 
@@ -173,7 +173,7 @@ function init()
                     {
                         measures[i] = parseFloat(measures[i])/65536;
                     }
-                    currXYZDisplay.innerHTML = round(measures[0],4)+" "+round(measures[1],4)+" "+round(measures[2],4);
+                    XYZDisplay.innerHTML = round(measures[0],4)+" "+round(measures[1],4)+" "+round(measures[2],4);
                     XYZtoXY(measures[0],measures[1],measures[2]);
                     XYZtoRGB(measures[0],measures[1],measures[2]);
                 }
@@ -188,7 +188,7 @@ function init()
 
     /*setInterval(() => {
         var currentTemp = electronDaemon.getTemp();
-        currTempDisplay.innerHTML = JSON.parse(currentTemp)+" &deg;C";
+        tempDisplay.innerHTML = JSON.parse(currentTemp)+" &deg;C";
     },5100);*/
 
     barsContainer = document.getElementById('bars');
@@ -202,10 +202,10 @@ function init()
         }
     }
     currMaxDisplay = document.getElementById('currentMax');
-    currTempDisplay = document.getElementById('currentTemp');
-    currXYZDisplay = document.getElementById('currentXYZ');
-    currxyYDisplay = document.getElementById('currentxyY');
-    currRGBDisplay = document.getElementById('currentRGB');
+    tempDisplay = document.getElementById('currentTemp');
+    XYZDisplay = document.getElementById('currentXYZ');
+    xyYDisplay = document.getElementById('currentxyY');
+    RGBDisplay = document.getElementById('currentRGB');
     namesContainer = document.getElementById('names');
     channelSliders = document.getElementById("channelSliders");
     emitterEdit = document.getElementById("emitterEdit");
@@ -300,9 +300,9 @@ function convertSpectrumToXYZ(spectralData,max,noDisp)
         Z += tristimulusZ[wI]*(spectralData[wI]/max);
     }
     //console.log(X+" "+Y+" "+Z);
-    if(currXYZDisplay && !noDisp)
+    if(XYZDisplay && !noDisp)
     {
-        currXYZDisplay.innerHTML = round(X,4)+" "+round(Y,4)+" "+round(Z,4);
+        XYZDisplay.innerHTML = round(X,4)+" "+round(Y,4)+" "+round(Z,4);
         XYZtoXY(X,Y,Z);
         XYZtoRGB(X,Y,Z);
     }
@@ -311,15 +311,15 @@ function convertSpectrumToXYZ(spectralData,max,noDisp)
 
 function XYZtoXY(X,Y,Z,noDisp)
 {
-    if(currxyYDisplay)
+    if(xyYDisplay)
     {
         var x = X/(X+Y+Z);
         var y = Y/(X+Y+Z);
         var Y = Y;
 
-        if(currXYZDisplay && !noDisp)
+        if(XYZDisplay && !noDisp)
         {
-            currxyYDisplay.innerHTML = round(x,4)+" "+round(y,4)+" "+round(Y,4);
+            xyYDisplay.innerHTML = round(x,4)+" "+round(y,4)+" "+round(Y,4);
             setxy(x,y);
         }
     }
@@ -358,15 +358,15 @@ function XYZtoRGB(tX,tY,tZ,noDisp)
     g = Math.round(g*255);
     b = Math.round(b*255);
 
-    if(currRGBDisplay && !noDisp)
+    if(RGBDisplay && !noDisp)
     {
-        currRGBDisplay.innerHTML = r+" "+g+" "+b;
-        currRGBDisplay.style.backgroundColor = "rgb("+r+","+g+","+b+")";
+        RGBDisplay.innerHTML = r+" "+g+" "+b;
+        RGBDisplay.style.backgroundColor = "rgb("+r+","+g+","+b+")";
     }
     return {r:r,g:g,b:b};
 }
 
-function xyToRGB(x,y,Y)
+function xyYToRGB(x,y,Y)
 {
     var X = x/y;
     if(!Y)
@@ -477,9 +477,9 @@ function updateSerialPorts(getPorts)
 
 function save()
 {
-    var currXY = currxyYDisplay.innerHTML;
-    var currXYZ = currXYZDisplay.innerHTML;
-    var currRGB = currRGBDisplay.innerHTML;
+    var currXY = xyYDisplay.innerHTML;
+    var currXYZ = XYZDisplay.innerHTML;
+    var currRGB = RGBDisplay.innerHTML;
     savedValues.push({
         "xyY":{
             x:currXY.split(" ")[0],
@@ -670,10 +670,10 @@ function getMeasurement(event,level,emitterIdx)
             measurement.spectrum.values.push(valueNode.innerHTML);
         }
     }
-    measurement.xyY = currxyYDisplay.innerText.split(" ");
-    measurement.XYZ = currXYZDisplay.innerText.split(" ");
-    measurement.RGB = currRGBDisplay.innerText.split(" ");
-    measurement.color = currRGBDisplay.style.backgroundColor;
+    measurement.xyY = xyYDisplay.innerText.split(" ");
+    measurement.XYZ = XYZDisplay.innerText.split(" ");
+    measurement.RGB = RGBDisplay.innerText.split(" ");
+    measurement.color = RGBDisplay.style.backgroundColor;
     patch[currMeasuredFixtureId].emitterData[idx].measures[level] = measurement;
     if(elem)
     {
@@ -1056,12 +1056,12 @@ function calcColorMix(event)
             }
             mixCoordinates = possiblePoints[minDistIdx];
 
-            var rgbPoint = xyToRGB(mixCoordinates.x,mixCoordinates.y);
+            var rgbPoint = xyYToRGB(mixCoordinates.x,mixCoordinates.y);
             mixPosData.style.backgroundColor = "rgb("+rgbPoint.r+","+rgbPoint.g+","+rgbPoint.b+")";
             mixPosData.childNodes[1].innerText = "xy: "+round(mixCoordinates.x,4)+" "+round(mixCoordinates.y,4);
             mixPosData.childNodes[2].innerText = "RGB: "+rgbPoint.r+" "+rgbPoint.g+" "+rgbPoint.b;
         }
-        var rgbReference = xyToRGB(referencePointCoordinates.x,referencePointCoordinates.y);
+        var rgbReference = xyYToRGB(referencePointCoordinates.x,referencePointCoordinates.y);
         calcPosData.style.backgroundColor = "rgb("+rgbReference.r+","+rgbReference.g+","+rgbReference.b+")";
         calcPosData.childNodes[1].innerText = "xy: "+round(referencePointCoordinates.x,4)+" "+round(referencePointCoordinates.y,4);
         calcPosData.childNodes[2].innerText = "RGB: "+rgbReference.r+" "+rgbReference.g+" "+rgbReference.b;
@@ -1168,16 +1168,16 @@ function calcColorMix(event)
                 }
     
                 //Perform matrix calculation
-                var e1 = xyToRGB(mixTriangle.points[0].x,mixTriangle.points[0].y/*,mixTriangle.points[0].Y*/);
-                var e2 = xyToRGB(mixTriangle.points[1].x,mixTriangle.points[1].y/*,mixTriangle.points[1].Y*/);
-                var e3 = xyToRGB(mixTriangle.points[2].x,mixTriangle.points[2].y/*,mixTriangle.points[2].Y*/);
+                var e1 = xyYToRGB(mixTriangle.points[0].x,mixTriangle.points[0].y/*,mixTriangle.points[0].Y*/);
+                var e2 = xyYToRGB(mixTriangle.points[1].x,mixTriangle.points[1].y/*,mixTriangle.points[1].Y*/);
+                var e3 = xyYToRGB(mixTriangle.points[2].x,mixTriangle.points[2].y/*,mixTriangle.points[2].Y*/);
                 var emitterMatrix = [
                     [e1.r,e2.r,e3.r],
                     [e1.g,e2.g,e3.g],
                     [e1.b,e2.b,e3.b]
                 ];
                 var invertMatrix = matrix_invert(emitterMatrix);
-                var mixPoint = xyToRGB(mixCoordinates.x,mixCoordinates.y);
+                var mixPoint = xyYToRGB(mixCoordinates.x,mixCoordinates.y);
     
                 var resultIntensities = [
                     invertMatrix[0][0] * mixPoint.r + invertMatrix[0][1] * mixPoint.g + invertMatrix[0][2] * mixPoint.b,
