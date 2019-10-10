@@ -366,10 +366,13 @@ function XYZtoRGB(tX,tY,tZ,noDisp)
     return {r:r,g:g,b:b};
 }
 
-function xyToRGB(x,y)
+function xyToRGB(x,y,Y)
 {
     var X = x/y;
-    var Y = 1;
+    if(!Y)
+    {
+        Y = 1;
+    }
     var Z = (1-x-y)/y;
     return XYZtoRGB(X,Y,Z,true);
 }
@@ -1086,16 +1089,19 @@ function calcColorMix(event)
                                 {
                                     x:parseFloat(currentEmitterData[i].measures["100%"].xyY[0]),
                                     y:parseFloat(currentEmitterData[i].measures["100%"].xyY[1]),
+                                    Y:parseFloat(currentEmitterData[i].measures["100%"].xyY[2]),
                                     name:currentEmitterData[i].name
                                 },
                                 {
                                     x:parseFloat(currentEmitterData[j].measures["100%"].xyY[0]),
                                     y:parseFloat(currentEmitterData[j].measures["100%"].xyY[1]),
+                                    Y:parseFloat(currentEmitterData[j].measures["100%"].xyY[2]),
                                     name:currentEmitterData[j].name
                                 },
                                 {
                                     x:parseFloat(currentEmitterData[k].measures["100%"].xyY[0]),
                                     y:parseFloat(currentEmitterData[k].measures["100%"].xyY[1]),
+                                    Y:parseFloat(currentEmitterData[k].measures["100%"].xyY[2]),
                                     name:currentEmitterData[k].name
                                 }
                             ];
@@ -1162,9 +1168,9 @@ function calcColorMix(event)
                 }
     
                 //Perform matrix calculation
-                var e1 = xyToRGB(mixTriangle.points[0].x,mixTriangle.points[0].y);
-                var e2 = xyToRGB(mixTriangle.points[1].x,mixTriangle.points[1].y);
-                var e3 = xyToRGB(mixTriangle.points[2].x,mixTriangle.points[2].y);
+                var e1 = xyToRGB(mixTriangle.points[0].x,mixTriangle.points[0].y/*,mixTriangle.points[0].Y*/);
+                var e2 = xyToRGB(mixTriangle.points[1].x,mixTriangle.points[1].y/*,mixTriangle.points[1].Y*/);
+                var e3 = xyToRGB(mixTriangle.points[2].x,mixTriangle.points[2].y/*,mixTriangle.points[2].Y*/);
                 var emitterMatrix = [
                     [e1.r,e2.r,e3.r],
                     [e1.g,e2.g,e3.g],
