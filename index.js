@@ -18,8 +18,8 @@ app.on('ready', () => {
     win = new BrowserWindow({
         x: 5,
         y: 5,
-        width: 1200,
-        height: 900,
+        width: 1410,
+        height: 970,
         frame: true,
         icon: "cie.ico",
         title: "Spectral Demo"
@@ -93,7 +93,7 @@ var activeSerialPort = null;
 var lastCommand = "";
 var measures = null;
 var AS7261BankMode = "2";
-var AS7261Command = "ATXYZC";
+var AS7261Command = "ATDATA";
 if(devFlag)
 {
     measures = [1500,3000,300,250,700,500];
@@ -153,6 +153,15 @@ function attachSerialListeners()
                     {
                         measures[2] = measures[2].split(" ")[1];
                         //console.log(measures);
+                    }
+                }
+                if(lastCommand.search("ATSMALLXYC") != -1)
+                {
+                    measures = receivedData.split(",");
+                    if(measures.length == 2)
+                    {
+                        measures[1] = measures[1].split(" ")[1];
+                        console.log(measures);
                     }
                 }
                 if(lastCommand.search("ATTEMP") != -1 && receivedData.search(",") == -1)
