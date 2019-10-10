@@ -682,6 +682,19 @@ function createFixtureSheet()
                     realValLabels[0].remove();
                 }
                 sendDMX(event);
+
+                if(referenceFixtureId == -1)
+                {
+                    mixTriangle.style.display = "none";
+                    mixPosData.style.display = "none";
+                    mixPos.style.display = "none";
+                }
+                else
+                {
+                    mixTriangle.style.display = "";
+                    mixPosData.style.display = "";
+                    mixPos.style.display = "";
+                }
             }
             td = document.createElement('td');
             td.draggable = false;
