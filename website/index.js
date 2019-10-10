@@ -611,10 +611,14 @@ function updateSliderDisp(event)
                 sheetCell.innerHTML = currSlider.value;
             }
 
-            if(patch[sFI].calibratedChannels)
+            if(patch[sFI].calibratedChannels && referenceFixtureId != -1)
             {
                 for(var emitterName in patch[sFI].channels)
                 {
+                    if(emitterName == "intensity")
+                    {
+                        continue;
+                    }
                     var sheetCell = document.getElementById(sFI+"_"+emitterName);
                     if(sheetCell)
                     {
@@ -623,7 +627,7 @@ function updateSliderDisp(event)
                         {
                             sheetCell.innerHTML = sheetCell.innerHTML.substring(0,pos);
                         }
-                        sheetCell.innerHTML += "("+parseInt(patch[sFI].calibratedChannels[emitterName]*100)+")";
+                        sheetCell.innerHTML += "<label class='realVal'>("+parseInt(patch[sFI].calibratedChannels[emitterName]*100)+")</label>";
                     }
                 }
             }
@@ -810,9 +814,13 @@ function sendDMX(event)
             }
             if(referenceFixtureId != -1 && selectedFixtures[pI])
             {
-                if(currFixture.calibratedChannels)
+                if(currFixture.calibratedChannels && currFixture.calibratedChannels[channel])
                 {
                     dmxValues[address] = parseInt(parseFloat(currFixture.calibratedChannels[channel])*255);
+                }
+                else
+                {
+                    dmxValues[address] = parseInt(parseInt(currFixture.channels[channel])/100*255); //avoiding 2.55 due to floating point js errors
                 }
             }
             else
@@ -1061,131 +1069,134 @@ function calcColorMix(event)
         //go thru each fixture
         for(var sFI in selectedFixtures)
         {
-            var currentEmitterData = patch[sFI].emitterData;
-
-            //get emitter triangles for this fixture
-            var mixTriangles = [];
-            for(var i = 0; i < currentEmitterData.length-2; i++)
+            if(selectedFixtures[sFI])
             {
-                for(var j = i+1; j < currentEmitterData.length-1; j++)
+                var currentEmitterData = patch[sFI].emitterData;
+
+                //get emitter triangles for this fixture
+                var mixTriangles = [];
+                for(var i = 0; i < currentEmitterData.length-2; i++)
                 {
-                    for(var k = j+1; k < currentEmitterData.length; k++)
+                    for(var j = i+1; j < currentEmitterData.length-1; j++)
                     {
-                        //console.log("["+sFI+"] Found triangle");
-                        var currTestTriangle = [
+                        for(var k = j+1; k < currentEmitterData.length; k++)
+                        {
+                            //console.log("["+sFI+"] Found triangle");
+                            var currTestTriangle = [
+                                {
+                                    x:parseFloat(currentEmitterData[i].measures["100%"].xyY[0]),
+                                    y:parseFloat(currentEmitterData[i].measures["100%"].xyY[1]),
+                                    name:currentEmitterData[i].name
+                                },
+                                {
+                                    x:parseFloat(currentEmitterData[j].measures["100%"].xyY[0]),
+                                    y:parseFloat(currentEmitterData[j].measures["100%"].xyY[1]),
+                                    name:currentEmitterData[j].name
+                                },
+                                {
+                                    x:parseFloat(currentEmitterData[k].measures["100%"].xyY[0]),
+                                    y:parseFloat(currentEmitterData[k].measures["100%"].xyY[1]),
+                                    name:currentEmitterData[k].name
+                                }
+                            ];
+    
+                            var currTestTriangle = sortCombinedPointsCounterClockwise(currTestTriangle,getCenterpoint(currTestTriangle));
+    
+                            //get if triangle is relevant and "relevance index"
+                            if(pointIsInside(mixCoordinates,currTestTriangle) || pointOnPolygon(mixCoordinates,currTestTriangle))
                             {
-                                x:parseFloat(currentEmitterData[i].measures["100%"].xyY[0]),
-                                y:parseFloat(currentEmitterData[i].measures["100%"].xyY[1]),
-                                name:currentEmitterData[i].name
-                            },
-                            {
-                                x:parseFloat(currentEmitterData[j].measures["100%"].xyY[0]),
-                                y:parseFloat(currentEmitterData[j].measures["100%"].xyY[1]),
-                                name:currentEmitterData[j].name
-                            },
-                            {
-                                x:parseFloat(currentEmitterData[k].measures["100%"].xyY[0]),
-                                y:parseFloat(currentEmitterData[k].measures["100%"].xyY[1]),
-                                name:currentEmitterData[k].name
+                                console.log("["+sFI+"] Mix point is inside");
+    
+                                var relevanceDistance = 0;
+                                //Add up all vector distances of the triangle points
+                                for(var triIdx = 0; triIdx < currTestTriangle.length; triIdx++)
+                                {
+                                    relevanceDistance += Math.sqrt(Math.pow(mixCoordinates.x-currTestTriangle[triIdx].x,2)+Math.pow(mixCoordinates.y-currTestTriangle[triIdx].y,2));
+                                }
+                                mixTriangles.push({
+                                    points:currTestTriangle,
+                                    relevanceDistance:relevanceDistance
+                                })
                             }
-                        ];
-
-                        var currTestTriangle = sortCombinedPointsCounterClockwise(currTestTriangle,getCenterpoint(currTestTriangle));
-
-                        //get if triangle is relevant and "relevance index"
-                        if(pointIsInside(mixCoordinates,currTestTriangle) || pointOnPolygon(mixCoordinates,currTestTriangle))
+                        }
+                    }
+                }
+    
+                //get best triangle (the one with the shortest distance should win)
+                var mixTriangle = mixTriangles.reduce(function(prev, curr) {
+                    return prev.relevanceDistance < curr.relevanceDistance ? prev : curr;
+                });
+    
+                if(sFI == referenceFixtureId)
+                {
+                    var box = calcPos.parentElement.getBoundingClientRect();
+                    var sizeX = box.width;
+                    var sizeY = box.height;
+                    mixTriangleSvg.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97));
+                    var newPath = "";
+                    for(var mTI = 0; mTI < mixTriangles.length; mTI++)
+                    {
+                        var currMixTriangle = mixTriangles[mTI];
+                        for(var i = 0; i < currMixTriangle.points.length; i++)
                         {
-                            console.log("["+sFI+"] Mix point is inside");
-
-                            var relevanceDistance = 0;
-                            //Add up all vector distances of the triangle points
-                            for(var triIdx = 0; triIdx < currTestTriangle.length; triIdx++)
+                            if(i == 0)
                             {
-                                relevanceDistance += Math.sqrt(Math.pow(mixCoordinates.x-currTestTriangle[triIdx].x,2)+Math.pow(mixCoordinates.y-currTestTriangle[triIdx].y,2));
+                                newPath += " M ";
                             }
-                            mixTriangles.push({
-                                points:currTestTriangle,
-                                relevanceDistance:relevanceDistance
-                            })
+                            else
+                            {
+                                newPath += "L ";
+                            }
+    
+                            newPath += parseInt(currMixTriangle.points[i].x*sizeX);
+                            newPath += ",";
+                            newPath += parseInt((currMixTriangle.points[i].y)*sizeY);
+                            newPath += " ";
                         }
-                    }
-                }
-            }
-
-            //get best triangle (the one with the shortest distance should win)
-            var mixTriangle = mixTriangles.reduce(function(prev, curr) {
-                return prev.relevanceDistance < curr.relevanceDistance ? prev : curr;
-            });
-
-            if(sFI == referenceFixtureId)
-            {
-                var box = calcPos.parentElement.getBoundingClientRect();
-                var sizeX = box.width;
-                var sizeY = box.height;
-                mixTriangleSvg.parentElement.setAttribute("viewBox","0 0 "+(box.width)+" "+(box.height*0.97));
-                var newPath = "";
-                for(var mTI = 0; mTI < mixTriangles.length; mTI++)
-                {
-                    var currMixTriangle = mixTriangles[mTI];
-                    for(var i = 0; i < currMixTriangle.points.length; i++)
-                    {
-                        if(i == 0)
+                        if(currMixTriangle.points[0])
                         {
-                            newPath += " M ";
+                            newPath += "L "+ parseInt(currMixTriangle.points[0].x*sizeX) + "," + parseInt((currMixTriangle.points[0].y)*sizeY);
                         }
-                        else
+                        mixTriangleSvg.setAttribute("d",newPath);
+                    }
+                }
+    
+                //Perform matrix calculation
+                var e1 = xyToRGB(mixTriangle.points[0].x,mixTriangle.points[0].y);
+                var e2 = xyToRGB(mixTriangle.points[1].x,mixTriangle.points[1].y);
+                var e3 = xyToRGB(mixTriangle.points[2].x,mixTriangle.points[2].y);
+                var emitterMatrix = [
+                    [e1.r,e2.r,e3.r],
+                    [e1.g,e2.g,e3.g],
+                    [e1.b,e2.b,e3.b]
+                ];
+                var invertMatrix = matrix_invert(emitterMatrix);
+                var mixPoint = xyToRGB(mixCoordinates.x,mixCoordinates.y);
+    
+                var resultIntensities = [
+                    invertMatrix[0][0] * mixPoint.r + invertMatrix[0][1] * mixPoint.g + invertMatrix[0][2] * mixPoint.b,
+                    invertMatrix[1][0] * mixPoint.r + invertMatrix[1][1] * mixPoint.g + invertMatrix[1][2] * mixPoint.b,
+                    invertMatrix[2][0] * mixPoint.r + invertMatrix[2][1] * mixPoint.g + invertMatrix[2][2] * mixPoint.b
+                ];
+    
+                //Apply dmx values
+                patch[sFI].calibratedChannels = {};
+                for(var eIdx = 0; eIdx < currentEmitterData.length; eIdx++)
+                {
+                    var emitterFound = false;
+                    for(var iI = 0; iI < mixTriangle.points.length; iI++)
+                    {
+                        if(mixTriangle.points[iI].name == currentEmitterData[eIdx].name)
                         {
-                            newPath += "L ";
+                            patch[sFI].calibratedChannels[currentEmitterData[eIdx].name] = Math.max(0,Math.min(resultIntensities[iI],1));
+                            emitterFound = true;
+                            break;
                         }
-
-                        newPath += parseInt(currMixTriangle.points[i].x*sizeX);
-                        newPath += ",";
-                        newPath += parseInt((currMixTriangle.points[i].y)*sizeY);
-                        newPath += " ";
                     }
-                    if(currMixTriangle.points[0])
+                    if(!emitterFound)
                     {
-                        newPath += "L "+ parseInt(currMixTriangle.points[0].x*sizeX) + "," + parseInt((currMixTriangle.points[0].y)*sizeY);
+                        patch[sFI].calibratedChannels[currentEmitterData[eIdx].name] = 0;
                     }
-                    mixTriangleSvg.setAttribute("d",newPath);
-                }
-            }
-
-            //Perform matrix calculation
-            var e1 = xyToRGB(mixTriangle.points[0].x,mixTriangle.points[0].y);
-            var e2 = xyToRGB(mixTriangle.points[1].x,mixTriangle.points[1].y);
-            var e3 = xyToRGB(mixTriangle.points[2].x,mixTriangle.points[2].y);
-            var emitterMatrix = [
-                [e1.r,e2.r,e3.r],
-                [e1.g,e2.g,e3.g],
-                [e1.b,e2.b,e3.b]
-            ];
-            var invertMatrix = matrix_invert(emitterMatrix);
-            var mixPoint = xyToRGB(mixCoordinates.x,mixCoordinates.y);
-
-            var resultIntensities = [
-                invertMatrix[0][0] * mixPoint.r + invertMatrix[0][1] * mixPoint.g + invertMatrix[0][2] * mixPoint.b,
-                invertMatrix[1][0] * mixPoint.r + invertMatrix[1][1] * mixPoint.g + invertMatrix[1][2] * mixPoint.b,
-                invertMatrix[2][0] * mixPoint.r + invertMatrix[2][1] * mixPoint.g + invertMatrix[2][2] * mixPoint.b
-            ];
-
-            //Apply dmx values
-            patch[sFI].calibratedChannels = {};
-            for(var eIdx = 0; eIdx < currentEmitterData.length; eIdx++)
-            {
-                var emitterFound = false;
-                for(var iI = 0; iI < mixTriangle.points.length; iI++)
-                {
-                    if(mixTriangle.points[iI].name == currentEmitterData[eIdx].name)
-                    {
-                        patch[sFI].calibratedChannels[currentEmitterData[eIdx].name] = Math.max(0,Math.min(resultIntensities[iI],1));
-                        emitterFound = true;
-                        break;
-                    }
-                }
-                if(!emitterFound)
-                {
-                    patch[sFI].calibratedChannels[currentEmitterData[eIdx].name] = 0;
                 }
             }
         }

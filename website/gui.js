@@ -326,7 +326,7 @@ function openPatch()
                     var fTLibEntry = fixtureTypeLibrary[currRow.childNodes[0].childNodes[0].value];
                     if(fTLibEntry.intensity)
                     {
-                        fixtureChannels.intensity = 0;
+                        fixtureChannels.intensity = 100;
                     }
                     for(var eIdx in fTLibEntry.emitters)
                     {
@@ -674,6 +674,12 @@ function createFixtureSheet()
                 {
                     referenceFixtureId = -1;
                 }
+
+                var realValLabels = document.getElementsByClassName("realVal");
+                while(realValLabels.length)
+                {
+                    realValLabels[0].remove();
+                }
             }
             td = document.createElement('td');
             td.draggable = false;
@@ -696,7 +702,7 @@ function createFixtureSheet()
                         if(fTLibEntry.intensity)
                         {
                             td.id = pI+"_intensity";
-                            td.innerText = 0;
+                            td.innerText = 100;
                         }
                     }
                     else
