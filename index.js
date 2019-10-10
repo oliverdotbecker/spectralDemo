@@ -18,7 +18,7 @@ app.on('ready', () => {
     win = new BrowserWindow({
         x: 5,
         y: 5,
-        width: 1410,
+        width: 1420,
         height: 970,
         frame: true,
         icon: "cie.ico",
