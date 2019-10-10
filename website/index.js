@@ -367,7 +367,7 @@ function XYZtoRGB(tX,tY,tZ,noDisp,test)
     return {r:r,g:g,b:b};
 }
 
-function xyYToRGB(x,y,Y)
+function xyYToRGB(x,y,Y,test)
 {
     var X = x/y;
     if(!Y)
@@ -375,7 +375,7 @@ function xyYToRGB(x,y,Y)
         Y = 1;
     }
     var Z = (1-x-y)/y;
-    return XYZtoRGB(X,Y,Z,true);
+    return XYZtoRGB(X,Y,Z,true,test);
 }
 
 function round(number,digits)
@@ -1245,13 +1245,21 @@ function calcColorMix(event)
                 }
                 else
                 {
-                    var mixPoint = xyYToRGB(mixCoordinates.x,mixCoordinates.y);
+                    var mixPoint = xyYToRGB(mixCoordinates.x,mixCoordinates.y,undefined,true);
 
                     var resultIntensities = [
                         invertMatrix[0][0] * mixPoint.r + invertMatrix[0][1] * mixPoint.g + invertMatrix[0][2] * mixPoint.b,
                         invertMatrix[1][0] * mixPoint.r + invertMatrix[1][1] * mixPoint.g + invertMatrix[1][2] * mixPoint.b,
                         invertMatrix[2][0] * mixPoint.r + invertMatrix[2][1] * mixPoint.g + invertMatrix[2][2] * mixPoint.b
                     ];
+
+                    // Request maximum brightness (for testing)
+                    var maxValue = Math.max.apply(null,resultIntensities);
+                    if (maxValue > 0.000000000001) {
+                        resultIntensities[0] /= maxValue;
+                        resultIntensities[1] /= maxValue;
+                        resultIntensities[2] /= maxValue;
+                    }
 
                     //Apply dmx values
                     patch[sFI].calibratedChannels = {};
