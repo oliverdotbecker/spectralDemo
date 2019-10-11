@@ -81,6 +81,8 @@ const valueChangeTimeout = 3000;
 const emitterChangeTimeout = 6000;
 const measureSliderValues = [5,10,20,35,50,65,85,100];
 
+var cancelMeasure = false;
+
 var selectedFixtures = [];
 var selectedFixturesHaveChangedValues = false;
 var currMeasuredFixtureId = null;
@@ -324,36 +326,59 @@ function XYZtoXY(X,Y,Z,noDisp)
     return [x,y,Y];
 }
 
-function XYZtoRGB(tX,tY,tZ,noDisp,test)
+function XYZtoRGB(tX,tY,tZ,noDisp,scale)
 {
-    //sRGB - D65
-    // Convert CIE_xyz to linear RGB (values[0..1])
-    var r = Math.max(tX * 3.24071     + tY * (-1.53726)  + tZ * (-0.498571),0);
-    var g = Math.max(tX * (-0.969258) + tY * 1.87599     + tZ * 0.0415557  ,0);
-    var b = Math.max(tX * 0.0556352   + tY * (-0.203996) + tZ * 1.05707    ,0);
+    //Color conversion
+    var sRGBd50 = [
+        [ 3.1338561, -1.6168667, -0.4906146],
+        [-0.9787684,  1.9161415,  0.0334540],
+        [ 0.0719453, -0.2289914,  1.4052427]
+    ];
+    var sRGBd65 = [
+        [ 3.2404542, -1.5371385, -0.4985314],
+        [-0.9692660,  1.8760108,  0.0415560],
+        [ 0.0556434, -0.2040259,  1.0572252]
+    ];
+    var CIE_RGBd50 = [
+        [ 2.3638081, -0.8676030, -0.4988161],
+        [-0.5005940,  1.3962369,  0.1047562],
+        [ 0.0141712, -0.0306400,  1.2323842]
+    ];
+    var CIE_RGB_E = [
+        [ 2.3706743, -0.9000405, -0.4706338],
+        [-0.5138850,  1.4253036,  0.0885814],
+        [ 0.0052982, -0.0146949,  1.0093968]
+    ];
 
-    // Convert linearRGB[0..1] to sRGB [0..255]
-    /*r *= 255;	g *= 255;	b *= 255;
+    var activeMatrix = sRGBd50;
+    // Convert CIE_XYZ to linear RGB (values[0..1])
+    var r = tX * activeMatrix[0][0] + tY * activeMatrix[0][1] + tZ * activeMatrix[0][2];
+    var g = tX * activeMatrix[1][0] + tY * activeMatrix[1][1] + tZ * activeMatrix[1][2];
+    var b = tX * activeMatrix[2][0] + tY * activeMatrix[2][1] + tZ * activeMatrix[2][2];
 
-    // Some values get negative by little rounding errors. Put them to 0.
-    if (r < 0){ r = 0; };  if (g < 0){ g = 0; }; if (b < 0){ b = 0; };
-
-    r = parseInt(r);
-    g = parseInt(g);
-    b = parseInt(b);*/
-
-    //CIE RGB - E
-    /*var r = Math.max((2.3706743*tX)+(-0.9000405*tY)+(-0.4706338*tZ),0);
-    var g = Math.max((-0.5138850*tX)+(1.4253036*tY)+(0.0885814*tZ),0);
-    var b = Math.max((0.0052982*tX)+(-0.0146949*tY)+(1.0093968*tZ),0);*/
-
-    if(!test)
+    if(!scale)
     {
+        //Eliminate negative values
+        r = Math.max(0,r);
+        g = Math.max(0,g);
+        b = Math.max(0,b);
+
+        //Apply gamma
         var gamma = 1/2.2;
-        r = normalize(Math.pow(r,gamma));
-        g = normalize(Math.pow(g,gamma));
-        b = normalize(Math.pow(b,gamma));
-    
+        r = Math.pow(r,gamma);
+        g = Math.pow(g,gamma);
+        b = Math.pow(b,gamma);
+
+        //Scale to a max of 1 for displaying the color
+        var max = Math.max(r,Math.max(g,b));
+        if(max > 1)
+        {
+            r /= max;
+            g /= max;
+            b /= max;
+        }
+
+        //Scale to 255 for displaying it
         r = Math.round(r*255);
         g = Math.round(g*255);
         b = Math.round(b*255);
@@ -367,7 +392,7 @@ function XYZtoRGB(tX,tY,tZ,noDisp,test)
     return {r:r,g:g,b:b};
 }
 
-function xyYToRGB(x,y,Y,test)
+function xyYToRGB(x,y,Y,scaleRGB)
 {
     var X = x/y;
     if(!Y)
@@ -375,7 +400,7 @@ function xyYToRGB(x,y,Y,test)
         Y = 1;
     }
     var Z = (1-x-y)/y;
-    return XYZtoRGB(X,Y,Z,true,test);
+    return XYZtoRGB(X,Y,Z,true,scaleRGB);
 }
 
 function round(number,digits)
@@ -384,11 +409,6 @@ function round(number,digits)
     number = Math.round(number);
     number = number/Math.pow(10,digits);
     return number;
-}
-
-function normalize(n)
-{
-    return Math.max(0,Math.min(n,1));
 }
 
 function setxy(x,y)
@@ -749,6 +769,14 @@ function measureAllEmitters(row)
 
 function measureNextValue()
 {
+    if(cancelMeasure)
+    {
+
+        closePopup();
+        drawColorSpace();
+        console.warn("Aborted automatic measurement");
+        return;
+    }
     var nextTimeoutVal = valueChangeTimeout;
     //Measure
     if(currEmitter != -1)
