@@ -52,8 +52,8 @@ function createSliders()
         Rot:false,
         Grün:false,
         Blau:false,
-        Amber:false,
-        Weiss:false
+        Weiss:false,
+        Amber:false
     };
 
     for(var pI = 0; pI < patch.length; pI++)
@@ -576,8 +576,8 @@ function createFixtureSheet()
             Rot:false,
             Grün:false,
             Blau:false,
-            Amber:false,
-            Weiss:false
+            Weiss:false,
+            Amber:false
         };
 
         for(var pI = 0; pI < patch.length; pI++)
