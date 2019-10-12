@@ -1,6 +1,6 @@
 const serialPort = require('serialport');
 const electron = require('electron');
-const {app, BrowserWindow, Menu} = electron;
+const {app, BrowserWindow, Menu, dialog} = electron;
 const globalShortcut = electron.globalShortcut;
 const fs = require('fs');
 
@@ -64,9 +64,15 @@ app.on('ready', () => {
                     }
                 },
                 {
-                    label: 'Export Emitters',
+                    label: 'Export selected emitters',
                     click: (menuItem, browserWindow, event) => {
                         win.webContents.executeJavaScript('doExport("emitters");');
+                    }
+                },
+                {
+                    label: 'Import selected emitters',
+                    click: (menuItem, browserWindow, event) => {
+                        selectDirectory();
                     }
                 }
             ]
@@ -395,6 +401,77 @@ exports.importEmitters = function(filename)
         retData = fs.readFileSync(filename,'utf8');
     }
     return retData;
+}
+
+function selectDirectory()
+{
+    dialog.showOpenDialog(win, {
+      properties: ['openDirectory'],
+      defaultPath: __dirname+"/measurementData",
+      buttonLabel:"Importieren"
+    },(paths) => {
+        if(paths && paths.length > 0)
+        {
+            var data = {};
+            var mainPath = paths[0];
+            var folders = fs.readdirSync(mainPath);
+            if(folders && folders.length > 0)
+            {
+                for(var fI = 0; fI < folders.length; fI++) //Emitter folders
+                {
+                    var emitterPath = mainPath+"/"+folders[fI];
+                    if(fs.lstatSync(emitterPath).isDirectory())
+                    {
+                        data[folders[fI]] = [];
+                        var files = fs.readdirSync(emitterPath);
+                        files = files.map(function (fileName) {
+                            return {
+                                name: fileName,
+                                time: fs.statSync(emitterPath + '/' + fileName).mtime.getTime()
+                            };
+                        })
+                        .sort(function (a, b) {
+                            return a.time - b.time;
+                        })
+                        .map(function (v) {
+                            return v.name;
+                        });
+                        for(var fileI = 0; fileI < files.length; fileI++)
+                        {
+                            var fileData = fs.readFileSync(emitterPath+"/"+files[fileI],'utf8');
+                            var spectralData = readUPRtekCSV(fileData);
+                            data[folders[fI]].push(spectralData);
+                        }
+                    }
+                }
+            }
+
+            win.webContents.executeJavaScript('doImport("emitterData",'+JSON.stringify(data)+');');
+        }
+    })
+}
+
+function readUPRtekCSV(data)
+{
+    data = data.split("\r\n");
+    var x = data[0].split("=")[1].trim();
+    var y = data[1].split("=")[1].trim();
+    var Y = parseFloat(data[8].split("=")[1].trim()) / parseFloat(data[6].split("=")[1].trim()); //LUX/Peak count
+
+    var X = (x*Y)/y;
+    var Z = ((1-x-y)*Y)/y;
+
+    X /= 100;
+    Y /= 100;
+    Z /= 100;
+
+    return {
+        x:x,
+        y:y,
+        X:X,
+        Y:Y,
+        Z:Z
+    };
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
