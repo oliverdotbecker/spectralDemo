@@ -17,7 +17,20 @@ const AS7262 = {
 var serialPorts = [];
 var activeSettings = AS7262;
 var activeSensor = "7262";
-electronDaemon.setSensor(activeSensor);
+
+if(settings.sensor)
+{
+    activeSensor = settings.sensor;
+    if(activeSensor == "7261")
+    {
+        activeSettings = AS7261;
+    }
+    electronDaemon.setSensor(activeSensor);
+}
+if(settings.comPort)
+{
+    electronDaemon.setSerialPath(settings.comPort);
+}
 
 const fixtureTypeLibrary = {
     "Arri Skypannel Mode RGBW":{
@@ -552,6 +565,40 @@ function doExport(arg)
                 var emitterData = patch[sI].emitterData;
                 var filePath = electronDaemon.exportEmitters(JSON.stringify(emitterData),"emitters_"+patch[sI].fixtureType+".json");
                 console.log("Emitters saved to: "+filePath);
+            }
+        }
+    }
+}
+
+function doImport(arg,data)
+{
+    if(arg == "emitterData")
+    {
+        var fileForm = document.getElementById("fileSelector");
+        if(fileForm)
+        {
+            fileForm.click();
+            fileForm.onchange = function(event)
+            {
+                var selectedFixture = -1;
+                for(var sFI = 0; sFI < selectedFixtures.length; sFI++)
+                {
+                    if(selectedFixtures[sFI])
+                    {
+                        selectedFixture = sFI;
+                        break;
+                    }
+                }
+
+                if(selectedFixture != -1)
+                {
+                    selectedFixtureEmitters = patch[sFI].emitterData;
+                    debugger;
+                }
+                else
+                {
+                    console.warn("No fixture selected");
+                }
             }
         }
     }

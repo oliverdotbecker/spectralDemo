@@ -20,8 +20,6 @@ var namesContainer = null;
 var channelSliders = null;
 var sliderContainer = null;
 
-activeSensor = settings.sensor;
-
 function createSurface()
 {
     barsContainer.innerHTML = "";
