@@ -574,32 +574,51 @@ function doImport(arg,data)
 {
     if(arg == "emitterData")
     {
-        var fileForm = document.getElementById("fileSelector");
-        if(fileForm)
+        var selectedFixture = -1;
+        for(var sFI = 0; sFI < selectedFixtures.length; sFI++)
         {
-            fileForm.click();
-            fileForm.onchange = function(event)
+            if(selectedFixtures[sFI])
             {
-                var selectedFixture = -1;
-                for(var sFI = 0; sFI < selectedFixtures.length; sFI++)
-                {
-                    if(selectedFixtures[sFI])
-                    {
-                        selectedFixture = sFI;
-                        break;
-                    }
-                }
+                selectedFixture = sFI;
+                break;
+            }
+        }
 
-                if(selectedFixture != -1)
+        if(selectedFixture != -1)
+        {
+            var selectedFixtureEmitters = patch[sFI].emitterData;
+            for(var eI = 0; eI < selectedFixtureEmitters.length; eI++)
+            {
+                if(data[selectedFixtureEmitters[eI].name])
                 {
-                    selectedFixtureEmitters = patch[sFI].emitterData;
-                    debugger;
-                }
-                else
-                {
-                    console.warn("No fixture selected");
+                    var currDataSet = data[selectedFixtureEmitters[eI].name][0];
+                    var rgb = XYZtoRGB(currDataSet.X,currDataSet.Y,currDataSet.Z);
+                    selectedFixtureEmitters[eI].measures = {};
+                    selectedFixtureEmitters[eI].measures["100%"] = {
+                        XYZ:[
+                            round(currDataSet.X,4),
+                            round(currDataSet.Y,4),
+                            round(currDataSet.Z,4)
+                        ],
+                        xyY:[
+                            round(parseFloat(currDataSet.x),4),
+                            round(parseFloat(currDataSet.y),4),
+                            round(currDataSet.Y,4)
+                        ],
+                        RGB:[
+                            rgb.r,
+                            rgb.g,
+                            rgb.b
+                        ],
+                        color:"rgb("+rgb.r+","+rgb.g+","+rgb.b+")"
+                    };
                 }
             }
+            drawColorSpace();
+        }
+        else
+        {
+            console.warn("No fixture selected");
         }
     }
 }
