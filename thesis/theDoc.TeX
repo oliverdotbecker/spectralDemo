@@ -207,7 +207,7 @@ Contest 2019 oder die Lichtinstallation zum 25. Jahrestag des Falls der Berliner
         \includegraphics[width=0.48\textwidth]{images/csm_MA_building_WBB.jpg}
     \end{center}
     \vspace{-20pt}
-    \caption{Firmensitz Waldbüttelbrunn}
+    \caption{Firmensitz Waldbüttelbrunn \cite{maabout}}
     \vspace{-15pt}
 \end{wrapfigure}
 Der Hauptsitz der MA Lighting Technology GmbH befindet sich in Waldbüttelbrunn in der Nähe von
@@ -234,7 +234,7 @@ Scheinwerfer und \ac{dmx}-Demultiplexer, um analoge Geräte ansteuern zu können
     \hfill 
     \begin{subfigure}[b]{0.25\textwidth}
         \includegraphics[width=\textwidth]{images/MA_2Port_Node_onPC_13019x.png}
-        \caption{2Port Node}
+        \caption{2Port Node \cite{gmaproducts}}
     \end{subfigure}
     \caption{grandMA 1 Serie Produkte}\label{fig:gma1}
 \end{figure}
@@ -256,7 +256,7 @@ wurde die Produktpalette wesentlich erweitert. Hinzu kam die grandMA2 Series.\\
     \hfill 
     \begin{subfigure}[b]{0.4\textwidth}
         \includegraphics[width=\textwidth]{images/MA-VPU-plus_d.png}
-        \caption{VPU}
+        \caption{VPU \cite{gma2products}}
     \end{subfigure}
     \caption{grandMA 2 Serie Produkte}\label{fig:gma2}
 \end{figure}
@@ -272,7 +272,7 @@ Alle diese Produkte adressieren vor allem den Highend-Profibereich für Theaterp
 Liveshows und Festinstallationen.\\
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{images/grandMA3-full-size.png}
-    \caption{grandMA3 full-size}\label{fig:gma3}
+    \caption{grandMA3 full-size \cite{gma3}}\label{fig:gma3}
 \end{figure}
 \noindent
 Seit Mitte 2017 entwickelt MA eine neue Produkt Serie. Die grandMA3 Serie. Diese Serie greift die
@@ -296,10 +296,12 @@ Diese Abkürzung steht für Digital Multiplex. Dahinter verbirgt sich ein digita
 welches vornehmlich in der Veranstaltungstechnik eingesetzt wird. Es wurde zuerst als DMX-
 512/1990 standardisiert. Im November 2004 wurde dieser Standard aktualisiert, bekannt als
 DMX512-A (ANSI E1.11-2008). \ac{dmx} basiert elektrisch auf dem seriellen RS-485 (EIA-485)
-Schnittstellenstandard.\\
+Schnittstellenstandard.
 \begin{figure}[H]
-    \includegraphics[width=\textwidth]{images/dmx.png}
-    \caption{Physikalische Übertragung DMX-512/1990 (RS-485)}
+    \begin{center}
+        \includegraphics[width=.75\textwidth]{images/dmx.png}
+    \end{center}
+    \caption{Physikalische Übertragung DMX-512/1990 (RS-485) \cite{soundlight}}
 \end{figure}
 \noindent
 Das eigentliche Signal wird dabei seriell auf einem Leitungspaar symmetrisch übertragen - auf der
@@ -309,15 +311,15 @@ auswirken und am Empfänger nicht das Pegelniveau, sondern die Pegeldifferenz au
 Das ermöglicht laut Standard [2] bis zu 1200m lange Übertragungsstrecken und eine
 Datenübertragungsrate bis zu 12 \ac{MBps}. Ein Netzwerk aus mehreren Geräten wird als Bus aufgebaut.\\
 Die Datenübertragung erfolgt mittels einer \ac{uart} gesteuerten asynchronen seriellen Schnittstelle. Ein
-Datenframe besteht aus acht Datenbits und zwei Stoppbits. Die Symbolrate beträgt 250 kBaud (Baud = Bits pro sec).
+Datenframe besteht aus acht Datenbits und zwei Stoppbits. Die Symbolrate beträgt 250 k\ac{baud}.
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{images/DMX_zeitlich.png}
-    \caption{Zeitliche Darstellung \ac{dmx}-Signal}
+    \caption{Zeitliche Darstellung \ac{dmx}-Signal \cite{soundlightA}} \label{fig:DMXoverTime}
 \end{figure}
 \noindent
 \begin{table}[H]
     \small
-    Legende zu Bild 6:\\
+    Legende zu Bild \ref{fig:DMXoverTime}:\\
     \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllll}
         Nr. & Signalabschnitt & Min & Soll & Max & Einheit\\
         1 & BREAK & 88 & 176 & - & $\mu$s\\
@@ -349,10 +351,10 @@ offenen Übertragungen.\\
 In der Spezifikation DMX512-A wurden erstmals Maximalzeiten für die Slot Time (3) und den
 zeitlichen Abstand zwischen zwei BREAKs (10) definiert. Wenn die Zeit zwischen zwei BREAKs größer
 als eine Sekunde ist, wertet ein Empfänger dies als Übertragungsausfall. Ein Übertragungsausfall ist
-folgendermaßen definiert: 'Ein Übertragungsausfall kann dann angenommen werden, wenn der
+folgendermaßen definiert: "'Ein Übertragungsausfall kann dann angenommen werden, wenn der
 angeschlossene Empfänger nicht innerhalb der angegebenen Zeit einen gültigen BREAK mit
-darauffolgendem NULL-Startcode erkennen kann.' Weiter wurde eine empfohlene Länge des
-BREAKs definiert. Dies soll den Empfängern die Dekodierung erleichtern.
+darauffolgendem NULL-Startcode erkennen kann."' \cite{dmxstandard} Weiter wurde eine empfohlene Länge
+des BREAKs definiert. Dies soll den Empfängern die Dekodierung erleichtern.
 \clearpage
 
 \subsection{Art-Net}
@@ -744,7 +746,7 @@ definieren. In dem ebenfalls zweidimensionalen Koordinatensystem bewegt man sich
     \caption{CIE 1976 2D Farbraum \cite{wikipedia1976}}
 \end{figure}
 \noindent
-"'Der CIE LUV-Farbraum ist eine Ableitung des Standard CIE XYZ-Farbraums, in dem der Abstand der Farben dem menschlichen Farbsehen besser entgegenkommt."' \cite{wisotoLuv}
+"'Der CIE LUV-Farbraum ist eine Ableitung des Standard CIE XYZ-Farbraums, in dem der Abstand der Farben dem menschlichen Farbsehen besser entgegenkommt."' \cite{wisotopLuv}
 Mit den folgenden Formeln lassen sich die u' und v' Koordinaten errechnen.
 \begin{align}\label{Equ:9}
     u' = \frac{4X}{X+15Y+3Z}\\
@@ -780,7 +782,7 @@ L ist ein Faktor für die Bestimmung der Sättigung $s_{uv}$ der Farbvalenz. \ci
 \end{align}
 \cite{lindbloom}, \cite{wikipedia1976}\\
 \\
-Wenn die uv Koordinaten auf 0 gesetzt werden, also auf dem Referenzweißpunkt liegen variiert L die Grauskala der Valenz. \cite{wisotoLuv}
+Wenn die uv Koordinaten auf 0 gesetzt werden, also auf dem Referenzweißpunkt liegen variiert L die Grauskala der Valenz. \cite{wisotopLuv}
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% LED %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -992,7 +994,7 @@ Hier ist zu beachten, dass auf dem Adafruit Sensorboard die Lötbrücke für "'\
 Anpassung verbleibt der Chip im \ac{i2c} Modus.\\
 Das Sensorboard wurde mit einem "'FTDI Friend"', einem weiteren Produkt von Adafruit, mit dem Endgerät, einem Windows Computer, verbunden.
 Dies ist ein USB-Seriell-Transceiver. Dieser Chip von der Firma FTDI wandelt \ac{usb} zu RS232 Analogsignalen. Die Verbindung mit dem \ac{ic}
-wird über \ac{uart} via RS232 hergestellt, mit einer Baud Rate von 115200.\\
+wird über \ac{uart} via RS232 hergestellt, mit einer \ac{baud} Rate von 115200.\\
 Die Kommunikation über \ac{uart} mit allen AMS Sensoren funktioniert mit AT-Kommandos, einer \ac{ascii} basierten Kommandosprache,
 welche für Modems in den 1980er Jahren entwickelt wurde.
 \subsection{AS7261}
@@ -1629,6 +1631,7 @@ Hier folgen Notizen:\\
 \subsection{Abkürzungsverzeichnis}
 \begin{acronym}
     \acro{ascii}[ASCII]{American Standard Code for Information Interchange}
+    \acro{baud}[Baud]{Bits per second}
     \acro{cie}[CIE]{Commission internationale de l’éclairage}
     \acro{css}[CSS]{Cascading Style Sheets}
     \acro{dmx}[DMX]{Digital Multiplex}
@@ -1664,6 +1667,13 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
 \begingroup
 \renewcommand{\section}[2]{}
 \begin{thebibliography}{xxxxxxxxxxxxxxxxxxx}
+    \bibitem[MA Lighting Homepage, 2019]{maabout}"'About us | MA Lighting International GmbH', \url{https://www.malighting.com/company/about-us/}. Visited on: 13.10.2019
+    \bibitem[MA Lighting Homepage, 2019]{gmaproducts}"'grandMA | MA Lighting International GmbH"', \url{https://www.malighting.com/product-archive/products/grandma/}. Visited on: 13.10.2019
+    \bibitem[MA Lighting Homepage, 2019]{gma2products}"'grandMA2 | MA Lighting International GmbH"', \url{https://www.malighting.com/product-archive/products/grandma2/}. Visited on: 13.10.2019
+    \bibitem[MA Lighting Homepage, 2019]{gma3}"'grandMA3 | MA Lighting International GmbH"', \url{https://www.malighting.com/grandma3/}. Visited on: 13.10.2019
+    \bibitem[DMX-512A Paper, 2019]{dmxstandard}"'DMX-512A Standard', \url{https://tsp.esta.org/tsp/documents/docs/E1-27-1_2006R2016.pdf}. Visited on: 13.10.2019
+    \bibitem[Soundlight Homepage, 2019]{soundlight}"'DMX512/1990"', \url{http://www.soundlight.de/techtips/dmx512/dmx512.htm}. Visited on: 13.10.2019
+    \bibitem[Soundlight Homepage, 2019]{soundlightA}"'Der neue Standart: DMX-512A"', \url{http://www.soundlight.de/techtips/dmx512/dmx2000a.htm}. Visited on: 13.10.2019
     \bibitem[Art-Net Homepage, 2019]{artnet}"'Home - Art-Net"', \url{https://art-net.org.uk/}. Visited on: 07.08.2019
     \bibitem[Art-Net Documatation, 2019]{artdmx}"'ArtDmx – Packet Definition - Art-Net"', \url{https://art-net.org.uk/structure/streaming-packets/artdmx-packet-definition/}. Visited on: 10.08.2019
     \bibitem[Electron Homepage, 2019]{electron}"'Electron | Plattformübergreifende Desktop-Anwendungen mit JavaScript, HTML und CSS entwickeln."', \url{https://electronjs.org/}. Visited on: 08.08.2019
@@ -1680,7 +1690,7 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
     \bibitem[CIExy1931 - Wikipedia,2019]{wikipedia1931Image} \url{https://de.wikipedia.org/wiki/Datei:CIExy1931.svg}. Visited on: 30.09.2019
     \bibitem[CIE - Wikipedia,2019]{wikipediaCIE} \url{https://de.wikipedia.org/wiki/CIE-Normvalenzsystem}. Visited on: 30.09.2019
     \bibitem[CIELUV - Wikipedia,2019]{wikipedia1976} \url{https://de.wikipedia.org/wiki/CIELUV-Farbraumsystem}. Visited on: 30.09.2019
-    \bibitem[CIE Luv - Wisotop,2019]{wisotoLuv} \url{https://wisotop.de/CIE-luv.php}. Visited on: 01.10.2019
+    \bibitem[CIE Luv - Wisotop,2019]{wisotopLuv} \url{https://wisotop.de/CIE-luv.php}. Visited on: 01.10.2019
     \bibitem[Leuchtdiode Wikipedia, 2019]{wikiLed}"'Leuchtdiode - Wikipedia"', \url{https://de.wikipedia.org/wiki/Leuchtdiode}. Visited on: 21.08.2019
     \bibitem[Showlicht von Scribble zum fertigen Desgin, 2014]{showlicht}"'Showlicht von Scribble zum fertigen Desgin"', 01.09.2019
     \bibitem[Philips PAR64 Leuchtmittel 1000W | Thomann, 2019]{convpar}"'Philips PAR64 Leuchtmittel 1000W | Thomann"', \url{https://www.thomann.de/de/philips_par64_1000_watt_mfl_cp62_exe.htm}. Visited on: 02.09.2019
