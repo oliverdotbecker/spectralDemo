@@ -406,9 +406,9 @@ exports.importEmitters = function(filename)
 function selectDirectory()
 {
     dialog.showOpenDialog(win, {
-      properties: ['openDirectory'],
-      defaultPath: __dirname+"/measurementData",
-      buttonLabel:"Importieren"
+        properties: ['openDirectory'],
+        defaultPath: __dirname+"/measurementData",
+        buttonLabel:"Importieren"
     },(paths) => {
         if(paths && paths.length > 0)
         {

@@ -33,7 +33,7 @@ if(settings.comPort)
 }
 
 const fixtureTypeLibrary = {
-    "Arri Skypannel Mode RGBW":{
+    "Arri Skypanel Mode RGBW":{
         intensity:1,
         emitters:{
             Rot:2,
