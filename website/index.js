@@ -14,6 +14,12 @@ const AS7262 = {
     channelWavelengths:[450,500,550,570,600,650], //nm
     maxSpectrumVal:65536
 }
+//UPRtek settings
+const UPRtek = {
+    channelCount:0,
+    channelNames:[],
+    channelColors:[]
+}
 var serialPorts = [];
 var activeSettings = AS7262;
 var activeSensor = "7262";
@@ -563,7 +569,7 @@ function doExport(arg)
             if(selectedFixtures[sI])
             {
                 var emitterData = patch[sI].emitterData;
-                var filePath = electronDaemon.exportEmitters(JSON.stringify(emitterData),"emitters_"+patch[sI].fixtureType+".json");
+                var filePath = electronDaemon.exportEmitters(JSON.stringify(emitterData),activeSensor+"/emitters_"+patch[sI].fixtureType+".json");
                 console.log("Emitters saved to: "+filePath);
             }
         }
@@ -1491,6 +1497,7 @@ function drawColorSpace()
 
             //Analyse the coordinates
             var combinedCoordinates = [];
+            if(coordinates.length && coordinates[0].length)
             {
                 // temporary vertex storage
                 var vertices1 = [], vertices2 = [];

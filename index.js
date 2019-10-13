@@ -387,7 +387,7 @@ exports.exportSavedData = function(data)
 
 exports.exportEmitters = function(data,filename)
 {
-    var filename = __dirname+'/'+filename;
+    var filename = __dirname+'/measurementData/'+filename;
     fs.writeFileSync(filename,data,'utf8');
     return filename;
 }
@@ -395,7 +395,7 @@ exports.exportEmitters = function(data,filename)
 exports.importEmitters = function(filename)
 {
     var retData = null;
-    var filename = __dirname+'/'+filename;
+    var filename = __dirname+'/measurementData/'+filename;
     if(fs.existsSync(filename))
     {
         retData = fs.readFileSync(filename,'utf8');
@@ -412,43 +412,63 @@ function selectDirectory()
     },(paths) => {
         if(paths && paths.length > 0)
         {
-            var data = {};
-            var mainPath = paths[0];
-            var folders = fs.readdirSync(mainPath);
-            if(folders && folders.length > 0)
-            {
-                for(var fI = 0; fI < folders.length; fI++) //Emitter folders
-                {
-                    var emitterPath = mainPath+"/"+folders[fI];
-                    if(fs.lstatSync(emitterPath).isDirectory())
-                    {
-                        data[folders[fI]] = [];
-                        var files = fs.readdirSync(emitterPath);
-                        files = files.map(function (fileName) {
-                            return {
-                                name: fileName,
-                                time: fs.statSync(emitterPath + '/' + fileName).mtime.getTime()
-                            };
-                        })
-                        .sort(function (a, b) {
-                            return a.time - b.time;
-                        })
-                        .map(function (v) {
-                            return v.name;
-                        });
-                        for(var fileI = 0; fileI < files.length; fileI++)
-                        {
-                            var fileData = fs.readFileSync(emitterPath+"/"+files[fileI],'utf8');
-                            var spectralData = readUPRtekCSV(fileData);
-                            data[folders[fI]].push(spectralData);
-                        }
-                    }
-                }
-            }
-
-            win.webContents.executeJavaScript('doImport("emitterData",'+JSON.stringify(data)+');');
+            collectData(paths[0]);
         }
     })
+}
+
+exports.importExternalEmitters = function(fixtureName)
+{
+    var path = __dirname+"/measurementData/UPRtek/"+fixtureName;
+    if(fs.existsSync(path))
+    {
+        return collectData(path,true);
+    }
+    return null;
+}
+
+function collectData(path,doReturn)
+{
+    var data = {};
+    var mainPath = path;
+    var folders = fs.readdirSync(mainPath);
+    if(folders && folders.length > 0)
+    {
+        for(var fI = 0; fI < folders.length; fI++) //Emitter folders
+        {
+            var emitterPath = mainPath+"/"+folders[fI];
+            if(fs.lstatSync(emitterPath).isDirectory())
+            {
+                data[folders[fI]] = [];
+                var files = fs.readdirSync(emitterPath);
+                files = files.map(function (fileName) {
+                    return {
+                        name: fileName,
+                        time: fs.statSync(emitterPath + '/' + fileName).mtime.getTime()
+                    };
+                })
+                .sort(function (a, b) {
+                    return a.time - b.time;
+                })
+                .map(function (v) {
+                    return v.name;
+                });
+                for(var fileI = 0; fileI < files.length; fileI++)
+                {
+                    var fileData = fs.readFileSync(emitterPath+"/"+files[fileI],'utf8');
+                    var spectralData = readUPRtekCSV(fileData);
+                    data[folders[fI]].push(spectralData);
+                }
+            }
+        }
+    }
+
+    if(doReturn)
+    {
+        return JSON.stringify(data);
+    }
+
+    win.webContents.executeJavaScript('doImport("emitterData",'+JSON.stringify(data)+');');
 }
 
 function readUPRtekCSV(data)
