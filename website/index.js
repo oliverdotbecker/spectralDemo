@@ -998,7 +998,7 @@ function calcColorMix(event)
                 if(sliderValues[sI] != 0)
                 {
                     var currEmitter = emitters[sI];
-                    if(JSON.stringify(currEmitter.measures) != JSON.stringify({}))
+                    if(currEmitter && JSON.stringify(currEmitter.measures) != JSON.stringify({}))
                     {
                         var minMeasure = 0;
                         var maxMeasure = 0;
