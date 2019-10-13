@@ -292,10 +292,10 @@ Weiter wird diese Applikation für die Ausgabe von \ac{dmx} genutzt.\\
 Im Folgenden werden die hier verwendeten Protokolle, Programme, und Frameworks dargelegt.
 
 \subsection{DMX}
-Diese Abkürzung steht für Digital Multiplex. Dahinter verbirgt sich ein digitales Steuerprotokoll,
+Diese Abkürzung steht für Digital Multiplex. Dabei handelt es sich um ein digitales Steuerprotokoll,
 welches vornehmlich in der Veranstaltungstechnik eingesetzt wird. Es wurde zuerst als DMX-
-512/1990 standardisiert. Im November 2004 wurde dieser Standard aktualisiert, bekannt als
-DMX512-A (ANSI E1.11-2008). \ac{dmx} basiert elektrisch auf dem seriellen RS-485 (EIA-485)
+512/1990 standardisiert. Im November 2004 wurde dieser Standard auf DMX512-A aktualisiert
+(ANSI E1.11-2008). \ac{dmx} basiert elektrisch auf dem seriellen RS-485 (EIA-485)
 Schnittstellenstandard.
 \begin{figure}[H]
     \begin{center}
@@ -305,9 +305,9 @@ Schnittstellenstandard.
 \end{figure}
 \noindent
 Das eigentliche Signal wird dabei seriell auf einem Leitungspaar symmetrisch übertragen - auf der
-einen Leitung mit invertierten und auf der anderen mit nichtinvertiertem Pegel. Das Signal ist so
-weniger störungsempfindlich, da sich externe Einstreuungen auf beide Datenleitungen gleichmäßig
-auswirken und am Empfänger nicht das Pegelniveau, sondern die Pegeldifferenz ausgewertet wird.
+einen Leitung mit invertierten und auf der anderen mit nichtinvertiertem Pegel. Da sich externe 
+Einstreuungen auf beide Datenleitungen gleichmäßig auswirken und am Empfänger nicht das Pegelniveau,
+sondern die Pegeldifferenz ausgewertet wird, ist das Signal so weniger störungsempfindlich.
 Das ermöglicht laut Standard [2] bis zu 1200m lange Übertragungsstrecken und eine
 Datenübertragungsrate bis zu 12 \ac{MBps}. Ein Netzwerk aus mehreren Geräten wird als Bus aufgebaut.\\
 Die Datenübertragung erfolgt mittels einer \ac{uart} gesteuerten asynchronen seriellen Schnittstelle. Ein
@@ -483,13 +483,13 @@ beschrieben. \cite{wikiLicht}\\
 \end{wrapfigure}
 \noindent
 Licht ist im elektromagnetischen Spektrum messbar. Somit kann man einen Farbton als eine Frequenz und eine Helligkeit als eine Amplitude beschreiben.
-Wo eine Farbe im elektromagnetischen Spektrum einzuordnen ist, wird sie mit der Wellenlänge in Nanometern (nm) angegeben. Diese Zahl fällt von
-dem Infrarotbereich des Spektrums ab 760 nm bis in den Ultraviolettbereich bei 380 nm.
+Wo eine Farbe im elektromagnetischen Spektrum einzuordnen ist, wird mit der Wellenlänge in Nanometern (nm) angegeben. Das Spektrum des Lichtes reicht von
+dem Infrarotbereich ab 760 nm bis in den Ultraviolettbereich bei 380 nm.
 \begin{align}\label{Equ:1}
     \lambda = \frac{c}{f}
 \end{align}
-Die zugehörigen Frequenzen liegen mit (\ref{Equ:1}) bei etwa 394,5 \ac{thz} für Infrarot und circa 789 \ac{thz} für Ultraviolett. Das
-entspricht einer Bandbreite von 394,5 \ac{thz}, die das menschliche Auge erfassen kann.\\
+Die zugehörigen Frequenzen liegen mit (\ref{Equ:1}) bei etwa 394,5 \ac{thz} für Infrarot und circa 789 \ac{thz} für Ultraviolett. Das menschliche Auge kann somit 
+eine Bandbreite von 394,5 \ac{thz} erfassen.\\
 \\
 Dieser Teil des elektromagnetischen Spektrums lässt sich zum Beispiel mit Photodioden messen. Sensoren, welche eine solche Aufgabe erfüllen,
 werden allgemein als Spektralsensoren bezeichnet.
@@ -497,8 +497,8 @@ werden allgemein als Spektralsensoren bezeichnet.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Farbe %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Farbe}
-Der Begriff Farbe, als Sinneseindruck, beschreibt die verschiedenen Zustände, welche die Amplituden im elektromagnetischen Spektrum annehmen können. Hier ist es
-unerheblich, ob nur eine einzelne Spektrallinie oder eine breite spektrale Verteilung betrachtet wird.\\
+Der Sinneseindruck Farbe setzt sich aus den verschiedenen Zuständen der Amplituden im elektromagnetischen Spektrum zusammen. Hier ist es
+unerheblich, ob nur eine einzelne Spektrallinie oder eine breite spektrale Verteilung betrachtet werden.\\
 Der Farbeindruck wird vorallem durch den Farbton geprägt. Ein Farbton entsteht natürlich oder künstlich von einem emittierenden oder reflektieren Körper.
 Weiter ist die Sättigung ein entscheidendes Merkmal einer Farbe. Umso intensiver ein Farbton ist, desto höher ist die Sättigung der Farbe. Ein blasser
 Farbton beinhaltet in seinem Spektrum einen Weiß-Anteil. Je blasser der Farbton, desto mehr Weiß-Anteile enthält er. Zuletzt ist noch die Helligkeit zu
@@ -515,13 +515,13 @@ weiterem Erhöhen der Temperatur wechselt der Farbton des Metalls über gelb zur
 \end{figure}
 \noindent
 Dieses Prinzip der Lichtemittierung wird auch Temperaturstrahlung genannt.\\
-Mit diesem Maß wird auch heute bei \ac{led}s noch die Farbtemperatur bestimmt und in Kelvin angegeben, auch wenn die Lichtemittierung nicht auf der
+Mit diesem Maß wird auch heute noch bei \ac{led}s die Farbtemperatur bestimmt und in Kelvin angegeben, auch wenn die Lichtemittierung nicht auf der
 Temperaturstrahlung basiert.
 \subsection{Farbmischung}
-Die Farbmischung folgt zwei Prinzipien, welche im Folgenden dargelegt werden.
+Es gibt zwei verschiedene Prinzipien der Farbmischung, die additive und die subtraktive Farbmischung. Diese werden im Folgenden dargelegt.
 \subsubsection{Additiv}
-Nimmt man eine rote und eine grüne Lichtquelle und lässt diese auf eine weiße, also neutrale, Fläche strahlen entsteht für das menschliche Auge
-ein Sinneseindruck einer gelben Farbe. Dies geschieht spektral betrachtet durch eine Addition der Amplituden der einzelnen Wellenlängen.
+Nimmt man eine rote und eine grüne Lichtquelle und lässt diese übereinander auf eine weiße, also neutrale, Fläche strahlen, entsteht für das menschliche Auge
+ein Sinneseindruck einer gelben Farbe. Dies geschieht durch die Addition der Spektren der beiden Lichtquellen.
 \cite[62]{lichtquellen}\\
 \begin{wrapfigure}{r}{0.5\textwidth}
     \vspace{-25pt}
@@ -533,12 +533,12 @@ ein Sinneseindruck einer gelben Farbe. Dies geschieht spektral betrachtet durch 
     \vspace{-15pt}
 \end{wrapfigure}
 Emittiertes Licht unterliegt generell der additiven Farbmischung. Dieses Prinzip findet beispielsweise Anwendung bei der Farbmischung von \ac{led}s.
-Mit diesem Prinzip funktionieren alltägliche Gegenstände wie Bildschirme in Fernsehgeräten oder Smartphones.
+Nach diesem Prinzip funktionieren alltägliche Gegenstände wie Bildschirme in Fernsehgeräten oder Smartphones.
 \subsubsection{Subtraktiv}
 Reflektiertes Licht unterliegt generell der subtraktiven Farbmischung. Nimmt man eine weiße Lichtquelle, enthält diese ein breites Spektrum an Wellenlängen.
 Trifft das weiße Licht auf einen Körper, wird das Licht reflektiert. Jedoch können Körper einzelne Wellenlängen oder auch größere Wellenlängenbereiche
-absorbieren. Absorbiert ein Körper vereinfacht rotes und blaues Licht und wird er von einer weißen Lichtquelle angestrahlt reflektiert er grünes
-Licht. Dieses reflektierte Licht trifft nun das menschliche Auge. Somit erscheint der Körper grün.
+absorbieren. Ein Körper, der rotes und blaues Licht absorbiert, reflektiert nur das grüne Licht, wenn er von einer weißen Lichtquelle angestrahlt wird. 
+Dieses reflektierte Licht trifft nun das menschliche Auge. Somit erscheint der Körper grün.
 \cite[62]{lichtquellen}\\
 Besonders die subtraktive Farbmischung ist uns allgegenwärtig. Mit der Sonne oder der Raumbeleuchtung als weiße Lichtquelle sehen wir unsere Umgebung in
 verschiedensten Farben und passen unsere Umgebung nach diesem Prinzip an. Von der Wandfarbe zum Ausdrucken eines wichtigen Dokuments ist subtraktive
@@ -580,7 +580,7 @@ resistiv sind.\\
 \end{figure}
 \noindent
 Die Mengenverteilung der verschiedenen Zapfenarten liegt circa bei S:M:L 1:16:32. Stäbchen und Zapfen übergeben die
-empfangen Farbreize and den Sehnerv. Dieser leitet die Informationen an das Gehirn weiter.
+empfangen Farbreize an den Sehnerv. Dieser leitet die Informationen an das Gehirn weiter.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Farbräume %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -667,7 +667,7 @@ Berechnungen dieser Arbeit stützen sich auf diese Gesetze. "'Die von Graßmann 
 Welt so gut wie nicht anerkannt – heute jedoch bilden sie eine weitestgehend immer noch gültige Grundlage aller modernen Farblehren und -räume."'\\
 \cite{wikipediaGrassmannGestze}
 \subsection{RGB}
-Der RGB Farbraum baut auf dem Prinzip der trichormatischen Theorie auf. Diese Theorie wurde maßgeblich von Hermann von Helmholtz um 1890 entwickelt. Sie
+Der RGB Farbraum baut auf dem Prinzip der trichromatischen Theorie auf. Diese Theorie wurde maßgeblich von Hermann von Helmholtz um 1890 entwickelt. Sie
 beschreibt drei Grundfarben: Rot, Grün und Blau. Helmholtz beobachtete, dass aus drei Farbvalenzen jede beliebige Valenz innerhalb des Gamut
 additiv gemischt werden kann. Diese Theorie wurde von Hermann Graßmann weiterentwickelt.\\
 Der RGB Farbraum beschreibt mit einem Zahlentripel eine Farbvalenz. Diese Zahlen beschreiben die Intensität von rotem (R), grünen (G) und
@@ -701,7 +701,7 @@ sogenannten Empfindlichkeitskurven beschrieben.
     \caption{CIE XYZ genormte Empfindlichkeitskurven \cite{wikipediaCIE}}
 \end{figure}
 \noindent
-Hier sind die Kurven, welche auch für das Tristimulus Verfahren benötigt werden, grafisch dargestellt. Bei dem Tristimulus Verfahren werden die spektrale Energie
+In Bild 15 sind die Kurven, welche auch für das Tristimulus Verfahren benötigt werden, grafisch dargestellt. Bei dem Tristimulus Verfahren wird die spektrale Energie
 einer Wellenlänge mit dem korrespondierenden Wert für jeweils X, Y und Z multipliziert, um die CIE XYZ Koordinate zu erhalten.\\
 Die Empfindlichkeitskurven ahmen die spektrale Empfindlichkeit des menschlichen Auges nach. X kann auch durch L ersetzt werden für die langwellig sensitiven Zapfen
 des Auges. Gleiches gilt für Y mit M und Z mit S. Somit kann man diese Darstellung als LMS-Farbraum bezeichnen.\\
@@ -710,7 +710,7 @@ des Auges. Gleiches gilt für Y mit M und Z mit S. Somit kann man diese Darstell
 und Z-Werten. Um eine normierte Übersicht der Farben zu erreichen wurden neutralweiße Normlichtfarben definiert. Aus Gründen der Farbwahrnehmung befinden sich diese
 auf der Black-Body-Kurve, da dies mit einer Farbtemperatur verbundene Beleuchtungen sind."' \cite{wikipediaCIE}\\
 Dies bedeutet, dass von dem roten Bereich zum Weißpunkt des CIE Diagramms eine Kurve zu finden ist, welche die verschiedenen Farbtemperaturen repräsentiert. Für die Umrechnung
-in andere Farbräume, wie zum Beispiel RGB, muss ein Referenzweißpunkt definiert werden wo sich die Weißpunkte der beiden Farbräume decken. Je nach Weißpunkt gibt es 
+in andere Farbräume, wie zum Beispiel RGB, muss ein Referenzweißpunkt definiert werden, an dem sich die Weißpunkte der beiden Farbräume decken. Je nach Weißpunkt gibt es 
 für die gleiche Umrechnung verschiedene Umrechnungsmatrizen.\\
 In dieser Arbeit wird der Weißpunkt D65 als Referenzpunkt genutzt. "'Das Spektrum hat eine ähnlichste Farbtemperatur von 6504 Kelvin. Genutzt wird dieses Normlicht als Weißpunkt für sRGB"' \cite{wikipediaCIE}
 \subsubsection{CIE 1931}
@@ -782,7 +782,7 @@ L ist ein Faktor für die Bestimmung der Sättigung $s_{uv}$ der Farbvalenz. \ci
 \end{align}
 \cite{lindbloom}, \cite{wikipedia1976}\\
 \\
-Wenn die uv Koordinaten auf 0 gesetzt werden, also auf dem Referenzweißpunkt liegen variiert L die Grauskala der Valenz. \cite{wisotopLuv}
+Wenn die uv Koordinaten auf 0 gesetzt werden, also auf dem Referenzweißpunkt liegen, variiert L die Grauskala der Valenz. \cite{wisotopLuv}
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% LED %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -806,7 +806,7 @@ Im Folgenden ein Auszug der Element-Farbzuordnung \cite{wikiLed}:
 Zunächst wurden \ac{led}s in den frühen 1960er Jahren als Leuchtindikatoren benutzt. Also zum Beispiel auf
 Platinen als Statusanzeige oder wie wir es heute von vielen Ethernetanschlussbuchsen kennen als blinkende Anzeige, die den Datenempfang
 signalisiert. Durch die voranschreitende technische Entwicklung der \ac{led}, wie bessere Effizienz und bessere Lichtausbeute, sowie verbesserter
-Langlebigkeit des Bauteils, fand anfang der 1990er die \ac{led} auch ihre Anwendung im Heimbereich.\\
+Langlebigkeit des Bauteils, fand Anfang der 1990er die \ac{led} auch ihre Anwendung im Heimbereich.\\
 \ac{led}s "'emittieren Licht in einem begrenzten Spektralbereich. Das Licht ist nahezu monochromatisch. Deshalb sind sie beim Einsatz als
 Signallicht besonders effizient im Vergleich zu anderen Lichtquellen, bei denen zur Erzielung einer monochromen Farbcharakteristik
 Farbfilter den größten Teil des Spektrums absorbieren müssen."'\\
@@ -820,7 +820,7 @@ So kann beispielsweise mit einer roten und einer grünen \ac{led} ein orangener 
 
 \subsection{Weiße LEDs}
 Eine tatsächlich weiße \ac{led} existiert bisher auf dem Markt nicht, da \ac{led}s generell schmalbandig abstrahlen. Die heutzutage
-verwendeten "'weißen"' \ac{led}s sind eigentlich blaue \ac{led}s, mit einem zusätzlichen Phosphor Filter als breitbandigem Lumineszenzfarbstoff.
+verwendeten "'weißen"' \ac{led}s sind eigentlich blaue \ac{led}s, mit einem zusätzlichen Phosphorfilter als breitbandigem Lumineszenzfarbstoff.
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
@@ -842,10 +842,10 @@ ein breitbandiges Abstrahlverhalten.
 %%%%%%%%%%%%%%%%%%%%%%%%%% Lichtquellen in der Veranstaltungstechnik %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lichtquellen in der Veranstaltungstechnik}
 Für die Veranstaltungstechnik ist künstliches Licht nahezu unverzichtbar. Von der Grundausleuchtung in einem Theater bis zum Effektlicht
-auf Kleinveranstaltungen. In den frühen Jahren der großen Konzerte wurde die Bühne hauptsächlich mit Scheinwerfern mit Glühfaden Leuchtmitteln beleuchtet.
+auf Kleinveranstaltungen. In den frühen Jahren der großen Konzerte wurde die Bühne hauptsächlich mit Scheinwerfern mit Glühfaden-Leuchtmitteln beleuchtet.
 Diese Form der Beleuchtung wurde in der Veranstaltungstechnik als Kunstlicht bezeichnet.\\
 Weiter werden vornehmlich in Theatern, sowie Film- und Fernseherproduktion Tageslichtscheinwerfer benutzt. Tageslichtleuchtmittel
-unterscheiden sich von der Art der Lichterzeugung gegenüber Glühlicht. Hier kommen anstatt eines Glühfadens zwei Elektroden in einer
+unterscheiden sich in der Art der Lichterzeugung gegenüber Glühlicht. Hier kommen anstatt eines Glühfadens zwei Elektroden in einer
 gasgefüllten Röhre zum Einsatz. Mit dem Anlegen einer Spannung an den beiden Elektroden baut sich ein elektrisches Feld auf, welches zu
 einer Gasentladung und somit zu einer Lichtemittierung führt. Solche Gasentladungslampen oder auch \ac{hmi} (Halogen-Metalldampflampe)
 werden für diese Anwendungen in der Regel mit Xenon befüllt. Das emittierte Licht ist ähnlich dem Spektrum des Sonnenlichtes auf der
@@ -916,8 +916,7 @@ sind alle unterschiedlich aufgebaut.
 \noindent
 Diese Lampe ist eine sehr kompakt gebaute RGBW \ac{led} Lichtquelle auf Akku Basis. Diese wurde von der Firma Ape Labs aus Eisigen in Deutschland
 entwickelt. Diese Lampe ist sowohl per Fernbedienung, als auch per W-\ac{dmx} steuerbar.
-Die "'Kanne"' hat einen Abstrahlwinkel von 65 Grad. Zur gezielten Steuerung, ohne vorprogrammierte Effekte wird ein \ac{dmx} zu W-DMX Wandler der
-Firma benötigt (W-APP). Dieser ermöglicht dann die Ansteuerung der Lampe durch die Applikation.
+Die "'Kanne"' hat einen Abstrahlwinkel von 65 Grad. Zur gezielten Steuerung, ohne vorprogrammierte Effekte wird ein \ac{dmx} zu W-DMX Wandler des Herstellers benötigt (W-APP). Dieser ermöglicht dann die Ansteuerung der Lampe durch eine Applikation.
 \subsubsection{Robe LEDWash 300}
 Dieses Wash Movinglight ist ein handelsübliches Gerät und wird weltweit bei vielen Veranstaltungen universell eingesetzt. Hier sind 19 einzelne
 RGBW \ac{led}s hinter einzelnen Linsen in zwei Kreisen und einer Mittelpunkt \ac{led} positioniert.
@@ -933,7 +932,7 @@ um ein möglichst homogenes Abstrahlverhalten zu erhalten. Laut Hersteller hat d
 Lichtausbeute von 3.370 Lumen. Die Lampe ist per \ac{xlr} mit DMX, oder via Ethernet RJ45-Buchse per Art-Net steuerbar. An einem Display
 am Fuß (der "'Base"') kann der Scheinwerfer konfiguriert werden.
 \subsubsection{ARRI SkyPanel}
-Das Skypanel S60-C von der Firma Arri, ein Tochterunternehmen der Firma Osram, wird oft als Fluter, das Grundlicht in Film und Fernsehen, eingesetzt.
+Das Skypanel S60-C von der Firma Arri, ein Tochterunternehmen der Firma Osram, wird oft als Grundlicht in Film und Fernsehen eingesetzt.
 Es wird beworben, dass es mit \ac{cie} 1931 xyY Werten per DMX angesteuert werden kann und diese \ac{cie} Werte von der Lampe exakt wiedergegeben werden. Somit
 ist diese Lampe eine perfekte Referenz für diese Arbeit.
 \begin{figure}[H]
@@ -965,7 +964,7 @@ Als Referenz Messgerät zu dem vergleichsweisen niedrigpreisigen Sensoren wurde 
     \caption{UPRtek MK350 LED}
 \end{figure}
 \noindent
-Dieses Messgerät kann Spektraldaten im Bereich von 360 bis 760 Nanometern messen. Hier wird ein Messwert pro einem Nanometer erfasst. Daraus berechnet
+Dieses Messgerät kann Spektraldaten im Bereich von 360 bis 760 Nanometern messen. Die Messauflösung beträgt einen Nanometer. Daraus berechnet
 das Messgerät die \ac{cie} 1931 xy Koordinaten, sowie die \ac{cie} 1976 uv Koordinaten. Messwerte können einzeln oder auch in Serie erfasst werden und
 im CSV Format für die weitere Auswertung auf eine SD Karte gesichert werden.
 \clearpage
@@ -975,8 +974,8 @@ im CSV Format für die weitere Auswertung auf eine SD Karte gesichert werden.
 Es gibt einige Hersteller von entsprechenden Spektralsensoren für Licht und spektral benachbarte Bereiche wie Infrarot.
 Ein Hersteller, dessen Sensoren in dieser Arbeit vornehmlich genutzt wurden, ist die Firma AMS.\\
 AMS ist ein globales Unternehmen und einer der führenden Hersteller für Sensortechnik. AMS stellt hauptsächlich Sensoren für die Bereiche
-Optik, Bildverarbeitung und Schall her. Sensoren von AMS werden in Smartphones und Smarthome Produkten sowie in industrieller Automatisierung
-und medizinischen Geräten zu finden. \cite{ams}\\
+Optik, Bildverarbeitung und Schall her. Sensoren von AMS werden in Smartphones und Smarthome Produkten, sowie in industrieller Automatisierung
+und medizinischen Geräten verbaut. \cite{ams}\\
 Zu Beginn wurde nach einer einfachen Evaluierungslösung für das Erfassen von spektralen Daten gesucht. Hier wurde das
 Sensorboard von der Firma Adafruit AS7262 genutzt. \cite{adafruit}\\
 Dieses Board nutzt einen AMS AS7262 Visible Spectral Light Sensor. Weiter stellt es Pin outs für \ac{i2c} und \ac{uart} bereit,
@@ -1060,7 +1059,7 @@ Zunächst wurden mit der Applikation "'Putty"' über die COM Schnittstelle einig
 Umgebungslichtes und einer Light Can empfangen. Es wurde der Befehl "'ATDATA"' genutzt.\\
 Anschließend wurde damit begonnen, eine erste NodeJS Applikation zu programmieren, um intervallweise spektrale Daten
 von der \ac{uart} Schnittstelle abzufragen und anzuzeigen. So konnten erste Messwerte mit dem AS7262 Sensor erhoben werden.
-Diese Messwerte wurden mit dem MK350 verglichen. Hier wurde beobachtet, dass die gemessenen Daten des MK350 auf den jeweiligen
+Diese Messwerte wurden mit dem MK350 verglichen. Hier war zu beobachten, dass die gemessenen Daten des MK350 auf den jeweiligen
 Wellenlängen mit den Werten übereinstimmen. Hier ist anzumerken, dass - wie in Bild \ref{fig:green_spec_MK350} zu sehen - die pro Wellenlänge
 gemessene Amplitude nach 1 normiert wird. Zur Vergleichbarkeit werden auch in der Applikation die Sensor Werte des AS7262 nach
 1 normiert. Die Messwerte der sechs Wellenlängen des AS7262 sind mit geringer Abweichung identisch zum MK350.\\
@@ -1087,7 +1086,7 @@ Applikation grafisch aufzubereiten. Zunächst wurde die NodeJS mit dem \ac{npm} 
 zur Generierung eines Electron Fensters, sowie eine Abfrage des Sensors mit dem Befehl "'ATCDATA"', welcher intervallweise alle 250 Millisekunden
 abgerufen wird. Die empfangenen Sensordaten werden dann per Schnittstelle an den Webcode weitergegeben.\\
 Mit den im Webcode verfügbaren Sensordaten wurden in Anlehnung zu der Darstellung im MK350 die Werte mit proportional hohen Balken pro Wellenlänge
-mit HTML Elementen dargestellt. Diese Balken wurden zur besseren Zuordnung in eine, die Wellenlänge repräsentierende, Farbe eingefärbt.
+mit HTML Elementen dargestellt. Diese Balken wurden zur besseren Zuordnung in eine die Wellenlänge repräsentierende Farbe eingefärbt.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.6\textwidth]{images/app_dummy_spectrum.png}
@@ -1131,12 +1130,12 @@ Aus diesen Werten und den mit dem Sensor erfassten Spektralwerten konnten nun di
 \subsubsection{Erfassen der Messwerte mit dem AS7261}
 Da der AS7261 nicht als Evaluierungskit von Adafruit verfügbar war, wurde ein zweites 7262 Sensorboard von Adafruit genutzt. Der 7261 Sensor
 wurde von AMS separat bestellt. Anschießend wurde der Chip auf dem Evaluierungs Board ausgetauscht.\\
-Für den Betrieb benötigt die AS72xx Chip Reihe einen Serial Flash Speicher mit einer Chip-Spezifischen Firmware. Diese wurde bei AMS angefragt
-und anschließend aud den Flash Speicher des Evaluierungsboard aufgespielt. AMS wies darauf hin, dass bei diesem Chip eine Kalibrierung entscheidend
-für den Einsatz im diesem Anwendungsfall ist. Doch sei die vorkonfigurierte Kalibrierung in der Firmaware für das messen von sichtbarem Licht
-optimiert und einsetzbar ist.\\
+Für den Betrieb benötigt die AS72xx Chip Reihe einen Serial Flash Speicher mit einer chip-spezifischen Firmware. Diese wurde bei AMS angefragt
+und anschließend auf den Flash Speicher des Evaluierungsboards aufgespielt. AMS wies darauf hin, dass bei diesem Chip eine Kalibrierung entscheidend
+für den Einsatz in diesem Anwendungsfall ist. Die vorkonfigurierte Kalibrierung in der Firmaware sei jedoch für das Messen von sichtbarem Licht
+optimiert und einsetzbar.\\
 Der AS7261 sendet auf des UART Kommando "'ATDATA"' XYZ Daten. Somit können in der Anwendung die bisher erläuterten Schritte übersprungen werden.
-Der Applikation musste lediglich ein Sensor Auswahldialog hinzugefügt werden und diese Einstellung an verschidenen Stellen im Programmablauf
+Der Applikation musste lediglich ein Sensor Auswahldialog hinzugefügt und diese Einstellung an verschidenen Stellen im Programmablauf
 berücksichtigt werden.\\
 \\
 {\color{red}
@@ -1144,8 +1143,8 @@ Hier folgen Notizen:\\ %// TODO : Finish 7261 stuff
 - Hier wurde festgestellt, dass der AS7261 folgende Vor-/Nachteile bei der Ermittlung der XYZ Werte hat}
 \subsection{Farbraum Umrechnungen}
 Um nun den grafischen Punkt auf einem \ac{cie} 1931 Diagramm zu erhalten, müssen die XYZ in xyY Koordinaten umgerechnet werden. Dies ist mit den
-Formeln \ref{Equ:8} bis \ref{Equ:10} möglich. Mit diesen Werten konnte nun der Punkt in das \ac{cie} 1931 Diagramm in der Applikation nach jeder Messung,
-also immer nach 250 Millisekunden eingezeichnet werden.\\
+Formeln \ref{Equ:8} bis \ref{Equ:10} möglich. Mit diesen Werten konnte nun der Punkt nach jeder Messung, also immer nach 250 Millisekunden, 
+in das \ac{cie} 1931 Diagramm in der Applikation eingezeichnet werden.\\
 Zusätzlich zur Darstellung im \ac{cie} 1931 Farbraum wurde zur besseren Einordnung und zur Anzeige in der Applikation die XYZ Werte in RGB Werte
 umgewandelt. Dies ist möglich mit folgenden Gleichungen von Lindblooms Webauftritt \cite{lindbloom}:
 \begin{align}\label{Equ:12}
@@ -1169,18 +1168,18 @@ mit sRGB Umrechnungsmatrix $\mathbf M^{-1}$ mit Weiß-Referenzpunkt D65 (siehe \
     \end{array}\right]
 \end{align}
 Für $\mathbf M^{-1}$ sind einige Definitionen gegeben. Diese gewählte Definition ist abhängig von dem RGB Farbraum, in den umgerechnet werden soll, sowie
-die Weißlicht-Bezugsquelle.
+der Weißlicht-Bezugsquelle.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=\textwidth]{images/app_dummy_info_with_rgb.png}
     \end{center}
-    \caption{Errechnete Werte aus dem Spektrum}
+    \caption{Aus dem Spektrum errechnete Werte}
 \end{figure}
 \noindent
 Mit diesen Umrechnungen sind nun alle relevanten Farbräume abgedeckt. Diese Werte werden in der Applikation angezeigt. Die Anzeige der RGB Werte
 wird mit den entsprechenden Werten als Hintergrundfarbe hinterlegt.
 \subsection{Aufnehmen von Messwerten}
-Mit den nun verfügbaren Farbraumdaten aus einer Messung, kann mit der weiteren Verarbeitung der Daten begonnen werden. Nun können die einzelnen
+Mit den nun verfügbaren Farbraumdaten aus einer Messung kann mit der weiteren Verarbeitung der Daten begonnen werden. Nun können die einzelnen
 Emitter vermessen und die Messdaten gesichert werden. Für eine erste Vermessung einer Light Can wurde diese mit dem WAPP per DMX angesteuert.
 Für die Vermessung einer Light Can wurde folgendes Szenario definiert:
 \begin{figure}[H]
@@ -1212,10 +1211,10 @@ Emitters, konnte das Menü des einzelnen Emitters geöffnet werden.
         \includegraphics[width=\textwidth]{images/app_edit_emitters_v1.png}
         \caption{Menü des einzelnen Emitters}
     \end{subfigure}
-    \caption{Erste version der Benutzeroberfläche zur manuellen Erfassung von Emitterwerten}
+    \caption{Erste Version der Benutzeroberfläche zur manuellen Erfassung von Emitterwerten}
 \end{figure}
 \noindent
-Das Emittermenü bot einige Einstellungsmöglichkeiten wie den Namen und die Farbe zur besseren Zuordnung für den Benutzer, sowie eine Schaltfläche pro zu messende
+Das Emittermenü bot einige Einstellungsmöglichkeiten wie den Namen und die Farbe zur besseren Zuordnung für den Benutzer, sowie eine Schaltfläche pro zu messender
 Helligkeitsstufe. Während einer Messung musste der Benutzer nun mit einer externen (DMX) Ansteuerung, beispielsweise den roten
 Emitter einer Light Can in den gewünschen Helligkeitszustand bringen. Anschließend konnte mit einem Klick auf die zugehörige Schaltfläche die
 aktuell gemessenen Werte im Hintergrund abgespeichert werden. Die betätigte Schaltfläche wurde zur Bestätigung für den Benutzer in der errechneten
@@ -1225,12 +1224,12 @@ Weiterverwendung gespeichert werden. Dieser Vorgang musste für alle Emitter wie
 \subsection{Vorberechnen anhand von Messwerten}\label{calcColor}
 Mit den nun verfügbaren Messwerten einer Lichtquelle wurde zur Überprüfung der bisher eingesetzten Berechnungen eine Möglichkeit programmiert,
 um virtuell in der Applikation die Emitter additiv zu mischen. Durch Interpolation zwischen den erfassten Helligkeitsstufen und additiver
-Farbmischung den Farbton einer aktiven Emitterkombination vorauszuberechnen.
+Farbmischung konnte der Farbton einer aktiven Emitterkombination vorausberechnet werden.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.9\textwidth]{images/app_emitters_with_sliders_v1.png}
     \end{center}
-    \caption{Emitter Übersicht mit Schiebereglern}\label{fig:emitterFaders}
+    \caption{Emitterübersicht mit Schiebereglern}\label{fig:emitterFaders}
 \end{figure}
 \noindent
 In der Benutzeroberfläche wurde dies mit Schiebereglern pro Emitter gelöst, welche von 0 bis 100 in fünf Prozent Schritten einstellbar sind.
@@ -1265,11 +1264,10 @@ Dieser Test zeigt, dass für lineare und annähernd lineare Farbmischsysteme ein
 Farbraum und die Farbmischung vorauszuberechnen. Für nicht lineare Farbmischsysteme sind weitere Messungen der tatsächlichen Mischfarben nötig oder der
 modifizierende Algorithmus in der Lampe muss bekannt sein.
 \subsection{Gamut Zeichnung}
-Als Gamut bezeichnet man das Farbvermögen einer Lichtquelle. Mit den verarbeiteten Messdaten ist es möglich, diesen in den CIE 1931 Farbraum für die einzelnen
-Lampen einzuzeichnen.\\
-Für eine beliebige Anzahl N von Emittern kann ein Polygon mit N oder weniger Ecken entstehen. Beispielsweise spannen die Emitter Rot, Grün und Blau ein
+Als Gamut bezeichnet man das Farbvermögen einer Lichtquelle. Mit den verarbeiteten Messdaten ist es möglich, diesen für die einzelnen Lampen in den CIE 1931 Farbraum einzuzeichnen.\\
+Für eine beliebige Anzahl n von Emittern kann ein Polygon mit N oder weniger Ecken entstehen. Beispielsweise spannen die Emitter Rot, Grün und Blau ein
 dreieckiges Polygon als Gamut auf. Ein vierter weißer Emitter liegt innerhalb dieses Polygons, dies erweitert den Gamut nicht. Läge ein weiterer Emitter außerhalb des
-bereits aufgespannten Polygons, wird dies entsprechend erweitert.\\
+bereits aufgespannten Polygons, wird dieses entsprechend erweitert.\\
 Um einen Gamut einer Lampe in ein CIE Diagramm einzuzeichnen müssen die xy Koordinaten gegen den Uhrzeigersinn sortiert werden. Dies wird bewerkstelligt, indem
 der Mittelpunkt des Polygons gesucht wird.
 \begin{align}\label{Equ:14}
