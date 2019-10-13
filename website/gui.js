@@ -67,7 +67,7 @@ function createSliders()
         }
     }
 
-    if(usedChannels.intensity)
+    /*if(usedChannels.intensity)
     {
         var newEmitter = document.createElement('div');
         newEmitter.className = "emitterEntry";
@@ -100,7 +100,7 @@ function createSliders()
         newSliderDisp.value = "100";
         newSliderContainer.appendChild(newSliderDisp);
         sliderContainer.appendChild(newSliderContainer);
-    }
+    }*/
 
     var eI = 0;
     for(var fTE in usedChannels)
