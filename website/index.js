@@ -241,6 +241,11 @@ function init()
     calcPosData = document.getElementById('calcPosData');
     mixPosData = document.getElementById('mixPosData');
 
+    if(activeSensor != "7262")
+    {
+        currMaxDisplay.parentElement.style.display = "none";
+    }
+
     var commandInput = document.getElementById('commandInput');
     if(commandInput)
     {
