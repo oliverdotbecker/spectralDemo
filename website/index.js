@@ -771,7 +771,6 @@ function measureNextValue()
 {
     if(cancelMeasure)
     {
-
         closePopup();
         drawColorSpace();
         console.warn("Aborted automatic measurement");
@@ -862,7 +861,7 @@ function sendDMX(event)
             }
             if(referenceFixtureId != -1 && selectedFixtures[pI])
             {
-                if(currFixture.calibratedChannels && currFixture.calibratedChannels[channel])
+                if(currFixture.calibratedChannels && currFixture.calibratedChannels[channel] !== undefined)
                 {
                     dmxValues[address] = parseInt(parseFloat(currFixture.calibratedChannels[channel])*255);
                 }
