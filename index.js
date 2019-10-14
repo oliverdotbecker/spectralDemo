@@ -474,6 +474,10 @@ function collectData(path,doReturn)
 function readUPRtekCSV(data)
 {
     data = data.split("\r\n");
+    if(data.length == 1)
+    {
+        data = data[0].split("\n");
+    }
     var x = data[0].split("=")[1].trim();
     var y = data[1].split("=")[1].trim();
     var Y = parseFloat(data[8].split("=")[1].trim()) / parseFloat(data[6].split("=")[1].trim()); //LUX/Peak count
