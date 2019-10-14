@@ -896,7 +896,7 @@ Somit konnte ein deutlich homogeneres Abstrahlverhalten erreicht werden.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Verwendete Geräte %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Verwendete Geräte}
-\subsection{Lampen}
+\subsection{Lampen}\label{lamps}
 Im Folgenden werden die Lichtquellen beziehungsweise die Lampen beschrieben, die für die Messungen verwendet wurden.
 Auch in der Veranstaltungstechnik als (engl.) "'Fixtures"' bezeichnet. Diese Lampen haben alle \ac{led}s als Lichtquelle. Diese \ac{led}s
 sind alle unterschiedlich aufgebaut.
@@ -1616,20 +1616,36 @@ Somit können die emittierten Farben verschiedener Scheinwerfer theoretisch abge
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Auswertung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Auswertung}
-Die bisherigen Ausführungen wurden 
+Es wurden mit den in Kapitel \ref{lamps} aufgeführten Lampen verschiedene Messungen zur Entwicklung und Validierung des Abgleichvorgangs durchgeführt.\\
+Ein Teil dieser Messungen wurde in vorhergehnden kapiteln bereits behandelt. Im Folgenden werden Testaufbauten, Messungen sowie Abgleichvorgänge aufgeführt
+und diskutiert.\\
 %// TODO : Weiter schreiben
 {\color{red}
 Hier folgen Notizen:\\
-- Analyse (stärken und Schwächen)
+Analyse (stärken und Schwächen)
 \begin{addmargin}[2em]{0em}
-   - Light Can innere Algorithmen\\
-   - Messfehler und Toleranzen\\
-   - Exemplarische Ergebnisse
-\end{addmargin}}
+   - Light Can innere Algorithmen (Ansatz zum Messen von Mischfarben zur Nachbildung des Mischalgorithmus)
+\end{addmargin}
+\begin{addmargin}[2em]{0em}
+    - Messfehler und Toleranzen
+\end{addmargin}
+\begin{addmargin}[4em]{0em}
+    * Ausführliche Erklärung des AS7262 Messfehlers -> Ausscheiden des Sensors (keine Interpolation möglich)
+    * Verleich Messdaten AS7262 und Spektrometer
+    * Einbinden der Spektrometerdaten
+\end{addmargin}
+\begin{addmargin}[2em]{0em}
+    - Exemplarische Ergebnisse des Farbabgleichs. MacArthur Ellipsenanalyse der Farbabweichungen zur Referenzfarbe
+\end{addmargin}
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Ausblick %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Ausblick}
+Mit einer entsprechenden Kalibrierung oder anderen genaueren Sensoren wäre ein deutlich genauerer Abgleich
+verschiedener LED Lichtquellen möglich. Der entscheidendste Faktor ist die Messdatenbasis.\\
+Ein manuelles erfassen und einlesen der Messdaten aus einem Spektrometer ist sehr zeitaufwändig. Ein in die
+Applikation integrierter Sensor, zum automatisierten erfassen der Sensordaten beschleunigt den Messprozess
+deutlich.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Anhang %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
