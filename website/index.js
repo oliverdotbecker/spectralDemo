@@ -1388,6 +1388,7 @@ function calcColorMix(event)
                             patch[sFI].calibratedChannels[currentEmitterData[eIdx].name] = 0;
                         }
                     }
+                    sendDMX();
                 }
             }
         }
