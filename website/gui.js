@@ -364,27 +364,30 @@ function openPatch()
                             {
                                 if(data[eI])
                                 {
-                                    var currDataSet = data[eI][0];
-                                    var rgb = XYZtoRGB(currDataSet.X,currDataSet.Y,currDataSet.Z);
                                     var measures = {};
-                                    measures["100%"] = {
-                                        XYZ:[
-                                            round(currDataSet.X,4),
-                                            round(currDataSet.Y,4),
-                                            round(currDataSet.Z,4)
-                                        ],
-                                        xyY:[
-                                            round(parseFloat(currDataSet.x),4),
-                                            round(parseFloat(currDataSet.y),4),
-                                            round(currDataSet.Y,4)
-                                        ],
-                                        RGB:[
-                                            rgb.r,
-                                            rgb.g,
-                                            rgb.b
-                                        ],
-                                        color:"rgb("+rgb.r+","+rgb.g+","+rgb.b+")"
-                                    };
+                                    for(var mI = 0; mI < data[eI].length, mI < 8; mI++)
+                                    {
+                                        var currDataSet = data[eI][mI%data[eI].length];
+                                        var rgb = XYZtoRGB(currDataSet.X,currDataSet.Y,currDataSet.Z);
+                                        measures[measureSliderValues[mI]+"%"] = {
+                                            XYZ:[
+                                                round(currDataSet.X,4),
+                                                round(currDataSet.Y,4),
+                                                round(currDataSet.Z,4)
+                                            ],
+                                            xyY:[
+                                                round(parseFloat(currDataSet.x),4),
+                                                round(parseFloat(currDataSet.y),4),
+                                                round(currDataSet.Y,4)
+                                            ],
+                                            RGB:[
+                                                rgb.r,
+                                                rgb.g,
+                                                rgb.b
+                                            ],
+                                            color:"rgb("+rgb.r+","+rgb.g+","+rgb.b+")"
+                                        };
+                                    }
                                     emitterData.push({
                                         name:eI,
                                         color:emitterDefaultColors[eI],

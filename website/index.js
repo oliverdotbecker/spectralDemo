@@ -602,27 +602,30 @@ function doImport(arg,data)
             {
                 if(data[selectedFixtureEmitters[eI].name])
                 {
-                    var currDataSet = data[selectedFixtureEmitters[eI].name][0];
-                    var rgb = XYZtoRGB(currDataSet.X,currDataSet.Y,currDataSet.Z);
                     selectedFixtureEmitters[eI].measures = {};
-                    selectedFixtureEmitters[eI].measures["100%"] = {
-                        XYZ:[
-                            round(currDataSet.X,4),
-                            round(currDataSet.Y,4),
-                            round(currDataSet.Z,4)
-                        ],
-                        xyY:[
-                            round(parseFloat(currDataSet.x),4),
-                            round(parseFloat(currDataSet.y),4),
-                            round(currDataSet.Y,4)
-                        ],
-                        RGB:[
-                            rgb.r,
-                            rgb.g,
-                            rgb.b
-                        ],
-                        color:"rgb("+rgb.r+","+rgb.g+","+rgb.b+")"
-                    };
+                    for(var mI = 0; mI < data[selectedFixtureEmitters[eI].name].length, mI < 8; mI++)
+                    {
+                        var currDataSet = data[selectedFixtureEmitters[eI].name][mI];
+                        var rgb = XYZtoRGB(currDataSet.X,currDataSet.Y,currDataSet.Z);
+                        selectedFixtureEmitters[eI].measures[measureSliderValues[mI]+"%"] = {
+                            XYZ:[
+                                round(currDataSet.X,4),
+                                round(currDataSet.Y,4),
+                                round(currDataSet.Z,4)
+                            ],
+                            xyY:[
+                                round(parseFloat(currDataSet.x),4),
+                                round(parseFloat(currDataSet.y),4),
+                                round(currDataSet.Y,4)
+                            ],
+                            RGB:[
+                                rgb.r,
+                                rgb.g,
+                                rgb.b
+                            ],
+                            color:"rgb("+rgb.r+","+rgb.g+","+rgb.b+")"
+                        };
+                    }
                 }
             }
             drawColorSpace();
