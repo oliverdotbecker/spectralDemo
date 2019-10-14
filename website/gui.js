@@ -20,8 +20,6 @@ var namesContainer = null;
 var channelSliders = null;
 var sliderContainer = null;
 
-activeSensor = settings.sensor;
-
 function createSurface()
 {
     barsContainer.innerHTML = "";
@@ -69,7 +67,7 @@ function createSliders()
         }
     }
 
-    if(usedChannels.intensity)
+    /*if(usedChannels.intensity)
     {
         var newEmitter = document.createElement('div');
         newEmitter.className = "emitterEntry";
@@ -102,7 +100,7 @@ function createSliders()
         newSliderDisp.value = "100";
         newSliderContainer.appendChild(newSliderDisp);
         sliderContainer.appendChild(newSliderContainer);
-    }
+    }*/
 
     var eI = 0;
     for(var fTE in usedChannels)
@@ -229,6 +227,10 @@ function openSensorSettings()
     newOption.value = "7262";
     newOption.innerHTML = "AS 7262";
     newSensorSelect.appendChild(newOption);
+    var newOption = document.createElement('option');
+    newOption.value = "UPRtek";
+    newOption.innerHTML = "UPRtek";
+    newSensorSelect.appendChild(newOption);
     newSensorSelect.value = activeSensor;
     newSensorSelect.onchange = function(event)
     {
@@ -247,7 +249,7 @@ function openSensorSettings()
                 }
                 electronDaemon.setSensor(activeSensor);
             }
-            else
+            else if(input.value == "7262")
             {
                 activeSettings = AS7262;
                 activeSensor = "7262";
@@ -256,6 +258,18 @@ function openSensorSettings()
                 if(waveLengthContainer)
                 {
                     waveLengthContainer.style.display = "";
+                }
+                electronDaemon.setSensor(activeSensor);
+            }
+            else
+            {
+                activeSettings = UPRtek;
+                activeSensor = "UPRtek";
+                currMaxDisplay.parentElement.style.display = "none";
+                var waveLengthContainer = document.getElementById("wavelengths");
+                if(waveLengthContainer)
+                {
+                    waveLengthContainer.style.display = "none";
                 }
                 electronDaemon.setSensor(activeSensor);
             }
@@ -338,7 +352,53 @@ function openPatch()
                     {
                         fixtureChannels[eIdx] = 0;
                     }
-                    var emitterData = electronDaemon.importEmitters("emitters_"+currRow.childNodes[0].childNodes[0].value+".json");
+                    var emitterData = null;
+                    if(activeSensor == "UPRtek")
+                    {
+                        emitterData = electronDaemon.importExternalEmitters(currRow.childNodes[0].childNodes[0].value);
+                        if(emitterData)
+                        {
+                            var data = JSON.parse(emitterData);
+                            emitterData = [];
+                            for(var eI in fTLibEntry.emitters)
+                            {
+                                if(data[eI])
+                                {
+                                    var currDataSet = data[eI][0];
+                                    var rgb = XYZtoRGB(currDataSet.X,currDataSet.Y,currDataSet.Z);
+                                    var measures = {};
+                                    measures["100%"] = {
+                                        XYZ:[
+                                            round(currDataSet.X,4),
+                                            round(currDataSet.Y,4),
+                                            round(currDataSet.Z,4)
+                                        ],
+                                        xyY:[
+                                            round(parseFloat(currDataSet.x),4),
+                                            round(parseFloat(currDataSet.y),4),
+                                            round(currDataSet.Y,4)
+                                        ],
+                                        RGB:[
+                                            rgb.r,
+                                            rgb.g,
+                                            rgb.b
+                                        ],
+                                        color:"rgb("+rgb.r+","+rgb.g+","+rgb.b+")"
+                                    };
+                                    emitterData.push({
+                                        name:eI,
+                                        color:emitterDefaultColors[eI],
+                                        measures:measures
+                                    })
+                                }
+                            }
+                            emitterData = JSON.stringify(emitterData);
+                        }
+                    }
+                    else
+                    {
+                        emitterData = electronDaemon.importEmitters(activeSensor+"/emitters_"+currRow.childNodes[0].childNodes[0].value+".json");
+                    }
                     if(emitterData)
                     {
                         emitterData = JSON.parse(emitterData);

@@ -14,13 +14,32 @@ const AS7262 = {
     channelWavelengths:[450,500,550,570,600,650], //nm
     maxSpectrumVal:65536
 }
+//UPRtek settings
+const UPRtek = {
+    channelCount:0,
+    channelNames:[],
+    channelColors:[]
+}
 var serialPorts = [];
 var activeSettings = AS7262;
 var activeSensor = "7262";
-electronDaemon.setSensor(activeSensor);
+
+if(settings.sensor)
+{
+    activeSensor = settings.sensor;
+    if(activeSensor == "7261")
+    {
+        activeSettings = AS7261;
+    }
+    electronDaemon.setSensor(activeSensor);
+}
+if(settings.comPort)
+{
+    electronDaemon.setSerialPath(settings.comPort);
+}
 
 const fixtureTypeLibrary = {
-    "Arri Skypannel Mode RGBW":{
+    "Arri Skypanel Mode RGBW":{
         intensity:1,
         emitters:{
             Rot:2,
@@ -221,6 +240,11 @@ function init()
 
     calcPosData = document.getElementById('calcPosData');
     mixPosData = document.getElementById('mixPosData');
+
+    if(activeSensor != "7262")
+    {
+        currMaxDisplay.parentElement.style.display = "none";
+    }
 
     var commandInput = document.getElementById('commandInput');
     if(commandInput)
@@ -550,9 +574,62 @@ function doExport(arg)
             if(selectedFixtures[sI])
             {
                 var emitterData = patch[sI].emitterData;
-                var filePath = electronDaemon.exportEmitters(JSON.stringify(emitterData),"emitters_"+patch[sI].fixtureType+".json");
+                var filePath = electronDaemon.exportEmitters(JSON.stringify(emitterData),activeSensor+"/emitters_"+patch[sI].fixtureType+".json");
                 console.log("Emitters saved to: "+filePath);
             }
+        }
+    }
+}
+
+function doImport(arg,data)
+{
+    if(arg == "emitterData")
+    {
+        var selectedFixture = -1;
+        for(var sFI = 0; sFI < selectedFixtures.length; sFI++)
+        {
+            if(selectedFixtures[sFI])
+            {
+                selectedFixture = sFI;
+                break;
+            }
+        }
+
+        if(selectedFixture != -1)
+        {
+            var selectedFixtureEmitters = patch[sFI].emitterData;
+            for(var eI = 0; eI < selectedFixtureEmitters.length; eI++)
+            {
+                if(data[selectedFixtureEmitters[eI].name])
+                {
+                    var currDataSet = data[selectedFixtureEmitters[eI].name][0];
+                    var rgb = XYZtoRGB(currDataSet.X,currDataSet.Y,currDataSet.Z);
+                    selectedFixtureEmitters[eI].measures = {};
+                    selectedFixtureEmitters[eI].measures["100%"] = {
+                        XYZ:[
+                            round(currDataSet.X,4),
+                            round(currDataSet.Y,4),
+                            round(currDataSet.Z,4)
+                        ],
+                        xyY:[
+                            round(parseFloat(currDataSet.x),4),
+                            round(parseFloat(currDataSet.y),4),
+                            round(currDataSet.Y,4)
+                        ],
+                        RGB:[
+                            rgb.r,
+                            rgb.g,
+                            rgb.b
+                        ],
+                        color:"rgb("+rgb.r+","+rgb.g+","+rgb.b+")"
+                    };
+                }
+            }
+            drawColorSpace();
+        }
+        else
+        {
+            console.warn("No fixture selected");
         }
     }
 }
@@ -925,7 +1002,7 @@ function calcColorMix(event)
                 if(sliderValues[sI] != 0)
                 {
                     var currEmitter = emitters[sI];
-                    if(JSON.stringify(currEmitter.measures) != JSON.stringify({}))
+                    if(currEmitter && JSON.stringify(currEmitter.measures) != JSON.stringify({}))
                     {
                         var minMeasure = 0;
                         var maxMeasure = 0;
@@ -1424,6 +1501,7 @@ function drawColorSpace()
 
             //Analyse the coordinates
             var combinedCoordinates = [];
+            if(coordinates.length && coordinates[0].length)
             {
                 // temporary vertex storage
                 var vertices1 = [], vertices2 = [];
