@@ -1137,10 +1137,13 @@ optimiert und einsetzbar.\\
 Der AS7261 sendet auf des UART Kommando "'ATDATA"' XYZ Daten. Somit können in der Anwendung die bisher erläuterten Schritte übersprungen werden.
 Der Applikation musste lediglich ein Sensor Auswahldialog hinzugefügt und diese Einstellung an verschidenen Stellen im Programmablauf
 berücksichtigt werden.\\
-\\
-{\color{red}
-Hier folgen Notizen:\\ %// TODO : Finish 7261 stuff
-- Hier wurde festgestellt, dass der AS7261 folgende Vor-/Nachteile bei der Ermittlung der XYZ Werte hat}
+Bei näherer Betrachtung der Sensorwerte mit dem Fortschreiten der Applikation wurde beobachtet, dass bei dem messen von blauem Licht der Sensor
+eine fehlerhafte xyY Koordinate bestimmt. Die gemessene Koordinate lag im pinken Bereich. Dies ist auf die sensitivität des X Sensors zwischen
+400 nm und 490 nm zurückzuführen \ref{fig:AS7261_spectrum}. Laut Hersteller ist dieses Verhalten bedingt durch die Werkskalibrierung des Sensors.
+Je nach Anwendungsfall muss der Sensor durch den Anwender eigens kalibriert werden. Die Werkskalibrierung ist für das messen von Farbtemperaturen
+optimiert.\\
+Gemessene Koordinaten im roten und grünen Bereich waren jedoch deutlich näher an den mit dem Spektrometer gemessenen Werten im Vergleich zu
+dem AS7262. %// TODO: Wenn nötig verweis auf späteres eingehen auf eine Kalibrierung
 \subsection{Farbraum Umrechnungen}
 Um nun den grafischen Punkt auf einem \ac{cie} 1931 Diagramm zu erhalten, müssen die XYZ in xyY Koordinaten umgerechnet werden. Dies ist mit den
 Formeln \ref{Equ:8} bis \ref{Equ:10} möglich. Mit diesen Werten konnte nun der Punkt nach jeder Messung, also immer nach 250 Millisekunden, 
@@ -1236,8 +1239,8 @@ um virtuell in der Applikation die Emitter additiv zu mischen. Dies wird erreich
         E^i_Z \\
     \end{array}\right]
 \end{align}
-Durch Interpolation zwischen den erfassten Helligkeitsstufen und additiver %//TODO
-Farbmischung kann der Farbton einer aktiven Emitterkombination vorausberechnet werden.
+Durch Interpolation der XYZ Werte zwischen den erfassten Helligkeitsstufen und deren additiver Farbmischung kann der Farbton einer aktiven Emitterkombination
+vorausberechnet werden.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.9\textwidth]{images/app_emitters_with_sliders_v1.png}
