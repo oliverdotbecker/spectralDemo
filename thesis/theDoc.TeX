@@ -1223,8 +1223,21 @@ Nach dem manuellen Erfassen aller Helligkeitsstufen konnten die erfassten Daten 
 Weiterverwendung gespeichert werden. Dieser Vorgang musste für alle Emitter wiederholt werden.
 \subsection{Vorberechnen anhand von Messwerten}\label{calcColor}
 Mit den nun verfügbaren Messwerten einer Lichtquelle wurde zur Überprüfung der bisher eingesetzten Berechnungen eine Möglichkeit programmiert,
-um virtuell in der Applikation die Emitter additiv zu mischen. Durch Interpolation zwischen den erfassten Helligkeitsstufen und additiver
-Farbmischung konnte der Farbton einer aktiven Emitterkombination vorausberechnet werden.
+um virtuell in der Applikation die Emitter additiv zu mischen. Dies wird erreicht indem die gemessenen Spektren der zu mischenden Emitter aufaddiert werden.
+\begin{align}\label{Equ:22}
+    \left[ \begin{array}{r}
+        \text{Mix}_X \\
+        \text{Mix}_Y \\
+        \text{Mix}_Z \\
+    \end{array}\right]
+    = \sum_{i} \left[ \begin{array}{r}
+        E^i_X \\
+        E^i_Y \\
+        E^i_Z \\
+    \end{array}\right]
+\end{align}
+Durch Interpolation zwischen den erfassten Helligkeitsstufen und additiver %//TODO
+Farbmischung kann der Farbton einer aktiven Emitterkombination vorausberechnet werden.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.9\textwidth]{images/app_emitters_with_sliders_v1.png}
@@ -1271,12 +1284,12 @@ bereits aufgespannten Polygons, wird dieses entsprechend erweitert.\\
 Um einen Gamut einer Lampe in ein CIE Diagramm einzuzeichnen müssen die xy Koordinaten gegen den Uhrzeigersinn sortiert werden. Dies wird bewerkstelligt, indem
 der Mittelpunkt des Polygons gesucht wird.
 \begin{align}\label{Equ:14}
-    Center_x = \frac{\sum_{i}Vertex_{ix}}{i}\\
-    Center_y = \frac{\sum_{i}Vertex_{iy}}{i}
+    \text{Center}_x = \frac{\sum_{i}\text{Vertex}_{ix}}{i}\\
+    \text{Center}_y = \frac{\sum_{i}\text{Vertex}_{iy}}{i}
 \end{align}
 Anschließend werden die Winkel der einzelnen Koordinaten zu dem gefundenen Mittelpunkt errechnet werden.
 \begin{align}\label{Equ:15}
-    \phi = arctan2(Vertex_x - Center_x, Vertex_y - Center_y)*\frac{180}{\pi}+360 %https://de.wikipedia.org/wiki/Arctan2
+    \phi = arctan2(\text{Vertex}_x - \text{Center}_x, \text{Vertex}_y - \text{Center}_y)*\frac{180}{\pi}+360 %https://de.wikipedia.org/wiki/Arctan2
 \end{align}
 Die Koordinaten werden nach aufsteigendem Winkel sortiert. Somit sind die Koordinaten gegen den Uhrzeigersinn angeordnet. Final wird in der Applikation dynamisch
 eine \ac{svg} Grafik mit den Strecken zwischen den Koordinaten über dem CIE 1931 Diagramm erzeugt.\\
@@ -1566,9 +1579,9 @@ Emitterkoordinaten erstellt.
 Wird $\mathbf K^{-1}$ mit dem Vektor der RGB Koordinaten des Mixpunktes multipliziert erhält man die Intensitätswerte der Emitter. Diese Werte sind eins normiert.
 \begin{align}\label{Equ:21}
     \left[ \begin{array}{r}
-        MP_R \\
-        MP_G \\
-        MP_B \\
+        \text{MP}_R \\
+        \text{MP}_G \\
+        \text{MP}_B \\
     \end{array}\right]
     = {\mathbf [K]^{-1}} \left[ \begin{array}{r}
         I_{E1} \\
@@ -1595,10 +1608,12 @@ werden auf 0 bis 100 skaliert. Diese Werte werden mit 2.55 multipliziert als DMX
     \caption{Fixture Sheet mit korrigierten Werten}
 \end{figure}
 \noindent
+Somit können die emittierten Farben verschiedener Scheinwerfer theoretisch abgeglichen werden.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Auswertung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Auswertung}
+Die bisherigen Ausführungen wurden 
 %// TODO : Weiter schreiben
 {\color{red}
 Hier folgen Notizen:\\
