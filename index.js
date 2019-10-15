@@ -392,10 +392,10 @@ exports.exportEmitters = function(data,filename)
     return filename;
 }
 
-exports.importEmitters = function(filename)
+exports.importEmitters = function(sensorName)
 {
     var retData = null;
-    var filename = __dirname+'/measurementData/'+filename;
+    var filename = __dirname+'/measurementData/'+sensorName;
     if(fs.existsSync(filename))
     {
         retData = fs.readFileSync(filename,'utf8');
