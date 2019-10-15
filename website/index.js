@@ -57,10 +57,10 @@ const fixtureTypeLibrary = {
             Weiss:10
         },
         constants:{
-            1:125,
-            3:214,
-            13:128,
-            14:255
+            1:125,//Pan
+            3:214,//Tilt
+            13:128,//Zoom
+            14:255//Shutter
         }
     },
     "Eurolight ML 56":{
