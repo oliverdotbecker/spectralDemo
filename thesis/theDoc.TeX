@@ -1132,8 +1132,8 @@ Aus diesen Werten und den mit dem Sensor erfassten Spektralwerten konnten nun di
 \noindent
 \subsubsection{Erfassen der Messwerte mit dem AS7261}
 Da der AS7261 nicht als Evaluierungskit von Adafruit verfügbar war, wurde ein zweites 7262 Sensorboard von Adafruit genutzt. Der 7261 Sensor
-wurde von AMS separat bestellt. Anschießend wurde der Chip auf dem Evaluierungs Board ausgetauscht.\\
-Für den Betrieb benötigt die AS72xx Chip Reihe einen Serial Flash Speicher mit einer chip-spezifischen Firmware. Diese wurde bei AMS angefragt
+wurde von AMS separat bestellt. Anschießend wurde der Chip auf einem weiteren AS7262 Evaluierungs Board durch einen AS7261 ausgetauscht.\\
+Für den Betrieb benötigt die AS72xx Chip Reihe einen Serial Flash Speicher mit einer Chip spezifischen Firmware. Diese wurde bei AMS angefragt
 und anschließend auf den Flash Speicher des Evaluierungsboards aufgespielt. AMS wies darauf hin, dass bei diesem Chip eine Kalibrierung entscheidend
 für den Einsatz in diesem Anwendungsfall ist. Die vorkonfigurierte Kalibrierung in der Firmaware sei jedoch für das Messen von sichtbarem Licht
 optimiert und einsetzbar.\\
@@ -1146,7 +1146,16 @@ eine fehlerhafte xyY Koordinate bestimmt. Die gemessene Koordinate lag im pinken
 Je nach Anwendungsfall muss der Sensor durch den Anwender eigens kalibriert werden. Die Werkskalibrierung ist für das messen von Farbtemperaturen
 optimiert.\\
 Gemessene Koordinaten im roten und grünen Bereich waren jedoch deutlich näher an den mit dem Spektrometer gemessenen Werten im Vergleich zu
-dem AS7262. %// TODO: Wenn nötig verweis auf späteres eingehen auf eine Kalibrierung
+dem AS7262. %// TODO: Wenn nötig Verweis auf späteres eingehen auf eine Kalibrierung
+\subsubsection{Erfassen der Messwerte mit dem UPRtek Spektrometer}
+Zur Verarbeitung in der Applikation wurden die XLS Export Dateien des Spektrometers in einer Ordnerstruktur auf dem Entwicklungsrechner organisiert.
+Pro Gerät ein Ordner mit Unterordnern pro Emitter. Die XLS Dateien der Messungen wurden in diesen Unterordnern gesammelt. Es wird angenommen, dass die
+Messungen immer chronologisch von 5\% bis 100\% durchgeführt werden. Nach Datei Zeitstempel geordnet werden die XLS Dateien von der Applikation gelesen
+und die xy Werte extrahiert. Der Y Wert wird wie folgt aus den XLS Daten berechnet:
+\begin{align}\label{Equ:23}
+    Y = \frac{\text{LUX}}{\text{Peak count}}
+\end{align}
+Diese Formel wurde durch "'Reverse Engineering"' des Auswertungsprogramms "'uSpectrum"' des Spektrometer Herstellers gefunden.
 \subsection{Farbraum Umrechnungen}
 Um nun den grafischen Punkt auf einem \ac{cie} 1931 Diagramm zu erhalten, müssen die XYZ in xyY Koordinaten umgerechnet werden. Dies ist mit den
 Formeln \ref{Equ:8} bis \ref{Equ:10} möglich. Mit diesen Werten konnte nun der Punkt nach jeder Messung, also immer nach 250 Millisekunden, 
@@ -1623,25 +1632,31 @@ Es wurden mit den in Kapitel \ref{lamps} aufgeführten Lampen verschiedene Messu
 Ein Teil dieser Messungen wurde in vorhergehnden kapiteln bereits behandelt. Im Folgenden werden Testaufbauten, Messungen sowie Abgleichvorgänge aufgeführt
 und diskutiert.\\
 Zunächst sind die charakteristischen Luminanz und Farbvalenz Werte der Emitter der verwendeten Lampen zu betrachten. Diese wurden als Basis mit dem UPRtek
-Spektrometer erhoben, um eine qualitative Aussage über die mit den AS726x gemessene Werte treffen zu können. Hier ist zu beobachten, dass
+Spektrometer erhoben, um eine qualitative Aussage über die mit den AS726x gemessene Werte treffen zu können. Hier ist zu beobachten, dass {\color{red}...}\\
 %// TODO : Weiter schreiben
+Bei den Messungen mit dem Spektrometer ist deutlich geworden, um in der Praxis Lampen zu vermessen ist das automatisierte Erfassen der Messwerte notwendig. Das
+Messen einer Lampe mit vier Emittern mit jeweils acht Messpunkten nahm etwa zehn Minuten in Anspruch. Dies beinhaltet das ansteuern der Lampe, des aufnehmen der
+Messwerte sowie das aufbereiten der Daten zum einlesen in die Applikation. Diese Zeit kann durch einen in die Applikation integrierten Senor verkürzt werden.
+Weiter macht eine integrierte Lösung dem Messprozess komfortabler für den Anwender, da Sensorwerte von der Applikation automatisch aufgenommen und aufbereitet
+werden, ohne weitere Benutzerinteraktion.\\
+%// TODO : Weiter schreiben
+Die erfassten Messwerte mit dem AS7262 unterscheiden sich deutlich von den mit dem Spektrometer aufgezeichneten Daten.
+\paragraph{}
 {\color{red}
 Hier folgen Notizen:\\
 Analyse (stärken und Schwächen)
 \begin{addmargin}[2em]{0em}
-   - Light Can innere Algorithmen (Ansatz zum Messen von Mischfarben zur Nachbildung des Mischalgorithmus)
-\end{addmargin}
-\begin{addmargin}[2em]{0em}
     - Messfehler und Toleranzen
 \end{addmargin}
 \begin{addmargin}[4em]{0em}
-    * Ausführliche Erklärung des AS7262 Messfehlers -> Ausscheiden des Sensors (keine Interpolation möglich)
-    * Verleich Messdaten AS7262 und Spektrometer
-    * Einbinden der Spektrometerdaten
+    * Ausführliche Erklärung des AS7262 Messfehlers -> Ausscheiden des Sensors (keine Interpolation möglich)\\
+    * Verleich Messdaten AS7262 und Spektrometer\\
+    * Einbinden der Spektrometerdaten\\
+    * Light Can innere Algorithmen (Ansatz zum Messen von Mischfarben zur Nachbildung des Mischalgorithmus)
 \end{addmargin}
 \begin{addmargin}[2em]{0em}
     - Exemplarische Ergebnisse des Farbabgleichs. MacArthur Ellipsenanalyse der Farbabweichungen zur Referenzfarbe
-\end{addmargin}
+\end{addmargin}}
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Ausblick %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
