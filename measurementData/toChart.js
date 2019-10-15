@@ -2,6 +2,8 @@ const fs = require('fs');
 
 var data = {};
 var fixture = "Arri Skypanel Mode RGBW";
+//fixture = "Robe LED Wash 300";
+//fixture = "Ape Labs Light Can";
 var folderDir = __dirname+"/UPRtek/";
 var measureLevels = ["5%","10%","20%","35%","50%","65%","85%","100%"];
 
