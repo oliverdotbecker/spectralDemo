@@ -48,6 +48,21 @@ const fixtureTypeLibrary = {
             Weiss:5
         }
     },
+    "Robe LED Wash 300":{
+        intensity:15,
+        emitters:{
+            Rot:7,
+            Grün:8,
+            Blau:9,
+            Weiss:10
+        },
+        constants:{
+            1:125,
+            3:214,
+            13:128,
+            14:255
+        }
+    },
     "Eurolight ML 56":{
         intensity:false,
         emitters:{
@@ -953,6 +968,14 @@ function sendDMX(event)
             else
             {
                 dmxValues[address] = parseInt(parseInt(currFixture.channels[channel])/100*255); //avoiding 2.55 due to floating point js errors
+            }
+        }
+        if(currFixtureType.constants)
+        {
+            for(var offset in currFixtureType.constants)
+            {
+                var address = parseInt(offset)+parseInt(currFixture.address)-2;
+                dmxValues[address] = currFixtureType.constants[offset];
             }
         }
     }
