@@ -1568,41 +1568,44 @@ function drawColorSpace()
                         var clip_point1 = clipPoints[vI];
                         var clip_point2 = clipPoints[(vI + 1) % 3];
 
-                        // swap lists
-                        vertices1 = vertices2; // == the W
-                        vertices2 = [];
-
-                        for (var i = 0; i < vertices1.length; i++)
+                        if(clip_point1 && clip_point2)
                         {
-                            var point1 = vertices1[i];
-                            var point2 = vertices1[(i + 1) % vertices1.length];
+                            // swap lists
+                            vertices1 = vertices2; // == the W
+                            vertices2 = [];
 
-                            //Kreuzprodukt?
-                            var d1 = (point1[0] - clip_point1[0]) * (clip_point2[1] - clip_point1[1]) - (point1[1] - clip_point1[1]) * (clip_point2[0] - clip_point1[0]);
-                            var d2 = (point2[0] - clip_point1[0]) * (clip_point2[1] - clip_point1[1]) - (point2[1] - clip_point1[1]) * (clip_point2[0] - clip_point1[0]);
+                            for (var i = 0; i < vertices1.length; i++)
+                            {
+                                var point1 = vertices1[i];
+                                var point2 = vertices1[(i + 1) % vertices1.length];
 
-                            if (d1 < 0.0 && d2 < 0.0)
-                            {
-                                // both points are inside, add second point
-                                vertices2.push(point2);
-                            }
-                            else if (d1 >= 0.0 && d2 < 0.0)
-                            {
-                                // only first point is outside, add intersection and second point
-                                var intersection = intersect(point1[0], point1[1], point2[0], point2[1], clip_point1[0], clip_point1[1], clip_point2[0], clip_point2[1]);
-                                if (intersection)
+                                //Kreuzprodukt?
+                                var d1 = (point1[0] - clip_point1[0]) * (clip_point2[1] - clip_point1[1]) - (point1[1] - clip_point1[1]) * (clip_point2[0] - clip_point1[0]);
+                                var d2 = (point2[0] - clip_point1[0]) * (clip_point2[1] - clip_point1[1]) - (point2[1] - clip_point1[1]) * (clip_point2[0] - clip_point1[0]);
+
+                                if (d1 < 0.0 && d2 < 0.0)
                                 {
-                                    vertices2.push([ intersection.x, intersection.y ]);
+                                    // both points are inside, add second point
+                                    vertices2.push(point2);
                                 }
-                                vertices2.push(point2);
-                            }
-                            else if (d1 < 0.0 && d2 >= 0.0)
-                            {
-                                // only second point is outside, add intersection point
-                                var intersection = intersect(point1[0], point1[1], point2[0], point2[1], clip_point1[0], clip_point1[1], clip_point2[0], clip_point2[1]);
-                                if (intersection)
+                                else if (d1 >= 0.0 && d2 < 0.0)
                                 {
-                                    vertices2.push([ intersection.x, intersection.y ]);
+                                    // only first point is outside, add intersection and second point
+                                    var intersection = intersect(point1[0], point1[1], point2[0], point2[1], clip_point1[0], clip_point1[1], clip_point2[0], clip_point2[1]);
+                                    if (intersection)
+                                    {
+                                        vertices2.push([ intersection.x, intersection.y ]);
+                                    }
+                                    vertices2.push(point2);
+                                }
+                                else if (d1 < 0.0 && d2 >= 0.0)
+                                {
+                                    // only second point is outside, add intersection point
+                                    var intersection = intersect(point1[0], point1[1], point2[0], point2[1], clip_point1[0], clip_point1[1], clip_point2[0], clip_point2[1]);
+                                    if (intersection)
+                                    {
+                                        vertices2.push([ intersection.x, intersection.y ]);
+                                    }
                                 }
                             }
                         }
