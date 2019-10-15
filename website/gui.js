@@ -245,6 +245,9 @@ function openSensorSettings()
                 var waveLengthContainer = document.getElementById("wavelengths");
                 if(waveLengthContainer)
                 {
+                    barsContainer.style.display = "";
+                    valueContainer.style.display = "";
+                    namesContainer.style.display = "";
                     waveLengthContainer.style.display = "none";
                 }
                 electronDaemon.setSensor(activeSensor);
@@ -257,6 +260,9 @@ function openSensorSettings()
                 var waveLengthContainer = document.getElementById("wavelengths");
                 if(waveLengthContainer)
                 {
+                    barsContainer.style.display = "";
+                    valueContainer.style.display = "";
+                    namesContainer.style.display = "";
                     waveLengthContainer.style.display = "";
                 }
                 electronDaemon.setSensor(activeSensor);
@@ -269,6 +275,9 @@ function openSensorSettings()
                 var waveLengthContainer = document.getElementById("wavelengths");
                 if(waveLengthContainer)
                 {
+                    barsContainer.style.display = "none";
+                    valueContainer.style.display = "none";
+                    namesContainer.style.display = "none";
                     waveLengthContainer.style.display = "none";
                 }
                 electronDaemon.setSensor(activeSensor);

@@ -259,6 +259,14 @@ function init()
     if(activeSensor != "7262")
     {
         currMaxDisplay.parentElement.style.display = "none";
+        wavelengthsContainer.style.display = "none";
+    }
+
+    if(activeSensor == "UPRtek")
+    {
+        barsContainer.style.display = "none";
+        valueContainer.style.display = "none";
+        namesContainer.style.display = "none";
     }
 
     var commandInput = document.getElementById('commandInput');
