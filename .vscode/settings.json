@@ -59,6 +59,7 @@
     ],
     "cSpell.ignoreWords": [
         "aboveskip",
+        "attcsmd",
         "basicstyle",
         "belowskip",
         "breakatwhitespace",
@@ -79,11 +80,15 @@
         "ndkeywordstyle",
         "numbersep",
         "numberstyle",
+        "rtek",
         "showspaces",
         "showstringspaces",
         "showtabs",
         "stringstyle",
+        "submenu",
         "tabsize",
-        "thomann"
+        "thomann",
+        "toggledevtools",
+        "togglefullscreen"
     ]
 }
