@@ -1,0 +1,15 @@
+{
+  "name": "tochart",
+  "version": "1.0.0",
+  "description": "",
+  "main": "toChart.js",
+  "scripts": {
+    "start": "node toChart.js",
+    "dev": "node toChart.js dev",
+    "debug": "node --nolazy --inspect-brk=9229 toChart.js dev"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+  }
+}

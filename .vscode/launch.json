@@ -21,6 +21,17 @@
             "protocol": "legacy"
         },
         {
+            "name": "toChart",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceRoot}\\measurementData",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run-script", "debug"
+            ],
+            "port": 9229
+        },
+        {
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
