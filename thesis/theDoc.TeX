@@ -468,7 +468,7 @@ Zusätzlich bietet Github ein Projektverwaltungssystem.
 \section{Licht und Licht messen} \label{light and measurement}
 Der Begriff Licht bezeichnet den Teil des elektromagnetischen Spektrums, welcher mit dem menschlichen Auge zu erfassen ist.\\
 \\
-Licht besteht aus rein physischer Betrachtungsweise aus Wellen im elektromagnetischen Spektrum und Teilchen. Dieses Phänomen, dass sich
+Licht lässt sich aus rein physischer Betrachtungsweise mit Wellen im elektromagnetischen Spektrum und Teilchen beschreiben. Dieses Phänomen, dass sich
 Licht sowohl in der Ausbreitung wie eine Welle, als auch gleichzeitig ein wie Teilchen verhält, nennt sich Welle-Teilchen-Dualismus.
 Dieser Begriff wurde durch Albert Einstein und Max Planck begründet. In dieser Theorie wird Licht als Quantenobjekt
 beschrieben. \cite{wikiLicht}\\
@@ -499,9 +499,9 @@ werden allgemein als Spektralsensoren bezeichnet.
 \section{Farbe}
 Der Sinneseindruck Farbe setzt sich aus den verschiedenen Zuständen der Amplituden im elektromagnetischen Spektrum zusammen. Hier ist es
 unerheblich, ob nur eine einzelne Spektrallinie oder eine breite spektrale Verteilung betrachtet werden.\\
-Der Farbeindruck wird vorallem durch den Farbton geprägt. Ein Farbton entsteht natürlich oder künstlich von einem emittierenden oder reflektieren Körper.
-Weiter ist die Sättigung ein entscheidendes Merkmal einer Farbe. Umso intensiver ein Farbton ist, desto höher ist die Sättigung der Farbe. Ein blasser
-Farbton beinhaltet in seinem Spektrum einen Weiß-Anteil. Je blasser der Farbton, desto mehr Weiß-Anteile enthält er. Zuletzt ist noch die Helligkeit zu
+Der Farbeindruck wird vorallem durch den Farbton geprägt. Ein Farbton entsteht natürlich oder künstlich von einem emittierenden oder reflektierenden Körper.
+Weiter ist die Sättigung ein entscheidendes Merkmal einer Farbe. Umso intensiver ein Farbton ist, desto höher ist die Sättigung der Farbe. Ein ungesättigter
+Farbton beinhaltet in seinem Spektrum einen Weiß-Anteil. Je ungesättigter der Farbton, desto mehr Weiß-Anteile enthält er. Zuletzt ist noch die Helligkeit zu
 nennen. Sie drückt die Intensität der Lichtempfindung einer Farbe aus und ist mit der Farbempfindung fest verknüpft.
 \subsection{Farbtemperatur}
 Der Begriff der Farbtemperatur ist durch den planckscher Strahler begründet. Es wurde beobachtet, dass sich beim starken Erhitzen eines Metalls
@@ -541,7 +541,7 @@ absorbieren. Ein Körper, der rotes und blaues Licht absorbiert, reflektiert nur
 Dieses reflektierte Licht trifft nun das menschliche Auge. Somit erscheint der Körper grün.
 \cite[62]{lichtquellen}\\
 Besonders die subtraktive Farbmischung ist uns allgegenwärtig. Mit der Sonne oder der Raumbeleuchtung als weiße Lichtquelle sehen wir unsere Umgebung in
-verschiedensten Farben und passen unsere Umgebung nach diesem Prinzip an. Von der Wandfarbe zum Ausdrucken eines wichtigen Dokuments ist subtraktive
+verschiedensten Farben und passen unsere Umgebung nach diesem Prinzip an. Von Farbfiltern über Wandfarbe zum Druck eines Dokuments ist subtraktive
 Farbmischung in unserem Alltag zu finden.
 \vspace{-10pt}
 \begin{figure}[H]
@@ -670,6 +670,8 @@ Welt so gut wie nicht anerkannt – heute jedoch bilden sie eine weitestgehend i
 Der RGB Farbraum baut auf dem Prinzip der trichromatischen Theorie auf. Diese Theorie wurde maßgeblich von Hermann von Helmholtz um 1890 entwickelt. Sie
 beschreibt drei Grundfarben: Rot, Grün und Blau. Helmholtz beobachtete, dass aus drei Farbvalenzen jede beliebige Valenz innerhalb des Gamut
 additiv gemischt werden kann. Diese Theorie wurde von Hermann Graßmann weiterentwickelt.\\
+Der Gamut beschreibt die Farben, welche ein Gerät wie eine Lampe oder ein anderes Medium darstellen kann. Grafisch wird der Gamut als Fläche oder Körper in
+Farbraumdiagrammen eingezeichnet.\\
 Der RGB Farbraum beschreibt mit einem Zahlentripel eine Farbvalenz. Diese Zahlen beschreiben die Intensität von rotem (R), grünen (G) und
 blauem (B) Licht. Die Werte für R, G und B sind einheitenlos. Oft werden diese von 0 bis 1 definiert, aber weitere übliche Wertebereiche
 von 0 bis 100 Prozent und von 0 bis 255 (8 bit) für digitale Anwendungen werden genutzt. \cite{wikipediaRGB}\\
@@ -704,7 +706,7 @@ sogenannten Empfindlichkeitskurven beschrieben.
 In Bild 15 sind die Kurven, welche auch für das Tristimulus Verfahren benötigt werden, grafisch dargestellt. Bei dem Tristimulus Verfahren wird die spektrale Energie
 einer Wellenlänge mit dem korrespondierenden Wert für jeweils X, Y und Z multipliziert, um die CIE XYZ Koordinate zu erhalten.\\
 Die Empfindlichkeitskurven ahmen die spektrale Empfindlichkeit des menschlichen Auges nach. X kann auch durch L ersetzt werden für die langwellig sensitiven Zapfen
-des Auges. Gleiches gilt für Y mit M und Z mit S. Somit kann man diese Darstellung als LMS-Farbraum bezeichnen.\\
+des Auges. Gleiches gilt für Y mit M und Z mit S. Somit kann man diese Darstellung als LMS-Farbraum bezeichnen.
 \subsubsection{Standardbeleuchtung} \label{whiteRef}
 "'Das CIE-Normvalenzsystem wurde ursprünglich in Hinsicht auf Beleuchtungsfragen entwickelt. Das System erlaubt prinzipiell jede denkbare Kombination an X-, Y-
 und Z-Werten. Um eine normierte Übersicht der Farben zu erreichen wurden neutralweiße Normlichtfarben definiert. Aus Gründen der Farbwahrnehmung befinden sich diese
@@ -717,7 +719,6 @@ In dieser Arbeit wird der Weißpunkt D65 als Referenzpunkt genutzt. "'Das Spektr
 Der 1931 definierte \ac{cie} Farbraum, auch umgangsprachlich als "'Schuhsohle"' bezeichnet, wird in der Regel zweidimensional dargestellt. In dem Koordinatensystem
 bewegt man sich mit x auf der x-Achse und mit y auf der y-Achse. Zusätzlich wird eine CIE 1931 Koordinate noch mit Y (groß Y) für die Helligkeit der Farbvalenz
 beschrieben.
-Hier wird in der Regel eine Konstante angenommen mit der Definition des Weißpunktes (siehe \ref{whiteRef}).
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.7\textwidth]{images/cie_1931.png}
@@ -778,7 +779,7 @@ L ist ein Faktor für die Bestimmung der Sättigung $s_{uv}$ der Farbvalenz. \ci
         \end{array}
         \right.\\
     &s_{uv} = \frac{C^*_{uv}}{L}\\
-    &C^*_{uv} = \sqrt{(u^2*v^2)}\\
+    &C^*_{uv} = \sqrt{(u^2*v^2)}
 \end{align}
 \cite{lindbloom}, \cite{wikipedia1976}\\
 \\
@@ -865,13 +866,13 @@ Erde. Daher der Name Tageslichtscheinwerfer.
 \end{figure}
 \noindent
 In den 2000er Jahren hielt dann die LED Einzug in die Welt der Veranstaltungstechnik. Damit begann ein Wandel besonders im Bezug auf die Lebensdauer
-der Leuchtmittel und der Lichtausbeute im Vergleich zum Stromverbrauch. Mit der fortschreitenden Entwicklung der \ac{led} und der
+und die Lichtausbeute der Leuchtmittel. Mit der fortschreitenden Entwicklung der \ac{led} und der
 Scheinwerfer, welche diese nutzen, hat die \ac{led} heute an vielen Stellen die konventionelle Glühlampe oder \ac{hmi} verdrängt.\\
 Die Lebensdauer einer auf \ac{led}-Technik basierenden Lampe liegt im Bereich von 15.000 bis 45.000 Betriebsstunden. Eine Glühlampe hingegen
 hat nur eine Lebensdauer von etwa 300 Betriebstunden. Eine Gasentladungslampe hält eine Betriebsbelastung von etwa 300 bis 2000 Stunden aus.
 Eine weitere Stärke der LED ist der niedrige Stromverbrauch bei einer vergleichbaren Lichtausbeute gegenüber einer Glühlampe oder \ac{hmi}.
-Ein PAR64 Medium Flood CP62 hat eine Lichtausbeute von etwa 320 Lumen mit einer Leistung von 1000 Watt \cite{convpar}. Ein vergleichbarer moderner
-\ac{led} \ac{par} mit einer LED Leistung von 180 Watt hat eine Lichtausbeute von etwa 5100 Lumen \cite{ledpar}. So können heute umfangreichere
+Ein \ac{par}64 Medium Flood CP62 hat eine Lichtausbeute von etwa 320.000 Lumen mit einer Leistung von 1000 Watt \cite{convpar}. Ein vergleichbarer %//TODO: Check Lumen
+moderner \ac{led} \ac{par} mit einer LED Leistung von 180 Watt hat eine Lichtausbeute von etwa 5100 Lumen \cite{ledpar}. So können heute umfangreichere
 Lichtinstallationen umgesetzt werden. Da die verfügbare Leistung an Veranstaltungsorten begrenzt ist, konnte nur eine vergleichsweise geringe
 Anzahl von konventionellen \ac{par} Scheinwerfern eingesetzt werden, da schon mit 100 \ac{par}s mit 1000 Watt Anschlussleistung bereits
 100.000 Watt zur Verfügung stehen müssten, um alle zur gleichen Zeit zu betreiben. Dies war in der Regel nicht der Fall. Dennoch wurden in der
@@ -882,16 +883,18 @@ können, benötigte man vier \ac{par}s. Drei davon mit einer jeweiligen Farbfoli
 subtraktiven Farbmischung. Es werden vor eine in der Regel weiße Lichtquelle hitzebeständige Folien gespannt, welche nur bestimmte Teile des 
 Lichtspektrums durchlassen.\\
 Dadurch war die Gesamtleistung aller eingesetzten Scheinwerfer früher deutlich größer als dem Licht für die Veranstaltung zugedacht war. Doch
-da die Lampen für die verschieden Farben nie alle zur gleichen Zeit an waren, war dies nur ein Problem im Haushalten mit der zur verfügungstehenden
+da die Lampen für die verschieden Farben nie alle zur gleichen Zeit an waren, war dies nur ein Problem im haushalten mit der zur verfügungstehenden
 Leistung.\\
 Mit \ac{led} Scheinwerfern gibt es dieses Problem heute kaum mehr. Die Scheinwerfer können durch das Verbauen von mehrfarbigen \ac{led}s (siehe
-\ref{colormixing}) in einem \ac{led} \ac{par} mit additiver Farbmischung ein großes Repertoire an Farben bereitstellen.
-Dennoch sind die Traversen auf den Großveranstaltungen voller geworden gegenüber früher.
+\ref{colormixing}) in einem \ac{led} \ac{par} mit additiver Farbmischung ein großes Repertoire an Farben bereitstellen.\\
 Die ersten \ac{led} \ac{par}s hatten viele einzelne rote, grüne und blaue 5-mm-\ac{led}s. Hier war jedoch das Problem, dass bei der Farbmischung
 mit beispielsweise Rot und Grün kein homogenes Gelb entstanden ist, da jede einzelne \ac{led}s ihr eigenes Streuverhalten hatte. So konnte
 auf einer auftreffenden Fläche wie dem Boden immer einzelne nur rote oder nur grüne Farbflächen entstehen. Dieses unerwünschte Verhalten wurde
 später gelöst, indem mehrere \ac{led}s in einen Chip integriert wurden, und vor jeden dieser \ac{led}-Chips eine Streulinse gesetzt wurde.
-Somit konnte ein deutlich homogeneres Abstrahlverhalten erreicht werden.
+Somit konnte ein deutlich homogeneres Abstrahlverhalten erreicht werden.\\
+Dennoch sind die Traversen auf den Großveranstaltungen voller geworden gegenüber früher, da die Anzahl von Geräteklassen der Scheinwerfer mit verschidenen
+Einsatzmöglichkeiten sich in jüngerer Vergangenheit erweitert hat. Zur flexibilität einer Lichtinstallation werden heute oft mehrere Geräteklassen wie Spot,
+Wash und Beam Geräte in großen Mengen eingesetzt. Weiter nimmt der Einsatz von LED Videowänden und Projektionsflächen in den letzten Jahren zu.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Verwendete Geräte %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -918,7 +921,7 @@ Diese Lampe ist eine sehr kompakt gebaute RGBW \ac{led} Lichtquelle auf Akku Bas
 entwickelt. Diese Lampe ist sowohl per Fernbedienung, als auch per W-\ac{dmx} steuerbar.
 Die "'Kanne"' hat einen Abstrahlwinkel von 65 Grad. Zur gezielten Steuerung, ohne vorprogrammierte Effekte wird ein \ac{dmx} zu W-DMX Wandler des Herstellers benötigt (W-APP). Dieser ermöglicht dann die Ansteuerung der Lampe durch eine Applikation.
 \subsubsection{Robe LEDWash 300}
-Dieses Wash Movinglight ist ein handelsübliches Gerät und wird weltweit bei vielen Veranstaltungen universell eingesetzt. Hier sind 19 einzelne
+Dieses Wash Movinglight wird weltweit bei vielen Veranstaltungen universell eingesetzt. Hier sind 19 einzelne
 RGBW \ac{led}s hinter einzelnen Linsen in zwei Kreisen und einer Mittelpunkt \ac{led} positioniert.
 \begin{figure}[H]
     \begin{center}
@@ -966,7 +969,7 @@ Als Referenz Messgerät zu dem vergleichsweisen niedrigpreisigen Sensoren wurde 
 \noindent
 Dieses Messgerät kann Spektraldaten im Bereich von 360 bis 760 Nanometern messen. Die Messauflösung beträgt einen Nanometer. Daraus berechnet
 das Messgerät die \ac{cie} 1931 xy Koordinaten, sowie die \ac{cie} 1976 uv Koordinaten. Messwerte können einzeln oder auch in Serie erfasst werden und
-im CSV Format für die weitere Auswertung auf eine SD Karte gesichert werden.
+im XLS Format für die weitere Auswertung auf eine SD Karte gesichert werden.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Sensorik %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1619,6 +1622,8 @@ Somit können die emittierten Farben verschiedener Scheinwerfer theoretisch abge
 Es wurden mit den in Kapitel \ref{lamps} aufgeführten Lampen verschiedene Messungen zur Entwicklung und Validierung des Abgleichvorgangs durchgeführt.\\
 Ein Teil dieser Messungen wurde in vorhergehnden kapiteln bereits behandelt. Im Folgenden werden Testaufbauten, Messungen sowie Abgleichvorgänge aufgeführt
 und diskutiert.\\
+Zunächst sind die charakteristischen Luminanz und Farbvalenz Werte der Emitter der verwendeten Lampen zu betrachten. Diese wurden als Basis mit dem UPRtek
+Spektrometer erhoben, um eine qualitative Aussage über die mit den AS726x gemessene Werte treffen zu können. Hier ist zu beobachten, dass
 %// TODO : Weiter schreiben
 {\color{red}
 Hier folgen Notizen:\\
