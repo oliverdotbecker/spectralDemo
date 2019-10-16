@@ -1632,14 +1632,19 @@ Es wurden mit den in Kapitel \ref{lamps} aufgeführten Lampen verschiedene Messu
 Ein Teil dieser Messungen wurde in vorhergehnden kapiteln bereits behandelt. Im Folgenden werden Testaufbauten, Messungen sowie Abgleichvorgänge aufgeführt
 und diskutiert.\\
 Zunächst sind die charakteristischen Luminanz und Farbvalenz Werte der Emitter der verwendeten Lampen zu betrachten. Diese wurden als Basis mit dem UPRtek
-Spektrometer erhoben, um eine qualitative Aussage über die mit den AS726x gemessene Werte treffen zu können. Hier ist zu beobachten, dass {\color{red}...}\\
+Spektrometer erhoben, um eine qualitative Aussage über die mit den AS726x gemessene Werte treffen zu können.\\
+Die mit dem Spektrometer gemessenen Werte sind tabellarisch und als Diagramme im Anhang zu finden.\\
 %// TODO : Weiter schreiben
+\paragraph{}
+\noindent
 Bei den Messungen mit dem Spektrometer ist deutlich geworden, um in der Praxis Lampen zu vermessen ist das automatisierte Erfassen der Messwerte notwendig. Das
 Messen einer Lampe mit vier Emittern mit jeweils acht Messpunkten nahm etwa zehn Minuten in Anspruch. Dies beinhaltet das ansteuern der Lampe, des aufnehmen der
 Messwerte sowie das aufbereiten der Daten zum einlesen in die Applikation. Diese Zeit kann durch einen in die Applikation integrierten Senor verkürzt werden.
 Weiter macht eine integrierte Lösung dem Messprozess komfortabler für den Anwender, da Sensorwerte von der Applikation automatisch aufgenommen und aufbereitet
 werden, ohne weitere Benutzerinteraktion.\\
 %// TODO : Weiter schreiben
+\paragraph{}
+\noindent
 Die erfassten Messwerte mit dem AS7262 unterscheiden sich deutlich von den mit dem Spektrometer aufgezeichneten Daten.
 \paragraph{}
 {\color{red}
@@ -1672,6 +1677,119 @@ deutlich.
 \renewcommand{\thesubsection}{\Alph{subsection}}
 \section*{Anhang}
 \addcontentsline{toc}{section}{Anhang}
+
+\subsection{Messungen}
+\subsubsection{UPRtek}
+Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
+\textbf{Arri SkyPanel RGBW Mode}
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.65\textwidth]{images/charts/skypanel.png}
+    \end{center}
+    \vspace{-.5cm}
+    \caption{Darstellung Luminanz der SkyPanel Emitter}
+    \begin{center}
+        \includegraphics[width=.62\textwidth]{images/macAdam/skypanelTotal.png}
+    \end{center}
+    \vspace{-.7cm}
+    \caption{Gesamtdarstellung xy Koordinaten der SkyPanel Emitter}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/macAdam/skypanelRed.png}
+        \caption{Roter Emitter}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/macAdam/skypanelGreen.png}
+        \caption{Grüner Emitter}
+    \end{subfigure}
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/macAdam/skypanelBlue.png}
+        \caption{Blauer Emitter}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/macAdam/skypanelWhite.png}
+        \caption{Weißer Emitter}
+    \end{subfigure}
+    \caption{Übersicht der Skypanel Emitter xy Koordinaten mit MacAdam Ellipsen}
+\end{figure}
+\noindent
+\textbf{Robe LEDWash 300}
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/charts/led_wash_300.png}
+    \end{center}
+    \vspace{-.5cm}
+    \caption{Darstellung Luminanz der LEDWash Emitter}
+    \begin{center}
+        \includegraphics[width=.7\textwidth]{images/macAdam/led_wash_300Total.png}
+    \end{center}
+    \vspace{-.7cm}
+    \caption{Gesamtdarstellung xy Koordinaten der LEDWash Emitter}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/macAdam/led_wash_300Red.png}
+        \caption{Roter Emitter}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/macAdam/led_wash_300Green.png}
+        \caption{Grüner Emitter}
+    \end{subfigure}
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/macAdam/led_wash_300Blue.png}
+        \caption{Blauer Emitter}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/macAdam/led_wash_300White.png}
+        \caption{Weißer Emitter}
+    \end{subfigure}
+    \caption{Übersicht der LEDWash Emitter xy Koordinaten mit MacAdam Ellipsen}
+\end{figure}
+\noindent
+\textbf{Ape Labs LightCan}
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/charts/lightCan.png}
+    \end{center}
+    \vspace{-.5cm}
+    \caption{Darstellung Luminanz der LEDWash Emitter}
+    \begin{center}
+        \includegraphics[width=.7\textwidth]{images/macAdam/lightCanTotal.png}
+    \end{center}
+    \vspace{-.7cm}
+    \caption{Gesamtdarstellung xy Koordinaten der LEDWash Emitter}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/macAdam/lightCanRed.png}
+        \caption{Roter Emitter}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/macAdam/lightCanGreen.png}
+        \caption{Grüner Emitter}
+    \end{subfigure}
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/macAdam/lightCanBlue.png}
+        \caption{Blauer Emitter}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/macAdam/lightCanWhite.png}
+        \caption{Weißer Emitter}
+    \end{subfigure}
+    \caption{Übersicht der LEDWash Emitter xy Koordinaten mit MacAdam Ellipsen}
+\end{figure}
+\noindent
+\clearpage
 
 \subsection{Abbildungsverzeichnis}
 \begingroup
