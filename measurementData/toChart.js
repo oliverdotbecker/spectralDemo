@@ -2,14 +2,38 @@ const fs = require('fs');
 
 var data = {};
 var fixture = "Arri Skypanel Mode RGBW";
-//fixture = "Robe LED Wash 300";
-//fixture = "Ape Labs Light Can";
+fixture = "Robe LED Wash 300";
+fixture = "Ape Labs Light Can";
 var folderDir = __dirname+"/UPRtek/";
 var measureLevels = ["5%","10%","20%","35%","50%","65%","85%","100%"];
 
 var emitters = fs.readdirSync(folderDir+fixture);
 if(emitters && emitters.length)
 {
+    //Sort Emitters
+    var temp = emitters;
+    emitters = [];
+    if(temp.indexOf("Rot") >= 0)
+    {
+        emitters.push("Rot");
+    }
+    if(temp.indexOf("Grün") >= 0)
+    {
+        emitters.push("Grün");
+    }
+    if(temp.indexOf("Blau") >= 0)
+    {
+        emitters.push("Blau");
+    }
+    if(temp.indexOf("Weiss") >= 0)
+    {
+        emitters.push("Weiss");
+    }
+    if(temp.indexOf("Amber") >= 0)
+    {
+        emitters.push("Amber");
+    }
+
     for(var fI = 0; fI < emitters.length; fI++)
     {
         var emitterPath = folderDir+fixture+"/"+emitters[fI];
@@ -37,8 +61,18 @@ if(emitters && emitters.length)
             }
         }
     }
+
     var csvOut = exportAsCSV(data);
     fs.writeFileSync(folderDir+fixture+".csv",csvOut,"utf8");
+
+    var csvOut = exportAsXYCSV(data);
+    fs.writeFileSync(folderDir+fixture+".txt",csvOut,"utf8");
+
+    /*var csvOut = exportAsSpectralCSVs(data);
+    for(var i = 0; i < csvOut.length; i++)
+    {
+        fs.writeFileSync(folderDir+"/"+fixture+"/"+fixture+"_spec_"+measureLevels[i]+".csv",csvOut[i],"utf8");
+    }*/
 }
 
 function readUPRtekCSV(data)
@@ -65,7 +99,8 @@ function readUPRtekCSV(data)
         X:X,
         Y:Y,
         Z:Z,
-        Lux:parseFloat(data[8].split("=")[1].trim())
+        Lux:parseFloat(data[8].split("=")[1].trim()),
+        spectral:data.slice(10,data.length-1)
     };
 }
 
@@ -112,5 +147,39 @@ function exportAsCSV(data)
     }*/
 
     csvOut = csvOut.replace(/\./g,",");
+    csvOut = "\uFEFF"+csvOut; //Flag for excel to use utf8
+    return csvOut;
+}
+
+function exportAsXYCSV(data)
+{
+    var csvOut = "";
+    for(var emitter in data)
+    {
+        var emitterData = data[emitter];
+        for(var lIdx = 0; lIdx < emitterData.length; lIdx++)
+        {
+            var currDataset = emitterData[lIdx];
+            csvOut += currDataset.x+" ";
+            csvOut += currDataset.y+"\n";
+        }
+    }
+    //csvOut = csvOut.replace(/\./g,",");
+    return csvOut;
+}
+
+function exportAsSpectralCSVs(data)
+{
+    var csvOut = [];
+
+    for(var emitter in data)
+    {
+        var emitterData = data[emitter];
+        for(var lIdx = 0; lIdx < emitterData.length; lIdx++)
+        {
+            var currDataset = emitterData[lIdx];
+            csvOut.push("\uFEFF"+(currDataset.spectral.join("\n")));
+        }
+    }
     return csvOut;
 }
