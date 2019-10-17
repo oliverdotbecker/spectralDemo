@@ -1,0 +1,1073 @@
+<version>1.00
+<same_plot_symbols>1
+<autoLabel_Chk>0
+<colorLabels_Chk>0
+<applyAlignmentToAllLabels_Chk>0
+<autoLabelType>0
+<pointLabelPosition>4
+<solidGamutLines_Chk>1
+<drawGamutLines_Chk>0
+<useThickLineForEllipseCircles_Chk>0
+<show100KCCTLines_Chk>0
+<showWavelengths_Chk>1
+<cctLinesLabelsType>3
+<gridLinesType>1
+<outOfGamutType>2
+<ellipseColorIndex>0
+<blackBodyDaylightLocus>4
+<whiteBackgroundForAllPlots>1
+<plotWhiteCIE>0
+<colorMapType>0
+<ciePlotSymbolSize>10
+<ciePlotFontSize>8
+<xyupvpDuvType>0
+<whiteMacAdamCircleText_Chk>1
+<userUserMacAdams_Chk>0
+<user_macAdam_Chk>0
+<userUserUpVpCircle_Chk>0
+<user_UpVpCircle_Chk>0
+<macAdam_user_num_TF>
+<UpVpCircle_user_num_TF>
+<ith_macAdam_Chk>1 1
+<ith_UpVpCircle_Chk>1 0
+<ith_macAdam_Chk>2 1
+<ith_UpVpCircle_Chk>2 0
+<ith_macAdam_Chk>3 1
+<ith_UpVpCircle_Chk>3 0
+<ith_macAdam_Chk>4 1
+<ith_UpVpCircle_Chk>4 0
+<ith_macAdam_Chk>5 0
+<ith_UpVpCircle_Chk>5 0
+<ith_macAdam_Chk>6 0
+<ith_UpVpCircle_Chk>6 0
+<ith_macAdam_Chk>7 0
+<ith_UpVpCircle_Chk>7 0
+<ith_macAdam_Chk>8 0
+<ith_UpVpCircle_Chk>8 0
+<ith_macAdam_Chk>9 0
+<ith_UpVpCircle_Chk>9 0
+<ith_macAdam_Chk>10 1
+<ith_UpVpCircle_Chk>10 0
+<ith_ansiEllipse_Chk>0 0
+<ith_ansiEllipse_Chk>1 0
+<ith_ansiEllipse_Chk>2 0
+<ith_ansiEllipse_Chk>3 0
+<ith_ansiEllipse_Chk>4 0
+<ith_ansiEllipse_Chk>5 0
+<ith_ansiEllipse_Chk>6 0
+<showANSIbins2008_Chk>0
+<showANSIbins2011_Chk>0
+<showANSIbins2015_Chk>0
+<autoOrderUserGamutPoints_Chk>0
+<showGamut>0 0
+<showGamut>1 0
+<showGamut>2 0
+<showGamut>3 0
+<showGamut>4 0
+<showGamut>5 0
+<showGamut>6 0
+<showGamut>7 0
+<showGamut>8 0
+<showGamut>9 0
+<showGamut>10 0
+<showGamut>11 0
+<x>0 0,4418
+<y>0 0,4981
+<u'>0 0,2183
+<v'>0 0,5539
+<CCT>0 3553
+<Duv>0 0,0333
+<Du'v'>0 0,0465
+<symbol_and_color>0 0 0
+<label>0 Skypanel
+<position>0 L
+<x>1 0,5447
+<y>1 0,3726
+<u'>1 0,3414
+<v'>1 0,5255
+<CCT>1 1631
+<Duv>1 -0,0102
+<Du'v'>1 -0,0153
+<symbol_and_color>1 0 0
+<label>1 LedWash
+<position>1 L
+<x>2 0,5379
+<y>2 0,3786
+<u'>2 0,3327
+<v'>2 0,5269
+<CCT>2 1709
+<Duv>2 -0,0092
+<Du'v'>2 -0,0138
+<symbol_and_color>2 0 0
+<label>2 LightCan
+<position>2 L
+<x>3 
+<y>3 
+<u'>3 
+<v'>3 
+<CCT>3 
+<Duv>3 
+<Du'v'>3 
+<symbol_and_color>3 0 0
+<label>3 
+<position>3 L
+<x>4 
+<y>4 
+<u'>4 
+<v'>4 
+<CCT>4 
+<Duv>4 
+<Du'v'>4 
+<symbol_and_color>4 0 0
+<label>4 
+<position>4 L
+<x>5 
+<y>5 
+<u'>5 
+<v'>5 
+<CCT>5 
+<Duv>5 
+<Du'v'>5 
+<symbol_and_color>5 0 0
+<label>5 
+<position>5 L
+<x>6 
+<y>6 
+<u'>6 
+<v'>6 
+<CCT>6 
+<Duv>6 
+<Du'v'>6 
+<symbol_and_color>6 0 0
+<label>6 
+<position>6 L
+<x>7 
+<y>7 
+<u'>7 
+<v'>7 
+<CCT>7 
+<Duv>7 
+<Du'v'>7 
+<symbol_and_color>7 0 0
+<label>7 
+<position>7 L
+<x>8 
+<y>8 
+<u'>8 
+<v'>8 
+<CCT>8 
+<Duv>8 
+<Du'v'>8 
+<symbol_and_color>8 0 0
+<label>8 
+<position>8 L
+<x>9 
+<y>9 
+<u'>9 
+<v'>9 
+<CCT>9 
+<Duv>9 
+<Du'v'>9 
+<symbol_and_color>9 0 0
+<label>9 
+<position>9 L
+<x>10 
+<y>10 
+<u'>10 
+<v'>10 
+<CCT>10 
+<Duv>10 
+<Du'v'>10 
+<symbol_and_color>10 0 0
+<label>10 
+<position>10 L
+<x>11 
+<y>11 
+<u'>11 
+<v'>11 
+<CCT>11 
+<Duv>11 
+<Du'v'>11 
+<symbol_and_color>11 0 0
+<label>11 
+<position>11 L
+<x>12 
+<y>12 
+<u'>12 
+<v'>12 
+<CCT>12 
+<Duv>12 
+<Du'v'>12 
+<symbol_and_color>12 0 0
+<label>12 
+<position>12 L
+<x>13 
+<y>13 
+<u'>13 
+<v'>13 
+<CCT>13 
+<Duv>13 
+<Du'v'>13 
+<symbol_and_color>13 0 0
+<label>13 
+<position>13 L
+<x>14 
+<y>14 
+<u'>14 
+<v'>14 
+<CCT>14 
+<Duv>14 
+<Du'v'>14 
+<symbol_and_color>14 0 0
+<label>14 
+<position>14 L
+<x>15 
+<y>15 
+<u'>15 
+<v'>15 
+<CCT>15 
+<Duv>15 
+<Du'v'>15 
+<symbol_and_color>15 0 0
+<label>15 
+<position>15 L
+<x>16 
+<y>16 
+<u'>16 
+<v'>16 
+<CCT>16 
+<Duv>16 
+<Du'v'>16 
+<symbol_and_color>16 0 0
+<label>16 
+<position>16 L
+<x>17 
+<y>17 
+<u'>17 
+<v'>17 
+<CCT>17 
+<Duv>17 
+<Du'v'>17 
+<symbol_and_color>17 0 0
+<label>17 
+<position>17 L
+<x>18 
+<y>18 
+<u'>18 
+<v'>18 
+<CCT>18 
+<Duv>18 
+<Du'v'>18 
+<symbol_and_color>18 0 0
+<label>18 
+<position>18 L
+<x>19 
+<y>19 
+<u'>19 
+<v'>19 
+<CCT>19 
+<Duv>19 
+<Du'v'>19 
+<symbol_and_color>19 0 0
+<label>19 
+<position>19 L
+<x>20 
+<y>20 
+<u'>20 
+<v'>20 
+<CCT>20 
+<Duv>20 
+<Du'v'>20 
+<symbol_and_color>20 0 0
+<label>20 
+<position>20 L
+<x>21 
+<y>21 
+<u'>21 
+<v'>21 
+<CCT>21 
+<Duv>21 
+<Du'v'>21 
+<symbol_and_color>21 0 0
+<label>21 
+<position>21 L
+<x>22 
+<y>22 
+<u'>22 
+<v'>22 
+<CCT>22 
+<Duv>22 
+<Du'v'>22 
+<symbol_and_color>22 0 0
+<label>22 
+<position>22 L
+<x>23 
+<y>23 
+<u'>23 
+<v'>23 
+<CCT>23 
+<Duv>23 
+<Du'v'>23 
+<symbol_and_color>23 0 0
+<label>23 
+<position>23 L
+<x>24 
+<y>24 
+<u'>24 
+<v'>24 
+<CCT>24 
+<Duv>24 
+<Du'v'>24 
+<symbol_and_color>24 0 0
+<label>24 
+<position>24 L
+<x>25 
+<y>25 
+<u'>25 
+<v'>25 
+<CCT>25 
+<Duv>25 
+<Du'v'>25 
+<symbol_and_color>25 0 0
+<label>25 
+<position>25 L
+<x>26 
+<y>26 
+<u'>26 
+<v'>26 
+<CCT>26 
+<Duv>26 
+<Du'v'>26 
+<symbol_and_color>26 0 0
+<label>26 
+<position>26 L
+<x>27 
+<y>27 
+<u'>27 
+<v'>27 
+<CCT>27 
+<Duv>27 
+<Du'v'>27 
+<symbol_and_color>27 0 0
+<label>27 
+<position>27 L
+<x>28 
+<y>28 
+<u'>28 
+<v'>28 
+<CCT>28 
+<Duv>28 
+<Du'v'>28 
+<symbol_and_color>28 0 0
+<label>28 
+<position>28 L
+<x>29 
+<y>29 
+<u'>29 
+<v'>29 
+<CCT>29 
+<Duv>29 
+<Du'v'>29 
+<symbol_and_color>29 0 0
+<label>29 
+<position>29 L
+<x>30 
+<y>30 
+<u'>30 
+<v'>30 
+<CCT>30 
+<Duv>30 
+<Du'v'>30 
+<symbol_and_color>30 0 0
+<label>30 
+<position>30 L
+<x>31 
+<y>31 
+<u'>31 
+<v'>31 
+<CCT>31 
+<Duv>31 
+<Du'v'>31 
+<symbol_and_color>31 0 0
+<label>31 
+<position>31 L
+<x>32 
+<y>32 
+<u'>32 
+<v'>32 
+<CCT>32 
+<Duv>32 
+<Du'v'>32 
+<symbol_and_color>32 0 0
+<label>32 
+<position>32 L
+<x>33 
+<y>33 
+<u'>33 
+<v'>33 
+<CCT>33 
+<Duv>33 
+<Du'v'>33 
+<symbol_and_color>33 0 0
+<label>33 
+<position>33 L
+<x>34 
+<y>34 
+<u'>34 
+<v'>34 
+<CCT>34 
+<Duv>34 
+<Du'v'>34 
+<symbol_and_color>34 0 0
+<label>34 
+<position>34 L
+<x>35 
+<y>35 
+<u'>35 
+<v'>35 
+<CCT>35 
+<Duv>35 
+<Du'v'>35 
+<symbol_and_color>35 0 0
+<label>35 
+<position>35 L
+<x>36 
+<y>36 
+<u'>36 
+<v'>36 
+<CCT>36 
+<Duv>36 
+<Du'v'>36 
+<symbol_and_color>36 0 0
+<label>36 
+<position>36 L
+<x>37 
+<y>37 
+<u'>37 
+<v'>37 
+<CCT>37 
+<Duv>37 
+<Du'v'>37 
+<symbol_and_color>37 0 0
+<label>37 
+<position>37 L
+<x>38 
+<y>38 
+<u'>38 
+<v'>38 
+<CCT>38 
+<Duv>38 
+<Du'v'>38 
+<symbol_and_color>38 0 0
+<label>38 
+<position>38 L
+<x>39 
+<y>39 
+<u'>39 
+<v'>39 
+<CCT>39 
+<Duv>39 
+<Du'v'>39 
+<symbol_and_color>39 0 0
+<label>39 
+<position>39 L
+<x>40 
+<y>40 
+<u'>40 
+<v'>40 
+<CCT>40 
+<Duv>40 
+<Du'v'>40 
+<symbol_and_color>40 0 0
+<label>40 
+<position>40 L
+<x>41 
+<y>41 
+<u'>41 
+<v'>41 
+<CCT>41 
+<Duv>41 
+<Du'v'>41 
+<symbol_and_color>41 0 0
+<label>41 
+<position>41 L
+<x>42 
+<y>42 
+<u'>42 
+<v'>42 
+<CCT>42 
+<Duv>42 
+<Du'v'>42 
+<symbol_and_color>42 0 0
+<label>42 
+<position>42 L
+<x>43 
+<y>43 
+<u'>43 
+<v'>43 
+<CCT>43 
+<Duv>43 
+<Du'v'>43 
+<symbol_and_color>43 0 0
+<label>43 
+<position>43 L
+<x>44 
+<y>44 
+<u'>44 
+<v'>44 
+<CCT>44 
+<Duv>44 
+<Du'v'>44 
+<symbol_and_color>44 0 0
+<label>44 
+<position>44 L
+<x>45 
+<y>45 
+<u'>45 
+<v'>45 
+<CCT>45 
+<Duv>45 
+<Du'v'>45 
+<symbol_and_color>45 0 0
+<label>45 
+<position>45 L
+<x>46 
+<y>46 
+<u'>46 
+<v'>46 
+<CCT>46 
+<Duv>46 
+<Du'v'>46 
+<symbol_and_color>46 0 0
+<label>46 
+<position>46 L
+<x>47 
+<y>47 
+<u'>47 
+<v'>47 
+<CCT>47 
+<Duv>47 
+<Du'v'>47 
+<symbol_and_color>47 0 0
+<label>47 
+<position>47 L
+<x>48 
+<y>48 
+<u'>48 
+<v'>48 
+<CCT>48 
+<Duv>48 
+<Du'v'>48 
+<symbol_and_color>48 0 0
+<label>48 
+<position>48 L
+<x>49 
+<y>49 
+<u'>49 
+<v'>49 
+<CCT>49 
+<Duv>49 
+<Du'v'>49 
+<symbol_and_color>49 0 0
+<label>49 
+<position>49 L
+<x>50 
+<y>50 
+<u'>50 
+<v'>50 
+<CCT>50 
+<Duv>50 
+<Du'v'>50 
+<symbol_and_color>50 0 0
+<label>50 
+<position>50 L
+<x>51 
+<y>51 
+<u'>51 
+<v'>51 
+<CCT>51 
+<Duv>51 
+<Du'v'>51 
+<symbol_and_color>51 0 0
+<label>51 
+<position>51 L
+<x>52 
+<y>52 
+<u'>52 
+<v'>52 
+<CCT>52 
+<Duv>52 
+<Du'v'>52 
+<symbol_and_color>52 0 0
+<label>52 
+<position>52 L
+<x>53 
+<y>53 
+<u'>53 
+<v'>53 
+<CCT>53 
+<Duv>53 
+<Du'v'>53 
+<symbol_and_color>53 0 0
+<label>53 
+<position>53 L
+<x>54 
+<y>54 
+<u'>54 
+<v'>54 
+<CCT>54 
+<Duv>54 
+<Du'v'>54 
+<symbol_and_color>54 0 0
+<label>54 
+<position>54 L
+<x>55 
+<y>55 
+<u'>55 
+<v'>55 
+<CCT>55 
+<Duv>55 
+<Du'v'>55 
+<symbol_and_color>55 0 0
+<label>55 
+<position>55 L
+<x>56 
+<y>56 
+<u'>56 
+<v'>56 
+<CCT>56 
+<Duv>56 
+<Du'v'>56 
+<symbol_and_color>56 0 0
+<label>56 
+<position>56 L
+<x>57 
+<y>57 
+<u'>57 
+<v'>57 
+<CCT>57 
+<Duv>57 
+<Du'v'>57 
+<symbol_and_color>57 0 0
+<label>57 
+<position>57 L
+<x>58 
+<y>58 
+<u'>58 
+<v'>58 
+<CCT>58 
+<Duv>58 
+<Du'v'>58 
+<symbol_and_color>58 0 0
+<label>58 
+<position>58 L
+<x>59 
+<y>59 
+<u'>59 
+<v'>59 
+<CCT>59 
+<Duv>59 
+<Du'v'>59 
+<symbol_and_color>59 0 0
+<label>59 
+<position>59 L
+<x>60 
+<y>60 
+<u'>60 
+<v'>60 
+<CCT>60 
+<Duv>60 
+<Du'v'>60 
+<symbol_and_color>60 0 0
+<label>60 
+<position>60 L
+<x>61 
+<y>61 
+<u'>61 
+<v'>61 
+<CCT>61 
+<Duv>61 
+<Du'v'>61 
+<symbol_and_color>61 0 0
+<label>61 
+<position>61 L
+<x>62 
+<y>62 
+<u'>62 
+<v'>62 
+<CCT>62 
+<Duv>62 
+<Du'v'>62 
+<symbol_and_color>62 0 0
+<label>62 
+<position>62 L
+<x>63 
+<y>63 
+<u'>63 
+<v'>63 
+<CCT>63 
+<Duv>63 
+<Du'v'>63 
+<symbol_and_color>63 0 0
+<label>63 
+<position>63 L
+<x>64 
+<y>64 
+<u'>64 
+<v'>64 
+<CCT>64 
+<Duv>64 
+<Du'v'>64 
+<symbol_and_color>64 0 0
+<label>64 
+<position>64 L
+<x>65 
+<y>65 
+<u'>65 
+<v'>65 
+<CCT>65 
+<Duv>65 
+<Du'v'>65 
+<symbol_and_color>65 0 0
+<label>65 
+<position>65 L
+<x>66 
+<y>66 
+<u'>66 
+<v'>66 
+<CCT>66 
+<Duv>66 
+<Du'v'>66 
+<symbol_and_color>66 0 0
+<label>66 
+<position>66 L
+<x>67 
+<y>67 
+<u'>67 
+<v'>67 
+<CCT>67 
+<Duv>67 
+<Du'v'>67 
+<symbol_and_color>67 0 0
+<label>67 
+<position>67 L
+<x>68 
+<y>68 
+<u'>68 
+<v'>68 
+<CCT>68 
+<Duv>68 
+<Du'v'>68 
+<symbol_and_color>68 0 0
+<label>68 
+<position>68 L
+<x>69 
+<y>69 
+<u'>69 
+<v'>69 
+<CCT>69 
+<Duv>69 
+<Du'v'>69 
+<symbol_and_color>69 0 0
+<label>69 
+<position>69 L
+<x>70 
+<y>70 
+<u'>70 
+<v'>70 
+<CCT>70 
+<Duv>70 
+<Du'v'>70 
+<symbol_and_color>70 0 0
+<label>70 
+<position>70 L
+<x>71 
+<y>71 
+<u'>71 
+<v'>71 
+<CCT>71 
+<Duv>71 
+<Du'v'>71 
+<symbol_and_color>71 0 0
+<label>71 
+<position>71 L
+<x>72 
+<y>72 
+<u'>72 
+<v'>72 
+<CCT>72 
+<Duv>72 
+<Du'v'>72 
+<symbol_and_color>72 0 0
+<label>72 
+<position>72 L
+<x>73 
+<y>73 
+<u'>73 
+<v'>73 
+<CCT>73 
+<Duv>73 
+<Du'v'>73 
+<symbol_and_color>73 0 0
+<label>73 
+<position>73 L
+<x>74 
+<y>74 
+<u'>74 
+<v'>74 
+<CCT>74 
+<Duv>74 
+<Du'v'>74 
+<symbol_and_color>74 0 0
+<label>74 
+<position>74 L
+<x>75 
+<y>75 
+<u'>75 
+<v'>75 
+<CCT>75 
+<Duv>75 
+<Du'v'>75 
+<symbol_and_color>75 0 0
+<label>75 
+<position>75 L
+<x>76 
+<y>76 
+<u'>76 
+<v'>76 
+<CCT>76 
+<Duv>76 
+<Du'v'>76 
+<symbol_and_color>76 0 0
+<label>76 
+<position>76 L
+<x>77 
+<y>77 
+<u'>77 
+<v'>77 
+<CCT>77 
+<Duv>77 
+<Du'v'>77 
+<symbol_and_color>77 0 0
+<label>77 
+<position>77 L
+<x>78 
+<y>78 
+<u'>78 
+<v'>78 
+<CCT>78 
+<Duv>78 
+<Du'v'>78 
+<symbol_and_color>78 0 0
+<label>78 
+<position>78 L
+<x>79 
+<y>79 
+<u'>79 
+<v'>79 
+<CCT>79 
+<Duv>79 
+<Du'v'>79 
+<symbol_and_color>79 0 0
+<label>79 
+<position>79 L
+<x>80 
+<y>80 
+<u'>80 
+<v'>80 
+<CCT>80 
+<Duv>80 
+<Du'v'>80 
+<symbol_and_color>80 0 0
+<label>80 
+<position>80 L
+<x>81 
+<y>81 
+<u'>81 
+<v'>81 
+<CCT>81 
+<Duv>81 
+<Du'v'>81 
+<symbol_and_color>81 0 0
+<label>81 
+<position>81 L
+<x>82 
+<y>82 
+<u'>82 
+<v'>82 
+<CCT>82 
+<Duv>82 
+<Du'v'>82 
+<symbol_and_color>82 0 0
+<label>82 
+<position>82 L
+<x>83 
+<y>83 
+<u'>83 
+<v'>83 
+<CCT>83 
+<Duv>83 
+<Du'v'>83 
+<symbol_and_color>83 0 0
+<label>83 
+<position>83 L
+<x>84 
+<y>84 
+<u'>84 
+<v'>84 
+<CCT>84 
+<Duv>84 
+<Du'v'>84 
+<symbol_and_color>84 0 0
+<label>84 
+<position>84 L
+<x>85 
+<y>85 
+<u'>85 
+<v'>85 
+<CCT>85 
+<Duv>85 
+<Du'v'>85 
+<symbol_and_color>85 0 0
+<label>85 
+<position>85 L
+<x>86 
+<y>86 
+<u'>86 
+<v'>86 
+<CCT>86 
+<Duv>86 
+<Du'v'>86 
+<symbol_and_color>86 0 0
+<label>86 
+<position>86 L
+<x>87 
+<y>87 
+<u'>87 
+<v'>87 
+<CCT>87 
+<Duv>87 
+<Du'v'>87 
+<symbol_and_color>87 0 0
+<label>87 
+<position>87 L
+<x>88 
+<y>88 
+<u'>88 
+<v'>88 
+<CCT>88 
+<Duv>88 
+<Du'v'>88 
+<symbol_and_color>88 0 0
+<label>88 
+<position>88 L
+<x>89 
+<y>89 
+<u'>89 
+<v'>89 
+<CCT>89 
+<Duv>89 
+<Du'v'>89 
+<symbol_and_color>89 0 0
+<label>89 
+<position>89 L
+<x>90 
+<y>90 
+<u'>90 
+<v'>90 
+<CCT>90 
+<Duv>90 
+<Du'v'>90 
+<symbol_and_color>90 0 0
+<label>90 
+<position>90 L
+<x>91 
+<y>91 
+<u'>91 
+<v'>91 
+<CCT>91 
+<Duv>91 
+<Du'v'>91 
+<symbol_and_color>91 0 0
+<label>91 
+<position>91 L
+<x>92 
+<y>92 
+<u'>92 
+<v'>92 
+<CCT>92 
+<Duv>92 
+<Du'v'>92 
+<symbol_and_color>92 0 0
+<label>92 
+<position>92 L
+<x>93 
+<y>93 
+<u'>93 
+<v'>93 
+<CCT>93 
+<Duv>93 
+<Du'v'>93 
+<symbol_and_color>93 0 0
+<label>93 
+<position>93 L
+<x>94 
+<y>94 
+<u'>94 
+<v'>94 
+<CCT>94 
+<Duv>94 
+<Du'v'>94 
+<symbol_and_color>94 0 0
+<label>94 
+<position>94 L
+<x>95 
+<y>95 
+<u'>95 
+<v'>95 
+<CCT>95 
+<Duv>95 
+<Du'v'>95 
+<symbol_and_color>95 0 0
+<label>95 
+<position>95 L
+<x>96 
+<y>96 
+<u'>96 
+<v'>96 
+<CCT>96 
+<Duv>96 
+<Du'v'>96 
+<symbol_and_color>96 0 0
+<label>96 
+<position>96 L
+<x>97 
+<y>97 
+<u'>97 
+<v'>97 
+<CCT>97 
+<Duv>97 
+<Du'v'>97 
+<symbol_and_color>97 0 0
+<label>97 
+<position>97 L
+<x>98 
+<y>98 
+<u'>98 
+<v'>98 
+<CCT>98 
+<Duv>98 
+<Du'v'>98 
+<symbol_and_color>98 0 0
+<label>98 
+<position>98 L
+<x>99 
+<y>99 
+<u'>99 
+<v'>99 
+<CCT>99 
+<Duv>99 
+<Du'v'>99 
+<symbol_and_color>99 0 0
+<label>99 
+<position>99 L
