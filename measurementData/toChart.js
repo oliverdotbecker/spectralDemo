@@ -2,8 +2,8 @@ const fs = require('fs');
 
 var data = {};
 var fixture = "Arri Skypanel Mode RGBW";
-fixture = "Robe LED Wash 300";
-fixture = "Ape Labs Light Can";
+//fixture = "Robe LED Wash 300";
+//fixture = "Ape Labs Light Can";
 var folderDir = __dirname+"/UPRtek/";
 var measureLevels = ["5%","10%","20%","35%","50%","65%","85%","100%"];
 
@@ -110,19 +110,22 @@ function exportAsCSV(data)
     csvOut += fixture+"\n\n";
 
     var rowsLux = [";","5%;","10%;","20%;","35%;","50%;","65%;","85%;","100%;"];
-    var rows_xyOut = [";","5%;","10%;","20%;","35%;","50%;","65%;","85%;","100%;"];
+    var rows_xyOut = [];
     for(var emitter in data)
     {
         rowsLux[0] += emitter+";";
-        rows_xyOut[0] += emitter+" (x);"+emitter+" (y);";
+        var xy1 = emitter+" (x);";
+        var xy2 = emitter+" (y);";
         var emitterData = data[emitter];
         for(var lIdx = 0; lIdx < emitterData.length; lIdx++)
         {
             var currDataset = emitterData[lIdx];
             rowsLux[lIdx+1] += currDataset.Lux+";";
-            rows_xyOut[lIdx+1] += currDataset.x+";";
-            rows_xyOut[lIdx+1] += currDataset.y+";";
+            xy1 += round(currDataset.x,4)+";";
+            xy2 += round(currDataset.y,4)+";";
         }
+        rows_xyOut.push(xy1);
+        rows_xyOut.push(xy2);
     }
 
     csvOut += "Lux\n"+rowsLux.join("\n")+"\n\n";
@@ -182,4 +185,12 @@ function exportAsSpectralCSVs(data)
         }
     }
     return csvOut;
+}
+
+function round(number,digits)
+{
+    number = number*Math.pow(10,digits);
+    number = Math.round(number);
+    number = number/Math.pow(10,digits);
+    return number;
 }
