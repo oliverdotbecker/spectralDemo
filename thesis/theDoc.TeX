@@ -318,8 +318,6 @@ Datenframe besteht aus acht Datenbits und zwei Stoppbits. Die Symbolrate beträg
 \end{figure}
 \noindent
 \begin{table}[H]
-    \small
-    Legende zu Bild \ref{fig:DMXoverTime}:\\
     \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllll}
         Nr. & Signalabschnitt & Min & Soll & Max & Einheit\\
         1 & BREAK & 88 & 176 & - & $\mu$s\\
@@ -333,6 +331,7 @@ Datenframe besteht aus acht Datenbits und zwei Stoppbits. Die Symbolrate beträg
         9 & MARK before BREAK & 0 & - & < 1 & s\\
         10 & BREAK – BREAK (Übertragungsausfall) & 1,2 ms & - & 1,25 s & s\\
     \end{tabular*}
+    \caption{Legende zu Bild \ref{fig:DMXoverTime}}
 \end{table}
 \noindent
 Ein \ac{dmx}-Paket beginnt mit mindestens 88 $\mu$s (22 Bitlängen) niedrigem Pegel (logisch 0) – dieser
@@ -368,7 +367,6 @@ in einer physikalischen Struktur aufgebaut werden.\\
 \\
 Mit Hilfe von Protokollwandlern wie dem MA xPort Node kann Art-Net in \ac{dmx} umgewandelt werden. Auch von anderen
 Herstellern gibt es auf dem Markt weit verbreitete Protokollwandler.\\
-\\
 Art-Net IP Adressen sind nach folgendem Muster aufgebaut:
 \begin{table}[H]
     \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} lllll}
@@ -376,6 +374,7 @@ Art-Net IP Adressen sind nach folgendem Muster aufgebaut:
         IP Adresse & Netz & Netz & Host & Host\\
         Subnetz & 255 & 255 & 0 & 0\\
     \end{tabular*}
+    \caption{Art-Net IP Schema}
 \end{table}
 \noindent
 In der Regel werden IP Adressen für Art-Net mit dem Netz 2.X.X.X oder 10.X.X.X verwendet. Art-Net wird über den
@@ -802,6 +801,7 @@ Im Folgenden ein Auszug der Element-Farbzuordnung \cite{wikiLed}:
         Galliumphosphid (GaP) & (Gelb-)Grün & 500 - 580\\
         Indiumgalliumnitrid (InGaN) &  Grün, Blau, Violett und Ultraviolett & 520 - 230\\
     \end{tabular*}
+    \caption{LED Zusammensetzungen}
 \end{table}
 \noindent
 Zunächst wurden \ac{led}s in den frühen 1960er Jahren als Leuchtindikatoren benutzt. Also zum Beispiel auf
@@ -1120,6 +1120,7 @@ Die hier genutzten Tristimuluswerte \cite{wisotop}:
         Y & 0.0380 & 0.3230 & 0.9950 & 0.9520 & 0.6310 & 0.1070\\
         Z & 1.7721 & 0.2720 & 0.0087 & 0.0021 & 0.0008 & 0.0000\\
     \end{tabular*}
+    \caption{CIE Tristimuluswerte}
 \end{table}
 \noindent
 Aus diesen Werten und den mit dem Sensor erfassten Spektralwerten konnten nun die \ac{cie} XYZ Werte errechnet werden.
@@ -1682,16 +1683,32 @@ deutlich.
 \subsubsection{UPRtek}
 Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 \textbf{Arri SkyPanel RGBW Mode}
+\begin{table}[H]
+    \small
+    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llll}
+        Lux    & Rot   & Grün  & Blau & Weiss\\
+        5\%    & 791   & 1075  & 325  & 3583\\
+        10\%   & 1541  & 2154  & 637  & 7279\\
+        20\%   & 3004  & 4240  & 1254 & 15094\\
+        35\%   & 5221  & 7383  & 2185 & 27255\\
+        50\%   & 7459  & 10621 & 3139 & 36158\\
+        65\%   & 9618  & 13785 & 4020 & 42448\\
+        85\%   & 12463 & 18014 & 4900 & 52849\\
+        100\%  & 14554 & 21179 & 5408 & 65884\\
+    \end{tabular*}
+    \caption{Gemessene Luminanz Werte des Skypanel}
+\end{table}
+\noindent
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.65\textwidth]{images/charts/skypanel.png}
+        \includegraphics[width=\textwidth]{images/charts/skypanel.png}
     \end{center}
-    \vspace{-.5cm}
     \caption{Darstellung Luminanz der SkyPanel Emitter}
+\end{figure}
+\begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.62\textwidth]{images/macAdam/skypanelTotal.png}
+        \includegraphics[width=\textwidth]{images/macAdam/skypanelTotal.png}
     \end{center}
-    \vspace{-.7cm}
     \caption{Gesamtdarstellung xy Koordinaten der SkyPanel Emitter}
 \end{figure}
 \begin{figure}[H]
@@ -1717,17 +1734,35 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
     \caption{Übersicht der Skypanel Emitter xy Koordinaten mit MacAdam Ellipsen}
 \end{figure}
 \noindent
+\clearpage
+
 \textbf{Robe LEDWash 300}
+\begin{table}[H]
+    \small
+    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llll}
+        Lux    & Rot   & Grün  & Blau & Weiss\\
+        5\%    & 513   & 942   & 199  & 1384\\
+        10\%   & 1384  & 2238  & 498  & 3126\\
+        20\%   & 2811  & 4553  & 928  & 7058\\
+        35\%   & 4879  & 8090  & 1677 & 19883\\
+        50\%   & 6910  & 11667 & 2650 & 15640\\
+        65\%   & 8927  & 14985 & 3249 & 26787\\
+        85\%   & 12662 & 20220 & 3962 & 45830\\
+        100\%  & 14407 & 22931 & 4383 & 43309\\
+    \end{tabular*}
+    \caption{Gemessene Luminanz Werte des LEDWash300}
+\end{table}
+\noindent
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.8\textwidth]{images/charts/led_wash_300.png}
     \end{center}
-    \vspace{-.5cm}
     \caption{Darstellung Luminanz der LEDWash Emitter}
+\end{figure}
+\begin{figure}[H]
     \begin{center}
         \includegraphics[width=.7\textwidth]{images/macAdam/led_wash_300Total.png}
     \end{center}
-    \vspace{-.7cm}
     \caption{Gesamtdarstellung xy Koordinaten der LEDWash Emitter}
 \end{figure}
 \begin{figure}[H]
@@ -1753,18 +1788,35 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
     \caption{Übersicht der LEDWash Emitter xy Koordinaten mit MacAdam Ellipsen}
 \end{figure}
 \noindent
+\clearpage
+
 \textbf{Ape Labs LightCan}
+\begin{table}[H]
+    \small
+    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llll}
+        Lux    & Rot  & Grün  & Blau  & Weiss\\
+        5\%    & 34   & 37    & 23    & 19\\
+        10\%   & 63   & 75    & 33    & 57\\
+        20\%   & 164  & 209   & 69    & 209\\
+        35\%   & 452  & 594   & 174   & 616\\
+        50\%   & 764  & 1196  & 343   & 1227\\
+        65\%   & 1467 & 1975  & 551   & 2030\\
+        85\%   & 2400 & 3313  & 940   & 3427\\
+        100\%  & 3112 & 4512  & 1290  & 4695\\
+    \end{tabular*}
+    \caption{Gemessene Luminanz Werte der LightCan}
+\end{table}
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.8\textwidth]{images/charts/lightCan.png}
     \end{center}
-    \vspace{-.5cm}
-    \caption{Darstellung Luminanz der LEDWash Emitter}
+    \caption{Darstellung Luminanz der LightCan Emitter}
+\end{figure}
+\begin{figure}[H]
     \begin{center}
         \includegraphics[width=.7\textwidth]{images/macAdam/lightCanTotal.png}
     \end{center}
-    \vspace{-.7cm}
-    \caption{Gesamtdarstellung xy Koordinaten der LEDWash Emitter}
+    \caption{Gesamtdarstellung xy Koordinaten der LightCan Emitter}
 \end{figure}
 \begin{figure}[H]
     \centering
@@ -1786,7 +1838,7 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
         \includegraphics[width=\textwidth]{images/macAdam/lightCanWhite.png}
         \caption{Weißer Emitter}
     \end{subfigure}
-    \caption{Übersicht der LEDWash Emitter xy Koordinaten mit MacAdam Ellipsen}
+    \caption{Übersicht der LightCan Emitter xy Koordinaten mit MacAdam Ellipsen}
 \end{figure}
 \noindent
 \clearpage
