@@ -7,73 +7,101 @@ var fixture = "Arri Skypanel Mode RGBW";
 var folderDir = __dirname+"/UPRtek/";
 var measureLevels = ["5%","10%","20%","35%","50%","65%","85%","100%"];
 
-var emitters = fs.readdirSync(folderDir+fixture);
-if(emitters && emitters.length)
+var modeCombined = true;
+var colorName = "";
+if(modeCombined)
 {
-    //Sort Emitters
-    var temp = emitters;
-    emitters = [];
-    if(temp.indexOf("Rot") >= 0)
-    {
-        emitters.push("Rot");
-    }
-    if(temp.indexOf("Grün") >= 0)
-    {
-        emitters.push("Grün");
-    }
-    if(temp.indexOf("Blau") >= 0)
-    {
-        emitters.push("Blau");
-    }
-    if(temp.indexOf("Weiss") >= 0)
-    {
-        emitters.push("Weiss");
-    }
-    if(temp.indexOf("Amber") >= 0)
-    {
-        emitters.push("Amber");
-    }
+    folderDir = __dirname+"/Combined/";
+    colorName = "Cyan";
 
-    for(var fI = 0; fI < emitters.length; fI++)
+    var colorPath = folderDir+colorName;
+    var files = fs.readdirSync(colorPath);
+    if(files && files.length)
     {
-        var emitterPath = folderDir+fixture+"/"+emitters[fI];
-        if(fs.lstatSync(emitterPath).isDirectory())
+        for(var fileI = 0; fileI < files.length; fileI++)
         {
-            data[emitters[fI]] = [];
-            var files = fs.readdirSync(emitterPath);
-            files = files.map(function (fileName) {
-                return {
-                    name: fileName,
-                    time: fs.statSync(emitterPath + '/' + fileName).mtime.getTime()
-                };
-            })
-            .sort(function (a, b) {
-                return a.time - b.time;
-            })
-            .map(function (v) {
-                return v.name;
-            });
-            for(var fileI = 0; fileI < files.length; fileI++)
-            {
-                var fileData = fs.readFileSync(emitterPath+"/"+files[fileI],'utf8');
-                var spectralData = readUPRtekCSV(fileData);
-                data[emitters[fI]].push(spectralData);
-            }
+            var fixtureName = files[fileI].split("_")[3];
+            fixtureName = fixtureName.split(".")[0];
+            var fileData = fs.readFileSync(colorPath+"/"+files[fileI],'utf8');
+            var spectralData = readUPRtekCSV(fileData);
+            data[fixtureName] = spectralData;
         }
     }
 
-    var csvOut = exportAsCSV(data);
-    fs.writeFileSync(folderDir+fixture+".csv",csvOut,"utf8");
-
-    var csvOut = exportAsXYCSV(data);
-    fs.writeFileSync(folderDir+fixture+".txt",csvOut,"utf8");
-
-    /*var csvOut = exportAsSpectralCSVs(data);
-    for(var i = 0; i < csvOut.length; i++)
-    {
-        fs.writeFileSync(folderDir+"/"+fixture+"/"+fixture+"_spec_"+measureLevels[i]+".csv",csvOut[i],"utf8");
-    }*/
+    var csvOut = exportComparedAsCSV(data);
+    fs.writeFileSync(colorPath+".csv",csvOut,"utf8");
 }
+else
+{
+    var emitters = fs.readdirSync(folderDir+fixture);
+    if(emitters && emitters.length)
+    {
+        //Sort Emitters
+        var temp = emitters;
+        emitters = [];
+        if(temp.indexOf("Rot") >= 0)
+        {
+            emitters.push("Rot");
+        }
+        if(temp.indexOf("Grün") >= 0)
+        {
+            emitters.push("Grün");
+        }
+        if(temp.indexOf("Blau") >= 0)
+        {
+            emitters.push("Blau");
+        }
+        if(temp.indexOf("Weiss") >= 0)
+        {
+            emitters.push("Weiss");
+        }
+        if(temp.indexOf("Amber") >= 0)
+        {
+            emitters.push("Amber");
+        }
+    
+        for(var fI = 0; fI < emitters.length; fI++)
+        {
+            var emitterPath = folderDir+fixture+"/"+emitters[fI];
+            if(fs.lstatSync(emitterPath).isDirectory())
+            {
+                data[emitters[fI]] = [];
+                var files = fs.readdirSync(emitterPath);
+                files = files.map(function (fileName) {
+                    return {
+                        name: fileName,
+                        time: fs.statSync(emitterPath + '/' + fileName).mtime.getTime()
+                    };
+                })
+                .sort(function (a, b) {
+                    return a.time - b.time;
+                })
+                .map(function (v) {
+                    return v.name;
+                });
+                for(var fileI = 0; fileI < files.length; fileI++)
+                {
+                    var fileData = fs.readFileSync(emitterPath+"/"+files[fileI],'utf8');
+                    var spectralData = readUPRtekCSV(fileData);
+                    data[emitters[fI]].push(spectralData);
+                }
+            }
+        }
+    
+        var csvOut = exportAsCSV(data);
+        fs.writeFileSync(folderDir+fixture+".csv",csvOut,"utf8");
+    
+        var csvOut = exportAsXYCSV(data);
+        fs.writeFileSync(folderDir+fixture+".txt",csvOut,"utf8");
+    
+        /*var csvOut = exportAsSpectralCSVs(data);
+        for(var i = 0; i < csvOut.length; i++)
+        {
+            fs.writeFileSync(folderDir+"/"+fixture+"/"+fixture+"_spec_"+measureLevels[i]+".csv",csvOut[i],"utf8");
+        }*/
+    }
+}
+
 
 function readUPRtekCSV(data)
 {
@@ -149,6 +177,27 @@ function exportAsCSV(data)
         csvOut += "\n";
     }*/
 
+    csvOut = csvOut.replace(/\./g,",");
+    csvOut = "\uFEFF"+csvOut; //Flag for excel to use utf8
+    return csvOut;
+}
+
+function exportComparedAsCSV(data)
+{
+    var csvOut = "";
+    csvOut += colorName+"\n\n";
+    var nameRow = ";";
+    var nameX = "x;";
+    var nameY = "y;";
+
+    for(var fixture in data)
+    {
+        nameRow += fixture+";";
+        var fixtureData = data[fixture];
+        nameX += round(fixtureData.x,4)+";";
+        nameY += round(fixtureData.y,4)+";";
+    }
+    csvOut += "xy\n"+nameRow+"\n"+nameX+"\n"+nameY+"\n";
     csvOut = csvOut.replace(/\./g,",");
     csvOut = "\uFEFF"+csvOut; //Flag for excel to use utf8
     return csvOut;
