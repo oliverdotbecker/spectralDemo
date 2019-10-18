@@ -1461,7 +1461,7 @@ DMX Empfänger sind in dieser Arbeit die Lampen, beziehungsweise im Fall der Ape
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Automatisiertes angleichen zweier LED Lichtquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Automatisiertes angleichen zweier LED Lichtquellen}
+\section{Automatisiertes angleichen zweier LED Lichtquellen} \label{comparing}
 Mit den in den realisierten Funktionen aus den vorhergehenden Kapiteln kann nun ein automatisierter Abgleich zweier LED Lichtquellen vorbereitet werden. Hier
 ergeben aufgrund der Ergebnisse der bisherigen Messungen folgende Fragen:\\
 \begin{addmargin}[2em]{0em}
@@ -1634,20 +1634,55 @@ Ein Teil dieser Messungen wurde in vorhergehnden kapiteln bereits behandelt. Im 
 und diskutiert.\\
 Zunächst sind die charakteristischen Luminanz und Farbvalenz Werte der Emitter der verwendeten Lampen zu betrachten. Diese wurden als Basis mit dem UPRtek
 Spektrometer erhoben, um eine qualitative Aussage über die mit den AS726x gemessene Werte treffen zu können.\\
-Die mit dem Spektrometer gemessenen Werte sind tabellarisch und als Diagramme im Anhang zu finden.\\
-%// TODO : Weiter schreiben
-\paragraph{}
-\noindent
+Die mit dem Spektrometer gemessenen Werte sind tabellarisch Tabelle \ref{table:luxSkypanel} bis \ref{table:whiteEmitterLightCan} und als Diagramme Bild
+\ref{fig:luxSkypanel} bis \ref{fig:macAdamLightCanEmitters} im Anhang zu finden.
+\subsection{Emitter Analyse pro Lampe}
+Hier sind zunächst die unterschiedlichen absoluten Helligkeiten jeder Lampe zu betrachten. Wo die Helligkeitsunterschiede zwischen Emittern gering sind, ist
+das Einstellen einer Farbvalenz einfacher. Hier ist beispielsweise der weiße Emitter des Skypanels problematisch, da dieser wie in Bild \ref{fig:luxSkypanel} 
+zu sehen bereits bei 5\% Steuerwert eine höhere absolute Helligkeit hat als der rote Emitter bei 20\% Steuerwert. So ist schon bei minmalen zumischen des weißen
+Emitters eine große Farbortverschiebung zu erwarten.\\
+Ein Farbort bezeichnet einen Punkt in einem Farbraum.\\
+Eine höhere Auflösung der ansteuerung kann hier Abhilfe schaffen. Viele Scheinwerfer besitzen zu diesem Zweck heute 16 anstatt 8 Bit Ansteuerungen. Das bedeutet,
+dass für eine Funktion des Gerätes wie einen Emitter zwei DMX Kanäle verwendet werden.\\
+Ähnliches Verhalten ist bei den Helligkeits Werten des Robe LEDWash zu beobachten (Bild \ref{fig:luxLedWash}). Die LightCan der Firma Ape Labs hingegen hat ein
+deutlich homogeneres Helligkeitsverhältnis der Emitter (Bild \ref{fig:luxLightCan}). Ebenso sind die Verläufe der Kurven ähnlich. Die anderen Lampen zeigen eine
+deutliche Dominanz des weißen Emitters.
+\subsubsection{MacAdam Ellipsen}
+Anschießend wurde die Farbtreue der einzelnen Emitter der verwendeten Lampen betrachtet. Hier und auch im späteren Verlauf der Analysen wurden MacAdam Ellipsen
+genutzt. Dieses Analyse Verfahren wurde von David Lewis MacAdam um 1942 erstmals beschrieben. \cite{macAdam}. Hier werden Ellipsen um einen Farbort in einem CIE
+1931 Diagramm eingezeichnet. Mit Probanden ermittelte MacAdam, dass Farbortabweichungen innerhalb von zwei Ellipsen nur von geübten Menschen erkannt werden.\\
+Somit wird angenommen, dass eine Farbortverschiebung von bis zu zwei MacAdam Ellipsen als nicht wahrnehmbar angenommen.\\
+\\
+Die Ellipsenanalyse wurde mit dem Programm "'LED ColorCalculator"' von der Firma Osram durchgeführt. \cite{osram}\\
+\\
+Die Emitter der gemessenen Lampen weisen alle Abweichungen über Ihre Dimmstufen hinweg auf. Als Soll Farbort wurde der 100\% Wert des jeweiligen Emitters
+angenommen. Besonders die Blauen Emitter aller Lampen weisen deutliche Farbortverschiebungen auf. Hier ist die nichtlinearität des CIE 1931 Farbraumes zu
+beachten. Die Fläche einer Ellipse im blauen oder roten Bereich ist deutlich kleiner als im grünen Bereich.\\
+Diese relevanten Abweichungen haben während des variieren der Helligkeit eines Emitters Einfluss auf den Gamut der Lichtquelle. So ändert sich theoretisch auch
+beim abgleichen der Gamut der Referenz Lampe und der abzugleichenden Lampe. Diese hohe Varianz kann mit dem in Kapitel \ref{comparing} beschriebenen Verfahren
+nicht abgebildet werden. Diese Fehlerquelle ist im Folgenden zu berücksichtigen.\\
+\\
 Bei den Messungen mit dem Spektrometer ist deutlich geworden, um in der Praxis Lampen zu vermessen ist das automatisierte Erfassen der Messwerte notwendig. Das
 Messen einer Lampe mit vier Emittern mit jeweils acht Messpunkten nahm etwa zehn Minuten in Anspruch. Dies beinhaltet das ansteuern der Lampe, des aufnehmen der
 Messwerte sowie das aufbereiten der Daten zum einlesen in die Applikation. Diese Zeit kann durch einen in die Applikation integrierten Senor verkürzt werden.
 Weiter macht eine integrierte Lösung dem Messprozess komfortabler für den Anwender, da Sensorwerte von der Applikation automatisch aufgenommen und aufbereitet
-werden, ohne weitere Benutzerinteraktion.\\
+werden, ohne weitere Benutzerinteraktion.
+\subsection{Analyse der Messwerte des AS7262}
+Die erfassten Messwerte mit dem AS7262 unterscheiden sich deutlich von den mit dem Spektrometer aufgezeichneten Daten.
 %// TODO : Weiter schreiben
 \paragraph{}
 \noindent
-Die erfassten Messwerte mit dem AS7262 unterscheiden sich deutlich von den mit dem Spektrometer aufgezeichneten Daten.
+{\color{red} ...}
 \paragraph{}
+\noindent
+So wurde entschieden, dass die Messwerte des AS7262 für diesen Zweck zu ungenau sind. Somit ist der Sensor für diese Anwendung ungeeignet. Somit wurden in der
+Applikation die Messwerte des Spektrometers verwendet als Datenbasis für die im Folgenden durchgeführten Abgleichvorgänge verwendet.
+\subsection{Analyse der Abgleichvorgänge}
+Bei den folgenden Messungen wurde das Skypanel als Referenz definiert.
+\subsubsection{Cyan}
+%// TODO : Weiter schreiben
+\paragraph{}
+\noindent
 {\color{red}
 Hier folgen Notizen:\\
 Analyse (stärken und Schwächen)
@@ -1661,8 +1696,20 @@ Analyse (stärken und Schwächen)
     * Light Can innere Algorithmen (Ansatz zum Messen von Mischfarben zur Nachbildung des Mischalgorithmus)
 \end{addmargin}
 \begin{addmargin}[2em]{0em}
-    - Exemplarische Ergebnisse des Farbabgleichs. MacArthur Ellipsenanalyse der Farbabweichungen zur Referenzfarbe
+    - Exemplarische Ergebnisse des Farbabgleichs. MacAdam Ellipsenanalyse der Farbabweichungen zur Referenzfarbe
 \end{addmargin}}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{.34\textwidth}
+        \includegraphics[width=\textwidth]{images/macAdam/comparedCyan.png}
+        \caption{Roter Emitter}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{.63\textwidth}
+        \includegraphics[width=\textwidth]{images/macAdam/comparedCyanTotal.png}
+        \caption{Grüner Emitter}
+    \end{subfigure}
+\end{figure}
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Ausblick %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1686,7 +1733,7 @@ Die Ansteuerungswerte in Prozent setzten sich wie folgt in DMX Werten um:
         Prozent [\%] & 5  & 10 & 20 & 35 & 50  & 65  & 85  & 100\\
         DMX          & 12 & 25 & 51 & 89 & 127 & 165 & 216 & 255\\
     \end{tabular*}
-    \caption{DMX Werte zu Ansteuerungswerten in Prozent}
+    \caption{DMX Werte zu Ansteuerungswerten in Prozent} \label{table:dmxToPercent}
 \end{table}
 \noindent
 \subsubsection{UPRtek}
@@ -1704,14 +1751,14 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
         85\%  & 12463 & 18014 & 4900 & 52849\\
         100\% & 14554 & 21179 & 5408 & 65884\\
     \end{tabular*}
-    \caption{Gemessene Luminanz Werte des Skypanel}
+    \caption{Gemessene Luminanz Werte des Skypanel} \label{table:luxSkypanel}
 \end{table}
 \noindent
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.8\textwidth]{images/charts/skypanel.png}
     \end{center}
-    \caption{Darstellung Luminanz der SkyPanel Emitter}
+    \caption{Darstellung Luminanz der SkyPanel Emitter} \label{fig:luxSkypanel}
 \end{figure}
 \begin{figure}[H]
     \begin{center}
@@ -1755,8 +1802,8 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 \begin{table}[H]
     \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
         Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Rot)          & 0,1809 & 0,1787 & 0,1783 & 0,1783 & 0,179  & 0,1792 & 0,1799 & 0,1807 \\
-        y (Rot)          & 0,7084 & 0,7136 & 0,7151 & 0,7165 & 0,716  & 0,7165 & 0,7162 & 0,7158 \\
+        x (Grün)         & 0,1809 & 0,1787 & 0,1783 & 0,1783 & 0,179  & 0,1792 & 0,1799 & 0,1807 \\
+        y (Grün)         & 0,7084 & 0,7136 & 0,7151 & 0,7165 & 0,716  & 0,7165 & 0,7162 & 0,7158 \\
         MacAdam Ellipsen & -      & > 1    & > 1    & > 1    & > 1    & > 1    & > 1    & > 1    \\
     \end{tabular*}
     \caption{Farbortverschiebung des grünen Skypanel Emitters}
@@ -1765,8 +1812,8 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 \begin{table}[H]
     \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
         Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Rot)          & 0,1483 & 0,1476 & 0,1476 & 0,1474 & 0,1474 & 0,1474 & 0,147  & 0,1468 \\
-        y (Rot)          & 0,0358 & 0,0348 & 0,0347 & 0,0345 & 0,0345 & 0,0351 & 0,0366 & 0,0377 \\
+        x (Blau)         & 0,1483 & 0,1476 & 0,1476 & 0,1474 & 0,1474 & 0,1474 & 0,147  & 0,1468 \\
+        y (Blau)         & 0,0358 & 0,0348 & 0,0347 & 0,0345 & 0,0345 & 0,0351 & 0,0366 & 0,0377 \\
         MacAdam Ellipsen & -      & > 2    & < 3    & < 3    & < 3    & < 3    & < 3    & < 3    \\
     \end{tabular*}
     \caption{Farbortverschiebung des blauen Skypanel Emitters}
@@ -1775,8 +1822,8 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 \begin{table}[H]
     \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
         Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Rot)          & 0,4458 & 0,4449 & 0,444  & 0,4432 & 0,4428 & 0,4425 & 0,4423 & 0,4419 \\
-        y (Rot)          & 0,4113 & 0,411  & 0,4102 & 0,4096 & 0,4091 & 0,4089 & 0,4086 & 0,4082 \\
+        x (Weiß)         & 0,4458 & 0,4449 & 0,444  & 0,4432 & 0,4428 & 0,4425 & 0,4423 & 0,4419 \\
+        y (Weiß)         & 0,4113 & 0,411  & 0,4102 & 0,4096 & 0,4091 & 0,4089 & 0,4086 & 0,4082 \\
         MacAdam Ellipsen & -      & > 1    & > 1    & > 1    & > 1    & 1      & > 2    & > 2    \\
     \end{tabular*}
     \caption{Farbortverschiebung des weißen Skypanel Emitters}
@@ -1797,14 +1844,14 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
         85\%  & 12662 & 20220 & 3962 & 45830\\
         100\% & 14407 & 22931 & 4383 & 43309\\
     \end{tabular*}
-    \caption{Gemessene Luminanz Werte des LEDWash300}
+    \caption{Gemessene Luminanz Werte des LEDWash300} \label{table:luxLedWash}
 \end{table}
 \noindent
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=\textwidth]{images/charts/led_wash_300.png}
     \end{center}
-    \caption{Darstellung Luminanz der LEDWash Emitter}
+    \caption{Darstellung Luminanz der LEDWash Emitter} \label{fig:luxLedWash}
 \end{figure}
 \begin{figure}[H]
     \begin{center}
@@ -1849,8 +1896,8 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 \begin{table}[H]
     \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
         Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Rot)          & 0,1803 & 0,1707 & 0,1668 & 0,1675 & 0,1641 & 0,1661 & 0,165 & 0,1658  \\
-        y (Rot)          & 0,6916 & 0,6921 & 0,6906 & 0,6905 & 0,6886 & 0,6882 & 0,6885 & 0,6874 \\
+        x (Grün)         & 0,1803 & 0,1707 & 0,1668 & 0,1675 & 0,1641 & 0,1661 & 0,165 & 0,1658  \\
+        y (Grün)         & 0,6916 & 0,6921 & 0,6906 & 0,6905 & 0,6886 & 0,6882 & 0,6885 & 0,6874 \\
         MacAdam Ellipsen & -      & > 1    & > 1    & > 1    & > 1    & > 1    & > 2    & > 5    \\
     \end{tabular*}
     \caption{Farbortverschiebung des grünen LEDWash Emitters}
@@ -1859,8 +1906,8 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 \begin{table}[H]
     \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
         Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Rot)          & 0,1539 & 0,1539 & 0,1542 & 0,1536 & 0,1538 & 0,1537 & 0,1533 & 0,1528 \\
-        y (Rot)          & 0,0264 & 0,0245 & 0,0242 & 0,0251 & 0,0247 & 0,0247 & 0,0262 & 0,027  \\
+        x (Blau)         & 0,1539 & 0,1539 & 0,1542 & 0,1536 & 0,1538 & 0,1537 & 0,1533 & 0,1528 \\
+        y (Blau)         & 0,0264 & 0,0245 & 0,0242 & 0,0251 & 0,0247 & 0,0247 & 0,0262 & 0,027  \\
         MacAdam Ellipsen & -      & > 5    & > 5    & > 5    & > 5    & > 5    & > 5    & > 10   \\
     \end{tabular*}
     \caption{Farbortverschiebung des blauen LEDWash Emitters}
@@ -1869,8 +1916,8 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 \begin{table}[H]
     \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
         Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Rot)          & 0,3197 & 0,3177 & 0,3175 & 0,3173 & 0,3163 & 0,3181 & 0,316  & 0,3183 \\
-        y (Rot)          & 0,336  & 0,3311 & 0,3321 & 0,3268 & 0,3266 & 0,3337 & 0,3235 & 0,3311 \\
+        x (Weiß)         & 0,3197 & 0,3177 & 0,3175 & 0,3173 & 0,3163 & 0,3181 & 0,316  & 0,3183 \\
+        y (Weiß)         & 0,336  & 0,3311 & 0,3321 & 0,3268 & 0,3266 & 0,3337 & 0,3235 & 0,3311 \\
         MacAdam Ellipsen & -      & > 3    & > 2    & > 2    & > 2    & > 2    & > 1    & > 2    \\
     \end{tabular*}
     \caption{Farbortverschiebung des weißen LEDWash Emitters}
@@ -1891,13 +1938,13 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
         85\%  & 2400 & 3313  & 940  & 3427\\
         100\% & 3112 & 4512  & 1290 & 4695\\
     \end{tabular*}
-    \caption{Gemessene Luminanz Werte der LightCan}
+    \caption{Gemessene Luminanz Werte der LightCan} \label{table:luxLightCan}
 \end{table}
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=\textwidth]{images/charts/lightCan.png}
     \end{center}
-    \caption{Darstellung Luminanz der LightCan Emitter}
+    \caption{Darstellung Luminanz der LightCan Emitter} \label{fig:luxLightCan}
 \end{figure}
 \begin{figure}[H]
     \begin{center}
@@ -1925,7 +1972,7 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
         \includegraphics[width=\textwidth]{images/macAdam/lightCanWhite.png}
         \caption{Weißer Emitter}
     \end{subfigure}
-    \caption{Übersicht der LightCan Emitter xy Koordinaten mit MacAdam Ellipsen}
+    \caption{Übersicht der LightCan Emitter xy Koordinaten mit MacAdam Ellipsen} \label{fig:macAdamLightCanEmitters}
 \end{figure}
 \noindent
 \begin{table}[H]
@@ -1941,8 +1988,8 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 \begin{table}[H]
     \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
         Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Rot)          & 0,2572 & 0,2038 & 0,1584 & 0,1383 & 0,1331 & 0,1328 & 0,1338 & 0,1364 \\
-        y (Rot)          & 0,4691 & 0,5558 & 0,6319 & 0,6661 & 0,6759 & 0,6802 & 0,6823 & 0,6816 \\
+        x (Grün)         & 0,2572 & 0,2038 & 0,1584 & 0,1383 & 0,1331 & 0,1328 & 0,1338 & 0,1364 \\
+        y (Grün)         & 0,4691 & 0,5558 & 0,6319 & 0,6661 & 0,6759 & 0,6802 & 0,6823 & 0,6816 \\
         MacAdam Ellipsen & -      & > 1    & > 2    & > 2    & > 3    & 8      & < 8    & < 8    \\
     \end{tabular*}
     \caption{Farbortverschiebung des grünen LightCan Emitters}
@@ -1951,8 +1998,8 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 \begin{table}[H]
     \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
         Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Rot)          & 0,1959 & 0,165  & 0,1488 & 0,1433 & 0,1417 & 0,1413 & 0,1406 & 0,1399 \\
-        y (Rot)          & 0,1296 & 0,0816 & 0,0563 & 0,0483 & 0,0466 & 0,0456 & 0,0462 & 0,0471 \\
+        x (Blau)         & 0,1959 & 0,165  & 0,1488 & 0,1433 & 0,1417 & 0,1413 & 0,1406 & 0,1399 \\
+        y (Blau)         & 0,1296 & 0,0816 & 0,0563 & 0,0483 & 0,0466 & 0,0456 & 0,0462 & 0,0471 \\
         MacAdam Ellipsen & -      & > 2    & > 4    & > 5    & 9      & < 9    & < 9    & < 9    \\
     \end{tabular*}
     \caption{Farbortverschiebung des blauen LightCan Emitters}
@@ -1961,11 +2008,11 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 \begin{table}[H]
     \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
         Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Rot)          & 0,2777 & 0,2852 & 0,2879 & 0,2871 & 0,2869 & 0,286  & 0,2865 & 0,2865 \\
-        y (Rot)          & 0,2897 & 0,286  & 0,284  & 0,2821 & 0,2826 & 0,2821 & 0,2812 & 0,2816 \\
+        x (Weiß)         & 0,2777 & 0,2852 & 0,2879 & 0,2871 & 0,2869 & 0,286  & 0,2865 & 0,2865 \\
+        y (Weiß)         & 0,2897 & 0,286  & 0,284  & 0,2821 & 0,2826 & 0,2821 & 0,2812 & 0,2816 \\
         MacAdam Ellipsen & -      & > 1    & > 1    & > 1    & > 1    & > 1    & > 4    & < 4    \\
     \end{tabular*}
-    \caption{Farbortverschiebung des weißen LightCan Emitters}
+    \caption{Farbortverschiebung des weißen LightCan Emitters} \label{table:whiteEmitterLightCan}
 \end{table}
 \noindent
 \clearpage
@@ -2058,6 +2105,8 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
     \bibitem[SkyPanel Manual,2019]{skypanelDMX} \url{https://www.arri.com/resource/blob/65958/560471fec7f8f2e186ef8ca9e6cdd489/arri-skypanel-dmx-protocol-specification-v4-4-en-okt2018-data.pdf} Page 12. Visited on: 16.09.2019
     \bibitem[artnet NPMJS,2019]{artnetPackage} \url{https://www.npmjs.com/package/artnet}. Visited on: 16.09.2019
     \bibitem[Sutherland–Hodgman algorithm Wikipedia,2019]{sutherlandHodgman} \url{https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm}. Visited on: 22.09.2019
+    \bibitem[David MacAdam Wikipedia,2019]{macAdam} \url{https://en.wikipedia.org/wiki/David_MacAdam}. Visited on: 18.10.2019
+    \bibitem[LED ColorCalculator,2019]{osram} \url{https://www.osram.us/cb/tools-and-resources/applications/led-colorcalculator/index.jsp}. Visited on: 18.10.2019
 \end{thebibliography}
 \endgroup
 \clearpage
