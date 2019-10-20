@@ -1055,7 +1055,7 @@ Hier werden aus der \ac{uart} (AT) Schnittstelle mit dem Befehl "'ATCDATA"' die 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Messungen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Messungen und Testapplikation}
 \subsection{Empfangen und Aufbereiten der Sensorwerte}
-\subsubsection{Erfassen der Messwerte mit dem AS7262}
+\subsubsection{Erfassen der Messwerte mit dem AS7262} \label{measureWithAS7262}
 Zu Beginn wurde der Sensor AS7262 in Betrieb genommen, da dieser auf einem Evaluierungsboard verfügbar war.
 Zunächst wurden mit der Applikation "'Putty"' über die COM Schnittstelle einige Kommandos gesendet, um die
 \ac{uart} Schnittstelle zu testen. Dies ist erfolgreich gelungen. Es wurden erste spektrale Werte des
@@ -1651,7 +1651,7 @@ deutliche Dominanz des weißen Emitters.
 Anschießend wurde die Farbtreue der einzelnen Emitter der verwendeten Lampen betrachtet. Hier und auch im späteren Verlauf der Analysen wurden MacAdam Ellipsen
 genutzt. Dieses Analyse Verfahren wurde von David Lewis MacAdam um 1942 erstmals beschrieben. \cite{macAdam}. Hier werden Ellipsen um einen Farbort in einem CIE
 1931 Diagramm eingezeichnet. Mit Probanden ermittelte MacAdam, dass Farbortabweichungen innerhalb von zwei Ellipsen nur von geübten Menschen erkannt werden.\\
-Somit wird angenommen, dass eine Farbortverschiebung von bis zu zwei MacAdam Ellipsen als nicht wahrnehmbar angenommen.\\
+Somit wird angenommen, dass eine Farbortverschiebung von bis zu zwei MacAdam Ellipsen als nicht wahrnehmbar angenommen.\\ %//TODO: Quelle
 \\
 Die Ellipsenanalyse wurde mit dem Programm "'LED ColorCalculator"' von der Firma Osram durchgeführt. \cite{osram}\\
 \\
@@ -1668,20 +1668,60 @@ Messwerte sowie das aufbereiten der Daten zum einlesen in die Applikation. Diese
 Weiter macht eine integrierte Lösung dem Messprozess komfortabler für den Anwender, da Sensorwerte von der Applikation automatisch aufgenommen und aufbereitet
 werden, ohne weitere Benutzerinteraktion.
 \subsection{Analyse der Messwerte des AS7262}
-Die erfassten Messwerte mit dem AS7262 unterscheiden sich deutlich von den mit dem Spektrometer aufgezeichneten Daten.
-%// TODO : Weiter schreiben
-\paragraph{}
+Die erfassten Messwerte mit dem AS7262 unterscheiden sich deutlich von den mit dem Spektrometer aufgezeichneten Daten. Wie bereits in Kapitel \ref{measureWithAS7262}
+beschrieben, ist die Spektraleauflösung des Sensors zu gering um die tatsächliche maximale Helligkeit eines Emitters zu erfassen.\\
+Bei Betrachtung des erzeugten Gamut mit den Messwerten des AS7262 im Vergleich zu dem gemessenen Gamut des Spektrometers ist zu erkennen, dass der AS7262 auf Grund
+seiner Spektralenauflösung nicht homogen das Lichtspektrum aufnehmen kann. Somit entstehen auch bei der Farbort Bestimmung große Abweichungen.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/app_skypanel_gamut_uprtek.png}
+        \caption{UPRtek Spektrometer}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{.49\textwidth}
+        \includegraphics[width=\textwidth]{images/app_skypanel_gamut_as7262.png}
+        \caption{AMS AS7262}
+    \end{subfigure}
+    \caption{Gamut des Skypanels aus Messungen mit Spektrometer und AS7262}
+\end{figure}
 \noindent
-{\color{red} ...}
-\paragraph{}
-\noindent
-So wurde entschieden, dass die Messwerte des AS7262 für diesen Zweck zu ungenau sind. Somit ist der Sensor für diese Anwendung ungeeignet. Somit wurden in der
-Applikation die Messwerte des Spektrometers verwendet als Datenbasis für die im Folgenden durchgeführten Abgleichvorgänge verwendet.
+Zur Verbesserung der Spektraldaten könnte eine Interpolation implementiert werden. Hier ist die Datenlage von sechs Messwerten über ein Spektrum von 380 nm
+zu gering, da zu viele Varianten aus den Werte Kombinationen der Ursprung der Messwerte sein kann. Oft hat der AS7262 nicht das Maximum des Emitters erfassen
+können.
+In den Folgenden Tabellen finden Sie die ermittelten xy Koordinaten der 100\% Werte des Emitter des Skypanels. In Bild \ref{compareUPRtekAS7262} sind diese
+Werte grafisch erfasst.
+\begin{table}[H]
+    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llll}
+        Emitter          & Rot      & Grün     & Blau     & Weiß\\
+        x (UPRtek)       & 0.684398 & 0.180659 & 0.146820 & 0.441911\\
+        y (UPRtek)       & 0.309250 & 0.715762 & 0.037744 & 0.408204\\
+        x (AS7262)       & 0.6148   & 0.301    & 0.1598   & 0.4474\\
+        y (AS7262)       & 0.366    & 0.6055   & 0.0336   & 0.4328\\
+        MacAdam Ellipsen & > 35     & > 35     & > 35     & ~ 10\\
+    \end{tabular*}
+    \caption{xy Koordinaten der 100\% Ansteuerung der Emitter des Skypanels}
+\end{table}
+Anhand dieser enormen Abweichungen wurde entschieden, dass die Messwerte des AS7262 für diesen Zweck zu ungenau sind. Somit ist der Sensor für diese Anwendung
+ungeeignet. Somit wurden in der Applikation die Messwerte des Spektrometers verwendet als Datenbasis für die im Folgenden durchgeführten Abgleichvorgänge
+verwendet.
 \subsection{Analyse der Abgleichvorgänge}
-Bei den folgenden Messungen wurde das Skypanel als Referenz definiert.
+Bei den folgenden Messungen wurde das Skypanel in der Applikation als Referenz definiert. Der LEDWash und die LightCan folgen der bestimmten Mixpunkt des Skypanels.
 \subsubsection{Cyan}
 %// TODO : Weiter schreiben
-\paragraph{}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{.34\textwidth}
+        \includegraphics[width=\textwidth]{images/macAdam/comparedCyan.png}
+        \caption{Roter Emitter}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{.63\textwidth}
+        \includegraphics[width=\textwidth]{images/macAdam/comparedCyanTotal.png}
+        \caption{Grüner Emitter}
+    \end{subfigure}
+    \caption{MacAdam Analyse des Cyan Abgleichvorgangs}
+\end{figure}
 \noindent
 {\color{red}
 Hier folgen Notizen:\\
@@ -1698,18 +1738,6 @@ Analyse (stärken und Schwächen)
 \begin{addmargin}[2em]{0em}
     - Exemplarische Ergebnisse des Farbabgleichs. MacAdam Ellipsenanalyse der Farbabweichungen zur Referenzfarbe
 \end{addmargin}}
-\begin{figure}[H]
-    \centering
-    \begin{subfigure}[b]{.34\textwidth}
-        \includegraphics[width=\textwidth]{images/macAdam/comparedCyan.png}
-        \caption{Roter Emitter}
-    \end{subfigure}
-    \hfill 
-    \begin{subfigure}[b]{.63\textwidth}
-        \includegraphics[width=\textwidth]{images/macAdam/comparedCyanTotal.png}
-        \caption{Grüner Emitter}
-    \end{subfigure}
-\end{figure}
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Ausblick %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2015,6 +2043,15 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
     \caption{Farbortverschiebung des weißen LightCan Emitters} \label{table:whiteEmitterLightCan}
 \end{table}
 \noindent
+\clearpage
+
+\subsubsection{AS7262}
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/macAdam/comparison_upr_as7262.png}
+    \end{center}
+    \caption{Vergleich der Messungen der Skypanel Emitter des UPRtek Spektrometers und dem AS7262} \label{compareUPRtekAS7262}
+\end{figure}
 \clearpage
 
 \subsection{Abbildungsverzeichnis}
