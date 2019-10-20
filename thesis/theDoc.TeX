@@ -1212,7 +1212,8 @@ In der Applikation wurden die Emitter der Light Can aufgelistet. Diese sind Rot,
 gemessen, da bei den Probemessungen beobachtet wurde, dass vor allem bei niedrigen Helligkeiten der gemessene Farbton sich deutlich von dem
 gemessenen Farbton bei hohen Helligkeiten unterscheidet.\\
 Die gewählten Helligkeitsstufen sind:\\
-5\%, 10\%, 20\%, 35\%, 50\%, 65\%, 85\% und 100\% der Helligkeit des jeweiligen Emitters.\\
+5\%, 10\%, 20\%, 35\%, 50\%, 65\%, 85\% und 100\% der Helligkeit des jeweiligen Emitters. In Tabelle \ref{table:dmxToPercent} finden sich die DMX Werte
+Entsprechungen der DMX Werte.\\
 Um die gemessenen Werte in der Applikation zu erfassen, wurde eine Emittersektion in der grafischen Benutzeroberfläche vorgesehen.
 Der Benutzer konnte mit der Schaltfläche "'Add Emitter"' manuell Emitter zu der aktuellen Messung hinzufügen. Durch Anklicken eines angelegten
 Emitters, konnte das Menü des einzelnen Emitters geöffnet werden.
@@ -1687,7 +1688,7 @@ seiner Spektralenauflösung nicht homogen das Lichtspektrum aufnehmen kann. Somi
 \end{figure}
 \noindent
 Zur Verbesserung der Spektraldaten könnte eine Interpolation implementiert werden. Hier ist die Datenlage von sechs Messwerten über ein Spektrum von 380 nm
-zu gering, da zu viele Varianten aus den Werte Kombinationen der Ursprung der Messwerte sein kann. Oft hat der AS7262 nicht das Maximum des Emitters erfassen
+zu gering, da zu viele Varianten aus den Werte Kombinationen der Ursprung der Messwerte sein kann. Oft hat der AS7262 nicht das Maximum eines Emitters erfassen
 können.
 In den Folgenden Tabellen finden Sie die ermittelten xy Koordinaten der 100\% Werte des Emitter des Skypanels. In Bild \ref{compareUPRtekAS7262} sind diese
 Werte grafisch erfasst.
@@ -1698,7 +1699,7 @@ Werte grafisch erfasst.
         y (UPRtek)       & 0.309250 & 0.715762 & 0.037744 & 0.408204\\
         x (AS7262)       & 0.6148   & 0.301    & 0.1598   & 0.4474\\
         y (AS7262)       & 0.366    & 0.6055   & 0.0336   & 0.4328\\
-        MacAdam Ellipsen & > 35     & > 35     & > 35     & ~ 10\\
+        MacAdam Ellipsen & > 35     & > 35     & > 35     & \textasciitilde 10\\
     \end{tabular*}
     \caption{xy Koordinaten der 100\% Ansteuerung der Emitter des Skypanels}
 \end{table}
@@ -1708,21 +1709,50 @@ verwendet.
 \subsection{Analyse der Abgleichvorgänge}
 Bei den folgenden Messungen wurde das Skypanel in der Applikation als Referenz definiert. Der LEDWash und die LightCan folgen der bestimmten Mixpunkt des Skypanels.
 \subsubsection{Cyan}
-%// TODO : Weiter schreiben
+Hier wurde das Skypanel mit 100\% für den grünen Emitter und 65\% angesteuert. Der Mixpunkt liegt hier innerhalb des kombinierten Gamut. Dieser liegt bei den
+CIE 1931 Koordinaten x = 0.1624 und y = 0.34.
 \begin{figure}[H]
-    \centering
-    \begin{subfigure}[b]{.34\textwidth}
-        \includegraphics[width=\textwidth]{images/macAdam/comparedCyan.png}
-        \caption{Roter Emitter}
-    \end{subfigure}
-    \hfill 
-    \begin{subfigure}[b]{.63\textwidth}
-        \includegraphics[width=\textwidth]{images/macAdam/comparedCyanTotal.png}
-        \caption{Grüner Emitter}
-    \end{subfigure}
-    \caption{MacAdam Analyse des Cyan Abgleichvorgangs}
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/app_mix_cyan_cie.png}
+    \end{center}
+    \caption{Vorberechneten xy Koordinaten der Applikation}
 \end{figure}
 \noindent
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{.39\textwidth}
+        \includegraphics[width=\textwidth]{images/app_mix_cyan_faders.png}
+        \caption{Schieberegler}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{.59\textwidth}
+        \includegraphics[width=\textwidth]{images/app_mix_cyan_fixtureSheet.png}
+        \caption{Fixture Sheet}
+    \end{subfigure}
+    \caption{Ansichten der Applikation für die Cyan Mischung}
+\end{figure}
+\noindent
+\begin{table}[H]
+    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} lll}
+                         & x        & y        & MacAdam Ellipsen\\
+        Vorberechnet     & 0.1624   & 0.34     & > 36\\
+        Skypanel (Ref)   & 0,1528   & 0,1694   & -\\
+        LEDWash 300      & 0,1565   & 0,1965   & \textasciitilde 2\\
+        LightCan         & 0,152    & 0,2128   & < 6\\
+    \end{tabular*}
+    \caption{xy Koordinaten der Lampen mit der Mischfarbe Cyan}
+\end{table}
+\noindent
+Hier ist zu beobachten, dass zwar die Lampen akzeptabel bis gut abgeglichen sind. Jedoch weicht der gemessene Farbort der Referenzlampe mit über 35 MacAdam
+Ellipsen deutlich von dem angestrebten Wert ab. Dies ist in Bild \ref{fig:macAdamCyan} deutlich zu erkennen.
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/macAdam/comparedCyan_mix.png}
+    \end{center}
+    \caption{MacAdam Analyse des Cyan Abgleichvorgangs} \label{fig:macAdamCyan}
+\end{figure}
+\noindent
+%// TODO: Weiter schreiben
 {\color{red}
 Hier folgen Notizen:\\
 Analyse (stärken und Schwächen)
@@ -1730,13 +1760,11 @@ Analyse (stärken und Schwächen)
     - Messfehler und Toleranzen
 \end{addmargin}
 \begin{addmargin}[4em]{0em}
-    * Ausführliche Erklärung des AS7262 Messfehlers -> Ausscheiden des Sensors (keine Interpolation möglich)\\
-    * Verleich Messdaten AS7262 und Spektrometer\\
-    * Einbinden der Spektrometerdaten\\
     * Light Can innere Algorithmen (Ansatz zum Messen von Mischfarben zur Nachbildung des Mischalgorithmus)
 \end{addmargin}
 \begin{addmargin}[2em]{0em}
-    - Exemplarische Ergebnisse des Farbabgleichs. MacAdam Ellipsenanalyse der Farbabweichungen zur Referenzfarbe
+    - Exemplarische Ergebnisse des Farbabgleichs.
+    - Abweichung Referenzfarbe und vorberechnete Farbe.
 \end{addmargin}}
 \clearpage
 
@@ -2045,13 +2073,61 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 \noindent
 \clearpage
 
-\subsubsection{AS7262}
+\subsubsection{AS7262 vs UPRtek}
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.8\textwidth]{images/macAdam/comparison_upr_as7262.png}
     \end{center}
     \caption{Vergleich der Messungen der Skypanel Emitter des UPRtek Spektrometers und dem AS7262} \label{compareUPRtekAS7262}
 \end{figure}
+\clearpage
+
+\subsubsection{Messungen von Mischfarben}
+\textbf{Gelb}
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/app_mix_yellow_cie.png}
+    \end{center}
+    \caption{Vorberechneten xy Koordinaten der Applikation}
+\end{figure}
+\noindent
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{.39\textwidth}
+        \includegraphics[width=\textwidth]{images/app_mix_yellow_faders.png}
+        \caption{Schieberegler}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{.59\textwidth}
+        \includegraphics[width=\textwidth]{images/app_mix_yellow_fixtureSheet.png}
+        \caption{Fixture Sheet}
+    \end{subfigure}
+    \caption{Ansichten der Applikation für die Gelb Mischung}
+\end{figure}
+\noindent
+\clearpage
+\textbf{Warm Weiß}
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/app_mix_warmWhite_cie.png}
+    \end{center}
+    \caption{Vorberechneten xy Koordinaten der Applikation}
+\end{figure}
+\noindent
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{.39\textwidth}
+        \includegraphics[width=\textwidth]{images/app_mix_warmWhite_faders.png}
+        \caption{Schieberegler}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{.59\textwidth}
+        \includegraphics[width=\textwidth]{images/app_mix_warmWhite_fixtureSheet.png}
+        \caption{Fixture Sheet}
+    \end{subfigure}
+    \caption{Ansichten der Applikation für die warm weiß Mischung}
+\end{figure}
+\noindent
 \clearpage
 
 \subsection{Abbildungsverzeichnis}
