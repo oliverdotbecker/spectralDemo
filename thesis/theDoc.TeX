@@ -77,7 +77,7 @@
     \large Stand: \today
 \end{center}
 \vspace{1cm}\noindent
-{\large Title:  Abgleich von LED Lichtquellen auf Basis einer komplexen Lichtsteuerung}
+{\large Title:  Abgleich von LED-Lichtquellen auf Basis einer komplexen Lichtsteuerung}
 \par\vspace{3cm}\noindent
 Submitted by: \hspace{2cm}             Oliver Becker\\
 \\
@@ -104,7 +104,7 @@ Date of Birth: 21.07.1992 \hspace{2.8cm} Matr-No.:725810
 \\
 2st Academic Supervisor: Prof. Dr. Shun-Ping Chen
 \par\noindent\rule{\textwidth}{0.4pt}
-Title: Abgleich von LED Lichtquellen auf Basis einer komplexen Lichtsteuerung\\
+Title: Abgleich von LED-Lichtquellen auf Basis einer komplexen Lichtsteuerung\\
 %%%%%%%%%%%%%%%%%%%%%%%%%% Abstract %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \par\vspace{-0.8cm}\section*{Abstract}
 \addcontentsline{toc}{section}{Abstract}
@@ -173,25 +173,25 @@ Eine weitere Herausforderung für das Ausleuchten von zum Beispiel Fernsehstudio
 Menge von Scheinwerfern mit verschiedensten Funktionen und Einsatzbereichen. Oft besteht hier
 der Anspruch Räume, Objekte und Personen homogen und mit einem definierten Farbton aus-
 beziehungsweise anzuleuchten.\\
-Die verschiedenen Scheinwerfer besitzen heute zum überwiegenden Teil LED Lichtquellen. Diese
+Die verschiedenen Scheinwerfer besitzen heute zum überwiegenden Teil LED-Lichtquellen. Diese
 wiederum unterscheiden sich ebenfalls in ihren Eigenschaften von der abgestrahlten Farbe über
 die Bauart bis zur Qualität der Farberhaltung über die Einsatzzeit.\\
-So gibt es den Bedarf in der Lichtindustrie, dass LED Lichtquellen ein gleiches Verhalten zeigen
+So gibt es den Bedarf in der Lichtindustrie, dass LED-Lichtquellen ein gleiches Verhalten zeigen
 wenn es um Farbmischung geht, um die Bedienung so einfach wie möglich zu machen.\\
 Dies ist von den Scheinwerfern herstellerübergreifend nicht zu erwarten. So liegt es nahe in der
 Steuerungstechnik eine Lösung zu suchen.\\
 \\
-In dieser Arbeit wird betrachtet, wie man anhand von spektralen Messdaten der LED Lichtquelle der
+In dieser Arbeit wird betrachtet, wie man anhand von spektralen Messdaten der LED-Lichtquelle der
 Scheinwerfer einen automatisierten Abgleich zwischen einem Referenzgerät und einem zweiten oder
 mehreren realisieren kann.\\
-Außerdem wird behandelt, wie diese spektralen Daten der LED Lichtquellen erhoben werden können, da
-diese Daten in der Praxis selten von Herstellen zur Verfügung gestellt werden.\\
+Außerdem wird behandelt, wie diese spektralen Daten der LED-Lichtquellen erhoben werden können, da
+diese Daten in der Praxis selten von Herstellern zur Verfügung gestellt werden.\\
 \\
 Diese Arbeit beschäftigt sich ebenfalls damit, welche Elemente in einer Software realisiert werden
-können um einen solchen Abgleich in einer Benutzeroberfläche nutzbar zu implementieren. Weiter
-kann mit der aus dieser Arbeit resultierenden Software Scheinwerfer per Art-Net angesteuert werden.\\
+können, um einen solchen Abgleich in einer Benutzeroberfläche nutzbar zu implementieren. Weiter
+können mit der aus dieser Arbeit resultierenden Software Scheinwerfer per Art-Net angesteuert werden.\\
 \\
-Diese Funktionen wurden in Software in Verbindung mit Peripherie Hardware realisiert.
+Diese Funktionen wurden in Software in Verbindung mit Peripheriehardware realisiert.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% MA Lighting Technology %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -217,10 +217,10 @@ Contest 2019 oder die Lichtinstallation zum 25. Jahrestag des Falls der Berliner
     \vspace{-15pt}
 \end{wrapfigure}
 Der Hauptsitz der MA Lighting Technology GmbH befindet sich in Waldbüttelbrunn in der Nähe von
-Würzburg. Dort beschäftigt MA circa 100 Mitarbeiter. In den fünf Gebäuden befinden Soft- und
+Würzburg. Dort beschäftigt MA circa 100 Mitarbeiter. In den fünf Gebäuden befinden sich Soft- und
 Hardwareentwicklung, Testabteilung, Produktion, Lager und Management. Alle Produkte werden
 größtenteils von Hand von den Mitarbeitern vor Ort zusammengebaut. Platinen und Gehäuse werden
-von externen Firmen geliefert. Die einzelnen Bauteile werden von den Mitarbeitern auf den
+von externen Firmen geliefert. Die einzelnen Bauteile werden von den Mitarbeitern auf die
 Platinen aufgesteckt und verlötet. Anschließend werden die bestückten Platinen in den Gehäusen
 montiert und verkabelt. Nach einem mehrtägigen BurnIn-Test und einer Werkskonfiguration werden
 die Geräte verpackt und sind versandfertig.\\
@@ -235,7 +235,7 @@ Scheinwerfer und \ac{dmx}-Demultiplexer, um analoge Geräte ansteuern zu können
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
         \includegraphics[width=\textwidth]{images/grandMA_1.png}
-        \caption{grandMA ful-Size}
+        \caption{grandMA full-Size}
     \end{subfigure}
     \hfill 
     \begin{subfigure}[b]{0.25\textwidth}
@@ -245,14 +245,14 @@ Scheinwerfer und \ac{dmx}-Demultiplexer, um analoge Geräte ansteuern zu können
     \caption{grandMA 1 Serie Produkte}\label{fig:gma1}
 \end{figure}
 \noindent
-Ebenso entwickelte MA die Steuerpulte Scan-Commander und die grandMA Series 1 sowohl als
+Ebenso entwickelte MA die Steuerpulte Scan-Commander und die grandMA Serie 1, sowohl als
 Konsole, als auch als Computerapplikation. Das Besondere an dieser Technologie ist, dass \ac{dmx}-Daten
 nicht nur über \ac{xlr}, sondern auch über ein eigenes Ethernet-Netzwerkprotokoll namens 'MA-Net'
 ausgegeben werden. Als Gegenstück am anderen Ende des Netzwerkkabels existieren sogenannte
 \ac{dmx}-Nodes. Diese fungieren als Protokollwandler zwischen MA-Net und \ac{dmx}.\\
 Die Firma setzte immer wieder Standards in der Branche. Im Zuge des technischen Fortschritts –
 Einsatz von \ac{led}s als Lichtquelle, moderne Netzwerktechnologie und Videodatenverarbeitung –
-wurde die Produktpalette wesentlich erweitert. Hinzu kam die grandMA2 Series.\\
+wurde die Produktpalette wesentlich erweitert. Hinzu kam die grandMA2 Serie.\\
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
@@ -264,15 +264,15 @@ wurde die Produktpalette wesentlich erweitert. Hinzu kam die grandMA2 Series.\\
         \includegraphics[width=\textwidth]{images/MA-VPU-plus_d.png}
         \caption{VPU \cite{gma2products}}
     \end{subfigure}
-    \caption{grandMA 2 Serie Produkte}\label{fig:gma2}
+    \caption{grandMA2 Serie Produkte}\label{fig:gma2}
 \end{figure}
 \noindent
-Die grandMA2 Series ist die moderne Fortführung der grandMA Series 1. Außerdem stellt sie
-folgende Produkte bereit: Die Network Processing Unit (NPU), eine Prozessoreinheit, welche die
+Die grandMA2 Serie ist die moderne Fortführung der grandMA Serie 1. Außerdem stellt sie
+folgende Produkte bereit: Die Network Processing Unit (NPU) ist eine Prozessoreinheit, welche die
 Konsole in ihren Berechnungen unterstützt, indem die Konsole Rechenaufträge auf die NPU dezentral
 auslagert. Die Video Processing Unit (VPU) verarbeitet Video-Content und gibt diesen nativ über
 Grafikkarten oder Pixelmapping mit Hilfe von \ac{dmx} aus. Die Replay-Unit (RPU) ist eine vollwertige
-Konsole ohne die typischen Steuerelemente, sie dient beispielsweise als Havariegerät. Zuletzt noch
+Konsole ohne die typischen Steuerelemente. Sie dient beispielsweise als Havariegerät. Zuletzt noch
 verschiedene Variationen der Nodes, welche weiterhin als Protokollwandler dienen.\\
 Alle diese Produkte adressieren vor allem den Highend-Profibereich für Theaterproduktionen,
 Liveshows und Festinstallationen.\\
@@ -281,8 +281,8 @@ Liveshows und Festinstallationen.\\
     \caption{grandMA3 full-size \cite{gma3}}\label{fig:gma3}
 \end{figure}
 \noindent
-Seit Mitte 2017 entwickelt MA eine neue Produkt Serie. Die grandMA3 Serie. Diese Serie greift die
-in den letzten 34 Jahren gesammelte Erfahrung auf, jedoch wurde jede Zeile Code neu geschrieben,
+Seit Mitte 2017 entwickelt MA eine neue Produktserie. Die grandMA3 Serie. Diese Serie greift die
+in den letzten 34 Jahren gesammelte Erfahrung auf. Jedoch wurde jede Zeile Code neu geschrieben,
 um die technischen Möglichkeiten der neuen Hardware vollumfänglich nutzen zu können.\\
 Neben vielen Veränderungen gegenüber den Vorserien arbeitet die Farblogik der grandMA3 Software
 mit den Spezifikationen des \ac{cie} 1931 Standards.
@@ -290,12 +290,12 @@ mit den Spezifikationen des \ac{cie} 1931 Standards.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Grundlagen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Grundlagen}
-In dieser Arbeit werden Lichtquellen mit der grandMA3 Applikation von MA Lighting über ein Protokoll
-mit der Bezeichnung \ac{dmx} angesteuert.\\
+In dieser Arbeit werden das Abgleichen von LED-Lichtquellen erforscht. Diese funktionalität soll später in der
+grandMA3 Applikation von MA Lighting verwendet werden.\\
 Für eine erste Überprüfung geeigneter Hardware wurde mit einer kleinen Demo Applikation gearbeitet. Diese wurde
 in JavaScript und \ac{html} mit Hilfe des Electron Frameworks erstellt.\\
-Weiter wird diese Applikation für die Ausgabe von \ac{dmx} genutzt.\\
-Im Folgenden werden die hier verwendeten Protokolle, Programme, und Frameworks dargelegt.
+Weiter wird diese Applikation für die Ausgabe von \ac{dmx} genutzt, sowie für erste Implementierung des Abgeichs.\\
+Im Folgenden werden die hier verwendeten Protokolle, Programme und Frameworks dargelegt.
 
 \subsection{DMX}
 Diese Abkürzung steht für Digital Multiplex. Dabei handelt es sich um ein digitales Steuerprotokoll,
@@ -307,23 +307,26 @@ Schnittstellenstandard.
     \begin{center}
         \includegraphics[width=.75\textwidth]{images/dmx.png}
     \end{center}
+    \vspace{-.5cm}
     \caption{Physikalische Übertragung DMX-512/1990 (RS-485) \cite{soundlight}}
 \end{figure}
+\vspace{-.3cm}
 \noindent
 Das eigentliche Signal wird dabei seriell auf einem Leitungspaar symmetrisch übertragen - auf der
 einen Leitung mit invertierten und auf der anderen mit nichtinvertiertem Pegel. Da sich externe 
 Einstreuungen auf beide Datenleitungen gleichmäßig auswirken und am Empfänger nicht das Pegelniveau,
 sondern die Pegeldifferenz ausgewertet wird, ist das Signal so weniger störungsempfindlich.
-Das ermöglicht laut Standard [2] bis zu 1200m lange Übertragungsstrecken und eine
+Das ermöglicht laut DMX Standard \cite{dmxstandard} bis zu 1200 m lange Übertragungsstrecken und eine
 Datenübertragungsrate bis zu 12 \ac{MBps}. Ein Netzwerk aus mehreren Geräten wird als Bus aufgebaut.\\
 Die Datenübertragung erfolgt mittels einer \ac{uart} gesteuerten asynchronen seriellen Schnittstelle. Ein
 Datenframe besteht aus acht Datenbits und zwei Stoppbits. Die Symbolrate beträgt 250 k\ac{baud}.
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{images/DMX_zeitlich.png}
-    \caption{Zeitliche Darstellung \ac{dmx}-Signal \cite{soundlightA}} \label{fig:DMXoverTime}
+    \caption{Zeitliche Darstellung des \ac{dmx}-Signals \cite{soundlightA}} \label{fig:DMXoverTime}
 \end{figure}
-\noindent
+\vspace{-.7cm}
 \begin{table}[H]
+    \small
     \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllll}
         Nr. & Signalabschnitt & Min & Soll & Max & Einheit\\
         1 & BREAK & 88 & 176 & - & $\mu$s\\
@@ -339,17 +342,18 @@ Datenframe besteht aus acht Datenbits und zwei Stoppbits. Die Symbolrate beträg
     \end{tabular*}
     \caption{Legende zu Bild \ref{fig:DMXoverTime}}
 \end{table}
+\vspace{-.1cm}
 \noindent
-Ein \ac{dmx}-Paket beginnt mit mindestens 88 $\mu$s (22 Bitlängen) niedrigem Pegel (logisch 0) – dieser
-Abschnitt wird 'BREAK' genannt. Durch ihn wird eine einfache Erkennung des Paketanfangs
+Ein \ac{dmx}-Paket beginnt mit einem mindestens 88 $\mu$s (22 Bitlängen) langem niedrigem Pegel (logisch 0)
+– dieser Abschnitt wird 'BREAK' genannt. Dadurch wird eine einfache Erkennung des Paketanfangs
 ermöglicht, da quasi jeder handelsübliche UART den Break als ungültiges Datenbyte mit fehlenden
-Stoppbits meldet. Darauf folgt 'MARK after BREAK' mit mindestens 8 $\mu$s (2 Bitlängen) hohem Pegel /
-Ruhezustand des Daten-Busses (logisch 1). In dieser 'MARK'-Zeit können sich langsamer getaktete
+Stoppbits meldet. Darauf folgt 'MARK after BREAK' mit einem mindestens 8 $\mu$s (2 Bitlängen) langem hohem Pegel /
+(Ruhezustand des Daten-Busses logisch 1). In dieser 'MARK'-Zeit können sich langsamer getaktete
 Controller auf ein neues \ac{dmx}-Paket einstellen. Dann wird das Startbyte mit dem Wert 0 für \ac{dmx}
 übertragen. Das Startbyte ist der Slot 0. Anschließend werden die anderen 512 Slots mit den
-relevanten \ac{dmx}-Daten gesendet. Es können, müssen aber nicht alle 513 Slots übertragen werden.
+relevanten \ac{dmx}-Daten gesendet. Es können, aber müssen nicht alle 513 Slots übertragen werden.
 Eine Adressierung der Slots ist jedoch nicht möglich – der zweite gesendete Slot ist für den ersten
-Kanal, der dritte Slot für den zweiten Kanal etc.. Sollte die Übertragung zu einem beliebigen
+Kanal, der dritte Slot für den zweiten Kanal usw.. Sollte die Übertragung zu einem beliebigen
 Zeitpunkt unterbrochen werden, kann sie durch das Senden eines neuen \ac{dmx}-Paketes wieder
 aufgenommen werden. Die 'BREAK'-Sequenz führt automatisch zu einem Zurücksetzen aller noch
 offenen Übertragungen.\\
@@ -364,7 +368,7 @@ des BREAKs definiert. Dies soll den Empfängern die Dekodierung erleichtern.
 
 \subsection{Art-Net}
 Art-Net ist ein Netzwerkprotokoll, dass zur Verteilung von \ac{dmx} und \ac{rdm} Daten genutzt werden kann.
-Es ist in OSI Layer 4 auf UDP aufgebaut. Das Protokoll ist von der Firma Artistic Licence Holdings Ltd. lizenziert.\\
+Es ist in OSI Layer 4 auf \ac{udp} aufgebaut. Das Protokoll ist von der Firma Artistic Licence Holdings Ltd. lizenziert.\\
 In dieser Arbeit wird Art-Net in der dritten Version verwendet. Diese Version wurde 2011 publiziert.\\
 Über das Art-Net 3 Protokoll können bis zu 32.768 \ac{dmx} Universen verwaltet werden.\\
 \cite{artnet}\\
@@ -407,14 +411,14 @@ lediglich ArtDmx Pakete. Diese Pakete transportieren DMX Daten. Hier ist der Auf
 \clearpage
 
 \subsection{HTML, JavaScript, CSS}
-\ac{html} ist eine Strukturbeschreibungssprache. Sie ist an den \ac{xml} Standard angelehnt. \ac{html}
-wird hauptsächlich in der Webentwicklung verwendet. Doch kann \ac{html} auch für webgestützte Desktop
-Applikationen genutzt werden.\\
-Die Sprache enthält grundlegende Elemente zur Beschreibung von Tabellen, Einbindung von Medieninhalten sowie
+\ac{html} ist eine Spreche zur Strukturbeschreibung. Sie ist an den \ac{xml} Standard angelehnt. \ac{html}
+wird hauptsächlich in der Webentwicklung verwendet, kann jedoch auch für webgestützte Desktopapplikationen
+genutzt werden.\\
+Die Sprache enthält grundlegende Elemente zur Beschreibung von Tabellen, Einbindung von Medieninhalten, sowie
 von weiteren HTML Dateien.\\
-Allerdings ist das erzeugte Ergebnis (zum Beispiel von einem Webbrowser) meist statisch. Als Beispiel ändert sich
+Allerdings ist das erzeugte Ergebnis (zum Beispiel von einem Webbrowser) meist statisch. Beispielsweise ändert sich
 der Inhalt nicht mit dem Vergrößern oder Verkleinern des Webbrowsers für eine bessere Lesbarkeit. Um solche heute
-gewohnten Effekte zu erzeugen, benötigt man \ac{css} oder JavaScript.\\
+üblichen Effekte zu erzeugen, benötigt man \ac{css} oder JavaScript.\\
 \\
 \ac{css} ist eine in der \ac{json} Notation geschriebene Sprache. Hier kann auf Elemente in einem \ac{html} Baum
 verwiesen werden, und mit verschiedenen Attributen das Erscheinungsbild im Webbrowser oder in der Applikation
@@ -422,49 +426,48 @@ geändert werden.\\
 Einfache Dinge wie Hintergrund- oder Textfarben bis hin zu komplexen Animationen können mit \ac{css} beschrieben
 werden.\\
 \\
-JavaScript ist eine Skript Sprache, die wie \ac{css} meist in der Webentwicklung verwendet wird, kann jedoch
+JavaScript ist eine Skript Sprache, die wie \ac{css} meist in der Webentwicklung verwendet wird. Sie kann jedoch
 mit einer entsprechenden JavaScript Laufzeitumgebung auch ohne Browser auf Endgeräten ausgeführt werden.\\
-Bei dieser Arbeit muss zwischen zwei Arten der Nutzung der Sprache JavaScript unterschieden werden:\\
+Bei dieser Arbeit muss zwischen zwei verschiednen Nutzungsarten der Sprache JavaScript unterschieden werden:\\
 \begin{addmargin}[2em]{0em}
- - Webcode, welcher innerhalb des Webbrowsers augeführt wird.\\
- - Appcode, welcher mit der NodeJS Laufzeitumgebung auf dem Endgerät ausgeführt wird.\\
+ - Webcode, wird innerhalb des Webbrowsers augeführt.\\
+ - Appcode, wird mit der NodeJS Laufzeitumgebung auf dem Endgerät ausgeführt.\\
 \end{addmargin}
 NodeJS ist eine JavaScript Laufzeitumgebung. Laufzeitumgebungen sind zum Ausführen eines Programms in einer
 Sprache zwingend erforderlich.\\
-Webcode kann dynamisch auf einer Website durch anklicken eines \ac{html} Elements weitere HTML Elemente erzeugen,
+Webcode kann dynamisch auf einer Website durch Anklicken eines \ac{html} Elements weitere HTML Elemente erzeugen,
 oder existierende manipulieren oder löschen. Somit kann eine Benutzereingabe das gesamte Erscheinungsbild ändern,
 ohne eine andere \ac{html} Seite aufzurufen.
 Zusätzlich bieten Webbrowser sogenannte "'Storages"' oder Speicher. Dort können mit JavaScript Daten gespeichert werden,
 um diese zum Beispiel beim nächsten Aufruf dieser Seite weiter zu nutzen.\\
-Appcode hat gegenüber Webcode weitreichendere Befugnisse auf dem Endgerät wie Dateisystemzugriff und Zugriff auf
+Appcode hat gegenüber Webcode weitreichendere Befugnisse auf dem Endgerät wie den Zugriff auf das Dateisystem und
 externe Schnittstellen, wie USB oder herkömmliche serielle Schnittstellen (COM).
 \clearpage
 
 \subsection{Electron}
-Electron ist ein Framework, welches zum Erstellen von Desktop Anwendungen genutzt werden kann. Electron funktioniert
+Electron ist ein Framework, welches zum Erstellen von Desktopanwendungen genutzt werden kann. Electron funktioniert
 wie ein Webbrowser. Die Applikation zeigt \ac{html} und andere Textinhalte an.\cite{electron} Der Programmierer kann diese
-Browserumgebung nach Belieben modifizieren und erweitern. Electron wurde aus dem Projekt Atom Editor von Github entwickelt.\\
-Das Framework basiert auf dem Chromium Projekt von Google. Auf dem Chromium Projekt basiert auch der Chrome Webbrowser von
+Browserumgebung nach Belieben modifizieren und erweitern. Electron wurde aus dem Projekt "'Atom Editor"' von Github entwickelt.\\
+Das Framework basiert auf dem Chromium Projekt von Google. Auf dem Chromium Projekt basiert auch der Webbrowser "'Chrome"' von
 Google.\\
 Das Electron Framework bietet eine betriebssystemübergreifende Applikation als Resultat. Electron Applikationen können unter
 Windows, Linux und MacOS ausgeführt werden.\\
 Electron ist Open Source Software und wird von einer breiten Community weltweit permanent weiterentwickelt.\cite{electron} Das Projekt wird
 in den Programmiersprachen C++ und JavaScript geschrieben. Der JavaScript-Anteil wird mit NodeJS auf den Zielcomputern ausgeführt.\\
 Electron selbst wird als Paket angeboten. Dies ist üblich für Open Source NodeJS Projekte. Ein Paket kann in ein Projekt eingebunden werden,
-vergleichbar mit einem SDK und einer DLL für C++. In der Regel werden diese Pakete über den Netzwerk-Paket-Manager oder auch \ac{npm} von
-Servern abgerufen. Weiter managed \ac{npm} die installierten Pakete pro Projekt, wie Versionen jedes Paketes, sowie das aktualisieren.
+vergleichbar mit einem \ac{sdk} und einer \ac{dll} für C++. In der Regel werden diese Pakete über den Netzwerk-Paket-Manager oder auch \ac{npm} von
+Servern abgerufen. Weiter managt \ac{npm} die installierten Pakete pro Projekt, wie Versionen jedes Paketes, sowie das aktualisieren.
 
 \subsection{Git und Github}
-Git ist eine Datei Versionierungs- und Management Software. Git wird häufig in der Software Entwicklung mit mehreren Stationen eingesetzt.\\
+Git ist eine Datei Versionierungs- und Management Software. Git wird häufig in der Softwareentwicklung mit mehreren Stationen eingesetzt.\\
 Eine Instanz von einem mit Git verwalteten Dateisystem wird als Repository bezeichnet. Diese Instanz wird meist auf einem Server bereitgestellt.
-Ein Nutzer kann den Inhalt des Repositories auf sein Endgerät abrufen.
+Ein Nutzer kann den Inhalt des Repositories auf seinem Endgerät abrufen.\\
 Abgerufene Dateien, vornehmlich nicht binäre Textdateien, können anschließend lokal auf einem Endgerät editiert werden. Wenn eine neue Version
 der Datei in das Repository eingestellt werden soll, werden die Änderungen an den Dateien mit einem Kommentar eingestellt (committed).
 Diese eingestellten Änderungen werden dann mit dem Server synchronisiert und mit den Änderungen von anderen Stationen automatisch zusammengeführt.\\
+Dieses System vereinfacht das Entwickeln einer Software mit mehreren Entwicklern deutlich.\\
 \\
-Dieses System macht das Entwickeln einer Software mit mehreren Entwicklern deutlich einfacher.\\
-\\
-Github ist eine Webplattform, welche kostenlos öffentliche Repositories hosted. Dort wurde auch das Git Repository der Applikation
+Github ist eine Webplattform, welche kostenlos öffentliche Repositories hostet. Dort wurde auch das Git Repository der Applikation
 dieses Projektes gehostet.\\
 Zusätzlich bietet Github ein Projektverwaltungssystem.
 \clearpage
@@ -821,7 +824,7 @@ Farbfilter den größten Teil des Spektrums absorbieren müssen."'\\
 
 \subsection{Mischen von Farben}\label{colormixing}
 Emittierende Körper unterliegen der additiven Farbmischung. Dies bedeutet, dass sich die ins elektromagnetische Spektrum abgegebenen
-Wellen bei ihren jeweiligen Wellenlängen aufaddieren. Somit kann mit verschiedenen LED Lichtquellen eine neue Farbe gemischt
+Wellen bei ihren jeweiligen Wellenlängen aufaddieren. Somit kann mit verschiedenen LED-Lichtquellen eine neue Farbe gemischt
 werden.\\
 So kann beispielsweise mit einer roten und einer grünen \ac{led} ein orangener bis gelber Farbton gemischt werden.
 
@@ -1467,9 +1470,9 @@ DMX Universum konfigurierten DMX Ausgängen aus. Dieses DMX Signal wird dann kab
 DMX Empfänger sind in dieser Arbeit die Lampen, beziehungsweise im Fall der Ape Labs Produkte der "'WAPP"'.
 \clearpage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%% Automatisiertes angleichen zweier LED Lichtquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Automatisiertes angleichen zweier LED Lichtquellen} \label{comparing}
-Mit den in den realisierten Funktionen aus den vorhergehenden Kapiteln kann nun ein automatisierter Abgleich zweier LED Lichtquellen vorbereitet werden. Hier
+%%%%%%%%%%%%%%%%%%%%%%%%%% Automatisiertes angleichen zweier LED-Lichtquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Automatisiertes angleichen zweier LED-Lichtquellen} \label{comparing}
+Mit den in den realisierten Funktionen aus den vorhergehenden Kapiteln kann nun ein automatisierter Abgleich zweier LED-Lichtquellen vorbereitet werden. Hier
 ergeben aufgrund der Ergebnisse der bisherigen Messungen folgende Fragen:\\
 \begin{addmargin}[2em]{0em}
     1. Wie kann eine Farbton der außerhalb des kombinierten Gamut mit möglichst geringe abweichung der Farbvalenz in den Bereich des kombinierten Gamut
@@ -1769,7 +1772,7 @@ Aus der bisherigen Auswertung sind 3 Hauptfehlerquellen auszumachen:
 \subsubsection{Fehlerquelle 1 - Messdaten}
 Im Folgenden wird dargelegt, wie diese kompensiert oder behoben werden könnten.\\
 Mit einer entsprechenden Kalibrierung der Sensoren die in dieser Arbeit genutzt wurden oder anderen genaueren
-Sensoren wäre ein deutlich genauerer Abgleich verschiedener LED Lichtquellen möglich. Jedoch ist eine
+Sensoren wäre ein deutlich genauerer Abgleich verschiedener LED-Lichtquellen möglich. Jedoch ist eine
 Kalibrierung immer Anwendungsspezifisch. Je breiter der Anwendungsfall definiert ist desto komplexer ist
 eine solche Kalibrierung.\\
 Wie in Kapitel \ref{measuringWith7261} behandelt ist für den AS7261 Sensor eine Kalibrierung für diese Art von
@@ -2187,6 +2190,7 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
     \acro{baud}[Baud]{Bits per second}
     \acro{cie}[CIE]{Commission internationale de l’éclairage}
     \acro{css}[CSS]{Cascading Style Sheets}
+    \acro{dll}[DLL]{Dynamic Link Library}
     \acro{dmx}[DMX]{Digital Multiplex}
     \acro{hmi}[HMI]{Hydrargyrum mediumarc iodite}
     \acro{html}[HTML]{Hypertext Markup Language}
@@ -2194,18 +2198,21 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
     \acro{ic}[IC]{Integrated Circuit}
     \acro{json}[JSON]{JavaScript Object Notation}
     \acro{led}[LED]{Light Emitting Diode}
-    \acro{MBps}[MBps]{Megabits pro Sekunde}
+    \acro{MBps}[MBps]{Megabits per second}
     \acro{nir}[NIR]{Near Infrared}
     \acro{npm}[NPM]{Network Paket Manager for Javascript}
     \acro{par}[PAR]{Parabolic Aluminized Refelector}
     \acro{rdm}[RDM]{Remote Device Management}
+    \acro{sdk}[SDK]{Software Development Kit}
     \acro{svg}[SVG]{Scalable Vector Graphics}
     \acro{thz}[THz]{Teraherz}
     \acro{uart}[UART]{Universal Asynchronous Receiver Transmitter}
+    \acro{udp}[UDP]{User Datagram Protocol}
     \acro{usb}[USB]{Universal Serial Bus}
-    \acro{xlr}[XLR]{drei oder fünf polige Steckverbindung}
+    \acro{xlr}[XLR]{drei- oder fünfpolige Steckverbindung}
     \acro{xml}[XML]{Extensible Markup Language}
 \end{acronym}
+\clearpage
 
 \subsection{Formelzeichen und Konstanten}
 $\lambda$ - Lambda - Wellenlänge\\
