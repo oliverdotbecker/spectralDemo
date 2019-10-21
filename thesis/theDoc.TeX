@@ -19,6 +19,7 @@
 \usepackage[font={scriptsize},figurename=Bild]{caption}
 \usepackage{listings}
 \usepackage{color}
+\usepackage{tabularx}
 
 \definecolor{darkGreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -115,6 +116,7 @@ equalization. Normally this data isn't provided by the light source manufacturer
 Furthermore is described which software elements are needed to realize such an equalization implementation.
 This covers the graphical user interface the equalization algorithm and a protocol to control lights.\\
 These modules have been implemented in software with connected external hardware.
+\vspace{.6cm}
 \par\noindent\rule{\textwidth}{0.4pt}
 In partial fulfillment of the requirements of the University of Applied Sciences Hochschule
 Darmstadt (h\_da) for the degree Master of Science in Electrical Engineering carried out in
@@ -324,19 +326,19 @@ Datenframe besteht aus acht Datenbits und zwei Stoppbits. Die Symbolrate beträg
 \vspace{-.7cm}
 \begin{table}[H]
     \small
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllll}
-        Nr. & Signalabschnitt & Min & Soll & Max & Einheit\\
-        1 & BREAK & 88 & 176 & - & $\mu$s\\
-        2 & MARK after BREAK & 8 $\mu$s & - & < 1 s\\
-        3 & Slot Time & 43,12 & 44,0 & 44,88 & $\mu$s\\
-        4 & Startbit & 3,92 & 4,0 & 4,08 & $\mu$s\\
-        5 & LSB (niederwertigstes Datenbit) & 3,92 & 4,0 & 4,08 & $\mu$s\\
-        6 & MSB (höchstwertiges Datenbit) & 3,92 & 4,0 & 4,08 & $\mu$s\\
-        7 & Stoppbit & 3,92 & 4,0 & 4,08 & $\mu$s\\
-        8 & MARK Inter-Slot Time & 0 & - & < 1 & s\\
-        9 & MARK before BREAK & 0 & - & < 1 & s\\
-        10 & BREAK – BREAK (Übertragungsausfall) & 1,2 ms & - & 1,25 s & s\\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l|X|l|l|l|l|}
+        \hline Nr. & Signalabschnitt & Min & Soll & Max & Einheit\\\hline
+        1 & BREAK & 88 & 176 & - & $\mu$s\\\hline
+        2 & MARK after BREAK & 8 $\mu$s & - & < 1 s & \\\hline
+        3 & Slot Time & 43,12 & 44,0 & 44,88 & $\mu$s\\\hline
+        4 & Startbit & 3,92 & 4,0 & 4,08 & $\mu$s\\\hline
+        5 & LSB (niederwertigstes Datenbit) & 3,92 & 4,0 & 4,08 & $\mu$s\\\hline
+        6 & MSB (höchstwertiges Datenbit) & 3,92 & 4,0 & 4,08 & $\mu$s\\\hline
+        7 & Stoppbit & 3,92 & 4,0 & 4,08 & $\mu$s\\\hline
+        8 & MARK Inter-Slot Time & 0 & - & < 1 & s\\\hline
+        9 & MARK before BREAK & 0 & - & < 1 & s\\\hline
+        10 & BREAK – BREAK (Übertragungsausfall) & 1,2 ms & - & 1,25 s & \\\hline
+    \end{tabularx}
     \caption{Legende zu Bild \ref{fig:DMXoverTime}}
 \end{table}
 \vspace{-.1cm}
@@ -376,31 +378,31 @@ Mit Hilfe von Protokollwandlern wie dem MA xPort Node kann Art-Net in \ac{dmx} u
 Herstellern gibt es auf dem Markt weit verbreitete Protokollwandler.\\
 Art-Net IP Adressen sind nach folgendem Muster aufgebaut:
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} lllll}
-        Bytes & 4 & 3 & 2 & 1\\
-        IP Adresse & Netz & Netz & Host & Host\\
-        Subnetz & 255 & 255 & 0 & 0\\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|X|}
+        \hline Bytes & 4 & 3 & 2 & 1\\\hline
+        IP Adresse & Netz & Netz & Host & Host\\\hline
+        Subnetz & 255 & 255 & 0 & 0\\\hline
+    \end{tabularx}
     \caption{Art-Net IP Schema}
 \end{table}
 \noindent
 In der Regel werden IP Adressen für Art-Net mit dem Netz 2.X.X.X oder 10.X.X.X verwendet. Art-Net wird über den
 Netzwerkport 6454 gesendet und empfangen.\\
 Ein Art-Net Paket kann verschiedene Informationen enthalten. Hier sendet die Applikation jedoch
-lediglich ArtDmx Pakete. Diese Pakete transportieren DMX Daten. Hier ist der Aufbau des ArtDmx Paketes dargelegt.\\
+lediglich ArtDmx Pakete. Diese Pakete transportieren DMX Daten. Hier ist der Aufbau des ArtDmx Paketes dargelegt.
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} lll}
-        Byte Offset & Name & Größe & Beschreibung\\
-        0 & ID & 8 & Art-Net\\
-        8 & OpCodeLo & 1 & Pakettyp (ArtDmx) LSB\\
-        9 & OpCodeHi & 1 & Pakettyp (ArtDmx) MSB\\
-        10 & ProtVer & 2 & Protokollversion (14)\\
-        12 & Sequenz & 1 & Paketsequenznummer\\
-        13 & Physical & 1 & Physikalischer Port\\
-        14 & Universe & 2 & Art-Net Universum\\
-        16 & Length & 2 & Länge der DMX Daten\\
-        18 & Data[] & 2-512 & DMX Daten\\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l|l|l|X|}
+        \hline Byte Offset & Name & Größe & Beschreibung\\\hline
+        0 & ID & 8 & Art-Net\\\hline
+        8 & OpCodeLo & 1 & Pakettyp (ArtDmx) LSB\\\hline
+        9 & OpCodeHi & 1 & Pakettyp (ArtDmx) MSB\\\hline
+        10 & ProtVer & 2 & Protokollversion (14)\\\hline
+        12 & Sequenz & 1 & Paketsequenznummer\\\hline
+        13 & Physical & 1 & Physikalischer Port\\\hline
+        14 & Universe & 2 & Art-Net Universum\\\hline
+        16 & Length & 2 & Länge der DMX Daten\\\hline
+        18 & Data[] & 2-512 & DMX Daten\\\hline
+    \end{tabularx}
     \caption{Aufbau des ArtDmx Pakets}\label{tab:ArtDmxDefinition}
 \end{table}
 \noindent
@@ -800,13 +802,13 @@ beziehungsweise welche Frequenz sie emittiert.\\
 Im Folgenden ein Auszug der Element-Farbzuordnung \cite{wikiLed}:
 \begin{table}[H]
     \small
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} ll}
-        Element & Farbe & Wellenlänge (nm)\\
-        Aluminiumgalliumarsenid (AIGaAs) & Rot, Infrarot & 665 - 1000\\
-        Galliumarsenidphosphid (GaAsP) & Rot, Orange und Gelb & 570 - 760\\
-        Galliumphosphid (GaP) & (Gelb-)Grün & 500 - 580\\
-        Indiumgalliumnitrid (InGaN) &  Grün, Blau, Violett und Ultraviolett & 520 - 230\\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l|l|l|}
+        \hline Element & Farbe & Wellenlänge (nm)\\\hline
+        Aluminiumgalliumarsenid (AIGaAs) & Rot, Infrarot & 665 - 1000\\\hline
+        Galliumarsenidphosphid (GaAsP) & Rot, Orange und Gelb & 570 - 760\\\hline
+        Galliumphosphid (GaP) & (Gelb-)Grün & 500 - 580\\\hline
+        Indiumgalliumnitrid (InGaN) &  Grün, Blau, Violett und Ultraviolett & 520 - 230\\\hline
+    \end{tabularx}
     \caption{LED Zusammensetzungen}
 \end{table}
 \noindent
@@ -1120,12 +1122,12 @@ Eine Aufstellung der Tristimuluswerte wurde von der Website "'Wisotop"' von der 
 Die hier genutzten Tristimuluswerte \cite{wisotop}:
 \begin{table}[H]
     \small
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllll}
-        Wellenlänge & 450 & 500 & 550 & 570 & 600 & 650\\
-        X & 0.3362 & 0.0049 & 0.4334 & 0.7621 & 1.0622 & 0.2835\\
-        Y & 0.0380 & 0.3230 & 0.9950 & 0.9520 & 0.6310 & 0.1070\\
-        Z & 1.7721 & 0.2720 & 0.0087 & 0.0021 & 0.0008 & 0.0000\\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l @{\extracolsep{\fill}} |l|l|l|l|l|l|}
+        \hline Wellenlänge & 450 & 500 & 550 & 570 & 600 & 650\\\hline
+        X & 0.3362 & 0.0049 & 0.4334 & 0.7621 & 1.0622 & 0.2835\\\hline
+        Y & 0.0380 & 0.3230 & 0.9950 & 0.9520 & 0.6310 & 0.1070\\\hline
+        Z & 1.7721 & 0.2720 & 0.0087 & 0.0021 & 0.0008 & 0.0000\\\hline
+    \end{tabularx}
     \caption{CIE Tristimuluswerte}
 \end{table}
 \noindent
@@ -1699,14 +1701,14 @@ können.
 In den Folgenden Tabellen finden Sie die ermittelten xy Koordinaten der 100\% Werte des Emitter des Skypanels. In Bild \ref{compareUPRtekAS7262} sind diese
 Werte grafisch erfasst.
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llll}
-        Emitter          & Rot      & Grün     & Blau     & Weiß\\
-        x (UPRtek)       & 0.684398 & 0.180659 & 0.146820 & 0.441911\\
-        y (UPRtek)       & 0.309250 & 0.715762 & 0.037744 & 0.408204\\
-        x (AS7262)       & 0.6148   & 0.301    & 0.1598   & 0.4474\\
-        y (AS7262)       & 0.366    & 0.6055   & 0.0336   & 0.4328\\
-        MacAdam Ellipsen & > 35     & > 35     & > 35     & \textasciitilde 10\\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l @{\extracolsep{\fill}} |l|l|l|l|}
+        \hline Emitter          & Rot      & Grün     & Blau     & Weiß\\\hline
+        x (UPRtek)       & 0.684398 & 0.180659 & 0.146820 & 0.441911\\\hline
+        y (UPRtek)       & 0.309250 & 0.715762 & 0.037744 & 0.408204\\\hline
+        x (AS7262)       & 0.6148   & 0.301    & 0.1598   & 0.4474\\\hline
+        y (AS7262)       & 0.366    & 0.6055   & 0.0336   & 0.4328\\\hline
+        MacAdam Ellipsen & > 35     & > 35     & > 35     & \textasciitilde 10\\\hline
+    \end{tabularx}
     \caption{xy Koordinaten der 100\% Ansteuerung der Emitter des Skypanels}
 \end{table}
 Anhand dieser enormen Abweichungen wurde entschieden, dass die Messwerte des AS7262 für diesen Zweck zu ungenau sind. Somit ist der Sensor für diese Anwendung
@@ -1739,13 +1741,13 @@ CIE 1931 Koordinaten x = 0.1624 und y = 0.34.
 \end{figure}
 \noindent
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} lll}
-                         & x        & y        & MacAdam Ellipsen\\
-        Vorberechnet     & 0.1624   & 0.34     & > 36\\
-        Skypanel (Ref)   & 0,1528   & 0,1694   & -\\
-        LEDWash 300      & 0,1565   & 0,1965   & \textasciitilde 2\\
-        LightCan         & 0,152    & 0,2128   & < 6\\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l @{\extracolsep{\fill}} |l|l|l|}
+        \hline           & x        & y        & MacAdam Ellipsen\\\hline
+        Vorberechnet     & 0.1624   & 0.34     & > 36\\\hline
+        Skypanel (Ref)   & 0,1528   & 0,1694   & -\\\hline
+        LEDWash 300      & 0,1565   & 0,1965   & \textasciitilde 2\\\hline
+        LightCan         & 0,152    & 0,2128   & < 6\\\hline
+    \end{tabularx}
     \caption{xy Koordinaten der Lampen mit der Mischfarbe Cyan}
 \end{table}
 \noindent
@@ -1829,28 +1831,30 @@ Mit anderen Sensoren oder einem integrierbaren Spektrometer
 \subsection{Messungen}
 Die Ansteuerungswerte in Prozent setzten sich wie folgt in DMX Werten um:
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
-        Prozent [\%] & 5  & 10 & 20 & 35 & 50  & 65  & 85  & 100\\
-        DMX          & 12 & 25 & 51 & 89 & 127 & 165 & 216 & 255\\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l @{\extracolsep{\fill}} |l|l|l|l|l|l|l|l|}
+        \hline
+        Prozent [\%] & 5  & 10 & 20 & 35 & 50  & 65  & 85  & 100\\\hline
+        DMX          & 12 & 25 & 51 & 89 & 127 & 165 & 216 & 255\\\hline
+    \end{tabularx}
     \caption{DMX Werte zu Ansteuerungswerten in Prozent} \label{table:dmxToPercent}
 \end{table}
-\noindent
+\vspace{-.5cm}
 \subsubsection{UPRtek}
 Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 \textbf{Arri SkyPanel RGBW Mode}
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llll}
-        Lux   & Rot   & Grün  & Blau & Weiss\\
-        5\%   & 791   & 1075  & 325  & 3583 \\
-        10\%  & 1541  & 2154  & 637  & 7279 \\
-        20\%  & 3004  & 4240  & 1254 & 15094\\
-        35\%  & 5221  & 7383  & 2185 & 27255\\
-        50\%  & 7459  & 10621 & 3139 & 36158\\
-        65\%  & 9618  & 13785 & 4020 & 42448\\
-        85\%  & 12463 & 18014 & 4900 & 52849\\
-        100\% & 14554 & 21179 & 5408 & 65884\\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l @{\extracolsep{\fill}} |l|l|l|l|}
+        \hline
+        Lux   & Rot   & Grün  & Blau & Weiss\\\hline
+        5\%   & 791   & 1075  & 325  & 3583 \\\hline
+        10\%  & 1541  & 2154  & 637  & 7279 \\\hline
+        20\%  & 3004  & 4240  & 1254 & 15094\\\hline
+        35\%  & 5221  & 7383  & 2185 & 27255\\\hline
+        50\%  & 7459  & 10621 & 3139 & 36158\\\hline
+        65\%  & 9618  & 13785 & 4020 & 42448\\\hline
+        85\%  & 12463 & 18014 & 4900 & 52849\\\hline
+        100\% & 14554 & 21179 & 5408 & 65884\\\hline
+    \end{tabularx}
     \caption{Gemessene Luminanz Werte des Skypanel} \label{table:luxSkypanel}
 \end{table}
 \noindent
