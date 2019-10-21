@@ -7,12 +7,12 @@ var fixture = "Arri Skypanel Mode RGBW";
 var folderDir = __dirname+"/UPRtek/";
 var measureLevels = ["5%","10%","20%","35%","50%","65%","85%","100%"];
 
-var modeCombined = true;
+var modeCombined = false;
 var colorName = "";
 if(modeCombined)
 {
     folderDir = __dirname+"/Combined/";
-    colorName = "Cyan";
+    colorName = "WarmWhite";
 
     var colorPath = folderDir+colorName;
     var files = fs.readdirSync(colorPath);
@@ -21,6 +21,10 @@ if(modeCombined)
         for(var fileI = 0; fileI < files.length; fileI++)
         {
             var fixtureName = files[fileI].split("_")[3];
+            if(!fixtureName)
+            {
+                continue;
+            }
             fixtureName = fixtureName.split(".")[0];
             var fileData = fs.readFileSync(colorPath+"/"+files[fileI],'utf8');
             var spectralData = readUPRtekCSV(fileData);
