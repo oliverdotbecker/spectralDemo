@@ -1131,7 +1131,7 @@ Aus diesen Werten und den mit dem Sensor erfassten Spektralwerten konnten nun di
     \caption{Darstellung der Sensorwerte und CIE 1931 Diagramm}
 \end{figure}
 \noindent
-\subsubsection{Erfassen der Messwerte mit dem AS7261}
+\subsubsection{Erfassen der Messwerte mit dem AS7261} \label{measuringWith7261}
 Da der AS7261 nicht als Evaluierungskit von Adafruit verfügbar war, wurde ein zweites 7262 Sensorboard von Adafruit genutzt. Der 7261 Sensor
 wurde von AMS separat bestellt. Anschießend wurde der Chip auf einem weiteren AS7262 Evaluierungs Board durch einen AS7261 ausgetauscht.\\
 Für den Betrieb benötigt die AS72xx Chip Reihe einen Serial Flash Speicher mit einer Chip spezifischen Firmware. Diese wurde bei AMS angefragt
@@ -1637,7 +1637,7 @@ Zunächst sind die charakteristischen Luminanz und Farbvalenz Werte der Emitter 
 Spektrometer erhoben, um eine qualitative Aussage über die mit den AS726x gemessene Werte treffen zu können.\\
 Die mit dem Spektrometer gemessenen Werte sind tabellarisch Tabelle \ref{table:luxSkypanel} bis \ref{table:whiteEmitterLightCan} und als Diagramme Bild
 \ref{fig:luxSkypanel} bis \ref{fig:macAdamLightCanEmitters} im Anhang zu finden.
-\subsection{Emitter Analyse pro Lampe}
+\subsection{Emitter Analyse pro Lampe} \label{emitterColorDrit}
 Hier sind zunächst die unterschiedlichen absoluten Helligkeiten jeder Lampe zu betrachten. Wo die Helligkeitsunterschiede zwischen Emittern gering sind, ist
 das Einstellen einer Farbvalenz einfacher. Hier ist beispielsweise der weiße Emitter des Skypanels problematisch, da dieser wie in Bild \ref{fig:luxSkypanel} 
 zu sehen bereits bei 5\% Steuerwert eine höhere absolute Helligkeit hat als der rote Emitter bei 20\% Steuerwert. So ist schon bei minmalen zumischen des weißen
@@ -1747,12 +1747,54 @@ Hier ist zu beobachten, dass zwar die Lampen akzeptabel bis gut abgeglichen sind
 Ellipsen deutlich von dem angestrebten Wert ab. Dies ist in Bild \ref{fig:macAdamCyan} deutlich zu erkennen.
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.8\textwidth]{images/macAdam/comparedCyan_mix.png}
+        \includegraphics[width=.9\textwidth]{images/macAdam/comparedCyan_mix.png}
     \end{center}
     \caption{MacAdam Analyse des Cyan Abgleichvorgangs} \label{fig:macAdamCyan}
 \end{figure}
 \noindent
 %// TODO: Weiter schreiben
+\subsection{Fehlerquellenanalyse}
+Aus der bisherigen Auswertung sind 3 Hauptfehlerquellen auszumachen:
+\begin{addmargin}[2em]{0em}
+    1. Fehlerhafte oder ungenaue Messdaten der Emitter\\
+    2. Nicht kompensierter Farbdrift der Emitter\\
+    3. Umrechnungsverluste des RGB Raums
+\end{addmargin}
+\subsubsection{Fehlerquelle 1 - Messdaten}
+Im Folgenden wird dargelegt, wie diese kompensiert oder behoben werden könnten.\\
+Mit einer entsprechenden Kalibrierung der Sensoren die in dieser Arbeit genutzt wurden oder anderen genaueren
+Sensoren wäre ein deutlich genauerer Abgleich verschiedener LED Lichtquellen möglich. Jedoch ist eine
+Kalibrierung immer Anwendungsspezifisch. Je breiter der Anwendungsfall definiert ist desto komplexer ist
+eine solche Kalibrierung.\\
+Wie in Kapitel \ref{measuringWith7261} behandelt ist für den AS7261 Sensor eine Kalibrierung für diese Art von
+Anwendung zwingend erforderlich.\\
+\\
+Der entscheidendste Faktor für einen guten Abgleich ist die Messdatenbasis.\\
+\\
+Ein manuelles erfassen und einlesen der Messdaten aus einem Spektrometer ist sehr zeitaufwändig. Ein in die
+Applikation integrierter Sensor, zum automatisierten erfassen der Sensordaten beschleunigt den Messprozess
+deutlich. Dies erleichtert weiter die Organisation der Messdaten, da dies direkt in der Applikation behandelt
+werden kann. Die gesicherten Messadaten des in dieser Arbeit genutzten Spektrometers wurden nach Datum und
+Uhrzeit benannt. Nach dem Messvorgang mussten diese Daten vom Nutzer gesichtet und sortiert werden um die
+einzelnen Messungen Emittern und Dimmstufen zuzuordnen.\\
+Hier brauchte ein Nutzer pro Lampe etwa fünf Minuten zum vermessen einer RGBW Lampe. Der automatisierte Prozess
+benötigt nur etwa eine Minute zum vermessen der gleichen Lampe. So ist die Zeitersparnis für einen Einsatz in der
+Praxis erheblich.
+\subsubsection{Fehlerquelle 2 - Emitterfarbdrift}
+Für das Abgleichen von zwei Lichtquellen wurde in dieser Arbeit immer der kombinierte Gamut der selektierten Lampen
+betrachtet. Dieser Gamut wurde aus den Farbvalenzen der 100 Prozent Dimmstufe des jeweiligen Emitters aufgespannt.\\
+Doch aufgrund des in Kapitel \ref{emitterColorDrit} beobachteten Farbdrifts eines Emitters über die Helligkeit müsste
+je nach Aussteuerung des jeweiligen Emitters der Gamut der Lampe, sowie der kombinierte Gamut angepasst werden.\\
+Dieses Vorgehen erzeugt jedoch die möglichkeit für Endlos Schleifen im Programmablauf, da in einer ersten Iteration
+zunächst die Lampen mit initialen kombinierten Gamut abgeglichen werden. Dann werden jedoch die Emitter durch den
+Abgleichalgorithmus anders angesteuert. So passt sich auch der Gamut der Lampe sowie der kombinierte Gamut an.\\
+So entsteht nun ein temporärer kombinierter Gamut, da dieser nur das Farbvermögen der aktuellen Emitteransteuerung
+beschreibt, nicht das Gesamte Farbvermögen. Dieser temporäre Gamut kann je nach Art der verschiebung Flächen
+außerhalb des initialen kombinierten Gamuts freigeben. Sollte der Referenzpunkt ebenfalls außerhalb des initialen
+kombinierten Gamuts liegen kann nun ein Mixpunkt mit geringerer Farbverschiebung erreicht werden. Daher beginnt
+der Abgleichzyklus von vorne.\\
+Dieses Vorgehen hat das Potenzial sich unendlich zu wiederholen. Daher wurde dieses komplexe Verfahren bisher noch
+nicht umgesetzt.\\
 {\color{red}
 Hier folgen Notizen:\\
 Analyse (stärken und Schwächen)
@@ -1770,11 +1812,7 @@ Analyse (stärken und Schwächen)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Ausblick %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Ausblick}
-Mit einer entsprechenden Kalibrierung oder anderen genaueren Sensoren wäre ein deutlich genauerer Abgleich
-verschiedener LED Lichtquellen möglich. Der entscheidendste Faktor ist die Messdatenbasis.\\
-Ein manuelles erfassen und einlesen der Messdaten aus einem Spektrometer ist sehr zeitaufwändig. Ein in die
-Applikation integrierter Sensor, zum automatisierten erfassen der Sensordaten beschleunigt den Messprozess
-deutlich.
+Mit anderen Sensoren oder einem integrierbaren Spektrometer
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Anhang %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
