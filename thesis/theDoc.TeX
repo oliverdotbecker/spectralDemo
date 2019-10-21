@@ -73,7 +73,7 @@
 \vspace{1cm}\noindent
 \begin{center}
     \huge MASTER THESIS\\
-    \huge \color{red} Vorabversion 0.97\\
+    \huge \color{red} Vorabversion 0.98\\
     \large Stand: \today
 \end{center}
 \vspace{1cm}\noindent
@@ -163,29 +163,35 @@ Darmstadt, den 30.10.2019 \hspace*{0pt}\hfill Oliver Becker
 %%%%%%%%%%%%%%%%%%%%%%%%%% Vorwort %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Vorwort}
 \addcontentsline{toc}{section}{Vorwort}
-Weltweit finden große Veranstaltungen statt. Bei allen Inszenierungen spielt das Licht eine 
-große Rolle. Egal, ob einfach nur hell oder szenisch ausgeleuchtet, bedarf es einer Steuerung 
-für diese Lichttechnik. Bühnen und Ansprüche der Veranstalter werden immer größer und komplexer. 
-So geht es über das einfache An- und Ausschalten eines Scheinwerfers schon sehr weit hinaus. 
-Heutzutage werden Lichtanlagen mit leistungsfähigen Computersystemen gesteuert, welche von 
+Weltweit finden große Veranstaltungen statt. Bei allen Inszenierungen spielt das Licht eine
+große Rolle. Egal, ob einfach nur hell oder szenisch ausgeleuchtet, bedarf es einer Steuerung
+für diese Lichttechnik. Bühnen und Ansprüche der Veranstalter werden immer größer und komplexer.
+So geht es über das einfache An- und Ausschalten eines Scheinwerfers schon sehr weit hinaus.
+Heutzutage werden Lichtanlagen mit leistungsfähigen Computersystemen gesteuert, welche von
 geschultem Personal bedient werden müssen.\\
-In der Filmindustrie spielt Licht eine große Rolle. Die Ausleuchtung eines Film-Sets entscheidet 
-auch wie die Handlung vom Betrachter wahrgenommen wird. Dies gilt sowohl für statische Szenen, 
-als auch für die zumeist hoch aufwändigen dynamischen Installationen.
-Eine der zurzeit größten Herausforderungen stellt die korrekte Farbwiedergabe der mannigfaltigen 
-Lichtquellen an einem Film-Set dar.
-Dies wird vor allem durch die unterschiedlichen chromatischen Eigenschaften von den Licht 
-emittierenden Quellen erschwert. Diese Quellen sind heute überwiegend LEDs.\\
-Als Beispiel wird hier ein Film-Set für eine Motorrad Verfolgungsszene genommen. Hier wird im 
-Hintergrund mit großen LED Kacheln der computergenerierte Hintergrund abgespielt. Mit kleinen 
-LED Streifen links und rechts neben dem im Studio aufgebauten Motorrad wird dynamisch Licht auf 
-den Schauspieler emittiert, um eine größere Dynamik zu simulieren.
-Zusätzlich wird mit kleinen Bildschirmen weiterer computergenerierter Hintergrund von vorne auf 
-das Motorrad und den Schauspieler projiziert, um realistische Spiegelungen in der 
-Windschutzscheibe und der Brille des Schauspielers zu erhalten.\\
-Alle diese aufgezählten Emitter haben zumeist alle unterschiedlichste chromatische Kennwerte 
-sofern diese überhaupt bekannt sind. Ein Abgleich dieser Quellen ist wünschenswert für ein 
-homogeneres Farbbild.
+Eine weitere Herausforderung für das Ausleuchten von zum Beispiel Fernsehstudios ist die große
+Menge von Scheinwerfern mit verschiedensten Funktionen und Einsatzbereichen. Oft besteht hier
+der Anspruch Räume, Objekte und Personen homogen und mit einem definierten Farbton aus-
+beziehungsweise anzuleuchten.\\
+Die verschiedenen Scheinwerfer besitzen heute zum überwiegenden Teil LED Lichtquellen. Diese
+wiederum unterscheiden sich ebenfalls in ihren Eigenschaften von der abgestrahlten Farbe über
+die Bauart bis zur Qualität der Farberhaltung über die Einsatzzeit.\\
+So gibt es den Bedarf in der Lichtindustrie, dass LED Lichtquellen ein gleiches Verhalten zeigen
+wenn es um Farbmischung geht, um die Bedienung so einfach wie möglich zu machen.\\
+Dies ist von den Scheinwerfern herstellerübergreifend nicht zu erwarten. So liegt es nahe in der
+Steuerungstechnik eine Lösung zu suchen.\\
+\\
+In dieser Arbeit wird betrachtet, wie man anhand von spektralen Messdaten der LED Lichtquelle der
+Scheinwerfer einen automatisierten Abgleich zwischen einem Referenzgerät und einem zweiten oder
+mehreren realisieren kann.\\
+Außerdem wird behandelt, wie diese spektralen Daten der LED Lichtquellen erhoben werden können, da
+diese Daten in der Praxis selten von Herstellen zur Verfügung gestellt werden.\\
+\\
+Diese Arbeit beschäftigt sich ebenfalls damit, welche Elemente in einer Software realisiert werden
+können um einen solchen Abgleich in einer Benutzeroberfläche nutzbar zu implementieren. Weiter
+kann mit der aus dieser Arbeit resultierenden Software Scheinwerfer per Art-Net angesteuert werden.\\
+\\
+Diese Funktionen wurden in Software in Verbindung mit Peripherie Hardware realisiert.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% MA Lighting Technology %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -197,7 +203,7 @@ und szenische Gebäudebeleuchtung. Schon Anfang der 1990er Jahre erkannten die F
 das Potenzial der elektrischen und digitalen Steuerung von Scheinwerfern und bauten die ersten
 Lichtstellpulte, sowie die zugehörigen Komponenten. Im Laufe der Jahre entwickelte sich MA zu
 einem der international führenden Unternehmen für computergesteuerte Lichtstellpulte,
-Netzwerkkomponenten und digitale Dimmer Systeme.\\
+Netzwerkkomponenten und digitale Dimmersysteme.\\
 In der Referenzliste von MA findet man viele große internationale Theater und Opernhäuser, Bands
 von AC/DC über Sting bis U2, die Eröffnungsfeier der Olympischen Spiele, den Eurovision Song
 Contest 2019 oder die Lichtinstallation zum 25. Jahrestag des Falls der Berliner Mauer 2014.\\
