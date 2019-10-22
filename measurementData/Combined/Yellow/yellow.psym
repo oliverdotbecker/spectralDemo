@@ -23,11 +23,12 @@
 <xyupvpDuvType>0
 <whiteMacAdamCircleText_Chk>1
 <userUserMacAdams_Chk>0
-<user_macAdam_Chk>0
+<user_macAdam_Chk>1
 <userUserUpVpCircle_Chk>0
 <user_UpVpCircle_Chk>0
-<macAdam_user_num_TF>
+<macAdam_user_num_TF>36,00
 <UpVpCircle_user_num_TF>
+
 <ith_macAdam_Chk>1 1
 <ith_UpVpCircle_Chk>1 0
 <ith_macAdam_Chk>2 1
@@ -101,15 +102,15 @@
 <symbol_and_color>2 0 0
 <label>2 LightCan
 <position>2 L
-<x>3 
-<y>3 
-<u'>3 
-<v'>3 
-<CCT>3 
-<Duv>3 
-<Du'v'>3 
+<x>3 0,3532
+<y>3 0,5329
+<u'>3 0,1626
+<v'>3 0,5520
+<CCT>3 N/A
+<Duv>3 0,0663
+<Du'v'>3 0,0841
 <symbol_and_color>3 0 0
-<label>3 
+<label>3 Mix Pos
 <position>3 L
 <x>4 
 <y>4 

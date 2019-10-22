@@ -1701,8 +1701,8 @@ können.
 In den Folgenden Tabellen finden Sie die ermittelten xy Koordinaten der 100\% Werte des Emitter des Skypanels. In Bild \ref{compareUPRtekAS7262} sind diese
 Werte grafisch erfasst.
 \begin{table}[H]
-    \begin{tabularx}{\textwidth}{|l @{\extracolsep{\fill}} |l|l|l|l|}
-        \hline Emitter          & Rot      & Grün     & Blau     & Weiß\\\hline
+    \begin{tabularx}{\textwidth}{|l|X|X|X|X|}
+        \hline Emitter   & Rot      & Grün     & Blau     & Weiß\\\hline
         x (UPRtek)       & 0.684398 & 0.180659 & 0.146820 & 0.441911\\\hline
         y (UPRtek)       & 0.309250 & 0.715762 & 0.037744 & 0.408204\\\hline
         x (AS7262)       & 0.6148   & 0.301    & 0.1598   & 0.4474\\\hline
@@ -1711,6 +1711,7 @@ Werte grafisch erfasst.
     \end{tabularx}
     \caption{xy Koordinaten der 100\% Ansteuerung der Emitter des Skypanels}
 \end{table}
+\noindent
 Anhand dieser enormen Abweichungen wurde entschieden, dass die Messwerte des AS7262 für diesen Zweck zu ungenau sind. Somit ist der Sensor für diese Anwendung
 ungeeignet. Somit wurden in der Applikation die Messwerte des Spektrometers verwendet als Datenbasis für die im Folgenden durchgeführten Abgleichvorgänge
 verwendet.
@@ -1741,7 +1742,7 @@ CIE 1931 Koordinaten x = 0.1624 und y = 0.34.
 \end{figure}
 \noindent
 \begin{table}[H]
-    \begin{tabularx}{\textwidth}{|l @{\extracolsep{\fill}} |l|l|l|}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
         \hline           & x        & y        & MacAdam Ellipsen\\\hline
         Vorberechnet     & 0.1624   & 0.34     & > 36\\\hline
         Skypanel (Ref)   & 0,1528   & 0,1694   & -\\\hline
@@ -1820,7 +1821,8 @@ Analyse (stärken und Schwächen)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Ausblick %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Ausblick}
-Mit anderen Sensoren oder einem integrierbaren Spektrometer
+In dieser Arbeit wurde festgestellt, dass die spektralen Messdaten das Herzstück eines Abgleiches zwischen
+zwei LED Lichtquellen ist.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Anhang %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1831,7 +1833,7 @@ Mit anderen Sensoren oder einem integrierbaren Spektrometer
 \subsection{Messungen}
 Die Ansteuerungswerte in Prozent setzten sich wie folgt in DMX Werten um:
 \begin{table}[H]
-    \begin{tabularx}{\textwidth}{|l @{\extracolsep{\fill}} |l|l|l|l|l|l|l|l|}
+    \begin{tabularx}{\textwidth}{|l|X|X|X|X|X|X|X|X|}
         \hline
         Prozent [\%] & 5  & 10 & 20 & 35 & 50  & 65  & 85  & 100\\\hline
         DMX          & 12 & 25 & 51 & 89 & 127 & 165 & 216 & 255\\\hline
@@ -1843,9 +1845,9 @@ Die Ansteuerungswerte in Prozent setzten sich wie folgt in DMX Werten um:
 Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 \textbf{Arri SkyPanel RGBW Mode}
 \begin{table}[H]
-    \begin{tabularx}{\textwidth}{|l @{\extracolsep{\fill}} |l|l|l|l|}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|X|}
         \hline
-        Lux   & Rot   & Grün  & Blau & Weiss\\\hline
+        Lux   & Rot   & Grün  & Blau & Weiß \\\hline
         5\%   & 791   & 1075  & 325  & 3583 \\\hline
         10\%  & 1541  & 2154  & 637  & 7279 \\\hline
         20\%  & 3004  & 4240  & 1254 & 15094\\\hline
@@ -1894,42 +1896,46 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 \end{figure}
 \noindent
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
-        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Rot)          & 0,6844 & 0,684  & 0,6841 & 0,6834 & 0,6835 & 0,6826 & 0,6813 & 0,679  \\
-        y (Rot)          & 0,3092 & 0,3094 & 0,3096 & 0,3097 & 0,3101 & 0,3101 & 0,3104 & 0,3107 \\
-        MacAdam Ellipsen & -      & > 1    & > 1    & > 1    & > 1    & > 1    & > 2    & > 3    \\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l|X|X|X|X|X|X|X|X|}
+        \hline
+        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\\hline
+        x (Rot)          & 0,6844 & 0,684  & 0,6841 & 0,6834 & 0,6835 & 0,6826 & 0,6813 & 0,679  \\\hline
+        y (Rot)          & 0,3092 & 0,3094 & 0,3096 & 0,3097 & 0,3101 & 0,3101 & 0,3104 & 0,3107 \\\hline
+        MacAdam Ellipsen & -      & > 1    & > 1    & > 1    & > 1    & > 1    & > 2    & > 3    \\\hline
+    \end{tabularx}
     \caption{Farbortverschiebung des roten Skypanel Emitters}
 \end{table}
 \noindent
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
-        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Grün)         & 0,1809 & 0,1787 & 0,1783 & 0,1783 & 0,179  & 0,1792 & 0,1799 & 0,1807 \\
-        y (Grün)         & 0,7084 & 0,7136 & 0,7151 & 0,7165 & 0,716  & 0,7165 & 0,7162 & 0,7158 \\
-        MacAdam Ellipsen & -      & > 1    & > 1    & > 1    & > 1    & > 1    & > 1    & > 1    \\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l|X|X|X|X|X|X|X|X|}
+        \hline
+        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\\hline
+        x (Grün)         & 0,1809 & 0,1787 & 0,1783 & 0,1783 & 0,179  & 0,1792 & 0,1799 & 0,1807 \\\hline
+        y (Grün)         & 0,7084 & 0,7136 & 0,7151 & 0,7165 & 0,716  & 0,7165 & 0,7162 & 0,7158 \\\hline
+        MacAdam Ellipsen & -      & > 1    & > 1    & > 1    & > 1    & > 1    & > 1    & > 1    \\\hline
+    \end{tabularx}
     \caption{Farbortverschiebung des grünen Skypanel Emitters}
 \end{table}
 \noindent
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
-        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Blau)         & 0,1483 & 0,1476 & 0,1476 & 0,1474 & 0,1474 & 0,1474 & 0,147  & 0,1468 \\
-        y (Blau)         & 0,0358 & 0,0348 & 0,0347 & 0,0345 & 0,0345 & 0,0351 & 0,0366 & 0,0377 \\
-        MacAdam Ellipsen & -      & > 2    & < 3    & < 3    & < 3    & < 3    & < 3    & < 3    \\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l|X|X|X|X|X|X|X|X|}
+        \hline
+        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\\hline
+        x (Blau)         & 0,1483 & 0,1476 & 0,1476 & 0,1474 & 0,1474 & 0,1474 & 0,147  & 0,1468 \\\hline
+        y (Blau)         & 0,0358 & 0,0348 & 0,0347 & 0,0345 & 0,0345 & 0,0351 & 0,0366 & 0,0377 \\\hline
+        MacAdam Ellipsen & -      & > 2    & < 3    & < 3    & < 3    & < 3    & < 3    & < 3    \\\hline
+    \end{tabularx}
     \caption{Farbortverschiebung des blauen Skypanel Emitters}
 \end{table}
 \noindent
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
-        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Weiß)         & 0,4458 & 0,4449 & 0,444  & 0,4432 & 0,4428 & 0,4425 & 0,4423 & 0,4419 \\
-        y (Weiß)         & 0,4113 & 0,411  & 0,4102 & 0,4096 & 0,4091 & 0,4089 & 0,4086 & 0,4082 \\
-        MacAdam Ellipsen & -      & > 1    & > 1    & > 1    & > 1    & 1      & > 2    & > 2    \\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l|X|X|X|X|X|X|X|X|}
+        \hline
+        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\\hline
+        x (Weiß)         & 0,4458 & 0,4449 & 0,444  & 0,4432 & 0,4428 & 0,4425 & 0,4423 & 0,4419 \\\hline
+        y (Weiß)         & 0,4113 & 0,411  & 0,4102 & 0,4096 & 0,4091 & 0,4089 & 0,4086 & 0,4082 \\\hline
+        MacAdam Ellipsen & -      & > 1    & > 1    & > 1    & > 1    & 1      & > 2    & > 2    \\\hline
+    \end{tabularx}
     \caption{Farbortverschiebung des weißen Skypanel Emitters}
 \end{table}
 \noindent
@@ -1937,17 +1943,18 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 
 \textbf{Robe LEDWash 300}
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llll}
-        Lux   & Rot   & Grün  & Blau & Weiss\\
-        5\%   & 513   & 942   & 199  & 1384 \\
-        10\%  & 1384  & 2238  & 498  & 3126 \\
-        20\%  & 2811  & 4553  & 928  & 7058 \\
-        35\%  & 4879  & 8090  & 1677 & 19883\\
-        50\%  & 6910  & 11667 & 2650 & 15640\\
-        65\%  & 8927  & 14985 & 3249 & 26787\\
-        85\%  & 12662 & 20220 & 3962 & 45830\\
-        100\% & 14407 & 22931 & 4383 & 43309\\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|X|}
+        \hline
+        Lux   & Rot   & Grün  & Blau & Weiß \\\hline
+        5\%   & 513   & 942   & 199  & 1384 \\\hline
+        10\%  & 1384  & 2238  & 498  & 3126 \\\hline
+        20\%  & 2811  & 4553  & 928  & 7058 \\\hline
+        35\%  & 4879  & 8090  & 1677 & 19883\\\hline
+        50\%  & 6910  & 11667 & 2650 & 15640\\\hline
+        65\%  & 8927  & 14985 & 3249 & 26787\\\hline
+        85\%  & 12662 & 20220 & 3962 & 45830\\\hline
+        100\% & 14407 & 22931 & 4383 & 43309\\\hline
+    \end{tabularx}
     \caption{Gemessene Luminanz Werte des LEDWash300} \label{table:luxLedWash}
 \end{table}
 \noindent
@@ -1988,42 +1995,46 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 \noindent
 \clearpage
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
-        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Rot)          & 0,6833 & 0,688 & 0,6896  & 0,6899 & 0,6896 & 0,6907 & 0,6912 & 0,6909 \\
-        y (Rot)          & 0,3042 & 0,3034 & 0,3028 & 0,3031 & 0,3028 & 0,3023 & 0,3029 & 0,3028 \\
-        MacAdam Ellipsen & -      & > 1    & > 1    & > 1    & > 1    & > 1    & > 2    & < 3    \\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l|X|X|X|X|X|X|X|X|}
+        \hline
+        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\\hline
+        x (Rot)          & 0,6833 & 0,688 & 0,6896  & 0,6899 & 0,6896 & 0,6907 & 0,6912 & 0,6909 \\\hline
+        y (Rot)          & 0,3042 & 0,3034 & 0,3028 & 0,3031 & 0,3028 & 0,3023 & 0,3029 & 0,3028 \\\hline
+        MacAdam Ellipsen & -      & > 1    & > 1    & > 1    & > 1    & > 1    & > 2    & < 3    \\\hline
+    \end{tabularx}
     \caption{Farbortverschiebung des roten LEDWash Emitters}
 \end{table}
 \noindent
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
-        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Grün)         & 0,1803 & 0,1707 & 0,1668 & 0,1675 & 0,1641 & 0,1661 & 0,165 & 0,1658  \\
-        y (Grün)         & 0,6916 & 0,6921 & 0,6906 & 0,6905 & 0,6886 & 0,6882 & 0,6885 & 0,6874 \\
-        MacAdam Ellipsen & -      & > 1    & > 1    & > 1    & > 1    & > 1    & > 2    & > 5    \\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l|X|X|X|X|X|X|X|X|}
+        \hline
+        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\\hline
+        x (Grün)         & 0,1803 & 0,1707 & 0,1668 & 0,1675 & 0,1641 & 0,1661 & 0,165 & 0,1658  \\\hline
+        y (Grün)         & 0,6916 & 0,6921 & 0,6906 & 0,6905 & 0,6886 & 0,6882 & 0,6885 & 0,6874 \\\hline
+        MacAdam Ellipsen & -      & > 1    & > 1    & > 1    & > 1    & > 1    & > 2    & > 5    \\\hline
+    \end{tabularx}
     \caption{Farbortverschiebung des grünen LEDWash Emitters}
 \end{table}
 \noindent
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
-        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Blau)         & 0,1539 & 0,1539 & 0,1542 & 0,1536 & 0,1538 & 0,1537 & 0,1533 & 0,1528 \\
-        y (Blau)         & 0,0264 & 0,0245 & 0,0242 & 0,0251 & 0,0247 & 0,0247 & 0,0262 & 0,027  \\
-        MacAdam Ellipsen & -      & > 5    & > 5    & > 5    & > 5    & > 5    & > 5    & > 10   \\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l|X|X|X|X|X|X|X|X|}
+        \hline
+        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\\hline
+        x (Blau)         & 0,1539 & 0,1539 & 0,1542 & 0,1536 & 0,1538 & 0,1537 & 0,1533 & 0,1528 \\\hline
+        y (Blau)         & 0,0264 & 0,0245 & 0,0242 & 0,0251 & 0,0247 & 0,0247 & 0,0262 & 0,027  \\\hline
+        MacAdam Ellipsen & -      & > 5    & > 5    & > 5    & > 5    & > 5    & > 5    & > 10   \\\hline
+    \end{tabularx}
     \caption{Farbortverschiebung des blauen LEDWash Emitters}
 \end{table}
 \noindent
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
-        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Weiß)         & 0,3197 & 0,3177 & 0,3175 & 0,3173 & 0,3163 & 0,3181 & 0,316  & 0,3183 \\
-        y (Weiß)         & 0,336  & 0,3311 & 0,3321 & 0,3268 & 0,3266 & 0,3337 & 0,3235 & 0,3311 \\
-        MacAdam Ellipsen & -      & > 3    & > 2    & > 2    & > 2    & > 2    & > 1    & > 2    \\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l|X|X|X|X|X|X|X|X|}
+        \hline
+        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\\hline
+        x (Weiß)         & 0,3197 & 0,3177 & 0,3175 & 0,3173 & 0,3163 & 0,3181 & 0,316  & 0,3183 \\\hline
+        y (Weiß)         & 0,336  & 0,3311 & 0,3321 & 0,3268 & 0,3266 & 0,3337 & 0,3235 & 0,3311 \\\hline
+        MacAdam Ellipsen & -      & > 3    & > 2    & > 2    & > 2    & > 2    & > 1    & > 2    \\\hline
+    \end{tabularx}
     \caption{Farbortverschiebung des weißen LEDWash Emitters}
 \end{table}
 \noindent
@@ -2031,17 +2042,18 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 
 \textbf{Ape Labs LightCan}
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llll}
-        Lux   & Rot  & Grün  & Blau & Weiss\\
-        5\%   & 34   & 37    & 23   & 19  \\
-        10\%  & 63   & 75    & 33   & 57  \\
-        20\%  & 164  & 209   & 69   & 209 \\
-        35\%  & 452  & 594   & 174  & 616 \\
-        50\%  & 764  & 1196  & 343  & 1227\\
-        65\%  & 1467 & 1975  & 551  & 2030\\
-        85\%  & 2400 & 3313  & 940  & 3427\\
-        100\% & 3112 & 4512  & 1290 & 4695\\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|X|}
+        \hline
+        Lux   & Rot  & Grün  & Blau & Weiß\\\hline
+        5\%   & 34   & 37    & 23   & 19  \\\hline
+        10\%  & 63   & 75    & 33   & 57  \\\hline
+        20\%  & 164  & 209   & 69   & 209 \\\hline
+        35\%  & 452  & 594   & 174  & 616 \\\hline
+        50\%  & 764  & 1196  & 343  & 1227\\\hline
+        65\%  & 1467 & 1975  & 551  & 2030\\\hline
+        85\%  & 2400 & 3313  & 940  & 3427\\\hline
+        100\% & 3112 & 4512  & 1290 & 4695\\\hline
+    \end{tabularx}
     \caption{Gemessene Luminanz Werte der LightCan} \label{table:luxLightCan}
 \end{table}
 \begin{figure}[H]
@@ -2080,42 +2092,46 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 \end{figure}
 \noindent
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
-        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Rot)          & 0,5254 & 0,6009 & 0,6563 & 0,6787 & 0,6787 & 0,6875 & 0,6897 & 0,6908 \\
-        y (Rot)          & 0,3216 & 0,3138 & 0,3075 & 0,3049 & 0,3049 & 0,3031 & 0,3022 & 0,3014 \\
-        MacAdam Ellipsen & -      & > 1    & > 2    & > 4    & > 6    & < 6    & < 6    & < 6    \\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l|X|X|X|X|X|X|X|X|}
+        \hline
+        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\\hline
+        x (Rot)          & 0,5254 & 0,6009 & 0,6563 & 0,6787 & 0,6787 & 0,6875 & 0,6897 & 0,6908 \\\hline
+        y (Rot)          & 0,3216 & 0,3138 & 0,3075 & 0,3049 & 0,3049 & 0,3031 & 0,3022 & 0,3014 \\\hline
+        MacAdam Ellipsen & -      & > 1    & > 2    & > 4    & > 6    & < 6    & < 6    & < 6    \\\hline
+    \end{tabularx}
     \caption{Farbortverschiebung des roten LightCan Emitters}
 \end{table}
 \noindent
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
-        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Grün)         & 0,2572 & 0,2038 & 0,1584 & 0,1383 & 0,1331 & 0,1328 & 0,1338 & 0,1364 \\
-        y (Grün)         & 0,4691 & 0,5558 & 0,6319 & 0,6661 & 0,6759 & 0,6802 & 0,6823 & 0,6816 \\
-        MacAdam Ellipsen & -      & > 1    & > 2    & > 2    & > 3    & 8      & < 8    & < 8    \\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l|X|X|X|X|X|X|X|X|}
+        \hline
+        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\\hline
+        x (Grün)         & 0,2572 & 0,2038 & 0,1584 & 0,1383 & 0,1331 & 0,1328 & 0,1338 & 0,1364 \\\hline
+        y (Grün)         & 0,4691 & 0,5558 & 0,6319 & 0,6661 & 0,6759 & 0,6802 & 0,6823 & 0,6816 \\\hline
+        MacAdam Ellipsen & -      & > 1    & > 2    & > 2    & > 3    & 8      & < 8    & < 8    \\\hline
+    \end{tabularx}
     \caption{Farbortverschiebung des grünen LightCan Emitters}
 \end{table}
 \noindent
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
-        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Blau)         & 0,1959 & 0,165  & 0,1488 & 0,1433 & 0,1417 & 0,1413 & 0,1406 & 0,1399 \\
-        y (Blau)         & 0,1296 & 0,0816 & 0,0563 & 0,0483 & 0,0466 & 0,0456 & 0,0462 & 0,0471 \\
-        MacAdam Ellipsen & -      & > 2    & > 4    & > 5    & 9      & < 9    & < 9    & < 9    \\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l|X|X|X|X|X|X|X|X|}
+        \hline
+        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\\hline
+        x (Blau)         & 0,1959 & 0,165  & 0,1488 & 0,1433 & 0,1417 & 0,1413 & 0,1406 & 0,1399 \\\hline
+        y (Blau)         & 0,1296 & 0,0816 & 0,0563 & 0,0483 & 0,0466 & 0,0456 & 0,0462 & 0,0471 \\\hline
+        MacAdam Ellipsen & -      & > 2    & > 4    & > 5    & 9      & < 9    & < 9    & < 9    \\\hline
+    \end{tabularx}
     \caption{Farbortverschiebung des blauen LightCan Emitters}
 \end{table}
 \noindent
 \begin{table}[H]
-    \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} llllllll}
-        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\
-        x (Weiß)         & 0,2777 & 0,2852 & 0,2879 & 0,2871 & 0,2869 & 0,286  & 0,2865 & 0,2865 \\
-        y (Weiß)         & 0,2897 & 0,286  & 0,284  & 0,2821 & 0,2826 & 0,2821 & 0,2812 & 0,2816 \\
-        MacAdam Ellipsen & -      & > 1    & > 1    & > 1    & > 1    & > 1    & > 4    & < 4    \\
-    \end{tabular*}
+    \begin{tabularx}{\textwidth}{|l|X|X|X|X|X|X|X|X|}
+        \hline
+        Steuerwert [\%]  & 100    & 85     & 65     & 50     & 35     & 20     & 10     & 5      \\\hline
+        x (Weiß)         & 0,2777 & 0,2852 & 0,2879 & 0,2871 & 0,2869 & 0,286  & 0,2865 & 0,2865 \\\hline
+        y (Weiß)         & 0,2897 & 0,286  & 0,284  & 0,2821 & 0,2826 & 0,2821 & 0,2812 & 0,2816 \\\hline
+        MacAdam Ellipsen & -      & > 1    & > 1    & > 1    & > 1    & > 1    & > 4    & < 4    \\\hline
+    \end{tabularx}
     \caption{Farbortverschiebung des weißen LightCan Emitters} \label{table:whiteEmitterLightCan}
 \end{table}
 \noindent
@@ -2152,7 +2168,23 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
     \end{subfigure}
     \caption{Ansichten der Applikation für die gelb Mischung}
 \end{figure}
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=\textwidth]{images/macAdam/comparedYellow.png}
+    \end{center}
+    \caption{MacAdam Analyse des Gelb Abgleichvorgangs}
+\end{figure}
 \noindent
+\begin{table}[H]
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline           & x        & y        & MacAdam Ellipsen\\\hline
+        Vorberechnet     & 0.1624   & 0.34     & > 36\\\hline
+        Skypanel (Ref)   & 0,4016   & 0,4981   & -\\\hline
+        LEDWash 300      & 0,4565   & 0,4716   & > 36\\\hline
+        LightCan         & 0,4521   & 0,474    & < 36\\\hline
+    \end{tabularx}
+    \caption{xy Koordinaten der Lampen mit der Mischfarbe Gelb}
+\end{table}
 \clearpage
 \textbf{Skypanel Referenz - Warm Weiß - 100\% Weiß}
 \begin{figure}[H]
@@ -2173,9 +2205,25 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
         \includegraphics[width=\textwidth]{images/app_mix_warmWhite_fixtureSheet.png}
         \caption{Fixture Sheet}
     \end{subfigure}
-    \caption{Ansichten der Applikation für die warm weiß Mischung}
+    \caption{Ansichten der Applikation für die warm Weiß Mischung}
+\end{figure}
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.9\textwidth]{images/macAdam/comparedWarmWhite.png}
+    \end{center}
+    \caption{MacAdam Analyse des warm Weiß Abgleichvorgangs}
 \end{figure}
 \noindent
+\begin{table}[H]
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline           & x        & y        & MacAdam Ellipsen\\\hline
+        Vorberechnet     & 0.4419   & 0.4082   & > 33\\\hline
+        Skypanel (Ref)   & 0,4418   & 0,4073   & -\\\hline
+        LEDWash 300      & 0,5447   & 0,3726   & >> 50\\\hline
+        LightCan         & 0,5379   & 0,3786   & >> 50\\\hline
+    \end{tabularx}
+    \caption{xy Koordinaten der Lampen mit der Mischfarbe warm Weiß}
+\end{table}
 \clearpage
 
 \subsection{Abbildungsverzeichnis}
