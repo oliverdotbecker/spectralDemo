@@ -28,6 +28,7 @@
 <user_UpVpCircle_Chk>0
 <macAdam_user_num_TF>50,00
 <UpVpCircle_user_num_TF>33,00
+
 <ith_macAdam_Chk>1 0
 <ith_UpVpCircle_Chk>1 0
 <ith_macAdam_Chk>2 1
@@ -72,15 +73,15 @@
 <showGamut>10 0
 <showGamut>11 0
 <x>0 0,4418
-<y>0 0,4981
-<u'>0 0,2183
-<v'>0 0,5539
-<CCT>0 3553
-<Duv>0 0,0333
-<Du'v'>0 0,0465
+<y>0 0,4081
+<u'>0 0,2520
+<v'>0 0,5237
+<CCT>0 2952
+<Duv>0 0,0009
+<Du'v'>0 0,0014
 <symbol_and_color>0 0 0
 <label>0 Skypanel
-<position>0 L
+<position>0 R
 <x>1 0,5447
 <y>1 0,3726
 <u'>1 0,3414

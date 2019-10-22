@@ -1760,7 +1760,10 @@ Ellipsen deutlich von dem angestrebten Wert ab. Dies ist in Bild \ref{fig:macAda
     \end{center}
     \caption{MacAdam Analyse des Cyan Abgleichvorgangs} \label{fig:macAdamCyan}
 \end{figure}
-\noindent
+\subsubsection{Gelb und warm Weiß}
+Grafiken und Tabellen zu diesen Abgleichvorgängen sind im Anhang in Kapitel \ref{equalizationMeasurments} zu finden. Auch bei der Messung des gelben Mischtons ist eine erhebliche Diskrepanz zwischen dem vorberechneten Mixpunkt und dem Referenzgerät zu beobachten (Bild \ref{fig:macAdamYellow}). Weiter ist bei beiden
+Mischfarben hier zu beobachten, dass die Farborte der abzugleichenden Geräte ebenfalls fern ab des Farborts des Referenzgeräts liegen. Jedoch liegen die Farborte
+der abzugleichenden Geräte sehr nahe beieinander.
 %// TODO: Weiter schreiben
 \subsection{Fehlerquellenanalyse}
 Aus der bisherigen Auswertung sind 3 Hauptfehlerquellen auszumachen:
@@ -1804,6 +1807,7 @@ kombinierten Gamuts liegen kann nun ein Mixpunkt mit geringerer Farbverschiebung
 der Abgleichzyklus von vorne.\\
 Dieses Vorgehen hat das Potenzial sich unendlich zu wiederholen. Daher wurde dieses komplexe Verfahren bisher noch
 nicht umgesetzt.\\
+%// TODO: Weiter schreiben
 {\color{red}
 Hier folgen Notizen:\\
 Analyse (stärken und Schwächen)
@@ -1823,6 +1827,7 @@ Analyse (stärken und Schwächen)
 \section{Ausblick}
 In dieser Arbeit wurde festgestellt, dass die spektralen Messdaten das Herzstück eines Abgleiches zwischen
 zwei LED Lichtquellen ist.
+%// TODO: Weiter schreiben
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Anhang %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2146,7 +2151,7 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 \end{figure}
 \clearpage
 
-\subsubsection{Messungen von Mischfarben}
+\subsubsection{Messungen von Mischfarben} \label{equalizationMeasurments}
 \textbf{Skypanel Referenz - Gelb - 100\% Rot 100\% Grün}
 \begin{figure}[H]
     \begin{center}
@@ -2172,7 +2177,7 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
     \begin{center}
         \includegraphics[width=\textwidth]{images/macAdam/comparedYellow.png}
     \end{center}
-    \caption{MacAdam Analyse des Gelb Abgleichvorgangs}
+    \caption{MacAdam Analyse des Gelb Abgleichvorgangs} \label{fig:macAdamYellow}
 \end{figure}
 \noindent
 \begin{table}[H]
@@ -2217,7 +2222,7 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
 \begin{table}[H]
     \begin{tabularx}{\textwidth}{|X|X|X|X|}
         \hline           & x        & y        & MacAdam Ellipsen\\\hline
-        Vorberechnet     & 0.4419   & 0.4082   & > 33\\\hline
+        Vorberechnet     & 0.4419   & 0.4082   & \textasciitilde 0\\\hline
         Skypanel (Ref)   & 0,4418   & 0,4073   & -\\\hline
         LEDWash 300      & 0,5447   & 0,3726   & >> 50\\\hline
         LightCan         & 0,5379   & 0,3786   & >> 50\\\hline
