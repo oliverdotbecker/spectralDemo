@@ -169,19 +169,19 @@ So geht es über das einfache An- und Ausschalten eines Scheinwerfers schon sehr
 Heutzutage werden Lichtanlagen mit leistungsfähigen Computersystemen gesteuert, welche von
 geschultem Personal bedient werden müssen.\\
 Eine weitere Herausforderung für das Ausleuchten von zum Beispiel Fernsehstudios ist die große
-Menge von Scheinwerfern mit verschiedensten Funktionen und Einsatzbereichen. Oft besteht hier
-der Anspruch Räume, Objekte und Personen homogen und mit einem definierten Farbton aus-
+Menge an Scheinwerfern mit verschiedensten Funktionen und Einsatzbereichen. Oft besteht hier
+der Anspruch, Räume, Objekte und Personen homogen und mit einem definierten Farbton aus-
 beziehungsweise anzuleuchten.\\
 Die verschiedenen Scheinwerfer besitzen heute zum überwiegenden Teil LED-Lichtquellen. Diese
 wiederum unterscheiden sich ebenfalls in ihren Eigenschaften von der abgestrahlten Farbe über
 die Bauart bis zur Qualität der Farberhaltung über die Einsatzzeit.\\
 So gibt es den Bedarf in der Lichtindustrie, dass LED-Lichtquellen ein gleiches Verhalten zeigen
 wenn es um Farbmischung geht, um die Bedienung so einfach wie möglich zu machen.\\
-Dies ist von den Scheinwerfern herstellerübergreifend nicht zu erwarten. So liegt es nahe in der
+Dies ist von den Scheinwerfern herstellerübergreifend nicht zu erwarten. So liegt es nahe, in der
 Steuerungstechnik eine Lösung zu suchen.\\
 \\
 In dieser Arbeit wird betrachtet, wie man anhand von spektralen Messdaten der LED-Lichtquelle der
-Scheinwerfer einen automatisierten Abgleich zwischen einem Referenzgerät und einem zweiten oder
+Scheinwerfer einen automatisierten Abgleich zwischen einem Referenzgerät und einem zweiten Gerät oder
 mehreren realisieren kann.\\
 Außerdem wird behandelt, wie diese spektralen Daten der LED-Lichtquellen erhoben werden können, da
 diese Daten in der Praxis selten von Herstellern zur Verfügung gestellt werden.\\
@@ -289,11 +289,11 @@ mit den Spezifikationen des \ac{cie} 1931 Standards.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Grundlagen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Grundlagen}
-In dieser Arbeit werden das Abgleichen von LED-Lichtquellen erforscht. Diese funktionalität soll später in der
+In dieser Arbeit wird das Abgleichen von LED-Lichtquellen erforscht. Diese funktionalität soll später in der
 grandMA3 Applikation von MA Lighting verwendet werden.\\
 Für eine erste Überprüfung geeigneter Hardware wurde mit einer kleinen Demo Applikation gearbeitet. Diese wurde
 in JavaScript und \ac{html} mit Hilfe des Electron Frameworks erstellt.\\
-Weiter wird diese Applikation für die Ausgabe von \ac{dmx} genutzt, sowie für erste Implementierung des Abgeichs.\\
+Weiter wird diese Applikation für die Ausgabe von \ac{dmx} genutzt, sowie für erste Implementierung des Abgleichs.\\
 Im Folgenden werden die hier verwendeten Protokolle, Programme und Frameworks dargelegt.
 
 \subsection{DMX}
@@ -312,7 +312,7 @@ Schnittstellenstandard.
 \vspace{-.3cm}
 \noindent
 Das eigentliche Signal wird dabei seriell auf einem Leitungspaar symmetrisch übertragen - auf der
-einen Leitung mit invertierten und auf der anderen mit nichtinvertiertem Pegel. Da sich externe 
+einen Leitung mit invertiertem und auf der anderen mit nichtinvertiertem Pegel. Da sich externe 
 Einstreuungen auf beide Datenleitungen gleichmäßig auswirken und am Empfänger nicht das Pegelniveau,
 sondern die Pegeldifferenz ausgewertet wird, ist das Signal so weniger störungsempfindlich.
 Das ermöglicht laut DMX Standard \cite{dmxstandard} bis zu 1200 m lange Übertragungsstrecken und eine
@@ -410,7 +410,7 @@ lediglich ArtDmx Pakete. Diese Pakete transportieren DMX Daten. Hier ist der Auf
 \clearpage
 
 \subsection{HTML, JavaScript, CSS}
-\ac{html} ist eine Spreche zur Strukturbeschreibung. Sie ist an den \ac{xml} Standard angelehnt. \ac{html}
+\ac{html} ist eine Sprache zur Strukturbeschreibung. Sie ist an den \ac{xml} Standard angelehnt. \ac{html}
 wird hauptsächlich in der Webentwicklung verwendet, kann jedoch auch für webgestützte Desktopapplikationen
 genutzt werden.\\
 Die Sprache enthält grundlegende Elemente zur Beschreibung von Tabellen, Einbindung von Medieninhalten, sowie
@@ -851,7 +851,7 @@ ein breitbandiges Abstrahlverhalten.
 %%%%%%%%%%%%%%%%%%%%%%%%%% Lichtquellen in der Veranstaltungstechnik %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lichtquellen in der Veranstaltungstechnik}
 Für die Veranstaltungstechnik ist künstliches Licht nahezu unverzichtbar. Von der Grundausleuchtung in einem Theater bis zum Effektlicht
-auf Kleinveranstaltungen. In den frühen Jahren der großen Konzerte wurde die Bühne hauptsächlich mit Scheinwerfern mit Glühfaden-Leuchtmitteln beleuchtet.
+auf Kleinveranstaltungen. In den frühen Jahren der großen Konzerte wurde die Bühne hauptsächlich von Scheinwerfern mit Glühfaden-Leuchtmitteln beleuchtet.
 Diese Form der Beleuchtung wurde in der Veranstaltungstechnik als Kunstlicht bezeichnet.\\
 Weiter werden vornehmlich in Theatern, sowie Film- und Fernseherproduktion Tageslichtscheinwerfer benutzt. Tageslichtleuchtmittel
 unterscheiden sich in der Art der Lichterzeugung gegenüber Glühlicht. Hier kommen anstatt eines Glühfadens zwei Elektroden in einer
@@ -886,12 +886,12 @@ Anzahl von konventionellen \ac{par} Scheinwerfern eingesetzt werden, da schon mi
 100.000 Watt zur Verfügung stehen müssten, um alle zur gleichen Zeit zu betreiben. Dies war in der Regel nicht der Fall. Dennoch wurden in der
 Vergangenheit bei Großveranstaltungen solche Stückzahlen in Bühnen verbaut und dies nicht als einziger Scheinwerfertyp.
 Denn hier hat die LED einen weiteren Vorteil zu damals.\\
-Früher wurden um eine Bühne in verschiedenen Farben auszuleuchten mehrere \ac{par}s benötigt. Um nur rot, grün, blau und weiß leuchten zu
+Um eine Bühne in verschiedenen Farben auszuleuchten, wurden früher mehrere \ac{par}s benötigt. Um nur rot, grün, blau und weiß leuchten zu
 können, benötigte man vier \ac{par}s. Drei davon mit einer jeweiligen Farbfolie vor dem Lichtaustritt. Farbfolien nutzen das Konzept der
 subtraktiven Farbmischung. Es werden vor eine in der Regel weiße Lichtquelle hitzebeständige Folien gespannt, welche nur bestimmte Teile des 
 Lichtspektrums durchlassen.\\
 Dadurch war die Gesamtleistung aller eingesetzten Scheinwerfer früher deutlich größer als dem Licht für die Veranstaltung zugedacht war. Doch
-da die Lampen für die verschieden Farben nie alle zur gleichen Zeit an waren, war dies nur ein Problem im haushalten mit der zur verfügungstehenden
+da die Lampen für die verschieden Farben nie alle zur gleichen Zeit an waren, war dies nur ein Problem des sparsamen Einsatzes der zur verfügungstehenden
 Leistung.\\
 Mit \ac{led} Scheinwerfern gibt es dieses Problem heute kaum mehr. Die Scheinwerfer können durch das Verbauen von mehrfarbigen \ac{led}s (siehe
 \ref{colormixing}) in einem \ac{led} \ac{par} mit additiver Farbmischung ein großes Repertoire an Farben bereitstellen.\\
@@ -901,7 +901,7 @@ auf einer auftreffenden Fläche wie dem Boden immer einzelne nur rote oder nur g
 später gelöst, indem mehrere \ac{led}s in einen Chip integriert wurden, und vor jeden dieser \ac{led}-Chips eine Streulinse gesetzt wurde.
 Somit konnte ein deutlich homogeneres Abstrahlverhalten erreicht werden.\\
 Dennoch sind die Traversen auf den Großveranstaltungen voller geworden gegenüber früher, da die Anzahl von Geräteklassen der Scheinwerfer mit verschidenen
-Einsatzmöglichkeiten sich in jüngerer Vergangenheit erweitert hat. Zur flexibilität einer Lichtinstallation werden heute oft mehrere Geräteklassen wie Spot,
+Einsatzmöglichkeiten sich in jüngerer Vergangenheit erweitert hat. Zur Flexibilität einer Lichtinstallation werden heute oft mehrere Geräteklassen wie Spot,
 Wash und Beam Geräte in großen Mengen eingesetzt. Weiter nimmt der Einsatz von LED Videowänden und Projektionsflächen in den letzten Jahren zu.
 \clearpage
 
@@ -959,7 +959,7 @@ werden. Außerdem kann manuell am Gerät auch eine xyY \ac{cie} Farbe ohne exter
 Bei einer Ansteuerung per DMX oder Art-Net kann am Gerät auch abgelesen werden, welche xyY Werte das Gerät aus der Ansteuerung ermittelt,
 und versucht zu emittieren.
 \subsection{Messgerät MK350 LED}
-Als Referenz Messgerät zu dem vergleichsweisen niedrigpreisigen Sensoren wurde das bei MA Lighting bereits vorhandene Spektralmessgerät
+Als Referenzmessgerät zu dem vergleichsweisen niedrigpreisigen Sensoren wurde das bei MA Lighting bereits vorhandene Spektralmessgerät
 "'MK350 LED"' der Firma UPRtek genutzt.\\
 \begin{figure}[H]
     \centering
@@ -1029,8 +1029,8 @@ allerdings keine Verwendung.\\
 Die AT Schnittstelle stellt verschiedenste Informationen zur Verfügung. Zunächst kann mit dem Befehl "'ATDATA"' die Sensorwerte als
 16-Bit Integer (Ganzzahl) Werte von 0 bis 65535 ausgegeben.\\
 \\
-Weiter gibt es nicht (spektral) Sensor bezogene Einstellungen die über die \ac{uart} Schnittstelle abgefragt und gesetzt werden können.
-Als ein Beispiel kann die Temperatur des Chips in Celsius des \ac{ic}s mit "'ATTEMP"' abgefragt werden.\\
+Weiter gibt es nicht (spektral) Sensor bezogene Einstellungen, die über die \ac{uart} Schnittstelle abgefragt und gesetzt werden können.
+Als ein Beispiel kann die Temperatur des Chip in Celsius des \ac{ic}s mit "'ATTEMP"' abgefragt werden.\\
 Mit "'ATLED0=100"' kann eine kleine grüne Status \ac{led} angeschaltet werden, um zu signalisieren, dass das Programm eine Verbindung mit 
 dem Chip herstellen konnte und die Kommunikation funktioniert.\\
 Zusätzlich kann mit den Befehlen "'ATLED1=0"' und "'ATLED1=100"' eine auf dem Evaluationsboard angebrachte weiße Referenz \ac{led} aus und
@@ -1149,10 +1149,10 @@ optimiert und einsetzbar.\\
 Der AS7261 sendet auf des UART Kommando "'ATDATA"' XYZ Daten. Somit können in der Anwendung die bisher erläuterten Schritte übersprungen werden.
 Der Applikation musste lediglich ein Sensor Auswahldialog hinzugefügt und diese Einstellung an verschidenen Stellen im Programmablauf
 berücksichtigt werden.\\
-Bei näherer Betrachtung der Sensorwerte mit dem Fortschreiten der Applikation wurde beobachtet, dass bei dem messen von blauem Licht der Sensor
-eine fehlerhafte xyY Koordinate bestimmt. Die gemessene Koordinate lag im pinken Bereich. Dies ist auf die sensitivität des X Sensors zwischen
+Bei näherer Betrachtung der Sensorwerte mit dem Fortschreiten der Applikation wurde beobachtet, dass bei dem Messen von blauem Licht der Sensor
+eine fehlerhafte xyY Koordinate bestimmt. Die gemessene Koordinate lag im pinken Bereich. Dies ist auf die Empfindlichkeit des X Sensors zwischen
 400 nm und 490 nm zurückzuführen \ref{fig:AS7261_spectrum}. Laut Hersteller ist dieses Verhalten bedingt durch die Werkskalibrierung des Sensors.
-Je nach Anwendungsfall muss der Sensor durch den Anwender eigens kalibriert werden. Die Werkskalibrierung ist für das messen von Farbtemperaturen
+Je nach Anwendungsfall muss der Sensor durch den Anwender eigens kalibriert werden. Die Werkskalibrierung ist für das Messen von Farbtemperaturen
 optimiert.\\
 Gemessene Koordinaten im roten und grünen Bereich waren jedoch deutlich näher an den mit dem Spektrometer gemessenen Werten im Vergleich zu
 dem AS7262. %// TODO: Wenn nötig Verweis auf späteres eingehen auf eine Kalibrierung
@@ -1224,7 +1224,7 @@ Die gewählten Helligkeitsstufen sind:\\
 Entsprechungen der DMX Werte.\\
 Um die gemessenen Werte in der Applikation zu erfassen, wurde eine Emittersektion in der grafischen Benutzeroberfläche vorgesehen.
 Der Benutzer konnte mit der Schaltfläche "'Add Emitter"' manuell Emitter zu der aktuellen Messung hinzufügen. Durch Anklicken eines angelegten
-Emitters, konnte das Menü des einzelnen Emitters geöffnet werden.
+Emitters konnte das Menü des einzelnen Emitters geöffnet werden.
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{\textwidth}
@@ -1248,7 +1248,7 @@ Nach dem manuellen Erfassen aller Helligkeitsstufen konnten die erfassten Daten 
 Weiterverwendung gespeichert werden. Dieser Vorgang musste für alle Emitter wiederholt werden.
 \subsection{Vorberechnen anhand von Messwerten}\label{calcColor}
 Mit den nun verfügbaren Messwerten einer Lichtquelle wurde zur Überprüfung der bisher eingesetzten Berechnungen eine Möglichkeit programmiert,
-um virtuell in der Applikation die Emitter additiv zu mischen. Dies wird erreicht indem die gemessenen Spektren der zu mischenden Emitter aufaddiert werden.
+um virtuell in der Applikation die Emitter additiv zu mischen. Dies wird erreicht, indem die gemessenen Spektren der zu mischenden Emitter aufaddiert werden.
 \begin{align}\label{Equ:22}
     \left[ \begin{array}{r}
         \text{Mix}_X \\
@@ -1290,7 +1290,7 @@ Spektrum wurde in eine \ac{cie} xy Koordinate umgerechnet und zusätzlich zu der
 Die vorberechnete Koordinate wird als rotes Kreuz in der CIE 1931 Normtafel angezeigt, neben der aktuellen Messung, welche als schwarzes Kreuz
 angezeigt wird.\\
 Hier ist zu beobachten, dass bei einem Mischfarbton in Bild \ref{fig:calcLightCanMix} die Messung der Lichtquelle mit der Vorberechnung nicht
-übereinstimmt. Bei Messungen mit den anderen Lichtquellen ist diese Abweichung nicht aufgetreten. die zwei Kreuze waren zumeist in jeder beliebigen
+übereinstimmt. Bei Messungen mit den anderen Lichtquellen ist diese Abweichung nicht aufgetreten. Die zwei Kreuze waren zumeist in jeder beliebigen
 Kombination nahezu deckungsgleich.\\
 Diese Abweichung entsteht durch eine spezielle Funktion des Light Can Scheinwerfers. Die Light Can nutzt einen internen Algorithmus, um sowohl bei
 maximaler Austeuerung eines einzelnen Emitters als auch bei der Aussteuerung von mehreren Emittern immer die gleiche Gesamthelligkeit zu
@@ -2297,34 +2297,34 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
     \bibitem[Lichtquellen, 2015]{lichtquellen} Dohlus, Rainer: "'Lichtquellen"' De Gruyter, Berlin, 2015
     \bibitem[Wisotop Homepage, 2019]{wisotopTriChro} \url{https://wisotop.de/wellenlaengen-des-lichts-farben.php}. Visited on: 03.10.2019
     \bibitem[Farbwahrnehmung FHT Esslingen, 2019]{fhtEsslignen}"'Farbwahrnehmung"', \url{http://www.it.fht-esslingen.de/~asbeck/gdial/farbe/sehen2.html}. Visited on: 11.08.2019
-    \bibitem[Wisotop Homepage,2019]{wisotopRGB} \url{https://wisotop.de/Farbmodelle-RGB-CMYK-HSS-HSL.php}. Visited on: 27.09.2019
-    \bibitem[RGB-Farbraum - Wikipedia,2019]{wikipediaRGB} \url{https://de.wikipedia.org/wiki/RGB-Farbraum}. Visited on: 29.09.2019
-    \bibitem[Hermann Graßmann - Wikipedia,2019]{wikipediaGrassmann} \url{https://de.wikipedia.org/wiki/Hermann\_Gra%C3%9Fmann}. Visited on: 29.09.2019
-    \bibitem[Graßmannsche Gesetze - Wikipedia,2019]{wikipediaGrassmannGestze} \url{https://de.wikipedia.org/wiki/Gra%C3%9Fmannsche_Gesetze}. Visited on: 29.09.2019
-    \bibitem[CIExy1931 - Wikipedia,2019]{wikipedia1931Image} \url{https://de.wikipedia.org/wiki/Datei:CIExy1931.svg}. Visited on: 30.09.2019
-    \bibitem[CIE - Wikipedia,2019]{wikipediaCIE} \url{https://de.wikipedia.org/wiki/CIE-Normvalenzsystem}. Visited on: 30.09.2019
-    \bibitem[CIELUV - Wikipedia,2019]{wikipedia1976} \url{https://de.wikipedia.org/wiki/CIELUV-Farbraumsystem}. Visited on: 30.09.2019
-    \bibitem[CIE Luv - Wisotop,2019]{wisotopLuv} \url{https://wisotop.de/CIE-luv.php}. Visited on: 01.10.2019
+    \bibitem[Wisotop Homepage, 2019]{wisotopRGB} \url{https://wisotop.de/Farbmodelle-RGB-CMYK-HSS-HSL.php}. Visited on: 27.09.2019
+    \bibitem[RGB-Farbraum - Wikipedia, 2019]{wikipediaRGB} \url{https://de.wikipedia.org/wiki/RGB-Farbraum}. Visited on: 29.09.2019
+    \bibitem[Hermann Graßmann - Wikipedia, 2019]{wikipediaGrassmann} \url{https://de.wikipedia.org/wiki/Hermann\_Gra%C3%9Fmann}. Visited on: 29.09.2019
+    \bibitem[Graßmannsche Gesetze - Wikipedia, 2019]{wikipediaGrassmannGestze} \url{https://de.wikipedia.org/wiki/Gra%C3%9Fmannsche_Gesetze}. Visited on: 29.09.2019
+    \bibitem[CIExy1931 - Wikipedia, 2019]{wikipedia1931Image} \url{https://de.wikipedia.org/wiki/Datei:CIExy1931.svg}. Visited on: 30.09.2019
+    \bibitem[CIE - Wikipedia, 2019]{wikipediaCIE} \url{https://de.wikipedia.org/wiki/CIE-Normvalenzsystem}. Visited on: 30.09.2019
+    \bibitem[CIELUV - Wikipedia, 2019]{wikipedia1976} \url{https://de.wikipedia.org/wiki/CIELUV-Farbraumsystem}. Visited on: 30.09.2019
+    \bibitem[CIE Luv - Wisotop, 2019]{wisotopLuv} \url{https://wisotop.de/CIE-luv.php}. Visited on: 01.10.2019
     \bibitem[Leuchtdiode Wikipedia, 2019]{wikiLed}"'Leuchtdiode - Wikipedia"', \url{https://de.wikipedia.org/wiki/Leuchtdiode}. Visited on: 21.08.2019
     \bibitem[Showlicht von Scribble zum fertigen Desgin, 2014]{showlicht}"'Showlicht von Scribble zum fertigen Desgin"', 01.09.2019
     \bibitem[Philips PAR64 Leuchtmittel 1000W | Thomann, 2019]{convpar}"'Philips PAR64 Leuchtmittel 1000W | Thomann"', \url{https://www.thomann.de/de/philips_par64_1000_watt_mfl_cp62_exe.htm}. Visited on: 02.09.2019
     \bibitem[P FLAT PRO 18 IP65 | Cameo, 2019]{ledpar}"'P FLAT PRO 18 IP65 | Cameo"', \url{https://www.cameolight.com/de/loesungen/installation/outdoor-lichttechnik/outdoor-scheinwerfer/2297/p-flat-pro-18-ip65?c=1826}. Visited on: 02.09.2019
-    \bibitem[Ape Labs Homepage,2019]{lightCan} \url{https://apelabs.com/products/leuchtdose}. Visited on: 02.09.2019
-    \bibitem[Robe Homepage,2019]{robe} \url{https://www.robe.cz/ledwash-300plus/}. Visited on: 02.09.2019
-    \bibitem[Arri Homepage,2019]{arri} \url{https://www.arri.com/en/lighting/led/skypanel/s60-c}. Visited on: 02.09.2019
-    \bibitem[UPRtek Homepage,2019]{uprtek} \url{https://www.uprtek.com/de/product/LED-Test-Measurement-Handspektrometer/MK350N-Basic-Handheld-Spectrometer.html}. Visited on: 09.09.2019
-    \bibitem[AMS Homepage,2019]{ams} \url{https://ams.com/about-ams}. Visited on: 04.10.2019
+    \bibitem[Ape Labs Homepage, 2019]{lightCan} \url{https://apelabs.com/products/leuchtdose}. Visited on: 02.09.2019
+    \bibitem[Robe Homepage, 2019]{robe} \url{https://www.robe.cz/ledwash-300plus/}. Visited on: 02.09.2019
+    \bibitem[Arri Homepage, 2019]{arri} \url{https://www.arri.com/en/lighting/led/skypanel/s60-c}. Visited on: 02.09.2019
+    \bibitem[UPRtek Homepage, 2019]{uprtek} \url{https://www.uprtek.com/de/product/LED-Test-Measurement-Handspektrometer/MK350N-Basic-Handheld-Spectrometer.html}. Visited on: 09.09.2019
+    \bibitem[AMS Homepage, 2019]{ams} \url{https://ams.com/about-ams}. Visited on: 04.10.2019
     \bibitem[Adafruit Learn, 2019]{adafruit}"'Overview | Adafruit AS7262 6-channel Visible Light Sensor | Adafruit Learning System"', \url{https://learn.adafruit.com/adafruit-as7262-6-channel-visible-light-sensor}. Visited on: 11.08.2019
     \bibitem[AS7261 Datenblatt, 2019]{datasheet61}"'AS7261 XYZ Chromatic White Color Sensor + NIR with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7261_DS000493_1-00.pdf/0e7d1f12-702e-d061-b07a-67b0b6316800}. Visited on: 11.08.2019
     \bibitem[AS7262 Datenblatt, 2019]{datasheet62}"'AS7262 6-Channel Visible Spectral ID Device with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7262_DS000486_2-00.pdf/0031f605-5629-e030-73b2-f365fd36a43b}. Visited on: 11.08.2019
-    \bibitem[Lindbloom Homepage,2019]{lindbloom} \url{http://brucelindbloom.com/index.html}. Visited on: 09.09.2019
-    \bibitem[Wisotop Homepage,2019]{wisotop} \url{https://wisotop.de/Anhang-Tristimulus-Werte.php}. Visited on: 09.09.2019
-    \bibitem[Light Can Manual,2019]{lightCanDMX} \url{http://download.apelabs.com/manuals/Ape_Labs_-_LightCan_-_Manual_-_web.pdf} Page 33. Visited on: 16.09.2019
-    \bibitem[SkyPanel Manual,2019]{skypanelDMX} \url{https://www.arri.com/resource/blob/65958/560471fec7f8f2e186ef8ca9e6cdd489/arri-skypanel-dmx-protocol-specification-v4-4-en-okt2018-data.pdf} Page 12. Visited on: 16.09.2019
-    \bibitem[artnet NPMJS,2019]{artnetPackage} \url{https://www.npmjs.com/package/artnet}. Visited on: 16.09.2019
-    \bibitem[Sutherland–Hodgman algorithm Wikipedia,2019]{sutherlandHodgman} \url{https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm}. Visited on: 22.09.2019
-    \bibitem[David MacAdam Wikipedia,2019]{macAdam} \url{https://en.wikipedia.org/wiki/David_MacAdam}. Visited on: 18.10.2019
-    \bibitem[LED ColorCalculator,2019]{osram} \url{https://www.osram.us/cb/tools-and-resources/applications/led-colorcalculator/index.jsp}. Visited on: 18.10.2019
+    \bibitem[Lindbloom Homepage, 2019]{lindbloom} \url{http://brucelindbloom.com/index.html}. Visited on: 09.09.2019
+    \bibitem[Wisotop Homepage, 2019]{wisotop} \url{https://wisotop.de/Anhang-Tristimulus-Werte.php}. Visited on: 09.09.2019
+    \bibitem[Light Can Manual, 2019]{lightCanDMX} \url{http://download.apelabs.com/manuals/Ape_Labs_-_LightCan_-_Manual_-_web.pdf} Page 33. Visited on: 16.09.2019
+    \bibitem[SkyPanel Manual, 2019]{skypanelDMX} \url{https://www.arri.com/resource/blob/65958/560471fec7f8f2e186ef8ca9e6cdd489/arri-skypanel-dmx-protocol-specification-v4-4-en-okt2018-data.pdf} Page 12. Visited on: 16.09.2019
+    \bibitem[artnet NPMJS, 2019]{artnetPackage} \url{https://www.npmjs.com/package/artnet}. Visited on: 16.09.2019
+    \bibitem[Sutherland–Hodgman algorithm Wikipedia, 2019]{sutherlandHodgman} \url{https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm}. Visited on: 22.09.2019
+    \bibitem[David MacAdam Wikipedia, 2019]{macAdam} \url{https://en.wikipedia.org/wiki/David_MacAdam}. Visited on: 18.10.2019
+    \bibitem[LED ColorCalculator, 2019]{osram} \url{https://www.osram.us/cb/tools-and-resources/applications/led-colorcalculator/index.jsp}. Visited on: 18.10.2019
 \end{thebibliography}
 \endgroup
 \clearpage
