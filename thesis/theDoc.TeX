@@ -1764,14 +1764,18 @@ Ellipsen deutlich von dem angestrebten Wert ab. Dies ist in Bild \ref{fig:macAda
 Grafiken und Tabellen zu diesen Abgleichvorgängen sind im Anhang in Kapitel \ref{equalizationMeasurments} zu finden. Auch bei der Messung des gelben Mischtons ist
 eine erhebliche Diskrepanz zwischen dem vorberechneten Mixpunkt und dem Referenzgerät zu beobachten (Bild \ref{fig:macAdamYellow}). Weiter ist bei beiden Mischfarben
 hier zu beobachten, dass die Farborte der abzugleichenden Geräte ebenfalls fern ab des Farborts des Referenzgeräts liegen. Jedoch liegen die Farborte
-der abzugleichenden Geräte sehr nahe beieinander.
-%// TODO: Weiter schreiben
+der abzugleichenden Geräte sehr nahe beieinander.\\
+Diese Abweichungen sind unteranderem auch der Interpolation zwischen den Dimmstufen der einzelnen Emitter sowie der niedrigen Auflösung der Emitterhelligkeitsskale von
+0 bis 100 Prozent. So ist es nur unter guten Bedingungen möglich, dass anhand der erfassten und weiter interpolierten Daten eine Lampe die gewüschte Mischfarbe produzieren
+kann. Hier beschränkt auch weiter die zu niedrig aufgelöste \ac{dmx} von acht Bit die Ansteuerungsmöglickeit der theoretisch berechneten Emitter helligkeitskombination.\\
+Abhilfe wäre hier eine bei vielen Lampen verfügbare Ansteuerungsmöglickeit eines Emitters mit 16 Bit.
 \subsection{Fehlerquellenanalyse}
-Aus der bisherigen Auswertung sind 3 Hauptfehlerquellen auszumachen:
+Aus der bisherigen Auswertung sind 4 Hauptfehlerquellen auszumachen:
 \begin{addmargin}[2em]{0em}
     1. Fehlerhafte oder ungenaue Messdaten der Emitter\\
     2. Nicht kompensierter Farbdrift der Emitter\\
-    3. Umrechnungsverluste des RGB Raums
+    3. Umrechnungsverluste des RGB Raums\\
+    4. Interne Farbkorrekturen der eingesetzten Lampen
 \end{addmargin}
 \subsubsection{Fehlerquelle 1 - Messdaten}
 Im Folgenden wird dargelegt, wie diese kompensiert oder behoben werden könnten.\\
@@ -1792,7 +1796,16 @@ Uhrzeit benannt. Nach dem Messvorgang mussten diese Daten vom Nutzer gesichtet u
 einzelnen Messungen Emittern und Dimmstufen zuzuordnen.\\
 Hier brauchte ein Nutzer pro Lampe etwa fünf Minuten zum vermessen einer RGBW Lampe. Der automatisierte Prozess
 benötigt nur etwa eine Minute zum vermessen der gleichen Lampe. So ist die Zeitersparnis für einen Einsatz in der
-Praxis erheblich.
+Praxis erheblich.\\
+Diese Zeit ist allerdings in Verhältnis mit der Auflösung der Messwerte über die Helligkeit des Emitters zu sehen.
+Die Messstufen in dieser Arbeit wurden in etwa 15\% Schritten gewählt, um einen Emitter in einer akzeptablen Zeit
+vermessen zu können. Der limitierende Faktor sind hier die verwendeten Sensorn. Mit deren Integrationszeit von etwa
+200 Millisekunden lassen nur eine begrenzete Messgeschwindigkeit zu. Weiter musste bei Messungen mit dem AS7262
+Sensor nach einer Variation in der Helligkeit des Emitters zwei bis drei Messungen jeweils verworfen werden bevor
+der Messwert als gülitg betrachtet werden konnte. Diese verworfenen Messwerte sprangen im CIE 1931 willkürlich.
+Dieser Effekt war noch intensiver zu beobachten, wenn von der 100\% Stufe eines Emitters zu einem neuen Emitter
+gewechselt wurde. Hier mussten etwa fünf bis sechs Messungen verworfen werden.\\
+Wenn nun die Zahl der Messungen stark erhöht wird, wird ebenso die Zeit für den Messvorgang erheblich steigen.
 \subsubsection{Fehlerquelle 2 - Emitterfarbdrift}
 Für das Abgleichen von zwei Lichtquellen wurde in dieser Arbeit immer der kombinierte Gamut der selektierten Lampen
 betrachtet. Dieser Gamut wurde aus den Farbvalenzen der 100 Prozent Dimmstufe des jeweiligen Emitters aufgespannt.\\
@@ -1807,21 +1820,19 @@ außerhalb des initialen kombinierten Gamuts freigeben. Sollte der Referenzpunkt
 kombinierten Gamuts liegen kann nun ein Mixpunkt mit geringerer Farbverschiebung erreicht werden. Daher beginnt
 der Abgleichzyklus von vorne.\\
 Dieses Vorgehen hat das Potenzial sich unendlich zu wiederholen. Daher wurde dieses komplexe Verfahren bisher noch
-nicht umgesetzt.\\
+nicht umgesetzt.
+\subsubsection{Fehlerquelle 3 - RGB Umrechnungsverluste}
+Da der CIE 1931 Farbraum erheblich mehr Farben darstellen kann als der hier in mehreren Rechnungen verwendete sRGB Farbraum
+kommt es nach der Umrechnung von XYZ Werten zu RGB Werten, welche kleiner null oder größer eins sein können. Dieses Verhalten
+ist beispielsweise konstant im Ablauf des Abgleiches zu beobachten. Hier müssen die errechneten Werte auf eins normiert
+werden. Sodass später nicht über 100\% eines Emitters für eine Farbmischung genutzt werden müssten.\\
+Mit dieser Korrektur verschient sich wiederum der Ausgangsberchnungswert wie in Fehlerquelle 2 dargestellt.\\
+Diese Verluste konnten bisher nicht kompensiert werden.
+\subsubsection{Fehlerquelle 4 - Interne Farbkorrekturen der eingesetzten Lampen}
 %// TODO: Weiter schreiben
 {\color{red}
 Hier folgen Notizen:\\
-Analyse (stärken und Schwächen)
-\begin{addmargin}[2em]{0em}
-    - Messfehler und Toleranzen
-\end{addmargin}
-\begin{addmargin}[4em]{0em}
-    * Light Can innere Algorithmen (Ansatz zum Messen von Mischfarben zur Nachbildung des Mischalgorithmus)
-\end{addmargin}
-\begin{addmargin}[2em]{0em}
-    - Exemplarische Ergebnisse des Farbabgleichs.
-    - Abweichung Referenzfarbe und vorberechnete Farbe.
-\end{addmargin}}
+Light Can innere Algorithmen (Ansatz zum Messen von Mischfarben zur Nachbildung des Mischalgorithmus)}
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Ausblick %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
