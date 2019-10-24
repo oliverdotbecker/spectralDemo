@@ -673,13 +673,13 @@ Viertes Graßmannsches Gesetz:\\
     T(A+B) \equiv T(A) + T(B)
 \end{align}
 Laut David L. MacAdam gilt dieses Gesetz nur für den Spezialfall einer idealisierten, auf einen Punkt reduzierten Quelle, nicht aber für
-ausgedehntere Farbflächen. Graßmann hatte sich nur mit dem oben genannten Spezialfall befasst."' \cite{wikipediaGrassmannGestze}\\
+ausgedehntere Farbflächen. Graßmann hatte sich nur mit dem oben genannten Spezialfall befasst."'\\
+\cite{wikipediaGrassmannGestze}\\
 \\
 Die hier aufgeführten Gesetze von Graßmann bilden die Grundlage für alle Berechnungen von Koordinaten innerhalb eines Farbraumes. Alle folgenden
 Berechnungen dieser Arbeit stützen sich auf diese Gesetze. "'Die von Graßmann aufgestellten Gesetze wurden lange Jahre in der
 wissenschaftlichen Welt so gut wie nicht anerkannt – heute jedoch bilden sie eine weitestgehend immer noch gültige Grundlage aller modernen
-Farblehren und -räume."'\\
-\cite{wikipediaGrassmannGestze}
+Farblehren und -räume."' \cite{wikipediaGrassmannGestze}
 \subsection{RGB}
 Der RGB Farbraum baut auf dem Prinzip der trichromatischen Theorie auf. Diese Theorie wurde maßgeblich von Hermann von Helmholtz um 1890
 entwickelt. Sie beschreibt drei Grundfarben: Rot, Grün und Blau. Helmholtz beobachtete, dass aus drei Farbvalenzen jede beliebige Valenz
@@ -713,7 +713,7 @@ steht X für den Rotanteil der Farbvalenz, sowie Y für die grüne und Z für di
 Grundgrößen werden mit sogenannten Empfindlichkeitskurven beschrieben.
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.5\textwidth]{images/cie_tristimul.png}
+        \includegraphics[width=.75\textwidth]{images/cie_tristimul.png}
     \end{center}
     \caption[CIE XYZ genormte Empfindlichkeitskurven]{CIE XYZ genormte Empfindlichkeitskurven \cite{wikipediaCIE}}
 \end{figure}
@@ -743,6 +743,7 @@ Y (groß Y) für die Helligkeit der Farbvalenz beschrieben.
     \begin{center}
         \includegraphics[width=.7\textwidth]{images/cie_1931.png}
     \end{center}
+    \vspace{-.7cm}
     \caption[CIE 1931 2D Farbraum]{CIE 1931 2D Farbraum \cite{wikipedia1931Image}}
 \end{figure}
 \noindent
@@ -776,7 +777,8 @@ entgegenkommt."' \cite{wisotopLuv} Mit den folgenden Formeln lassen sich die u' 
 \end{align}
 \cite{lindbloom}\\
 Um mehrere Farben zu vergleichen, muss die u'v' Koordinate auf ein Referenzweiß ($X_r$,$Y_r$,$Z_r$) bezogen werden. So ergeben sich
-absolute uv Koordinaten. Die Luminanz L ist ein Faktor für die Bestimmung der Sättigung $s_{uv}$ der Farbvalenz. \cite{wikipedia1976}
+absolute uv Koordinaten. Die Luminanz L ist ein Faktor für die Bestimmung der Sättigung $s_{uv}$ der Farbvalenz.\\
+\cite{wikipedia1976}
 \begin{align}\label{Equ:10}
     &y_r = \frac{Y}{Y_r}\\
     &L = \left\{
@@ -806,7 +808,7 @@ absolute uv Koordinaten. Die Luminanz L ist ein Faktor für die Bestimmung der S
 \\
 Wenn die uv Koordinaten auf 0 gesetzt werden, also auf dem Referenzweißpunkt liegen, variiert L die Grauskala der Valenz. \cite{wisotopLuv}
 \clearpage
-
+%// TODO: Proceed Reading here
 %%%%%%%%%%%%%%%%%%%%%%%%%% LED %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{LED}
 \subsection{Allgemein}
