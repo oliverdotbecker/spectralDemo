@@ -1829,10 +1829,22 @@ werden. Sodass später nicht über 100\% eines Emitters für eine Farbmischung g
 Mit dieser Korrektur verschient sich wiederum der Ausgangsberchnungswert wie in Fehlerquelle 2 dargestellt.\\
 Diese Verluste konnten bisher nicht kompensiert werden.
 \subsubsection{Fehlerquelle 4 - Interne Farbkorrekturen der eingesetzten Lampen}
-%// TODO: Weiter schreiben
-{\color{red}
-Hier folgen Notizen:\\
-Light Can innere Algorithmen (Ansatz zum Messen von Mischfarben zur Nachbildung des Mischalgorithmus)}
+Zuletzt wurde beobachtet, dass die Emitter der verwendeten Lampe "'LightCan"' eine ihre Emitter für den gleichen DMX
+Steruerwert unterschiedlich aussteuert. Bei einer Ansteuerung von 100\% des roten Emitters steuert die Lampe den
+maximalen Wert für den roten Emitter aus. Wenn nun der grüne Emitter mit 100\% hinzgenommen wird, wird der rote Emitter
+als auch der grüne Emitter von der Lampe intern gedämpft. So hat der entstandene gelbe Farbton etwa die gleiche absolute
+Helligkeit wie die der rote Emitter alleine. Wenn die Lampe das nicht machen würde, wäre durch die kombination zweier
+Emitter die Mischfarbe heller als ein einzelner Emitter.\\
+Im Fall dieser Batteriebetriebenen Lampe würde dies ebenfalls bedeuten, dass eine Mischfarbe mehr Batterieleistung verbrauchen
+würde als ein einzelner Emitter. Daher wird dies dir die Lampe intern kompensiert.\\
+Allerdings ist nun keine lineare Farbmischung von 0\% bis 100\% mehr gegeben. Somit kann die Applikation mit den erfassten
+Messwerten die Mischfarben nicht exakt vorberechnen, da dieser interne Algorithmus der Lampe nicht bekannt ist.\\
+Eine Lösung für dieses Problem wäre auch die Mischfarben der Lampe zu messen, um dem Algorithmus in der Applikaiton nachbilden
+zu können.\\
+Weiter muss bei der automatischen Dämpfung der Emitter auch wieder der in Fehlerquelle 2 behandelte Farbdrift der Emitter
+berücksichtigt werden.\\
+Die LightCan ist nur ein Beispiel für dieses Verhalten. Diese oder andere interne Korrekturen der Lampe ist auch in anderen
+zu finden.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Ausblick %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
