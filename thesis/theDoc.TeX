@@ -114,7 +114,7 @@ measurement data of the light source.\\
 In addition the thesis covers how to automatic measure the LED emitters, because this data is the basis of an
 equalization. Normally this data isn't provided by the light source manufacturers.\\
 Furthermore is described which software elements are needed to realize such an equalization implementation.
-This covers the graphical user interface the equalization algorithm and a protocol to control lights.\\
+This covers the graphical user interface, the equalization algorithm and a protocol to control lights.\\
 These modules have been implemented in software with connected external hardware.
 \vspace{.6cm}
 \par\noindent\rule{\textwidth}{0.4pt}
@@ -212,7 +212,8 @@ Contest 2019 oder die Lichtinstallation zum 25. Jahrestag des Falls der Berliner
         \includegraphics[width=0.48\textwidth]{images/csm_MA_building_WBB.jpg}
     \end{center}
     \vspace{-20pt}
-    \caption{Firmensitz Waldbüttelbrunn \cite{maabout}}
+    \captionsetup{justification=raggedright,singlelinecheck=false}
+    \caption[Firmensitz Waldbüttelbrunn]{Firmensitz Waldbüttelbrunn \cite{maabout}}
     \vspace{-15pt}
 \end{wrapfigure}
 Der Hauptsitz der MA Lighting Technology GmbH befindet sich in Waldbüttelbrunn in der Nähe von
@@ -239,6 +240,7 @@ Scheinwerfer und \ac{dmx}-Demultiplexer, um analoge Geräte ansteuern zu können
     \hfill 
     \begin{subfigure}[b]{0.25\textwidth}
         \includegraphics[width=\textwidth]{images/MA_2Port_Node_onPC_13019x.png}
+        \captionsetup{justification=raggedright,singlelinecheck=false}
         \caption{2Port Node \cite{gmaproducts}}
     \end{subfigure}
     \caption{grandMA 1 Serie Produkte}\label{fig:gma1}
@@ -277,13 +279,13 @@ Alle diese Produkte adressieren vor allem den Highend-Profibereich für Theaterp
 Liveshows und Festinstallationen.\\
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{images/grandMA3-full-size.png}
-    \caption{grandMA3 full-size \cite{gma3}}\label{fig:gma3}
+    \caption[grandMA3 full-size]{grandMA3 full-size \cite{gma3}}\label{fig:gma3}
 \end{figure}
 \noindent
 Seit Mitte 2017 entwickelt MA eine neue Produktserie. Die grandMA3 Serie. Diese Serie greift die
 in den letzten 34 Jahren gesammelte Erfahrung auf. Jedoch wurde jede Zeile Code neu geschrieben,
 um die technischen Möglichkeiten der neuen Hardware vollumfänglich nutzen zu können.\\
-Neben vielen Veränderungen gegenüber den Vorserien arbeitet die Farblogik der grandMA3 Software
+Neben vielen Veränderungen gegenüber den Vorserien arbeitet die Farblogik der \mbox{grandMA3} Software
 mit den Spezifikationen des \ac{cie} 1931 Standards.
 \clearpage
 
@@ -291,10 +293,11 @@ mit den Spezifikationen des \ac{cie} 1931 Standards.
 \section{Grundlagen}
 In dieser Arbeit wird das Abgleichen von LED-Lichtquellen erforscht. Diese funktionalität soll später in der
 grandMA3 Applikation von MA Lighting verwendet werden.\\
-Für eine erste Überprüfung geeigneter Hardware wurde mit einer kleinen Demo Applikation gearbeitet. Diese wurde
-in JavaScript und \ac{html} mit Hilfe des Electron Frameworks erstellt.\\
-Weiter wird diese Applikation für die Ausgabe von \ac{dmx} genutzt, sowie für erste Implementierung des Abgleichs.\\
-Im Folgenden werden die hier verwendeten Protokolle, Programme und Frameworks dargelegt.
+Für eine erste Überprüfung geeigneter Hardware wurde mit einer Demo-Applikation gearbeitet. Diese wurde
+in JavaScript und \ac{html} mit Hilfe des Electron Frameworks erstellt. Anschießend wird diese erweitert und
+als Hauptappliaktion verwendet.\\
+Es wird die Ausgabe von \ac{dmx} über Art-Net, sowie eine erste Version des Abgleichs implementiert. Im
+Folgenden werden die hier verwendeten Protokolle, Programme und Frameworks dargelegt.
 
 \subsection{DMX}
 Diese Abkürzung steht für Digital Multiplex. Dabei handelt es sich um ein digitales Steuerprotokoll,
@@ -307,7 +310,7 @@ Schnittstellenstandard.
         \includegraphics[width=.75\textwidth]{images/dmx.png}
     \end{center}
     \vspace{-.5cm}
-    \caption{Physikalische Übertragung DMX-512/1990 (RS-485) \cite{soundlight}}
+    \caption[Physikalische Übertragung DMX-512/1990 (RS-485)]{Physikalische Übertragung DMX-512/1990 (RS-485) \cite{soundlight}}
 \end{figure}
 \vspace{-.3cm}
 \noindent
@@ -321,7 +324,7 @@ Die Datenübertragung erfolgt mittels einer \ac{uart} gesteuerten asynchronen se
 Datenframe besteht aus acht Datenbits und zwei Stoppbits. Die Symbolrate beträgt 250 k\ac{baud}.
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{images/DMX_zeitlich.png}
-    \caption{Zeitliche Darstellung des \ac{dmx}-Signals \cite{soundlightA}} \label{fig:DMXoverTime}
+    \caption[Zeitliche Darstellung des DMX-Signals]{Zeitliche Darstellung des \ac{dmx}-Signals \cite{soundlightA}} \label{fig:DMXoverTime}
 \end{figure}
 \vspace{-.7cm}
 \begin{table}[H]
@@ -346,7 +349,7 @@ Datenframe besteht aus acht Datenbits und zwei Stoppbits. Die Symbolrate beträg
 Ein \ac{dmx}-Paket beginnt mit einem mindestens 88 $\mu$s (22 Bitlängen) langem niedrigem Pegel (logisch 0)
 – dieser Abschnitt wird 'BREAK' genannt. Dadurch wird eine einfache Erkennung des Paketanfangs
 ermöglicht, da quasi jeder handelsübliche UART den Break als ungültiges Datenbyte mit fehlenden
-Stoppbits meldet. Darauf folgt 'MARK after BREAK' mit einem mindestens 8 $\mu$s (2 Bitlängen) langem hohem Pegel /
+Stoppbits meldet. Darauf folgt 'MARK after BREAK' mit einem mindestens 8 $\mu$s (2 Bitlängen) langem hohem Pegel
 (Ruhezustand des Daten-Busses logisch 1). In dieser 'MARK'-Zeit können sich langsamer getaktete
 Controller auf ein neues \ac{dmx}-Paket einstellen. Dann wird das Startbyte mit dem Wert 0 für \ac{dmx}
 übertragen. Das Startbyte ist der Slot 0. Anschließend werden die anderen 512 Slots mit den
@@ -427,7 +430,7 @@ werden.\\
 \\
 JavaScript ist eine Skript Sprache, die wie \ac{css} meist in der Webentwicklung verwendet wird. Sie kann jedoch
 mit einer entsprechenden JavaScript Laufzeitumgebung auch ohne Browser auf Endgeräten ausgeführt werden.\\
-Bei dieser Arbeit muss zwischen zwei verschiednen Nutzungsarten der Sprache JavaScript unterschieden werden:\\
+Bei dieser Arbeit muss zwischen zwei verschiednen Nutzungsarten der Sprache Java-Script unterschieden werden:\\
 \begin{addmargin}[2em]{0em}
  - Webcode, wird innerhalb des Webbrowsers augeführt.\\
  - Appcode, wird mit der NodeJS Laufzeitumgebung auf dem Endgerät ausgeführt.\\
@@ -484,7 +487,8 @@ beschrieben. \cite{wikiLicht}\\
         \includegraphics[width=0.48\textwidth]{images/Elektromagnetisches-Spektrum.png}
     \end{center}
     \vspace{-20pt}
-    \caption{Licht im elektromagnetischen Spektrum \cite{spectrumLight}}
+    \captionsetup{justification=raggedright,singlelinecheck=false}
+    \caption[Licht im elektromagnetischen Spektrum]{Licht im elektromagnetischen Spektrum \cite{spectrumLight}}
     \vspace{-15pt}
 \end{wrapfigure}
 \noindent
@@ -517,7 +521,7 @@ weiterem Erhöhen der Temperatur wechselt der Farbton des Metalls über gelb zur
     \begin{center}
         \includegraphics[width=.8\textwidth]{images/thermal_radiation_figure.png}
     \end{center}
-    \caption{Darstellung der Farbtemperatur mit Kelvin Skala \cite{wikiFarbtemperatur}}
+    \caption[Darstellung der Farbtemperatur mit Kelvin Skala]{Darstellung der Farbtemperatur mit Kelvin Skala \cite{wikiFarbtemperatur}}
 \end{figure}
 \noindent
 Dieses Prinzip der Lichtemittierung wird auch Temperaturstrahlung genannt.\\
@@ -571,7 +575,7 @@ Somit ist das Sehen bei Tag ca. sieben Mal so hoch aufgelöst wie bei Nacht.
     \begin{center}
         \includegraphics[width=.8\textwidth]{images/eye.png}
     \end{center}
-    \caption{Schematische Darstellung des Auges \cite{wisotopTriChro}}\label{fig:eye}
+    \caption[Schematische Darstellung des Auges]{Schematische Darstellung des Auges \cite{wisotopTriChro}}\label{fig:eye}
 \end{figure}
 \noindent
 Ähnlich wie verschiedene Photodioden, welche einzelne Spektralbereiche abdecken, decken auch die Zapfen nur einen
@@ -597,7 +601,7 @@ Auges im elektromagnetischen Spektrum. Das Farbspektrum ist kein Farbraum, da hi
 in dieser Arbeit das Farbspektrum die Referenz für die weiteren Berechnungen in den genutzten Farbräumen.
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{images/farbspektrum.png}
-    \caption{Darstellung des sichtbaren Farbspektrums \cite{fhtEsslignen}}
+    \caption[Darstellung des sichtbaren Farbspektrums]{Darstellung des sichtbaren Farbspektrums \cite{fhtEsslignen}}
 \end{figure}
 \noindent
 \subsection{Graßmannsche Gesetze}
@@ -685,7 +689,7 @@ Grafisch wird der RGB Farbraum in den meisten Publikationen als Würfel in einem
 mit einer Kantenlänge von eins umschließt die in diesem Farbraum abbildbaren Farbvalenzen.
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{images/rgb_color_cube.png}
-    \caption{RGB Farbwürfel \cite{wisotopRGB}}
+    \caption[RGB Farbwürfel]{RGB Farbwürfel \cite{wisotopRGB}}
 \end{figure}
 \noindent
 Bei den Koordinaten (0,0,0) ist Schwarz definiert. Bei (1,1,1) ist der Weißpunkt definiert. Die Graulinie befindet sich auf der Diagonalen
@@ -706,7 +710,7 @@ sogenannten Empfindlichkeitskurven beschrieben.
     \begin{center}
         \includegraphics[width=.5\textwidth]{images/cie_tristimul.png}
     \end{center}
-    \caption{CIE XYZ genormte Empfindlichkeitskurven \cite{wikipediaCIE}}
+    \caption[CIE XYZ genormte Empfindlichkeitskurven]{CIE XYZ genormte Empfindlichkeitskurven \cite{wikipediaCIE}}
 \end{figure}
 \noindent
 In Bild 15 sind die Kurven, welche auch für das Tristimulusverfahren benötigt werden, grafisch dargestellt. Bei dem Tristimulusverfahren wird die spektrale Energie
@@ -729,7 +733,7 @@ beschrieben.
     \begin{center}
         \includegraphics[width=.7\textwidth]{images/cie_1931.png}
     \end{center}
-    \caption{CIE 1931 2D Farbraum \cite{wikipedia1931Image}}
+    \caption[CIE 1931 2D Farbraum]{CIE 1931 2D Farbraum \cite{wikipedia1931Image}}
 \end{figure}
 \noindent
 Die xy Koordinaten sind 1 normiert. Außerdem gilt:
@@ -750,7 +754,7 @@ definieren. In dem ebenfalls zweidimensionalen Koordinatensystem bewegt man sich
     \begin{center}
         \includegraphics[width=.7\textwidth]{images/cie_1976.png}
     \end{center}
-    \caption{CIE 1976 2D Farbraum \cite{wikipedia1976}}
+    \caption[CIE 1976 2D Farbraum]{CIE 1976 2D Farbraum \cite{wikipedia1976}}
 \end{figure}
 \noindent
 "'Der CIE LUV-Farbraum ist eine Ableitung des Standard CIE XYZ-Farbraums, in dem der Abstand der Farben dem menschlichen Farbsehen besser entgegenkommt."' \cite{wisotopLuv}
@@ -840,7 +844,7 @@ verwendeten "'weißen"' \ac{led}s sind eigentlich blaue \ac{led}s, mit einem zus
         \includegraphics[width=\textwidth]{images/LED_weiss_phosphor.png}
         \caption{Spektrale Abdeckung}
     \end{subfigure}
-    \caption{Weiße LED - Aufbau und Spektrum \cite{wikiLed}}\label{fig:White LED}
+    \caption[Weiße LED - Aufbau und Spektrum]{Weiße LED - Aufbau und Spektrum \cite{wikiLed}}\label{fig:White LED}
 \end{figure}
 \noindent
 Dies verschiebt das abgestrahlte Licht in den gelben Bereich. Somit entsteht mit einem Teil des blauen Lichts und mit dem farbverschobenen Spektrum
@@ -869,7 +873,7 @@ Erde. Daher der Name Tageslichtscheinwerfer.
         \includegraphics[width=\textwidth]{images/HMI_Spectrum.png}
         \caption{Gasentladungslampe}
     \end{subfigure}
-    \caption{Typische Spektren der verschiedenen Leuchtmittel\cite{showlicht}[35+37]}\label{fig:lightEmiiterSpects}
+    \caption[Typische Spektren der verschiedenen Leuchtmittel]{Typische Spektren der verschiedenen Leuchtmittel\cite{showlicht}[35+37]}\label{fig:lightEmiiterSpects}
 \end{figure}
 \noindent
 In den 2000er Jahren hielt dann die LED Einzug in die Welt der Veranstaltungstechnik. Damit begann ein Wandel besonders im Bezug auf die Lebensdauer
@@ -919,7 +923,7 @@ sind alle unterschiedlich aufgebaut.
     \end{center}
     \vspace{-20pt}
     \begin{center}
-        \caption{Light Can\\\cite{lightCan}}
+        \caption[Light Can]{Light Can\\\cite{lightCan}}
     \end{center}
     \vspace{-15pt}
 \end{wrapfigure}
@@ -935,7 +939,7 @@ RGBW \ac{led}s hinter einzelnen Linsen, welche in zwei Kreisen und einer Mittelp
     \begin{center}
         \includegraphics[width=.3\textwidth]{images/Robe_300_ledwash.png}
     \end{center}
-    \caption{Robe LEDWash 300 \cite{robe}}
+    \caption[Robe LEDWash 300]{Robe LEDWash 300 \cite{robe}}
 \end{figure}
 \noindent
 Das Movinglight hat einen einstellbaren Abstrahlwinkel von 8 bis 63 Grad. Dieser wurde allerdings bei den Messungen auf 63 Grad fest eingestellt,
@@ -950,7 +954,7 @@ ist diese Lampe eine perfekte Referenz für diese Arbeit.
     \begin{center}
         \includegraphics[width=.48\textwidth]{images/skypanel_s60_c.png}
     \end{center}
-    \caption{ARRI Skypanel S60-C \cite{arri}}
+    \caption[ARRI Skypanel S60-C]{ARRI Skypanel S60-C \cite{arri}}
 \end{figure}
 \noindent
 Das SkyPanel hat einen Abstrahlwinkel von 115 Grad. Die RGBW \ac{led}s befinden sich hinter einem lampengroßem Diffusor. Die Lampe ist per
@@ -995,7 +999,7 @@ sowie eine Status-\ac{led} und eine Referenz \ac{led} Weißlichtquelle zur Beleu
     \begin{center}
         \includegraphics[width=.48\textwidth]{images/AS7262_front.png}
     \end{center}
-    \caption{Adafruit AS7262 Sensorboard \cite{adafruit}}
+    \caption[Adafruit AS7262 Sensorboard]{Adafruit AS7262 Sensorboard \cite{adafruit}}
 \end{figure}
 \noindent
 Für eine erste Evaluierung und auch für das weitere Vorgehen wurde die UART Schnittstelle genutzt, da diese in der Kommunikation
@@ -1021,7 +1025,7 @@ Gewichtung der Sensoren ist angelehnt an die \ac{cie} 1931 Gewichtungskurven fü
         \includegraphics[width=\textwidth]{images/AS7261_spectrum.png}
         \caption{Spektrale Abdeckung}\label{fig:AS7261_spectrum}
     \end{subfigure}
-    \caption{AMS AS7261 \cite{datasheet61}}\label{fig:AS7261}
+    \caption[AMS AS7261]{AMS AS7261 \cite{datasheet61}}\label{fig:AS7261}
 \end{figure}
 \noindent
 Neben den \ac{cie} X, Y und Z Sensoren verfügt der Sensor noch über einen \ac{nir}, einen Dark und einen Clear Sensor. Diese finden hier
@@ -1053,7 +1057,7 @@ Bereich.
         \includegraphics[width=\textwidth]{images/AS7262_spectrum.png}
         \caption{Spektrale Abdeckung}\label{fig:spec_7262}
     \end{subfigure}
-    \caption{AMS AS7262 \cite{datasheet62}}\label{fig:AS7262}
+    \caption[AMS AS7262]{AMS AS7262 \cite{datasheet62}}\label{fig:AS7262}
 \end{figure}
 \noindent
 Hier werden aus der \ac{uart} (AT) Schnittstelle mit dem Befehl "'ATCDATA"' die Sensorwerte der einzelnen Dioden als 32-Bit floating point
@@ -1085,7 +1089,7 @@ gemessene Amplitude nach 1 normiert wird. Zur Vergleichbarkeit werden auch in de
         \includegraphics[width=\textwidth]{images/app_lightcan_green_spectrum.png}
         \caption{Spektrum AS7262}\label{fig:green_spec_7262}
     \end{subfigure}
-    \caption{Spektrum des grünen Emitters einer LightCan. Gemessen am 10.09.2019}
+    \caption{Spektrum des grünen Emitters einer LightCan}
 \end{figure}
 \noindent
 Doch war hier ein großes Defizit des AS7262 zu beobachten. Wie in Bild  \ref{fig:green_spec_MK350} zu erkennen liegt das Maximum
@@ -1850,7 +1854,20 @@ zu finden.
 %%%%%%%%%%%%%%%%%%%%%%%%%% Ausblick %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Ausblick}
 In dieser Arbeit wurde festgestellt, dass die spektralen Messdaten das Herzstück eines Abgleiches zwischen
-zwei LED Lichtquellen ist.
+zwei LED Lichtquellen sind. Ohne entsprechend spektral Aufgelöste Messgeräte, am besten im 1 Nanometer Abstand,
+ist ein exakter Abgleich schwierig bis unmöglich.\\
+Ebenfalls müssen verschiedene Dimmstufen der Emitter einer Lampe gut Aufgelöst aufgenommen werden. Aus den
+Erfahrungen dieser Arbeit wären 5\% Schritte zu Empfehlen um Genauigkeit und Messzeit in ein ausgewogens
+Verhhältnis zu bringen.\\
+Erfassen der Daten mit anderen Technologien wie beispielsweise einer Kamera eines Mobiltelefons ist nicht zu
+Empfehlen, da hier in der Regel nicht auf spektrale Informationen oder CIE XYZ Werte zurückgeriggen werden kann.
+Hier führen Umrechnungsverluste über den RGB Farbraum zu sich weiterführenden Fehlern.\\
+Oft kann in einem Mobiltelefon nicht auf die Rohdaten der Kamera zugegriffen werden. So werden die Messwerte von
+den optimierungen der Kamerafunktion des Mobiltelefons verfälscht und sind nicht verwendbar.\\
+Für die Erfassung der Messwerte ist ein spektrales Messgerät notwendig.\\
+\\
+Mit weiteren Optimierungen der hier erarbeiteten Abläufe ist ein Einsatz in der Praxis denkbar. Jedoch ist die
+findung eines geeigneten integrierbaren Senors die dringlichste Aufgabe zur Anwendung.
 %// TODO: Weiter schreiben
 \clearpage
 
