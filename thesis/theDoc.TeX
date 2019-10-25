@@ -808,7 +808,6 @@ absolute uv Koordinaten. Die Luminanz L ist ein Faktor für die Bestimmung der S
 \\
 Wenn die uv Koordinaten auf 0 gesetzt werden, also auf dem Referenzweißpunkt liegen, variiert L die Grauskala der Valenz. \cite{wisotopLuv}
 \clearpage
-%// TODO: Proceed Reading here
 %%%%%%%%%%%%%%%%%%%%%%%%%% LED %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{LED}
 \subsection{Allgemein}
@@ -818,20 +817,20 @@ beziehungsweise welche Frequenz sie emittiert.\\
 Im Folgenden ein Auszug der Element-Farbzuordnung \cite{wikiLed}:
 \begin{table}[H]
     \small
-    \begin{tabularx}{\textwidth}{|l|l|l|}
+    \begin{tabularx}{\textwidth}{|l|l|X|}
         \hline Element & Farbe & Wellenlänge (nm)\\\hline
         Aluminiumgalliumarsenid (AIGaAs) & Rot, Infrarot & 665 - 1000\\\hline
         Galliumarsenidphosphid (GaAsP) & Rot, Orange und Gelb & 570 - 760\\\hline
         Galliumphosphid (GaP) & (Gelb-)Grün & 500 - 580\\\hline
-        Indiumgalliumnitrid (InGaN) &  Grün, Blau, Violett und Ultraviolett & 520 - 230\\\hline
+        Indiumgalliumnitrid (InGaN) &  Grün, Blau, Violett und UV & 520 - 230\\\hline
     \end{tabularx}
     \caption{LED Zusammensetzungen}
 \end{table}
 \noindent
-Zunächst wurden \ac{led}s in den frühen 1960er Jahren als Leuchtindikatoren benutzt. Also zum Beispiel auf
-Platinen als Statusanzeige oder wie wir es heute von vielen Ethernetanschlussbuchsen kennen als blinkende Anzeige, die den Datenempfang
-signalisiert. Durch die voranschreitende technische Entwicklung der \ac{led}, wie bessere Effizienz und bessere Lichtausbeute, sowie
-verbesserter Langlebigkeit des Bauteils, fand Anfang der 1990er die \ac{led} auch ihre Anwendung im Heimbereich.\\
+Zunächst wurden \ac{led}s in den frühen 1960er Jahren als Leuchtindikatoren benutzt. Zum Beispiel auf Platinen als Statusanzeige oder wie
+wir es heute von vielen Ethernetanschlussbuchsen kennen als blinkende Anzeige, die den Datenempfang signalisiert. Durch die
+voranschreitende technische Entwicklung der \ac{led}, wie bessere Effizienz und Lichtausbeute, sowie verbesserter Langlebigkeit
+des Bauteils, fand Anfang der 1990er die \ac{led} auch ihre Anwendung im Heimbereich.\\
 \ac{led}s "'emittieren Licht in einem begrenzten Spektralbereich. Das Licht ist nahezu monochromatisch. Deshalb sind sie beim Einsatz als
 Signallicht besonders effizient im Vergleich zu anderen Lichtquellen, bei denen zur Erzielung einer monochromen Farbcharakteristik
 Farbfilter den größten Teil des Spektrums absorbieren müssen."'\\
@@ -839,9 +838,9 @@ Farbfilter den größten Teil des Spektrums absorbieren müssen."'\\
 
 \subsection{Mischen von Farben}\label{colormixing}
 Emittierende Körper unterliegen der additiven Farbmischung. Dies bedeutet, dass sich die ins elektromagnetische Spektrum abgegebenen
-Wellen bei ihren jeweiligen Wellenlängen aufaddieren. Somit kann mit verschiedenen LED-Lichtquellen eine neue Farbe gemischt
+Wellen bei ihren jeweiligen Wellenlängen aufaddieren. So kann mit mehreren verschiedenen LED-Lichtquellen eine neue Farbe gemischt
 werden.\\
-So kann beispielsweise mit einer roten und einer grünen \ac{led} ein orangener bis gelber Farbton gemischt werden.
+Beispielsweise kann mit einer roten und einer grünen \ac{led} ein orangener bis gelber Farbton gemischt werden.
 
 \subsection{Weiße LEDs}
 Eine tatsächlich weiße \ac{led} existiert bisher auf dem Markt nicht, da \ac{led}s generell schmalbandig abstrahlen. Die heutzutage
@@ -858,17 +857,18 @@ Lumineszenzfarbstoff.
         \includegraphics[width=\textwidth]{images/LED_weiss_phosphor.png}
         \caption{Spektrale Abdeckung}
     \end{subfigure}
-    \caption[Weiße LED - Aufbau und Spektrum]{Weiße LED - Aufbau und Spektrum \cite{wikiLed}}\label{fig:White LED}
+    \caption[Weiße LED - Aufbau und Spektrum]{Weiße LED - Aufbau und Spektrum \cite{wikiLed}}\label{fig:WhiteLED}
 \end{figure}
 \noindent
-Dies verschiebt das abgestrahlte Licht in den gelben Bereich. Somit entsteht mit einem Teil des blauen Lichts und mit dem farbverschobenen Spektrum
-ein breitbandiges Abstrahlverhalten.
+Dies verschiebt das abgestrahlte Licht in den gelben Bereich. Somit entsteht mit einem Teil des blauen Lichts und mit dem farbverschobenen
+Spektrum ein breitbandiges Abstrahlverhalten. Diese Kombination ergibt ein wie in Bild \ref{fig:WhiteLED} dargestellt einen weißen
+Farbeindruck.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Lichtquellen in der Veranstaltungstechnik %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Lichtquellen in der Veranstaltungstechnik}
 Für die Veranstaltungstechnik ist künstliches Licht nahezu unverzichtbar, von der Grundausleuchtung in einem Theater bis zum Effektlicht
-auf Kleinveranstaltungen. In den frühen Jahren der großen Konzerte wurde die Bühne hauptsächlich von Scheinwerfern mit
+auf Groß- und Kleinveranstaltungen. In den frühen Jahren der großen Konzerte wurde die Bühne hauptsächlich von Scheinwerfern mit
 Glühfaden-Leuchtmitteln beleuchtet. Diese Form der Beleuchtung wird in der Veranstaltungstechnik als Kunstlicht bezeichnet.\\
 Weiter werden vornehmlich in Theatern, sowie Film- und Fernseherproduktion Tageslichtscheinwerfer benutzt. Tageslichtleuchtmittel
 unterscheiden sich in der Art der Lichterzeugung gegenüber Glühlicht. Hier kommen anstatt eines Glühfadens zwei Elektroden in einer
@@ -887,10 +887,10 @@ Erde. Daher der Name Tageslichtscheinwerfer.
         \includegraphics[width=\textwidth]{images/HMI_Spectrum.png}
         \caption{Gasentladungslampe}
     \end{subfigure}
-    \caption[Typische Spektren der verschiedenen Leuchtmittel]{Typische Spektren der verschiedenen Leuchtmittel\cite{showlicht}[35+37]}\label{fig:lightEmiiterSpects}
+    \caption[Typische Spektren der verschiedenen Leuchtmittel]{Typische Spektren der verschiedenen Leuchtmittel \cite{showlicht}[35+37]}\label{fig:lightEmiiterSpects}
 \end{figure}
 \noindent
-In den 2000er Jahren hielt dann die LED Einzug in die Welt der Veranstaltungstechnik. Damit begann ein Wandel besonders im Bezug auf die
+In den 2000er Jahren hielt die \ac{led} Einzug in die Welt der Veranstaltungstechnik. Damit begann ein Wandel besonders im Bezug auf die
 Lebensdauer und die Lichtausbeute der Leuchtmittel. Mit der fortschreitenden Entwicklung der \ac{led} und der
 Scheinwerfer, welche diese nutzen, hat die \ac{led} heute an vielen Stellen die konventionelle Glühlampe oder \ac{hmi} verdrängt.\\
 Die Lebensdauer einer auf \ac{led}-Technik basierenden Lampe liegt im Bereich von 15.000 bis 45.000 Betriebsstunden. Eine Glühlampe hingegen
@@ -911,10 +911,10 @@ Dadurch war die Gesamtleistung aller eingesetzten Scheinwerfer früher deutlich 
 Doch da die Lampen für die verschieden Farben nie alle zur gleichen Zeit an waren, war dies nur ein Problem des sparsamen Einsatzes der zur
 verfügungstehenden Leistung.\\
 Mit \ac{led} Scheinwerfern gibt es dieses Problem heute kaum mehr. Die Scheinwerfer können durch das Verbauen von mehrfarbigen \ac{led}s
-(siehe \ref{colormixing}) in einem \ac{led} \ac{par} mit additiver Farbmischung ein großes Repertoire an Farben bereitstellen.\\
+(siehe Kapitel \ref{colormixing}) in einem \ac{led} \ac{par} mit additiver Farbmischung ein großes Repertoire an Farben bereitstellen.\\
 Die ersten \ac{led} \ac{par}s hatten viele einzelne rote, grüne und blaue 5-mm-\ac{led}s. Hier war jedoch das Problem, dass bei der
-Farbmischung mit beispielsweise Rot und Grün kein homogenes Gelb entstanden ist, da jede einzelne \ac{led}s ihr eigenes Streuverhalten
-hatte. So konnte auf einer auftreffenden Fläche wie dem Boden immer einzelne nur rote oder nur grüne Farbflächen entstehen. Dieses
+Farbmischung mit beispielsweise Rot und Grün kein homogenes Gelb entstanden ist, da jede einzelne \ac{led} ihr eigenes Streuverhalten
+hatte. So konnten auf einer auftreffenden Fläche wie dem Boden immer einzelne nur rote oder nur grüne Farbflächen entstehen. Dieses
 unerwünschte Verhalten wurde später gelöst, indem mehrere \ac{led}s in einen Chip integriert wurden, und vor jeden dieser \ac{led}-Chips
 eine Streulinse gesetzt wurde. Somit konnte ein deutlich homogeneres Abstrahlverhalten erreicht werden.\\
 Dennoch sind die Traversen auf den Großveranstaltungen voller geworden gegenüber früher, da sich die Anzahl von Geräteklassen der
@@ -958,21 +958,22 @@ RGBW \ac{led}s hinter einzelnen Linsen, welche in zwei Kreisen und einer Mittelp
 \end{figure}
 \noindent
 Das Movinglight hat einen einstellbaren Abstrahlwinkel von 8 bis 63 Grad. Dieser wurde allerdings bei den Messungen auf 63 Grad fest
-eingestellt, um ein möglichst homogenes Abstrahlverhalten zu erhalten. Laut Hersteller hat die Lampe gemessen in fünf Metern Abstand zur Lampe eine Lichtausbeute von 3.370 Lumen. Die Lampe ist per \ac{xlr} mit DMX, oder via Ethernet RJ45-Buchse per Art-Net steuerbar. An einem
+eingestellt, um ein möglichst homogenes Abstrahlverhalten zu erhalten. Laut Hersteller hat die Lampe gemessen in fünf Metern Abstand eine
+Lichtausbeute von 3.370 Lumen. Die Lampe ist per \ac{xlr} mit DMX, oder via Ethernet RJ45-Buchse per Art-Net steuerbar. An einem
 Display am Fuß (der "'Base"') kann der Scheinwerfer konfiguriert werden.
 \subsubsection{ARRI SkyPanel}
-Das Skypanel S60-C von der Firma Arri, ein Tochterunternehmen der Firma Osram, wird oft als Grundlicht in Film und Fernsehen eingesetzt.
+Das SkyPanel S60-C von der Firma Arri, ein Tochterunternehmen der Firma Osram, wird oft als Grundlicht in Film und Fernsehen eingesetzt.
 Es wird beworben, dass es mit \ac{cie} 1931 xyY Werten per DMX angesteuert werden kann und diese \ac{cie} Werte von der Lampe exakt
 wiedergegeben werden. Somit ist diese Lampe eine perfekte Referenz für diese Arbeit.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.48\textwidth]{images/skypanel_s60_c.png}
     \end{center}
-    \caption[ARRI Skypanel S60-C]{ARRI Skypanel S60-C \cite{arri}}
+    \caption[ARRI SkyPanel S60-C]{ARRI SkyPanel S60-C \cite{arri}}
 \end{figure}
 \noindent
 Das SkyPanel hat einen Abstrahlwinkel von 115 Grad. Die RGBW \ac{led}s befinden sich hinter einem lampengroßem Diffusor. Die Lampe ist per
-\ac{xlr} mit DMX, W-DMX oder via Ethernet RJ45-Buchse per Art-Net steuerbar. An einem Display auf der Rückseite kann der Scheinwerfer
+\ac{xlr} mit DMX oder via Ethernet RJ45-Buchse per Art-Net steuerbar. An einem Display auf der Rückseite kann der Scheinwerfer
 konfiguriert werden. Außerdem kann manuell am Gerät auch eine xyY \ac{cie} Farbe ohne externe Ansteuerung eingestellt werden.\\
 Bei einer Ansteuerung per DMX oder Art-Net kann am Gerät auch abgelesen werden, welche xyY Werte das Gerät aus der Ansteuerung ermittelt,
 und versucht zu emittieren.
@@ -997,7 +998,7 @@ Dieses Messgerät kann Spektraldaten im Bereich von 360 bis 760 Nanometern messe
 berechnet das Messgerät die \ac{cie} 1931 xy Koordinaten, sowie die \ac{cie} 1976 uv Koordinaten. Messwerte können einzeln oder auch in
 Serie erfasst werden und im XLS Format für die weitere Auswertung auf eine SD Karte gesichert werden.
 \clearpage
-
+%// TODO: weiter lesen
 %%%%%%%%%%%%%%%%%%%%%%%%%% Sensorik %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Sensorik}
 Es gibt einige Hersteller von Spektralsensoren für Licht und spektral benachbarte Bereiche wie Infrarot.
@@ -1666,7 +1667,7 @@ Die mit dem Spektrometer gemessenen Werte sind tabellarisch Tabelle \ref{table:l
 %//TODO: Messaufbau
 \subsection{Emitter Analyse pro Lampe} \label{emitterColorDrit}
 Hier sind zunächst die unterschiedlichen absoluten Helligkeiten jeder Lampe zu betrachten. Wenn die Helligkeitsunterschiede zwischen Emittern gering sind, ist
-das Einstellen einer Farbvalenz einfacher. Hier ist beispielsweise der weiße Emitter des Skypanels problematisch, da dieser wie in Bild \ref{fig:luxSkypanel} 
+das Einstellen einer Farbvalenz einfacher. Hier ist beispielsweise der weiße Emitter des SkyPanels problematisch, da dieser wie in Bild \ref{fig:luxSkypanel} 
 zu sehen bereits bei 5\% Steuerwert eine höhere absolute Helligkeit hat als der rote Emitter bei 20\% Steuerwert. So ist schon bei minmalen zumischen des weißen
 Emitters eine große Farbortverschiebung zu erwarten.\\
 Ein Farbort bezeichnet einen Punkt in einem Farbraum.\\
@@ -1712,13 +1713,14 @@ seiner Spektralenauflösung nicht homogen das Lichtspektrum aufnehmen kann. Somi
         \includegraphics[width=\textwidth]{images/app_skypanel_gamut_as7262.png}
         \caption{AMS AS7262}
     \end{subfigure}
-    \caption{Gamut des Skypanels aus Messungen mit Spektrometer und AS7262}
+    \caption{Gamut des SkyPanels aus Messungen mit Spektrometer und AS7262}
 \end{figure}
 \noindent
-Zur Verbesserung der Spektraldaten könnte eine Interpolation implementiert werden. Hier ist die Datenlage von sechs Messwerten über ein Spektrum von 380 nm
-zu gering, da zu viele Varianten aus den Wertekombinationen der Ursprung der Messwerte entstehen können. Oft hat der AS7262 nicht das Maximum eines Emitters
-erfassen können. In den folgenden Tabellen finden Sie die ermittelten xy Koordinaten der 100\% Werte der Skypanel-Emitter. In Bild \ref{compareUPRtekAS7262}
-sind diese Werte grafisch erfasst.
+Zur Verbesserung der Spektraldaten könnte eine Interpolation implementiert werden. Hier ist die Datenlage von sechs Messwerten
+über ein Spektrum von 380 nm zu gering, da zu viele Varianten aus den Wertekombinationen der Ursprung der Messwerte entstehen
+können. Oft hat der AS7262 nicht das Maximum eines Emitters erfassen können. In den folgenden Tabellen finden Sie die
+ermittelten xy Koordinaten der 100\% Werte der SkyPanel-Emitter. In Bild \ref{compareUPRtekAS7262} sind diese Werte grafisch
+erfasst.
 \begin{table}[H]
     \begin{tabularx}{\textwidth}{|l|X|X|X|X|}
         \hline Emitter   & Rot      & Grün     & Blau     & Weiß\\\hline
@@ -1728,16 +1730,18 @@ sind diese Werte grafisch erfasst.
         y (AS7262)       & 0.366    & 0.6055   & 0.0336   & 0.4328\\\hline
         MacAdam Ellipsen & > 35     & > 35     & > 35     & \textasciitilde 10\\\hline
     \end{tabularx}
-    \caption{xy Koordinaten der 100\% Ansteuerung der Emitter des Skypanels}
+    \caption{xy Koordinaten der 100\% Ansteuerung der Emitter des SkyPanels}
 \end{table}
 \noindent
-Anhand dieser enormen Abweichungen wurde entschieden, dass die Messwerte des AS7262 für diesen Zweck zu ungenau sind. Somit ist der Sensor für diese Anwendung
-ungeeignet. Im Folgenden wurden in der Applikation die Messwerte des Spektrometers als Datenbasis für die weiteren Abgleichvorgänge verwendet.
+Anhand dieser enormen Abweichungen wurde entschieden, dass die Messwerte des AS7262 für diesen Zweck zu ungenau sind. Somit ist
+der Sensor für diese Anwendung ungeeignet. Im Folgenden wurden in der Applikation die Messwerte des Spektrometers als Datenbasis
+für die weiteren Abgleichvorgänge verwendet.
 \subsection{Analyse der Abgleichvorgänge}
-Bei den folgenden Messungen wurde das Skypanel in der Applikation als Referenz definiert. Der LEDWash und die LightCan folgen dem bestimmten Mixpunkt des Skypanels.
+Bei den folgenden Messungen wurde das SkyPanel in der Applikation als Referenz definiert. Der LEDWash und die LightCan folgen
+dem bestimmten Mixpunkt des SkyPanels.
 \subsubsection{Cyan}
-Hier wurde das Skypanel mit 100\% für den grünen Emitter und 65\% angesteuert. Der Mixpunkt liegt hier innerhalb des kombinierten Gamut. Dieser liegt bei den
-CIE 1931 Koordinaten x = 0.1624 und y = 0.34.
+Hier wurde das SkyPanel mit 100\% für den grünen Emitter und 65\% angesteuert. Der Mixpunkt liegt hier innerhalb des
+kombinierten Gamut. Dieser liegt bei den CIE 1931 Koordinaten x = 0.1624 und y = 0.34.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.8\textwidth]{images/app_mix_cyan_cie.png}
@@ -1763,15 +1767,16 @@ CIE 1931 Koordinaten x = 0.1624 und y = 0.34.
     \begin{tabularx}{\textwidth}{|X|X|X|X|}
         \hline           & x        & y        & MacAdam Ellipsen\\\hline
         Vorberechnet     & 0.1624   & 0.34     & > 36\\\hline
-        Skypanel (Ref)   & 0,1528   & 0,1694   & -\\\hline
+        SkyPanel (Ref)   & 0,1528   & 0,1694   & -\\\hline
         LEDWash 300      & 0,1565   & 0,1965   & \textasciitilde 2\\\hline
         LightCan         & 0,152    & 0,2128   & < 6\\\hline
     \end{tabularx}
     \caption{xy Koordinaten der Lampen mit der Mischfarbe Cyan}
 \end{table}
 \noindent
-Hier ist zu beobachten, dass zwar die Lampen akzeptabel bis gut abgeglichen sind. Jedoch weicht der gemessene Farbort der Referenzlampe mit über 35 MacAdam
-Ellipsen deutlich von dem angestrebten Wert ab. Dies ist in Bild \ref{fig:macAdamCyan} deutlich zu erkennen.
+Hier ist zu beobachten, dass zwar die Lampen akzeptabel bis gut abgeglichen sind. Jedoch weicht der gemessene Farbort der
+Referenzlampe mit über 35 MacAdam Ellipsen deutlich von dem angestrebten Wert ab. Dies ist in Bild \ref{fig:macAdamCyan}
+deutlich zu erkennen.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.9\textwidth]{images/macAdam/comparedCyan_mix.png}
@@ -1779,13 +1784,16 @@ Ellipsen deutlich von dem angestrebten Wert ab. Dies ist in Bild \ref{fig:macAda
     \caption{MacAdam Analyse des Cyan Abgleichvorgangs} \label{fig:macAdamCyan}
 \end{figure}
 \subsubsection{Gelb und warm Weiß}
-Grafiken und Tabellen zu diesen Abgleichvorgängen sind im Anhang in Kapitel \ref{equalizationMeasurments} zu finden. Auch bei der Messung des gelben Mischtons ist
-eine erhebliche Diskrepanz zwischen dem vorberechneten Mixpunkt und dem Referenzgerät zu beobachten (Bild \ref{fig:macAdamYellow}). Weiter ist hier bei beiden
-Mischfarben zu beobachten, dass die Farborte der abzugleichenden Geräte ebenfalls fern ab des Farborts des Referenzgeräts liegen. Jedoch liegen die Farborte
-der abzugleichenden Geräte sehr nahe beieinander.\\
-Diese Abweichungen sind unter anderem auch der Interpolation zwischen den Dimmstufen der einzelnen Emitter sowie der niedrigen Auflösung der
-Emitterhelligkeitsskala von 0 bis 100 Prozent geschuldet. So ist es nur unter guten Bedingungen möglich, dass anhand der erfassten und weiter interpolierten Daten
-einer Lampe die gewünschte Mischfarbe produzieren werden kann. Hier beschränkt auch weiter die zu niedrig aufgelöste \ac{dmx} Ansteuerungsmöglickeit von acht Bit die theoretisch berechneten Emitter Helligkeitskombinationen.\\
+Grafiken und Tabellen zu diesen Abgleichvorgängen sind im Anhang in Kapitel \ref{equalizationMeasurments} zu finden. Auch bei
+der Messung des gelben Mischtons ist eine erhebliche Diskrepanz zwischen dem vorberechneten Mixpunkt und dem Referenzgerät zu
+beobachten (Bild \ref{fig:macAdamYellow}). Weiter ist hier bei beiden Mischfarben zu beobachten, dass die Farborte der
+abzugleichenden Geräte ebenfalls fern ab des Farborts des Referenzgeräts liegen. Jedoch liegen die Farborte der abzugleichenden
+Geräte sehr nahe beieinander.\\
+Diese Abweichungen sind unter anderem auch der Interpolation zwischen den Dimmstufen der einzelnen Emitter sowie der niedrigen
+Auflösung der Emitterhelligkeitsskala von 0 bis 100 Prozent geschuldet. So ist es nur unter guten Bedingungen möglich, dass
+anhand der erfassten und weiter interpolierten Daten einer Lampe die gewünschte Mischfarbe produzieren werden kann. Hier
+beschränkt auch weiter die zu niedrig aufgelöste \ac{dmx} Ansteuerungsmöglickeit von acht Bit die theoretisch berechneten
+Emitter Helligkeitskombinationen.\\
 Abhilfe wäre hier eine bei vielen Lampen verfügbare Ansteuerungsmöglickeit eines Emitters mit 16 Bit.
 \subsection{Fehlerquellenanalyse}
 Aus der bisherigen Auswertung sind 4 Hauptfehlerquellen auszumachen:
@@ -1841,9 +1849,9 @@ Dieses Vorgehen hat das Potenzial sich unendlich zu wiederholen. Daher wurde die
 nicht umgesetzt.
 \subsubsection{Fehlerquelle 3 - Umrechnungsverluste zwischen dem RGB und CIE Farbraum}
 Da der CIE 1931 Farbraum erheblich mehr Farben darstellen kann als der hier in mehreren Rechnungen verwendete sRGB Farbraum,
-resultieren aus der Umrechnung von XYZ Werten zu RGB Werten - RGB Werte, welche kleiner Null oder größer Eins sein können. Dieses Verhalten
-ist kontinuierlich im Ablauf des Abgleiches zu beobachten. Hier müssen die errechneten Werte auf Eins normiert
-werden. Sodass später nicht über 100\% eines Emitters für eine Farbmischung benötigt werden müssten.\\
+resultieren aus der Umrechnung von XYZ Werten zu RGB Werten - RGB Werte, welche kleiner Null oder größer Eins sein können.
+Dieses Verhalten ist kontinuierlich im Ablauf des Abgleiches zu beobachten. Hier müssen die errechneten Werte auf Eins
+normiert werden. Sodass später nicht über 100\% eines Emitters für eine Farbmischung benötigt werden müssten.\\
 Mit dieser Korrektur verschiebt sich wiederum der Ausgangsberechnungswert wie in Fehlerquelle 2 dargestellt.\\
 Diese Verluste konnten bisher nicht kompensiert werden.
 \subsubsection{Fehlerquelle 4 - Interne Farbkorrekturen der eingesetzten Lampen}
@@ -1917,7 +1925,7 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
         85\%  & 12463 & 18014 & 4900 & 52849\\\hline
         100\% & 14554 & 21179 & 5408 & 65884\\\hline
     \end{tabularx}
-    \caption{Gemessene Luminanz Werte des Skypanel} \label{table:luxSkypanel}
+    \caption{Gemessene Luminanz Werte des SkyPanel} \label{table:luxSkypanel}
 \end{table}
 \noindent
 \begin{figure}[H]
@@ -1952,7 +1960,7 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
         \includegraphics[width=\textwidth]{images/macAdam/skypanelWhite.png}
         \caption{Weißer Emitter}
     \end{subfigure}
-    \caption{Übersicht der Skypanel Emitter xy Koordinaten mit MacAdam Ellipsen}
+    \caption{Übersicht der SkyPanel Emitter xy Koordinaten mit MacAdam Ellipsen}
 \end{figure}
 \noindent
 \begin{table}[H]
@@ -1963,7 +1971,7 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
         y (Rot)          & 0,3092 & 0,3094 & 0,3096 & 0,3097 & 0,3101 & 0,3101 & 0,3104 & 0,3107 \\\hline
         MacAdam Ellipsen & -      & > 1    & > 1    & > 1    & > 1    & > 1    & > 2    & > 3    \\\hline
     \end{tabularx}
-    \caption{Farbortverschiebung des roten Skypanel Emitters}
+    \caption{Farbortverschiebung des roten SkyPanel Emitters}
 \end{table}
 \noindent
 \begin{table}[H]
@@ -1974,7 +1982,7 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
         y (Grün)         & 0,7084 & 0,7136 & 0,7151 & 0,7165 & 0,716  & 0,7165 & 0,7162 & 0,7158 \\\hline
         MacAdam Ellipsen & -      & > 1    & > 1    & > 1    & > 1    & > 1    & > 1    & > 1    \\\hline
     \end{tabularx}
-    \caption{Farbortverschiebung des grünen Skypanel Emitters}
+    \caption{Farbortverschiebung des grünen SkyPanel Emitters}
 \end{table}
 \noindent
 \begin{table}[H]
@@ -1985,7 +1993,7 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
         y (Blau)         & 0,0358 & 0,0348 & 0,0347 & 0,0345 & 0,0345 & 0,0351 & 0,0366 & 0,0377 \\\hline
         MacAdam Ellipsen & -      & > 2    & < 3    & < 3    & < 3    & < 3    & < 3    & < 3    \\\hline
     \end{tabularx}
-    \caption{Farbortverschiebung des blauen Skypanel Emitters}
+    \caption{Farbortverschiebung des blauen SkyPanel Emitters}
 \end{table}
 \noindent
 \begin{table}[H]
@@ -1996,7 +2004,7 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
         y (Weiß)         & 0,4113 & 0,411  & 0,4102 & 0,4096 & 0,4091 & 0,4089 & 0,4086 & 0,4082 \\\hline
         MacAdam Ellipsen & -      & > 1    & > 1    & > 1    & > 1    & 1      & > 2    & > 2    \\\hline
     \end{tabularx}
-    \caption{Farbortverschiebung des weißen Skypanel Emitters}
+    \caption{Farbortverschiebung des weißen SkyPanel Emitters}
 \end{table}
 \noindent
 \clearpage
@@ -2202,12 +2210,12 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
     \begin{center}
         \includegraphics[width=.8\textwidth]{images/macAdam/comparison_upr_as7262.png}
     \end{center}
-    \caption{Vergleich der Messungen der Skypanel Emitter des UPRtek Spektrometers und dem AS7262} \label{compareUPRtekAS7262}
+    \caption{Vergleich der Messungen der SkyPanel Emitter des UPRtek Spektrometers und dem AS7262} \label{compareUPRtekAS7262}
 \end{figure}
 \clearpage
 
 \subsubsection{Messungen von Mischfarben} \label{equalizationMeasurments}
-\textbf{Skypanel Referenz - Gelb - 100\% Rot 100\% Grün}
+\textbf{SkyPanel Referenz - Gelb - 100\% Rot 100\% Grün}
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.8\textwidth]{images/app_mix_yellow_cie.png}
@@ -2239,14 +2247,14 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
     \begin{tabularx}{\textwidth}{|X|X|X|X|}
         \hline           & x        & y        & MacAdam Ellipsen\\\hline
         Vorberechnet     & 0.1624   & 0.34     & > 36\\\hline
-        Skypanel (Ref)   & 0,4016   & 0,4981   & -\\\hline
+        SkyPanel (Ref)   & 0,4016   & 0,4981   & -\\\hline
         LEDWash 300      & 0,4565   & 0,4716   & > 36\\\hline
         LightCan         & 0,4521   & 0,474    & < 36\\\hline
     \end{tabularx}
     \caption{xy Koordinaten der Lampen mit der Mischfarbe Gelb}
 \end{table}
 \clearpage
-\textbf{Skypanel Referenz - Warm Weiß - 100\% Weiß}
+\textbf{SkyPanel Referenz - Warm Weiß - 100\% Weiß}
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.8\textwidth]{images/app_mix_warmWhite_cie.png}
@@ -2278,7 +2286,7 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
     \begin{tabularx}{\textwidth}{|X|X|X|X|}
         \hline           & x        & y        & MacAdam Ellipsen\\\hline
         Vorberechnet     & 0.4419   & 0.4082   & \textasciitilde 0\\\hline
-        Skypanel (Ref)   & 0,4418   & 0,4073   & -\\\hline
+        SkyPanel (Ref)   & 0,4418   & 0,4073   & -\\\hline
         LEDWash 300      & 0,5447   & 0,3726   & >> 50\\\hline
         LightCan         & 0,5379   & 0,3786   & >> 50\\\hline
     \end{tabularx}
