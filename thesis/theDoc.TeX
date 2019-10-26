@@ -1966,8 +1966,21 @@ den optimierungen der Kamerafunktion des Mobiltelefons verfälscht und sind nich
 Für die Erfassung der Messwerte ist ein spektrales Messgerät notwendig.\\
 \\
 Mit weiteren Optimierungen der hier erarbeiteten Abläufe ist ein Einsatz in der Praxis denkbar. Jedoch ist die
-findung eines geeigneten integrierbaren Senors die dringlichste Aufgabe zur Anwendung.
-%// TODO: Weiter schreiben
+findung eines geeigneten integrierbaren Senors die dringlichste Aufgabe zur Anwendung.\\
+Ein solcher geeigneter Seonsr wäre mit einer entsprechender Kalibrierung der AS7261. Eine solche Kalibrierung ist
+allerdings wie bereits in Kapitel \ref{measuringWith7261} beschrieben sehr Anwendungsspezifisch. Je breiter der
+Anwendungsfall definiert ist, desto aufwändidiger ist eine Kalibrierung des Sensors.\\
+Eine Alternative könnte der Sensor AS7265x der Firma AMS sein \cite{datasheet65}. Dieser Sensor besteht aus drei
+Subsensoren, welche jeweils sechs Messflanken im elektromagnetischen Spektrum besitzen. Zusammen besitzen die drei
+Sensoren 18 Messflanken von 410 bis 940 Nanometern. 14 dieser Messflanken liegen innerhalb des sichtbaren Spektrums.
+Die anderen vier im Infrarotbereich des Spektrums.\\
+Dies ist eine deutliche Verbesserung der spektralen Auflösung gegenüber dem AS7262 Sensor. So kann diese Fehlerquelle
+verringert werden. Auch eine Interpolation zwischen den Messwerten aufgrund der Spektralenabdeckung sollte zu einer
+aussagekräftigen Datenbasis führen.\\
+\\
+Künfig wird diese oder eine ähnliche Implementierung in der grandMA3 Software der Firma MA Lighting zu Einsatz kommen.
+Zum Zeitpunkt dieser Arbeit sind bereits erste Teile der Implementierung aus dieser Arbeit in die Software
+eingearbeitet worden.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Anhang %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2449,6 +2462,7 @@ c - Lichtgeschwindigkeit - 299 792 458 meter pro sekunde
     \bibitem[Sutherland–Hodgman algorithm Wikipedia, 2019]{sutherlandHodgman} \url{https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm}. Visited on: 22.09.2019
     \bibitem[David MacAdam Wikipedia, 2019]{macAdam} \url{https://en.wikipedia.org/wiki/David_MacAdam}. Visited on: 18.10.2019
     \bibitem[LED ColorCalculator, 2019]{osram} \url{https://www.osram.us/cb/tools-and-resources/applications/led-colorcalculator/index.jsp}. Visited on: 18.10.2019
+    \bibitem[AS7265x Datenblatt, 2019]{datasheet65}"'AS7265x Smart 18-Channel VIS to NIR Spectral ID 3-Sensor Chipset with Electronic Shutter"', \url{https://ams.com/documents/20143/36005/AS7265x_DS000612_1-00.pdf/08051c8a-a7f6-6231-7993-2d3fe0bf38b8}. Visited on: 26.10.2019
 \end{thebibliography}
 \endgroup
 \clearpage
