@@ -1174,7 +1174,7 @@ eine fehlerhafte xyY Koordinate bestimmt. Die gemessene Koordinate lag im pinken
 Je nach Anwendungsfall muss der Sensor durch den Anwender eigens kalibriert werden. Die Werkskalibrierung ist für das Messen von Farbtemperaturen
 optimiert.\\
 Gemessene Koordinaten im roten und grünen Bereich waren jedoch deutlich näher an den mit dem Spektrometer gemessenen Werten im Vergleich zu
-dem AS7262. %// TODO: Wenn nötig Verweis auf späteres eingehen auf eine Kalibrierung
+dem AS7262.
 \subsubsection{Erfassen der Messwerte mit dem UPRtek Spektrometer}
 Zur Verarbeitung in der Applikation wurden die XLS Export Dateien des Spektrometers in einer Ordnerstruktur auf dem Entwicklungsrechner organisiert.
 Pro Gerät ein Ordner mit Unterordnern pro Emitter. Die XLS Dateien der Messungen wurden in diesen Unterordnern gesammelt. Es wird angenommen, dass die
@@ -1664,13 +1664,75 @@ Zunächst sind die charakteristischen Luminanz und Farbvalenz Werte der Emitter 
 Spektrometer erhoben, um eine qualitative Aussage über die mit den AS726x gemessene Werte treffen zu können.\\
 Die mit dem Spektrometer gemessenen Werte sind tabellarisch Tabelle \ref{table:luxSkypanel} bis \ref{table:whiteEmitterLightCan} und als Diagramme Bild
 \ref{fig:luxSkypanel} bis \ref{fig:macAdamLightCanEmitters} im Anhang zu finden.
-%//TODO: Messaufbau
+\subsection{Messaufbau}
+Die in diesem Kapitel beschriebenen Messungen wurden unter folgenden Bedingungen durchgeführt.
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/meassureScenario.png}
+    \end{center}
+    \caption{Skizze des Messaufbaus} \label{fig:measureScribble}
+\end{figure}
+\noindent
+In Bild \ref{fig:measureScribble} wird der Messaufbau schematisch skizziert. Oben von links nach rechts sind die verwendeten Geräte eingezeichent.
+Das SkyPanel, der LEDWash 300 und rechts die LightCan. Die roten Punkte markieren die Position des Messgerätes pro Lampe.
+\begin{table}[H]
+    \begin{tabularx}{\textwidth}{|l|X|X|X|}
+        \hline Gerät  & SkyPanel & LEDWash 300 & LightCan\\\hline
+        Abstand       & 20 cm    & 30 cm       & 12 cm   \\\hline
+    \end{tabularx}
+    \caption{Messabstände des Aufbaus}
+\end{table}
+Dieser Messaufbau ist auf möglichst ideale Bedingungen ausgerichtet.\\
+Ein ähnlicher Aufbau ist allerdings in der Praxis selten möglich, da in der Regel die Lampen an Ihren festen Positionen beispielsweise in einem
+Fernsehstudio an der Decke angebracht sind. Eine solche Messsituation könnte in der Praxis lediglich in einem Lager für Lampen oder in einer
+Werkstatt zur Wartung der Lampen hergestellt werden.\\
+Die Abstände wurden so gewählt, sodass Messungen mit einem stabilen Messwert durchgeführt werden können. Der Abstand zum LEDWash musste größer
+gewählt werden, um den Lichtaustritt aller Linsen zu messen.\\
+\\
+Zusätzlich wurde für ein realitätsnäheres Szenario aufgebaut um weitere Messungen mit den AMS Sensoren durchzuführen.
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/meassureScenarioRealistic.png}
+    \end{center}
+    \caption{Skizze des realitätsnahen Messaufbaus} \label{fig:measureScribbleReal}
+\end{figure}
+\noindent
+Hier wurden meherere Messpositionen auf einem Rolltisch festgelegt. Ebenso wurde die position des Rolltisches im Raum markiert, um immer die
+gleiche Messposition zu finden. An den Messpositionen auf dem Tisch wurde der 3D gedruckte Halter für die LightCan angebracht, sowie kleine
+einzelne 3D gedruckte Sensor Halter, welche auf die anderen beiden Lampen ausgerichtet sind.
+\begin{table}[H]
+    \begin{tabularx}{\textwidth}{|l|X|X|X|}
+        \hline Gerät  & SkyPanel & LEDWash 300 & LightCan\\\hline
+        Abstand       & 100 cm   & 140 cm      & 12 cm   \\\hline
+    \end{tabularx}
+    \caption{Messabstände realitätsnahen Aufbaus}
+\end{table}
+\noindent
+Die Abstände wurden bei der Konzeption des Aufbaus nicht beachtet, da in der Praxis die Lampen für den Showeinsatz positioniert werden un nicht
+für die Messung. Weiter wurde für den Rolltisch nur die eine Position gewählt, da jedes neue Positionieren weitere Zeit in Anspruch nimmt. Daher
+ist zu erwarten, dass in der Praxis viele vorallem kopfbewegte Lampen wie der LEDWash auf eine position ausgerichtet werden und dann von diesem
+einen Punkt vermessen werden.\\
+Eine Herausforderung bei der Einrichtung des Messaufbaus ist der 2 Grad Betrachtungswinkel der AMS Sensoren. So muss beispielsweise eine zwei
+Meter entfernte Lampe mit dem Sensorbereich exakt getroffen werden für eine optimale Messung.\\
+Die übrigen Lampen wie das SkyPanel werden anschließend versucht, je nach Ausrichtung, in die bereits notwendingen Tischpositionen zu integrieren.\\
+Die LightCan wurde weiterhin in ihrem 3D gedruckten Halter vermessen, da diese akkubasierte Lampe regelmäßig von ihrem Einsatzort zum Aufladen
+entfernt werden muss und somit in einer Werkstatt oder in einem Lager vermessen werden kann.\\
+Die folgenden analysen und Messergebnisse stammel alle aus Messungen aus dem ersten Messaufbau. Die Messungen aus dem zweiten Aufbau wurden
+verworfen. Dies wird in Kapitel \ref{measuresWithAS7262} näher erläutert.
 \subsection{Emitter Analyse pro Lampe} \label{emitterColorDrit}
 Hier sind zunächst die unterschiedlichen absoluten Helligkeiten jeder Lampe zu betrachten. Wenn die Helligkeitsunterschiede zwischen Emittern gering sind, ist
 das Einstellen einer Farbvalenz einfacher. Hier ist beispielsweise der weiße Emitter des SkyPanels problematisch, da dieser wie in Bild \ref{fig:luxSkypanel} 
 zu sehen bereits bei 5\% Steuerwert eine höhere absolute Helligkeit hat als der rote Emitter bei 20\% Steuerwert. So ist schon bei minmalen zumischen des weißen
 Emitters eine große Farbortverschiebung zu erwarten.\\
-Ein Farbort bezeichnet einen Punkt in einem Farbraum.\\
+Ein Farbort bezeichnet einen Punkt in einem Farbraum.
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/charts/skypanel.png}
+    \end{center}
+    \vspace{-.4cm}
+    \caption{Darstellung Luminanz der SkyPanel Emitter} \label{fig:luxSkypanel}
+\end{figure}
+\noindent
 Eine höhere Auflösung der Ansteuerung kann hier Abhilfe schaffen. Viele Scheinwerfer besitzen zu diesem Zweck heute 16 anstatt 8 Bit Ansteuerungen. Das bedeutet,
 dass für eine Funktion des Gerätes wie einen Emitter zwei DMX Kanäle verwendet werden.\\
 Ähnliches Verhalten ist bei den Helligkeits Werten des Robe LEDWash zu beobachten (Bild \ref{fig:luxLedWash}). Die LightCan der Firma Ape Labs hingegen hat ein
@@ -1680,24 +1742,33 @@ deutliche Dominanz des weißen Emitters.
 Anschießend wurde die Farbtreue der einzelnen Emitter der verwendeten Lampen betrachtet. Hier und auch im späteren Verlauf der Analysen wurden MacAdam Ellipsen
 genutzt. Dieses Analyse Verfahren wurde von David Lewis MacAdam um 1942 erstmals beschrieben. \cite{macAdam}. Hier werden Ellipsen um einen Farbort in einem CIE
 1931 Diagramm eingezeichnet. Mit Probanden ermittelte MacAdam, dass Farbortabweichungen innerhalb von zwei Ellipsen nur von geübten Menschen erkannt werden.\\
-Somit wird angenommen, dass eine Farbortverschiebung von bis zu zwei MacAdam Ellipsen als nicht wahrnehmbar angenommen.\\ %//TODO: Quelle
+Somit wird angenommen, dass eine Farbortverschiebung von bis zu zwei MacAdam Ellipsen als nicht wahrnehmbar angenommen.\\ %//TODO: Quelle von Daniel
 \\
 Die Ellipsenanalyse wurde mit dem Programm "'LED ColorCalculator"' von der Firma Osram durchgeführt. \cite{osram}\\
 \\
 Alle Emitter der gemessenen Lampen weisen chromatische Abweichungen über ihre Dimmstufen hinweg auf. Als Soll Farbort wurde der 100\% Wert des jeweiligen Emitters
 angenommen. Besonders die blauen Emitter aller Lampen weisen deutliche Farbortverschiebungen auf. Hier ist die Nichtlinearität des CIE 1931 Farbraumes zu
-beachten. Die Fläche einer Ellipse im blauen oder roten Bereich ist deutlich kleiner als im grünen Bereich.\\
+beachten. Wie in Bild \ref{fig:macAdamExample} zu beobachten, ist die Fläche einer Ellipse im blauen oder roten Bereich ist deutlich kleiner als im grünen Bereich.\\
+\\
 Diese relevanten Abweichungen haben während des Variierens der Helligkeit eines Emitters Einfluss auf den Gamut der Lichtquelle. So ändert sich theoretisch auch
 beim Abgleichvorgang der Gamut der Referenzlampe und der abzugleichenden Lampe. Diese hohe Varianz kann mit dem in Kapitel \ref{comparing} beschriebenen Verfahren
-nicht abgebildet werden. Diese Fehlerquelle ist im Folgenden zu berücksichtigen.\\
-\\
+nicht abgebildet werden. Diese Fehlerquelle ist im Folgenden zu berücksichtigen.
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/CIExy1931MacAdam.png}
+    \end{center}
+    \vspace{-.4cm}
+    \caption[Verschiedene Farborte mit etwa der zehnten MacAdam Ellipse]{Verschiedene Farborte mit etwa der zehnten MacAdam Ellipse \cite{macAdam}} \label{fig:macAdamExample}
+\end{figure}
+\noindent
 Bei den Messungen mit dem Spektrometer ist deutlich geworden: Um in der Praxis Lampen zu vermessen ist das automatisierte Erfassen der Messwerte notwendig. Das
 Messen einer Lampe mit vier Emittern mit jeweils acht Messpunkten nahm etwa zehn Minuten in Anspruch. Dieser Zeitraum beinhaltet das Ansteuern der Lampe, das
 Aufnehmen der Messwerte sowie das Aufbereiten der Daten zum Einlesen in die Applikation. Diese Zeit kann durch einen in die Applikation integrierten Senor verkürzt
 werden. Weiter macht eine integrierte Lösung den Messprozess komfortabler für den Anwender, da Sensorwerte von der Applikation automatisch aufgenommen und
 aufbereitet werden, ohne weitere Benutzerinteraktion.\\
+\\
 Zusätzlich wird der Eingriff durch den Benutzer als Fehlerquelle ausgeschlossen.
-\subsection{Analyse der Messwerte des AS7262}
+\subsection{Analyse der Messwerte des AS7262} \label{measuresWithAS7262}
 Die mit dem AS7262 erfassten Messwerte unterscheiden sich deutlich von den mit dem Spektrometer aufgezeichneten Daten. Wie bereits in Kapitel \ref{measureWithAS7262}
 beschrieben, ist die Spektraleauflösung des Sensors zu gering um die tatsächliche maximale Helligkeit eines Emitters zu erfassen.\\
 Bei Betrachtung des erzeugten Gamuts aus den Messwerten des AS7262 im Vergleich zu dem gemessenen Gamut des Spektrometers ist zu erkennen, dass der AS7262 auf Grund
@@ -1732,6 +1803,12 @@ erfasst.
     \end{tabularx}
     \caption{xy Koordinaten der 100\% Ansteuerung der Emitter des SkyPanels}
 \end{table}
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.93\textwidth]{images/macAdam/comparison_upr_as7262.png}
+    \end{center}
+    \caption{Vergleich der Messungen der SkyPanel Emitter des UPRtek Spektrometers und dem AS7262} \label{compareUPRtekAS7262}
+\end{figure}
 \noindent
 Anhand dieser enormen Abweichungen wurde entschieden, dass die Messwerte des AS7262 für diesen Zweck zu ungenau sind. Somit ist
 der Sensor für diese Anwendung ungeeignet. Im Folgenden wurden in der Applikation die Messwerte des Spektrometers als Datenbasis
@@ -1910,7 +1987,7 @@ Die Ansteuerungswerte in Prozent setzten sich wie folgt in DMX Werten um:
 \end{table}
 \vspace{-.5cm}
 \subsubsection{UPRtek}
-Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
+Messungen mit dem Spektrometer UPRtek LED 350\\
 \textbf{Arri SkyPanel RGBW Mode}
 \begin{table}[H]
     \begin{tabularx}{\textwidth}{|X|X|X|X|X|}
@@ -1928,12 +2005,6 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
     \caption{Gemessene Luminanz Werte des SkyPanel} \label{table:luxSkypanel}
 \end{table}
 \noindent
-\begin{figure}[H]
-    \begin{center}
-        \includegraphics[width=.8\textwidth]{images/charts/skypanel.png}
-    \end{center}
-    \caption{Darstellung Luminanz der SkyPanel Emitter} \label{fig:luxSkypanel}
-\end{figure}
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=\textwidth]{images/macAdam/skypanelTotal.png}
@@ -2203,15 +2274,6 @@ Messungen mit dem Spektrometer UPRtek LED 350. Gemessen am 15.10.2019.\\
     \caption{Farbortverschiebung des weißen LightCan Emitters} \label{table:whiteEmitterLightCan}
 \end{table}
 \noindent
-\clearpage
-
-\subsubsection{AS7262 vs UPRtek}
-\begin{figure}[H]
-    \begin{center}
-        \includegraphics[width=.8\textwidth]{images/macAdam/comparison_upr_as7262.png}
-    \end{center}
-    \caption{Vergleich der Messungen der SkyPanel Emitter des UPRtek Spektrometers und dem AS7262} \label{compareUPRtekAS7262}
-\end{figure}
 \clearpage
 
 \subsubsection{Messungen von Mischfarben} \label{equalizationMeasurments}
