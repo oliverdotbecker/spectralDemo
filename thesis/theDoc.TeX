@@ -900,7 +900,7 @@ Eine weitere Stärke der LED ist der niedrige Stromverbrauch bei einer vergleich
 Ein \ac{par}64 Medium Flood CP62 hat eine Lichtausbeute von etwa 320.000 Lumen mit einer Leistung von 1000 Watt \cite{convpar}. Ein %//TODO: Check Lumen
 vergleichbarer moderner \ac{led} \ac{par} mit einer LED Leistung von 180 Watt hat eine Lichtausbeute von etwa 5100 Lumen \cite{ledpar}. So
 können heute umfangreichere Lichtinstallationen umgesetzt werden. Da die verfügbare Leistung an Veranstaltungsorten begrenzt ist, konnte in
-der Vergangenheit nur eine vergleichsweise geringe Anzahl von konventionellen \ac{par} Scheinwerfern eingesetzt werden, da schon 100
+der Vergangenheit nur eine vergleichsweise geringe Anzahl von konventionellen \ac{par} Scheinwerfern eingesetzt werden, da schon bei 100
 \ac{par}s mit 1000 Watt Anschlussleistung bereits 100.000 Watt zur Verfügung stehen müssen, um alle zur gleichen Zeit zu betreiben. Dies
 war in der Regel nicht der Fall. Dennoch wurden in der Vergangenheit bei Großveranstaltungen solche Stückzahlen in Bühnen verbaut und dies
 nicht als einziger Scheinwerfertyp. Hier hat die LED einen weiteren Vorteil zu damals.\\
@@ -1028,7 +1028,7 @@ Dies ist ein USB-Seriell-Transceiver. Dieser Chip von der Firma FTDI wandelt \ac
 Die Kommunikation über \ac{uart} mit allen AMS Sensoren funktioniert mit AT-Kommandos, einer \ac{ascii} basierten Kommandosprache,
 welche für Modems in den 1980er Jahren entwickelt wurde.
 \subsection{AS7261}
-Das Sensorspektrum des 7261 ähnelt sehr der Farbreizverarbeitung im menschlichen Auge. Die in Bild \ref{fig:AS7261_spectrum} gezeigte
+Das Sensorspektrum des AS7261 ähnelt sehr der Farbreizverarbeitung im menschlichen Auge. Die in Bild \ref{fig:AS7261_spectrum} gezeigte
 Gewichtung der Sensoren ist angelehnt an die \ac{cie} 1931 Gewichtungskurven für das menschliche Auge.
 \begin{figure}[H]
     \centering
@@ -1058,7 +1058,7 @@ an geschaltet werden, um nicht selbst emittierende Objekte zu vermessen.\\
 Die Schnittstelle stellt noch einige weitere Informationen zur Verfügung, wie die Chip Software-Version, einen Sensor Gain, einen Sensor
 Bank Modus und die Integrationszeit.
 \subsection{AS7262}
-Auch das Sensorspektrum des 7262 ähnelt sehr der Zapfenverteilung im menschlichen Auge. Dieser \ac{ic} hat insgesamt sechs einzelne
+Auch das Sensorspektrum des AS7262 ähnelt sehr der Zapfenverteilung im menschlichen Auge. Dieser \ac{ic} hat insgesamt sechs einzelne
 Photodioden. Davon sind vier im rot bis gelbgrünen Teil des Spektrums angesiedelt, eine weitere Photodiode im grünen Spektralbereich und
 die letzte im blauen Bereich. So sind auch in Bild \ref{fig:eye_spectrum} zwei der drei Zapfenarten im rot bis grünen Bereich. Die dritte
 Zapfenart ist im blauen Bereich.
@@ -1086,13 +1086,13 @@ Hier werden aus der \ac{uart} (AT) Schnittstelle mit dem Befehl "'ATCDATA"' die 
 \subsubsection{Erfassen der Messwerte mit dem AS7262} \label{measureWithAS7262}
 Zu Beginn wurde der Sensor AS7262 in Betrieb genommen, da dieser auf einem Evaluierungsboard verfügbar war.
 Zunächst wurden mit der Applikation "'Putty"' über die COM Schnittstelle einige Kommandos gesendet, um die
-\ac{uart} Schnittstelle zu testen. Dies ist erfolgreich gelungen. Es wurden erste spektrale Werte des
-Umgebungslichtes und einer LightCan empfangen. Es wurde der Befehl "'ATDATA"' genutzt.\\
+\ac{uart} Schnittstelle zu testen. Dies ist erfolgreich gelungen. Dann wurden erste spektrale Werte des
+Umgebungslichtes und einer LightCan empfangen. Hier wurde der Befehl "'ATDATA"' genutzt.\\
 Anschließend wurde damit begonnen, eine erste NodeJS Applikation zu programmieren, um intervallweise spektrale Daten
-von der \ac{uart} Schnittstelle abzufragen und anzuzeigen. So konnten erste Messwerte mit dem AS7262 Sensor erhoben werden.
-Diese Messwerte wurden mit dem MK350 verglichen. Hier war zu beobachten, dass die gemessenen Daten des MK350 auf den jeweiligen
-Wellenlängen mit den Werten übereinstimmen. Hier ist anzumerken, dass - wie in Bild \ref{fig:green_spec_MK350} zu sehen - die pro Wellenlänge
-gemessene Amplitude nach 1 normiert wird. Zur Vergleichbarkeit werden auch in der Applikation die Sensor Werte des AS7262 nach
+von der \ac{uart} Schnittstelle abzufragen und anzuzeigen. So konnten erste Messwerte mit dem Sensor AS7262 erhoben werden.
+Diese Messwerte wurden mit den Daten des MK350 verglichen. Hier war zu beobachten, dass die Daten des MK350 auf den jeweiligen
+Wellenlängen mit den Werten übereinstimmten. Hier ist anzumerken, dass - wie in Bild \ref{fig:green_spec_MK350} zu sehen - die pro Wellenlänge
+gemessene Amplitude nach 1 normiert wird. Zur Vergleichbarkeit werden auch in der Applikation die Sensorwerte des AS7262 nach
 1 normiert. Die Messwerte der sechs Wellenlängen des AS7262 sind mit geringer Abweichung identisch zum MK350.\\
 \begin{figure}[H]
     \centering
@@ -1108,14 +1108,14 @@ gemessene Amplitude nach 1 normiert wird. Zur Vergleichbarkeit werden auch in de
     \caption{Spektrum des grünen Emitters einer LightCan}
 \end{figure}
 \noindent
-Doch war hier ein großes Defizit des AS7262 zu beobachten. Wie in Bild  \ref{fig:green_spec_MK350} zu erkennen liegt das Maximum
+Jedoch war hier ein großes Defizit des AS7262 zu beobachten. Wie in Bild  \ref{fig:green_spec_MK350} zu erkennen liegt das Maximum
 des grünen Emitters bei ca. 515 Nanometern. Doch liegen die beiden nächsten Messflanken des AS7262 bei 500 und 550 Nanometern (Bild \ref{fig:spec_7262}).
 Somit wird der Wellenlängenbereich mit der höchsten Energiedichte nicht erfasst. Dies erzeugt eine relevante Fehlerquelle für weitere
 Berechnungen.\\
 Nach der Implementierung der ersten Auswertung der Messdaten eines mit der Applikation verbundenen Sensors wurde begonnen, die Messwerte in der
 Applikation grafisch aufzubereiten. Zunächst wurde die NodeJS mit dem \ac{npm} Paket Electron erweitert. Auf der Appcode Seite ist ein Befehlssatz
-zur Generierung eines Electron Fensters, sowie eine Abfrage des Sensors mit dem Befehl "'ATCDATA"', welcher intervallweise alle 250 Millisekunden
-abgerufen wird. Die empfangenen Sensordaten werden dann per Schnittstelle an den Webcode weitergegeben.\\
+zur Generierung eines Electron Fensters hinzugekommen, sowie eine Abfrage des Sensors mit dem Befehl "'ATCDATA"', welcher intervallweise alle 250
+Millisekunden abgerufen wird. Die empfangenen Sensordaten werden dann per Schnittstelle an den Webcode weitergegeben.\\
 Mit den im Webcode verfügbaren Sensordaten wurden in Anlehnung zu der Darstellung im MK350 die Werte mit proportional hohen Balken pro Wellenlänge
 mit HTML Elementen dargestellt. Diese Balken wurden zur besseren Zuordnung in eine die Wellenlänge repräsentierende Farbe eingefärbt.
 \begin{figure}[H]
@@ -1129,7 +1129,7 @@ Die 1 normierten Werte bezogen auf den maximal gemessenen einheitlosen Wert sind
 oberen linken Ecke angezeigt. Unter den normierten Messwerten ist zusätzlich ein beschreibender Name der Farbe, sowie die Wellenlänge aufgeführt.\\
 \\
 Mit diesen Werten wurde begonnen, eine XYZ \ac{cie} Koordinate zu errechnen. Hier wurden die Formeln von Bruce Lindbloom genutzt. Lindblooms Webauftritt
-dient bereits in vielen Büchern und anderen Publikationen als Referenz für Themen wie Farbräume oder Umrechnung zwischen Farbräumen.\\
+dient bereits in vielen Büchern und anderen Publikationen als Referenz für Themen wie Farbräume oder Umrechnungen zwischen Farbräumen.\\
 Zur Umrechnung eines diskreten Farbspektrums zu einer \ac{cie} XYZ Koordinate sind folgende Formeln gegeben \cite{lindbloom}:
 \begin{align}\label{Equ:11}
     X = \sum_{i}x_i*P_i\Delta\lambda\\
@@ -1137,7 +1137,7 @@ Zur Umrechnung eines diskreten Farbspektrums zu einer \ac{cie} XYZ Koordinate si
     Z = \sum_{i}z_i*P_i\Delta\lambda
 \end{align}
 Die Variablen $x_i$, $y_i$ und $z_i$ stehen hier für die Tristimuluskurven (Standard Observer Functions) oder auch Empfindlichkeitskurven aus Kapitel \ref{section_CIE}.
-Eine Aufstellung der Tristimuluswerte wurde von der Website "'Wisotop"' von der Fachhochschule Köln entnommen. Die Dokumentationen der
+Eine Aufstellung der Tristimuluswerte wurde von der Website "'Wisotop"' erstellt von der Fachhochschule Köln entnommen. Die Dokumentationen der
 \ac{cie} Kommission sind nicht öffentlich einsehbar.
 Die hier genutzten Tristimuluswerte \cite{wisotop}:
 \begin{table}[H]
@@ -1160,37 +1160,37 @@ Aus diesen Werten und den mit dem Sensor erfassten Spektralwerten konnten nun di
 \end{figure}
 \noindent
 \subsubsection{Erfassen der Messwerte mit dem AS7261} \label{measuringWith7261}
-Da der AS7261 nicht als Evaluierungskit von Adafruit verfügbar war, wurde ein zweites 7262 Sensorboard von Adafruit genutzt. Der 7261 Sensor
-wurde von AMS separat bestellt. Anschießend wurde der Chip auf einem weiteren AS7262 Evaluierungs Board durch einen AS7261 ausgetauscht.\\
-Für den Betrieb benötigt die AS72xx Chip Reihe einen Serial Flash Speicher mit einer Chip spezifischen Firmware. Diese wurde bei AMS angefragt
+Da der AS7261 nicht als Evaluierungskit von Adafruit verfügbar war, wurde ein zweites AS7262 Sensorboard von Adafruit genutzt. Der AS7261 Sensor
+wurde von AMS separat bestellt. Anschießend wurde der Chip auf einem zweiten AS7262 Evaluierungs Board durch einen AS7261 ausgetauscht.\\
+Für den Betrieb benötigt die AS72xx Chip Reihe einen Serial Flash Speicher mit einer chipspezifischen Firmware. Diese wurde bei AMS angefragt
 und anschließend auf den Flash Speicher des Evaluierungsboards aufgespielt. AMS wies darauf hin, dass bei diesem Chip eine Kalibrierung entscheidend
-für den Einsatz in diesem Anwendungsfall ist. Die vorkonfigurierte Kalibrierung in der Firmaware sei jedoch für das Messen von sichtbarem Licht
+für den Einsatz in diesem Anwendungsfall ist. Die vorkonfigurierte Kalibrierung in der Firmware sei jedoch für das Messen von sichtbarem Licht
 optimiert und einsetzbar.\\
-Der AS7261 sendet auf des UART Kommando "'ATDATA"' XYZ Daten. Somit können in der Anwendung die bisher erläuterten Schritte übersprungen werden.
-Der Applikation musste lediglich ein Sensor Auswahldialog hinzugefügt und diese Einstellung an verschidenen Stellen im Programmablauf
+Der AS7261 sendet auf das UART Kommando "'ATDATA"' XYZ Daten. Somit können in der Anwendung die bisher erläuterten Schritte übersprungen werden.
+Der Applikation musste lediglich ein Sensorauswahldialog hinzugefügt und diese Einstellung an verschidenen Stellen im Programmablauf
 berücksichtigt werden.\\
 Bei näherer Betrachtung der Sensorwerte mit dem Fortschreiten der Applikation wurde beobachtet, dass beim Messen von blauem Licht der Sensor
-eine fehlerhafte xyY Koordinate bestimmt. Die gemessene Koordinate lag im pinken Bereich. Dies ist auf die Empfindlichkeit des X Sensors zwischen
-400 nm und 490 nm zurückzuführen \ref{fig:AS7261_spectrum}. Laut Hersteller ist dieses Verhalten bedingt durch die Werkskalibrierung des Sensors.
-Je nach Anwendungsfall muss der Sensor durch den Anwender eigens kalibriert werden. Die Werkskalibrierung ist für das Messen von Farbtemperaturen
-optimiert.\\
-Gemessene Koordinaten im roten und grünen Bereich waren jedoch deutlich näher an den mit dem Spektrometer gemessenen Werten im Vergleich zu
-dem AS7262.
+eine fehlerhafte xyY-Koordinate bestimmt. Die gemessene Koordinate lag im pinken Bereich. Dies ist auf die Empfindlichkeit des X Sensors zwischen
+400 nm und 490 nm zurückzuführen. Siehe Bild \ref{fig:AS7261_spectrum}. Laut Hersteller ist dieses Verhalten bedingt durch die Werkskalibrierung
+des Sensors. Je nach Anwendungsfall muss der Sensor durch den Anwender eigens kalibriert werden. Die Werkskalibrierung ist für das Messen von
+Farbtemperaturen optimiert.\\
+Gemessene Koordinaten im roten und grünen Bereich waren jedoch deutlich näher an den, mit dem Spektrometer gemessenen Werten, im Vergleich zu
+den Messungen mit dem AS7262.
 \subsubsection{Erfassen der Messwerte mit dem UPRtek Spektrometer}
-Zur Verarbeitung in der Applikation wurden die XLS Export Dateien des Spektrometers in einer Ordnerstruktur auf dem Entwicklungsrechner organisiert.
-Pro Gerät ein Ordner mit Unterordnern pro Emitter. Die XLS Dateien der Messungen wurden in diesen Unterordnern gesammelt. Es wird angenommen, dass die
-Messungen immer chronologisch von 5\% bis 100\% durchgeführt werden. Nach Datei Zeitstempel geordnet werden die XLS Dateien von der Applikation gelesen
+Zur Verarbeitung in der Applikation werden die XLS Export Dateien des Spektrometers in einer Ordnerstruktur auf dem Entwicklungsrechner organisiert,
+pro Gerät ein Ordner mit Unterordnern pro Emitter. Die XLS Dateien der Messungen wurden in diesen Unterordnern gesammelt. Es wird angenommen, dass die
+Messungen immer chronologisch von 5\% bis 100\% durchgeführt werden. Nach Dateizeitstempel geordnet werden die XLS Dateien von der Applikation gelesen
 und die xy Werte extrahiert. Der Y Wert wird wie folgt aus den XLS Daten berechnet:
 \begin{align}\label{Equ:23}
     Y = \frac{\text{LUX}}{\text{Peak count}}
 \end{align}
-Diese Formel wurde durch "'Reverse Engineering"' des Auswertungsprogramms "'uSpectrum"' des Spektrometer Herstellers gefunden.
+Diese Formel wurde durch "'Reverse Engineering"' des Auswertungsprogramms "'uSpectrum"' des Spektrometerherstellers gefunden.
 \subsection{Farbraum Umrechnungen}
-Um nun den grafischen Punkt auf einem \ac{cie} 1931 Diagramm zu erhalten, müssen die XYZ in xyY Koordinaten umgerechnet werden. Dies ist mit den
-Formeln \ref{Equ:8} bis \ref{Equ:10} möglich. Mit diesen Werten konnte nun der Punkt nach jeder Messung, also immer nach 250 Millisekunden, 
-in das \ac{cie} 1931 Diagramm in der Applikation eingezeichnet werden.\\
+Um nun den grafischen Punkt auf einem \ac{cie} 1931 Diagramm zu erhalten, müssen die XYZ in xyY-Koordinaten umgerechnet werden. Dies ist mit den
+Formeln (\ref{Equ:8}) bis (\ref{Equ:10}) von Seite \pageref{Equ:10} möglich. Mit diesen Werten konnte nun der Punkt nach jeder Messung, also immer
+nach 250 Millisekunden, in das \ac{cie} 1931 Diagramm in der Applikation eingezeichnet werden.\\
 Zusätzlich zur Darstellung im \ac{cie} 1931 Farbraum wurde zur besseren Einordnung und zur Anzeige in der Applikation die XYZ Werte in RGB Werte
-umgewandelt. Dies ist möglich mit folgenden Gleichungen von Lindblooms Webauftritt \cite{lindbloom}:
+umgewandelt. Dies ist möglich mit folgenden Gleichungen von Lindblooms Webauftritt \cite{lindbloom}:\\
 \begin{align}\label{Equ:12}
     \left[ \begin{array}{r}
         R \\
@@ -1211,7 +1211,7 @@ mit sRGB Umrechnungsmatrix $\mathbf M^{-1}$ mit Weiß-Referenzpunkt D65 (siehe \
         0.0556434  & -0.2040259 & 1.0572252  \\
     \end{array}\right]
 \end{align}
-Für $\mathbf M^{-1}$ sind einige Definitionen gegeben. Diese gewählte Definition ist abhängig von dem RGB Farbraum, in den umgerechnet werden soll, sowie
+Für $\mathbf M^{-1}$ sind einige Definitionen gegeben. Die gewählte Definition ist abhängig von dem RGB Farbraum, in den umgerechnet werden soll, sowie
 der Weißlicht-Bezugsquelle.
 \begin{figure}[H]
     \begin{center}
@@ -1224,8 +1224,8 @@ Mit diesen Umrechnungen sind nun alle relevanten Farbräume abgedeckt. Diese Wer
 wird mit den entsprechenden Werten als Hintergrundfarbe hinterlegt.
 \subsection{Aufnehmen von Messwerten}
 Mit den nun verfügbaren Farbraumdaten aus einer Messung kann mit der weiteren Verarbeitung der Daten begonnen werden. Nun können die einzelnen
-Emitter vermessen und die Messdaten gesichert werden. Für eine erste Vermessung einer LightCan wurde diese mit dem WAPP per DMX angesteuert.
-Für die Vermessung einer LightCan wurde folgendes Szenario definiert:
+Emitter vermessen und die Messdaten gesichert werden. Zum vermessen einer LightCan muss diese mit dem WAPP, einem \ac{dmx} zu Wireless \ac{dmx}
+Umsetzer angesteuert werden. Für die Vermessung einer LightCan wurde folgendes Szenario definiert:
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=\textwidth]{images/light_can_holder_3d.png}
@@ -1233,17 +1233,17 @@ Für die Vermessung einer LightCan wurde folgendes Szenario definiert:
     \caption{3D Modell des Messaufbaus für eine LightCan}\label{fig:3DCanHolder}
 \end{figure}
 \noindent
-Diese in Bild \ref{fig:3DCanHolder} gezeigte Vorrichtung wurde 3D modelliert und anschließend mit einem 3D Drucker hergestellt. In die linke
+Die in Bild \ref{fig:3DCanHolder} gezeigte Vorrichtung wurde 3D modelliert und anschließend mit einem 3D-Drucker hergestellt. In die linke
 Halterung kann eines der Sensorboards eingeschoben werden. Mit einem definierten Abstand von zwölf Zentimetern kann in den rechten runden Halterungen
 eine LightCan arretiert werden. Dieser Abstand wurde anhand der Empfindlichkeiten der Sensoren in den ersten Probemessungen festgelegt.\\
 In der Applikation wurden die Emitter der LightCan aufgelistet. Diese sind Rot, Grün, Blau und Weiß. Pro Emitter werden acht Helligkeitsstufen
 gemessen, da bei den Probemessungen beobachtet wurde, dass vor allem bei niedrigen Helligkeiten der gemessene Farbton sich deutlich von dem
 gemessenen Farbton bei hohen Helligkeiten unterscheidet.\\
 Die gewählten Helligkeitsstufen sind:\\
-5\%, 10\%, 20\%, 35\%, 50\%, 65\%, 85\% und 100\% der Helligkeit des jeweiligen Emitters. In Tabelle \ref{table:dmxToPercent} finden sich die DMX Werte
-Entsprechungen der DMX Werte.\\
-Um die gemessenen Werte in der Applikation zu erfassen, wurde eine Emittersektion in der grafischen Benutzeroberfläche vorgesehen.
-Der Benutzer konnte mit der Schaltfläche "'Add Emitter"' manuell Emitter zu der aktuellen Messung hinzufügen. Durch Anklicken eines angelegten
+5\%, 10\%, 20\%, 35\%, 50\%, 65\%, 85\% und 100\% der Helligkeit des jeweiligen Emitters. In Tabelle \ref{table:dmxToPercent} finden sich die DMX-Werte
+Entsprechungen der Prozentwerte.\\
+Um die gemessenen Werte in der Applikation erfassen zu können, wurde eine Emittersektion in der grafischen Benutzeroberfläche vorgesehen.
+Der Benutzer kannte mit der Schaltfläche "'Add Emitter"' manuell Emitter zu der aktuellen Messung hinzufügen. Durch Anklicken eines angelegten
 Emitters konnte das Menü des einzelnen Emitters geöffnet werden.
 \begin{figure}[H]
     \centering
@@ -1259,9 +1259,9 @@ Emitters konnte das Menü des einzelnen Emitters geöffnet werden.
     \caption{Erste Version der Benutzeroberfläche zur manuellen Erfassung von Emitterwerten}
 \end{figure}
 \noindent
-Das Emittermenü bot einige Einstellungsmöglichkeiten wie den Namen und die Farbe zur besseren Zuordnung für den Benutzer, sowie eine Schaltfläche pro zu messender
+Das Emittermenü bot einige Einstellungsmöglichkeiten, wie den Namen und die Farbe zur besseren Zuordnung für den Benutzer, sowie eine Schaltfläche pro zu messender
 Helligkeitsstufe. Während einer Messung musste der Benutzer nun mit einer externen (DMX) Ansteuerung, beispielsweise den roten
-Emitter einer LightCan in den gewünschen Helligkeitszustand bringen. Anschließend konnte mit einem Klick auf die zugehörige Schaltfläche die
+Emitter einer LightCan in den gewünschen Helligkeitszustand bringen. Anschließend konnten mit einem Klick auf die zugehörige Schaltfläche die
 aktuell gemessenen Werte im Hintergrund abgespeichert werden. Die betätigte Schaltfläche wurde zur Bestätigung für den Benutzer in der errechneten
 RGB Farbe hinterlegt.\\
 Nach dem manuellen Erfassen aller Helligkeitsstufen konnten die erfassten Daten mit der Schaltfläche "'Save"' permanent auf der Festplatte zur
@@ -1287,11 +1287,12 @@ vorausberechnet werden.
     \begin{center}
         \includegraphics[width=.9\textwidth]{images/app_emitters_with_sliders_v1.png}
     \end{center}
+    \vspace{-.3cm}
     \caption{Emitterübersicht mit Schiebereglern}\label{fig:emitterFaders}
 \end{figure}
 \noindent
 In der Benutzeroberfläche wurde dies mit Schiebereglern pro Emitter gelöst, welche von 0 bis 100 in Fünf-Prozent-Schritten einstellbar sind.
-Sobald der Benutzer einen Schieberegler betätigt, wurde das gemessene oder interpolierte Spektrum der Emitter aufaddiert. Dieses kombinierte
+Sobald der Benutzer einen Schieberegler betätigte, wurde das gemessene oder interpolierte Spektrum der Emitter aufaddiert. Dieses kombinierte
 Spektrum wurde in eine \ac{cie} xy Koordinate umgerechnet und zusätzlich zu der aktuellen Messung in der CIE 1931 Normtafel angezeigt.
 \begin{figure}[H]
     \centering
@@ -1304,56 +1305,58 @@ Spektrum wurde in eine \ac{cie} xy Koordinate umgerechnet und zusätzlich zu der
         \includegraphics[width=\textwidth]{images/app_dummy_spectrum_with_xy_and_calc_and_emitters_green_blue.png}
         \caption{Messung des grünen und blauen Emitters}\label{fig:calcLightCanMix}
     \end{subfigure}
-    \caption{Zwischenstand der Benutzeroberfläche mit Messungen und Vorberechnung einer LightCan}
+    \caption{Zwischenstand der Benutzeroberfläche mit Messungen und Vorberechnungen für eine LightCan}
 \end{figure}
 \noindent
 Die vorberechnete Koordinate wird als rotes Kreuz in der CIE 1931 Normtafel angezeigt, neben der aktuellen Messung, welche als schwarzes Kreuz
 angezeigt wird.\\
-Hier ist zu beobachten, dass bei einem Mischfarbton in Bild \ref{fig:calcLightCanMix} die Messung der Lichtquelle mit der Vorberechnung nicht
-übereinstimmt. Bei Messungen mit den anderen Lichtquellen ist diese Abweichung nicht aufgetreten. Die zwei Kreuze waren zumeist in jeder beliebigen
+Hier ist zu beobachten, dass bei dem Mischfarbton in Bild \ref{fig:calcLightCanMix} die Messung der Lichtquelle nicht mit der Vorberechnung
+übereinstimmt. Bei Messungen mit den anderen Lichtquellen ist diese Abweichung nicht aufgetreten. Die zwei Kreuze waren in jeder beliebigen
 Kombination nahezu deckungsgleich.\\
 Diese Abweichung entsteht durch eine spezielle Funktion des LightCan Scheinwerfers. Die LightCan nutzt einen internen Algorithmus, um sowohl bei
-maximaler Austeuerung eines einzelnen Emitters als auch bei der Aussteuerung von mehreren Emittern immer die gleiche Gesamthelligkeit zu
+maximaler Austeuerung eines einzelnen Emitters, als auch bei der Aussteuerung von mehreren Emittern immer die gleiche Gesamthelligkeit zu
 emittieren.\\
-So wird bei einem 100 Prozent Ansteuerung des grünen Emitters eine Helligkeit von circa 4400 Lux von dem einen Emitter abgegeben. Bei der
-Kombination mehrere Emitter wird die maximale zu erreichende Helligkeit der einzelnen Emitter reduziert.\\
+So wird bei einer 100 Prozent Ansteuerung des grünen Emitters eine Helligkeit von circa 4400 Lux von dem einen Emitter abgegeben. Bei der
+Kombination mehrerer Emitter wird die maximal zu erreichende Helligkeit der einzelnen Emitter reduziert.\\
 \\
 Dieser Test zeigt, dass für lineare und annähernd lineare Farbmischsysteme eine Einzelvermessung der Emitter ausreichend ist, um den Gamut, den möglichen
 Farbraum und die Farbmischung vorauszuberechnen. Für nicht lineare Farbmischsysteme sind weitere Messungen der tatsächlichen Mischfarben nötig oder der
 modifizierende Algorithmus in der Lampe muss bekannt sein.
 \subsection{Gamut Zeichnung}
-Als Gamut bezeichnet man das Farbvermögen einer Lichtquelle. Mit den verarbeiteten Messdaten ist es möglich, diesen für die einzelnen Lampen in den CIE 1931 Farbraum einzuzeichnen.\\
+Als Gamut bezeichnet man das Farbvermögen einer Lichtquelle. Mit den verarbeiteten Messdaten ist es möglich, diesen für die einzelnen Lampen in den CIE
+1931 Farbraum einzuzeichnen.\\
 Für eine beliebige Anzahl n von Emittern kann ein Polygon mit N oder weniger Ecken entstehen. Beispielsweise spannen die Emitter Rot, Grün und Blau ein
-dreieckiges Polygon als Gamut auf. Ein vierter weißer Emitter liegt innerhalb dieses Polygons, dies erweitert den Gamut nicht. Läge ein weiterer Emitter außerhalb des
-bereits aufgespannten Polygons, wird dieses entsprechend erweitert.\\
-Um einen Gamut einer Lampe in ein CIE Diagramm einzuzeichnen müssen die xy Koordinaten gegen den Uhrzeigersinn sortiert werden. Dies wird bewerkstelligt, indem
-der Mittelpunkt des Polygons gesucht wird.
+dreieckiges Polygon als Gamut auf. Ein vierter weißer Emitter liegt innerhalb dieses Polygons. Dies erweitert den Gamut nicht. Läge ein weiterer Emitter
+außerhalb des bereits aufgespannten Polygons, wird dieses entsprechend erweitert.\\
+Um einen Gamut einer Lampe in ein CIE Diagramm einzuzeichnen, müssen die xy Koordinaten gegen den Uhrzeigersinn sortiert werden. Dies wird bewerkstelligt,
+indem der Mittelpunkt des Polygons gesucht wird.
 \begin{align}\label{Equ:14}
     \text{Center}_x = \frac{\sum_{i}\text{Vertex}_{ix}}{i}\\
     \text{Center}_y = \frac{\sum_{i}\text{Vertex}_{iy}}{i}
 \end{align}
-Anschließend werden die Winkel der einzelnen Koordinaten zu dem gefundenen Mittelpunkt errechnet werden.
+Anschließend werden die Winkel der einzelnen Koordinaten zu dem gefundenen Mittelpunkt errechnet.
 \begin{align}\label{Equ:15}
     \phi = arctan2(\text{Vertex}_x - \text{Center}_x, \text{Vertex}_y - \text{Center}_y)*\frac{180}{\pi}+360 %https://de.wikipedia.org/wiki/Arctan2
 \end{align}
-Die Koordinaten werden nach aufsteigendem Winkel sortiert. Somit sind die Koordinaten gegen den Uhrzeigersinn angeordnet. Final wird in der Applikation dynamisch
-eine \ac{svg} Grafik mit den Strecken zwischen den Koordinaten über dem CIE 1931 Diagramm erzeugt.\\
+Die Koordinaten werden nach aufsteigendem Winkel sortiert. Somit sind die Koordinaten gegen den Uhrzeigersinn angeordnet. Final wird in der Applikation
+dynamisch eine \ac{svg} Grafik mit den Strecken zwischen den Gamutvertices über dem CIE 1931 Diagramm erzeugt.\\
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.7\textwidth]{images/gamut_lightCan.png}
+        \includegraphics[width=.9\textwidth]{images/gamut_lightCan.png}
     \end{center}
     \caption{Gamut einer LightCan}
 \end{figure}
 \noindent
-\subsection{Zeichnung eines kombinierten Gamut}
-Hier war die Aufgabe zu bestimmten, ob Koordinaten (oder auch als Vertex bezeichnet) eines Gamut A innerhalb eines Gamut B einer anderen Lampe liegen. Wenn diese
-Bedingung erfüllt ist, muss zur Bestimmung des gemeinsamen Gamut ermittelt werden, ob ein Punkt innerhalb des bestehenden Polygons liegt. Dies wurde mit dem
-Sutherland–Hodgman Algorithmus \cite{sutherlandHodgman} bewerkstelligt. Für diesen Algorithmus werden die Vertex Daten des zu analysierenden Polygons benötigt. Die
-Vertex Daten sind hier die CIE 1931 xy Koordinaten. Wichtig ist, dass die Vertices gegen den Uhrzeigersinn vorsortiert sind.\\
-Der Algorithmus spannt die Gerade zwischen zwei Vertices und prüft, auf welcher Seite der Geraden sich die bisherigen Gamut Vertices befinden. Wenn beide Vertices
-sich auf der gegen den Uhrzeigersinn linken Seite, der Gamutflächenseite, befinden, wird der zweite Vertex der Gamutvertex Liste hinzugefügt.\\
-Liegt der erste der beiden Vertices außerhalb der Flächenseite, wird der auf der Fläche liegende Vertex und der Schnittpunkt des Polygons und der Gamutflächenseite der
-Gamutvertex Liste hinzugefügt (siehe Bild \ref{fig:sutherland_hodgman}).\\
+\subsection{Zeichnung eines kombinierten Gamuts}
+Hier war die Aufgabe zu bestimmen, ob Koordinaten (oder auch Vertex) eines Gamuts A innerhalb eines Gamuts B einer anderen Lampe liegen.
+Wenn diese Bedingung erfüllt ist, muss zur Bestimmung des gemeinsamen Gamuts ermittelt werden, ob ein Punkt innerhalb des bestehenden Polygons liegt. Dies
+wurde mit dem Sutherland–Hodgman Algorithmus \cite{sutherlandHodgman} bewerkstelligt. Für diesen Algorithmus werden die Vertex Daten des zu analysierenden
+Polygons benötigt. Die Vertex Daten sind hier die CIE 1931 xy Koordinaten. Wichtig ist, dass die Vertices gegen den Uhrzeigersinn vorsortiert sind.\\
+Der Algorithmus spannt die Gerade zwischen zwei Vertices und prüft, auf welcher Seite der Geraden sich die bisherigen Vertices des Gamuts befinden. Wenn
+beide Vertices sich auf der, gegen den Uhrzeigersinn gesehen linken Seite, also der Innenseite (Gamutflächenseite) des Gamuts befinden, wird der zweite
+Vertex der Gamutvertex Liste hinzugefügt.\\
+Liegt der erste der beiden Vertices außerhalb der Gamutflächenseite, wird der auf der Fläche liegende Vertex und der Schnittpunkt des Polygons und der
+Gamutflächenseite der Gamutvertex Liste hinzugefügt (siehe Bild \ref{fig:sutherland_hodgman}).\\
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{.49\textwidth}
@@ -1368,14 +1371,14 @@ Gamutvertex Liste hinzugefügt (siehe Bild \ref{fig:sutherland_hodgman}).\\
     \caption{Grafische Darstellung des Sutherland–Hodgman Algorithmus} \label{fig:sutherland_hodgman}
 \end{figure}
 \noindent
-Liegt der zweite Vertex außerhalb der Gamutflächenseite wird der Schnittpunkt des Polygons und der Gamutflächenseite der Gamutvertex Liste hinzugefügt. Diese Vorgehensweise
-wird in der Applikation für jede selektierte Lampe wiederholt. Gestartet wird mit dem Gamut der ersten selektierten Lampe. Dieser Gamut wird mit dem der nächsten Lampe
-zusammengeführt. Der daraus entstehende kombinierte Gamut wird nun mit dem der nächsten selektierten Lampe ebenfalls zusammengeführt, bis alle Lampen der Selektion
-durchlaufen sind. Der hier entstehende Gamut wird nun in dem CIE 1931 Diagramm weiß eingezeichnet. Zusätzlich wird der Gamut der einzelnen Lampen jeweils in schwarz
-eingezeichnet (siehe Bild \ref{fig:combinedGamut}).
+Liegt der zweite Vertex außerhalb der Gamutflächenseite wird der Schnittpunkt des Polygons und der Gamutflächenseite der Gamutvertex Liste hinzugefügt.
+Diese Vorgehensweise wird in der Applikation für jede selektierte Lampe wiederholt. Gestartet wird mit dem Gamut der ersten selektierten Lampe. Dieser
+Gamut wird mit dem der nächsten Lampe zusammengeführt. Der daraus entstehende kombinierte Gamut wird nun mit dem der nächsten selektierten Lampe ebenfalls
+zusammengeführt, bis alle Lampen der Selektion durchlaufen sind. Der hier entstehende Gamut wird nun in dem CIE 1931 Diagramm weiß eingezeichnet.
+Zusätzlich wird der Gamut der einzelnen Lampen jeweils in schwarz eingezeichnet (siehe Bild \ref{fig:combinedGamut}).
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.75\textwidth]{images/combined_gamut_lightCan_lightStick.png}
+        \includegraphics[width=.9\textwidth]{images/combined_gamut_lightCan_lightStick.png}
     \end{center}
     \caption{Kombinierter Gamut einer LightCan und eines ApeSticks}\label{fig:combinedGamut}
 \end{figure}
@@ -1500,9 +1503,9 @@ ergeben sich aufgrund der Ergebnisse der bisherigen Messungen folgende Fragen:\\
     3. Wie kann dies grafisch in einem Programm für den Benutzer realisiert werden?\\
 \end{addmargin}
 Diese Punkte werden nun nacheinander erörtert. Die Ausgangssituation ist, dass ein Benutzer in der Applikation zwei vermessene Lampen selektiert. Die
-Applikation berechnet die xyY Koordinaten des kombinierten Gamuts der beiden Lampen.
+Applikation berechnet die xyY-Koordinaten des kombinierten Gamuts der beiden Lampen.
 Per Benutzereingabe wird ein Mischungsverhältnis der Emitter vorgegeben. Beispielsweise ein Cyanton mit 100\% Grün- und 65\% Blauanteil. Mit den erfassten
-Messwerten wird mit der vorgehensweise aus Kapitel \ref{calcColor} die erwartete xyY Koordinate errechnet. Diese Koordinate wird im Folgenden als
+Messwerten wird mit der vorgehensweise aus Kapitel \ref{calcColor} die erwartete xyY-Koordinate errechnet. Diese Koordinate wird im Folgenden als
 Referenzpunkt bezeichnet.
 \subsection{Finden eines Punktes innerhalb des kombinierten Gamuts}
 Nun muss ermittelt werden, ob der Referenzpunkt auf dem CIE 1931 Diagramm außerhalb des kombinierten Gamuts liegt oder nicht. Falls der Punkt außerhalb des
@@ -1605,7 +1608,7 @@ einzelnen Emitter der konkrete Helligkeitswert errechnet werden, um diesen dann 
 \\
 Diese Intensitäten der einzelnen Emitter kann nicht im CIE 1931 Farbraum ermittelt werden, da dieser in der xyY nicht beschreibt, von welchem Emitter,
 beziehungsweise welchem Grundton, welcher Anteil die Farbmischung erzeugt. Hierzu wird hier der RGB Farbraum gewählt.\\
-Somit müssen die xyY Koordinaten des Mixpunktes in RGB Koordinaten umgerechnet werden mit \cite{lindbloom}:
+Somit müssen die xyY-Koordinaten des Mixpunktes in RGB Koordinaten umgerechnet werden mit \cite{lindbloom}:
 \begin{align}\label{Equ:19}
     X = \frac{x}{y}\\
     Y = 1\\
@@ -1723,8 +1726,8 @@ Die folgenden Analysen und Messergebnisse stammen alle aus Messungen aus dem ers
 verworfen. Dies wird in Kapitel \ref{measuresWithAS7262} näher erläutert.
 \subsection{Emitter Analyse pro Lampe} \label{emitterColorDrit}
 Hier sind zunächst die unterschiedlichen absoluten Helligkeiten jeder Lampe zu betrachten. Wenn die Helligkeitsunterschiede zwischen Emittern gering sind, ist
-das Einstellen einer Farbvalenz einfacher. Hier ist beispielsweise der weiße Emitter des SkyPanels problematisch, da dieser wie in Bild \ref{fig:luxSkypanel} 
-zu sehen bereits bei 5\% Steuerwert eine höhere absolute Helligkeit hat als der rote Emitter bei 20\% Steuerwert. So ist schon bei minmalen Zumischen des weißen
+das Einstellen einer Farbvalenz einfacher. Beispielsweise ist hier der weiße Emitter des SkyPanels problematisch, da dieser wie in Bild \ref{fig:luxSkypanel} 
+zu sehen bereits bei 5\% Steuerwert eine höhere absolute Helligkeit hat als der rote Emitter bei 20\% Steuerwert. So ist schon bei minimalen Zumischen des weißen
 Emitters eine große Farbortverschiebung zu erwarten.\\
 Ein Farbort bezeichnet einen Punkt in einem Farbraum.
 \begin{figure}[H]
@@ -1977,7 +1980,7 @@ Subsensoren, welche jeweils sechs Messflanken im elektromagnetischen Spektrum be
 Sensoren 18 Messflanken von 410 bis 940 Nanometern. 14 dieser Messflanken liegen innerhalb des sichtbaren Spektrums.
 Die anderen vier im Infrarotbereich des Spektrums.\\
 Dies ist eine deutliche Verbesserung der spektralen Auflösung gegenüber dem AS7262 Sensor. So kann diese Fehlerquelle
-verringert werden. Auch eine Interpolation zwischen den Messwerten aufgrund der Spektralenabdeckung sollte zu einer
+verringert werden. Auch eine Interpolation zwischen den Messwerten aufgrund der spektralen Abdeckung sollte zu einer
 aussagekräftigen Datenbasis führen.\\
 \\
 Künftig wird diese oder eine ähnliche Implementierung in der grandMA3 Software der Firma MA Lighting zu Einsatz kommen.
