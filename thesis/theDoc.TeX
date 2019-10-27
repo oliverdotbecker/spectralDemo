@@ -930,7 +930,7 @@ und Projektionsflächen in den letzten Jahren zu.
 Im Folgenden werden die Lichtquellen beziehungsweise die Lampen beschrieben, die für die Messungen verwendet wurden.
 Auch in der Veranstaltungstechnik als (engl.) "'Fixtures"' bezeichnet. Die verwendeten Lampen haben \ac{led}s als Lichtquelle. Diese
 \ac{led}s sind alle unterschiedlich aufgebaut.
-\subsubsection{Ape Labs Light Can}
+\subsubsection{Ape Labs LightCan}
 ~\par\vspace{-\baselineskip}
 \begin{wrapfigure}{r}{0.4\textwidth}
     \vspace{-45pt}
@@ -939,7 +939,7 @@ Auch in der Veranstaltungstechnik als (engl.) "'Fixtures"' bezeichnet. Die verwe
     \end{center}
     \vspace{-20pt}
     \begin{center}
-        \caption[Light Can]{Light Can\\\cite{lightCan}}
+        \caption[LightCan]{LightCan\\\cite{lightCan}}
     \end{center}
     \vspace{-15pt}
 \end{wrapfigure}
@@ -1087,7 +1087,7 @@ Hier werden aus der \ac{uart} (AT) Schnittstelle mit dem Befehl "'ATCDATA"' die 
 Zu Beginn wurde der Sensor AS7262 in Betrieb genommen, da dieser auf einem Evaluierungsboard verfügbar war.
 Zunächst wurden mit der Applikation "'Putty"' über die COM Schnittstelle einige Kommandos gesendet, um die
 \ac{uart} Schnittstelle zu testen. Dies ist erfolgreich gelungen. Es wurden erste spektrale Werte des
-Umgebungslichtes und einer Light Can empfangen. Es wurde der Befehl "'ATDATA"' genutzt.\\
+Umgebungslichtes und einer LightCan empfangen. Es wurde der Befehl "'ATDATA"' genutzt.\\
 Anschließend wurde damit begonnen, eine erste NodeJS Applikation zu programmieren, um intervallweise spektrale Daten
 von der \ac{uart} Schnittstelle abzufragen und anzuzeigen. So konnten erste Messwerte mit dem AS7262 Sensor erhoben werden.
 Diese Messwerte wurden mit dem MK350 verglichen. Hier war zu beobachten, dass die gemessenen Daten des MK350 auf den jeweiligen
@@ -1224,19 +1224,19 @@ Mit diesen Umrechnungen sind nun alle relevanten Farbräume abgedeckt. Diese Wer
 wird mit den entsprechenden Werten als Hintergrundfarbe hinterlegt.
 \subsection{Aufnehmen von Messwerten}
 Mit den nun verfügbaren Farbraumdaten aus einer Messung kann mit der weiteren Verarbeitung der Daten begonnen werden. Nun können die einzelnen
-Emitter vermessen und die Messdaten gesichert werden. Für eine erste Vermessung einer Light Can wurde diese mit dem WAPP per DMX angesteuert.
-Für die Vermessung einer Light Can wurde folgendes Szenario definiert:
+Emitter vermessen und die Messdaten gesichert werden. Für eine erste Vermessung einer LightCan wurde diese mit dem WAPP per DMX angesteuert.
+Für die Vermessung einer LightCan wurde folgendes Szenario definiert:
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=\textwidth]{images/light_can_holder_3d.png}
     \end{center}
-    \caption{3D Modell des Messaufbaus für eine Light Can}\label{fig:3DCanHolder}
+    \caption{3D Modell des Messaufbaus für eine LightCan}\label{fig:3DCanHolder}
 \end{figure}
 \noindent
 Diese in Bild \ref{fig:3DCanHolder} gezeigte Vorrichtung wurde 3D modelliert und anschließend mit einem 3D Drucker hergestellt. In die linke
 Halterung kann eines der Sensorboards eingeschoben werden. Mit einem definierten Abstand von zwölf Zentimetern kann in den rechten runden Halterungen
-eine Light Can arretiert werden. Dieser Abstand wurde anhand der Empfindlichkeiten der Sensoren in den ersten Probemessungen festgelegt.\\
-In der Applikation wurden die Emitter der Light Can aufgelistet. Diese sind Rot, Grün, Blau und Weiß. Pro Emitter werden acht Helligkeitsstufen
+eine LightCan arretiert werden. Dieser Abstand wurde anhand der Empfindlichkeiten der Sensoren in den ersten Probemessungen festgelegt.\\
+In der Applikation wurden die Emitter der LightCan aufgelistet. Diese sind Rot, Grün, Blau und Weiß. Pro Emitter werden acht Helligkeitsstufen
 gemessen, da bei den Probemessungen beobachtet wurde, dass vor allem bei niedrigen Helligkeiten der gemessene Farbton sich deutlich von dem
 gemessenen Farbton bei hohen Helligkeiten unterscheidet.\\
 Die gewählten Helligkeitsstufen sind:\\
@@ -1261,7 +1261,7 @@ Emitters konnte das Menü des einzelnen Emitters geöffnet werden.
 \noindent
 Das Emittermenü bot einige Einstellungsmöglichkeiten wie den Namen und die Farbe zur besseren Zuordnung für den Benutzer, sowie eine Schaltfläche pro zu messender
 Helligkeitsstufe. Während einer Messung musste der Benutzer nun mit einer externen (DMX) Ansteuerung, beispielsweise den roten
-Emitter einer Light Can in den gewünschen Helligkeitszustand bringen. Anschließend konnte mit einem Klick auf die zugehörige Schaltfläche die
+Emitter einer LightCan in den gewünschen Helligkeitszustand bringen. Anschließend konnte mit einem Klick auf die zugehörige Schaltfläche die
 aktuell gemessenen Werte im Hintergrund abgespeichert werden. Die betätigte Schaltfläche wurde zur Bestätigung für den Benutzer in der errechneten
 RGB Farbe hinterlegt.\\
 Nach dem manuellen Erfassen aller Helligkeitsstufen konnten die erfassten Daten mit der Schaltfläche "'Save"' permanent auf der Festplatte zur
@@ -1304,7 +1304,7 @@ Spektrum wurde in eine \ac{cie} xy Koordinate umgerechnet und zusätzlich zu der
         \includegraphics[width=\textwidth]{images/app_dummy_spectrum_with_xy_and_calc_and_emitters_green_blue.png}
         \caption{Messung des grünen und blauen Emitters}\label{fig:calcLightCanMix}
     \end{subfigure}
-    \caption{Zwischenstand der Benutzeroberfläche mit Messungen und Vorberechnung einer Light Can}
+    \caption{Zwischenstand der Benutzeroberfläche mit Messungen und Vorberechnung einer LightCan}
 \end{figure}
 \noindent
 Die vorberechnete Koordinate wird als rotes Kreuz in der CIE 1931 Normtafel angezeigt, neben der aktuellen Messung, welche als schwarzes Kreuz
@@ -1312,7 +1312,7 @@ angezeigt wird.\\
 Hier ist zu beobachten, dass bei einem Mischfarbton in Bild \ref{fig:calcLightCanMix} die Messung der Lichtquelle mit der Vorberechnung nicht
 übereinstimmt. Bei Messungen mit den anderen Lichtquellen ist diese Abweichung nicht aufgetreten. Die zwei Kreuze waren zumeist in jeder beliebigen
 Kombination nahezu deckungsgleich.\\
-Diese Abweichung entsteht durch eine spezielle Funktion des Light Can Scheinwerfers. Die Light Can nutzt einen internen Algorithmus, um sowohl bei
+Diese Abweichung entsteht durch eine spezielle Funktion des LightCan Scheinwerfers. Die LightCan nutzt einen internen Algorithmus, um sowohl bei
 maximaler Austeuerung eines einzelnen Emitters als auch bei der Aussteuerung von mehreren Emittern immer die gleiche Gesamthelligkeit zu
 emittieren.\\
 So wird bei einem 100 Prozent Ansteuerung des grünen Emitters eine Helligkeit von circa 4400 Lux von dem einen Emitter abgegeben. Bei der
@@ -1391,13 +1391,13 @@ vermessene Lampen ansteuern zu können.
 Lichtquellen verschiedener Hersteller haben viele unterschiedliche Funktionen. Von einer Helligkeitsregelung, dem Dimmer, über mehrere Emitter, wie
 die hier verwendeten Lichtquellen, bis zu Bewegungssteuerungen mehrerer Achsen, wie beim Robe LEDWash 300.\\
 Die Zuordnung dieser Funktionen zu den DMX Steuerkanälen der Lampe ist somit je nach Funktionalitätsumfang von Lampe zu Lampe und auch bei einem gleichen
-Lampentyp von Hersteller zu Hersteller unterschiedlich. So findet sich beispielsweise bei der Light Can kein Dimmer Steuerkanal für die Gesamtintensität
+Lampentyp von Hersteller zu Hersteller unterschiedlich. So findet sich beispielsweise bei der LightCan kein Dimmer Steuerkanal für die Gesamtintensität
 der Lampe. Hier werden nur Steuerkanäle der einzelnen Emitter bereitgestellt.
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{.49\textwidth}
         \includegraphics[width=\textwidth]{images/dmx_chart_light_can_4_channel_mode.png}
-        \caption{Light Can 4 Channel Mode \cite{lightCanDMX}}
+        \caption{LightCan 4 Channel Mode \cite{lightCanDMX}}
     \end{subfigure}
     \hfill 
     \begin{subfigure}[b]{.49\textwidth}
@@ -1407,7 +1407,7 @@ der Lampe. Hier werden nur Steuerkanäle der einzelnen Emitter bereitgestellt.
     \caption{DMX Charts der Hersteller Ape Labs und Arri}
 \end{figure}
 \noindent
-Das SkyPanel hingegen bietet 31 sogenannte DMX Modi, die Light Can 3 Modi. Je nach Wahl des DMX Modus wechselt die Belegung der \ac{dmx} Steuerkanäle, auf die
+Das SkyPanel hingegen bietet 31 sogenannte DMX Modi, die LightCan 3 Modi. Je nach Wahl des DMX Modus wechselt die Belegung der \ac{dmx} Steuerkanäle, auf die
 die Lampe reagiert. Hier wird nach Anwendungsfall ein DMX Mode gewählt. Das SkyPanel bietet auch in einem DMX Modus eine Ansteuerung von CIE 1931 x und
 y Kanälen auf zwei \ac{dmx} Kanälen. Dies wird ermöglicht durch in der Lampe internes Umsetzen der empfangenen \ac{dmx} Werte auf diesen Kanälen in Helligkeitswerte
 für die einzelnen Emitter.\\
@@ -2458,7 +2458,7 @@ c - Lichtgeschwindigkeit - 299 792 458 Meter pro Sekunde
     \bibitem[AS7262 Datenblatt, 2019]{datasheet62}"'AS7262 6-Channel Visible Spectral ID Device with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7262_DS000486_2-00.pdf/0031f605-5629-e030-73b2-f365fd36a43b}. Visited on: 11.08.2019
     \bibitem[Lindbloom Homepage, 2019]{lindbloom} \url{http://brucelindbloom.com/index.html}. Visited on: 09.09.2019
     \bibitem[Wisotop Homepage, 2019]{wisotop} \url{https://wisotop.de/Anhang-Tristimulus-Werte.php}. Visited on: 09.09.2019
-    \bibitem[Light Can Manual, 2019]{lightCanDMX} \url{http://download.apelabs.com/manuals/Ape_Labs_-_LightCan_-_Manual_-_web.pdf} Page 33. Visited on: 16.09.2019
+    \bibitem[LightCan Manual, 2019]{lightCanDMX} \url{http://download.apelabs.com/manuals/Ape_Labs_-_LightCan_-_Manual_-_web.pdf} Page 33. Visited on: 16.09.2019
     \bibitem[SkyPanel Manual, 2019]{skypanelDMX} \url{https://www.arri.com/resource/blob/65958/560471fec7f8f2e186ef8ca9e6cdd489/arri-skypanel-dmx-protocol-specification-v4-4-en-okt2018-data.pdf} Page 12. Visited on: 16.09.2019
     \bibitem[artnet NPMJS, 2019]{artnetPackage} \url{https://www.npmjs.com/package/artnet}. Visited on: 16.09.2019
     \bibitem[Sutherland–Hodgman algorithm Wikipedia, 2019]{sutherlandHodgman} \url{https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm}. Visited on: 22.09.2019
