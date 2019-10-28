@@ -1005,7 +1005,7 @@ Serie erfasst werden und im XLS Format für die weitere Auswertung auf eine SD K
 Es gibt einige Hersteller von Spektralsensoren für Licht und spektral benachbarte Bereiche wie Infrarot.
 Ein Hersteller, dessen Sensoren in dieser Arbeit vornehmlich genutzt wurden, ist die Firma AMS.\\
 AMS ist ein globales Unternehmen und einer der führenden Hersteller für Sensortechnik. AMS stellt hauptsächlich Sensoren für die Bereiche
-Optik, Bildverarbeitung und Schall her. Sensoren von AMS werden in Smartphones und Smarthome Produkten, sowie in industrieller
+Optik, Bildverarbeitung und Schall her. Sensoren von AMS werden in Smartphones und Smart Home Produkten, sowie in industrieller
 Automatisierung und medizinischen Geräten verbaut. \cite{ams}\\
 Zu Beginn wurde nach einer einfachen Evaluierungslösung für das Erfassen von spektralen Daten gesucht. Hier wurde das
 Sensorboard von der Firma Adafruit AS7262 genutzt. \cite{adafruit}\\
@@ -1344,36 +1344,36 @@ dynamisch eine \ac{svg} Grafik mit den Strecken zwischen den Gamutvertices über
     \begin{center}
         \includegraphics[width=.9\textwidth]{images/gamut_lightCan.png}
     \end{center}
-    \caption{Gamut einer LightCan}
+    \caption{Gamut einer LightCan} \label{fig:gamutLightCan}
 \end{figure}
 \noindent
 \subsection{Zeichnung eines kombinierten Gamuts}
 Hier war die Aufgabe zu bestimmen, ob Koordinaten (oder auch Vertex) eines Gamuts A innerhalb eines Gamuts B einer anderen Lampe liegen.
 Wenn diese Bedingung erfüllt ist, muss zur Bestimmung des gemeinsamen Gamuts ermittelt werden, ob ein Punkt innerhalb des bestehenden Polygons liegt. Dies
-wurde mit dem Sutherland–Hodgman Algorithmus \cite{sutherlandHodgman} bewerkstelligt. Für diesen Algorithmus werden die Vertex Daten des zu analysierenden
+wurde mit dem Sutherland–Hodgman-Algorithmus \cite{sutherlandHodgman} bewerkstelligt. Für diesen Algorithmus werden die Vertex Daten des zu analysierenden
 Polygons benötigt. Die Vertex Daten sind hier die CIE 1931 xy Koordinaten. Wichtig ist, dass die Vertices gegen den Uhrzeigersinn vorsortiert sind.\\
 Der Algorithmus spannt die Gerade zwischen zwei Vertices und prüft, auf welcher Seite der Geraden sich die bisherigen Vertices des Gamuts befinden. Wenn
 beide Vertices sich auf der, gegen den Uhrzeigersinn gesehen linken Seite, also der Innenseite (Gamutflächenseite) des Gamuts befinden, wird der zweite
-Vertex der Gamutvertex Liste hinzugefügt.\\
-Liegt der erste der beiden Vertices außerhalb der Gamutflächenseite, wird der auf der Fläche liegende Vertex und der Schnittpunkt des Polygons und der
+Vertex der Gamutvertexliste hinzugefügt.\\
+Liegt der erste der beiden Vertices außerhalb der Gamutflächenseite, wird der auf der Gamutfläche liegende Vertex und der Schnittpunkt des Polygons und der
 Gamutflächenseite der Gamutvertex Liste hinzugefügt (siehe Bild \ref{fig:sutherland_hodgman}).\\
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{.49\textwidth}
         \includegraphics[width=\textwidth]{images/sutherland_hodgman_example.png}
-        \caption{Ausgangs Situation}
+        \caption{Ausgangssituation}
     \end{subfigure}
     \hfill 
     \begin{subfigure}[b]{.49\textwidth}
         \includegraphics[width=\textwidth]{images/sutherland_hodgman_example_solution.png}
         \caption{Errechnete Vertices}
     \end{subfigure}
-    \caption{Grafische Darstellung des Sutherland–Hodgman Algorithmus} \label{fig:sutherland_hodgman}
+    \caption{Grafische Darstellung des Sutherland–Hodgman-Algorithmus} \label{fig:sutherland_hodgman}
 \end{figure}
 \noindent
-Liegt der zweite Vertex außerhalb der Gamutflächenseite wird der Schnittpunkt des Polygons und der Gamutflächenseite der Gamutvertex Liste hinzugefügt.
+Liegt der zweite Vertex außerhalb der Gamutflächenseite wird der Schnittpunkt des Polygons und der Gamutflächenseite der Gamutvertexliste hinzugefügt.
 Diese Vorgehensweise wird in der Applikation für jede selektierte Lampe wiederholt. Gestartet wird mit dem Gamut der ersten selektierten Lampe. Dieser
-Gamut wird mit dem der nächsten Lampe zusammengeführt. Der daraus entstehende kombinierte Gamut wird nun mit dem der nächsten selektierten Lampe ebenfalls
+Gamut wird mit dem der nächsten Lampe zusammengeführt. Der daraus entstehende kombinierte Gamut wird nun mit dem Gamut der nächsten selektierten Lampe
 zusammengeführt, bis alle Lampen der Selektion durchlaufen sind. Der hier entstehende Gamut wird nun in dem CIE 1931 Diagramm weiß eingezeichnet.
 Zusätzlich wird der Gamut der einzelnen Lampen jeweils in schwarz eingezeichnet (siehe Bild \ref{fig:combinedGamut}).
 \begin{figure}[H]
@@ -1387,15 +1387,15 @@ Zusätzlich wird der Gamut der einzelnen Lampen jeweils in schwarz eingezeichnet
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Ansteuerung externer Lichtquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Ansteuerung externer Lichtquellen}
-Für eine automatisierte Vermessung der Lichtquellen ist es nötig, dass die messende Applikation auch die Lichtquellen ansteuern kann. Somit wurde
+Für eine automatisierte Lichtquellenvermessung ist es nötig, dass die messende Applikation auch die Lichtquellen ansteuern kann. Somit wurde
 in der Applikation eine \ac{dmx} Steuerung mit Art-Net implementiert. Weiter wurde ermöglicht, mehrere Lampen zu verwalten und zu steuern, um später mehrere
-vermessene Lampen ansteuern zu können.
+zu vermessende Lampen ansteuern zu können.
 \subsection{Fixturetypen}
-Lichtquellen verschiedener Hersteller haben viele unterschiedliche Funktionen. Von einer Helligkeitsregelung, dem Dimmer, über mehrere Emitter, wie
-die hier verwendeten Lichtquellen, bis zu Bewegungssteuerungen mehrerer Achsen, wie beim Robe LEDWash 300.\\
-Die Zuordnung dieser Funktionen zu den DMX Steuerkanälen der Lampe ist somit je nach Funktionalitätsumfang von Lampe zu Lampe und auch bei einem gleichen
-Lampentyp von Hersteller zu Hersteller unterschiedlich. So findet sich beispielsweise bei der LightCan kein Dimmer Steuerkanal für die Gesamtintensität
-der Lampe. Hier werden nur Steuerkanäle der einzelnen Emitter bereitgestellt.
+Lichtquellen verschiedener Hersteller haben viele unterschiedliche Funktionen. Von einer Helligkeitsregelung, dem Dimmer, über mehrere Emitter, bis hin zur
+Bewegungssteuerung mehrerer Achsen.\\
+Die Zuordnung dieser Funktionen zu den DMX Steuerkanälen der Lampe ist somit je nach Funktionalitätsumfang von Lampe zu Lampe und  von Hersteller zu Hersteller
+unterschiedlich. So findet sich beispielsweise bei der LightCan kein Dimmersteuerkanal für die Gesamtintensität der Lampe. Hier werden lediglich Steuerkanäle für
+die einzelnen Emitter bereitgestellt.
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{.49\textwidth}
@@ -1410,13 +1410,13 @@ der Lampe. Hier werden nur Steuerkanäle der einzelnen Emitter bereitgestellt.
     \caption{DMX Charts der Hersteller Ape Labs und Arri}
 \end{figure}
 \noindent
-Das SkyPanel hingegen bietet 31 sogenannte DMX Modi, die LightCan 3 Modi. Je nach Wahl des DMX Modus wechselt die Belegung der \ac{dmx} Steuerkanäle, auf die
-die Lampe reagiert. Hier wird nach Anwendungsfall ein DMX Mode gewählt. Das SkyPanel bietet auch in einem DMX Modus eine Ansteuerung von CIE 1931 x und
-y Kanälen auf zwei \ac{dmx} Kanälen. Dies wird ermöglicht durch in der Lampe internes Umsetzen der empfangenen \ac{dmx} Werte auf diesen Kanälen in Helligkeitswerte
-für die einzelnen Emitter.\\
-Eine abstrahierte, oder auch vereinheitliche Steuerung für äquivalente Lampenfunktionen ist durch diese Unterschiede in der Belegung nur durch
-Zuordnungstabellen in der Software möglich. Hier wird die gewählte Belegung der Lampe hinterlegt, um mit einem Schieberegler für den roten Emitter
-wie in Bild \ref{fig:emitterFaders} den entsprechenden Steuerkanal mit dem eingestellten Wert zu beschicken.\\
+Das SkyPanel bietet 31 sogenannte DMX Modi, die LightCan hingegen drei Modi. Je nach Wahl des DMX Modus wechselt die Belegung der \ac{dmx} Steuerkanäle, auf die
+die Lampe reagiert. Hier wird je nach Anwendungsfall ein DMX Mode gewählt. Das SkyPanel bietet unteranderem in einem DMX Modus eine Ansteuerung von CIE 1931 x- und
+y-Kanälen auf je einem \ac{dmx} Kanal. Hierfür werden die auf diesen Kanälen empfangenen \ac{dmx} Werte in der Lampe in Helligkeitswerte für die einzelnen Emitter
+übersetzt.\\
+Eine abstrahierte, oder auch vereinheitlichte, Steuerung für äquivalente Lampenfunktionen ist durch diese Unterschiede in der Belegung nur durch
+Zuordnungstabellen in der Software möglich. Hier wird die gewählte Belegung der Lampe hinterlegt, um mit einem Schieberegler den entsprechenden Steuerkanal für
+zum Beispiel den roten Emitter, wie in Bild \ref{fig:emitterFaders} mit dem eingestellten Wert zu beschicken.\\
 \\
 Diese Zuordnungstabellen nennt man in der Brache (engl.) "'Fixturetypen"'.
 \clearpage
@@ -1431,44 +1431,44 @@ Diese Zuordnungstabellen nennt man in der Brache (engl.) "'Fixturetypen"'.
 \end{wrapfigure}
 \noindent
 In der Applikation ist dies eine statische \ac{json} Liste von Fixturetypen (Bild \ref{fig:code_fixturetype}). Hier wird lediglich festgehalten, welche
-Emitter die Lampe hat und auf welchem \ac{dmx} Kanal des Modus sich der Emitter bezogen auf 1 befindet. Weiter ob die Lampe einen Dimmer Kanal hat und
+Emitter die Lampe hat und auf welchem \ac{dmx} Kanal sich der Emitter bezogen auf die DMX Startadresse befindet. Weiter ob die Lampe einen Dimmerkanal hat und
 wenn ja auf welchem Kanal dieser zu finden ist.
 \subsection{Patch}
-Im sogenannten "'Patch"' oder auch "'Adressierung"' legt man fest, welche Lampen man steuern möchte. Ein Patcheintrag besteht aus den Informationen
+Im sogenannten "'Patch"' ("'Adressierung"') legt man fest, welche Lampen man steuern möchte. Ein Patcheintrag besteht aus den Informationen
 des verwendeten Fixturetypen und der DMX Startadresse. Die DMX Startadresse ist eine Nummer zwischen 1 und 512, welche man an der Lampe einstellt.
 Alle weiteren Steuerkanäle des DMX Modus der Lampe folgen dann auf diese Startadresse. Hier muss bei mehreren Lampen auf einer DMX Linie darauf geachtet
 werden, dass sich keine Lampen in ihren Steuerkanälen ungewollt überlappen.\\
-Die gleiche Startadresse pro Lampe muss dann mit dem entsprechenden Fixturetypen und dem korrekten Modus der Steuerungssoftware eingegeben werden.\\
-In der Applikation werden beim Hinzufügen von Lampen im Hintergrund noch weitere Dinge erledigt. Durch das Nutzen von mehreren Lampen musste die Art
-und Weise umgestellt werden, wie Emitter und die angelegten Lampen selbst verwaltet werden.\\
-Die Emitter Sektion wird nun automatisch erzeugt. Anhand der genutzten Fixturetypen wird zusammengetragen, welche Arten von Emittern benötigt werden.
-Für alle verwendeten Emitter wird eine entsprechende Representation mit einem Schieberegler erzeugt. Die "'Add Emitter"' Schaltfläche zum manuellen
-Hinzufügen von Emittern entfällt.\\
-Falls für den Fixturetypen bereits eine vergangene Messung auf der Festplatte verfügbar ist, wird diese dem Fixture als Emitter Daten zugewiesen.
+Die DMX Startadresse der Lampe muss mit dem entsprechenden Fixturetypen und dem korrekten Modus in dem Patchdialog eingegeben werden.\\
+Durch das Nutzen von mehreren Lampen muss die Art und Weise umgestellt werden, wie Emitter und angelegte Lampen verwaltet werden.\\
+In der Applikation werden beim Hinzufügen von Lampen im Hintergrund noch weitere Dinge erledigt: Die Emittersektion wird nun automatisch erzeugt. Anhand der
+genutzten Fixturetypen wird zusammengetragen, welche Arten von Emittern benötigt werden. Für alle verwendeten Emitter wird eine entsprechende Repräsentation mit
+einem Schieberegler erzeugt. Die "'Add Emitter"' Schaltfläche zum manuellen Hinzufügen von Emittern entfällt.\\
+Falls für den Fixturetypen bereits Daten aus einer vergangenen Messung auf der Festplatte verfügbar ist, werden diese dem Fixture als Emitterdaten zugewiesen.
 Wenn keine Daten vorhanden sind, wird das Fixture als nicht vermessen markiert.\\
-Zuletzt wird der Patch gesichert und beim nächsten Öffnen der Applikation auch wieder geladen.
+Zuletzt wird der Patch gesichert, um diesen beim nächsten Öffnen der Applikation wieder laden zu können.
 \subsection{Fixture Sheet}
 Ein sogenanntes "'Fixture Sheet"' ist eine Auflistung der gepatchten Fixtures und deren aktueller Zustand.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.9\textwidth]{images/app_fixture_sheet_dummy.png}
     \end{center}
+    \vspace{-10pt}
     \caption{Fixture Sheet in der Applikation mit Selektion}\label{fig:fixtureSheet}
 \end{figure}
 \noindent
 Weiter wird hier eine Selektion eingeführt. Nur selektierte Fixtures werden über die Schieberegler in ihren Werten manipuliert. Alle anderen Werte bleiben
-unangetastet. Alle selektierten Fixtures werden mit gelber Schrift gekennzeichnet.\\
-Jede Reihe des Fixture Sheets außer der obersten repräsentiert den Zustand eines gepatchten Fixtures. In der ersten Spalte in Bild \ref{fig:fixtureSheet}
+unangetastet. Selektierte Fixtures werden mit gelber Schrift gekennzeichnet.\\
+Jede Reihe des Fixture Sheets, außer der obersten, repräsentiert den Zustand eines gepatchten Fixtures. In der ersten Spalte in Bild \ref{fig:fixtureSheet}
 wird eine inkrementierte Nummer angezeigt, um mehrere Fixtures des gleichen Typs auseinanderhalten zu können. In der zweiten Spalte wird der Name des
 Fixturetyps angezeigt, um diesen zu identifizieren.\\
 Die folgenden Spalten bis "'M"' werden dynamisch je nach genutzten Attributen generiert. Nutzt ein Fixture ein Attribut nicht, wird die Spalte leer gelassen.
 Wird das Attribut genutzt, wird der aktuelle Wert, der mit den Schiebereglern eingestellt wurde, von 0 bis 100 angezeigt. Dieser Wert soll später via \ac{dmx}
 ausgegeben werden.\\
 Die Spalte "'M"' steht für "'Measure"'. Mit dem Anklicken der Zelle wird später automatisiert das Vermessen des Fixtures angestoßen. Mit Klicken auf die
-Zelle in der Spalte "'S"' für "'Settings"' also Einstellungen, können nun hier in einem Popup die gemessenen Emitter Werte eingesehen werden.
+Zelle in der Spalte "'S"' für "'Settings"', also Einstellungen, können in einem Popup die gemessenen Emitterwerte eingesehen werden.
 \subsection{Art-Net Implementierung}
-Zur Ansteuerung der Lampen mit \ac{dmx} wurde eine einfache Art-Net Implementierung aus dem NPM Modul "'artnet"' von dem Alias "'hobbyquaker"' genutzt
-\cite{artnetPackage}. Zur Art-Net - DMX Umsetzung wurde ein grandMA3 "'4Port Node"' genutzt. Dieser wurde als Protokoll Wandler eingesetzt.\\
+Zur Ansteuerung der Lampen mit \ac{dmx} wurde eine einfache Art-Net Implementierung aus dem NPM-Modul "'artnet"' von dem Alias "'hobbyquaker"' genutzt
+\cite{artnetPackage}. Zur Umsetzung von Art-Net zu DMX wurde ein grandMA3 "'4Port Node"' genutzt. Dieser wurde als Protokollwandler eingesetzt.\\
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.9\textwidth]{images/Data_transmission_scheme.png}
@@ -1476,46 +1476,44 @@ Zur Ansteuerung der Lampen mit \ac{dmx} wurde eine einfache Art-Net Implementier
     \caption{Schema der DMX Übertragung zu einer LightCan}\label{fig:dataScheme}
 \end{figure}
 \noindent
-Im Fall der Lampen der Firma Ape Labs wird ein weiteres Gerät, bezeichnet als "'WAPP"' zur DMX - W-DMX Umsetzung genutzt.\\
+Im Fall von Lampen der Firma Ape Labs wird ein weiteres Gerät, bezeichnet als "'WAPP"', zur Umsetzung von DMX zu W-DMX genutzt.\\
 In der Applikation wird mit jeder Einstellung an einem beliebigen Schieberegler das Zusammenstellen neuer DMX Informationen angestoßen. Jede gepatchte
-Instanz eines Fixturetypes hält ihre aktuell eingestellten Werte. Diese Werte werden mit der DMX Startadresse der Instanz und der Belegung der Steuerkanäle
-des Fixturetypes in das DMX Universum eingepflegt. Die in der Applikation geführten Werte von 0 bis 100 werden mit 2.55 multipliziert. Somit ergeben sich die
-zu übertragenden DMX Werte.\\
-Dieses gefüllte DMX Universum wird aus dem Webcode dem Appcode übergeben. In der Appcode Sektion wird das DMX Universum der artnet Bibliothek übergeben. Diese
-wiederum nimmt diese Daten als akutellen Zustand für das Art-Net Universum 1. Dieser Zustand wird unmittelbar als ArtDmx Paket (siehe Tabelle \ref{tab:ArtDmxDefinition})
-im Broadcast Modus an die IP "'2.255.255.255"' gesendet.\\
-Solange der artnet Bibliothek kein neuer Universumszustand übergeben wird, sendet diese alle 900 Millisekunden ein leeres ArtDmx Paket für diese Universum als
-sogenanntes "'Keep-Alive"' Signal. Dies wird übertragen, um einerseits dem Art-Net Empfänger zu signalisieren, dass die Übertragung nicht abgebrochen ist,
-andererseits ist das Paket leer, um nicht informationslose Daten zu übertragen.\\
-Der Art-Net Empfänger, welcher in dieser Arbeit ein 4port Node der Firma MA Lighting Technology ist, empfängt diese ArtDmx Pakete und gibt sie an die mit dem äquivalenten
-DMX Universum konfigurierten DMX Ausgängen aus. Dieses DMX Signal wird dann kabelgebunden an die DMX Empfänger weitergeleitet.\\
+Instanz eines Fixturetypes behält ihre aktuell eingestellten Werte. Diese Werte werden mit der DMX Startadresse der Instanz und der Belegung der Steuerkanäle
+des Fixturetypes in das DMX Universum eingepflegt. Die in der Applikation geführten Werte von 0 bis 100 werden mit 2.55 für die DMX Ausgabe multipliziert. Somit
+ergeben sich die zu übertragenden acht Bit DMX Werte.\\
+Dieses gefüllte DMX Universum wird aus dem Webcode an den Appcode weitergegeben. In der Appcodesektion wird das DMX Universum an die artnet-Bibliothek übergeben.
+Diese wiederum nimmt die Daten als akutellen Zustand für das Art-Net Universum 1 an. Dieser Zustand wird unmittelbar als ArtDmx-Paket (siehe Tabelle
+\ref{tab:ArtDmxDefinition}) im Broadcast-Modus an die IP "'2.255.255.255"' gesendet.\\
+Solange der artnet-Bibliothek kein neuer Universumszustand übergeben wird, sendet diese alle 900 Millisekunden ein leeres ArtDmx-Paket für dieses Universum als
+sogenanntes "'Keep-Alive"'-Signal. Dies wird übertragen, um dem Art-Net-Empfänger zu signalisieren, dass die Übertragung nicht abgebrochen ist. Um keine
+informationslosen Daten zu übertragen, ist das Paket nach dem Header leer.\\
+Der Art-Net-Empfänger, welcher in dieser Arbeit ein 4port Node der Firma MA Lighting Technology ist, empfängt diese ArtDmx-Pakete und gibt sie an die, mit dem
+äquivalenten DMX Universum konfigurierten, DMX Ausgänge aus. Dieses DMX Signal wird dann kabelgebunden an die DMX Empfänger weitergeleitet.\\
 DMX Empfänger sind in dieser Arbeit die Lampen, beziehungsweise im Fall der Ape Labs Produkte der "'WAPP"'.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Automatisiertes Abgleichen zweier LED-Lichtquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Automatisiertes Abgleichen zweier LED-Lichtquellen} \label{comparing}
-Mit den in den realisierten Funktionen aus den vorhergehenden Kapiteln kann nun ein automatisierter Abgleich zweier LED-Lichtquellen vorbereitet werden. Hier
+Mit den realisierten Funktionen aus den vorhergehenden Kapiteln kann nun ein automatisierter Abgleich von zwei LED-Lichtquellen vorbereitet werden. Hier
 ergeben sich aufgrund der Ergebnisse der bisherigen Messungen folgende Fragen:\\
 \begin{addmargin}[2em]{0em}
-    1. Wie kann ein Farbton außerhalb des kombinierten Gamut mit möglichst geringer Abweichung der Farbvalenz in den Bereich des kombinierten Gamut
+    1. Wie kann ein Farbton, der außerhalb des kombinierten Gamuts liegt, mit möglichst geringer Abweichung der Farbvalenz in den Bereich des kombinierten Gamut
     verschoben werden?\\
-    2. Wie kann eine Anpassung der Farbvalenz der anderen Lichtquelle auf die erste realisiert werden?\\
-    3. Wie kann dies grafisch in einem Programm für den Benutzer realisiert werden?\\
+    2. Wie kann eine Anpassung der Farbvalenz einer Lichtquelle auf eine andere realisiert werden?\\
+    3. Wie kann dies grafisch in einem Programm für den Benutzer dargestellt werden?\\
 \end{addmargin}
-Diese Punkte werden nun nacheinander erörtert. Die Ausgangssituation ist, dass ein Benutzer in der Applikation zwei vermessene Lampen selektiert. Die
-Applikation berechnet die xyY-Koordinaten des kombinierten Gamuts der beiden Lampen.
-Per Benutzereingabe wird ein Mischungsverhältnis der Emitter vorgegeben. Beispielsweise ein Cyanton mit 100\% Grün- und 65\% Blauanteil. Mit den erfassten
-Messwerten wird mit der vorgehensweise aus Kapitel \ref{calcColor} die erwartete xyY-Koordinate errechnet. Diese Koordinate wird im Folgenden als
-Referenzpunkt bezeichnet.
+Diese Punkte werden nun nacheinander erörtert. Die Ausgangssituation ist, dass ein Benutzer in der Applikation zwei bereits vermessene Lampen selektiert. Die
+Applikation berechnet die xyY-Koordinaten des kombinierten Gamuts der beiden Lampen. Über eine Benutzereingabe wird das Mischungsverhältnis der Emitter vorgegeben.
+Beispielsweise ein Cyanton mit 100\% Grün- und 65\% Blauanteil. Mit den erfassten Messwerten wird, mit der vorgehensweise aus Kapitel \ref{calcColor}, die erwartete
+xyY-Koordinate errechnet. Diese Koordinate wird im Folgenden als Referenzpunkt bezeichnet.
 \subsection{Finden eines Punktes innerhalb des kombinierten Gamuts}
-Nun muss ermittelt werden, ob der Referenzpunkt auf dem CIE 1931 Diagramm außerhalb des kombinierten Gamuts liegt oder nicht. Falls der Punkt außerhalb des
-kombinierten Gamuts befindet, kann dieser Punkt nicht von allen Lampen gemischt werden. Somit müsste ein Punkt innerhalb, beziehungsweise auf dem Rand
-dieses Polygons gefunden werden, sodass alle gewählten Lichtquellen in der Lage sind diese Farbvalenz zu erzeugen.\\
-Zunächst wird geprüft, ob sich der Referenzpunkt innerhalb des kombinierten Gamuts befindet. Die Koordinaten des kombinierten Gamuts werden gegen den
-Uhrzeigersinn vorsortiert. Siehe (\ref{Equ:14}) - (\ref{Equ:15}). Anschließend kann ähnlich zum Sutherland–Hodgman Algorithmus geprüft werden, ob sich
-der Referenzpunkt links von der Geraden zweier aufeinanderfolgender Koordinaten ist. Auch hier ist zu beachten, dass links von der Strecke aus Sicht der
-Richtung der Geraden gegen den Uhrzeigersinn ist. Wenn diese Bedingung für alle Geraden erfüllt ist, befindet sich der Referenzpunkt innerhalb des kombinierten
-Gamuts.\\
+Nun muss ermittelt werden, ob der Referenzpunkt auf dem CIE 1931 Diagramm außerhalb des kombinierten Gamuts liegt oder nicht. Falls der Punkt sich außerhalb des
+kombinierten Gamuts befindet, kann dieser Punkt nicht von allen Lampen gemischt werden. Somit müsste ein Punkt innerhalb, beziehungsweise auf dem Rand,
+dieses Polygons gefunden werden, damit alle gewählten Lichtquellen in der Lage sind diese Farbvalenz zu erzeugen.\\
+Zunächst wird geprüft, ob der Referenzpunkt sich innerhalb des kombinierten Gamuts befindet. Die Koordinaten des kombinierten Gamuts werden gegen den
+Uhrzeigersinn vorsortiert. Siehe (\ref{Equ:14}) - (\ref{Equ:15}). Anschließend kann ähnlich zum Sutherland–Hodgman-Algorithmus geprüft werden, ob
+der Referenzpunkt sich, gegen den Uhrzeigersinn gesehen, links von der Geraden zweier aufeinanderfolgender Koordinaten ist. Wenn diese Bedingung für alle Geraden
+erfüllt ist, befindet sich der Referenzpunkt innerhalb des kombinierten Gamuts.\\
 \begin{lstlisting}[caption=Punkt in Polygon Check]
 function pointIsInside(point, vs)
 {
@@ -1538,7 +1536,7 @@ Wenn sich der Punkt nicht innerhalb des kombinierten Gamuts befindet, wird gepr�
 kombinierten Gamuts befindet. Dies prüft die vorhergehende Routine nicht. Falls dies ebenfalls nicht der Fall ist, muss der Punkt außerhalb des Gamuts liegen.\\
 In diesem Fall muss ein neuer Punkt auf dem Rand des Gamuts gefunden werden, welcher die geringste Abweichung zur Farbvalenz des Referenzpunktes hat. Dieser
 Punkt wird im Folgenden "'Mixpunkt"' genannt.
-Es wird angenommen, dass die minimale Farbverschiebung durch das Suchen des orthogonalen Bezugspunktes an dem kombinierten Gamut erreicht wird (siehe
+Es wird angenommen, dass die minimale Farbverschiebung durch das Suchen des orthogonalen Bezugspunktes am kombinierten Gamut erreicht wird (siehe
 Bild \ref{fig:refCombined}).
 \begin{figure}[H]
     \begin{center}
@@ -1547,8 +1545,8 @@ Bild \ref{fig:refCombined}).
     \caption{Kombinierter Gamut mit Referenz- und Mixpunkt}\label{fig:refCombined}
 \end{figure}
 \noindent
-Dieser Bezugspunkt wird berechnet mit Hilfe das Ansatzes des Kreuzprodukts von der Strecke der beiden Vertices (A und B) und zwischen dem Referenzpunkt (C)
-und dem Mixpunkt (D). Setzt man dieses Kreuzprodukt gleich null müssen diese im rechten Winkel zueinander liegen.
+Dieser Bezugspunkt wird berechnet mit Hilfe des Kreuzprodukts der Vektoren zwischen den beiden Vertices (A und B) und zwischen dem Referenzpunkt (C)
+und dem Mixpunkt (D). Setzt man das Kreuzprodukt gleich null, liegen die Vektoren im rechten Winkel zueinander.
 \begin{align}\label{Equ:16}
     AB \times CD = 0
 \end{align}
@@ -1577,45 +1575,50 @@ function getSpPoint(A,B,C,limit)
     return {x:x, y:y};
 }
 \end{lstlisting}
-Diese Prozedur wird für alle Seiten des Polygons ausgeführt. Falls mehrere Punkte gefunden werden, wird der Punkt mit der kürzesten Vektor Distanz zum
+Diese Prozedur wird für alle Seiten des Polygons ausgeführt. Falls mehrere Punkte gefunden werden, wird der Punkt mit der kürzesten Vektordistanz zum
 Referenzpunkt gewählt.\\
-Falls der Referenzpunkt nicht außerhalb des kombinierten Gamuts liegt, wird der Referenzpunkt als Mixpunkt übernommen.\\
+Falls der Referenzpunkt innerhalb des kombinierten Gamuts liegt, wird der Referenzpunkt als Mixpunkt übernommen.\\
 \\
-Nun kann begonnen werden die \ac{dmx} Ausgabe für diesen Punkt für alle selektierten Lampen zu berechnen. Der folgende Ablauf wird pro Lampe der Selektion
+Nun kann begonnen werden die \ac{dmx} Ausgabe für diesen Punkt für alle selektierten Lampen zu berechnen. Der folgende Ablauf wird bei jeder Lampe der Selektion
 angewendet.
 \subsection{Finden der Emitter und Intensitäten}
-Hier wird begonnen, indem die Emitterkombinationen pro Lampe ermittelt werden, mit welchen der gewünschte Farbton gemischt werden kann. Da die hier
-verwendeten Lampen RGBW Lichtquellen besitzen gibt es mehrere Möglichkeiten eine Farbe zu mischen. Für komplexere Testaufbauten gibt es allerdings auch
-übliche Lampen in der Veranstaltungstechnik mit fünf oder mehr Emittern. Beispielsweise RGBWA (Amber) Geräte.\\
-Es werden nun aus allen möglichen Emitterkombinationen immer drei Emitter einer Lampe betrachtet. Diese ergeben im CIE 1931 Diagramm ein Dreieck. Die
-Vertices des Dreiecks werden gegen den Uhrzeigersinn sortiert. Anschließend wird geprüft, ob der Mixpunkt innerhalb dieses Emitterdreiecks liegt.
-Falls ja, wird diese Emitterkombination zu einer Sammlung möglicher Mischkombinationen hinzugefügt. Zusätzlich wird ein Relevanzabstand berechnet.\\
-Dieser beschreibt die Gesamthelligkeit der Farbmischung. Dies kann mit der Summe der Distanzen zwischen den Dreieckspunkten und dem Mixpunkt ausgedrückt
-werden, da je weiter ein Emitter im Farbraum von dem zu mischenden Punkt entfernt ist, desto geringer die Intensität des Emitters in der Mischung ist.
-Somit: Um so kleiner die Summe der Distanzen der Emitter des Dreiecks, desto größer ist die Gesamthelligkeit gegenüber einer anderen Emitterkombination.
+Hier wird begonnen, indem die Emitterkombinationen mit welchen der gewünschte Farbton gemischt werden kann, für jede Lampe ermittelt werden. Da die hier
+verwendeten Lampen RGBW Lichtquellen besitzen, gibt es mehrere Möglichkeiten eine Farbe zu mischen. Für komplexere Testaufbauten gibt es allerdings in der
+Veranstaltungstechnik auch übliche Lampen mit fünf oder mehr Emittern, beispielsweise RGBWA (Amber) Geräte.\\
+So kann das, in Bild \ref{fig:gamutLightCan} dargestellte, Gamutdreieck mit weiteren Emittern zu einem N-Eck werden. Um diese komplexität generisch
+verarbeiten zu können muss die Form des Gamuts zur Analyse in einfache Segmente zerlegt werden.\\
+Weiter müssen für eine potenzielle Farbmischung alle verfügbaren Emitter betrachtet werden. Wie in Bild \ref{fig:triangleCombined} ist der weiße
+Emitter innerhalb des Gamuts der anderen drei Emitter Rot, Grün und Blau. Wenn nun nur die Emitter betrachtet würden, die den Umriss des Gamuts
+definieren, würde in diesem Beispiel der weiße Emitter nicht berücksichtigt werden. Die einfachste Form und minimalistischte Form der Segmentierung
+einer Fläche ist das Dreieck.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.8\textwidth]{images/combined_gamut_with_mix_triangles_cyan.png}
     \end{center}
-    \caption{Kombinierter Gamut mit Mixdreiecken}\label{fig:triangleCombined}
+    \caption{Kombinierter Gamut eines SkyPanels mit Mixdreiecken und einer LightCan}\label{fig:triangleCombined}
 \end{figure}
 \noindent
-Auf Bild \ref{fig:triangleCombined} sind zwei mögliche "'Mixdreiecke"' zu sehen. Einmal mit den Emittern RGB und eines mit den Emittern GBW. Es ist leicht
+Somit werden nun aus allen möglichen Emitterkombinationen immer ein Dreieck aus drei Emittern einer Lampe betrachtet. Die Vertices des Dreiecks werden gegen
+den Uhrzeigersinn sortiert. Anschließend wird geprüft, ob der Mixpunkt innerhalb dieses Emitterdreiecks liegt. Falls ja, wird diese Emitterkombination zu einer
+Sammlung möglicher Mischkombinationen hinzugefügt. Zusätzlich wird ein Relevanzabstand berechnet, der die Gesamthelligkeit der Farbmischung beschreibt.\\
+Berechnet wird dieser durch das summieren der Distanzen zwischen den einzelnen Dreieckspunkten und dem Mixpunkt. Je weiter ein Emitter im Farbraum von dem zu
+mischenden Punkt entfernt ist, desto geringer ist die Intensität des Emitters in der Mischung. Umso kleiner der Relevanzabstand ist, desto größer ist die Gesamthelligkeit gegenüber einer anderen Emitterkombination.\\
+Auf Bild \ref{fig:triangleCombined} sind zwei mögliche "'Mixdreiecke"' zu sehen, einmal mit den Emittern RGB und einmal mit den Emittern GBW. Es ist leicht
 zu erkennen, dass das kleinere Mixdreieck eine kürzere Gesamtdistanz hat. Somit wird dieses "'Mixdreieck"' für das weitere Vorgehen genutzt.\\
 Um von dem Referenzpunkt zum Mixpunkt zu gelangen, muss grafisch betrachtet etwas von dem weißen Emitter hinzugegeben werden. Was nicht direkt ersichtlich
-ist, dass der grüne und blaue Emitter in der Intensität gedämpft werden muss, um das korrekte Mischungsverhältnis zu erhalten. Nun muss jedoch für die
-einzelnen Emitter der konkrete Helligkeitswert errechnet werden, um diesen dann auch der Lampe per \ac{dmx} übermitteln zu können.\\
+ist, dass der grüne und blaue Emitter in der Intensität gedämpft werden müssen, um das korrekte Mischungsverhältnis zu erhalten. Für die einzelnen Emitter muss
+nun der konkrete Helligkeitswert errechnet werden, um diesen per \ac{dmx} an die Lampe übermitteln zu können.\\
 \\
-Diese Intensitäten der einzelnen Emitter kann nicht im CIE 1931 Farbraum ermittelt werden, da dieser in der xyY nicht beschreibt, von welchem Emitter,
-beziehungsweise welchem Grundton, welcher Anteil die Farbmischung erzeugt. Hierzu wird hier der RGB Farbraum gewählt.\\
-Somit müssen die xyY-Koordinaten des Mixpunktes in RGB Koordinaten umgerechnet werden mit \cite{lindbloom}:
+Die Intensitäten der einzelnen Emitter können nicht im CIE 1931 Farbraum ermittelt werden, da dieser mit xyY Koordinaten nicht beschreibt, aus welchen Grundtönen,
+sich die Farbmischung zusammensetzt. Hierzu wird der RGB Farbraum gewählt.\\
+Somit müssen die xyY-Koordinaten des Mixpunktes in RGB Koordinaten umgerechnet werden, mit \cite{lindbloom}:
 \begin{align}\label{Equ:19}
     X = \frac{x}{y}\\
     Y = 1\\
     Z = \frac{1-x-y}{y}
 \end{align}
 und (\ref{Equ:12}) bis (\ref{Equ:13}).\\
-Ebenfalls werden die Emitterkoordinaten des Mixdreiecks in RGB Koordinaten umgewandelt. Nun wird in Anlehnung an (\ref{Equ:13}) eine Matrix aus den RGB
+Auch die Emitterkoordinaten des Mixdreiecks werden in RGB Koordinaten umgewandelt. Nun wird in Anlehnung an (\ref{Equ:13}) eine Matrix aus den RGB
 Emitterkoordinaten erstellt.
 \begin{align}\label{Equ:20}
     \mathbf K = \left[ \begin{array}{rrr}
@@ -1639,16 +1642,16 @@ Wird $\mathbf K^{-1}$ mit dem Vektor der RGB Koordinaten des Mixpunktes multipli
 \end{align}
 \subsection{Umsetzen des Benutzerinterfaces}
 In der Benutzeroberfläche kann bisher eine Selektion von Fixtures vorgenommen werden. Der kombinierte Gamut dieser Selektion wird in das CIE 1931 Diagramm
-eingezeichnet, wenn die Fixtures Messdaten hinterlegt haben. Bei dem Mischen einer Farbe wird für das erste Fixture eine vorberechnete Koordinate
+eingezeichnet, wenn in den Fixtures Messdaten hinterlegt sind. Bei dem Mischen einer Farbe wird für das erste Fixture eine vorberechnete Koordinate
 eingezeichnet.\\
-Die Einzeichnung der vorberechnen Koordinate wurde erweitert, sodass diese für jedes selektiertes Fixture eingezeichnet wird. Jede Koordinate wird mit
-der Fixture Nummer (Fixture Id) markiert.\\
+Die Einzeichnung der vorberechnen Koordinate wurde erweitert, sodass diese für jedes selektierte Fixture eingezeichnet wird. Jede Koordinate wird mit
+der Fixturenummer (Fixture ID) markiert.\\
 \\
 Zum Nutzen der Funktionalität der vorhergehenden Kapitel muss ein Referenz-Fixture definiert werden. Im Fixture Sheet kann nun ein Eintrag mit
 einem Rechtsklick als Referenz definiert werden. Somit wird die vorberechnete Koordinate zum "'Referenzpunkt"'. Die gewählte Reihe wird mit roter
 Schrift gekennzeichnet.\\
-Die errechneten und korrigierten Intensitätswerte werden im Fixture Sheet pro Emitter in Klammern hinter dem Nutzer eingestellten Wert angezeigt. Diese Werte
-werden auf 0 bis 100 skaliert. Diese Werte werden mit 2.55 multipliziert als DMX ausgegeben.
+Die errechneten und korrigierten Intensitätswerte werden im Fixture Sheet für jeden Emitter in Klammern hinter dem, vom Nutzer eingestellten Wert angezeigt. Diese
+Werte werden auf 0 bis 100 skaliert und im Weiteren mit 2.55 multipliziert als DMX ausgegeben.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.8\textwidth]{images/app_fixture_sheet_with_reference.png}
@@ -1665,7 +1668,7 @@ Es wurden mit den in Kapitel \ref{lamps} aufgeführten Lampen verschiedene Messu
 Ein Teil dieser Messungen wurde in vorhergehenden Kapiteln bereits behandelt. Im Folgenden werden Testaufbauten, Messungen sowie Abgleichvorgänge aufgeführt
 und diskutiert.\\
 Zunächst sind die charakteristischen Luminanz- und Farbvalenzwerte der Emitter der verwendeten Lampen zu betrachten. Diese wurden als Basis mit dem UPRtek
-Spektrometer erhoben, um eine qualitative Aussage über die mit den AS726x gemessene Werte treffen zu können.\\
+Spektrometer erhoben, um eine qualitative Aussage über die, mit den AS726x gemessenen, Werte treffen zu können.\\
 Die mit dem Spektrometer gemessenen Werte sind tabellarisch in Tabelle \ref{table:luxSkypanel} bis \ref{table:whiteEmitterLightCan} und als Diagramme in
 Bild \ref{fig:luxSkypanel} bis \ref{fig:macAdamLightCanEmitters} im Anhang zu finden.
 \subsection{Messaufbau}
