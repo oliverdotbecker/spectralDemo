@@ -181,8 +181,8 @@ Dies ist von den Scheinwerfern herstellerübergreifend nicht zu erwarten. So lie
 Steuerungstechnik eine Lösung zu suchen.\\
 \\
 In dieser Arbeit wird betrachtet, wie man anhand von spektralen Messdaten der LED-Lichtquelle der
-Scheinwerfer einen automatisierten Abgleich zwischen einem Referenzgerät und einem zweiten Gerät oder
-mehreren realisieren kann.\\
+Scheinwerfer einen automatisierten chromatischen Abgleich zwischen einem Referenzgerät und einem
+zweiten Gerät oder mehreren realisieren kann.\\
 Außerdem wird behandelt, wie diese spektralen Daten der LED-Lichtquellen erhoben werden können, da
 diese Daten in der Praxis selten von Herstellern zur Verfügung gestellt werden.\\
 \\
@@ -1418,7 +1418,7 @@ Eine abstrahierte, oder auch vereinheitlichte, Steuerung für äquivalente Lampe
 Zuordnungstabellen in der Software möglich. Hier wird die gewählte Belegung der Lampe hinterlegt, um mit einem Schieberegler den entsprechenden Steuerkanal für
 zum Beispiel den roten Emitter, wie in Bild \ref{fig:emitterFaders} mit dem eingestellten Wert zu beschicken.\\
 \\
-Diese Zuordnungstabellen nennt man in der Brache (engl.) "'Fixturetypen"'.
+Diese Zuordnungstabellen nennt man in der Branche (engl.) "'Fixturetypen"'.
 \clearpage
 \begin{wrapfigure}{r}{0.3\textwidth}
     \vspace{-25pt}
@@ -1432,7 +1432,7 @@ Diese Zuordnungstabellen nennt man in der Brache (engl.) "'Fixturetypen"'.
 \noindent
 In der Applikation ist dies eine statische \ac{json} Liste von Fixturetypen (Bild \ref{fig:code_fixturetype}). Hier wird lediglich festgehalten, welche
 Emitter die Lampe hat und auf welchem \ac{dmx} Kanal sich der Emitter bezogen auf die DMX Startadresse befindet. Weiter ob die Lampe einen Dimmerkanal hat und
-wenn ja auf welchem Kanal dieser zu finden ist.
+wenn ja auf welchem Kanal dieser zu finden ist.\\
 \subsection{Patch}
 Im sogenannten "'Patch"' ("'Adressierung"') legt man fest, welche Lampen man steuern möchte. Ein Patcheintrag besteht aus den Informationen
 des verwendeten Fixturetypen und der DMX Startadresse. Die DMX Startadresse ist eine Nummer zwischen 1 und 512, welche man an der Lampe einstellt.
@@ -1447,7 +1447,7 @@ Falls für den Fixturetypen bereits Daten aus einer vergangenen Messung auf der 
 Wenn keine Daten vorhanden sind, wird das Fixture als nicht vermessen markiert.\\
 Zuletzt wird der Patch gesichert, um diesen beim nächsten Öffnen der Applikation wieder laden zu können.
 \subsection{Fixture Sheet}
-Ein sogenanntes "'Fixture Sheet"' ist eine Auflistung der gepatchten Fixtures und deren aktueller Zustand.
+Ein sogenanntes "'Fixture Sheet"' ist eine Auflistung der gepatchten Fixtures und deren aktuelle Steuerwerte.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.9\textwidth]{images/app_fixture_sheet_dummy.png}
@@ -1497,7 +1497,7 @@ DMX Empfänger sind in dieser Arbeit die Lampen, beziehungsweise im Fall der Ape
 Mit den realisierten Funktionen aus den vorhergehenden Kapiteln kann nun ein automatisierter Abgleich von zwei LED-Lichtquellen vorbereitet werden. Hier
 ergeben sich aufgrund der Ergebnisse der bisherigen Messungen folgende Fragen:\\
 \begin{addmargin}[2em]{0em}
-    1. Wie kann ein Farbton, der außerhalb des kombinierten Gamuts liegt, mit möglichst geringer Abweichung der Farbvalenz in den Bereich des kombinierten Gamut
+    1. Wie kann ein Farbton, der außerhalb des kombinierten Gamuts liegt, mit möglichst geringer Abweichung der Farbvalenz in den Bereich des kombinierten Gamuts
     verschoben werden?\\
     2. Wie kann eine Anpassung der Farbvalenz einer Lichtquelle auf eine andere realisiert werden?\\
     3. Wie kann dies grafisch in einem Programm für den Benutzer dargestellt werden?\\
@@ -1546,7 +1546,7 @@ Bild \ref{fig:refCombined}).
 \end{figure}
 \noindent
 Dieser Bezugspunkt wird berechnet mit Hilfe des Kreuzprodukts der Vektoren zwischen den beiden Vertices (A und B) und zwischen dem Referenzpunkt (C)
-und dem Mixpunkt (D). Setzt man das Kreuzprodukt gleich null, liegen die Vektoren im rechten Winkel zueinander.
+und dem Mixpunkt (D). Setzt man das Kreuzprodukt gleich Null, liegen die Vektoren im rechten Winkel zueinander.
 \begin{align}\label{Equ:16}
     AB \times CD = 0
 \end{align}
@@ -1644,14 +1644,14 @@ Wird $\mathbf K^{-1}$ mit dem Vektor der RGB Koordinaten des Mixpunktes multipli
 In der Benutzeroberfläche kann bisher eine Selektion von Fixtures vorgenommen werden. Der kombinierte Gamut dieser Selektion wird in das CIE 1931 Diagramm
 eingezeichnet, wenn in den Fixtures Messdaten hinterlegt sind. Bei dem Mischen einer Farbe wird für das erste Fixture eine vorberechnete Koordinate
 eingezeichnet.\\
-Die Einzeichnung der vorberechnen Koordinate wurde erweitert, sodass diese für jedes selektierte Fixture eingezeichnet wird. Jede Koordinate wird mit
+Die Einzeichnung der vorberechneten Koordinate wurde erweitert, sodass diese für jedes selektierte Fixture eingezeichnet wird. Jede Koordinate wird mit
 der Fixturenummer (Fixture ID) markiert.\\
 \\
 Zum Nutzen der Funktionalität der vorhergehenden Kapitel muss ein Referenz-Fixture definiert werden. Im Fixture Sheet kann nun ein Eintrag mit
 einem Rechtsklick als Referenz definiert werden. Somit wird die vorberechnete Koordinate zum "'Referenzpunkt"'. Die gewählte Reihe wird mit roter
 Schrift gekennzeichnet.\\
-Die errechneten und korrigierten Intensitätswerte werden, im Fixture Sheet für jeden Emitter in Klammern hinter dem, vom Nutzer eingestellten Wert angezeigt. Diese
-Werte werden auf 0 bis 100 skaliert und im Weiteren mit 2.55 multipliziert als DMX ausgegeben.
+Die errechneten und korrigierten Intensitätswerte werden, im Fixture Sheet für jeden Emitter in Klammern hinter dem, vom Nutzer eingestellten Wert angezeigt.
+Diese Werte werden auf 0 bis 100 skaliert und im Weiteren mit 2.55 multipliziert als DMX ausgegeben.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.8\textwidth]{images/app_fixture_sheet_with_reference.png} %//TODO: Neu
