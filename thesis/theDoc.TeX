@@ -1512,8 +1512,8 @@ kombinierten Gamuts befindet, kann dieser Punkt nicht von allen Lampen gemischt 
 dieses Polygons gefunden werden, damit alle gewählten Lichtquellen in der Lage sind diese Farbvalenz zu erzeugen.\\
 Zunächst wird geprüft, ob der Referenzpunkt sich innerhalb des kombinierten Gamuts befindet. Die Koordinaten des kombinierten Gamuts werden gegen den
 Uhrzeigersinn vorsortiert. Siehe (\ref{Equ:14}) - (\ref{Equ:15}). Anschließend kann ähnlich zum Sutherland–Hodgman-Algorithmus geprüft werden, ob
-der Referenzpunkt sich, gegen den Uhrzeigersinn gesehen, links von der Geraden zweier aufeinanderfolgender Koordinaten ist. Wenn diese Bedingung für alle Geraden
-erfüllt ist, befindet sich der Referenzpunkt innerhalb des kombinierten Gamuts.\\
+der Referenzpunkt sich, gegen den Uhrzeigersinn gesehen, links von der Geraden zweier aufeinanderfolgender Koordinaten befindet. Wenn diese Bedingung für alle
+Geraden erfüllt ist, befindet sich der Referenzpunkt innerhalb des kombinierten Gamuts.\\
 \begin{lstlisting}[caption=Punkt in Polygon Check]
 function pointIsInside(point, vs)
 {
@@ -1540,7 +1540,7 @@ Es wird angenommen, dass die minimale Farbverschiebung durch das Suchen des orth
 Bild \ref{fig:refCombined}).
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.7\textwidth]{images/combined_gamut_with_mix_point_and_math.png}
+        \includegraphics[width=.7\textwidth]{images/combined_gamut_with_mix_point_and_math.png} %//TODO: Neu
     \end{center}
     \caption{Kombinierter Gamut mit Referenz- und Mixpunkt}\label{fig:refCombined}
 \end{figure}
@@ -1583,25 +1583,25 @@ Nun kann begonnen werden die \ac{dmx} Ausgabe für diesen Punkt für alle selekt
 angewendet.
 \subsection{Finden der Emitter und Intensitäten}
 Hier wird begonnen, indem die Emitterkombinationen mit welchen der gewünschte Farbton gemischt werden kann, für jede Lampe ermittelt werden. Da die hier
-verwendeten Lampen RGBW Lichtquellen besitzen, gibt es mehrere Möglichkeiten eine Farbe zu mischen. Für komplexere Testaufbauten gibt es allerdings in der
-Veranstaltungstechnik auch übliche Lampen mit fünf oder mehr Emittern, beispielsweise RGBWA (Amber) Geräte.\\
-So kann das, in Bild \ref{fig:gamutLightCan} dargestellte, Gamutdreieck mit weiteren Emittern zu einem N-Eck werden. Um diese komplexität generisch
-verarbeiten zu können muss die Form des Gamuts zur Analyse in einfache Segmente zerlegt werden.\\
-Weiter müssen für eine potenzielle Farbmischung alle verfügbaren Emitter betrachtet werden. Wie in Bild \ref{fig:triangleCombined} ist der weiße
+verwendeten Lampen RGBW Lichtquellen besitzen, gibt es mehrere Möglichkeiten eine Farbe zu mischen. Für komplexere Testaufbauten gibt es allerdings auch in der
+Veranstaltungstechnik übliche Lampen mit fünf oder mehr Emittern, beispielsweise RGBWA (Amber) Geräte.\\
+So kann das, in Bild \ref{fig:gamutLightCan} dargestellte, Gamutdreieck mit weiteren Emittern zu einem N-Eck werden. Um diese Komplexität generisch
+verarbeiten zu können, muss die Form des Gamuts zur Analyse in einfache Segmente zerlegt werden.\\
+Weiter müssen für eine potenzielle Farbmischung alle verfügbaren Emitter betrachtet werden. Wie in Bild \ref{fig:triangleCombined} zu sehen ist der weiße
 Emitter innerhalb des Gamuts der anderen drei Emitter Rot, Grün und Blau. Wenn nun nur die Emitter betrachtet würden, die den Umriss des Gamuts
-definieren, würde in diesem Beispiel der weiße Emitter nicht berücksichtigt werden. Die einfachste Form und minimalistischte Form der Segmentierung
+definieren, würde in diesem Beispiel der weiße Emitter nicht berücksichtigt werden. Die einfachste und minimalistischte Form der Segmentierung
 einer Fläche ist das Dreieck.
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.8\textwidth]{images/combined_gamut_with_mix_triangles_cyan.png}
+        \includegraphics[width=.8\textwidth]{images/combined_gamut_with_mix_triangles_cyan.png} %//TODO: Neu
     \end{center}
-    \caption{Kombinierter Gamut eines SkyPanels mit Mixdreiecken und einer LightCan}\label{fig:triangleCombined}
+    \caption{Kombinierter Gamut eines SkyPanels und einer LightCan mit Mixdreiecken des SkyPanels}\label{fig:triangleCombined}
 \end{figure}
 \noindent
-Somit werden nun aus allen möglichen Emitterkombinationen immer ein Dreieck aus drei Emittern einer Lampe betrachtet. Die Vertices des Dreiecks werden gegen
+Somit wird nun aus allen möglichen Emitterkombinationen immer ein Dreieck aus drei Emittern einer Lampe betrachtet. Die Vertices des Dreiecks werden gegen
 den Uhrzeigersinn sortiert. Anschließend wird geprüft, ob der Mixpunkt innerhalb dieses Emitterdreiecks liegt. Falls ja, wird diese Emitterkombination zu einer
 Sammlung möglicher Mischkombinationen hinzugefügt. Zusätzlich wird ein Relevanzabstand berechnet, der die Gesamthelligkeit der Farbmischung beschreibt.\\
-Berechnet wird dieser durch das summieren der Distanzen zwischen den einzelnen Dreieckspunkten und dem Mixpunkt. Je weiter ein Emitter im Farbraum von dem zu
+Berechnet wird dieser durch das Summieren der Distanzen zwischen den einzelnen Dreieckspunkten und dem Mixpunkt. Je weiter ein Emitter im Farbraum von dem zu
 mischenden Punkt entfernt ist, desto geringer ist die Intensität des Emitters in der Mischung. Umso kleiner der Relevanzabstand ist, desto größer ist die Gesamthelligkeit gegenüber einer anderen Emitterkombination.\\
 Auf Bild \ref{fig:triangleCombined} sind zwei mögliche "'Mixdreiecke"' zu sehen, einmal mit den Emittern RGB und einmal mit den Emittern GBW. Es ist leicht
 zu erkennen, dass das kleinere Mixdreieck eine kürzere Gesamtdistanz hat. Somit wird dieses "'Mixdreieck"' für das weitere Vorgehen genutzt.\\
@@ -1650,11 +1650,11 @@ der Fixturenummer (Fixture ID) markiert.\\
 Zum Nutzen der Funktionalität der vorhergehenden Kapitel muss ein Referenz-Fixture definiert werden. Im Fixture Sheet kann nun ein Eintrag mit
 einem Rechtsklick als Referenz definiert werden. Somit wird die vorberechnete Koordinate zum "'Referenzpunkt"'. Die gewählte Reihe wird mit roter
 Schrift gekennzeichnet.\\
-Die errechneten und korrigierten Intensitätswerte werden im Fixture Sheet für jeden Emitter in Klammern hinter dem, vom Nutzer eingestellten Wert angezeigt. Diese
+Die errechneten und korrigierten Intensitätswerte werden, im Fixture Sheet für jeden Emitter in Klammern hinter dem, vom Nutzer eingestellten Wert angezeigt. Diese
 Werte werden auf 0 bis 100 skaliert und im Weiteren mit 2.55 multipliziert als DMX ausgegeben.
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.8\textwidth]{images/app_fixture_sheet_with_reference.png}
+        \includegraphics[width=.8\textwidth]{images/app_fixture_sheet_with_reference.png} %//TODO: Neu
     \end{center}
     \caption{Fixture Sheet mit korrigierten Werten}
 \end{figure}
@@ -1680,8 +1680,8 @@ Die in diesem Kapitel beschriebenen Messungen wurden unter folgenden Bedingungen
     \caption{Skizze des Messaufbaus} \label{fig:measureScribble}
 \end{figure}
 \noindent
-In Bild \ref{fig:measureScribble} wird der Messaufbau schematisch skizziert. Oben von links nach rechts sind die verwendeten Geräte eingezeichnet.
-Das SkyPanel, der LEDWash 300 und rechts die LightCan. Die roten Punkte markieren die Position des Messgerätes pro Lampe.
+In Bild \ref{fig:measureScribble} wird der Messaufbau schematisch skizziert. Oben sind von links nach rechts die verwendeten Geräte eingezeichnet -
+das SkyPanel, der LEDWash 300 und die LightCan. Die roten Punkte markieren die Position des Messgerätes pro Lampe.
 \begin{table}[H]
     \begin{tabularx}{\textwidth}{|l|X|X|X|}
         \hline Gerät  & SkyPanel & LEDWash 300 & LightCan\\\hline
@@ -1697,7 +1697,7 @@ Werkstatt zur Wartung der Lampen hergestellt werden.\\
 Die Abstände wurden so gewählt, dass Messungen mit einem stabilen Messwert durchgeführt werden können. Der Abstand zum LEDWash musste größer
 gewählt werden, um den Lichtaustritt aller Linsen zu messen.\\
 \\
-Zusätzlich wurde für ein realitätsnäheres Szenario aufgebaut, um weitere Messungen mit den AMS Sensoren durchzuführen.
+Zusätzlich wurde ein realitätsnäheres Szenario aufgebaut, um weitere Messungen mit den AMS Sensoren durchzuführen.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.8\textwidth]{images/meassureScenarioRealistic.png}
@@ -1706,8 +1706,8 @@ Zusätzlich wurde für ein realitätsnäheres Szenario aufgebaut, um weitere Mes
 \end{figure}
 \noindent
 Hier wurden mehrere Messpositionen auf einem Rolltisch festgelegt. Ebenso wurde die Position des Rolltischs im Raum markiert, um immer die
-gleiche Messposition zu finden. An den Messpositionen auf dem Tisch wurde der 3D gedruckte Halter für die LightCan angebracht, sowie kleine
-einzelne 3D gedruckte Sensor Halter, welche auf die anderen beiden Lampen ausgerichtet sind.
+gleiche Messposition zu finden. An den Messpositionen auf dem Tisch wurde der 3D-gedruckte Halter für die LightCan angebracht, sowie kleine
+einzelne 3D-gedruckte Sensorhalter, welche auf die anderen beiden Lampen ausgerichtet waren.
 \begin{table}[H]
     \begin{tabularx}{\textwidth}{|l|X|X|X|}
         \hline Gerät  & SkyPanel & LEDWash 300 & LightCan\\\hline
@@ -1716,48 +1716,47 @@ einzelne 3D gedruckte Sensor Halter, welche auf die anderen beiden Lampen ausger
     \caption{Messabstände realitätsnahen Aufbaus}
 \end{table}
 \noindent
-Die Abstände wurden bei der Konzeption des Aufbaus nicht beachtet, da in der Praxis die Lampen für den Showeinsatz positioniert werden und nicht
-für die Messung. Weiter wurde für den Rolltisch nur die eine Position gewählt, da jedes neue Positionieren weitere Zeit in Anspruch nimmt. Daher
-ist zu erwarten, dass in der Praxis viele vorallem kopfbewegte Lampen wie der LEDWash auf eine Position ausgerichtet werden und dann von diesem
-einen Punkt vermessen werden.\\
-Eine Herausforderung bei der Einrichtung des Messaufbaus ist der 2 Grad Betrachtungswinkel der AMS Sensoren. So muss beispielsweise eine zwei
-Meter entfernte Lampe mit dem Sensorbereich exakt getroffen werden für eine optimale Messung.\\
+Die Abstände wurden bei der Konzeption des Aufbaus nicht beachtet, da die Lampen in der Praxis für den Showeinsatz positioniert werden und nicht
+für die Messung. Weiter wurde für den Rolltisch nur die eine Position gewählt, da jedes neue Positionieren weitere Zeit in Anspruch nehmen würde. Daher
+ist zu erwarten, dass in der Praxis viele, vorallem kopfbewegte Lampen wie der LEDWash, auf eine Position ausgerichtet und dann von diesem
+einen Punkt aus vermessen werden.\\
+Eine Herausforderung bei der Einrichtung des Messaufbaus ist der geringe Betrachtungswinkel der AMS Sensoren, von nur zwei Grad. So muss beispielsweise eine
+zwei Meter entfernte Lampe für eine optimale Messung mit dem Sensorbereich exakt getroffen werden.\\
 Bei den übrigen Lampen wie dem SkyPanel wird anschließend versucht, diese je nach Ausrichtung in die bereits notwendigen Tischpositionen zu integrieren.\\
 Die LightCan wurde weiterhin in ihrem 3D gedruckten Halter vermessen, da diese akkubasierte Lampe regelmäßig von ihrem Einsatzort zum Aufladen
 entfernt werden muss und somit in einer Werkstatt oder in einem Lager vermessen werden kann.\\
 Die folgenden Analysen und Messergebnisse stammen alle aus Messungen aus dem ersten Messaufbau. Die Messungen aus dem zweiten Aufbau wurden
 verworfen. Dies wird in Kapitel \ref{measuresWithAS7262} näher erläutert.
-\subsection{Emitter Analyse pro Lampe} \label{emitterColorDrit}
+\subsection{Emitteranalyse pro Lampe} \label{emitterColorDrit}
 Hier sind zunächst die unterschiedlichen absoluten Helligkeiten jeder Lampe zu betrachten. Wenn die Helligkeitsunterschiede zwischen Emittern gering sind, ist
-das Einstellen einer Farbvalenz einfacher. Beispielsweise ist hier der weiße Emitter des SkyPanels problematisch, da dieser wie in Bild \ref{fig:luxSkypanel} 
-zu sehen bereits bei 5\% Steuerwert eine höhere absolute Helligkeit hat als der rote Emitter bei 20\% Steuerwert. So ist schon bei minimalen Zumischen des weißen
-Emitters eine große Farbortverschiebung zu erwarten.\\
-Ein Farbort bezeichnet einen Punkt in einem Farbraum.
+das Einstellen einer Farbvalenz einfacher. Beispielsweise ist hier der weiße Emitter des SkyPanels problematisch, da dieser, wie in Bild \ref{fig:luxSkypanel} 
+zu sehen, bereits bei 5\% Steuerwert eine höhere absolute Helligkeit hat als der rote Emitter bei 20\% Steuerwert.
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.8\textwidth]{images/charts/skypanel.png}
+        \includegraphics[width=.88\textwidth]{images/charts/skypanel.png}
     \end{center}
     \vspace{-.4cm}
-    \caption{Darstellung Luminanz der SkyPanel Emitter} \label{fig:luxSkypanel}
+    \caption{Darstellung der Luminanz der SkyPanel Emitter} \label{fig:luxSkypanel}
 \end{figure}
 \noindent
+So ist schon bei minimalen Zumischen des weißen Emitters eine große Farbortverschiebung zu erwarten.\\
+Ein Farbort bezeichnet einen Punkt in einem Farbraum.\\
 Eine höhere Auflösung der Ansteuerung kann hier Abhilfe schaffen. Viele Scheinwerfer besitzen zu diesem Zweck heute 16 anstatt 8 Bit Ansteuerungen. Das bedeutet,
-dass für eine Funktion des Gerätes wie einen Emitter zwei DMX Kanäle verwendet werden.\\
+dass für eine Funktion des Gerätes, wie zum Beispiel einem Emitter, zwei DMX Kanäle verwendet werden.\\
 Ähnliches Verhalten ist bei den Helligkeitswerten des Robe LEDWash zu beobachten (Bild \ref{fig:luxLedWash}). Die LightCan der Firma Ape Labs hingegen hat ein
 deutlich homogeneres Helligkeitsverhältnis der Emitter (Bild \ref{fig:luxLightCan}). Ebenso sind die Verläufe der Kurven ähnlich. Die anderen Lampen zeigen eine
 deutliche Dominanz des weißen Emitters.
 \subsubsection{MacAdam Ellipsen}
 Anschießend wurde die Farbtreue der einzelnen Emitter der verwendeten Lampen betrachtet. Hier und auch im späteren Verlauf der Analysen wurden MacAdam Ellipsen
-genutzt. Dieses Analyse Verfahren wurde von David Lewis MacAdam um 1942 erstmals beschrieben. \cite{macAdam}. Hier werden Ellipsen um einen Farbort in einem CIE
-1931 Diagramm eingezeichnet. Mit Probanden ermittelte MacAdam, dass Farbortabweichungen innerhalb von zwei Ellipsen nur von geübten Menschen erkannt werden.\\
-Somit wird angenommen, dass eine Farbortverschiebung von bis zu zwei MacAdam Ellipsen als nicht wahrnehmbar angenommen.\\ %//TODO: Quelle von Daniel
-\\
+genutzt. Dieses Analyseverfahren wurde von David Lewis MacAdam um 1942 erstmals beschrieben. \cite{macAdam}. Hier werden Ellipsen um einen Farbort in einem CIE
+1931 Diagramm eingezeichnet. Mit Probanden ermittelte MacAdam, dass Farbortabweichungen innerhalb von zwei Ellipsen nur von geübten Menschen erkannt werden
+konnten.\\
+Somit wird angenommen, dass eine Farbortverschiebung innerhalb von zwei MacAdam Ellipsen als nicht wahrnehmbar angenommen. \cite{macAdamEllipses}[7]\\
 Die Ellipsenanalyse wurde mit dem Programm "'LED ColorCalculator"' von der Firma Osram durchgeführt. \cite{osram}\\
 \\
 Alle Emitter der gemessenen Lampen weisen chromatische Abweichungen über ihre Dimmstufen hinweg auf. Als Sollfarbort wurde der 100\% Wert des jeweiligen Emitters
 angenommen. Besonders die blauen Emitter aller Lampen weisen deutliche Farbortverschiebungen auf. Hier ist die Nichtlinearität des CIE 1931 Farbraumes zu
-beachten. Wie in Bild \ref{fig:macAdamExample} zu beobachten, ist die Fläche einer Ellipse im blauen oder roten Bereich ist deutlich kleiner als im grünen Bereich.\\
-\\
+beachten. Wie in Bild \ref{fig:macAdamExample} zu beobachten, ist die Fläche einer Ellipse im blauen oder roten Bereich deutlich kleiner als im grünen Bereich.\\
 Diese relevanten Abweichungen haben während des Variierens der Helligkeit eines Emitters Einfluss auf den Gamut der Lichtquelle. So ändert sich theoretisch auch
 beim Abgleichvorgang der Gamut der Referenzlampe und der abzugleichenden Lampe. Diese hohe Varianz kann mit dem in Kapitel \ref{comparing} beschriebenen Verfahren
 nicht abgebildet werden. Diese Fehlerquelle ist im Folgenden zu berücksichtigen.
@@ -1771,16 +1770,18 @@ nicht abgebildet werden. Diese Fehlerquelle ist im Folgenden zu berücksichtigen
 \noindent
 Bei den Messungen mit dem Spektrometer ist deutlich geworden: Um in der Praxis Lampen zu vermessen, ist das automatisierte Erfassen der Messwerte notwendig. Das
 Messen einer Lampe mit vier Emittern mit jeweils acht Messpunkten nahm etwa zehn Minuten in Anspruch. Dieser Zeitraum beinhaltet das Ansteuern der Lampe, das
-Aufnehmen der Messwerte sowie das Aufbereiten der Daten zum Einlesen in die Applikation. Diese Zeit kann durch einen in die Applikation integrierten Senor verkürzt
-werden. Weiter macht eine integrierte Lösung den Messprozess komfortabler für den Anwender, da Sensorwerte von der Applikation automatisch aufgenommen und
-aufbereitet werden, ohne weitere Benutzerinteraktion.\\
+Aufnehmen der Messwerte sowie das Aufbereiten der Daten zum Einlesen in die Applikation. Diese Zeit kann durch einen in die Applikation integrierten Sensor verkürzt
+werden. Weiter macht eine integrierte Lösung den Messprozess komfortabler für den Anwender, da Sensorwerte ohne weitere Benutzerinteraktion von der Applikation
+automatisch aufgenommen und aufbereitet werden.\\
 \\
 Zusätzlich wird der Eingriff durch den Benutzer als Fehlerquelle ausgeschlossen.
 \subsection{Analyse der Messwerte des AS7262} \label{measuresWithAS7262}
-Die mit dem AS7262 erfassten Messwerte unterscheiden sich deutlich von den mit dem Spektrometer aufgezeichneten Daten. Wie bereits in Kapitel \ref{measureWithAS7262}
-beschrieben, ist die Spektraleauflösung des Sensors zu gering um die tatsächliche maximale Helligkeit eines Emitters zu erfassen.\\
-Bei Betrachtung des erzeugten Gamuts aus den Messwerten des AS7262 im Vergleich zu dem gemessenen Gamut des Spektrometers ist zu erkennen, dass der AS7262 auf Grund
-seiner Spektralenauflösung das Lichtspektrum nicht homogen aufnehmen kann. Somit entstehen auch bei der Farbortbestimmung große Abweichungen.
+Die mit dem AS7262 erfassten Messwerte unterscheiden sich deutlich von den, mit dem Spektrometer aufgezeichneten, Daten. Wie bereits
+in Kapitel \ref{measureWithAS7262} beschrieben, ist die spektrale Auflösung des Sensors zu gering, um die tatsächliche maximale
+Helligkeit eines Emitters zu erfassen.\\
+Bei Betrachtung des erzeugten Gamuts aus den Messwerten des AS7262 im Vergleich zu dem Gamut des Spektrometers ist zu erkennen, dass
+der AS7262 auf Grund seiner spektralen Auflösung das Lichtspektrum nicht homogen aufnehmen kann. Somit entstehen auch bei der
+Farbortbestimmung große Abweichungen.
 \begin{figure}[H]
     \centering
     \begin{subfigure}[b]{.49\textwidth}
@@ -1796,10 +1797,9 @@ seiner Spektralenauflösung das Lichtspektrum nicht homogen aufnehmen kann. Somi
 \end{figure}
 \noindent
 Zur Verbesserung der Spektraldaten könnte eine Interpolation implementiert werden. Hier ist die Datenlage von sechs Messwerten
-über ein Spektrum von 380 nm zu gering, da zu viele Varianten aus den Wertekombinationen der Ursprung der Messwerte entstehen
-können. Oft hat der AS7262 nicht das Maximum eines Emitters erfassen können. In den folgenden Tabellen finden Sie die
-ermittelten xy Koordinaten der 100\% Werte der SkyPanel-Emitter. In Bild \ref{compareUPRtekAS7262} sind diese Werte grafisch
-erfasst.
+über ein Spektrum von 380 Nanometer zu gering, da zu viele Varianten aus den Wertekombinationen der Messwerte entstehen
+können. Oft hat der AS7262 nicht das Maximum eines Emitters erfasst. In den folgenden Tabellen sind die ermittelten xy
+Koordinaten der 100\% Werte der SkyPanel-Emitter dargestellt. In Bild \ref{compareUPRtekAS7262} sind diese Werte grafisch erfasst.
 \begin{table}[H]
     \begin{tabularx}{\textwidth}{|l|X|X|X|X|}
         \hline Emitter   & Rot      & Grün     & Blau     & Weiß\\\hline
@@ -1812,10 +1812,12 @@ erfasst.
     \caption{xy Koordinaten der 100\% Ansteuerung der Emitter des SkyPanels}
 \end{table}
 \begin{figure}[H]
+    \vspace{-5pt}
     \begin{center}
         \includegraphics[width=.93\textwidth]{images/macAdam/comparison_upr_as7262.png}
     \end{center}
-    \caption{Vergleich der Messungen der SkyPanel Emitter des UPRtek Spektrometers und dem AS7262} \label{compareUPRtekAS7262}
+    \vspace{-11pt}
+    \caption{Vergleich der Messungen der SkyPanel Emitter des UPRtek Spektrometers und des AS7262} \label{compareUPRtekAS7262}
 \end{figure}
 \noindent
 Anhand dieser enormen Abweichungen wurde entschieden, dass die Messwerte des AS7262 für diesen Zweck zu ungenau sind. Somit ist
@@ -1823,10 +1825,10 @@ der Sensor für diese Anwendung ungeeignet. Im Folgenden wurden in der Applikati
 für die weiteren Abgleichvorgänge verwendet.
 \subsection{Analyse der Abgleichvorgänge}
 Bei den folgenden Messungen wurde das SkyPanel in der Applikation als Referenz definiert. Der LEDWash und die LightCan folgen
-dem bestimmten Mixpunkt des SkyPanels.
+dem durch das SkyPanel bestimmten Mixpunkt.
 \subsubsection{Cyan}
-Hier wurde das SkyPanel mit 100\% für den grünen Emitter und 65\% angesteuert. Der Mixpunkt liegt hier innerhalb des
-kombinierten Gamut. Dieser liegt bei den CIE 1931 Koordinaten x = 0.1624 und y = 0.34.
+Hier wurde das SkyPanel mit 100\% für den grünen und 65\% für den blauen Emitter angesteuert. Der Mixpunkt liegt hier innerhalb des
+kombinierten Gamuts, bei den CIE 1931 Koordinaten x = 0.1624 und y = 0.34.
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.8\textwidth]{images/app_mix_cyan_cie.png}
@@ -1859,8 +1861,8 @@ kombinierten Gamut. Dieser liegt bei den CIE 1931 Koordinaten x = 0.1624 und y =
     \caption{xy Koordinaten der Lampen mit der Mischfarbe Cyan}
 \end{table}
 \noindent
-Hier ist zu beobachten, dass zwar die Lampen akzeptabel bis gut abgeglichen sind. Jedoch weicht der gemessene Farbort der
-Referenzlampe mit über 35 MacAdam Ellipsen deutlich von dem angestrebten Wert ab. Dies ist in Bild \ref{fig:macAdamCyan}
+Hier ist zu beobachten, dass die Lampen zwar akzeptabel bis gut abgeglichen sind, der gemessene Farbort der Referenzlampe
+mit über 35 MacAdam Ellipsen jedoch deutlich von dem angestrebten Wert abweicht. Dies ist in Bild \ref{fig:macAdamCyan}
 deutlich zu erkennen.
 \begin{figure}[H]
     \begin{center}
@@ -1869,82 +1871,98 @@ deutlich zu erkennen.
     \caption{MacAdam Analyse des Cyan Abgleichvorgangs} \label{fig:macAdamCyan}
 \end{figure}
 \subsubsection{Gelb und Warmweiß}
-Grafiken und Tabellen zu diesen Abgleichvorgängen sind im Anhang in Kapitel \ref{equalizationMeasurments} zu finden. Auch bei
-der Messung des gelben Mischtons ist eine erhebliche Diskrepanz zwischen dem vorberechneten Mixpunkt und dem Referenzgerät zu
-beobachten (Bild \ref{fig:macAdamYellow}). Weiter ist hier bei beiden Mischfarben zu beobachten, dass die Farborte der
-abzugleichenden Geräte ebenfalls fernab des Farborts des Referenzgeräts liegen. Jedoch liegen die Farborte der abzugleichenden
-Geräte sehr nahe beieinander.\\
-Diese Abweichungen sind unter anderem auch der Interpolation zwischen den Dimmstufen der einzelnen Emitter sowie der niedrigen
+Tabellen und Grafiken in voller Größe zu diesen Abgleichvorgängen sind im Anhang in Kapitel \ref{equalizationMeasurments} zu
+finden.\\
+Auch beider Messung des gelben Mischtons ist eine erhebliche Diskrepanz zwischen dem vorberechneten Mixpunkt und dem
+Referenzgerät zu beobachten (Bild \ref{fig:macAdamYellow}). Weiter ist hier bei beiden Mischfarben zu beobachten, dass die
+Farborte der abzugleichenden Geräte ebenfalls fernab des Farborts des Referenzgeräts liegen. Die Farborte der abzugleichenden
+Geräte liegen jedoch sehr nahe beieinander.
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/macAdam/comparedYellow.png}
+    \end{center}
+    \vspace{-10pt}
+    \caption{MacAdam Analyse des Gelb Abgleichvorgangs} \label{fig:macAdamYellow}
+\end{figure}
+\vspace{-10pt}
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.8\textwidth]{images/macAdam/comparedWarmWhite.png}
+    \end{center}
+    \vspace{-10pt}
+    \caption{MacAdam Analyse des Warmweiß Abgleichvorgangs}
+\end{figure}
+\noindent
+Diese Abweichungen sind unter anderem auch der Interpolation zwischen den Dimmstufen der einzelnen Emitter, sowie der niedrigen
 Auflösung der Emitterhelligkeitsskala von 0 bis 100 Prozent geschuldet. So ist es nur unter guten Bedingungen möglich,
-anhand der erfassten und weiter interpolierten Daten einer Lampe die gewünschte Mischfarbe zu produzieren. Hier
-beschränkt auch weiter die zu niedrig aufgelöste \ac{dmx} Ansteuerungsmöglickeit von acht Bit die theoretisch berechneten
-Emitter Helligkeitskombinationen.\\
-Abhilfe wäre hier eine bei vielen Lampen verfügbare Ansteuerungsmöglickeit eines Emitters mit 16 Bit.
+anhand der erfassten und weiter interpolierten Daten einer Lampe, die gewünschte Mischfarbe zu produzieren. Weiterhin werden
+die theoretisch berechneten Emitter-Helligkeitskombinationen durch die zu niedrig aufgelöste \ac{dmx} Ansteuerungsmöglickeit von
+acht Bit beschränkt.\\
+Abhilfe würde hier eine bei vielen Lampen verfügbare Ansteuerungsmöglickeit eines Emitters mit 16 Bit schaffen.
 \subsection{Fehlerquellenanalyse}
-Aus der bisherigen Auswertung sind 4 Hauptfehlerquellen auszumachen:
+Aus der bisherigen Auswertung sind vier Hauptfehlerquellen auszumachen:
 \begin{addmargin}[2em]{0em}
     1. Fehlerhafte oder ungenaue Messdaten der Emitter\\
     2. Nicht kompensierter Farbdrift der Emitter\\
     3. Umrechnungsverluste zwischen dem RGB und CIE Farbraum\\
-    4. Interne Farbkorrekturen der eingesetzten Lampen
+    4. Interne Farbkorrekturen der eingesetzten Lampen\\
 \end{addmargin}
+Im Folgenden wird dargelegt, wie diese Fehlerquellen kompensiert oder behoben werden könnten.
 \subsubsection{Fehlerquelle 1 - Messdaten}
-Im Folgenden wird dargelegt, wie diese kompensiert oder behoben werden könnten.\\
 Mit einer entsprechenden Kalibrierung der Sensoren die in dieser Arbeit genutzt wurden oder anderen genaueren
-Sensoren wäre ein deutlich genauerer Abgleich verschiedener LED-Lichtquellen möglich. Jedoch ist eine
-Kalibrierung immer anwendungsspezifisch. Je breiter der Anwendungsfall definiert ist, desto komplexer ist
-eine solche Kalibrierung.\\
+Sensoren, wäre ein deutlich genauerer Abgleich verschiedener LED-Lichtquellen möglich. Eine Kalibrierung immer
+anwendungsspezifisch. Je breiter der Anwendungsfall definiert ist, desto komplexer ist eine solche Kalibrierung.\\
 Wie in Kapitel \ref{measuringWith7261} behandelt ist für den AS7261 Sensor eine Kalibrierung für diese Art von
 Anwendung zwingend erforderlich.\\
 \\
 Der entscheidendste Faktor für einen guten Abgleich ist die Messdatenbasis.\\
 \\
 Ein manuelles Erfassen und Einlesen der Messdaten aus einem Spektrometer ist sehr zeitaufwändig. Ein in die
-Applikation integrierter Sensor, zum automatisierten Erfassen der Sensordaten beschleunigt den Messprozess
-deutlich. Dies erleichtert weiter die Organisation der Messdaten, da dies direkt in der Applikation behandelt
+Applikation integrierter Sensor, zum automatisierten Erfassen der Sensordaten, beschleunigt den Messprozess
+deutlich. Dies erleichtert weiterhin die Organisation der Messdaten, da dies direkt in der Applikation behandelt
 werden kann. Die gesicherten Messdaten des in dieser Arbeit genutzten Spektrometers wurden nach Datum und
 Uhrzeit benannt. Nach dem Messvorgang mussten diese Daten vom Nutzer gesichtet und sortiert werden, um die
-einzelnen Messungen den Emittern und Dimmstufen zuzuordnen.\\
+einzelnen Messungen den jeweiligen Emittern und Dimmstufen zuzuordnen.\\
 Zum Vermessen einer RGBW Lampe braucht ein Nutzer etwa fünf Minuten. Der automatisierte Prozess benötigt hingegen
-nur etwa eine Minute zum Vermessen der gleichen Lampe. So ist die Zeitersparnis bei einem Einsatz in der
+nur etwa eine Minute für die gleiche Lampe. So ist die Zeitersparnis bei einem Einsatz in der
 Praxis erheblich.\\
 Diese Zeit ist allerdings im Verhältnis mit der Auflösung der Messwerte über die Helligkeit des Emitters zu sehen.
 Die Messstufen in dieser Arbeit wurden in 5\% bis 20\% Schritten gewählt, um einen Emitter in einer akzeptablen Zeit
 vermessen zu können. Der limitierende Faktor sind hier die verwendeten Sensoren. Mit deren Integrationszeit von etwa
-200 Millisekunden lassen sie nur eine begrenzte Messgeschwindigkeit zu. Weiter musste bei Messungen mit dem AS7262
-Sensor nach einer Variation in der Helligkeit des Emitters jeweils zwei bis drei Messungen verworfen werden bevor
-der Messwert als gültig betrachtet werden konnte. Diese verworfenen Messwerte sprangen im CIE 1931 Farbraum willkürlich.
+200 Millisekunden lassen sie nur eine begrenzte Messgeschwindigkeit zu. Weiter mussten bei Messungen mit dem AS7262
+Sensor nach einer Variation in der Helligkeit des Emitters zwei bis drei Messungen verworfen werden, bevor
+der Messwert als gültig betrachtet werden konnte. Die verworfenen Messwerte sprangen im CIE 1931 Farbraum willkürlich.
 Dieser Effekt war noch intensiver zu beobachten, wenn von der 100\% Stufe eines Emitters zu einem neuen Emitter
 gewechselt wurde. Hier mussten etwa fünf bis sechs Messungen verworfen werden.\\
 Wenn nun die Zahl der Messungen stark erhöht wird, wird ebenso die Zeit für den Messvorgang erheblich steigen.
 \subsubsection{Fehlerquelle 2 - Emitterfarbdrift}
 Für das Abgleichen von zwei Lichtquellen wurde in dieser Arbeit immer der kombinierte Gamut der selektierten Lampen
 betrachtet. Dieser Gamut wurde aus den Farbvalenzen der 100 Prozent Dimmstufe des jeweiligen Emitters aufgespannt.\\
-Doch aufgrund des in Kapitel \ref{emitterColorDrit} beobachteten Farbdrifts eines Emitters über die Helligkeit müsste
-je nach Aussteuerung des jeweiligen Emitters der Gamut der Lampe, sowie der kombinierte Gamut angepasst werden.\\
+Doch aufgrund des in Kapitel \ref{emitterColorDrit} beobachteten Farbdrifts eines Emitters über die Helligkeit, müsste
+je nach Aussteuerung des jeweiligen Emitters der Gamut der Lampe sowie der kombinierte Gamut angepasst werden.\\
 Dieses Vorgehen erzeugt jedoch die Möglichkeit für Endlosschleifen im Programmablauf, da in einer ersten Iteration
-zunächst die Lampen mit dem initialen kombinierten Gamut abgeglichen werden. Dann wird jedoch die Ansteuerung der Emitter
+zunächst die Lampen mit dem initial kombinierten Gamut abgeglichen werden. Dann wird jedoch die Ansteuerung der Emitter
 durch den Abgleichalgorithmus variiert. Somit passt sich auch der Gamut der Lampe sowie der kombinierte Gamut an.\\
-Es entsteht nun ein temporärer kombinierter Gamut, da dieser nur das Farbvermögen der aktuellen Emitteransteuerung
-beschreibt, nicht das gesamte Farbvermögen. Dieser temporäre Gamut kann je nach Art der Verschiebung Flächen
-außerhalb des initialen kombinierten Gamuts freigeben. Sollte der Referenzpunkt ebenfalls außerhalb des initialen
-kombinierten Gamuts liegen, kann nun ein Mixpunkt mit geringerer Farbverschiebung erreicht werden. Daher beginnt
-der Abgleichzyklus von vorne.\\
+Es entsteht nun erneut ein nur temporär gültiger kombinierter Gamut, da dieser nur das Farbvermögen der aktuellen
+Emitteransteuerung beschreibt, nicht das gesamte Farbvermögen. Dieser temporäre Gamut kann je nach Art der Verschiebung
+Flächen außerhalb des initial kombinierten Gamuts freigeben. Sollte der Referenzpunkt ebenfalls außerhalb des
+initial kombinierten Gamuts liegen, kann nun ein Mixpunkt mit geringerer Farbverschiebung erreicht werden. Daher
+beginnt der Abgleichzyklus von vorne.\\
 Dieses Vorgehen hat das Potenzial sich unendlich zu wiederholen. Daher wurde dieses komplexe Verfahren bisher noch
 nicht umgesetzt.
 \subsubsection{Fehlerquelle 3 - Umrechnungsverluste zwischen dem RGB und CIE Farbraum}
 Da der CIE 1931 Farbraum erheblich mehr Farben darstellen kann als der hier in mehreren Rechnungen verwendete sRGB Farbraum,
-resultieren aus der Umrechnung von XYZ Werten zu RGB Werten - RGB Werte, welche kleiner Null oder größer Eins sein können.
+resultieren aus der Umrechnung von XYZ Werten zu RGB Werten RGB Werte, welche kleiner Null oder größer Eins sein können.
 Dieses Verhalten ist kontinuierlich im Ablauf des Abgleiches zu beobachten. Hier müssen die errechneten Werte auf Eins
-normiert werden. Sodass später nicht über 100\% eines Emitters für eine Farbmischung benötigt werden müssten.\\
+normiert werden, sodass später nicht über 100\% eines Emitters für eine Farbmischung benötigt würden.\\
 Mit dieser Korrektur verschiebt sich wiederum der Ausgangsberechnungswert wie in Fehlerquelle 2 dargestellt.\\
 Diese Verluste konnten bisher nicht kompensiert werden.
 \subsubsection{Fehlerquelle 4 - Interne Farbkorrekturen der eingesetzten Lampen}
 Zuletzt wurde beobachtet, dass die verwendete Lampe "'LightCan"' ihre Emitter für den gleichen DMX
 Steuerwert unterschiedlich aussteuert. Bei einer Ansteuerung von 100\% des roten Emitters steuert die Lampe den
-maximalen Wert für den roten Emitter aus. Wenn nun der grüne Emitter mit 100\% hinzu genommen wird, wird der rote Emitter
+maximalen Wert für den roten Emitter aus. Wenn nun der grüne Emitter mit 100\% hinzu genommen wird, wird sowohl der rote Emitter
 als auch der grüne Emitter von der Lampe intern gedämpft. So hat der entstandene gelbe Farbton etwa die gleiche absolute
-Helligkeit wie die der rote Emitter alleine. Wenn dies in der Lampe nicht implementiert wäre, wäre durch die Kombination zweier
+Helligkeit wie der rote Emitter alleine. Wenn dies in der Lampe nicht implementiert wäre, wäre durch die Kombination zweier
 Emitter die Mischfarbe heller als ein einzelner Emitter.\\
 Im Fall dieser batteriebetriebenen Lampe würde dies ebenfalls bedeuten, dass eine Mischfarbe mehr Batterieleistung verbrauchen
 würde als ein einzelner Emitter. Daher wird dies durch die Lampe intern kompensiert.\\
@@ -1954,7 +1972,7 @@ Eine Lösung für dieses Problem wäre auch die Mischfarben der Lampe zu messen,
 zu können.\\
 Weiter muss bei der automatischen Dämpfung der Emitter auch wieder der in Fehlerquelle 2 behandelte Farbdrift der Emitter
 berücksichtigt werden.\\
-Die LightCan ist nur ein Beispiel für dieses Verhalten. Diese oder andere interne Korrekturen der Lampe ist auch in anderen
+Die LightCan ist nur ein Beispiel für dieses Verhalten. Diese oder andere interne Korrekturen der Lampe sind auch in anderen
 Geräten zu finden.
 \clearpage
 
@@ -1964,18 +1982,18 @@ In dieser Arbeit wurde festgestellt, dass die spektralen Messdaten das Herzstüc
 zwei LED Lichtquellen sind. Ohne entsprechend spektral aufgelöste Messgeräte, am besten im 1 Nanometer Abstand,
 ist ein exakter Abgleich schwierig bis unmöglich.\\
 Ebenfalls müssen verschiedene Dimmstufen der Emitter einer Lampe gut aufgelöst aufgenommen werden. Aus den
-Erfahrungen dieser Arbeit wären 5\% Schritte zu empfehlen, um Genauigkeit und Messzeit in ein ausgewogenes
+Erfahrungen dieser Arbeit wären fünf Prozent Schritte zu empfehlen, um Genauigkeit und Messzeit in ein ausgewogenes
 Verhältnis zu bringen.\\
-Erfassen der Daten mit anderen Technologien wie beispielsweise der Kamera eines Mobiltelefons ist nicht zu
+Erfassen der Daten mit anderen Technologien wie beispielsweise der Kamera eines Mobiltelefons, ist nicht zu
 empfehlen, da hier in der Regel nicht auf spektrale Informationen oder CIE XYZ Werte zurückgegriffen werden kann.
 Hier führen Umrechnungsverluste über den RGB Farbraum zu sich fortführenden Fehlern.\\
 Oft kann in einem Mobiltelefon nicht auf die Rohdaten der Kamera zugegriffen werden. So werden die Messwerte von
-den Optimierungen der Kamerafunktion des Mobiltelefons verfälscht und sind nicht verwendbar.\\
+den Kameraoptimierungen des Mobiltelefons verfälscht und sind nicht verwendbar.\\
 Für die Erfassung der Messwerte ist ein spektrales Messgerät notwendig.\\
 \\
 Mit weiteren Optimierungen der hier erarbeiteten Abläufe ist ein Einsatz in der Praxis denkbar. Jedoch ist die
-Findung eines geeigneten integrierbaren Senors die dringlichste Aufgabe zur Anwendung.\\
-Ein solcher geeigneter Sensor wäre mit einer entsprechender Kalibrierung der AS7261. Eine solche Kalibrierung ist
+Findung eines geeigneten integrierbaren Sensors die dringlichste Aufgabe für die praktikable Anwendung.\\
+Ein solcher geeigneter Sensor wäre der AS7261 mit einer entsprechenden Kalibrierung. Eine solche Kalibrierung ist
 allerdings wie bereits in Kapitel \ref{measuringWith7261} beschrieben sehr anwendungsspezifisch. Je breiter der
 Anwendungsfall definiert ist, desto aufwändiger ist eine Kalibrierung des Sensors.\\
 Eine Alternative könnte der Sensor AS7265x der Firma AMS sein \cite{datasheet65}. Dieser Sensor besteht aus drei
@@ -1986,7 +2004,7 @@ Dies ist eine deutliche Verbesserung der spektralen Auflösung gegenüber dem AS
 verringert werden. Auch eine Interpolation zwischen den Messwerten aufgrund der spektralen Abdeckung sollte zu einer
 aussagekräftigen Datenbasis führen.\\
 \\
-Künftig wird diese oder eine ähnliche Implementierung in der grandMA3 Software der Firma MA Lighting zu Einsatz kommen.
+Künftig wird diese oder eine ähnliche Implementierung in der grandMA3 Software der Firma MA Lighting zum Einsatz kommen.
 Zum Zeitpunkt dieser Arbeit sind bereits erste Teile der Implementierung aus dieser Arbeit in die Software
 eingearbeitet worden.
 \clearpage
@@ -2323,7 +2341,7 @@ Messungen mit dem Spektrometer UPRtek LED 350\\
     \begin{center}
         \includegraphics[width=\textwidth]{images/macAdam/comparedYellow.png}
     \end{center}
-    \caption{MacAdam Analyse des Gelb Abgleichvorgangs} \label{fig:macAdamYellow}
+    \caption{MacAdam Analyse des Gelb Abgleichvorgangs (volle Größe)}
 \end{figure}
 \noindent
 \begin{table}[H]
@@ -2360,9 +2378,9 @@ Messungen mit dem Spektrometer UPRtek LED 350\\
 \end{figure}
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.9\textwidth]{images/macAdam/comparedWarmWhite.png}
+        \includegraphics[width=\textwidth]{images/macAdam/comparedWarmWhite.png}
     \end{center}
-    \caption{MacAdam Analyse des Warmweiß Abgleichvorgangs}
+    \caption{MacAdam Analyse des Warmweiß Abgleichvorgangs (volle Größe)}
 \end{figure}
 \noindent
 \begin{table}[H]
@@ -2469,6 +2487,7 @@ c - Lichtgeschwindigkeit - 299 792 458 Meter pro Sekunde
     \bibitem[artnet NPMJS, 2019]{artnetPackage} \url{https://www.npmjs.com/package/artnet}. Visited on: 16.09.2019
     \bibitem[Sutherland–Hodgman algorithm Wikipedia, 2019]{sutherlandHodgman} \url{https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm}. Visited on: 22.09.2019
     \bibitem[David MacAdam Wikipedia, 2019]{macAdam} \url{https://en.wikipedia.org/wiki/David_MacAdam}. Visited on: 18.10.2019
+    \bibitem[Optibin, 2019]{macAdamEllipses} "'Optibin - Achieves color consistency with industry-leading LED optimization"'\url{https://www.colorkinetics.com/b-dam/color-kinetics/learn-more/intellihue/PCK-Technology-Overview-Optibin.pdf}. Visited on: 28.10.2019
     \bibitem[LED ColorCalculator, 2019]{osram} \url{https://www.osram.us/cb/tools-and-resources/applications/led-colorcalculator/index.jsp}. Visited on: 18.10.2019
     \bibitem[AS7265x Datenblatt, 2019]{datasheet65}"'AS7265x Smart 18-Channel VIS to NIR Spectral ID 3-Sensor Chipset with Electronic Shutter"', \url{https://ams.com/documents/20143/36005/AS7265x_DS000612_1-00.pdf/08051c8a-a7f6-6231-7993-2d3fe0bf38b8}. Visited on: 26.10.2019
 \end{thebibliography}
