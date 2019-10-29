@@ -539,7 +539,7 @@ das menschliche Auge der Sinneseindruck einer gelben Farbe. Dies geschieht durch
 \begin{wrapfigure}{r}{0.5\textwidth}
     \vspace{-25pt}
     \begin{center}
-        \includegraphics[width=0.48\textwidth]{images/additive_color_mixing.png}
+        \includegraphics[width=0.48\textwidth]{images/additive_color_mixing.png} %//TODO: Neu
     \end{center}
     \vspace{-20pt}
     \caption{Prinzip additive Farbmischung}
@@ -1344,9 +1344,9 @@ Die Koordinaten werden nach aufsteigendem Winkel sortiert. Somit sind die Koordi
 dynamisch eine \ac{svg} Grafik mit den Strecken zwischen den Gamutvertices über dem CIE 1931 Diagramm erzeugt.\\
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.9\textwidth]{images/gamut_lightCan.png}
+        \includegraphics[width=.9\textwidth]{images/gamut_skypanel.png} %//TODO: Check text to image
     \end{center}
-    \caption{Gamut einer LightCan} \label{fig:gamutLightCan}
+    \caption{Gamut eines Skypanels} \label{fig:gamutSkypanel}
 \end{figure}
 \noindent
 \subsection{Zeichnung eines kombinierten Gamuts}
@@ -1380,9 +1380,9 @@ zusammengeführt, bis alle Lampen der Selektion durchlaufen sind. Der hier entst
 Zusätzlich wird der Gamut der einzelnen Lampen jeweils in schwarz eingezeichnet (siehe Bild \ref{fig:combinedGamut}).
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.9\textwidth]{images/combined_gamut_lightCan_lightStick.png}
+        \includegraphics[width=\textwidth]{images/combined_gamut_lightCan_skypanel.png} %//TODO: Check text to image
     \end{center}
-    \caption{Kombinierter Gamut einer LightCan und eines ApeSticks}\label{fig:combinedGamut}
+    \caption{Kombinierter Gamut einer LightCan und eines SkyPanels}\label{fig:combinedGamut}
 \end{figure}
 \noindent
 \clearpage
@@ -1542,7 +1542,7 @@ Es wird angenommen, dass die minimale Farbverschiebung durch das Suchen des orth
 Bild \ref{fig:refCombined}).
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.7\textwidth]{images/combined_gamut_with_mix_point_and_math.png} %//TODO: Neu
+        \includegraphics[width=.75\textwidth]{images/combined_gamut_with_mix_point_and_math.png} %//TODO: Check text to image
     \end{center}
     \caption{Kombinierter Gamut mit Referenz- und Mixpunkt}\label{fig:refCombined}
 \end{figure}
@@ -1562,7 +1562,8 @@ und dem Mixpunkt (D) berechnet. Setzt man das Kreuzprodukt gleich Null, liegen d
     &(A_x+t(B_x-A_x)-C_x)(B_x-A_x)+(A_y+t(B_y-A_y)-C_y)(B_y-A_y)=0\\
     &t = \frac{(C_x-A_x)(B_x-A_x)+(C_y-A_y)(B_y-A_y)}{(B_x-A_x)^2+(B_y-A_y)^2}
 \end{align}
-Mit der Limitierung $0 \geq t \leq 1$ kann der errechnete Punkt nur auf der Strecke AB liegen, falls D ebenfalls außerhalb des Polygons liegt.\\
+Mit der Limitierung $0 \geq t \leq 1$ kann der errechnete Punkt nur auf der Strecke AB liegen, falls D, wie in Bild \ref{fig:refCombined}, ebenfalls außerhalb des Polygons
+liegt.\\
 \begin{lstlisting}[caption=Mixpunktermittlung]
 function getSpPoint(A,B,C,limit)
 {
@@ -1587,7 +1588,7 @@ angewendet.
 Hier wird begonnen, indem die Emitterkombinationen mit welchen der gewünschte Farbton gemischt werden kann, für jede Lampe ermittelt werden. Da die hier
 verwendeten Lampen RGBW Lichtquellen besitzen, gibt es mehrere Möglichkeiten eine Farbe zu mischen. Für komplexere Testaufbauten gibt es allerdings auch in der
 Veranstaltungstechnik übliche Lampen mit fünf oder mehr Emittern, beispielsweise RGBWA (Amber) Geräte.\\
-So kann das, in Bild \ref{fig:gamutLightCan} dargestellte, Gamutdreieck mit weiteren Emittern zu einem N-Eck werden. Um diese Komplexität generisch
+So kann das, in Bild \ref{fig:gamutSkypanel} dargestellte, Gamutdreieck mit weiteren Emittern zu einem N-Eck werden. Um diese Komplexität generisch
 verarbeiten zu können, muss die Form des Gamuts zur Analyse in einfache Segmente zerlegt werden.\\
 Weiter müssen für eine potenzielle Farbmischung alle verfügbaren Emitter betrachtet werden. Wie in Bild \ref{fig:triangleCombined} zu sehen ist der weiße
 Emitter innerhalb des Gamuts der anderen drei Emitter Rot, Grün und Blau. Wenn nun nur die Emitter betrachtet würden, die den Umriss des Gamuts
@@ -1595,9 +1596,9 @@ definieren, würde in diesem Beispiel der weiße Emitter nicht berücksichtigt w
 einer Fläche ist das Dreieck.
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.8\textwidth]{images/combined_gamut_with_mix_triangles_cyan.png} %//TODO: Neu
+        \includegraphics[width=.8\textwidth]{images/combined_gamut_with_mix_triangles_cyan.png} %//TODO: Check text to image
     \end{center}
-    \caption{Kombinierter Gamut eines SkyPanels und einer LightCan mit Mixdreiecken des SkyPanels}\label{fig:triangleCombined}
+    \caption{Kombinierter Gamut eines SkyPanels und einer LightCan mit Mixdreiecken der LightCan}\label{fig:triangleCombined}
 \end{figure}
 \noindent
 Somit wird nun aus allen möglichen Emitterkombinationen immer ein Dreieck aus drei Emittern einer Lampe betrachtet. Die Vertices des Dreiecks werden gegen
@@ -1656,7 +1657,7 @@ Die errechneten und korrigierten Intensitätswerte werden, im Fixture Sheet für
 Diese Werte werden auf 0 bis 100 skaliert und im Weiteren mit 2.55 multipliziert als DMX ausgegeben.
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.8\textwidth]{images/app_fixture_sheet_with_reference.png} %//TODO: Neu
+        \includegraphics[width=\textwidth]{images/app_fixture_sheet_with_reference.png} %//TODO: Check text to image
     \end{center}
     \caption{Fixture Sheet mit korrigierten Werten}
 \end{figure}
@@ -1677,7 +1678,7 @@ Bild \ref{fig:luxSkypanel} bis \ref{fig:macAdamLightCanEmitters} im Anhang zu fi
 Die in diesem Kapitel beschriebenen Messungen wurden unter folgenden Bedingungen durchgeführt.
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.8\textwidth]{images/meassureScenario.png}
+        \includegraphics[width=.8\textwidth]{images/meassureScenario.png} %//TODO: Legende
     \end{center}
     \caption{Skizze des Messaufbaus} \label{fig:measureScribble}
 \end{figure}
@@ -1702,7 +1703,7 @@ gewählt werden, um den Lichtaustritt aller Linsen zu messen.\\
 Zusätzlich wurde ein realitätsnäheres Szenario aufgebaut, um weitere Messungen mit den AMS Sensoren durchzuführen.
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.8\textwidth]{images/meassureScenarioRealistic.png}
+        \includegraphics[width=.8\textwidth]{images/meassureScenarioRealistic.png} %//TODO: Legende
     \end{center}
     \caption{Skizze des realitätsnahen Messaufbaus} \label{fig:measureScribbleReal}
 \end{figure}
