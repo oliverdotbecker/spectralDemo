@@ -896,11 +896,13 @@ Lebensdauer und die Lichtausbeute der Leuchtmittel. Mit der fortschreitenden Ent
 Scheinwerfer, welche diese nutzen, hat die \ac{led} heute an vielen Stellen die konventionelle Glühlampe oder \ac{hmi} verdrängt.\\
 Die Lebensdauer einer auf \ac{led}-Technik basierenden Lampe liegt im Bereich von 15.000 bis 45.000 Betriebsstunden. Eine Glühlampe hingegen
 hat nur eine Lebensdauer von etwa 300 Betriebstunden. Eine Gasentladungslampe hält eine Betriebsbelastung von etwa 300 bis 2000 Stunden aus.
-Eine weitere Stärke der LED ist der niedrige Stromverbrauch bei einer vergleichbaren Lichtausbeute gegenüber einer Glühlampe oder \ac{hmi}.
-Ein \ac{par}64 Medium Flood CP62 hat eine Lichtausbeute von etwa 320.000 Lumen mit einer Leistung von 1000 Watt \cite{convpar}. Ein %//TODO: Check Lumen
-vergleichbarer moderner \ac{led} \ac{par} mit einer LED Leistung von 180 Watt hat eine Lichtausbeute von etwa 5100 Lumen \cite{ledpar}. So
-können heute umfangreichere Lichtinstallationen umgesetzt werden. Da die verfügbare Leistung an Veranstaltungsorten begrenzt ist, konnte in
-der Vergangenheit nur eine vergleichsweise geringe Anzahl von konventionellen \ac{par} Scheinwerfern eingesetzt werden, da schon bei 100
+Eine weitere Stärke der LED ist der niedrige Stromverbrauch bei einer vergleichbaren Lichtausbeute gegenüber einer Glühlampe oder \ac{hmi}.\\
+Beispielsweise hat ein konventioneller ARRI T1 Scheinwerfer mit einem 1000 Watt Leuchtmittel und 8097,5 Lumen eine Lichtausbeute von 8,0975
+Lumen pro Watt. Eine vergleichbare LED Lichtquelle, der ARRI L7-C mit einer maximalen Leistung von 220 Watt \cite{arriL7} und 4019,4 Lumen hingegen
+verfügt über eine Lichtausbeute von 18,27 Lumen por Watt. Die Werte wurden der ARRI Photometrics App in der Version 1.3.1 entnommen. Bildschirmfotos
+der App sind im Anhang \ref{arriApp} zu finden.\\
+So können heute umfangreichere Lichtinstallationen umgesetzt werden. Da die verfügbare Leistung an Veranstaltungsorten begrenzt ist, konnte
+in der Vergangenheit nur eine vergleichsweise geringe Anzahl von konventionellen \ac{par} Scheinwerfern eingesetzt werden, da schon bei 100
 \ac{par}s mit 1000 Watt Anschlussleistung bereits 100.000 Watt zur Verfügung stehen müssen, um alle zur gleichen Zeit zu betreiben. Dies
 war in der Regel nicht der Fall. Dennoch wurden in der Vergangenheit bei Großveranstaltungen solche Stückzahlen in Bühnen verbaut und dies
 nicht als einziger Scheinwerfertyp. Hier hat die LED einen weiteren Vorteil zu damals.\\
@@ -964,7 +966,7 @@ Lichtausbeute von 3.370 Lumen. Die Lampe ist per \ac{xlr} mit DMX, oder via Ethe
 Display am Fuß (der "'Base"') kann der Scheinwerfer konfiguriert werden.
 \subsubsection{ARRI SkyPanel}
 Das SkyPanel S60-C von der Firma Arri, ein Tochterunternehmen der Firma Osram, wird oft als Grundlicht in Film und Fernsehen eingesetzt.
-Es wird beworben, dass es mit \ac{cie} 1931 xyY Werten per DMX angesteuert werden kann und diese \ac{cie} Werte von der Lampe exakt
+Es wird beworben, dass es mit \ac{cie} 1931 xy Werten per DMX angesteuert werden kann und diese \ac{cie} Werte von der Lampe exakt
 wiedergegeben werden. Somit ist diese Lampe eine perfekte Referenz für diese Arbeit.
 \begin{figure}[H]
     \begin{center}
@@ -2395,6 +2397,26 @@ Messungen mit dem Spektrometer UPRtek LED 350\\
 \end{table}
 \clearpage
 
+\subsection{ARRI Photometrics App Snapshots} \label{arriApp}
+Hier sind Bildschirmfotos aus der, für Android verfügbaren, ARRI Photometrics App zu finden. Die angegebenen Lux Werte wurden mit einem
+online verfügbaren Umrechnungsprogramm durchgeführt.\\
+URL: \url{https://ledtipps.net/lux-lumen-umrechnung/}, Zugriff am: 29.10.2019.
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.7\textwidth]{images/arri_t1_data.png}
+    \end{center}
+    \caption{App Ansicht des ARRI T1}
+\end{figure}
+\noindent
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=.7\textwidth]{images/arri_l7_data.png}
+    \end{center}
+    \caption{App Ansicht des ARRI L7-C}
+\end{figure}
+\noindent
+\clearpage
+
 \subsection{Abbildungsverzeichnis}
 \begingroup
 \renewcommand{\section}[2]{}
@@ -2470,8 +2492,7 @@ c - Lichtgeschwindigkeit - 299 792 458 Meter pro Sekunde
     \bibitem[CIE Luv - Wisotop, 2019]{wisotopLuv} \url{https://wisotop.de/CIE-luv.php}. Visited on: 01.10.2019
     \bibitem[Leuchtdiode Wikipedia, 2019]{wikiLed}"'Leuchtdiode - Wikipedia"', \url{https://de.wikipedia.org/wiki/Leuchtdiode}. Visited on: 21.08.2019
     \bibitem[Showlicht von Scribble zum fertigen Desgin, 2014]{showlicht}"'Showlicht von Scribble zum fertigen Desgin"', 01.09.2019
-    \bibitem[Philips PAR64 Leuchtmittel 1000W | Thomann, 2019]{convpar}"'Philips PAR64 Leuchtmittel 1000W | Thomann"', \url{https://www.thomann.de/de/philips_par64_1000_watt_mfl_cp62_exe.htm}. Visited on: 02.09.2019
-    \bibitem[P FLAT PRO 18 IP65 | Cameo, 2019]{ledpar}"'P FLAT PRO 18 IP65 | Cameo"', \url{https://www.cameolight.com/de/loesungen/installation/outdoor-lichttechnik/outdoor-scheinwerfer/2297/p-flat-pro-18-ip65?c=1826}. Visited on: 02.09.2019
+    \bibitem[Arri Homepage, 2019]{arriL7} \url{https://www.arri.com/en/lighting/led/l-series/l7-c#F0.0000L7C}. Visited on: 29.10.2019
     \bibitem[Ape Labs Homepage, 2019]{lightCan} \url{https://apelabs.com/products/leuchtdose}. Visited on: 02.09.2019
     \bibitem[Robe Homepage, 2019]{robe} \url{https://www.robe.cz/ledwash-300plus/}. Visited on: 02.09.2019
     \bibitem[Arri Homepage, 2019]{arri} \url{https://www.arri.com/en/lighting/led/skypanel/s60-c}. Visited on: 02.09.2019
