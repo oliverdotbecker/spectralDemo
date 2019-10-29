@@ -899,7 +899,7 @@ hat nur eine Lebensdauer von etwa 300 Betriebstunden. Eine Gasentladungslampe h�
 Eine weitere Stärke der LED ist der niedrige Stromverbrauch bei einer vergleichbaren Lichtausbeute gegenüber einer Glühlampe oder \ac{hmi}.\\
 Beispielsweise hat ein konventioneller ARRI T1 Scheinwerfer mit einem 1000 Watt Leuchtmittel und 8097,5 Lumen eine Lichtausbeute von 8,0975
 Lumen pro Watt. Eine vergleichbare LED Lichtquelle, der ARRI L7-C mit einer maximalen Leistung von 220 Watt \cite{arriL7} und 4019,4 Lumen hingegen
-verfügt über eine Lichtausbeute von 18,27 Lumen por Watt. Die Werte wurden der ARRI Photometrics App in der Version 1.3.1 entnommen. Bildschirmfotos
+verfügt über eine Lichtausbeute von 18,27 Lumen pro Watt. Die Werte wurden der ARRI Photometrics App in der Version 1.3.1 entnommen. Bildschirmfotos
 der App sind im Anhang \ref{arriApp} zu finden.\\
 So können heute umfangreichere Lichtinstallationen umgesetzt werden. Da die verfügbare Leistung an Veranstaltungsorten begrenzt ist, konnte
 in der Vergangenheit nur eine vergleichsweise geringe Anzahl von konventionellen \ac{par} Scheinwerfern eingesetzt werden, da schon bei 100
@@ -1509,7 +1509,7 @@ Applikation berechnet die xyY-Koordinaten des kombinierten Gamuts der beiden Lam
 Beispielsweise ein Cyanton mit 100\% Grün- und 65\% Blauanteil. Mit den erfassten Messwerten wird, mit der vorgehensweise aus Kapitel \ref{calcColor}, die erwartete
 xyY-Koordinate errechnet. Diese Koordinate wird im Folgenden als Referenzpunkt bezeichnet.
 \subsection{Finden eines Punktes innerhalb des kombinierten Gamuts}
-Nun muss ermittelt werden, ob der Referenzpunkt auf dem CIE 1931 Diagramm außerhalb des kombinierten Gamuts liegt oder nicht. Falls der Punkt sich außerhalb des
+Zuerst muss ermittelt werden, ob der Referenzpunkt auf dem CIE 1931 Diagramm außerhalb des kombinierten Gamuts liegt oder nicht. Falls der Punkt sich außerhalb des
 kombinierten Gamuts befindet, kann dieser Punkt nicht von allen Lampen gemischt werden. Somit müsste ein Punkt innerhalb, beziehungsweise auf dem Rand,
 dieses Polygons gefunden werden, damit alle gewählten Lichtquellen in der Lage sind diese Farbvalenz zu erzeugen.\\
 Zunächst wird geprüft, ob der Referenzpunkt sich innerhalb des kombinierten Gamuts befindet. Die Koordinaten des kombinierten Gamuts werden gegen den
@@ -1547,8 +1547,8 @@ Bild \ref{fig:refCombined}).
     \caption{Kombinierter Gamut mit Referenz- und Mixpunkt}\label{fig:refCombined}
 \end{figure}
 \noindent
-Dieser Bezugspunkt wird berechnet mit Hilfe des Kreuzprodukts der Vektoren zwischen den beiden Vertices (A und B) und zwischen dem Referenzpunkt (C)
-und dem Mixpunkt (D). Setzt man das Kreuzprodukt gleich Null, liegen die Vektoren im rechten Winkel zueinander.
+Dieser Bezugspunkt wird mit Hilfe des Kreuzprodukts der Vektoren zwischen den beiden Vertices (A und B) und zwischen dem Referenzpunkt (C)
+und dem Mixpunkt (D) berechnet. Setzt man das Kreuzprodukt gleich Null, liegen die Vektoren im rechten Winkel zueinander.
 \begin{align}\label{Equ:16}
     AB \times CD = 0
 \end{align}
@@ -1664,8 +1664,8 @@ Diese Werte werden auf 0 bis 100 skaliert und im Weiteren mit 2.55 multipliziert
 Mit diesem Verfahren können die emittierten Farben verschiedener Scheinwerfer theoretisch abgeglichen werden.
 \clearpage
 
-%%%%%%%%%%%%%%%%%%%%%%%%%% Auswertung %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Auswertung}
+%%%%%%%%%%%%%%%%%%%%%%%%%% Auswertung und Analyse %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Auswertung und Analyse}
 Es wurden mit den in Kapitel \ref{lamps} aufgeführten Lampen verschiedene Messungen zur Entwicklung und Validierung des Abgleichvorgangs durchgeführt.\\
 Ein Teil dieser Messungen wurde in vorhergehenden Kapiteln bereits behandelt. Im Folgenden werden Testaufbauten, Messungen sowie Abgleichvorgänge aufgeführt
 und diskutiert.\\
