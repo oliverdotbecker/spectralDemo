@@ -73,17 +73,13 @@
 \end{flushright}
 \vspace{1cm}\noindent
 \begin{center}
-    \huge MASTER THESIS\\
-    \huge \color{red} Vorabversion 0.992\\
-    \large Stand: \today
+    \huge MASTER THESIS
 \end{center}
-\vspace{1cm}\noindent
+\vspace{2cm}\noindent
 {\large Title:  Abgleich von LED-Lichtquellen auf Basis einer komplexen Lichtsteuerung}
+\par\vspace{4cm}\noindent
+Submitted by: \hspace{2cm}             Oliver Becker
 \par\vspace{3cm}\noindent
-Submitted by: \hspace{2cm}             Oliver Becker\\
-\\
-Matriculation number:  \hspace{.6cm}   725810\\
-\par\vspace{2cm}\noindent
 1st Academic Supervisor: \hspace{.2cm} Prof. Dr. Herbert Krauß\\
 \\
 2nd Academic Supervisor: \hspace{.05cm} Prof. Dr. Shun-Ping Chen\\
@@ -95,7 +91,7 @@ Completion Date: \hspace{1.5cm}         31.10.2019
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Template Content %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \noindent
-Student:\\
+\textbf{Student:}\\
 \\
 Oliver \hspace{6cm} Becker\\
 \\
@@ -118,9 +114,9 @@ This covers the graphical user interface, the equalization algorithm and a proto
 These modules have been implemented in software with connected external hardware.
 \vspace{.6cm}
 \par\noindent\rule{\textwidth}{0.4pt}
-In partial fulfillment of the requirements of the University of Applied Sciences Hochschule
-Darmstadt (h\_da) for the degree Master of Science in Electrical Engineering carried out in
-collaboration with Industrial Enterprise\\
+In partial fulfillment of the requirements of the \textbf{University of Applied Sciences Hochschule
+Darmstadt (h\_da)} for the degree \textbf{Master of Science in Electrical Engineering} carried out in
+collaboration with \textbf{Industrial Enterprise}\\
 \\
 Company:\hspace{0.45cm} MA Lighting Technology GmbH\\
 Address:\hspace{0.7cm} Dachdeckerstraße 13\\
@@ -152,7 +148,7 @@ acknowledged and due reference is given to the author and source.\\
 I also certify that all content without reference or citation contained in this thesis is original work.\\
 I acknowledge that any misappropriation of the previous declarations can be considered a case of academic fraud.
 \par\vspace{2cm}\noindent
-Darmstadt, den 30.10.2019 \hspace*{0pt}\hfill Oliver Becker
+Darmstadt, 31.10.2019 \hspace*{0pt}\hfill Oliver Becker
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% tableofcontents %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -209,12 +205,12 @@ Contest 2019 oder die Lichtinstallation zum 25. Jahrestag des Falls der Berliner
 \begin{wrapfigure}{r}{0.5\textwidth}
     \vspace{-25pt}
     \begin{center}
-        \includegraphics[width=0.48\textwidth]{images/csm_MA_building_WBB.jpg}
+        \includegraphics[width=0.48\textwidth]{images/ma_wbb_luftbild_2.png}
     \end{center}
     \vspace{-20pt}
     \captionsetup{justification=raggedright,singlelinecheck=false}
-    \caption[Firmensitz Waldbüttelbrunn]{Firmensitz Waldbüttelbrunn \cite{maabout}} %//TODO: Neu oder Text anpassen
-    \vspace{-15pt}
+    \caption[Firmensitz Waldbüttelbrunn]{Firmensitz Waldbüttelbrunn \cite{googleEarth}}
+    \vspace{-5pt}
 \end{wrapfigure}
 Der Hauptsitz der MA Lighting Technology GmbH befindet sich in Waldbüttelbrunn in der Nähe von
 Würzburg. Dort beschäftigt MA circa 100 Mitarbeiter. In den fünf Gebäuden befinden sich Soft- und
@@ -535,11 +531,11 @@ Es gibt zwei verschiedene Prinzipien der Farbmischung, die additive und die subt
 \subsubsection{Additiv}
 Nimmt man eine rote und eine grüne Lichtquelle und lässt diese übereinander auf eine weiße - also neutrale - Fläche strahlen, entsteht für
 das menschliche Auge der Sinneseindruck einer gelben Farbe. Dies geschieht durch die Addition der Spektren der beiden Lichtquellen.
-\cite[62]{lichtquellen}\\
+\cite{lichtquellen}\\
 \begin{wrapfigure}{r}{0.5\textwidth}
     \vspace{-25pt}
     \begin{center}
-        \includegraphics[width=0.48\textwidth]{images/additive_color_mixing.png} %//TODO: Neu
+        \includegraphics[width=0.48\textwidth]{images/additive_color_mixing.png}
     \end{center}
     \vspace{-20pt}
     \caption{Prinzip additive Farbmischung}
@@ -552,7 +548,7 @@ Reflektiertes Licht unterliegt generell der subtraktiven Farbmischung. Eine wei�
 Wellenlängen. Trifft das weiße Licht auf einen Körper, wird das Licht reflektiert. Jedoch können Körper einzelne Wellenlängen oder auch
 größere Wellenlängenbereiche absorbieren. Ein Körper, der rotes und blaues Licht absorbiert, reflektiert nur das grüne Licht, wenn er von
 einer weißen Lichtquelle angestrahlt wird. Dieses reflektierte Licht trifft nun das menschliche Auge. Somit erscheint der Körper grün.
-\cite[62]{lichtquellen}\\
+\cite{lichtquellen}\\
 Besonders die subtraktive Farbmischung ist uns allgegenwärtig. Mit der Sonne oder der Raumbeleuchtung als weiße Lichtquelle sehen wir
 unsere Umgebung in verschiedensten Farben und passen unsere Umgebung nach diesem Prinzip an. Von Farbfiltern über Wandfarbe zum Druck eines
 Dokuments ist subtraktive Farbmischung in unserem Alltag zu finden.
@@ -566,7 +562,7 @@ Dokuments ist subtraktive Farbmischung in unserem Alltag zu finden.
 \noindent
 Eine wahrgenommen Farbe oder ein Farbton wird auch Farbvalenz genannt. Verschiedene spektrale Zusammensetzungen von Licht können die
 gleiche Farbvalenz besitzen. "'Die Menge der möglichen Farbempfindungen ist wesentlich kleiner als die der sie erzeugenden spektralen
-Verteilungen. Oder anders ausgedrückt: eine Farbvalenz kann durch viele Farbreizfunktionen $\phi_\lambda$ ausgedrückt werden."'\cite[63]{lichtquellen}
+Verteilungen. Oder anders ausgedrückt: eine Farbvalenz kann durch viele Farbreizfunktionen $\phi_\lambda$ ausgedrückt werden."'\cite{lichtquellen}
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Menschliches Farbsehen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -691,7 +687,7 @@ Der RGB Farbraum beschreibt mit einem Zahlentripel eine Farbvalenz. Diese Zahlen
 blauem (B) Licht. Die Werte für R, G und B sind einheitenlos. Oft werden diese von 0 bis 1 definiert, aber auch weitere übliche
 Wertebereiche von 0 bis 100 Prozent oder von 0 bis 255 (8 bit) für digitale Anwendungen werden genutzt. \cite{wikipediaRGB}\\
 Grafisch wird der RGB Farbraum in den meisten Publikationen als Würfel in einem kartesischen Koordinatensystem dargestellt. Dieser Würfel
-mit einer Kantenlänge von eins umschließt die in diesem Farbraum abbildbaren Farbvalenzen.
+mit einer Kantenlänge von Eins umschließt die in diesem Farbraum abbildbaren Farbvalenzen.
 \begin{figure}[H]
     \includegraphics[width=\textwidth]{images/rgb_color_cube.png}
     \caption[RGB Farbwürfel]{RGB Farbwürfel \cite{wisotopRGB}}
@@ -888,7 +884,7 @@ Erde. Daher der Name Tageslichtscheinwerfer.
         \includegraphics[width=\textwidth]{images/HMI_Spectrum.png}
         \caption{Gasentladungslampe}
     \end{subfigure}
-    \caption[Typische Spektren der verschiedenen Leuchtmittel]{Typische Spektren der verschiedenen Leuchtmittel \cite{showlicht}[35+37]}\label{fig:lightEmiiterSpects}
+    \caption[Typische Spektren der verschiedenen Leuchtmittel]{Typische Spektren der verschiedenen Leuchtmittel \cite{showlicht}}\label{fig:lightEmiiterSpects}
 \end{figure}
 \noindent
 In den 2000er Jahren hielt die \ac{led} Einzug in die Welt der Veranstaltungstechnik. Damit begann ein Wandel besonders im Bezug auf die
@@ -1355,9 +1351,9 @@ Hier war die Aufgabe zu bestimmen, ob Koordinaten (oder auch Vertex) eines Gamut
 Wenn diese Bedingung erfüllt ist, muss zur Bestimmung des gemeinsamen Gamuts ermittelt werden, ob ein Punkt innerhalb des bestehenden Polygons liegt. Dies
 wurde mit dem Sutherland–Hodgman-Algorithmus \cite{sutherlandHodgman} bewerkstelligt. Für diesen Algorithmus werden die Vertex Daten des zu analysierenden
 Polygons benötigt. Die Vertex Daten sind hier die CIE 1931 xy Koordinaten. Wichtig ist, dass die Vertices gegen den Uhrzeigersinn vorsortiert sind.\\
-Der Algorithmus spannt die Gerade zwischen zwei Vertices (P1 und P2) des Gamut A und zwischen zwei Vertices (CP1 und CP2) des Gamut B und prüft, auf
-welcher Seite der Geraden des Gamut A sich die Vertices des Gamut B befinden.\\
-Wenn beide Vertices sich auf der, gegen den Uhrzeigersinn gesehen linken Seite, also der Innenseite (Gamutflächenseite) des Gamuts befinden, wird der
+Der Algorithmus spannt die Gerade zwischen zwei Vertices (P1 und P2) des Gamuts A und zwischen zwei Vertices (CP1 und CP2) des Gamuts B. Anschließend wird geprüft prüft, auf
+welcher Seite der Geraden des Gamuts A sich die Vertices des Gamuts B befinden.\\
+Wenn beide Vertices sich auf der, gegen den Uhrzeigersinn gesehen, linken Seite, also der Innenseite (Gamutflächenseite) des Gamuts befinden, wird der
 zweite Vertex (CP2) der Gamutvertexliste hinzugefügt.\\
 Liegt der erste der beiden Vertices außerhalb der Gamutflächenseite, wird der auf der Gamutfläche liegende Vertex (OP2) und der Schnittpunkt des Polygons und der
 Gamutflächenseite  (OP1) der Gamutvertexliste hinzugefügt (siehe Bild \ref{fig:sutherland_hodgman}).\\
@@ -1390,12 +1386,11 @@ Zusätzlich wird der Gamut jeder einzelnen Lampe in schwarz eingezeichnet (siehe
 \noindent
 \clearpage
 
-%// TODO: weiter lesen
 %%%%%%%%%%%%%%%%%%%%%%%%%% Ansteuerung externer Lichtquellen %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Ansteuerung externer Lichtquellen}
 Für eine automatisierte Lichtquellenvermessung ist es nötig, dass die messende Applikation auch die Lichtquellen ansteuern kann. Somit wurde
-in der Applikation eine \ac{dmx} Steuerung mit Art-Net implementiert. Weiter wurde ermöglicht, mehrere Lampen zu verwalten und zu steuern, um später mehrere
-zu vermessende Lampen ansteuern zu können.
+in der Applikation eine \ac{dmx} Ausgabe via Art-Net implementiert. Weiter wurde ermöglicht, mehrere Lampen zu verwalten und zu steuern, um später mehrere
+zu vermessende Lampen ansteuern und abgleichen zu können.
 \subsection{Fixturetypen}
 Lichtquellen verschiedener Hersteller haben viele unterschiedliche Funktionen. Von einer Helligkeitsregelung, dem Dimmer, über mehrere Emitter, bis hin zur
 Bewegungssteuerung mehrerer Achsen.\\
@@ -1417,8 +1412,8 @@ die einzelnen Emitter bereitgestellt.
 \end{figure}
 \noindent
 Das SkyPanel bietet 31 sogenannte DMX Modi, die LightCan hingegen drei Modi. Je nach Wahl des DMX Modus wechselt die Belegung der \ac{dmx} Steuerkanäle, auf die
-die Lampe reagiert. Hier wird je nach Anwendungsfall ein DMX Mode gewählt. Das SkyPanel bietet unteranderem in einem DMX Modus eine Ansteuerung von CIE 1931 x- und
-y-Kanälen auf je einem \ac{dmx} Kanal. Hierfür werden die auf diesen Kanälen empfangenen \ac{dmx} Werte in der Lampe in Helligkeitswerte für die einzelnen Emitter
+die Lampe reagiert. Hier wird je nach Anwendungsfall ein DMX Modus gewählt. Das SkyPanel bietet unter anderem in einem DMX Modus eine Ansteuerung von CIE 1931 x- und
+y-Parametern auf je einem \ac{dmx} Kanal. Hierfür werden die auf diesen Kanälen empfangenen \ac{dmx} Werte in der Lampe in Helligkeitswerte für die einzelnen Emitter
 übersetzt.\\
 Eine abstrahierte, oder auch vereinheitlichte, Steuerung für äquivalente Lampenfunktionen ist durch diese Unterschiede in der Belegung nur durch
 Zuordnungstabellen in der Software möglich. Hier wird die gewählte Belegung der Lampe hinterlegt, um mit einem Schieberegler den entsprechenden Steuerkanal für
@@ -1470,11 +1465,11 @@ Fixturetyps angezeigt, um diesen zu identifizieren.\\
 Die folgenden Spalten bis "'M"' werden dynamisch je nach genutzten Attributen generiert. Nutzt ein Fixture ein Attribut nicht, wird die Spalte leer gelassen.
 Wird das Attribut genutzt, wird der aktuelle Wert, der mit den Schiebereglern eingestellt wurde, von 0 bis 100 angezeigt. Dieser Wert soll später via \ac{dmx}
 ausgegeben werden.\\
-Die Spalte "'M"' steht für "'Measure"'. Mit dem Anklicken der Zelle wird später automatisiert das Vermessen des Fixtures angestoßen. Mit Klicken auf die
+Die Spalte "'M"' steht für "'Measure"'. Mit dem Anklicken der Zelle wird später das automatisierte Vermessen des Fixtures angestoßen. Mit Klicken auf die
 Zelle in der Spalte "'S"' für "'Settings"', also Einstellungen, können in einem Popup die gemessenen Emitterwerte eingesehen werden.
 \subsection{Art-Net Implementierung}
-Zur Ansteuerung der Lampen mit \ac{dmx} wurde eine einfache Art-Net Implementierung aus dem NPM-Modul "'artnet"' von dem Alias "'hobbyquaker"' genutzt
-\cite{artnetPackage}. Zur Umsetzung von Art-Net zu DMX wurde ein grandMA3 "'4Port Node"' genutzt. Dieser wurde als Protokollwandler eingesetzt.\\
+Zur Ansteuerung der Lampen mit \ac{dmx} wurde eine einfache Art-Net Implementierung aus dem NPM-Modul "'artnet"' von dem Autor mit dem Alias "'hobbyquaker"'
+genutzt \cite{artnetPackage}. Zur Umsetzung von Art-Net zu DMX wurde ein grandMA3 "'4Port Node"' genutzt. Dieser wurde als Protokollwandler eingesetzt.\\
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=.9\textwidth]{images/Data_transmission_scheme.png}
@@ -1510,7 +1505,7 @@ ergeben sich aufgrund der Ergebnisse der bisherigen Messungen folgende Fragen:\\
 \end{addmargin}
 Diese Punkte werden nun nacheinander erörtert. Die Ausgangssituation ist, dass ein Benutzer in der Applikation zwei bereits vermessene Lampen selektiert. Die
 Applikation berechnet die xyY-Koordinaten des kombinierten Gamuts der beiden Lampen. Über eine Benutzereingabe wird das Mischungsverhältnis der Emitter vorgegeben.
-Beispielsweise ein Cyanton mit 100\% Grün- und 65\% Blauanteil. Mit den erfassten Messwerten wird, mit der vorgehensweise aus Kapitel \ref{calcColor}, die erwartete
+Beispielsweise ein Cyanton mit 100\% Grün- und 65\% Blauanteil. Mit den erfassten Messwerten wird, mit der Vorgehensweise aus Kapitel \ref{calcColor}, die erwartete
 xyY-Koordinate errechnet. Diese Koordinate wird im Folgenden als Referenzpunkt bezeichnet.
 \subsection{Finden eines Punktes innerhalb des kombinierten Gamuts}
 Zuerst muss ermittelt werden, ob der Referenzpunkt auf dem CIE 1931 Diagramm außerhalb des kombinierten Gamuts liegt oder nicht. Falls der Punkt sich außerhalb des
@@ -1546,13 +1541,13 @@ Es wird angenommen, dass die minimale Farbverschiebung durch das Suchen des orth
 Bild \ref{fig:refCombined}).
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.75\textwidth]{images/combined_gamut_with_mix_point_and_math.png} %//TODO: Check text to image
+        \includegraphics[width=.75\textwidth]{images/combined_gamut_with_mix_point_and_math.png}
     \end{center}
     \caption{Kombinierter Gamut mit Referenz- und Mixpunkt}\label{fig:refCombined}
 \end{figure}
 \noindent
-Dieser Bezugspunkt wird mit Hilfe des Kreuzprodukts der Vektoren zwischen den beiden Vertices (A und B) und zwischen dem Referenzpunkt (C)
-und dem Mixpunkt (D) berechnet. Setzt man das Kreuzprodukt gleich Null, liegen die Vektoren im rechten Winkel zueinander.
+Dieser Bezugspunkt wird mit Hilfe des Kreuzprodukts der Vektoren zwischen den beiden Vertices A und B und zwischen dem Referenzpunkt (C)
+und dem gesuchten Mixpunkt (D) berechnet. Setzt man das Kreuzprodukt gleich Null, liegen die Vektoren im rechten Winkel zueinander.
 \begin{align}\label{Equ:16}
     AB \times CD = 0
 \end{align}
@@ -1566,8 +1561,8 @@ und dem Mixpunkt (D) berechnet. Setzt man das Kreuzprodukt gleich Null, liegen d
     &(A_x+t(B_x-A_x)-C_x)(B_x-A_x)+(A_y+t(B_y-A_y)-C_y)(B_y-A_y)=0\\
     &t = \frac{(C_x-A_x)(B_x-A_x)+(C_y-A_y)(B_y-A_y)}{(B_x-A_x)^2+(B_y-A_y)^2}
 \end{align}
-Mit der Limitierung $0 \geq t \leq 1$ kann der errechnete Punkt nur auf der Strecke AB liegen, falls D, wie in Bild \ref{fig:refCombined}, ebenfalls außerhalb des Polygons
-liegt.\\
+Mit der Limitierung $0 \geq t \leq 1$ kann der errechnete Punkt nur auf der Strecke AB liegen, falls D, wie in Bild \ref{fig:refCombined} zu sehen, ebenfalls außerhalb des
+kombinierten Gamuts liegt.\\
 \begin{lstlisting}[caption=Mixpunktermittlung]
 function getSpPoint(A,B,C,limit)
 {
@@ -1582,7 +1577,7 @@ function getSpPoint(A,B,C,limit)
     return {x:x, y:y};
 }
 \end{lstlisting}
-Diese Prozedur wird für alle Seiten des Polygons ausgeführt. Falls mehrere Punkte gefunden werden, wird der Punkt mit der kürzesten Vektordistanz zum
+Diese Prozedur wird für alle Seiten des kombinierten Gamuts ausgeführt. Falls mehrere Punkte gefunden werden, wird der Punkt mit der kürzesten Vektordistanz zum
 Referenzpunkt gewählt.\\
 Falls der Referenzpunkt innerhalb des kombinierten Gamuts liegt, wird der Referenzpunkt als Mixpunkt übernommen.\\
 \\
@@ -1600,7 +1595,7 @@ definieren, würde in diesem Beispiel der weiße Emitter nicht berücksichtigt w
 einer Fläche ist das Dreieck.
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.8\textwidth]{images/combined_gamut_with_mix_triangles_cyan.png} %//TODO: Check text to image
+        \includegraphics[width=.8\textwidth]{images/combined_gamut_with_mix_triangles_cyan.png}
     \end{center}
     \caption{Kombinierter Gamut eines SkyPanels und einer LightCan mit Mixdreiecken der LightCan}\label{fig:triangleCombined}
 \end{figure}
@@ -1612,7 +1607,7 @@ Berechnet wird dieser durch das Summieren der Distanzen zwischen den einzelnen D
 mischenden Punkt entfernt ist, desto geringer ist die Intensität des Emitters in der Mischung. Umso kleiner der Relevanzabstand ist, desto größer ist die Gesamthelligkeit gegenüber einer anderen Emitterkombination.\\
 Auf Bild \ref{fig:triangleCombined} sind zwei mögliche "'Mixdreiecke"' zu sehen, einmal mit den Emittern RGB und einmal mit den Emittern GBW. Es ist leicht
 zu erkennen, dass das kleinere Mixdreieck eine kürzere Gesamtdistanz hat. Somit wird dieses "'Mixdreieck"' für das weitere Vorgehen genutzt.\\
-Um von dem Referenzpunkt zum Mixpunkt zu gelangen, muss grafisch betrachtet etwas von dem weißen Emitter hinzugegeben werden. Was nicht direkt ersichtlich
+Um von dem Referenzpunkt zum Mixpunkt zu gelangen, muss grafisch betrachtet etwas von dem weißen Emitter hinzugegeben werden. Nicht direkt ersichtlich
 ist, dass der grüne und blaue Emitter in der Intensität gedämpft werden müssen, um das korrekte Mischungsverhältnis zu erhalten. Für die einzelnen Emitter muss
 nun der konkrete Helligkeitswert errechnet werden, um diesen per \ac{dmx} an die Lampe übermitteln zu können.\\
 \\
@@ -1634,7 +1629,7 @@ Emitterkoordinaten erstellt.
         E^1_b  & E^2_b & E^3_b \\
     \end{array}\right]
 \end{align}
-Wird $\mathbf K^{-1}$ mit dem Vektor der RGB Koordinaten des Mixpunktes multipliziert erhält man die Intensitätswerte der Emitter. Diese Werte sind eins normiert.
+Wird $\mathbf K^{-1}$ mit dem Vektor der RGB Koordinaten des Mixpunktes multipliziert erhält man die Intensitätswerte der Emitter. Diese Werte sind Eins normiert.
 \begin{align}\label{Equ:21}
     \left[ \begin{array}{r}
         \text{MP}_R \\
@@ -1655,13 +1650,13 @@ Die Einzeichnung der vorberechneten Koordinate wurde erweitert, sodass diese fü
 der Fixturenummer (Fixture ID) markiert.\\
 \\
 Zum Nutzen der Funktionalität der vorhergehenden Kapitel muss ein Referenz-Fixture definiert werden. Im Fixture Sheet kann nun ein Eintrag mit
-einem Rechtsklick als Referenz definiert werden. Somit wird die vorberechnete Koordinate zum "'Referenzpunkt"'. Die gewählte Reihe wird mit roter
+einem Rechtsklick als Referenz definiert werden. Somit wird die vorberechnete Koordinate dieses Fixtures zum "'Referenzpunkt"'. Die gewählte Reihe wird mit roter
 Schrift gekennzeichnet.\\
 Die errechneten und korrigierten Intensitätswerte werden, im Fixture Sheet für jeden Emitter in Klammern hinter dem, vom Nutzer eingestellten Wert angezeigt.
 Diese Werte werden auf 0 bis 100 skaliert und im Weiteren mit 2.55 multipliziert als DMX ausgegeben.
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=\textwidth]{images/app_fixture_sheet_with_reference.png} %//TODO: Check text to image
+        \includegraphics[width=\textwidth]{images/app_fixture_sheet_with_reference.png}
     \end{center}
     \caption{Fixture Sheet mit korrigierten Werten}
 \end{figure}
@@ -1682,8 +1677,9 @@ Bild \ref{fig:luxSkypanel} bis \ref{fig:macAdamLightCanEmitters} im Anhang zu fi
 Die in diesem Kapitel beschriebenen Messungen wurden unter folgenden Bedingungen durchgeführt.
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.8\textwidth]{images/meassureScenario.png} %//TODO: Legende
+        \includegraphics[width=.8\textwidth]{images/meassureScenario.png}
     \end{center}
+    \vspace{-20pt}
     \caption{Skizze des Messaufbaus} \label{fig:measureScribble}
 \end{figure}
 \noindent
@@ -1707,7 +1703,7 @@ gewählt werden, um den Lichtaustritt aller Linsen zu messen.\\
 Zusätzlich wurde ein realitätsnäheres Szenario aufgebaut, um weitere Messungen mit den AMS Sensoren durchzuführen.
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.8\textwidth]{images/meassureScenarioRealistic.png} %//TODO: Legende
+        \includegraphics[width=.8\textwidth]{images/meassureScenarioRealistic.png}
     \end{center}
     \caption{Skizze des realitätsnahen Messaufbaus} \label{fig:measureScribbleReal}
 \end{figure}
@@ -1752,13 +1748,21 @@ Eine höhere Auflösung der Ansteuerung kann hier Abhilfe schaffen. Viele Schein
 dass für eine Funktion des Gerätes, wie zum Beispiel einem Emitter, zwei DMX Kanäle verwendet werden.\\
 Ähnliches Verhalten ist bei den Helligkeitswerten des Robe LEDWash zu beobachten (Bild \ref{fig:luxLedWash}). Die LightCan der Firma Ape Labs hingegen hat ein
 deutlich homogeneres Helligkeitsverhältnis der Emitter (Bild \ref{fig:luxLightCan}). Ebenso sind die Verläufe der Kurven ähnlich. Die anderen Lampen zeigen eine
-deutliche Dominanz des weißen Emitters.
+deutliche Dominanz des weißen Emitters.\\
+\\
+Bei den Messungen mit dem Spektrometer ist deutlich geworden: Um in der Praxis Lampen zu vermessen, ist das automatisierte Erfassen der Messwerte notwendig. Das
+Messen einer Lampe mit vier Emittern mit jeweils acht Messpunkten nahm etwa zehn Minuten in Anspruch. Dieser Zeitraum beinhaltet das Ansteuern der Lampe, das
+Aufnehmen der Messwerte sowie das Aufbereiten der Daten zum Einlesen in die Applikation. Diese Zeit kann durch einen in die Applikation integrierten Sensor verkürzt
+werden. Weiter macht eine integrierte Lösung den Messprozess komfortabler für den Anwender, da Sensorwerte ohne weitere Benutzerinteraktion von der Applikation
+automatisch aufgenommen und aufbereitet werden.\\
+\\
+Zusätzlich wird der Eingriff durch den Benutzer als Fehlerquelle ausgeschlossen.
 \subsubsection{MacAdam Ellipsen}
 Anschießend wurde die Farbtreue der einzelnen Emitter der verwendeten Lampen betrachtet. Hier und auch im späteren Verlauf der Analysen wurden MacAdam Ellipsen
 genutzt. Dieses Analyseverfahren wurde von David Lewis MacAdam um 1942 erstmals beschrieben. \cite{macAdam}. Hier werden Ellipsen um einen Farbort in einem CIE
 1931 Diagramm eingezeichnet. Mit Probanden ermittelte MacAdam, dass Farbortabweichungen innerhalb von zwei Ellipsen nur von geübten Menschen erkannt werden
 konnten.\\
-Somit wird angenommen, dass eine Farbortverschiebung innerhalb von zwei MacAdam Ellipsen als nicht wahrnehmbar angenommen. \cite{macAdamEllipses}[7]\\
+Somit wird eine Farbortverschiebung innerhalb von zwei MacAdam Ellipsen als nicht wahrnehmbar angenommen. \cite{macAdamEllipses}\\
 Die Ellipsenanalyse wurde mit dem Programm "'LED ColorCalculator"' von der Firma Osram durchgeführt. \cite{osram}\\
 \\
 Alle Emitter der gemessenen Lampen weisen chromatische Abweichungen über ihre Dimmstufen hinweg auf. Als Sollfarbort wurde der 100\% Wert des jeweiligen Emitters
@@ -1769,19 +1773,13 @@ beim Abgleichvorgang der Gamut der Referenzlampe und der abzugleichenden Lampe. 
 nicht abgebildet werden. Diese Fehlerquelle ist im Folgenden zu berücksichtigen.
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=.8\textwidth]{images/CIExy1931MacAdam.png}
+        \includegraphics[width=\textwidth]{images/CIExy1931MacAdam.png}
     \end{center}
     \vspace{-.4cm}
     \caption[Verschiedene Farborte mit etwa der zehnten MacAdam Ellipse]{Verschiedene Farborte mit etwa der zehnten MacAdam Ellipse \cite{macAdam}} \label{fig:macAdamExample}
 \end{figure}
 \noindent
-Bei den Messungen mit dem Spektrometer ist deutlich geworden: Um in der Praxis Lampen zu vermessen, ist das automatisierte Erfassen der Messwerte notwendig. Das
-Messen einer Lampe mit vier Emittern mit jeweils acht Messpunkten nahm etwa zehn Minuten in Anspruch. Dieser Zeitraum beinhaltet das Ansteuern der Lampe, das
-Aufnehmen der Messwerte sowie das Aufbereiten der Daten zum Einlesen in die Applikation. Diese Zeit kann durch einen in die Applikation integrierten Sensor verkürzt
-werden. Weiter macht eine integrierte Lösung den Messprozess komfortabler für den Anwender, da Sensorwerte ohne weitere Benutzerinteraktion von der Applikation
-automatisch aufgenommen und aufbereitet werden.\\
-\\
-Zusätzlich wird der Eingriff durch den Benutzer als Fehlerquelle ausgeschlossen.
+\clearpage
 \subsection{Analyse der Messwerte des AS7262} \label{measuresWithAS7262}
 Die mit dem AS7262 erfassten Messwerte unterscheiden sich deutlich von den, mit dem Spektrometer aufgezeichneten, Daten. Wie bereits
 in Kapitel \ref{measureWithAS7262} beschrieben, ist die spektrale Auflösung des Sensors zu gering, um die tatsächliche maximale
@@ -1804,7 +1802,7 @@ Farbortbestimmung große Abweichungen.
 \end{figure}
 \noindent
 Zur Verbesserung der Spektraldaten könnte eine Interpolation implementiert werden. Hier ist die Datenlage von sechs Messwerten
-über ein Spektrum von 380 Nanometer zu gering, da zu viele Varianten aus den Wertekombinationen der Messwerte entstehen
+über ein Spektrum von 380 Nanometern jedoch zu gering, da zu viele Varianten aus den Wertekombinationen der Messwerte entstehen
 können. Oft hat der AS7262 nicht das Maximum eines Emitters erfasst. In den folgenden Tabellen sind die ermittelten xy
 Koordinaten der 100\% Werte der SkyPanel-Emitter dargestellt. In Bild \ref{compareUPRtekAS7262} sind diese Werte grafisch erfasst.
 \begin{table}[H]
@@ -1880,7 +1878,7 @@ deutlich zu erkennen.
 \subsubsection{Gelb und Warmweiß}
 Tabellen und Grafiken in voller Größe zu diesen Abgleichvorgängen sind im Anhang in Kapitel \ref{equalizationMeasurments} zu
 finden.\\
-Auch beider Messung des gelben Mischtons ist eine erhebliche Diskrepanz zwischen dem vorberechneten Mixpunkt und dem
+Auch bei der Messung des gelben Mischtons ist eine erhebliche Diskrepanz zwischen dem vorberechneten Mixpunkt und dem
 Referenzgerät zu beobachten (Bild \ref{fig:macAdamYellow}). Weiter ist hier bei beiden Mischfarben zu beobachten, dass die
 Farborte der abzugleichenden Geräte ebenfalls fernab des Farborts des Referenzgeräts liegen. Die Farborte der abzugleichenden
 Geräte liegen jedoch sehr nahe beieinander.
@@ -1917,7 +1915,7 @@ Aus der bisherigen Auswertung sind vier Hauptfehlerquellen auszumachen:
 Im Folgenden wird dargelegt, wie diese Fehlerquellen kompensiert oder behoben werden könnten.
 \subsubsection{Fehlerquelle 1 - Messdaten}
 Mit einer entsprechenden Kalibrierung der Sensoren die in dieser Arbeit genutzt wurden oder anderen genaueren
-Sensoren, wäre ein deutlich genauerer Abgleich verschiedener LED-Lichtquellen möglich. Eine Kalibrierung immer
+Sensoren, wäre ein deutlich genauerer Abgleich verschiedener LED-Lichtquellen möglich. Eine Kalibrierung ist immer
 anwendungsspezifisch. Je breiter der Anwendungsfall definiert ist, desto komplexer ist eine solche Kalibrierung.\\
 Wie in Kapitel \ref{measuringWith7261} behandelt ist für den AS7261 Sensor eine Kalibrierung für diese Art von
 Anwendung zwingend erforderlich.\\
@@ -1951,7 +1949,7 @@ Dieses Vorgehen erzeugt jedoch die Möglichkeit für Endlosschleifen im Programm
 zunächst die Lampen mit dem initial kombinierten Gamut abgeglichen werden. Dann wird jedoch die Ansteuerung der Emitter
 durch den Abgleichalgorithmus variiert. Somit passt sich auch der Gamut der Lampe sowie der kombinierte Gamut an.\\
 Es entsteht nun erneut ein nur temporär gültiger kombinierter Gamut, da dieser nur das Farbvermögen der aktuellen
-Emitteransteuerung beschreibt, nicht das gesamte Farbvermögen. Dieser temporäre Gamut kann je nach Art der Verschiebung
+Emitteransteuerung beschreibt, nicht das gesamte Farbvermögen. Dieser temporäre Gamut kann, je nach Art der Verschiebung,
 Flächen außerhalb des initial kombinierten Gamuts freigeben. Sollte der Referenzpunkt ebenfalls außerhalb des
 initial kombinierten Gamuts liegen, kann nun ein Mixpunkt mit geringerer Farbverschiebung erreicht werden. Daher
 beginnt der Abgleichzyklus von vorne.\\
@@ -2003,7 +2001,7 @@ Findung eines geeigneten integrierbaren Sensors die dringlichste Aufgabe für di
 Ein solcher geeigneter Sensor wäre der AS7261 mit einer entsprechenden Kalibrierung. Eine solche Kalibrierung ist
 allerdings wie bereits in Kapitel \ref{measuringWith7261} beschrieben sehr anwendungsspezifisch. Je breiter der
 Anwendungsfall definiert ist, desto aufwändiger ist eine Kalibrierung des Sensors.\\
-Eine Alternative könnte der Sensor AS7265x der Firma AMS sein \cite{datasheet65}. Dieser Sensor besteht aus drei
+Eine Alternative könnte der Sensor AS7265x \cite{datasheet65} der Firma AMS sein. Dieser Sensor besteht aus drei
 Subsensoren, welche jeweils sechs Messflanken im elektromagnetischen Spektrum besitzen. Zusammen besitzen die drei
 Sensoren 18 Messflanken von 410 bis 940 Nanometern. 14 dieser Messflanken liegen innerhalb des sichtbaren Spektrums.
 Die anderen vier im Infrarotbereich des Spektrums.\\
@@ -2011,9 +2009,19 @@ Dies ist eine deutliche Verbesserung der spektralen Auflösung gegenüber dem AS
 verringert werden. Auch eine Interpolation zwischen den Messwerten aufgrund der spektralen Abdeckung sollte zu einer
 aussagekräftigen Datenbasis führen.\\
 \\
-Künftig wird diese oder eine ähnliche Implementierung in der grandMA3 Software der Firma MA Lighting zum Einsatz kommen.
-Zum Zeitpunkt dieser Arbeit sind bereits erste Teile der Implementierung aus dieser Arbeit in die Software
-eingearbeitet worden.
+Eine weitere Verbesserung des Ergebnisses könnte durch einen, zusätzlich von den Herstellern zur Verfügung gestellten, 
+Roh-Ansteuerungsmodus für Lampen mit nichtlinearen internen Algorithmen zur Optimierung der Farbmischung erreicht werden. 
+Diese Algorithmen werden in der Regel von Herstellern implementiert,
+damit die verschiedenen Lampen eines Herstellers sich chromatisch möglichst gleich verhalten.
+Eine Möglichkeit zur Umgehung dieser Algorithmen, um Lampen herstellerübergreifend miteinader abgleichen zu können, wäre
+wünschenswert.\\
+\clearpage
+\noindent
+Zusammengefasst ist der in dieser Arbeit entwickelte Prozess ein großer Schritt zum Abgleichen von LED-Lichtquellen.
+In weiteren Schritten muss unter anderem ein geeigneter Spektralsensor zur Erfassung der Messdaten in die Applikation eingebunden
+werden. Die Applikation wurde so programmiert, dass diese Erweiterung jederzeit vorgenommen werden kann, ohne die
+weiteren Prozesse, wie den Abgleich, anpassen zu müssen.\\
+Ein Einsatz in der Praxis ist zur Zeit noch nicht abzusehen.
 \clearpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Anhang %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2472,7 +2480,7 @@ c - Lichtgeschwindigkeit - 299 792 458 Meter pro Sekunde
 \begingroup
 \renewcommand{\section}[2]{}
 \begin{thebibliography}{xxxxxxxxxxxxxxxxxxx}
-    \bibitem[MA Lighting Homepage, 2019]{maabout}"'About us | MA Lighting International GmbH', \url{https://www.malighting.com/company/about-us/}. Visited on: 13.10.2019
+    \bibitem[Google Earth, 2019]{googleEarth}"'Google Earth"', \url{https://earth.google.com/web/@49.79593509,9.84039498,314.18261337a,120.70738457d,35y,160.49228636h,59.99892202t,360r}. Visited on: 30.10.2019
     \bibitem[MA Lighting Homepage, 2019]{gmaproducts}"'grandMA | MA Lighting International GmbH"', \url{https://www.malighting.com/product-archive/products/grandma/}. Visited on: 13.10.2019
     \bibitem[MA Lighting Homepage, 2019]{gma2products}"'grandMA2 | MA Lighting International GmbH"', \url{https://www.malighting.com/product-archive/products/grandma2/}. Visited on: 13.10.2019
     \bibitem[MA Lighting Homepage, 2019]{gma3}"'grandMA3 | MA Lighting International GmbH"', \url{https://www.malighting.com/grandma3/}. Visited on: 13.10.2019
@@ -2485,37 +2493,37 @@ c - Lichtgeschwindigkeit - 299 792 458 Meter pro Sekunde
     \bibitem[Licht Wikipedia, 2019]{wikiLicht}"'Licht - Wikipedia"', \url{https://de.wikipedia.org/wiki/Licht}. Visited on: 11.08.2019
     \bibitem[Farbtemperatur Wikipedia, 2019]{wikiFarbtemperatur}"'Farbtemperatur - Wikipedia"', \url{https://de.wikipedia.org/wiki/Farbtemperatur}. Visited on: 14.09.2019
     \bibitem[Wikipedia, 2019]{spectrumLight}"'Electromagnetic spectrum - Wikipedia"', \url{https://en.wikipedia.org/wiki/Electromagnetic_spectrum}. Visited on: 11.08.2019
-    \bibitem[Lichtquellen, 2015]{lichtquellen} Dohlus, Rainer: "'Lichtquellen"' De Gruyter, Berlin, 2015
-    \bibitem[Wisotop Homepage, 2019]{wisotopTriChro} \url{https://wisotop.de/wellenlaengen-des-lichts-farben.php}. Visited on: 03.10.2019
+    \bibitem[Lichtquellen, 2015]{lichtquellen} Dohlus, Rainer: "'Lichtquellen"'. De Gruyter, Berlin, 2015. Page 62 + 63.
+    \bibitem[Wisotop Homepage, 2019]{wisotopTriChro} "'Trichromatisches Sehen"', \url{https://wisotop.de/wellenlaengen-des-lichts-farben.php}. Visited on: 03.10.2019
     \bibitem[Farbwahrnehmung FHT Esslingen, 2019]{fhtEsslignen}"'Farbwahrnehmung"', \url{http://www.it.fht-esslingen.de/~asbeck/gdial/farbe/sehen2.html}. Visited on: 11.08.2019
-    \bibitem[Wisotop Homepage, 2019]{wisotopRGB} \url{https://wisotop.de/Farbmodelle-RGB-CMYK-HSS-HSL.php}. Visited on: 27.09.2019
-    \bibitem[RGB-Farbraum - Wikipedia, 2019]{wikipediaRGB} \url{https://de.wikipedia.org/wiki/RGB-Farbraum}. Visited on: 29.09.2019
-    \bibitem[Hermann Graßmann - Wikipedia, 2019]{wikipediaGrassmann} \url{https://de.wikipedia.org/wiki/Hermann\_Gra%C3%9Fmann}. Visited on: 29.09.2019
-    \bibitem[Graßmannsche Gesetze - Wikipedia, 2019]{wikipediaGrassmannGestze} \url{https://de.wikipedia.org/wiki/Gra%C3%9Fmannsche_Gesetze}. Visited on: 29.09.2019
-    \bibitem[CIExy1931 - Wikipedia, 2019]{wikipedia1931Image} \url{https://de.wikipedia.org/wiki/Datei:CIExy1931.svg}. Visited on: 30.09.2019
-    \bibitem[CIE - Wikipedia, 2019]{wikipediaCIE} \url{https://de.wikipedia.org/wiki/CIE-Normvalenzsystem}. Visited on: 30.09.2019
-    \bibitem[CIELUV - Wikipedia, 2019]{wikipedia1976} \url{https://de.wikipedia.org/wiki/CIELUV-Farbraumsystem}. Visited on: 30.09.2019
-    \bibitem[CIE Luv - Wisotop, 2019]{wisotopLuv} \url{https://wisotop.de/CIE-luv.php}. Visited on: 01.10.2019
+    \bibitem[Wisotop Homepage, 2019]{wisotopRGB} "'Das RGB-Farbmodell"', \url{https://wisotop.de/Farbmodelle-RGB-CMYK-HSS-HSL.php}. Visited on: 27.09.2019
+    \bibitem[RGB-Farbraum - Wikipedia, 2019]{wikipediaRGB} "'RGB-Farbraum"', \url{https://de.wikipedia.org/wiki/RGB-Farbraum}. Visited on: 29.09.2019
+    \bibitem[Hermann Graßmann - Wikipedia, 2019]{wikipediaGrassmann} "'Hermann Graßmann"', \url{https://de.wikipedia.org/wiki/Hermann\_Gra%C3%9Fmann}. Visited on: 29.09.2019
+    \bibitem[Graßmannsche Gesetze - Wikipedia, 2019]{wikipediaGrassmannGestze} "'Graßmannsche Gesetze"', \url{https://de.wikipedia.org/wiki/Gra%C3%9Fmannsche_Gesetze}. Visited on: 29.09.2019
+    \bibitem[CIExy1931 - Wikipedia, 2019]{wikipedia1931Image} "'CIExy1931.svg"', \url{https://de.wikipedia.org/wiki/Datei:CIExy1931.svg}. Visited on: 30.09.2019
+    \bibitem[CIE - Wikipedia, 2019]{wikipediaCIE} "'CIE-Normvalenzsystem"', \url{https://de.wikipedia.org/wiki/CIE-Normvalenzsystem}. Visited on: 30.09.2019
+    \bibitem[CIELUV - Wikipedia, 2019]{wikipedia1976} "'CIELUV-Farbraumsystem"', \url{https://de.wikipedia.org/wiki/CIELUV-Farbraumsystem}. Visited on: 30.09.2019
+    \bibitem[CIE Luv - Wisotop, 2019]{wisotopLuv} "'Der LUV-Farbraum der CIE"', \url{https://wisotop.de/CIE-luv.php}. Visited on: 01.10.2019
     \bibitem[Leuchtdiode Wikipedia, 2019]{wikiLed}"'Leuchtdiode - Wikipedia"', \url{https://de.wikipedia.org/wiki/Leuchtdiode}. Visited on: 21.08.2019
-    \bibitem[Showlicht von Scribble zum fertigen Desgin, 2014]{showlicht}"'Showlicht von Scribble zum fertigen Desgin"', 01.09.2019
-    \bibitem[Arri Homepage, 2019]{arriL7} \url{https://www.arri.com/en/lighting/led/l-series/l7-c#F0.0000L7C}. Visited on: 29.10.2019
-    \bibitem[Ape Labs Homepage, 2019]{lightCan} \url{https://apelabs.com/products/leuchtdose}. Visited on: 02.09.2019
-    \bibitem[Robe Homepage, 2019]{robe} \url{https://www.robe.cz/ledwash-300plus/}. Visited on: 02.09.2019
-    \bibitem[Arri Homepage, 2019]{arri} \url{https://www.arri.com/en/lighting/led/skypanel/s60-c}. Visited on: 02.09.2019
-    \bibitem[UPRtek Homepage, 2019]{uprtek} \url{https://www.uprtek.com/de/product/LED-Test-Measurement-Handspektrometer/MK350N-Basic-Handheld-Spectrometer.html}. Visited on: 09.09.2019
-    \bibitem[AMS Homepage, 2019]{ams} \url{https://ams.com/about-ams}. Visited on: 04.10.2019
+    \bibitem[Showlicht von Scribble zum fertigen Desgin, 2014]{showlicht} Greil, Roland; Lorenz, Marc: "'Showlicht von Scribble zum fertigen Desgin"'. LEIKRO Media GmbH, Gröbenzell, 2014. Page 35 + 37.
+    \bibitem[Arri Homepage, 2019]{arriL7} "'LC-7"', \url{https://www.arri.com/en/lighting/led/l-series/l7-c#F0.0000L7C}. Visited on: 29.10.2019
+    \bibitem[Ape Labs Homepage, 2019]{lightCan} "'LightCan"', \url{https://apelabs.com/products/leuchtdose}. Visited on: 02.09.2019
+    \bibitem[Robe Homepage, 2019]{robe} "'LEDWash 300+"', \url{https://www.robe.cz/ledwash-300plus/}. Visited on: 02.09.2019
+    \bibitem[Arri Homepage, 2019]{arri} "'S60-C"', \url{https://www.arri.com/en/lighting/led/skypanel/s60-c}. Visited on: 02.09.2019
+    \bibitem[UPRtek Homepage, 2019]{uprtek} "'LED Test \& Measurement-Handspektrometer"', \url{https://www.uprtek.com/de/product/LED-Test-Measurement-Handspektrometer/MK350N-Basic-Handheld-Spectrometer.html}. Visited on: 09.09.2019
+    \bibitem[AMS Homepage, 2019]{ams} "'About ams"', \url{https://ams.com/about-ams}. Visited on: 04.10.2019
     \bibitem[Adafruit Learn, 2019]{adafruit}"'Overview | Adafruit AS7262 6-channel Visible Light Sensor | Adafruit Learning System"', \url{https://learn.adafruit.com/adafruit-as7262-6-channel-visible-light-sensor}. Visited on: 11.08.2019
     \bibitem[AS7261 Datenblatt, 2019]{datasheet61}"'AS7261 XYZ Chromatic White Color Sensor + NIR with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7261_DS000493_1-00.pdf/0e7d1f12-702e-d061-b07a-67b0b6316800}. Visited on: 11.08.2019
     \bibitem[AS7262 Datenblatt, 2019]{datasheet62}"'AS7262 6-Channel Visible Spectral ID Device with Electronic Shutter and Smart Interface"', \url{https://ams.com/documents/20143/36005/AS7262_DS000486_2-00.pdf/0031f605-5629-e030-73b2-f365fd36a43b}. Visited on: 11.08.2019
-    \bibitem[Lindbloom Homepage, 2019]{lindbloom} \url{http://brucelindbloom.com/index.html}. Visited on: 09.09.2019
-    \bibitem[Wisotop Homepage, 2019]{wisotop} \url{https://wisotop.de/Anhang-Tristimulus-Werte.php}. Visited on: 09.09.2019
-    \bibitem[LightCan Manual, 2019]{lightCanDMX} \url{http://download.apelabs.com/manuals/Ape_Labs_-_LightCan_-_Manual_-_web.pdf} Page 33. Visited on: 16.09.2019
-    \bibitem[SkyPanel Manual, 2019]{skypanelDMX} \url{https://www.arri.com/resource/blob/65958/560471fec7f8f2e186ef8ca9e6cdd489/arri-skypanel-dmx-protocol-specification-v4-4-en-okt2018-data.pdf} Page 12. Visited on: 16.09.2019
-    \bibitem[artnet NPMJS, 2019]{artnetPackage} \url{https://www.npmjs.com/package/artnet}. Visited on: 16.09.2019
-    \bibitem[Sutherland–Hodgman algorithm Wikipedia, 2019]{sutherlandHodgman} \url{https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm}. Visited on: 22.09.2019
-    \bibitem[David MacAdam Wikipedia, 2019]{macAdam} \url{https://en.wikipedia.org/wiki/David_MacAdam}. Visited on: 18.10.2019
-    \bibitem[Optibin, 2019]{macAdamEllipses} "'Optibin - Achieves color consistency with industry-leading LED optimization"'\url{https://www.colorkinetics.com/b-dam/color-kinetics/learn-more/intellihue/PCK-Technology-Overview-Optibin.pdf}. Visited on: 28.10.2019
-    \bibitem[LED ColorCalculator, 2019]{osram} \url{https://www.osram.us/cb/tools-and-resources/applications/led-colorcalculator/index.jsp}. Visited on: 18.10.2019
+    \bibitem[Lindbloom Homepage, 2019]{lindbloom} "'Bruce Lindbloom"', \url{http://brucelindbloom.com/index.html}. Visited on: 09.09.2019
+    \bibitem[Wisotop Homepage, 2019]{wisotop} "'Spectral Tristimulus Values Defining CIE 1964"', \url{https://wisotop.de/Anhang-Tristimulus-Werte.php}. Visited on: 09.09.2019
+    \bibitem[LightCan Manual, 2019]{lightCanDMX} "'LightCan Bedienungsanleitung"', \url{http://download.apelabs.com/manuals/Ape_Labs_-_LightCan_-_Manual_-_web.pdf} Page 33. Visited on: 16.09.2019
+    \bibitem[SkyPanel Manual, 2019]{skypanelDMX} "'SkyPanel DMX Protocol Specification"', \url{https://www.arri.com/resource/blob/65958/560471fec7f8f2e186ef8ca9e6cdd489/arri-skypanel-dmx-protocol-specification-v4-4-en-okt2018-data.pdf} Page 12. Visited on: 16.09.2019
+    \bibitem[artnet NPMJS, 2019]{artnetPackage} "'artnet"', \url{https://www.npmjs.com/package/artnet}. Visited on: 16.09.2019
+    \bibitem[Sutherland–Hodgman algorithm Wikipedia, 2019]{sutherlandHodgman} "'Sutherland–Hodgman algorithm"', \url{https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm}. Visited on: 22.09.2019
+    \bibitem[David MacAdam Wikipedia, 2019]{macAdam} "'David MacAdam"', \url{https://en.wikipedia.org/wiki/David_MacAdam}. Visited on: 18.10.2019
+    \bibitem[Optibin, 2019]{macAdamEllipses} "'Optibin - Achieves color consistency with industry-leading LED optimization"'\url{https://www.colorkinetics.com/b-dam/color-kinetics/learn-more/intellihue/PCK-Technology-Overview-Optibin.pdf}. Page 7. Visited on: 28.10.2019
+    \bibitem[LED ColorCalculator, 2019]{osram} "'LED ColorCalculator"', \url{https://www.osram.us/cb/tools-and-resources/applications/led-colorcalculator/index.jsp}. Visited on: 18.10.2019
     \bibitem[AS7265x Datenblatt, 2019]{datasheet65}"'AS7265x Smart 18-Channel VIS to NIR Spectral ID 3-Sensor Chipset with Electronic Shutter"', \url{https://ams.com/documents/20143/36005/AS7265x_DS000612_1-00.pdf/08051c8a-a7f6-6231-7993-2d3fe0bf38b8}. Visited on: 26.10.2019
 \end{thebibliography}
 \endgroup
