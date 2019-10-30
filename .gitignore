@@ -3,6 +3,8 @@ package-lock.json
 export*.json
 emitters.json
 
+build/
+
 thesis/theDoc.synctex.gz
 thesis/theDoc.aux
 thesis/theDoc.fdb_latexmk
