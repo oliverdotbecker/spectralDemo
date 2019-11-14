@@ -1632,14 +1632,14 @@ Emitterkoordinaten erstellt.
 Wird $\mathbf K^{-1}$ mit dem Vektor der RGB Koordinaten des Mixpunktes multipliziert erhält man die Intensitätswerte der Emitter. Diese Werte sind Eins normiert.
 \begin{align}\label{Equ:21}
     \left[ \begin{array}{r}
-        \text{MP}_R \\
-        \text{MP}_G \\
-        \text{MP}_B \\
-    \end{array}\right]
-    = {\mathbf [K]^{-1}} \left[ \begin{array}{r}
         I_{E1} \\
         I_{E2} \\
         I_{E3} \\
+    \end{array}\right]
+    = {\mathbf [K]^{-1}} \left[ \begin{array}{r}
+        \text{MP}_R \\
+        \text{MP}_G \\
+        \text{MP}_B \\
     \end{array}\right]
 \end{align}
 \subsection{Umsetzen des Benutzerinterfaces}
