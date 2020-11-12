@@ -20,7 +20,7 @@
     "electron-rebuild": "1.6.1"
   },
   "build": {
-    "appId": "bss.spectraldemo",
+    "appId": "ob.spectraldemo",
     "productName": "Spectral Demo",
     "asar": true,
     "copyright": "Copyright © 2019 ${author}",
@@ -33,7 +33,7 @@
     ],
     "win": {
       "icon": "cie.ico",
-      "publisherName": "BSS - Oliver Becker"
+      "publisherName": "Oliver Becker"
     },
     "nsis": {
       "oneClick": false,
