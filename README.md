@@ -1,4 +1,7 @@
 # Spectral Demo
+
+This is a application developed as demonstration for the master thesis 'Abgleich von LED-Lichtquellen auf Basis einer komplexen Lichtsteuerung'. The repository also contains the thesis in LaTeX.
+
 ## Application
 A node js / electron processing application for a ams AS726x sensor
 
