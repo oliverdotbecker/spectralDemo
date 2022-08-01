@@ -2,6 +2,7 @@ const serialPort = require('serialport');
 const electron = require('electron');
 const {app, BrowserWindow, Menu, dialog} = electron;
 const globalShortcut = electron.globalShortcut;
+require('@electron/remote/main').initialize();
 const fs = require('fs');
 
 var devFlag = false;
@@ -22,8 +23,14 @@ app.on('ready', () => {
         height: 970,
         frame: true,
         icon: "cie.ico",
-        title: "Spectral Demo"
+        title: "Spectral Demo",
+        webPreferences: {
+            nodeIntegration:true,
+            webSecurity:false,
+            contextIsolation: false
+        }
     });
+    require("@electron/remote/main").enable(win.webContents);
 
     var pagePath = 'file://' + __dirname + '/website/index.html';
     //win.webContents.openDevTools();
@@ -209,14 +216,14 @@ exports.getAvailableSerialPorts = function(query)
 {
     if(query)
     {
-        return serialPort.list().then(ports => {
+        return serialPort.SerialPort.list().then(ports => {
             serialPorts = JSON.stringify(ports);
         });
     }
     return serialPorts;
 }
 
-serialPort.list().then(ports => {
+serialPort.SerialPort.list().then(ports => {
     if(ports.length > 0)
     {
         serialPath = ports[0].comName;

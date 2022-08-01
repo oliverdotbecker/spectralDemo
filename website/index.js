@@ -1,4 +1,4 @@
-const electronDaemon = require('electron').remote.require('./index.js');
+const electronDaemon = require('@electron/remote').require('./index.js');
 
 //AS7261 settings
 const AS7261 = {
